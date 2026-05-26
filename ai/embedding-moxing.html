@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="ai" data-exclude="embedding-moxing">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="Embedding模型对比：text-embedding-3 vs BGE vs E5">
+    <meta property="og:description" content="全面对比主流文本Embedding模型，包括OpenAI text-embedding-3系列、BGE系列和E5系列，覆盖性能、价格、中文支持和选型建议。">
+    <meta property="og:url" content="https://aidev.fit/ai/embedding-moxing.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/ai/embedding-moxing.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="AI 教程">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Embedding模型对比：text-embedding-3 vs BGE vs E5">
+    <meta name="twitter:description" content="全面对比主流文本Embedding模型，包括OpenAI text-embedding-3系列、BGE系列和E5系列，覆盖性能、价格、中文支持和选型建议。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/ai/embedding-moxing.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/embedding-moxing.webp" type="image/webp" fetchpriority="high">
+    <title>Embedding模型对比：text-embedding-3 vs BGE vs E5 — AI自习室</title>
+    <meta name="description" content="全面对比主流文本Embedding模型，包括OpenAI text-embedding-3系列、BGE系列和E5系列，覆盖性能、价格、中文支持和选型建议。">
+    <meta name="keywords" content="AI, Machine Learning, LLM">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/ai/embedding-moxing.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai/embedding-moxing.html">
+    <link rel="canonical" href="https://aidev.fit/ai/embedding-moxing.html"><link rel="prev" href="https://aidev.fit/ai/ai-testing.html">
+<link rel="next" href="https://aidev.fit/ai/knowledge-graph.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Embedding模型对比：text-embedding-3 vs BGE vs E5",
+      "description": "全面对比主流文本Embedding模型，包括OpenAI text-embedding-3系列、BGE系列和E5系列，覆盖性能、价格、中文支持和选型建议。",
+      "image": "https://aidev.fit/images/covers/en/ai/embedding-moxing.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "386",
+      "keywords": "AI, Machine Learning, LLM",
+      "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/embedding-moxing.html"},
+      "articleBody": "Embedding模型的重要性   文本Embedding模型将自然语言转换为向量表示，是RAG系统、语义搜索和文本分类的基础。选择合适的Embedding模型直接影响下游任务的性能。   OpenAI text-embedding-3系列   OpenAI目前提供两个版本的Embedding模型：    text-embedding-3-small：  - 维度：1536（可通过dimensions参数降低） - 价格：$0.02/1M tokens - MTEB基准：62.3 - 特点：性价比极高，适合大多数场景    text-embedding-3-large：  - 维度：3072（可通过dimensions参数降低） - 价格：$0.13/1M tokens - MTEB基准：64.6 - 特点：效果最佳，适合对精度要求极高的场景   BGE系列   北京人工智能研究院（BAAI）开发的BGE系列在中文场景表现优异。    BGE-large-zh-v1.5：  - 维度：1024 - 特点：中文效果出色，开源可私有部署 - 适用场景：中文文档检索、中文RAG系统    BGE-M3：  - 特点：多语言、多粒度（词/句/段）、多功能（稠密/稀疏向量） - 适用场景：多语言混合内容、需要混合检索的场景   BGE模型的优势在于可以完全本地部署，没有API调用成本和数据隐私风险。   E5系列   微软开发的E5系列采用对比学习训练。    E5-mistral-7b-instruct：  - 维度：4096 - 特点：基于Mistral-7B训练，效果在MTEB上排名靠前 - 局限：需要使用指令前缀，推理资源要求高    multilingual-e5-large：  - 维度：1024 - 特点：支持多语言，包括中文 - 适用场景：多语言搜索和检索   效果对比   在中文语义相似度任务上的表现：         模型   维度   中文效果   推理速度   部署成本           text-embedding-3-small   1536   良好   API   按量付费       text-embedding-3-large   3072   优秀   API   较高       BGE-large-zh-v1.5   1024   优秀   快   低       BGE-M3   1024   优秀   中   中       multilingual-e5-large   1024   良好   中   中         选型建议      中文为主，预算充足  → text-embedding-3-large    中文为主，注重成本  → BGE-large-zh-v1.5    需要本地部署  → BGE系列    多语言混合  → BGE-M3或multilingual-e5-large    英文为主，追求极致  → text-embedding-3-large     选择Embedding模型需平衡效果、成本、延迟和隐私需求，没有放之四海而皆准的最优解。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "AI 教程", "item": "https://aidev.fit/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "Embedding模型对比：text-embedding-3 vs BGE vs E5"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/ai/">AI 教程</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">AI</span>
+          <span class="tag-cat">Machine Learning</span>
+          <span class="tag-cat">LLM</span></div>
+        <h1 class="article-title">Embedding模型对比：text-embedding-3 vs BGE vs E5</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>1 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>386 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/embedding-moxing.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/embedding-moxing.png" alt="Embedding模型对比：text-embedding-3 vs BGE vs E5" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（6）</summary><ol><li><a href="#embedding模型的重要性">Embedding模型的重要性</a></li><li><a href="#openai-text-embedding-3系列">OpenAI text-embedding-3系列</a></li><li><a href="#bge系列">BGE系列</a></li><li><a href="#e5系列">E5系列</a></li><li><a href="#效果对比">效果对比</a></li><li><a href="#选型建议">选型建议</a></li></ol></details>
+        <div class="article-body"><h2>Embedding模型的重要性</h2>
+<p>文本Embedding模型将自然语言转换为向量表示，是RAG系统、语义搜索和文本分类的基础。选择合适的Embedding模型直接影响下游任务的性能。</p>
+<h2>OpenAI text-embedding-3系列</h2>
+<p>OpenAI目前提供两个版本的Embedding模型：</p>
+<p><strong>text-embedding-3-small：</strong>
+- 维度：1536（可通过dimensions参数降低）
+- 价格：$0.02/1M tokens
+- MTEB基准：62.3
+- 特点：性价比极高，适合大多数场景</p>
+<p><strong>text-embedding-3-large：</strong>
+- 维度：3072（可通过dimensions参数降低）
+- 价格：$0.13/1M tokens
+- MTEB基准：64.6
+- 特点：效果最佳，适合对精度要求极高的场景</p>
+<h2>BGE系列</h2>
+<p>北京人工智能研究院（BAAI）开发的BGE系列在中文场景表现优异。</p>
+<p><strong>BGE-large-zh-v1.5：</strong>
+- 维度：1024
+- 特点：中文效果出色，开源可私有部署
+- 适用场景：中文文档检索、中文RAG系统</p>
+<p><strong>BGE-M3：</strong>
+- 特点：多语言、多粒度（词/句/段）、多功能（稠密/稀疏向量）
+- 适用场景：多语言混合内容、需要混合检索的场景</p>
+<p>BGE模型的优势在于可以完全本地部署，没有API调用成本和数据隐私风险。</p>
+<h2>E5系列</h2>
+<p>微软开发的E5系列采用对比学习训练。</p>
+<p><strong>E5-mistral-7b-instruct：</strong>
+- 维度：4096
+- 特点：基于Mistral-7B训练，效果在MTEB上排名靠前
+- 局限：需要使用指令前缀，推理资源要求高</p>
+<p><strong>multilingual-e5-large：</strong>
+- 维度：1024
+- 特点：支持多语言，包括中文
+- 适用场景：多语言搜索和检索</p>
+<h2>效果对比</h2>
+<p>在中文语义相似度任务上的表现：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>维度</th>
+<th>中文效果</th>
+<th>推理速度</th>
+<th>部署成本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>text-embedding-3-small</td>
+<td>1536</td>
+<td>良好</td>
+<td>API</td>
+<td>按量付费</td>
+</tr>
+<tr>
+<td>text-embedding-3-large</td>
+<td>3072</td>
+<td>优秀</td>
+<td>API</td>
+<td>较高</td>
+</tr>
+<tr>
+<td>BGE-large-zh-v1.5</td>
+<td>1024</td>
+<td>优秀</td>
+<td>快</td>
+<td>低</td>
+</tr>
+<tr>
+<td>BGE-M3</td>
+<td>1024</td>
+<td>优秀</td>
+<td>中</td>
+<td>中</td>
+</tr>
+<tr>
+<td>multilingual-e5-large</td>
+<td>1024</td>
+<td>良好</td>
+<td>中</td>
+<td>中</td>
+</tr>
+</tbody>
+</table>
+<h2>选型建议</h2>
+<ol>
+<li><strong>中文为主，预算充足</strong> → text-embedding-3-large</li>
+<li><strong>中文为主，注重成本</strong> → BGE-large-zh-v1.5</li>
+<li><strong>需要本地部署</strong> → BGE系列</li>
+<li><strong>多语言混合</strong> → BGE-M3或multilingual-e5-large</li>
+<li><strong>英文为主，追求极致</strong> → text-embedding-3-large</li>
+</ol>
+<p>选择Embedding模型需平衡效果、成本、延迟和隐私需求，没有放之四海而皆准的最优解。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
+<a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-cost-control.html"><span class="related-title">AI成本控制：缓存策略、批处理、模型降级的实战方案</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=Embedding%E6%A8%A1%E5%9E%8B%E5%AF%B9%E6%AF%94%EF%BC%9Atext-embedding-3%20vs%20BGE%20vs%20E5&url=https%3A//aidev.fit/ai/embedding-moxing.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/ai/embedding-moxing.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Embedding%E6%A8%A1%E5%9E%8B%E5%AF%B9%E6%AF%94%EF%BC%9Atext-embedding-3%20vs%20BGE%20vs%20E5&url=https%3A//aidev.fit/ai/embedding-moxing.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/ai/embedding-moxing.html&t=Embedding%E6%A8%A1%E5%9E%8B%E5%AF%B9%E6%AF%94%EF%BC%9Atext-embedding-3%20vs%20BGE%20vs%20E5" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=Embedding%E6%A8%A1%E5%9E%8B%E5%AF%B9%E6%AF%94%EF%BC%9Atext-embedding-3%20vs%20BGE%20vs%20E5&body=https%3A//aidev.fit/ai/embedding-moxing.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/ai/embedding-moxing.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/ai/ai-testing.html" title="AI测试方法论：自动化评估、回归测试、A/B测试框架">← 上一篇<br><small>AI测试方法论：自动化评估、回归测试、A/B测试框架</small></a><a class="next" href="/ai/knowledge-graph.html" title="知识图谱+RAG：图数据库与LLM结合的企业级实践">下一篇 →<br><small>知识图谱+RAG：图数据库与LLM结合的企业级实践</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
+<a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-cost-control.html"><span class="related-title">AI成本控制：缓存策略、批处理、模型降级的实战方案</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#embedding模型的重要性">Embedding模型的重要性</a></li><li class="toc-h2"><a href="#openai-text-embedding-3系列">OpenAI text-embedding-3系列</a></li><li class="toc-h2"><a href="#bge系列">BGE系列</a></li><li class="toc-h2"><a href="#e5系列">E5系列</a></li><li class="toc-h2"><a href="#效果对比">效果对比</a></li><li class="toc-h2"><a href="#选型建议">选型建议</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

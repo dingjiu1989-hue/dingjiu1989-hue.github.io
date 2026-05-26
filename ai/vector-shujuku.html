@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="ai" data-exclude="vector-shujuku">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="向量数据库选型指南：Milvus vs Qdrant vs Chroma">
+    <meta property="og:description" content="深入对比Milvus、Qdrant和Chroma三大向量数据库，从性能、易用性、扩展性和成本等角度分析，帮助开发者根据实际场景做出最佳选型决策。">
+    <meta property="og:url" content="https://aidev.fit/ai/vector-shujuku.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/ai/vector-shujuku.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="AI 教程">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="向量数据库选型指南：Milvus vs Qdrant vs Chroma">
+    <meta name="twitter:description" content="深入对比Milvus、Qdrant和Chroma三大向量数据库，从性能、易用性、扩展性和成本等角度分析，帮助开发者根据实际场景做出最佳选型决策。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/ai/vector-shujuku.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/vector-shujuku.webp" type="image/webp" fetchpriority="high">
+    <title>向量数据库选型指南：Milvus vs Qdrant vs Chroma — AI自习室</title>
+    <meta name="description" content="深入对比Milvus、Qdrant和Chroma三大向量数据库，从性能、易用性、扩展性和成本等角度分析，帮助开发者根据实际场景做出最佳选型决策。">
+    <meta name="keywords" content="AI, Machine Learning, LLM">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/ai/vector-shujuku.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai/vector-shujuku.html">
+    <link rel="canonical" href="https://aidev.fit/ai/vector-shujuku.html"><link rel="prev" href="https://aidev.fit/ai/search-augmented.html">
+<link rel="next" href="https://aidev.fit/ai/no-code-ai-chatbot.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "向量数据库选型指南：Milvus vs Qdrant vs Chroma",
+      "description": "深入对比Milvus、Qdrant和Chroma三大向量数据库，从性能、易用性、扩展性和成本等角度分析，帮助开发者根据实际场景做出最佳选型决策。",
+      "image": "https://aidev.fit/images/covers/en/ai/vector-shujuku.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "323",
+      "keywords": "AI, Machine Learning, LLM",
+      "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/vector-shujuku.html"},
+      "articleBody": "向量数据库的作用   向量数据库是RAG系统和AI搜索应用的核心组件，专门用于存储和检索高维向量数据。随着Embedding模型的普及，向量数据库已成为AI基础设施的关键一环。   Milvus   Milvus是开源的分布式向量数据库，经历了从Milvus 1.x到Milvus 2.x的重大架构升级。    优势：  - 支持10亿级别向量规模的分布式部署 - 丰富的索引类型（IVF_FLAT、HNSW、DiskANN等） - 支持混合查询（向量+标量过滤） - 提供GPU加速选项    劣势：  - 部署运维复杂，依赖etcd、MinIO等组件 - 小规模场景下资源消耗较高 - 学习曲线相对陡峭    推荐场景：  企业级RAG系统、大规模相似性搜索、推荐系统   Qdrant   Qdrant使用Rust语言编写，以高性能和部署简便著称。    优势：  - 单二进制部署，无外部依赖 - 性能优异，查询延迟低 - 支持过滤、分组、聚合等高级查询 - 提供RESTful和gRPC双重API    劣势：  - 社区生态相对Milvus较小 - 分布式功能相对年轻    推荐场景：  中小规模生产系统、实时搜索、对延迟敏感的应用   Chroma   Chroma专为AI应用设计，追求极致的开发体验。    优势：  - 安装极简（pip install chromadb） - API设计直观，与Python生态深度融合 - 支持内存模式和持久化模式 - 内置Embedding功能    劣势：  - 不适合大规模生产部署 - 分布式支持有限 - 性能无法与专业向量数据库媲美    推荐场景：  原型开发、学习实验、小规模个人项目   性能对比   基于1M 768维向量的基准测试结果：         指标   Milvus   Qdrant   Chroma           查询延迟(p99)   5ms   3ms   15ms       吞吐量(QPS)   5000+   8000+   500+       索引构建时间   快   中等   快       内存占用   高   中   低         选型决策树     数据量 &lt; 1M → Chroma快速原型   数据量 1M-100M，延迟敏感 → Qdrant   数据量 &gt; 100M，需要分布式 → Milvus   需要混合搜索（向量+全文） → Qdrant或Milvus   团队运维能力有限 → Qdrant     根据实际需求选择最合适的向量数据库，避免过度设计。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "AI 教程", "item": "https://aidev.fit/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "向量数据库选型指南：Milvus vs Qdrant vs Chroma"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/ai/">AI 教程</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">AI</span>
+          <span class="tag-cat">Machine Learning</span>
+          <span class="tag-cat">LLM</span></div>
+        <h1 class="article-title">向量数据库选型指南：Milvus vs Qdrant vs Chroma</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>1 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>323 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/vector-shujuku.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/vector-shujuku.png" alt="向量数据库选型指南：Milvus vs Qdrant vs Chroma" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（6）</summary><ol><li><a href="#向量数据库的作用">向量数据库的作用</a></li><li><a href="#milvus">Milvus</a></li><li><a href="#qdrant">Qdrant</a></li><li><a href="#chroma">Chroma</a></li><li><a href="#性能对比">性能对比</a></li><li><a href="#选型决策树">选型决策树</a></li></ol></details>
+        <div class="article-body"><h2>向量数据库的作用</h2>
+<p>向量数据库是RAG系统和AI搜索应用的核心组件，专门用于存储和检索高维向量数据。随着Embedding模型的普及，向量数据库已成为AI基础设施的关键一环。</p>
+<h2>Milvus</h2>
+<p>Milvus是开源的分布式向量数据库，经历了从Milvus 1.x到Milvus 2.x的重大架构升级。</p>
+<p><strong>优势：</strong>
+- 支持10亿级别向量规模的分布式部署
+- 丰富的索引类型（IVF_FLAT、HNSW、DiskANN等）
+- 支持混合查询（向量+标量过滤）
+- 提供GPU加速选项</p>
+<p><strong>劣势：</strong>
+- 部署运维复杂，依赖etcd、MinIO等组件
+- 小规模场景下资源消耗较高
+- 学习曲线相对陡峭</p>
+<p><strong>推荐场景：</strong> 企业级RAG系统、大规模相似性搜索、推荐系统</p>
+<h2>Qdrant</h2>
+<p>Qdrant使用Rust语言编写，以高性能和部署简便著称。</p>
+<p><strong>优势：</strong>
+- 单二进制部署，无外部依赖
+- 性能优异，查询延迟低
+- 支持过滤、分组、聚合等高级查询
+- 提供RESTful和gRPC双重API</p>
+<p><strong>劣势：</strong>
+- 社区生态相对Milvus较小
+- 分布式功能相对年轻</p>
+<p><strong>推荐场景：</strong> 中小规模生产系统、实时搜索、对延迟敏感的应用</p>
+<h2>Chroma</h2>
+<p>Chroma专为AI应用设计，追求极致的开发体验。</p>
+<p><strong>优势：</strong>
+- 安装极简（pip install chromadb）
+- API设计直观，与Python生态深度融合
+- 支持内存模式和持久化模式
+- 内置Embedding功能</p>
+<p><strong>劣势：</strong>
+- 不适合大规模生产部署
+- 分布式支持有限
+- 性能无法与专业向量数据库媲美</p>
+<p><strong>推荐场景：</strong> 原型开发、学习实验、小规模个人项目</p>
+<h2>性能对比</h2>
+<p>基于1M 768维向量的基准测试结果：</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>Milvus</th>
+<th>Qdrant</th>
+<th>Chroma</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>查询延迟(p99)</td>
+<td>5ms</td>
+<td>3ms</td>
+<td>15ms</td>
+</tr>
+<tr>
+<td>吞吐量(QPS)</td>
+<td>5000+</td>
+<td>8000+</td>
+<td>500+</td>
+</tr>
+<tr>
+<td>索引构建时间</td>
+<td>快</td>
+<td>中等</td>
+<td>快</td>
+</tr>
+<tr>
+<td>内存占用</td>
+<td>高</td>
+<td>中</td>
+<td>低</td>
+</tr>
+</tbody>
+</table>
+<h2>选型决策树</h2>
+<ol>
+<li>数据量 &lt; 1M → Chroma快速原型</li>
+<li>数据量 1M-100M，延迟敏感 → Qdrant</li>
+<li>数据量 &gt; 100M，需要分布式 → Milvus</li>
+<li>需要混合搜索（向量+全文） → Qdrant或Milvus</li>
+<li>团队运维能力有限 → Qdrant</li>
+</ol>
+<p>根据实际需求选择最合适的向量数据库，避免过度设计。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
+<a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-cost-control.html"><span class="related-title">AI成本控制：缓存策略、批处理、模型降级的实战方案</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%97%EF%BC%9AMilvus%20vs%20Qdrant%20vs%20Chroma&url=https%3A//aidev.fit/ai/vector-shujuku.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/ai/vector-shujuku.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%97%EF%BC%9AMilvus%20vs%20Qdrant%20vs%20Chroma&url=https%3A//aidev.fit/ai/vector-shujuku.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/ai/vector-shujuku.html&t=%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%97%EF%BC%9AMilvus%20vs%20Qdrant%20vs%20Chroma" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%97%EF%BC%9AMilvus%20vs%20Qdrant%20vs%20Chroma&body=https%3A//aidev.fit/ai/vector-shujuku.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/ai/vector-shujuku.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/ai/search-augmented.html" title="搜索增强生成：结合Elasticsearch与传统搜索的RAG方案">← 上一篇<br><small>搜索增强生成：结合Elasticsearch与传统搜索的RAG方案</small></a><a class="next" href="/ai/no-code-ai-chatbot.html" title="零代码搭建 AI 聊天机器人：客服、知识库、个人助手">下一篇 →<br><small>零代码搭建 AI 聊天机器人：客服、知识库、个人助手</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
+<a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-cost-control.html"><span class="related-title">AI成本控制：缓存策略、批处理、模型降级的实战方案</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#向量数据库的作用">向量数据库的作用</a></li><li class="toc-h2"><a href="#milvus">Milvus</a></li><li class="toc-h2"><a href="#qdrant">Qdrant</a></li><li class="toc-h2"><a href="#chroma">Chroma</a></li><li class="toc-h2"><a href="#性能对比">性能对比</a></li><li class="toc-h2"><a href="#选型决策树">选型决策树</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

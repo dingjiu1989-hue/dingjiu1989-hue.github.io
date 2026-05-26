@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="tech" data-exclude="api-she-ji">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="RESTful API设计规范：资源命名、状态码、版本管理、分页">
+    <meta property="og:description" content="系统讲解RESTful API的设计规范和最佳实践，涵盖资源命名规则、HTTP状态码使用、版本管理策略和分页方案的设计。">
+    <meta property="og:url" content="https://aidev.fit/tech/api-she-ji.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/api-she-ji.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="技术教程">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RESTful API设计规范：资源命名、状态码、版本管理、分页">
+    <meta name="twitter:description" content="系统讲解RESTful API的设计规范和最佳实践，涵盖资源命名规则、HTTP状态码使用、版本管理策略和分页方案的设计。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/tech/api-she-ji.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/api-she-ji.webp" type="image/webp" fetchpriority="high">
+    <title>RESTful API设计规范：资源命名、状态码、版本管理、分页 — AI自习室</title>
+    <meta name="description" content="系统讲解RESTful API的设计规范和最佳实践，涵盖资源命名规则、HTTP状态码使用、版本管理策略和分页方案的设计。">
+    <meta name="keywords" content="Technology, DevOps, Cloud">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/tech/api-she-ji.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/api-she-ji.html">
+    <link rel="canonical" href="https://aidev.fit/tech/api-she-ji.html"><link rel="prev" href="https://aidev.fit/tech/web-performance.html">
+<link rel="next" href="https://aidev.fit/tech/ci-cd-liu-cheng.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "RESTful API设计规范：资源命名、状态码、版本管理、分页",
+      "description": "系统讲解RESTful API的设计规范和最佳实践，涵盖资源命名规则、HTTP状态码使用、版本管理策略和分页方案的设计。",
+      "image": "https://aidev.fit/images/covers/en/tech/api-she-ji.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1186",
+      "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/api-she-ji.html"},
+      "articleBody": "RESTful设计原则   RESTful API设计需要遵循几个核心原则：资源导向、无状态、统一接口和HATEOAS。虽然在实际项目中不必严格遵守所有原则，但理解这些原则有助于设计更规范的API。   资源命名   命名规范     使用名词复数表示资源集合： /users 、 /orders    使用URL路径表示资源层级： /users/{id}/orders    使用查询参数表示过滤和排序： ?status=active&amp;sort=created_at    使用小写字母和连字符： /user-profiles 而非 /userProfiles      最佳实践        GET /users                    # 获取用户列表   GET /users/{id}               # 获取单个用户   POST /users                   # 创建用户   PATCH /users/{id}             # 部分更新用户   DELETE /users/{id}            # 删除用户   GET /users/{id}/orders        # 获取用户的订单列表        常见反模式     使用动词： /getUsers 应为 GET /users    过深的嵌套：超过三级嵌套应考虑展平   不一致的命名：混合使用snake_case和camelCase     HTTP状态码   正确使用HTTP状态码可以让客户端更准确地理解请求结果。   常用状态码      200 OK ：请求成功    201 Created ：资源创建成功    204 No Content ：删除成功，无返回内容    400 Bad Request ：请求参数错误    401 Unauthorized ：未认证    403 Forbidden ：无权限    404 Not Found ：资源不存在    409 Conflict ：资源冲突（如重复创建）    422 Unprocessable Entity ：业务逻辑验证失败    429 Too Many Requests ：请求频率限制    500 Internal Server Error ：服务器内部错误     错误响应格式        {         &quot;error&quot;  :     {             &quot;code&quot;  :     &quot;USER_NOT_FOUND&quot;  ,             &quot;message&quot;  :     &quot;用户不存在&quot;  ,             &quot;details&quot;  :     {                 &quot;userId&quot;  :     &quot;12345&quot;             }         }   }        版本管理   版本策略      URL路径版本 ： /v1/users 、 /v2/users ，最常用    请求头版本 ： Accept: application/vnd.myapp.v1+json     查询参数版本 ： /users?version=1      URL路径版本策略最为直观，便于缓存和调试。建议在URL中永久保留版本号。   版本演进     向后兼容的变更：新增字段、新增端点不需要大版本   破坏性变更：修改字段类型、删除字段需要大版本   每个大版本至少维护6-12个月的过渡期     分页设计   分页方案        GET /users?page=1&amp;per_page=20        响应中包含分页元数据：        {         &quot;data&quot;  :     [  ...  ],         &quot;pagination&quot;  :     {             &quot;page&quot;  :     1  ,             &quot;per_page&quot;  :     20  ,             &quot;total&quot;  :     156  ,             &quot;total_pages&quot;  :     8  ,             &quot;links&quot;  :     {                 &quot;first&quot;  :     &quot;/users?page=1&quot;  ,                 &quot;prev&quot;  :     null  ,                 &quot;next&quot;  :     &quot;/users?page=2&quot;  ,                 &quot;last&quot;  :     &quot;/users?page=8&quot;             }         }   }        游标分页   对于实时数据，游标分页比偏移分页更稳定：        GET /users?cursor=eyJpZCI6MTB9&amp;limit=20        游标分页在数据发生增删时不会导致重复或遗漏，适合社交信息流等场景。   安全与规范     所有API必须使用HTTPS   认证使用Bearer Token或OAuth 2.0   统一时间格式（ISO 8601）   统一错误格式   提供API文档（OpenAPI/Swagger）     遵循一致的API设计规范能降低前后端协作成本，提升API的可维护性和开发者体验。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "技术教程", "item": "https://aidev.fit/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "RESTful API设计规范：资源命名、状态码、版本管理、分页"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/tech/">技术教程</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">Technology</span>
+          <span class="tag-cat">DevOps</span>
+          <span class="tag-cat">Cloud</span></div>
+        <h1 class="article-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>5 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>1186 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/api-she-ji.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/api-she-ji.png" alt="RESTful API设计规范：资源命名、状态码、版本管理、分页" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（15）</summary><ol><li><a href="#restful设计原则">RESTful设计原则</a></li><li><a href="#资源命名">资源命名</a></li><li><a href="#命名规范">命名规范</a></li><li><a href="#最佳实践">最佳实践</a></li><li><a href="#常见反模式">常见反模式</a></li><li><a href="#http状态码">HTTP状态码</a></li><li><a href="#常用状态码">常用状态码</a></li><li><a href="#错误响应格式">错误响应格式</a></li><li><a href="#版本管理">版本管理</a></li><li><a href="#版本策略">版本策略</a></li><li><a href="#版本演进">版本演进</a></li><li><a href="#分页设计">分页设计</a></li><li><a href="#分页方案">分页方案</a></li><li><a href="#游标分页">游标分页</a></li><li><a href="#安全与规范">安全与规范</a></li></ol></details>
+        <div class="article-body"><h2>RESTful设计原则</h2>
+<p>RESTful API设计需要遵循几个核心原则：资源导向、无状态、统一接口和HATEOAS。虽然在实际项目中不必严格遵守所有原则，但理解这些原则有助于设计更规范的API。</p>
+<h2>资源命名</h2>
+<h3>命名规范</h3>
+<ul>
+<li>使用名词复数表示资源集合：<code>/users</code>、<code>/orders</code></li>
+<li>使用URL路径表示资源层级：<code>/users/{id}/orders</code></li>
+<li>使用查询参数表示过滤和排序：<code>?status=active&amp;sort=created_at</code></li>
+<li>使用小写字母和连字符：<code>/user-profiles</code>而非<code>/userProfiles</code></li>
+</ul>
+<h3>最佳实践</h3>
+<div class="codehilite"><pre><span></span><code><span class="err">GET /users                    # 获取用户列表</span>
+<span class="err">GET /users/{id}               # 获取单个用户</span>
+<span class="err">POST /users                   # 创建用户</span>
+<span class="err">PATCH /users/{id}             # 部分更新用户</span>
+<span class="err">DELETE /users/{id}            # 删除用户</span>
+<span class="err">GET /users/{id}/orders        # 获取用户的订单列表</span>
+</code></pre></div>
+
+<h3>常见反模式</h3>
+<ul>
+<li>使用动词：<code>/getUsers</code>应为<code>GET /users</code></li>
+<li>过深的嵌套：超过三级嵌套应考虑展平</li>
+<li>不一致的命名：混合使用snake_case和camelCase</li>
+</ul>
+<h2>HTTP状态码</h2>
+<p>正确使用HTTP状态码可以让客户端更准确地理解请求结果。</p>
+<h3>常用状态码</h3>
+<ul>
+<li><strong>200 OK</strong>：请求成功</li>
+<li><strong>201 Created</strong>：资源创建成功</li>
+<li><strong>204 No Content</strong>：删除成功，无返回内容</li>
+<li><strong>400 Bad Request</strong>：请求参数错误</li>
+<li><strong>401 Unauthorized</strong>：未认证</li>
+<li><strong>403 Forbidden</strong>：无权限</li>
+<li><strong>404 Not Found</strong>：资源不存在</li>
+<li><strong>409 Conflict</strong>：资源冲突（如重复创建）</li>
+<li><strong>422 Unprocessable Entity</strong>：业务逻辑验证失败</li>
+<li><strong>429 Too Many Requests</strong>：请求频率限制</li>
+<li><strong>500 Internal Server Error</strong>：服务器内部错误</li>
+</ul>
+<h3>错误响应格式</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;USER_NOT_FOUND&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;用户不存在&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;userId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2>版本管理</h2>
+<h3>版本策略</h3>
+<ul>
+<li><strong>URL路径版本</strong>：<code>/v1/users</code>、<code>/v2/users</code>，最常用</li>
+<li><strong>请求头版本</strong>：<code>Accept: application/vnd.myapp.v1+json</code></li>
+<li><strong>查询参数版本</strong>：<code>/users?version=1</code></li>
+</ul>
+<p>URL路径版本策略最为直观，便于缓存和调试。建议在URL中永久保留版本号。</p>
+<h3>版本演进</h3>
+<ul>
+<li>向后兼容的变更：新增字段、新增端点不需要大版本</li>
+<li>破坏性变更：修改字段类型、删除字段需要大版本</li>
+<li>每个大版本至少维护6-12个月的过渡期</li>
+</ul>
+<h2>分页设计</h2>
+<h3>分页方案</h3>
+<div class="codehilite"><pre><span></span><code><span class="err">GET /users?page=1&amp;per_page=20</span>
+</code></pre></div>
+
+<p>响应中包含分页元数据：</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;pagination&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;per_page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">156</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;total_pages&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;links&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;first&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/users?page=1&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;prev&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;next&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/users?page=2&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;last&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/users?page=8&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>游标分页</h3>
+<p>对于实时数据，游标分页比偏移分页更稳定：</p>
+<div class="codehilite"><pre><span></span><code><span class="err">GET /users?cursor=eyJpZCI6MTB9&amp;limit=20</span>
+</code></pre></div>
+
+<p>游标分页在数据发生增删时不会导致重复或遗漏，适合社交信息流等场景。</p>
+<h2>安全与规范</h2>
+<ul>
+<li>所有API必须使用HTTPS</li>
+<li>认证使用Bearer Token或OAuth 2.0</li>
+<li>统一时间格式（ISO 8601）</li>
+<li>统一错误格式</li>
+<li>提供API文档（OpenAPI/Swagger）</li>
+</ul>
+<p>遵循一致的API设计规范能降低前后端协作成本，提升API的可维护性和开发者体验。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/docker-kubernetes-guide.html"><span class="related-title">Docker与Kubernetes入门实战</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/docker-ru-men.html"><span class="related-title">Docker从入门到精通：容器化部署最佳实践</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/git-jin-jie.html"><span class="related-title">Git进阶：交互式Rebase、Bisect调试、子模块管理</span><span class="related-meta">技术教程 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=RESTful%20API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83%EF%BC%9A%E8%B5%84%E6%BA%90%E5%91%BD%E5%90%8D%E3%80%81%E7%8A%B6%E6%80%81%E7%A0%81%E3%80%81%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E3%80%81%E5%88%86%E9%A1%B5&url=https%3A//aidev.fit/tech/api-she-ji.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/tech/api-she-ji.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=RESTful%20API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83%EF%BC%9A%E8%B5%84%E6%BA%90%E5%91%BD%E5%90%8D%E3%80%81%E7%8A%B6%E6%80%81%E7%A0%81%E3%80%81%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E3%80%81%E5%88%86%E9%A1%B5&url=https%3A//aidev.fit/tech/api-she-ji.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/tech/api-she-ji.html&t=RESTful%20API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83%EF%BC%9A%E8%B5%84%E6%BA%90%E5%91%BD%E5%90%8D%E3%80%81%E7%8A%B6%E6%80%81%E7%A0%81%E3%80%81%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E3%80%81%E5%88%86%E9%A1%B5" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=RESTful%20API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83%EF%BC%9A%E8%B5%84%E6%BA%90%E5%91%BD%E5%90%8D%E3%80%81%E7%8A%B6%E6%80%81%E7%A0%81%E3%80%81%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E3%80%81%E5%88%86%E9%A1%B5&body=https%3A//aidev.fit/tech/api-she-ji.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/tech/api-she-ji.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/tech/web-performance.html" title="Web性能优化指南">← 上一篇<br><small>Web性能优化指南</small></a><a class="next" href="/tech/ci-cd-liu-cheng.html" title="CI/CD流水线设计：GitHub Actions从入门到生产级配置">下一篇 →<br><small>CI/CD流水线设计：GitHub Actions从入门到生产级配置</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/docker-kubernetes-guide.html"><span class="related-title">Docker与Kubernetes入门实战</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/docker-ru-men.html"><span class="related-title">Docker从入门到精通：容器化部署最佳实践</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/git-jin-jie.html"><span class="related-title">Git进阶：交互式Rebase、Bisect调试、子模块管理</span><span class="related-meta">技术教程 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#restful设计原则">RESTful设计原则</a></li><li class="toc-h2"><a href="#资源命名">资源命名</a></li><li class="toc-h3"><a href="#命名规范">命名规范</a></li><li class="toc-h3"><a href="#最佳实践">最佳实践</a></li><li class="toc-h3"><a href="#常见反模式">常见反模式</a></li><li class="toc-h2"><a href="#http状态码">HTTP状态码</a></li><li class="toc-h3"><a href="#常用状态码">常用状态码</a></li><li class="toc-h3"><a href="#错误响应格式">错误响应格式</a></li><li class="toc-h2"><a href="#版本管理">版本管理</a></li><li class="toc-h3"><a href="#版本策略">版本策略</a></li><li class="toc-h3"><a href="#版本演进">版本演进</a></li><li class="toc-h2"><a href="#分页设计">分页设计</a></li><li class="toc-h3"><a href="#分页方案">分页方案</a></li><li class="toc-h3"><a href="#游标分页">游标分页</a></li><li class="toc-h2"><a href="#安全与规范">安全与规范</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="ai" data-exclude="prompt-gongcheng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="Prompt工程进阶：思维链、Few-shot、结构化Prompt设计模式">
+    <meta property="og:description" content="深入讲解Prompt工程的高级技术，包括思维链推理、Few-shot学习、结构化Prompt设计模式等，帮助开发者系统性地优化与大语言模型的交互效果。">
+    <meta property="og:url" content="https://aidev.fit/ai/prompt-gongcheng.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/ai/prompt-gongcheng.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="AI 教程">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Prompt工程进阶：思维链、Few-shot、结构化Prompt设计模式">
+    <meta name="twitter:description" content="深入讲解Prompt工程的高级技术，包括思维链推理、Few-shot学习、结构化Prompt设计模式等，帮助开发者系统性地优化与大语言模型的交互效果。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/ai/prompt-gongcheng.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/prompt-gongcheng.webp" type="image/webp" fetchpriority="high">
+    <title>Prompt工程进阶：思维链、Few-shot、结构化Prompt设计模式 — AI自习室</title>
+    <meta name="description" content="深入讲解Prompt工程的高级技术，包括思维链推理、Few-shot学习、结构化Prompt设计模式等，帮助开发者系统性地优化与大语言模型的交互效果。">
+    <meta name="keywords" content="AI, Machine Learning, LLM">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/ai/prompt-gongcheng.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai/prompt-gongcheng.html">
+    <link rel="canonical" href="https://aidev.fit/ai/prompt-gongcheng.html"><link rel="prev" href="https://aidev.fit/ai/multi-modal.html">
+<link rel="next" href="https://aidev.fit/ai/rag-zhihuangan.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Prompt工程进阶：思维链、Few-shot、结构化Prompt设计模式",
+      "description": "深入讲解Prompt工程的高级技术，包括思维链推理、Few-shot学习、结构化Prompt设计模式等，帮助开发者系统性地优化与大语言模型的交互效果。",
+      "image": "https://aidev.fit/images/covers/en/ai/prompt-gongcheng.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "325",
+      "keywords": "AI, Machine Learning, LLM",
+      "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/prompt-gongcheng.html"},
+      "articleBody": "Prompt工程的核心原则   Prompt工程是LLM应用开发的基础技能。写好Prompt需要遵循四个核心原则：明确性、结构化、示例引导和边界控制。   思维链提示   思维链（Chain-of-Thought, CoT）是提升LLM推理能力最有效的方法之一。其核心思想是引导模型在给出最终答案前展示推理过程。   Zero-shot CoT   只需在Prompt末尾添加\"请逐步思考\"或\"Let's think step by step\"，就能显著提升模型在数学和逻辑推理任务上的表现。   Few-shot CoT   提供包含完整推理过程的示例，让模型模仿推理路径。示例的数量通常为2-5个，过多会超出上下文限制，过少则不足以引导。   Auto-CoT   自动生成推理链示例，避免人工构造的成本。具体做法是先对问题进行聚类，然后从每个类别中选择代表性样本并自动生成推理过程。   Few-shot学习技巧   Few-shot学习的质量取决于示例的选择和排列：      示例代表性 ：选择与目标问题在语义和难度上相近的示例    示例多样性 ：覆盖不同类型的输入场景    示例顺序 ：将最相似的示例放在最后（近因效应）    标签平衡 ：各类别的示例数量保持均衡     结构化Prompt设计   将Prompt分解为多个功能模块，形成标准化结构：        ## 角色定义  你是一个{角色}，擅长{能力描述}。   ## 任务说明  你需要完成以下任务：{具体任务描述}   ## 约束条件   -    如果缺乏必要信息，请明确说明  -    输出格式必须为JSON  -    保持客观中立的语气   ## 输出格式  {期望的输出格式模板}   ## 上下文信息  {提供给模型的外部知识}       这种模块化设计便于维护和复用，也方便A/B测试不同模块的效果。   进阶技巧      分步引导 ：将复杂任务拆解为多个步骤，每一步使用独立的Prompt    对抗性Prompt ：在Prompt中加入对抗性示例，提升模型的鲁棒性    自一致性 ：多次采样取最一致的答案，提高准确性    主动提示 ：让模型在不确定时主动提问，而不是猜测    工具调用 ：定义函数签名，让模型自主决定何时调用外部工具     掌握这些进阶技巧后，可以系统性地提升LLM应用的表现，减少幻觉和错误输出。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "AI 教程", "item": "https://aidev.fit/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "Prompt工程进阶：思维链、Few-shot、结构化Prompt设计模式"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/ai/">AI 教程</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">AI</span>
+          <span class="tag-cat">Machine Learning</span>
+          <span class="tag-cat">LLM</span></div>
+        <h1 class="article-title">Prompt工程进阶：思维链、Few-shot、结构化Prompt设计模式</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>1 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>325 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/prompt-gongcheng.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/prompt-gongcheng.png" alt="Prompt工程进阶：思维链、Few-shot、结构化Prompt设计模式" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（8）</summary><ol><li><a href="#prompt工程的核心原则">Prompt工程的核心原则</a></li><li><a href="#思维链提示">思维链提示</a></li><li><a href="#zero-shot-cot">Zero-shot CoT</a></li><li><a href="#few-shot-cot">Few-shot CoT</a></li><li><a href="#auto-cot">Auto-CoT</a></li><li><a href="#few-shot学习技巧">Few-shot学习技巧</a></li><li><a href="#结构化prompt设计">结构化Prompt设计</a></li><li><a href="#进阶技巧">进阶技巧</a></li></ol></details>
+        <div class="article-body"><h2>Prompt工程的核心原则</h2>
+<p>Prompt工程是LLM应用开发的基础技能。写好Prompt需要遵循四个核心原则：明确性、结构化、示例引导和边界控制。</p>
+<h2>思维链提示</h2>
+<p>思维链（Chain-of-Thought, CoT）是提升LLM推理能力最有效的方法之一。其核心思想是引导模型在给出最终答案前展示推理过程。</p>
+<h3>Zero-shot CoT</h3>
+<p>只需在Prompt末尾添加"请逐步思考"或"Let's think step by step"，就能显著提升模型在数学和逻辑推理任务上的表现。</p>
+<h3>Few-shot CoT</h3>
+<p>提供包含完整推理过程的示例，让模型模仿推理路径。示例的数量通常为2-5个，过多会超出上下文限制，过少则不足以引导。</p>
+<h3>Auto-CoT</h3>
+<p>自动生成推理链示例，避免人工构造的成本。具体做法是先对问题进行聚类，然后从每个类别中选择代表性样本并自动生成推理过程。</p>
+<h2>Few-shot学习技巧</h2>
+<p>Few-shot学习的质量取决于示例的选择和排列：</p>
+<ul>
+<li><strong>示例代表性</strong>：选择与目标问题在语义和难度上相近的示例</li>
+<li><strong>示例多样性</strong>：覆盖不同类型的输入场景</li>
+<li><strong>示例顺序</strong>：将最相似的示例放在最后（近因效应）</li>
+<li><strong>标签平衡</strong>：各类别的示例数量保持均衡</li>
+</ul>
+<h2>结构化Prompt设计</h2>
+<p>将Prompt分解为多个功能模块，形成标准化结构：</p>
+<div class="codehilite"><pre><span></span><code><span class="gu">## 角色定义</span>
+你是一个{角色}，擅长{能力描述}。
+
+<span class="gu">## 任务说明</span>
+你需要完成以下任务：{具体任务描述}
+
+<span class="gu">## 约束条件</span>
+<span class="k">-</span><span class="w"> </span>如果缺乏必要信息，请明确说明
+<span class="k">-</span><span class="w"> </span>输出格式必须为JSON
+<span class="k">-</span><span class="w"> </span>保持客观中立的语气
+
+<span class="gu">## 输出格式</span>
+{期望的输出格式模板}
+
+<span class="gu">## 上下文信息</span>
+{提供给模型的外部知识}
+</code></pre></div>
+
+<p>这种模块化设计便于维护和复用，也方便A/B测试不同模块的效果。</p>
+<h2>进阶技巧</h2>
+<ol>
+<li><strong>分步引导</strong>：将复杂任务拆解为多个步骤，每一步使用独立的Prompt</li>
+<li><strong>对抗性Prompt</strong>：在Prompt中加入对抗性示例，提升模型的鲁棒性</li>
+<li><strong>自一致性</strong>：多次采样取最一致的答案，提高准确性</li>
+<li><strong>主动提示</strong>：让模型在不确定时主动提问，而不是猜测</li>
+<li><strong>工具调用</strong>：定义函数签名，让模型自主决定何时调用外部工具</li>
+</ol>
+<p>掌握这些进阶技巧后，可以系统性地提升LLM应用的表现，减少幻觉和错误输出。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
+<a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-cost-control.html"><span class="related-title">AI成本控制：缓存策略、批处理、模型降级的实战方案</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=Prompt%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6%EF%BC%9A%E6%80%9D%E7%BB%B4%E9%93%BE%E3%80%81Few-shot%E3%80%81%E7%BB%93%E6%9E%84%E5%8C%96Prompt%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F&url=https%3A//aidev.fit/ai/prompt-gongcheng.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/ai/prompt-gongcheng.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Prompt%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6%EF%BC%9A%E6%80%9D%E7%BB%B4%E9%93%BE%E3%80%81Few-shot%E3%80%81%E7%BB%93%E6%9E%84%E5%8C%96Prompt%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F&url=https%3A//aidev.fit/ai/prompt-gongcheng.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/ai/prompt-gongcheng.html&t=Prompt%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6%EF%BC%9A%E6%80%9D%E7%BB%B4%E9%93%BE%E3%80%81Few-shot%E3%80%81%E7%BB%93%E6%9E%84%E5%8C%96Prompt%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=Prompt%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6%EF%BC%9A%E6%80%9D%E7%BB%B4%E9%93%BE%E3%80%81Few-shot%E3%80%81%E7%BB%93%E6%9E%84%E5%8C%96Prompt%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F&body=https%3A//aidev.fit/ai/prompt-gongcheng.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/ai/prompt-gongcheng.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/ai/multi-modal.html" title="多模态AI实践：图片理解、语音识别、视频分析的API使用">← 上一篇<br><small>多模态AI实践：图片理解、语音识别、视频分析的API使用</small></a><a class="next" href="/ai/rag-zhihuangan.html" title="RAG实战指南：从文档分块到问答系统的完整实现">下一篇 →<br><small>RAG实战指南：从文档分块到问答系统的完整实现</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
+<a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-cost-control.html"><span class="related-title">AI成本控制：缓存策略、批处理、模型降级的实战方案</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#prompt工程的核心原则">Prompt工程的核心原则</a></li><li class="toc-h2"><a href="#思维链提示">思维链提示</a></li><li class="toc-h3"><a href="#zero-shot-cot">Zero-shot CoT</a></li><li class="toc-h3"><a href="#few-shot-cot">Few-shot CoT</a></li><li class="toc-h3"><a href="#auto-cot">Auto-CoT</a></li><li class="toc-h2"><a href="#few-shot学习技巧">Few-shot学习技巧</a></li><li class="toc-h2"><a href="#结构化prompt设计">结构化Prompt设计</a></li><li class="toc-h2"><a href="#进阶技巧">进阶技巧</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

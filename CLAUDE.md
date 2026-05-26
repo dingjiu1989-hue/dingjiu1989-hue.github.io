@@ -8,6 +8,7 @@ Live: https://aidev.fit (via ghost domain dingjiu1989-hue.github.io)
 | Path | Purpose |
 |------|---------|
 | `scripts/gen_en_site.py` | Build all EN HTML from `en/articles.json` |
+| `scripts/gen_cn_site.py` | Build all CN HTML from `articles.json` |
 | `scripts/gen_ai_friendly.py` | Generate llms.txt, llms-full.txt, robots.txt, /md/ |
 | `scripts/gen_covers.py` | Generate 1200×630 PNG covers for all articles |
 | `scripts/syndicate_devto.py` | Publish to dev.to (DA 90+) with canonical URLs |
@@ -32,6 +33,7 @@ python3 scripts/maintain.py
 
 # Site only (HTML + CSS + JS)
 python3 scripts/gen_en_site.py
+python3 scripts/gen_cn_site.py
 
 # AI-friendly files only
 python3 scripts/gen_ai_friendly.py

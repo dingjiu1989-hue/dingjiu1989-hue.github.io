@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="tech" data-exclude="redis-shijian">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="Redis缓存实战：数据类型、过期策略、分布式锁实现">
+    <meta property="og:description" content="全面讲解Redis在实践中的核心用法，涵盖丰富的数据类型及应用场景、缓存过期与淘汰策略、分布式锁的实现方案和避坑指南。">
+    <meta property="og:url" content="https://aidev.fit/tech/redis-shijian.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/redis-shijian.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="技术教程">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Redis缓存实战：数据类型、过期策略、分布式锁实现">
+    <meta name="twitter:description" content="全面讲解Redis在实践中的核心用法，涵盖丰富的数据类型及应用场景、缓存过期与淘汰策略、分布式锁的实现方案和避坑指南。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/tech/redis-shijian.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/redis-shijian.webp" type="image/webp" fetchpriority="high">
+    <title>Redis缓存实战：数据类型、过期策略、分布式锁实现 — AI自习室</title>
+    <meta name="description" content="全面讲解Redis在实践中的核心用法，涵盖丰富的数据类型及应用场景、缓存过期与淘汰策略、分布式锁的实现方案和避坑指南。">
+    <meta name="keywords" content="Technology, DevOps, Cloud">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/tech/redis-shijian.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/redis-shijian.html">
+    <link rel="canonical" href="https://aidev.fit/tech/redis-shijian.html"><link rel="prev" href="https://aidev.fit/tech/python-jin-cheng.html">
+<link rel="next" href="https://aidev.fit/tech/serverless-shijian.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Redis缓存实战：数据类型、过期策略、分布式锁实现",
+      "description": "全面讲解Redis在实践中的核心用法，涵盖丰富的数据类型及应用场景、缓存过期与淘汰策略、分布式锁的实现方案和避坑指南。",
+      "image": "https://aidev.fit/images/covers/en/tech/redis-shijian.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1462",
+      "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/redis-shijian.html"},
+      "articleBody": "Redis数据类型与场景   Redis不仅是一个缓存，更是一个数据结构服务器。理解每种数据类型的特性和适用场景是充分发挥Redis能力的关键。   String   最基本的数据类型，适合缓存、计数器、分布式ID等场景：       SET   user:1001:name    &quot;张三&quot;  INCR   article:123:views SETEX   session:abc    3600     &quot;user_data&quot;      # 带过期时间的设置        Hash   适合存储对象数据，可单独更新某个字段：       HSET   user:1001   name    &quot;张三&quot;    age    28    city    &quot;北京&quot;  HGET   user:1001   name HINCRBY   user:1001   age    1        List   基于链表实现，适合消息队列和时间线场景：       LPUSH   timeline:user:1001    &quot;post:1&quot;  LRANGE   timeline:user:1001    0     9      # 获取最近10条        Set   无序集合，适合标签、去重和社交关系：       SADD   article:1:tags    &quot;技术&quot;     &quot;Redis&quot;     &quot;缓存&quot;  SINTER   article:1:tags   article:2:tags     # 共同标签        Sorted Set   有序集合，适合排行榜、延迟队列等场景：       ZADD   leaderboard    1000     &quot;user1&quot;  ZINCRBY   leaderboard    10     &quot;user1&quot;  ZREVRANGE   leaderboard    0     9    WITHSCORES     # Top 10        过期与淘汰策略   过期策略   Redis使用两种方式清理过期key：      惰性删除 ：访问key时检查是否过期    定期删除 ：每100ms随机检查一批key     内存淘汰策略   当内存达到上限时，根据配置的策略淘汰数据：      noeviction ：不淘汰，写入返回错误（默认）    allkeys-lru ：淘汰最近最少使用的key    volatile-lru ：仅在设置了过期时间的key中淘汰最少使用    allkeys-lfu ：淘汰最不频繁使用的key（Redis 4.0+）    volatile-ttl ：淘汰即将过期的key     建议生产环境使用 allkeys-lru 策略，配合合理的过期时间设置。   分布式锁   基本实现   使用SET命令的NX和EX参数实现：        import     redis    r   =   redis  .  Redis  ()    def     acquire_lock  (  lock_name  ,   acquire_timeout  =  10  ,   lock_timeout  =  30  ):       identifier   =   str  (  uuid  .  uuid4  ())       end   =   time  .  time  ()   +   acquire_timeout       while   time  .  time  ()   &lt;   end  :           if   r  .  set  (  f  &quot;lock:  {  lock_name  }  &quot;  ,   identifier  ,   nx  =  True  ,   ex  =  lock_timeout  ):               return   identifier           time  .  sleep  (  0.01  )       return   None    def     release_lock  (  lock_name  ,   identifier  ):       # 使用Lua脚本保证原子性       script   =   &quot;&quot;&quot;       if redis.call(&quot;get&quot;, KEYS[1]) == ARGV[1] then           return redis.call(&quot;del&quot;, KEYS[1])       else           return 0       end       &quot;&quot;&quot;       return   r  .  eval  (  script  ,   1  ,   f  &quot;lock:  {  lock_name  }  &quot;  ,   identifier  )        Redlock算法   对于需要更高安全性的场景，可以使用Redlock算法在多个Redis节点上获取锁。   注意事项     锁的超时时间需要根据业务执行时间合理设置   使用唯一标识避免误删其他客户端持有的锁   释放锁时使用Lua脚本保证检查和删除的原子性   考虑可重入锁的需求     缓存常见问题   缓存穿透   查询不存在的数据导致请求直接打到数据库。    解决方案 ：缓存空值或使用布隆过滤器。   缓存击穿   热点key过期导致高并发请求直击数据库。    解决方案：  使用互斥锁或设置热点key永不过期。   缓存雪崩   大量key同时过期导致数据库压力激增。    解决方案 ：过期时间增加随机值，避免批量过期。   Redis作为高性能缓存和数据结构服务器，掌握其核心特性和常见问题的处理方案，是后端开发的必备技能。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "技术教程", "item": "https://aidev.fit/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Redis缓存实战：数据类型、过期策略、分布式锁实现"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/tech/">技术教程</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">Technology</span>
+          <span class="tag-cat">DevOps</span>
+          <span class="tag-cat">Cloud</span></div>
+        <h1 class="article-title">Redis缓存实战：数据类型、过期策略、分布式锁实现</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>7 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>1462 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/redis-shijian.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/redis-shijian.png" alt="Redis缓存实战：数据类型、过期策略、分布式锁实现" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（17）</summary><ol><li><a href="#redis数据类型与场景">Redis数据类型与场景</a></li><li><a href="#string">String</a></li><li><a href="#hash">Hash</a></li><li><a href="#list">List</a></li><li><a href="#set">Set</a></li><li><a href="#sorted-set">Sorted Set</a></li><li><a href="#过期与淘汰策略">过期与淘汰策略</a></li><li><a href="#过期策略">过期策略</a></li><li><a href="#内存淘汰策略">内存淘汰策略</a></li><li><a href="#分布式锁">分布式锁</a></li><li><a href="#基本实现">基本实现</a></li><li><a href="#redlock算法">Redlock算法</a></li><li><a href="#注意事项">注意事项</a></li><li><a href="#缓存常见问题">缓存常见问题</a></li><li><a href="#缓存穿透">缓存穿透</a></li><li><a href="#缓存击穿">缓存击穿</a></li><li><a href="#缓存雪崩">缓存雪崩</a></li></ol></details>
+        <div class="article-body"><h2>Redis数据类型与场景</h2>
+<p>Redis不仅是一个缓存，更是一个数据结构服务器。理解每种数据类型的特性和适用场景是充分发挥Redis能力的关键。</p>
+<h3>String</h3>
+<p>最基本的数据类型，适合缓存、计数器、分布式ID等场景：</p>
+<div class="codehilite"><pre><span></span><code>SET<span class="w"> </span>user:1001:name<span class="w"> </span><span class="s2">&quot;张三&quot;</span>
+INCR<span class="w"> </span>article:123:views
+SETEX<span class="w"> </span>session:abc<span class="w"> </span><span class="m">3600</span><span class="w"> </span><span class="s2">&quot;user_data&quot;</span><span class="w">  </span><span class="c1"># 带过期时间的设置</span>
+</code></pre></div>
+
+<h3>Hash</h3>
+<p>适合存储对象数据，可单独更新某个字段：</p>
+<div class="codehilite"><pre><span></span><code>HSET<span class="w"> </span>user:1001<span class="w"> </span>name<span class="w"> </span><span class="s2">&quot;张三&quot;</span><span class="w"> </span>age<span class="w"> </span><span class="m">28</span><span class="w"> </span>city<span class="w"> </span><span class="s2">&quot;北京&quot;</span>
+HGET<span class="w"> </span>user:1001<span class="w"> </span>name
+HINCRBY<span class="w"> </span>user:1001<span class="w"> </span>age<span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+
+<h3>List</h3>
+<p>基于链表实现，适合消息队列和时间线场景：</p>
+<div class="codehilite"><pre><span></span><code>LPUSH<span class="w"> </span>timeline:user:1001<span class="w"> </span><span class="s2">&quot;post:1&quot;</span>
+LRANGE<span class="w"> </span>timeline:user:1001<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">9</span><span class="w">  </span><span class="c1"># 获取最近10条</span>
+</code></pre></div>
+
+<h3>Set</h3>
+<p>无序集合，适合标签、去重和社交关系：</p>
+<div class="codehilite"><pre><span></span><code>SADD<span class="w"> </span>article:1:tags<span class="w"> </span><span class="s2">&quot;技术&quot;</span><span class="w"> </span><span class="s2">&quot;Redis&quot;</span><span class="w"> </span><span class="s2">&quot;缓存&quot;</span>
+SINTER<span class="w"> </span>article:1:tags<span class="w"> </span>article:2:tags<span class="w">  </span><span class="c1"># 共同标签</span>
+</code></pre></div>
+
+<h3>Sorted Set</h3>
+<p>有序集合，适合排行榜、延迟队列等场景：</p>
+<div class="codehilite"><pre><span></span><code>ZADD<span class="w"> </span>leaderboard<span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="s2">&quot;user1&quot;</span>
+ZINCRBY<span class="w"> </span>leaderboard<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="s2">&quot;user1&quot;</span>
+ZREVRANGE<span class="w"> </span>leaderboard<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">9</span><span class="w"> </span>WITHSCORES<span class="w">  </span><span class="c1"># Top 10</span>
+</code></pre></div>
+
+<h2>过期与淘汰策略</h2>
+<h3>过期策略</h3>
+<p>Redis使用两种方式清理过期key：</p>
+<ul>
+<li><strong>惰性删除</strong>：访问key时检查是否过期</li>
+<li><strong>定期删除</strong>：每100ms随机检查一批key</li>
+</ul>
+<h3>内存淘汰策略</h3>
+<p>当内存达到上限时，根据配置的策略淘汰数据：</p>
+<ul>
+<li><strong>noeviction</strong>：不淘汰，写入返回错误（默认）</li>
+<li><strong>allkeys-lru</strong>：淘汰最近最少使用的key</li>
+<li><strong>volatile-lru</strong>：仅在设置了过期时间的key中淘汰最少使用</li>
+<li><strong>allkeys-lfu</strong>：淘汰最不频繁使用的key（Redis 4.0+）</li>
+<li><strong>volatile-ttl</strong>：淘汰即将过期的key</li>
+</ul>
+<p>建议生产环境使用<code>allkeys-lru</code>策略，配合合理的过期时间设置。</p>
+<h2>分布式锁</h2>
+<h3>基本实现</h3>
+<p>使用SET命令的NX和EX参数实现：</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">redis</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">Redis</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">acquire_lock</span><span class="p">(</span><span class="n">lock_name</span><span class="p">,</span> <span class="n">acquire_timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">lock_timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+    <span class="n">identifier</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="n">acquire_timeout</span>
+    <span class="k">while</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;lock:</span><span class="si">{</span><span class="n">lock_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">nx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ex</span><span class="o">=</span><span class="n">lock_timeout</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">identifier</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">release_lock</span><span class="p">(</span><span class="n">lock_name</span><span class="p">,</span> <span class="n">identifier</span><span class="p">):</span>
+    <span class="c1"># 使用Lua脚本保证原子性</span>
+    <span class="n">script</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    if redis.call(&quot;get&quot;, KEYS[1]) == ARGV[1] then</span>
+<span class="s2">        return redis.call(&quot;del&quot;, KEYS[1])</span>
+<span class="s2">    else</span>
+<span class="s2">        return 0</span>
+<span class="s2">    end</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">script</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;lock:</span><span class="si">{</span><span class="n">lock_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">identifier</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>Redlock算法</h3>
+<p>对于需要更高安全性的场景，可以使用Redlock算法在多个Redis节点上获取锁。</p>
+<h3>注意事项</h3>
+<ul>
+<li>锁的超时时间需要根据业务执行时间合理设置</li>
+<li>使用唯一标识避免误删其他客户端持有的锁</li>
+<li>释放锁时使用Lua脚本保证检查和删除的原子性</li>
+<li>考虑可重入锁的需求</li>
+</ul>
+<h2>缓存常见问题</h2>
+<h3>缓存穿透</h3>
+<p>查询不存在的数据导致请求直接打到数据库。</p>
+<p><strong>解决方案</strong>：缓存空值或使用布隆过滤器。</p>
+<h3>缓存击穿</h3>
+<p>热点key过期导致高并发请求直击数据库。</p>
+<p><strong>解决方案：</strong> 使用互斥锁或设置热点key永不过期。</p>
+<h3>缓存雪崩</h3>
+<p>大量key同时过期导致数据库压力激增。</p>
+<p><strong>解决方案</strong>：过期时间增加随机值，避免批量过期。</p>
+<p>Redis作为高性能缓存和数据结构服务器，掌握其核心特性和常见问题的处理方案，是后端开发的必备技能。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/docker-kubernetes-guide.html"><span class="related-title">Docker与Kubernetes入门实战</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/docker-ru-men.html"><span class="related-title">Docker从入门到精通：容器化部署最佳实践</span><span class="related-meta">技术教程 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=Redis%E7%BC%93%E5%AD%98%E5%AE%9E%E6%88%98%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E3%80%81%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5%E3%80%81%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%AE%9E%E7%8E%B0&url=https%3A//aidev.fit/tech/redis-shijian.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/tech/redis-shijian.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Redis%E7%BC%93%E5%AD%98%E5%AE%9E%E6%88%98%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E3%80%81%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5%E3%80%81%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%AE%9E%E7%8E%B0&url=https%3A//aidev.fit/tech/redis-shijian.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/tech/redis-shijian.html&t=Redis%E7%BC%93%E5%AD%98%E5%AE%9E%E6%88%98%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E3%80%81%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5%E3%80%81%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%AE%9E%E7%8E%B0" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=Redis%E7%BC%93%E5%AD%98%E5%AE%9E%E6%88%98%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E3%80%81%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5%E3%80%81%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%AE%9E%E7%8E%B0&body=https%3A//aidev.fit/tech/redis-shijian.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/tech/redis-shijian.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/tech/python-jin-cheng.html" title="Python异步编程：asyncio、协程、并发模式详解">← 上一篇<br><small>Python异步编程：asyncio、协程、并发模式详解</small></a><a class="next" href="/tech/serverless-shijian.html" title="Serverless实战：AWS Lambda函数优化、冷启动、监控">下一篇 →<br><small>Serverless实战：AWS Lambda函数优化、冷启动、监控</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/docker-kubernetes-guide.html"><span class="related-title">Docker与Kubernetes入门实战</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/docker-ru-men.html"><span class="related-title">Docker从入门到精通：容器化部署最佳实践</span><span class="related-meta">技术教程 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#redis数据类型与场景">Redis数据类型与场景</a></li><li class="toc-h3"><a href="#string">String</a></li><li class="toc-h3"><a href="#hash">Hash</a></li><li class="toc-h3"><a href="#list">List</a></li><li class="toc-h3"><a href="#set">Set</a></li><li class="toc-h3"><a href="#sorted-set">Sorted Set</a></li><li class="toc-h2"><a href="#过期与淘汰策略">过期与淘汰策略</a></li><li class="toc-h3"><a href="#过期策略">过期策略</a></li><li class="toc-h3"><a href="#内存淘汰策略">内存淘汰策略</a></li><li class="toc-h2"><a href="#分布式锁">分布式锁</a></li><li class="toc-h3"><a href="#基本实现">基本实现</a></li><li class="toc-h3"><a href="#redlock算法">Redlock算法</a></li><li class="toc-h3"><a href="#注意事项">注意事项</a></li><li class="toc-h2"><a href="#缓存常见问题">缓存常见问题</a></li><li class="toc-h3"><a href="#缓存穿透">缓存穿透</a></li><li class="toc-h3"><a href="#缓存击穿">缓存击穿</a></li><li class="toc-h3"><a href="#缓存雪崩">缓存雪崩</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

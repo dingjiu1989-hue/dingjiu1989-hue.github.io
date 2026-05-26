@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="ai" data-exclude="llm-fine-tuning">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="LLM微调实战：LoRA vs QLoRA vs 全量微调">
+    <meta property="og:description" content="全面对比LLM微调的三大主流方法——LoRA、QLoRA和全量微调，包括数据准备、训练技巧、评估方法和生产部署的实践经验。">
+    <meta property="og:url" content="https://aidev.fit/ai/llm-fine-tuning.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/ai/llm-fine-tuning.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="AI 教程">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LLM微调实战：LoRA vs QLoRA vs 全量微调">
+    <meta name="twitter:description" content="全面对比LLM微调的三大主流方法——LoRA、QLoRA和全量微调，包括数据准备、训练技巧、评估方法和生产部署的实践经验。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/ai/llm-fine-tuning.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/llm-fine-tuning.webp" type="image/webp" fetchpriority="high">
+    <title>LLM微调实战：LoRA vs QLoRA vs 全量微调 — AI自习室</title>
+    <meta name="description" content="全面对比LLM微调的三大主流方法——LoRA、QLoRA和全量微调，包括数据准备、训练技巧、评估方法和生产部署的实践经验。">
+    <meta name="keywords" content="AI, Machine Learning, LLM">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/ai/llm-fine-tuning.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai/llm-fine-tuning.html">
+    <link rel="canonical" href="https://aidev.fit/ai/llm-fine-tuning.html"><link rel="prev" href="https://aidev.fit/ai/langchain-shijian.html">
+<link rel="next" href="https://aidev.fit/ai/llm-jiaoyi.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "LLM微调实战：LoRA vs QLoRA vs 全量微调",
+      "description": "全面对比LLM微调的三大主流方法——LoRA、QLoRA和全量微调，包括数据准备、训练技巧、评估方法和生产部署的实践经验。",
+      "image": "https://aidev.fit/images/covers/en/ai/llm-fine-tuning.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "285",
+      "keywords": "AI, Machine Learning, LLM",
+      "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/llm-fine-tuning.html"},
+      "articleBody": "微调方法概述   大语言模型的微调是将通用模型适配到特定领域或任务的关键技术。目前主流有三种微调范式：全量微调、LoRA和QLoRA，它们在资源消耗、效果和灵活性上各有优劣。   全量微调   全量微调会更新模型的所有参数，理论上能达到最佳效果，但对硬件要求极高。以LLaMA-7B为例，全量微调需要至少4张A100 80GB显卡。全量微调的适用场景包括：     需要彻底改变模型行为模式   有充足的GPU资源   追求极致性能     LoRA微调   LoRA（Low-Rank Adaptation）通过在原始权重旁插入低秩矩阵来微调，只更新这些新增的参数。核心优势包括：     训练参数量仅为原模型的0.1%-1%   单张消费级显卡即可微调7B模型   多个LoRA权重可以动态切换     在实际应用中，LoRA的秩（rank）设置为8-64之间，目标模块通常选择Attention层的Q和V矩阵。   QLoRA微调   QLoRA在LoRA的基础上引入4-bit量化，进一步降低显存占用。使用NF4数据类型的量化结合双重量化技术，可以在保持效果的前提下将显存需求降低4倍。   QLoRA的关键组件包括：      NF4量化 ：基于正态分布的4-bit数据类型，比普通int4更适合模型权重分布。    双重量化 ：对量化常数再次量化，进一步减少显存占用。    分页优化器 ：利用CPU内存作为显存溢出时的缓冲。     数据准备   数据质量决定了微调效果的上限。高质量的数据集应满足：      多样性与覆盖度 ：覆盖目标领域的各种场景    格式标准化 ：统一采用ChatML或ShareGPT格式    质量过滤 ：去除低质量、重复和有偏见的数据     推荐使用 datasets 库进行数据加载和预处理，配合 tokenizers 进行统一的分词处理。   评估方法   微调后的模型评估应从多个维度进行：      自动评估 ：使用BLEU、ROUGE、Perplexity等指标    人工评估 ：构建评估集进行盲测对比    任务特定评估 ：针对目标任务的准确率、召回率等     推荐使用 lm-evaluation-harness 框架进行标准化的模型评估，确保结果的可比性。   选择微调方法时，建议从QLoRA开始快速验证数据有效性，然后根据效果和资源决定是否升级到LoRA或全量微调。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "AI 教程", "item": "https://aidev.fit/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "LLM微调实战：LoRA vs QLoRA vs 全量微调"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/ai/">AI 教程</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">AI</span>
+          <span class="tag-cat">Machine Learning</span>
+          <span class="tag-cat">LLM</span></div>
+        <h1 class="article-title">LLM微调实战：LoRA vs QLoRA vs 全量微调</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>1 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>285 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/llm-fine-tuning.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/llm-fine-tuning.png" alt="LLM微调实战：LoRA vs QLoRA vs 全量微调" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（6）</summary><ol><li><a href="#微调方法概述">微调方法概述</a></li><li><a href="#全量微调">全量微调</a></li><li><a href="#lora微调">LoRA微调</a></li><li><a href="#qlora微调">QLoRA微调</a></li><li><a href="#数据准备">数据准备</a></li><li><a href="#评估方法">评估方法</a></li></ol></details>
+        <div class="article-body"><h2>微调方法概述</h2>
+<p>大语言模型的微调是将通用模型适配到特定领域或任务的关键技术。目前主流有三种微调范式：全量微调、LoRA和QLoRA，它们在资源消耗、效果和灵活性上各有优劣。</p>
+<h2>全量微调</h2>
+<p>全量微调会更新模型的所有参数，理论上能达到最佳效果，但对硬件要求极高。以LLaMA-7B为例，全量微调需要至少4张A100 80GB显卡。全量微调的适用场景包括：</p>
+<ul>
+<li>需要彻底改变模型行为模式</li>
+<li>有充足的GPU资源</li>
+<li>追求极致性能</li>
+</ul>
+<h2>LoRA微调</h2>
+<p>LoRA（Low-Rank Adaptation）通过在原始权重旁插入低秩矩阵来微调，只更新这些新增的参数。核心优势包括：</p>
+<ul>
+<li>训练参数量仅为原模型的0.1%-1%</li>
+<li>单张消费级显卡即可微调7B模型</li>
+<li>多个LoRA权重可以动态切换</li>
+</ul>
+<p>在实际应用中，LoRA的秩（rank）设置为8-64之间，目标模块通常选择Attention层的Q和V矩阵。</p>
+<h2>QLoRA微调</h2>
+<p>QLoRA在LoRA的基础上引入4-bit量化，进一步降低显存占用。使用NF4数据类型的量化结合双重量化技术，可以在保持效果的前提下将显存需求降低4倍。</p>
+<p>QLoRA的关键组件包括：</p>
+<ol>
+<li><strong>NF4量化</strong>：基于正态分布的4-bit数据类型，比普通int4更适合模型权重分布。</li>
+<li><strong>双重量化</strong>：对量化常数再次量化，进一步减少显存占用。</li>
+<li><strong>分页优化器</strong>：利用CPU内存作为显存溢出时的缓冲。</li>
+</ol>
+<h2>数据准备</h2>
+<p>数据质量决定了微调效果的上限。高质量的数据集应满足：</p>
+<ul>
+<li><strong>多样性与覆盖度</strong>：覆盖目标领域的各种场景</li>
+<li><strong>格式标准化</strong>：统一采用ChatML或ShareGPT格式</li>
+<li><strong>质量过滤</strong>：去除低质量、重复和有偏见的数据</li>
+</ul>
+<p>推荐使用<code>datasets</code>库进行数据加载和预处理，配合<code>tokenizers</code>进行统一的分词处理。</p>
+<h2>评估方法</h2>
+<p>微调后的模型评估应从多个维度进行：</p>
+<ol>
+<li><strong>自动评估</strong>：使用BLEU、ROUGE、Perplexity等指标</li>
+<li><strong>人工评估</strong>：构建评估集进行盲测对比</li>
+<li><strong>任务特定评估</strong>：针对目标任务的准确率、召回率等</li>
+</ol>
+<p>推荐使用<code>lm-evaluation-harness</code>框架进行标准化的模型评估，确保结果的可比性。</p>
+<p>选择微调方法时，建议从QLoRA开始快速验证数据有效性，然后根据效果和资源决定是否升级到LoRA或全量微调。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
+<a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-cost-control.html"><span class="related-title">AI成本控制：缓存策略、批处理、模型降级的实战方案</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=LLM%E5%BE%AE%E8%B0%83%E5%AE%9E%E6%88%98%EF%BC%9ALoRA%20vs%20QLoRA%20vs%20%E5%85%A8%E9%87%8F%E5%BE%AE%E8%B0%83&url=https%3A//aidev.fit/ai/llm-fine-tuning.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/ai/llm-fine-tuning.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=LLM%E5%BE%AE%E8%B0%83%E5%AE%9E%E6%88%98%EF%BC%9ALoRA%20vs%20QLoRA%20vs%20%E5%85%A8%E9%87%8F%E5%BE%AE%E8%B0%83&url=https%3A//aidev.fit/ai/llm-fine-tuning.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/ai/llm-fine-tuning.html&t=LLM%E5%BE%AE%E8%B0%83%E5%AE%9E%E6%88%98%EF%BC%9ALoRA%20vs%20QLoRA%20vs%20%E5%85%A8%E9%87%8F%E5%BE%AE%E8%B0%83" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=LLM%E5%BE%AE%E8%B0%83%E5%AE%9E%E6%88%98%EF%BC%9ALoRA%20vs%20QLoRA%20vs%20%E5%85%A8%E9%87%8F%E5%BE%AE%E8%B0%83&body=https%3A//aidev.fit/ai/llm-fine-tuning.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/ai/llm-fine-tuning.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/ai/langchain-shijian.html" title="LangChain实战：Chain、Agent、Memory、Tool使用详解">← 上一篇<br><small>LangChain实战：Chain、Agent、Memory、Tool使用详解</small></a><a class="next" href="/ai/llm-jiaoyi.html" title="LLM交易：微调模型 vs API调用，成本与效果的权衡">下一篇 →<br><small>LLM交易：微调模型 vs API调用，成本与效果的权衡</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
+<a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-cost-control.html"><span class="related-title">AI成本控制：缓存策略、批处理、模型降级的实战方案</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#微调方法概述">微调方法概述</a></li><li class="toc-h2"><a href="#全量微调">全量微调</a></li><li class="toc-h2"><a href="#lora微调">LoRA微调</a></li><li class="toc-h2"><a href="#qlora微调">QLoRA微调</a></li><li class="toc-h2"><a href="#数据准备">数据准备</a></li><li class="toc-h2"><a href="#评估方法">评估方法</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

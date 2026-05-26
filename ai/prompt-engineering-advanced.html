@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="ai" data-exclude="prompt-engineering-advanced">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="高级Prompt Engineering技巧">
+    <meta property="og:description" content="深入探讨高级提示工程方法，包括思维链、Few-Shot学习、结构化输出等关键技术，助你充分发挥大语言模型的能力。">
+    <meta property="og:url" content="https://aidev.fit/ai/prompt-engineering-advanced.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/ai/prompt-engineering-advanced.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:section" content="AI 教程">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="高级Prompt Engineering技巧">
+    <meta name="twitter:description" content="深入探讨高级提示工程方法，包括思维链、Few-Shot学习、结构化输出等关键技术，助你充分发挥大语言模型的能力。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/ai/prompt-engineering-advanced.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/prompt-engineering-advanced.webp" type="image/webp" fetchpriority="high">
+    <title>高级Prompt Engineering技巧 — AI自习室</title>
+    <meta name="description" content="深入探讨高级提示工程方法，包括思维链、Few-Shot学习、结构化输出等关键技术，助你充分发挥大语言模型的能力。">
+    <meta name="keywords" content="AI, Machine Learning, LLM">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/ai/prompt-engineering-advanced.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai/prompt-engineering-advanced.html">
+    <link rel="canonical" href="https://aidev.fit/ai/prompt-engineering-advanced.html"><link rel="prev" href="https://aidev.fit/ai/llm-api-integration.html">
+<link rel="next" href="https://aidev.fit/ai/rag-implementation.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "高级Prompt Engineering技巧",
+      "description": "深入探讨高级提示工程方法，包括思维链、Few-Shot学习、结构化输出等关键技术，助你充分发挥大语言模型的能力。",
+      "image": "https://aidev.fit/images/covers/en/ai/prompt-engineering-advanced.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "218",
+      "keywords": "AI, Machine Learning, LLM",
+      "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/prompt-engineering-advanced.html"},
+      "articleBody": "从基础到进阶   Prompt Engineering已从简单的\"请用中文回答\"进化为一门系统化的工程学科。掌握高级技巧能够显著提升LLM输出的质量和可靠性。   思维链（Chain-of-Thought）   思维链提示是让模型展示推理过程的核心技术。与其直接问答案，不如引导模型逐步思考。Few-Shot CoT通过在示例中展示推理步骤来引导模型。Zero-Shot CoT则更简洁——只需在提示末尾加上\"让我们逐步思考\"即可触发推理链。   进阶用法包括自洽性（Self-Consistency）：多次运行CoT并投票选择最一致的答案，可显著提高数学和逻辑推理任务的准确率。   结构化输出控制   控制LLM输出格式是生产环境的关键需求。XML标签法是最直观的方式，在提示中定义 &lt;output&gt;&lt;answer&gt;&lt;/answer&gt;&lt;reasoning&gt;&lt;/reasoning&gt;&lt;/output&gt; 结构。JSON模式配合System Message中的格式说明，能让模型稳定输出可解析的结构化数据。   更可靠的做法是使用函数调用（Function Calling）功能。通过定义函数的参数Schema，模型会自动输出符合规范的JSON，无需在Prompt中反复强调格式。   系统提示词设计   高质量的System Prompt应当包含以下要素：角色定义（你是谁）、任务说明（你要做什么）、输出规范（格式要求）、约束条件（不能做什么）以及上下文信息（当前环境数据）。   高级技巧实战    分而治之 ：复杂任务拆分为多个子Prompt，每个Prompt聚焦单一职责。例如代码审查任务可拆分为\"检查安全漏洞\"\"检查性能问题\"\"检查代码风格\"三个独立步骤。    动态Few-Shot ：根据用户输入从样本库中检索最相似的示例，而非使用固定示例。利用向量相似度搜索，每次动态选择3-5个最相关示例，效果远超随机选择。    对抗性Prompt测试 ：主动测试Prompt的鲁棒性，包括角色扮演攻击、越狱尝试和边界条件测试，确保生产环境的提示词安全可靠。   掌握这些技巧后，你将能够构建更可靠、更高效的LLM应用系统。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "AI 教程", "item": "https://aidev.fit/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "高级Prompt Engineering技巧"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/ai/">AI 教程</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">AI</span>
+          <span class="tag-cat">Machine Learning</span>
+          <span class="tag-cat">LLM</span></div>
+        <h1 class="article-title">高级Prompt Engineering技巧</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-11">2026-05-11</time>
+          <span class="meta-sep">·</span>
+          <span>1 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>218 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/prompt-engineering-advanced.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/prompt-engineering-advanced.png" alt="高级Prompt Engineering技巧" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（5）</summary><ol><li><a href="#从基础到进阶">从基础到进阶</a></li><li><a href="#思维链chain-of-thought">思维链（Chain-of-Thought）</a></li><li><a href="#结构化输出控制">结构化输出控制</a></li><li><a href="#系统提示词设计">系统提示词设计</a></li><li><a href="#高级技巧实战">高级技巧实战</a></li></ol></details>
+        <div class="article-body"><h2>从基础到进阶</h2>
+<p>Prompt Engineering已从简单的"请用中文回答"进化为一门系统化的工程学科。掌握高级技巧能够显著提升LLM输出的质量和可靠性。</p>
+<h2>思维链（Chain-of-Thought）</h2>
+<p>思维链提示是让模型展示推理过程的核心技术。与其直接问答案，不如引导模型逐步思考。Few-Shot CoT通过在示例中展示推理步骤来引导模型。Zero-Shot CoT则更简洁——只需在提示末尾加上"让我们逐步思考"即可触发推理链。</p>
+<p>进阶用法包括自洽性（Self-Consistency）：多次运行CoT并投票选择最一致的答案，可显著提高数学和逻辑推理任务的准确率。</p>
+<h2>结构化输出控制</h2>
+<p>控制LLM输出格式是生产环境的关键需求。XML标签法是最直观的方式，在提示中定义<code>&lt;output&gt;&lt;answer&gt;&lt;/answer&gt;&lt;reasoning&gt;&lt;/reasoning&gt;&lt;/output&gt;</code>结构。JSON模式配合System Message中的格式说明，能让模型稳定输出可解析的结构化数据。</p>
+<p>更可靠的做法是使用函数调用（Function Calling）功能。通过定义函数的参数Schema，模型会自动输出符合规范的JSON，无需在Prompt中反复强调格式。</p>
+<h2>系统提示词设计</h2>
+<p>高质量的System Prompt应当包含以下要素：角色定义（你是谁）、任务说明（你要做什么）、输出规范（格式要求）、约束条件（不能做什么）以及上下文信息（当前环境数据）。</p>
+<h2>高级技巧实战</h2>
+<p><strong>分而治之</strong>：复杂任务拆分为多个子Prompt，每个Prompt聚焦单一职责。例如代码审查任务可拆分为"检查安全漏洞""检查性能问题""检查代码风格"三个独立步骤。</p>
+<p><strong>动态Few-Shot</strong>：根据用户输入从样本库中检索最相似的示例，而非使用固定示例。利用向量相似度搜索，每次动态选择3-5个最相关示例，效果远超随机选择。</p>
+<p><strong>对抗性Prompt测试</strong>：主动测试Prompt的鲁棒性，包括角色扮演攻击、越狱尝试和边界条件测试，确保生产环境的提示词安全可靠。</p>
+<p>掌握这些技巧后，你将能够构建更可靠、更高效的LLM应用系统。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-cost-control.html"><span class="related-title">AI成本控制：缓存策略、批处理、模型降级的实战方案</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-jiankong.html"><span class="related-title">AI应用监控：Token消耗追踪、延迟优化、成本控制实战</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=%E9%AB%98%E7%BA%A7Prompt%20Engineering%E6%8A%80%E5%B7%A7&url=https%3A//aidev.fit/ai/prompt-engineering-advanced.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/ai/prompt-engineering-advanced.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=%E9%AB%98%E7%BA%A7Prompt%20Engineering%E6%8A%80%E5%B7%A7&url=https%3A//aidev.fit/ai/prompt-engineering-advanced.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/ai/prompt-engineering-advanced.html&t=%E9%AB%98%E7%BA%A7Prompt%20Engineering%E6%8A%80%E5%B7%A7" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=%E9%AB%98%E7%BA%A7Prompt%20Engineering%E6%8A%80%E5%B7%A7&body=https%3A//aidev.fit/ai/prompt-engineering-advanced.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/ai/prompt-engineering-advanced.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/ai/llm-api-integration.html" title="LLM API集成最佳实践">← 上一篇<br><small>LLM API集成最佳实践</small></a><a class="next" href="/ai/rag-implementation.html" title="RAG检索增强生成实战">下一篇 →<br><small>RAG检索增强生成实战</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-cost-control.html"><span class="related-title">AI成本控制：缓存策略、批处理、模型降级的实战方案</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-jiankong.html"><span class="related-title">AI应用监控：Token消耗追踪、延迟优化、成本控制实战</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#从基础到进阶">从基础到进阶</a></li><li class="toc-h2"><a href="#思维链chain-of-thought">思维链（Chain-of-Thought）</a></li><li class="toc-h2"><a href="#结构化输出控制">结构化输出控制</a></li><li class="toc-h2"><a href="#系统提示词设计">系统提示词设计</a></li><li class="toc-h2"><a href="#高级技巧实战">高级技巧实战</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

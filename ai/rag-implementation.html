@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="ai" data-exclude="rag-implementation">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="RAG检索增强生成实战">
+    <meta property="og:description" content="从理论到实践，详解RAG系统的构建方法，包括文档分块、向量检索、检索排序优化等关键环节，助你打造高效的知识问答系统。">
+    <meta property="og:url" content="https://aidev.fit/ai/rag-implementation.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/ai/rag-implementation.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:section" content="AI 教程">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RAG检索增强生成实战">
+    <meta name="twitter:description" content="从理论到实践，详解RAG系统的构建方法，包括文档分块、向量检索、检索排序优化等关键环节，助你打造高效的知识问答系统。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/ai/rag-implementation.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/rag-implementation.webp" type="image/webp" fetchpriority="high">
+    <title>RAG检索增强生成实战 — AI自习室</title>
+    <meta name="description" content="从理论到实践，详解RAG系统的构建方法，包括文档分块、向量检索、检索排序优化等关键环节，助你打造高效的知识问答系统。">
+    <meta name="keywords" content="AI, Machine Learning, LLM">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/ai/rag-implementation.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai/rag-implementation.html">
+    <link rel="canonical" href="https://aidev.fit/ai/rag-implementation.html"><link rel="prev" href="https://aidev.fit/ai/prompt-engineering-advanced.html">
+<link rel="next" href="https://aidev.fit/ai/ai-agent-kuangjia.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "RAG检索增强生成实战",
+      "description": "从理论到实践，详解RAG系统的构建方法，包括文档分块、向量检索、检索排序优化等关键环节，助你打造高效的知识问答系统。",
+      "image": "https://aidev.fit/images/covers/en/ai/rag-implementation.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "218",
+      "keywords": "AI, Machine Learning, LLM",
+      "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/rag-implementation.html"},
+      "articleBody": "RAG核心原理   检索增强生成（Retrieval-Augmented Generation）通过将外部知识库与LLM结合，解决了大模型知识截止、幻觉和数据隐私三大痛点。RAG系统将用户问题先转化为向量查询，从知识库中检索相关文档片段，再将检索结果作为上下文输入给LLM生成最终答案。   文档处理流水线   高质量的文档处理是RAG系统的基石。首先需要将原始文档进行格式统一，PDF、Word、网页等不同来源需要不同的解析策略。第二步是文档分块（Chunking），这是影响检索质量的关键因素。    分块策略选择 ：固定大小分块简单但可能切断语义完整性；基于句子的分块能保持自然语义边界；递归分块则结合两者优势。推荐使用语义分块法，利用Embedding模型判断文本的语义转折点，在主题变化处分块。   块大小推荐在256-1024 tokens之间，具体取决于文档类型。技术文档可以稍大，FAQ类宜小。   向量检索优化    Embedding模型选择 ：中文场景推荐使用BAAI/bge-large-zh-v1.5或moka-ai/m3e-base。需要注意Embedding维度与向量数据库的兼容性。    混合检索 ：纯向量检索可能遗漏关键词精确匹配的场景。结合BM25全文检索的混合方案能显著提升召回率。使用RRF（互惠排名融合）或倒数排序融合算法将两种检索结果合并排序。   高级RAG技巧    查询重写 ：用户原始查询可能表述不清。让LLM将查询重写为更规范的表述后再检索，或生成多个相关查询进行批量检索后去重。    重排序（Re-ranking） ：初检索后使用Cross-Encoder模型对结果进行精排，将最相关片段排在前面。虽然增加了少量延迟，但能显著提升最终回答质量。    上下文压缩 ：检索到的文档可能包含冗余信息。使用LLM提取与问题最相关的段落，减少输入给生成模型的Token数量，既节省成本又提升精度。   生产环境考量   RAG系统上线后需要持续监控检索的查准率和查全率。推荐构建评测数据集，包含标准问答对，定期评估系统的回答质量。同时注意文档更新机制，确保知识库内容的时效性。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "AI 教程", "item": "https://aidev.fit/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "RAG检索增强生成实战"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/ai/">AI 教程</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">AI</span>
+          <span class="tag-cat">Machine Learning</span>
+          <span class="tag-cat">LLM</span></div>
+        <h1 class="article-title">RAG检索增强生成实战</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-11">2026-05-11</time>
+          <span class="meta-sep">·</span>
+          <span>1 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>218 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/rag-implementation.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/rag-implementation.png" alt="RAG检索增强生成实战" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（5）</summary><ol><li><a href="#rag核心原理">RAG核心原理</a></li><li><a href="#文档处理流水线">文档处理流水线</a></li><li><a href="#向量检索优化">向量检索优化</a></li><li><a href="#高级rag技巧">高级RAG技巧</a></li><li><a href="#生产环境考量">生产环境考量</a></li></ol></details>
+        <div class="article-body"><h2>RAG核心原理</h2>
+<p>检索增强生成（Retrieval-Augmented Generation）通过将外部知识库与LLM结合，解决了大模型知识截止、幻觉和数据隐私三大痛点。RAG系统将用户问题先转化为向量查询，从知识库中检索相关文档片段，再将检索结果作为上下文输入给LLM生成最终答案。</p>
+<h2>文档处理流水线</h2>
+<p>高质量的文档处理是RAG系统的基石。首先需要将原始文档进行格式统一，PDF、Word、网页等不同来源需要不同的解析策略。第二步是文档分块（Chunking），这是影响检索质量的关键因素。</p>
+<p><strong>分块策略选择</strong>：固定大小分块简单但可能切断语义完整性；基于句子的分块能保持自然语义边界；递归分块则结合两者优势。推荐使用语义分块法，利用Embedding模型判断文本的语义转折点，在主题变化处分块。</p>
+<p>块大小推荐在256-1024 tokens之间，具体取决于文档类型。技术文档可以稍大，FAQ类宜小。</p>
+<h2>向量检索优化</h2>
+<p><strong>Embedding模型选择</strong>：中文场景推荐使用BAAI/bge-large-zh-v1.5或moka-ai/m3e-base。需要注意Embedding维度与向量数据库的兼容性。</p>
+<p><strong>混合检索</strong>：纯向量检索可能遗漏关键词精确匹配的场景。结合BM25全文检索的混合方案能显著提升召回率。使用RRF（互惠排名融合）或倒数排序融合算法将两种检索结果合并排序。</p>
+<h2>高级RAG技巧</h2>
+<p><strong>查询重写</strong>：用户原始查询可能表述不清。让LLM将查询重写为更规范的表述后再检索，或生成多个相关查询进行批量检索后去重。</p>
+<p><strong>重排序（Re-ranking）</strong>：初检索后使用Cross-Encoder模型对结果进行精排，将最相关片段排在前面。虽然增加了少量延迟，但能显著提升最终回答质量。</p>
+<p><strong>上下文压缩</strong>：检索到的文档可能包含冗余信息。使用LLM提取与问题最相关的段落，减少输入给生成模型的Token数量，既节省成本又提升精度。</p>
+<h2>生产环境考量</h2>
+<p>RAG系统上线后需要持续监控检索的查准率和查全率。推荐构建评测数据集，包含标准问答对，定期评估系统的回答质量。同时注意文档更新机制，确保知识库内容的时效性。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-cost-control.html"><span class="related-title">AI成本控制：缓存策略、批处理、模型降级的实战方案</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-jiankong.html"><span class="related-title">AI应用监控：Token消耗追踪、延迟优化、成本控制实战</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=RAG%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90%E5%AE%9E%E6%88%98&url=https%3A//aidev.fit/ai/rag-implementation.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/ai/rag-implementation.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=RAG%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90%E5%AE%9E%E6%88%98&url=https%3A//aidev.fit/ai/rag-implementation.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/ai/rag-implementation.html&t=RAG%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90%E5%AE%9E%E6%88%98" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=RAG%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90%E5%AE%9E%E6%88%98&body=https%3A//aidev.fit/ai/rag-implementation.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/ai/rag-implementation.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/ai/prompt-engineering-advanced.html" title="高级Prompt Engineering技巧">← 上一篇<br><small>高级Prompt Engineering技巧</small></a><a class="next" href="/ai/ai-agent-kuangjia.html" title="AI Agent框架对比：LangGraph vs CrewAI vs AutoGen">下一篇 →<br><small>AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-cost-control.html"><span class="related-title">AI成本控制：缓存策略、批处理、模型降级的实战方案</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-jiankong.html"><span class="related-title">AI应用监控：Token消耗追踪、延迟优化、成本控制实战</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#rag核心原理">RAG核心原理</a></li><li class="toc-h2"><a href="#文档处理流水线">文档处理流水线</a></li><li class="toc-h2"><a href="#向量检索优化">向量检索优化</a></li><li class="toc-h2"><a href="#高级rag技巧">高级RAG技巧</a></li><li class="toc-h2"><a href="#生产环境考量">生产环境考量</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

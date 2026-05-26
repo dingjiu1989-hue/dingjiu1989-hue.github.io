@@ -34,7 +34,7 @@ jobs:
       - name: Rebuild full site
         run: |
           PYTHONPATH=. python3 scripts/gen_en_site.py
-          python3 scripts/_gen_cn_daily_page.py
+          PYTHONPATH=. python3 scripts/gen_cn_site.py
 
       - name: Generate AI-friendly files
         run: PYTHONPATH=. python3 scripts/gen_ai_friendly.py

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="tech" data-exclude="docker-ru-men">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="Docker从入门到精通：容器化部署最佳实践">
+    <meta property="og:description" content="全面讲解Docker的核心概念与实践技巧，涵盖镜像构建、容器管理、Docker Compose编排和生产环境部署的最佳实践。">
+    <meta property="og:url" content="https://aidev.fit/tech/docker-ru-men.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/docker-ru-men.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="技术教程">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Docker从入门到精通：容器化部署最佳实践">
+    <meta name="twitter:description" content="全面讲解Docker的核心概念与实践技巧，涵盖镜像构建、容器管理、Docker Compose编排和生产环境部署的最佳实践。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/tech/docker-ru-men.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/docker-ru-men.webp" type="image/webp" fetchpriority="high">
+    <title>Docker从入门到精通：容器化部署最佳实践 — AI自习室</title>
+    <meta name="description" content="全面讲解Docker的核心概念与实践技巧，涵盖镜像构建、容器管理、Docker Compose编排和生产环境部署的最佳实践。">
+    <meta name="keywords" content="Technology, DevOps, Cloud">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/tech/docker-ru-men.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/docker-ru-men.html">
+    <link rel="canonical" href="https://aidev.fit/tech/docker-ru-men.html"><link rel="prev" href="https://aidev.fit/tech/code-review.html">
+<link rel="next" href="https://aidev.fit/tech/git-jin-jie.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Docker从入门到精通：容器化部署最佳实践",
+      "description": "全面讲解Docker的核心概念与实践技巧，涵盖镜像构建、容器管理、Docker Compose编排和生产环境部署的最佳实践。",
+      "image": "https://aidev.fit/images/covers/en/tech/docker-ru-men.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "895",
+      "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/docker-ru-men.html"},
+      "articleBody": "Docker核心概念   Docker通过容器化技术实现应用的轻量级虚拟化。理解三个核心概念是掌握Docker的基础：镜像（Image）、容器（Container）和仓库（Registry）。   镜像是一个只读模板，包含运行应用所需的全部文件；容器是镜像的运行实例；仓库用于存储和分发镜像。   Dockerfile编写技巧   基础镜像选择   选择合适的基础镜像对安全和性能至关重要：      Alpine ：5MB左右，最小化镜像，但兼容性较差    Slim ：Debian的精简版，兼容性好    Distroless ：Google维护，只包含运行时依赖     多阶段构建   多阶段构建是减小镜像体积的最佳实践：        # 构建阶段   FROM     golang:1.22     AS     builder   WORKDIR     /app   COPY    .   .  RUN    go   build   -o   app   # 运行阶段   FROM     alpine:3.19   COPY    --from = builder   /app/app   /app  CMD     [  &quot;/app&quot;  ]        通过这种方式，可以将Golang应用的镜像从1GB以上减小到20MB左右。   层优化     将不变的操作放在Dockerfile前面   合并RUN指令减少层数   使用.dockerignore排除不必要的文件     Docker Compose编排   Docker Compose用于定义和运行多容器应用：        version  :     &#39;3.8&#39;   services  :       web  :         build  :     .         ports  :           -     &quot;8080:8080&quot;         depends_on  :           -     db       db  :         image  :     postgres:16         volumes  :           -     pgdata:/var/lib/postgresql/data         environment  :           POSTGRES_DB  :     myapp   volumes  :       pgdata  :        生产环境最佳实践   安全加固     使用非root用户运行容器   限制容器资源使用（CPU、内存）   定期扫描镜像漏洞（Trivy、Snyk）   启用容器运行时的安全选项     日志管理   容器应输出日志到stdout/stderr，由Docker日志驱动统一收集。生产环境推荐使用json-file驱动并配合日志轮转：       docker run --log-opt max-size=10m --log-opt max-file=3 myapp       监控与健康检查   在Dockerfile中定义健康检查指令：        HEALTHCHECK    --interval = 30s   --timeout = 3s    \\       CMD    curl   -f   http://localhost:8080/health    ||     exit     1        Docker的价值在于标准化应用的构建、分发和部署流程，掌握这些核心实践能显著提升开发和运维效率。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "技术教程", "item": "https://aidev.fit/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Docker从入门到精通：容器化部署最佳实践"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/tech/">技术教程</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">Technology</span>
+          <span class="tag-cat">DevOps</span>
+          <span class="tag-cat">Cloud</span></div>
+        <h1 class="article-title">Docker从入门到精通：容器化部署最佳实践</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>4 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>895 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/docker-ru-men.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/docker-ru-men.png" alt="Docker从入门到精通：容器化部署最佳实践" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（10）</summary><ol><li><a href="#docker核心概念">Docker核心概念</a></li><li><a href="#dockerfile编写技巧">Dockerfile编写技巧</a></li><li><a href="#基础镜像选择">基础镜像选择</a></li><li><a href="#多阶段构建">多阶段构建</a></li><li><a href="#层优化">层优化</a></li><li><a href="#docker-compose编排">Docker Compose编排</a></li><li><a href="#生产环境最佳实践">生产环境最佳实践</a></li><li><a href="#安全加固">安全加固</a></li><li><a href="#日志管理">日志管理</a></li><li><a href="#监控与健康检查">监控与健康检查</a></li></ol></details>
+        <div class="article-body"><h2>Docker核心概念</h2>
+<p>Docker通过容器化技术实现应用的轻量级虚拟化。理解三个核心概念是掌握Docker的基础：镜像（Image）、容器（Container）和仓库（Registry）。</p>
+<p>镜像是一个只读模板，包含运行应用所需的全部文件；容器是镜像的运行实例；仓库用于存储和分发镜像。</p>
+<h2>Dockerfile编写技巧</h2>
+<h3>基础镜像选择</h3>
+<p>选择合适的基础镜像对安全和性能至关重要：</p>
+<ul>
+<li><strong>Alpine</strong>：5MB左右，最小化镜像，但兼容性较差</li>
+<li><strong>Slim</strong>：Debian的精简版，兼容性好</li>
+<li><strong>Distroless</strong>：Google维护，只包含运行时依赖</li>
+</ul>
+<h3>多阶段构建</h3>
+<p>多阶段构建是减小镜像体积的最佳实践：</p>
+<div class="codehilite"><pre><span></span><code><span class="c"># 构建阶段</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">golang:1.22</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>go<span class="w"> </span>build<span class="w"> </span>-o<span class="w"> </span>app
+
+<span class="c"># 运行阶段</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">alpine:3.19</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/app/app<span class="w"> </span>/app
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;/app&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<p>通过这种方式，可以将Golang应用的镜像从1GB以上减小到20MB左右。</p>
+<h3>层优化</h3>
+<ul>
+<li>将不变的操作放在Dockerfile前面</li>
+<li>合并RUN指令减少层数</li>
+<li>使用.dockerignore排除不必要的文件</li>
+</ul>
+<h2>Docker Compose编排</h2>
+<p>Docker Compose用于定义和运行多容器应用：</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.8&#39;</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">web</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8080:8080&quot;</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
+<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:16</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pgdata:/var/lib/postgresql/data</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">POSTGRES_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pgdata</span><span class="p">:</span>
+</code></pre></div>
+
+<h2>生产环境最佳实践</h2>
+<h3>安全加固</h3>
+<ul>
+<li>使用非root用户运行容器</li>
+<li>限制容器资源使用（CPU、内存）</li>
+<li>定期扫描镜像漏洞（Trivy、Snyk）</li>
+<li>启用容器运行时的安全选项</li>
+</ul>
+<h3>日志管理</h3>
+<p>容器应输出日志到stdout/stderr，由Docker日志驱动统一收集。生产环境推荐使用json-file驱动并配合日志轮转：</p>
+<div class="codehilite"><pre><span></span><code>docker run --log-opt max-size=10m --log-opt max-file=3 myapp
+</code></pre></div>
+
+<h3>监控与健康检查</h3>
+<p>在Dockerfile中定义健康检查指令：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">HEALTHCHECK</span><span class="w"> </span>--interval<span class="o">=</span>30s<span class="w"> </span>--timeout<span class="o">=</span>3s<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="k">CMD</span><span class="w"> </span>curl<span class="w"> </span>-f<span class="w"> </span>http://localhost:8080/health<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+
+<p>Docker的价值在于标准化应用的构建、分发和部署流程，掌握这些核心实践能显著提升开发和运维效率。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/docker-kubernetes-guide.html"><span class="related-title">Docker与Kubernetes入门实战</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/git-jin-jie.html"><span class="related-title">Git进阶：交互式Rebase、Bisect调试、子模块管理</span><span class="related-meta">技术教程 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=Docker%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5&url=https%3A//aidev.fit/tech/docker-ru-men.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/tech/docker-ru-men.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Docker%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5&url=https%3A//aidev.fit/tech/docker-ru-men.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/tech/docker-ru-men.html&t=Docker%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=Docker%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5&body=https%3A//aidev.fit/tech/docker-ru-men.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/tech/docker-ru-men.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/tech/code-review.html" title="Code Review最佳实践：流程、规范、工具、团队文化">← 上一篇<br><small>Code Review最佳实践：流程、规范、工具、团队文化</small></a><a class="next" href="/tech/git-jin-jie.html" title="Git进阶：交互式Rebase、Bisect调试、子模块管理">下一篇 →<br><small>Git进阶：交互式Rebase、Bisect调试、子模块管理</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/docker-kubernetes-guide.html"><span class="related-title">Docker与Kubernetes入门实战</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/git-jin-jie.html"><span class="related-title">Git进阶：交互式Rebase、Bisect调试、子模块管理</span><span class="related-meta">技术教程 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#docker核心概念">Docker核心概念</a></li><li class="toc-h2"><a href="#dockerfile编写技巧">Dockerfile编写技巧</a></li><li class="toc-h3"><a href="#基础镜像选择">基础镜像选择</a></li><li class="toc-h3"><a href="#多阶段构建">多阶段构建</a></li><li class="toc-h3"><a href="#层优化">层优化</a></li><li class="toc-h2"><a href="#docker-compose编排">Docker Compose编排</a></li><li class="toc-h2"><a href="#生产环境最佳实践">生产环境最佳实践</a></li><li class="toc-h3"><a href="#安全加固">安全加固</a></li><li class="toc-h3"><a href="#日志管理">日志管理</a></li><li class="toc-h3"><a href="#监控与健康检查">监控与健康检查</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

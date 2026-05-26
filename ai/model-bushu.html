@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="ai" data-exclude="model-bushu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="模型部署方案：vLLM vs TGI vs Ollama，推理优化技巧">
+    <meta property="og:description" content="深入对比vLLM、TGI和Ollama三大模型部署框架，涵盖推理优化技术、吞吐量提升、延迟优化和成本控制等生产级部署实践经验。">
+    <meta property="og:url" content="https://aidev.fit/ai/model-bushu.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/ai/model-bushu.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="AI 教程">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="模型部署方案：vLLM vs TGI vs Ollama，推理优化技巧">
+    <meta name="twitter:description" content="深入对比vLLM、TGI和Ollama三大模型部署框架，涵盖推理优化技术、吞吐量提升、延迟优化和成本控制等生产级部署实践经验。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/ai/model-bushu.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/model-bushu.webp" type="image/webp" fetchpriority="high">
+    <title>模型部署方案：vLLM vs TGI vs Ollama，推理优化技巧 — AI自习室</title>
+    <meta name="description" content="深入对比vLLM、TGI和Ollama三大模型部署框架，涵盖推理优化技术、吞吐量提升、延迟优化和成本控制等生产级部署实践经验。">
+    <meta name="keywords" content="AI, Machine Learning, LLM">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/ai/model-bushu.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai/model-bushu.html">
+    <link rel="canonical" href="https://aidev.fit/ai/model-bushu.html"><link rel="prev" href="https://aidev.fit/ai/llm-router.html">
+<link rel="next" href="https://aidev.fit/ai/model-compression.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "模型部署方案：vLLM vs TGI vs Ollama，推理优化技巧",
+      "description": "深入对比vLLM、TGI和Ollama三大模型部署框架，涵盖推理优化技术、吞吐量提升、延迟优化和成本控制等生产级部署实践经验。",
+      "image": "https://aidev.fit/images/covers/en/ai/model-bushu.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "347",
+      "keywords": "AI, Machine Learning, LLM",
+      "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/model-bushu.html"},
+      "articleBody": "模型部署挑战   将LLM部署到生产环境面临三大挑战：推理延迟、吞吐量和成本。不同的部署框架以不同方式解决这些问题。   vLLM   vLLM是目前最流行的开源LLM推理引擎，由加州大学伯克利分校开发。    核心技术：  1.  PagedAttention ：类操作系统的分页内存管理，KV Cache利用率提升至95%以上 2.  连续批处理 ：动态将请求组合为batch，大幅提升吞吐量 3.  量化支持 ：AWQ、GPTQ、FP8等多种量化格式 4.  前缀缓存 ：共享前缀的请求复用KV Cache    优势：  吞吐量业界领先，API兼容OpenAI格式。  劣势：  对HuggingFace模型格式支持最为完善，其他格式支持有限。   TGI（Text Generation Inference）   TGI由HuggingFace开发，与HuggingFace生态深度集成。    核心技术：  1.  张量并行 ：跨多GPU的分片推理 2.  Flash Attention ：优化的注意力计算内核 3.  Speculative Decoding ：投机解码加速生成 4.  水印生成 ：内置AI文本水印功能    优势：  与HuggingFace模型和生态无缝集成，支持模型热加载。  劣势：  自定义扩展性不如vLLM灵活。   Ollama   Ollama专注于本地部署和开发者体验。    核心技术：  1.  一键部署 ：极简的模型管理和启动流程 2.  Modelfile ：类似Dockerfile的模型配置方式 3.  多平台支持 ：macOS、Linux、Windows全覆盖 4.  GPU加速 ：自动检测并使用GPU    优势：  安装和使用最简单，适合个人开发环境。  劣势：  生产级功能不足，不适合高并发场景。   推理优化技巧   KV Cache优化     使用PagedAttention减少显存碎片   启用前缀缓存减少重复计算     量化策略     INT8量化：无损或接近无损，推理速度提升2倍   INT4量化：可接受的质量损失，推理速度提升3-4倍   FP8量化：Hopper架构GPU支持，质量和速度的平衡     批处理策略     使用连续批处理提高GPU利用率   根据延迟SLA动态调整批处理大小   长请求和短请求混合批处理     部署架构建议      单机单卡 ：7B以下模型，使用Ollama或vLLM    单机多卡 ：13B-70B模型，vLLM + 张量并行    多机多卡 ：70B+模型，vLLM + 流水线并行     选择合适的部署框架需要综合考虑模型大小、并发需求、延迟要求和运维能力。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "AI 教程", "item": "https://aidev.fit/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "模型部署方案：vLLM vs TGI vs Ollama，推理优化技巧"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/ai/">AI 教程</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">AI</span>
+          <span class="tag-cat">Machine Learning</span>
+          <span class="tag-cat">LLM</span></div>
+        <h1 class="article-title">模型部署方案：vLLM vs TGI vs Ollama，推理优化技巧</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>1 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>347 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/model-bushu.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/model-bushu.png" alt="模型部署方案：vLLM vs TGI vs Ollama，推理优化技巧" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（9）</summary><ol><li><a href="#模型部署挑战">模型部署挑战</a></li><li><a href="#vllm">vLLM</a></li><li><a href="#tgitext-generation-inference">TGI（Text Generation Inference）</a></li><li><a href="#ollama">Ollama</a></li><li><a href="#推理优化技巧">推理优化技巧</a></li><li><a href="#kv-cache优化">KV Cache优化</a></li><li><a href="#量化策略">量化策略</a></li><li><a href="#批处理策略">批处理策略</a></li><li><a href="#部署架构建议">部署架构建议</a></li></ol></details>
+        <div class="article-body"><h2>模型部署挑战</h2>
+<p>将LLM部署到生产环境面临三大挑战：推理延迟、吞吐量和成本。不同的部署框架以不同方式解决这些问题。</p>
+<h2>vLLM</h2>
+<p>vLLM是目前最流行的开源LLM推理引擎，由加州大学伯克利分校开发。</p>
+<p><strong>核心技术：</strong>
+1. <strong>PagedAttention</strong>：类操作系统的分页内存管理，KV Cache利用率提升至95%以上
+2. <strong>连续批处理</strong>：动态将请求组合为batch，大幅提升吞吐量
+3. <strong>量化支持</strong>：AWQ、GPTQ、FP8等多种量化格式
+4. <strong>前缀缓存</strong>：共享前缀的请求复用KV Cache</p>
+<p><strong>优势：</strong> 吞吐量业界领先，API兼容OpenAI格式。
+<strong>劣势：</strong> 对HuggingFace模型格式支持最为完善，其他格式支持有限。</p>
+<h2>TGI（Text Generation Inference）</h2>
+<p>TGI由HuggingFace开发，与HuggingFace生态深度集成。</p>
+<p><strong>核心技术：</strong>
+1. <strong>张量并行</strong>：跨多GPU的分片推理
+2. <strong>Flash Attention</strong>：优化的注意力计算内核
+3. <strong>Speculative Decoding</strong>：投机解码加速生成
+4. <strong>水印生成</strong>：内置AI文本水印功能</p>
+<p><strong>优势：</strong> 与HuggingFace模型和生态无缝集成，支持模型热加载。
+<strong>劣势：</strong> 自定义扩展性不如vLLM灵活。</p>
+<h2>Ollama</h2>
+<p>Ollama专注于本地部署和开发者体验。</p>
+<p><strong>核心技术：</strong>
+1. <strong>一键部署</strong>：极简的模型管理和启动流程
+2. <strong>Modelfile</strong>：类似Dockerfile的模型配置方式
+3. <strong>多平台支持</strong>：macOS、Linux、Windows全覆盖
+4. <strong>GPU加速</strong>：自动检测并使用GPU</p>
+<p><strong>优势：</strong> 安装和使用最简单，适合个人开发环境。
+<strong>劣势：</strong> 生产级功能不足，不适合高并发场景。</p>
+<h2>推理优化技巧</h2>
+<h3>KV Cache优化</h3>
+<ul>
+<li>使用PagedAttention减少显存碎片</li>
+<li>启用前缀缓存减少重复计算</li>
+</ul>
+<h3>量化策略</h3>
+<ul>
+<li>INT8量化：无损或接近无损，推理速度提升2倍</li>
+<li>INT4量化：可接受的质量损失，推理速度提升3-4倍</li>
+<li>FP8量化：Hopper架构GPU支持，质量和速度的平衡</li>
+</ul>
+<h3>批处理策略</h3>
+<ul>
+<li>使用连续批处理提高GPU利用率</li>
+<li>根据延迟SLA动态调整批处理大小</li>
+<li>长请求和短请求混合批处理</li>
+</ul>
+<h3>部署架构建议</h3>
+<ul>
+<li><strong>单机单卡</strong>：7B以下模型，使用Ollama或vLLM</li>
+<li><strong>单机多卡</strong>：13B-70B模型，vLLM + 张量并行</li>
+<li><strong>多机多卡</strong>：70B+模型，vLLM + 流水线并行</li>
+</ul>
+<p>选择合适的部署框架需要综合考虑模型大小、并发需求、延迟要求和运维能力。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
+<a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-cost-control.html"><span class="related-title">AI成本控制：缓存策略、批处理、模型降级的实战方案</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88%EF%BC%9AvLLM%20vs%20TGI%20vs%20Ollama%EF%BC%8C%E6%8E%A8%E7%90%86%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7&url=https%3A//aidev.fit/ai/model-bushu.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/ai/model-bushu.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88%EF%BC%9AvLLM%20vs%20TGI%20vs%20Ollama%EF%BC%8C%E6%8E%A8%E7%90%86%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7&url=https%3A//aidev.fit/ai/model-bushu.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/ai/model-bushu.html&t=%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88%EF%BC%9AvLLM%20vs%20TGI%20vs%20Ollama%EF%BC%8C%E6%8E%A8%E7%90%86%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88%EF%BC%9AvLLM%20vs%20TGI%20vs%20Ollama%EF%BC%8C%E6%8E%A8%E7%90%86%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7&body=https%3A//aidev.fit/ai/model-bushu.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/ai/model-bushu.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/ai/llm-router.html" title="LLM路由器：根据查询复杂度自动选择模型的工程实现">← 上一篇<br><small>LLM路由器：根据查询复杂度自动选择模型的工程实现</small></a><a class="next" href="/ai/model-compression.html" title="模型压缩技术：量化、蒸馏、剪枝的原理与工具">下一篇 →<br><small>模型压缩技术：量化、蒸馏、剪枝的原理与工具</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
+<a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-cost-control.html"><span class="related-title">AI成本控制：缓存策略、批处理、模型降级的实战方案</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#模型部署挑战">模型部署挑战</a></li><li class="toc-h2"><a href="#vllm">vLLM</a></li><li class="toc-h2"><a href="#tgitext-generation-inference">TGI（Text Generation Inference）</a></li><li class="toc-h2"><a href="#ollama">Ollama</a></li><li class="toc-h2"><a href="#推理优化技巧">推理优化技巧</a></li><li class="toc-h3"><a href="#kv-cache优化">KV Cache优化</a></li><li class="toc-h3"><a href="#量化策略">量化策略</a></li><li class="toc-h3"><a href="#批处理策略">批处理策略</a></li><li class="toc-h3"><a href="#部署架构建议">部署架构建议</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

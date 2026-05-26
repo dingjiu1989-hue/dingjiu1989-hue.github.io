@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="tech" data-exclude="message-queue">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="消息队列选型：Kafka vs RabbitMQ vs Pulsar，场景对比">
+    <meta property="og:description" content="全面对比Kafka、RabbitMQ和Apache Pulsar三大消息队列，从性能、可靠性、扩展性和适用场景等角度深入分析，帮助开发者进行技术选型。">
+    <meta property="og:url" content="https://aidev.fit/tech/message-queue.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/message-queue.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="技术教程">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="消息队列选型：Kafka vs RabbitMQ vs Pulsar，场景对比">
+    <meta name="twitter:description" content="全面对比Kafka、RabbitMQ和Apache Pulsar三大消息队列，从性能、可靠性、扩展性和适用场景等角度深入分析，帮助开发者进行技术选型。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/tech/message-queue.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/message-queue.webp" type="image/webp" fetchpriority="high">
+    <title>消息队列选型：Kafka vs RabbitMQ vs Pulsar，场景对比 — AI自习室</title>
+    <meta name="description" content="全面对比Kafka、RabbitMQ和Apache Pulsar三大消息队列，从性能、可靠性、扩展性和适用场景等角度深入分析，帮助开发者进行技术选型。">
+    <meta name="keywords" content="Technology, DevOps, Cloud">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/tech/message-queue.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/message-queue.html">
+    <link rel="canonical" href="https://aidev.fit/tech/message-queue.html"><link rel="prev" href="https://aidev.fit/tech/linux-ming-ling.html">
+<link rel="next" href="https://aidev.fit/tech/microservices-congpu.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "消息队列选型：Kafka vs RabbitMQ vs Pulsar，场景对比",
+      "description": "全面对比Kafka、RabbitMQ和Apache Pulsar三大消息队列，从性能、可靠性、扩展性和适用场景等角度深入分析，帮助开发者进行技术选型。",
+      "image": "https://aidev.fit/images/covers/en/tech/message-queue.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "490",
+      "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/message-queue.html"},
+      "articleBody": "消息队列的核心作用   消息队列在分布式系统中承担着解耦、异步削峰和流量控制的关键角色。选择合适的消息中间件直接影响系统的稳定性、性能和运维复杂度。   Kafka   Kafka是最流行的高吞吐量分布式消息系统，由LinkedIn开发后捐献给Apache基金会。   核心特性      高吞吐量 ：单机可达百万级消息/秒    持久化存储 ：消息写入磁盘，支持回溯消费    分区机制 ：通过分区实现水平扩展    消息顺序 ：单个分区内保证消息顺序    Exactly-Once语义 ：支持精确一次处理     适用场景     日志收集和聚合   流式数据处理（配合Flink/Spark）   事件驱动架构   用户行为追踪   指标监控数据采集     局限     功能相对简单（没有延迟队列、死信队列等）   运维门槛较高   消息粒度较粗（不支持路由匹配）     RabbitMQ   RabbitMQ是基于AMQP协议的传统消息队列，以功能丰富和易用性著称。   核心特性      灵活的路由 ：支持Direct、Topic、Fanout和Headers四种交换机    丰富的队列特性 ：延迟队列、死信队列、优先级队列    可靠投递 ：Publisher Confirm、消息持久化、ACK机制    管理界面 ：自带友好的Web管理界面    多协议支持 ：AMQP、MQTT、STOMP     适用场景     业务系统的异步任务处理   微服务间的RPC通信   需要复杂路由规则的场景   对可靠性要求高的金融交易     局限     吞吐量有限（约数万级/秒）   消息堆积时性能下降明显   水平扩展能力有限     Apache Pulsar   Pulsar是新兴的云原生消息流平台，采用存算分离架构。   核心特性      存算分离 ：计算层和存储层独立扩展    多租户 ：原生支持多租户隔离    分层存储 ：冷数据自动卸载到S3等廉价存储    地域复制 ：跨机房数据复制    统一模型 ：同时支持队列和流两种模式     适用场景     云原生环境   多租户SaaS平台   需要长期数据保留的场景   跨地域部署的全球化应用     局限     社区生态不如Kafka成熟   中文资料较少     对比总结         维度   Kafka   RabbitMQ   Pulsar           吞吐量   极高(百万/秒)   中(万/秒)   高(十万/秒)       延迟   中(ms级)   低(us级)   低(ms级)       消息可靠性   高   极高   高       路由灵活性   低   高   中       运维复杂度   高   低   中       云原生支持   一般   一般   优秀         选型建议      大数据/流处理  → Kafka    业务系统/微服务  → RabbitMQ    云原生/多租户  → Pulsar    IoT/移动端  → RabbitMQ（MQTT支持）    需要长时回溯  → Kafka或Pulsar     根据具体场景的技术需求来选型，而不是盲目追随热门技术。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "技术教程", "item": "https://aidev.fit/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "消息队列选型：Kafka vs RabbitMQ vs Pulsar，场景对比"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/tech/">技术教程</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">Technology</span>
+          <span class="tag-cat">DevOps</span>
+          <span class="tag-cat">Cloud</span></div>
+        <h1 class="article-title">消息队列选型：Kafka vs RabbitMQ vs Pulsar，场景对比</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>2 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>490 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/message-queue.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/message-queue.png" alt="消息队列选型：Kafka vs RabbitMQ vs Pulsar，场景对比" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（15）</summary><ol><li><a href="#消息队列的核心作用">消息队列的核心作用</a></li><li><a href="#kafka">Kafka</a></li><li><a href="#核心特性">核心特性</a></li><li><a href="#适用场景">适用场景</a></li><li><a href="#局限">局限</a></li><li><a href="#rabbitmq">RabbitMQ</a></li><li><a href="#核心特性">核心特性</a></li><li><a href="#适用场景">适用场景</a></li><li><a href="#局限">局限</a></li><li><a href="#apache-pulsar">Apache Pulsar</a></li><li><a href="#核心特性">核心特性</a></li><li><a href="#适用场景">适用场景</a></li><li><a href="#局限">局限</a></li><li><a href="#对比总结">对比总结</a></li><li><a href="#选型建议">选型建议</a></li></ol></details>
+        <div class="article-body"><h2>消息队列的核心作用</h2>
+<p>消息队列在分布式系统中承担着解耦、异步削峰和流量控制的关键角色。选择合适的消息中间件直接影响系统的稳定性、性能和运维复杂度。</p>
+<h2>Kafka</h2>
+<p>Kafka是最流行的高吞吐量分布式消息系统，由LinkedIn开发后捐献给Apache基金会。</p>
+<h3>核心特性</h3>
+<ul>
+<li><strong>高吞吐量</strong>：单机可达百万级消息/秒</li>
+<li><strong>持久化存储</strong>：消息写入磁盘，支持回溯消费</li>
+<li><strong>分区机制</strong>：通过分区实现水平扩展</li>
+<li><strong>消息顺序</strong>：单个分区内保证消息顺序</li>
+<li><strong>Exactly-Once语义</strong>：支持精确一次处理</li>
+</ul>
+<h3>适用场景</h3>
+<ul>
+<li>日志收集和聚合</li>
+<li>流式数据处理（配合Flink/Spark）</li>
+<li>事件驱动架构</li>
+<li>用户行为追踪</li>
+<li>指标监控数据采集</li>
+</ul>
+<h3>局限</h3>
+<ul>
+<li>功能相对简单（没有延迟队列、死信队列等）</li>
+<li>运维门槛较高</li>
+<li>消息粒度较粗（不支持路由匹配）</li>
+</ul>
+<h2>RabbitMQ</h2>
+<p>RabbitMQ是基于AMQP协议的传统消息队列，以功能丰富和易用性著称。</p>
+<h3>核心特性</h3>
+<ul>
+<li><strong>灵活的路由</strong>：支持Direct、Topic、Fanout和Headers四种交换机</li>
+<li><strong>丰富的队列特性</strong>：延迟队列、死信队列、优先级队列</li>
+<li><strong>可靠投递</strong>：Publisher Confirm、消息持久化、ACK机制</li>
+<li><strong>管理界面</strong>：自带友好的Web管理界面</li>
+<li><strong>多协议支持</strong>：AMQP、MQTT、STOMP</li>
+</ul>
+<h3>适用场景</h3>
+<ul>
+<li>业务系统的异步任务处理</li>
+<li>微服务间的RPC通信</li>
+<li>需要复杂路由规则的场景</li>
+<li>对可靠性要求高的金融交易</li>
+</ul>
+<h3>局限</h3>
+<ul>
+<li>吞吐量有限（约数万级/秒）</li>
+<li>消息堆积时性能下降明显</li>
+<li>水平扩展能力有限</li>
+</ul>
+<h2>Apache Pulsar</h2>
+<p>Pulsar是新兴的云原生消息流平台，采用存算分离架构。</p>
+<h3>核心特性</h3>
+<ul>
+<li><strong>存算分离</strong>：计算层和存储层独立扩展</li>
+<li><strong>多租户</strong>：原生支持多租户隔离</li>
+<li><strong>分层存储</strong>：冷数据自动卸载到S3等廉价存储</li>
+<li><strong>地域复制</strong>：跨机房数据复制</li>
+<li><strong>统一模型</strong>：同时支持队列和流两种模式</li>
+</ul>
+<h3>适用场景</h3>
+<ul>
+<li>云原生环境</li>
+<li>多租户SaaS平台</li>
+<li>需要长期数据保留的场景</li>
+<li>跨地域部署的全球化应用</li>
+</ul>
+<h3>局限</h3>
+<ul>
+<li>社区生态不如Kafka成熟</li>
+<li>中文资料较少</li>
+</ul>
+<h2>对比总结</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Kafka</th>
+<th>RabbitMQ</th>
+<th>Pulsar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>吞吐量</td>
+<td>极高(百万/秒)</td>
+<td>中(万/秒)</td>
+<td>高(十万/秒)</td>
+</tr>
+<tr>
+<td>延迟</td>
+<td>中(ms级)</td>
+<td>低(us级)</td>
+<td>低(ms级)</td>
+</tr>
+<tr>
+<td>消息可靠性</td>
+<td>高</td>
+<td>极高</td>
+<td>高</td>
+</tr>
+<tr>
+<td>路由灵活性</td>
+<td>低</td>
+<td>高</td>
+<td>中</td>
+</tr>
+<tr>
+<td>运维复杂度</td>
+<td>高</td>
+<td>低</td>
+<td>中</td>
+</tr>
+<tr>
+<td>云原生支持</td>
+<td>一般</td>
+<td>一般</td>
+<td>优秀</td>
+</tr>
+</tbody>
+</table>
+<h2>选型建议</h2>
+<ol>
+<li><strong>大数据/流处理</strong> → Kafka</li>
+<li><strong>业务系统/微服务</strong> → RabbitMQ</li>
+<li><strong>云原生/多租户</strong> → Pulsar</li>
+<li><strong>IoT/移动端</strong> → RabbitMQ（MQTT支持）</li>
+<li><strong>需要长时回溯</strong> → Kafka或Pulsar</li>
+</ol>
+<p>根据具体场景的技术需求来选型，而不是盲目追随热门技术。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/docker-kubernetes-guide.html"><span class="related-title">Docker与Kubernetes入门实战</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/docker-ru-men.html"><span class="related-title">Docker从入门到精通：容器化部署最佳实践</span><span class="related-meta">技术教程 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%80%89%E5%9E%8B%EF%BC%9AKafka%20vs%20RabbitMQ%20vs%20Pulsar%EF%BC%8C%E5%9C%BA%E6%99%AF%E5%AF%B9%E6%AF%94&url=https%3A//aidev.fit/tech/message-queue.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/tech/message-queue.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%80%89%E5%9E%8B%EF%BC%9AKafka%20vs%20RabbitMQ%20vs%20Pulsar%EF%BC%8C%E5%9C%BA%E6%99%AF%E5%AF%B9%E6%AF%94&url=https%3A//aidev.fit/tech/message-queue.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/tech/message-queue.html&t=%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%80%89%E5%9E%8B%EF%BC%9AKafka%20vs%20RabbitMQ%20vs%20Pulsar%EF%BC%8C%E5%9C%BA%E6%99%AF%E5%AF%B9%E6%AF%94" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%80%89%E5%9E%8B%EF%BC%9AKafka%20vs%20RabbitMQ%20vs%20Pulsar%EF%BC%8C%E5%9C%BA%E6%99%AF%E5%AF%B9%E6%AF%94&body=https%3A//aidev.fit/tech/message-queue.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/tech/message-queue.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/tech/linux-ming-ling.html" title="Linux运维必备命令：性能分析、日志排查、网络诊断">← 上一篇<br><small>Linux运维必备命令：性能分析、日志排查、网络诊断</small></a><a class="next" href="/tech/microservices-congpu.html" title="微服务从零到一：Spring Boot vs Quarkus 入门实践">下一篇 →<br><small>微服务从零到一：Spring Boot vs Quarkus 入门实践</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/docker-kubernetes-guide.html"><span class="related-title">Docker与Kubernetes入门实战</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/docker-ru-men.html"><span class="related-title">Docker从入门到精通：容器化部署最佳实践</span><span class="related-meta">技术教程 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#消息队列的核心作用">消息队列的核心作用</a></li><li class="toc-h2"><a href="#kafka">Kafka</a></li><li class="toc-h3"><a href="#核心特性">核心特性</a></li><li class="toc-h3"><a href="#适用场景">适用场景</a></li><li class="toc-h3"><a href="#局限">局限</a></li><li class="toc-h2"><a href="#rabbitmq">RabbitMQ</a></li><li class="toc-h3"><a href="#核心特性">核心特性</a></li><li class="toc-h3"><a href="#适用场景">适用场景</a></li><li class="toc-h3"><a href="#局限">局限</a></li><li class="toc-h2"><a href="#apache-pulsar">Apache Pulsar</a></li><li class="toc-h3"><a href="#核心特性">核心特性</a></li><li class="toc-h3"><a href="#适用场景">适用场景</a></li><li class="toc-h3"><a href="#局限">局限</a></li><li class="toc-h2"><a href="#对比总结">对比总结</a></li><li class="toc-h2"><a href="#选型建议">选型建议</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

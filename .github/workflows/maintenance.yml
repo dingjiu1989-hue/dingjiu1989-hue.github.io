@@ -37,7 +37,7 @@ jobs:
       - name: Rebuild site (AI-friendly files + sitemap + feeds)
         run: |
           PYTHONPATH=. python3 scripts/gen_en_site.py
-          python3 scripts/_gen_cn_daily_page.py
+          PYTHONPATH=. python3 scripts/gen_cn_site.py
           PYTHONPATH=. python3 scripts/gen_ai_friendly.py
           python3 scripts/add_en_seo.py
           python3 scripts/gen_rss.py

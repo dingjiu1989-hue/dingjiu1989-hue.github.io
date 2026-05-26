@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="tech" data-exclude="webfu-wu-qi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="Web服务器对比：Nginx vs Caddy vs Apache，配置与性能">
+    <meta property="og:description" content="全面对比Nginx、Caddy和Apache三大Web服务器的配置方式、性能表现和适用场景，帮助开发者根据实际需求做出最佳选型。">
+    <meta property="og:url" content="https://aidev.fit/tech/webfu-wu-qi.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/webfu-wu-qi.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="技术教程">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Web服务器对比：Nginx vs Caddy vs Apache，配置与性能">
+    <meta name="twitter:description" content="全面对比Nginx、Caddy和Apache三大Web服务器的配置方式、性能表现和适用场景，帮助开发者根据实际需求做出最佳选型。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/tech/webfu-wu-qi.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/webfu-wu-qi.webp" type="image/webp" fetchpriority="high">
+    <title>Web服务器对比：Nginx vs Caddy vs Apache，配置与性能 — AI自习室</title>
+    <meta name="description" content="全面对比Nginx、Caddy和Apache三大Web服务器的配置方式、性能表现和适用场景，帮助开发者根据实际需求做出最佳选型。">
+    <meta name="keywords" content="Technology, DevOps, Cloud">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/tech/webfu-wu-qi.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/webfu-wu-qi.html">
+    <link rel="canonical" href="https://aidev.fit/tech/webfu-wu-qi.html"><link rel="prev" href="https://aidev.fit/tech/typescript-shijian.html">
+<link rel="next" href="https://aidev.fit/tech/git-advanced.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Web服务器对比：Nginx vs Caddy vs Apache，配置与性能",
+      "description": "全面对比Nginx、Caddy和Apache三大Web服务器的配置方式、性能表现和适用场景，帮助开发者根据实际需求做出最佳选型。",
+      "image": "https://aidev.fit/images/covers/en/tech/webfu-wu-qi.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "956",
+      "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/webfu-wu-qi.html"},
+      "articleBody": "Web服务器选型概述   Web服务器是互联网应用的入口，选择合适的Web服务器直接影响性能、安全性和运维效率。Nginx、Caddy和Apache是目前最主流的三个选择。   Nginx   Nginx以其高并发处理能力和低资源消耗著称，是当前市场占有率最高的Web服务器。   核心特性      事件驱动架构 ：单进程异步处理，轻松支撑万级并发    反向代理 ：作为API网关，支持负载均衡    静态文件服务 ：处理效率极高    配置灵活 ：丰富的模块和指令     配置示例        server     {         listen     80  ;         server_name     example.com  ;          location     /     {             proxy_pass     http://localhost:3000  ;             proxy_set_header     Host     $host  ;             proxy_set_header     X-Real-IP     $remote_addr  ;         }          location     /static/     {             alias     /var/www/static/  ;             expires     7d  ;         }   }        适用场景   高并发网站、反向代理、负载均衡、静态资源服务。   Caddy   Caddy以自动HTTPS和简洁配置闻名，是现代Web应用的新选择。   核心特性      自动HTTPS ：默认申请和续期Let's Encrypt证书    简洁配置 ：Caddyfile语法比Nginx更易读    HTTP/3支持 ：原生支持QUIC协议    插件生态 ：可通过插件扩展功能     配置示例        example  .  com     {         reverse_proxy     localhost  :  3000          # 静态文件服务         handle_path     /  static  /*     {             root     *     /  var  /  www  /  static             file_server         }          # 自动HTTPS默认开启   }        适用场景   中小型项目、需要快速配置的项目、对HTTPS有强依赖的场景。   Apache   Apache是历史最悠久的Web服务器，模块化架构使其功能丰富。   核心特性      模块化架构 ：200+官方模块    .htaccess ：目录级配置，适合共享主机    多处理模块 ：支持prefork、worker、event模式    广泛兼容 ：几乎所有CMS和应用都对Apache支持最好     适用场景   传统LAMP架构、共享主机环境、需要.htaccess的场景。   性能对比         指标   Nginx   Caddy   Apache           静态文件   优秀   良好   良好       并发连接   优秀(1万+)   良好   中等(5千+)       内存占用   低   中   中-高       配置复杂度   中   低   高       自动HTTPS   需配置   内置   需配置       动态模块   编译时   运行时   运行时         选型建议      高并发API服务  → Nginx    快速原型或小项目  → Caddy    传统CMS或共享主机  → Apache    需要自动HTTPS  → Caddy    反向代理场景  → Nginx或Caddy     没有绝对的最佳Web服务器，根据项目规模、团队经验和运维能力选择最合适的方案才是关键。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "技术教程", "item": "https://aidev.fit/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Web服务器对比：Nginx vs Caddy vs Apache，配置与性能"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/tech/">技术教程</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">Technology</span>
+          <span class="tag-cat">DevOps</span>
+          <span class="tag-cat">Cloud</span></div>
+        <h1 class="article-title">Web服务器对比：Nginx vs Caddy vs Apache，配置与性能</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>4 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>956 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/webfu-wu-qi.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/webfu-wu-qi.png" alt="Web服务器对比：Nginx vs Caddy vs Apache，配置与性能" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（14）</summary><ol><li><a href="#web服务器选型概述">Web服务器选型概述</a></li><li><a href="#nginx">Nginx</a></li><li><a href="#核心特性">核心特性</a></li><li><a href="#配置示例">配置示例</a></li><li><a href="#适用场景">适用场景</a></li><li><a href="#caddy">Caddy</a></li><li><a href="#核心特性">核心特性</a></li><li><a href="#配置示例">配置示例</a></li><li><a href="#适用场景">适用场景</a></li><li><a href="#apache">Apache</a></li><li><a href="#核心特性">核心特性</a></li><li><a href="#适用场景">适用场景</a></li><li><a href="#性能对比">性能对比</a></li><li><a href="#选型建议">选型建议</a></li></ol></details>
+        <div class="article-body"><h2>Web服务器选型概述</h2>
+<p>Web服务器是互联网应用的入口，选择合适的Web服务器直接影响性能、安全性和运维效率。Nginx、Caddy和Apache是目前最主流的三个选择。</p>
+<h2>Nginx</h2>
+<p>Nginx以其高并发处理能力和低资源消耗著称，是当前市场占有率最高的Web服务器。</p>
+<h3>核心特性</h3>
+<ul>
+<li><strong>事件驱动架构</strong>：单进程异步处理，轻松支撑万级并发</li>
+<li><strong>反向代理</strong>：作为API网关，支持负载均衡</li>
+<li><strong>静态文件服务</strong>：处理效率极高</li>
+<li><strong>配置灵活</strong>：丰富的模块和指令</li>
+</ul>
+<h3>配置示例</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">example.com</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://localhost:3000</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Host</span><span class="w"> </span><span class="nv">$host</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Real-IP</span><span class="w"> </span><span class="nv">$remote_addr</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/static/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">alias</span><span class="w"> </span><span class="s">/var/www/static/</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">expires</span><span class="w"> </span><span class="s">7d</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>适用场景</h3>
+<p>高并发网站、反向代理、负载均衡、静态资源服务。</p>
+<h2>Caddy</h2>
+<p>Caddy以自动HTTPS和简洁配置闻名，是现代Web应用的新选择。</p>
+<h3>核心特性</h3>
+<ul>
+<li><strong>自动HTTPS</strong>：默认申请和续期Let's Encrypt证书</li>
+<li><strong>简洁配置</strong>：Caddyfile语法比Nginx更易读</li>
+<li><strong>HTTP/3支持</strong>：原生支持QUIC协议</li>
+<li><strong>插件生态</strong>：可通过插件扩展功能</li>
+</ul>
+<h3>配置示例</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">reverse_proxy</span><span class="w"> </span><span class="n">localhost</span><span class="p">:</span><span class="mi">3000</span>
+
+<span class="w">    </span><span class="c1"># 静态文件服务</span>
+<span class="w">    </span><span class="n">handle_path</span><span class="w"> </span><span class="o">/</span><span class="k">static</span><span class="o">/*</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">root</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="k">static</span>
+<span class="w">        </span><span class="n">file_server</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1"># 自动HTTPS默认开启</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>适用场景</h3>
+<p>中小型项目、需要快速配置的项目、对HTTPS有强依赖的场景。</p>
+<h2>Apache</h2>
+<p>Apache是历史最悠久的Web服务器，模块化架构使其功能丰富。</p>
+<h3>核心特性</h3>
+<ul>
+<li><strong>模块化架构</strong>：200+官方模块</li>
+<li><strong>.htaccess</strong>：目录级配置，适合共享主机</li>
+<li><strong>多处理模块</strong>：支持prefork、worker、event模式</li>
+<li><strong>广泛兼容</strong>：几乎所有CMS和应用都对Apache支持最好</li>
+</ul>
+<h3>适用场景</h3>
+<p>传统LAMP架构、共享主机环境、需要.htaccess的场景。</p>
+<h2>性能对比</h2>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>Nginx</th>
+<th>Caddy</th>
+<th>Apache</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>静态文件</td>
+<td>优秀</td>
+<td>良好</td>
+<td>良好</td>
+</tr>
+<tr>
+<td>并发连接</td>
+<td>优秀(1万+)</td>
+<td>良好</td>
+<td>中等(5千+)</td>
+</tr>
+<tr>
+<td>内存占用</td>
+<td>低</td>
+<td>中</td>
+<td>中-高</td>
+</tr>
+<tr>
+<td>配置复杂度</td>
+<td>中</td>
+<td>低</td>
+<td>高</td>
+</tr>
+<tr>
+<td>自动HTTPS</td>
+<td>需配置</td>
+<td>内置</td>
+<td>需配置</td>
+</tr>
+<tr>
+<td>动态模块</td>
+<td>编译时</td>
+<td>运行时</td>
+<td>运行时</td>
+</tr>
+</tbody>
+</table>
+<h2>选型建议</h2>
+<ol>
+<li><strong>高并发API服务</strong> → Nginx</li>
+<li><strong>快速原型或小项目</strong> → Caddy</li>
+<li><strong>传统CMS或共享主机</strong> → Apache</li>
+<li><strong>需要自动HTTPS</strong> → Caddy</li>
+<li><strong>反向代理场景</strong> → Nginx或Caddy</li>
+</ol>
+<p>没有绝对的最佳Web服务器，根据项目规模、团队经验和运维能力选择最合适的方案才是关键。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/docker-kubernetes-guide.html"><span class="related-title">Docker与Kubernetes入门实战</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/docker-ru-men.html"><span class="related-title">Docker从入门到精通：容器化部署最佳实践</span><span class="related-meta">技术教程 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%AF%94%EF%BC%9ANginx%20vs%20Caddy%20vs%20Apache%EF%BC%8C%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%80%A7%E8%83%BD&url=https%3A//aidev.fit/tech/webfu-wu-qi.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/tech/webfu-wu-qi.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%AF%94%EF%BC%9ANginx%20vs%20Caddy%20vs%20Apache%EF%BC%8C%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%80%A7%E8%83%BD&url=https%3A//aidev.fit/tech/webfu-wu-qi.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/tech/webfu-wu-qi.html&t=Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%AF%94%EF%BC%9ANginx%20vs%20Caddy%20vs%20Apache%EF%BC%8C%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%80%A7%E8%83%BD" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E6%AF%94%EF%BC%9ANginx%20vs%20Caddy%20vs%20Apache%EF%BC%8C%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%80%A7%E8%83%BD&body=https%3A//aidev.fit/tech/webfu-wu-qi.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/tech/webfu-wu-qi.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/tech/typescript-shijian.html" title="TypeScript实践：类型体操、泛型、装饰器高级用法">← 上一篇<br><small>TypeScript实践：类型体操、泛型、装饰器高级用法</small></a><a class="next" href="/tech/git-advanced.html" title="Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战">下一篇 →<br><small>Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/docker-kubernetes-guide.html"><span class="related-title">Docker与Kubernetes入门实战</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/docker-ru-men.html"><span class="related-title">Docker从入门到精通：容器化部署最佳实践</span><span class="related-meta">技术教程 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#web服务器选型概述">Web服务器选型概述</a></li><li class="toc-h2"><a href="#nginx">Nginx</a></li><li class="toc-h3"><a href="#核心特性">核心特性</a></li><li class="toc-h3"><a href="#配置示例">配置示例</a></li><li class="toc-h3"><a href="#适用场景">适用场景</a></li><li class="toc-h2"><a href="#caddy">Caddy</a></li><li class="toc-h3"><a href="#核心特性">核心特性</a></li><li class="toc-h3"><a href="#配置示例">配置示例</a></li><li class="toc-h3"><a href="#适用场景">适用场景</a></li><li class="toc-h2"><a href="#apache">Apache</a></li><li class="toc-h3"><a href="#核心特性">核心特性</a></li><li class="toc-h3"><a href="#适用场景">适用场景</a></li><li class="toc-h2"><a href="#性能对比">性能对比</a></li><li class="toc-h2"><a href="#选型建议">选型建议</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

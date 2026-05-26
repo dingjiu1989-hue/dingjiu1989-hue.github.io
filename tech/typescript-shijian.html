@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="tech" data-exclude="typescript-shijian">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="TypeScript实践：类型体操、泛型、装饰器高级用法">
+    <meta property="og:description" content="深入讲解TypeScript的高级特性，包括条件类型、映射类型等类型体操技巧，泛型的进阶用法以及装饰器的实际应用场景。">
+    <meta property="og:url" content="https://aidev.fit/tech/typescript-shijian.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/typescript-shijian.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="技术教程">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TypeScript实践：类型体操、泛型、装饰器高级用法">
+    <meta name="twitter:description" content="深入讲解TypeScript的高级特性，包括条件类型、映射类型等类型体操技巧，泛型的进阶用法以及装饰器的实际应用场景。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/tech/typescript-shijian.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/typescript-shijian.webp" type="image/webp" fetchpriority="high">
+    <title>TypeScript实践：类型体操、泛型、装饰器高级用法 — AI自习室</title>
+    <meta name="description" content="深入讲解TypeScript的高级特性，包括条件类型、映射类型等类型体操技巧，泛型的进阶用法以及装饰器的实际应用场景。">
+    <meta name="keywords" content="Technology, DevOps, Cloud">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/tech/typescript-shijian.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/typescript-shijian.html">
+    <link rel="canonical" href="https://aidev.fit/tech/typescript-shijian.html"><link rel="prev" href="https://aidev.fit/tech/serverless-shijian.html">
+<link rel="next" href="https://aidev.fit/tech/webfu-wu-qi.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "TypeScript实践：类型体操、泛型、装饰器高级用法",
+      "description": "深入讲解TypeScript的高级特性，包括条件类型、映射类型等类型体操技巧，泛型的进阶用法以及装饰器的实际应用场景。",
+      "image": "https://aidev.fit/images/covers/en/tech/typescript-shijian.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "3210",
+      "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/typescript-shijian.html"},
+      "articleBody": "超越基础类型   TypeScript的类型系统远比表面上看起来更强大。掌握高级类型技巧能让代码更加安全和优雅。   类型体操   条件类型   根据条件选择不同的类型：        type     IsString  &lt;  T  &gt;     =     T     extends     string     ?     true     :     false  ;   type     Result1     =     IsString  &lt;  &quot;hello&quot;  &gt;  ;      // true   type     Result2     =     IsString  &lt;  42  &gt;  ;           // false        映射类型   对已有类型的属性进行变换：        type     Readonly  &lt;  T  &gt;     =     {         readonly     [  P     in     keyof     T  ]  :     T  [  P  ];   };    type     Partial  &lt;  T  &gt;     =     {         [  P     in     keyof     T  ]  ?  :     T  [  P  ];   };    type     Pick  &lt;  T  ,     K     extends     keyof     T  &gt;     =     {         [  P     in     K  ]  :     T  [  P  ];   };        递归类型   处理嵌套结构的类型：        type     DeepPartial  &lt;  T  &gt;     =     {         [  P     in     keyof     T  ]  ?  :     T  [  P  ]     extends     object     ?     DeepPartial  &lt;  T  [  P  ]  &gt;     :     T  [  P  ];   };    type     DeepReadonly  &lt;  T  &gt;     =     {         readonly     [  P     in     keyof     T  ]  :     T  [  P  ]     extends     object     ?     DeepReadonly  &lt;  T  [  P  ]  &gt;     :     T  [  P  ];   };        infer关键字   从类型中提取子类型：        type     ReturnType  &lt;  T  &gt;     =     T     extends     (  ...args  :     any  [])     =&gt;     infer     R     ?     R     :     never  ;   type     ArrayItem  &lt;  T  &gt;     =     T     extends     (  infer     U  )[]     ?     U     :     never  ;   type     PromiseValue  &lt;  T  &gt;     =     T     extends     Promise  &lt;  infer     U  &gt;     ?     U     :     T  ;        泛型进阶   泛型约束   使用extends约束泛型参数的范围：        interface     HasId     {         id  :     number  ;   }    function     getById  &lt;  T     extends     HasId  &gt;  (  items  :     T  [],     id  :     number  )  :     T     |     undefined     {         return     items  .  find  (  item     =&gt;     item  .  id     ===     id  );   }        泛型工具类型   TypeScript内置了大量有用的工具类型，需要深入理解其使用场景：      Partial&lt;T&gt; ：所有属性变为可选    Required&lt;T&gt; ：所有属性变为必选    Readonly&lt;T&gt; ：所有属性变为只读    Pick&lt;T, K&gt; ：从T中选取部分属性    Omit&lt;T, K&gt; ：从T中排除部分属性    Record&lt;K, V&gt; ：构造一个键值类型    Exclude&lt;T, U&gt; ：从联合类型中排除某些类型     模板字面量类型   TypeScript 4.1+支持的模板字面量类型：        type     EventName     =     `on  ${  Capitalize  &lt;  string  &gt;  }  `  ;   type     CSSProperty     =     `--  ${  string  }  `  ;        装饰器   类装饰器   修改类的行为和结构：        function     LogClass  &lt;  T     extends     {     new     (  ...args  :     any  [])  :     {}     }  &gt;  (  constructor  :     T  )     {         return     class     extends     constructor     {             createdAt     =     new     Date  ();         };   }        方法装饰器   拦截方法调用，实现日志、缓存等功能：        function     Log  (  target  :     any  ,     propertyKey  :     string  ,     descriptor  :     PropertyDescriptor  )     {         const     original     =     descriptor  .  value  ;         descriptor  .  value     =     function  (  ...args  :     any  [])     {             console  .  log  (  `Calling   ${  propertyKey  }   with`  ,     args  );             return     original  .  apply  (  this  ,     args  );         };   }        实践建议      优先使用interface定义公共API的类型     使用type定义联合类型和工具类型     避免过度抽象 ：复杂的类型体操可能降低代码可读性    善用satisfies操作符 （TypeScript 4.9+）进行类型验证    使用ts-reset等工具库增强类型安全      掌握TypeScript的高级类型系统，能够写出更具表达力和安全性的代码。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "技术教程", "item": "https://aidev.fit/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "TypeScript实践：类型体操、泛型、装饰器高级用法"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/tech/">技术教程</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">Technology</span>
+          <span class="tag-cat">DevOps</span>
+          <span class="tag-cat">Cloud</span></div>
+        <h1 class="article-title">TypeScript实践：类型体操、泛型、装饰器高级用法</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>16 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>3210 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/typescript-shijian.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/typescript-shijian.png" alt="TypeScript实践：类型体操、泛型、装饰器高级用法" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（14）</summary><ol><li><a href="#超越基础类型">超越基础类型</a></li><li><a href="#类型体操">类型体操</a></li><li><a href="#条件类型">条件类型</a></li><li><a href="#映射类型">映射类型</a></li><li><a href="#递归类型">递归类型</a></li><li><a href="#infer关键字">infer关键字</a></li><li><a href="#泛型进阶">泛型进阶</a></li><li><a href="#泛型约束">泛型约束</a></li><li><a href="#泛型工具类型">泛型工具类型</a></li><li><a href="#模板字面量类型">模板字面量类型</a></li><li><a href="#装饰器">装饰器</a></li><li><a href="#类装饰器">类装饰器</a></li><li><a href="#方法装饰器">方法装饰器</a></li><li><a href="#实践建议">实践建议</a></li></ol></details>
+        <div class="article-body"><h2>超越基础类型</h2>
+<p>TypeScript的类型系统远比表面上看起来更强大。掌握高级类型技巧能让代码更加安全和优雅。</p>
+<h2>类型体操</h2>
+<h3>条件类型</h3>
+<p>根据条件选择不同的类型：</p>
+<div class="codehilite"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="nx">IsString</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">true</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">;</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">Result1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IsString</span><span class="o">&lt;</span><span class="s2">&quot;hello&quot;</span><span class="o">&gt;</span><span class="p">;</span><span class="w">  </span><span class="c1">// true</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">Result2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IsString</span><span class="o">&lt;</span><span class="mf">42</span><span class="o">&gt;</span><span class="p">;</span><span class="w">       </span><span class="c1">// false</span>
+</code></pre></div>
+
+<h3>映射类型</h3>
+<p>对已有类型的属性进行变换：</p>
+<div class="codehilite"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="nx">Readonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">readonly</span><span class="w"> </span><span class="p">[</span><span class="nx">P</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">keyof</span><span class="w"> </span><span class="nx">T</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="kr">type</span><span class="w"> </span><span class="nx">Partial</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">[</span><span class="nx">P</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">keyof</span><span class="w"> </span><span class="nx">T</span><span class="p">]</span><span class="nx">?</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="kr">type</span><span class="w"> </span><span class="nx">Pick</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span><span class="w"> </span><span class="nx">K</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">keyof</span><span class="w"> </span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">[</span><span class="nx">P</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">K</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<h3>递归类型</h3>
+<p>处理嵌套结构的类型：</p>
+<div class="codehilite"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="nx">DeepPartial</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">[</span><span class="nx">P</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">keyof</span><span class="w"> </span><span class="nx">T</span><span class="p">]</span><span class="nx">?</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">object</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">DeepPartial</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="o">&gt;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="kr">type</span><span class="w"> </span><span class="nx">DeepReadonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">readonly</span><span class="w"> </span><span class="p">[</span><span class="nx">P</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">keyof</span><span class="w"> </span><span class="nx">T</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">object</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">DeepReadonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="o">&gt;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<h3>infer关键字</h3>
+<p>从类型中提取子类型：</p>
+<div class="codehilite"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="nx">ReturnType</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="p">(</span><span class="nx">...args</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">[])</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">infer</span><span class="w"> </span><span class="nx">R</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">R</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">never</span><span class="p">;</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">ArrayItem</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="p">(</span><span class="nx">infer</span><span class="w"> </span><span class="nx">U</span><span class="p">)[]</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">U</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">never</span><span class="p">;</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">PromiseValue</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">infer</span><span class="w"> </span><span class="nx">U</span><span class="o">&gt;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">U</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">;</span>
+</code></pre></div>
+
+<h2>泛型进阶</h2>
+<h3>泛型约束</h3>
+<p>使用extends约束泛型参数的范围：</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">HasId</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">getById</span><span class="o">&lt;</span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">HasId</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">items</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">[],</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">items</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">item</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">id</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>泛型工具类型</h3>
+<p>TypeScript内置了大量有用的工具类型，需要深入理解其使用场景：</p>
+<ul>
+<li><code>Partial&lt;T&gt;</code>：所有属性变为可选</li>
+<li><code>Required&lt;T&gt;</code>：所有属性变为必选</li>
+<li><code>Readonly&lt;T&gt;</code>：所有属性变为只读</li>
+<li><code>Pick&lt;T, K&gt;</code>：从T中选取部分属性</li>
+<li><code>Omit&lt;T, K&gt;</code>：从T中排除部分属性</li>
+<li><code>Record&lt;K, V&gt;</code>：构造一个键值类型</li>
+<li><code>Exclude&lt;T, U&gt;</code>：从联合类型中排除某些类型</li>
+</ul>
+<h3>模板字面量类型</h3>
+<p>TypeScript 4.1+支持的模板字面量类型：</p>
+<div class="codehilite"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="nx">EventName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`on</span><span class="si">${</span><span class="nx">Capitalize</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">CSSProperty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`--</span><span class="si">${</span><span class="kt">string</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+</code></pre></div>
+
+<h2>装饰器</h2>
+<h3>类装饰器</h3>
+<p>修改类的行为和结构：</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">LogClass</span><span class="o">&lt;</span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="p">(</span><span class="nx">...args</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">[])</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="p">}</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">constructor</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="kr">constructor</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">createdAt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>方法装饰器</h3>
+<p>拦截方法调用，实现日志、缓存等功能：</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">Log</span><span class="p">(</span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="nx">propertyKey</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">descriptor</span><span class="o">:</span><span class="w"> </span><span class="kt">PropertyDescriptor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">original</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">descriptor</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">descriptor</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">...args</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Calling </span><span class="si">${</span><span class="nx">propertyKey</span><span class="si">}</span><span class="sb"> with`</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">original</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="p">);</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2>实践建议</h2>
+<ol>
+<li><strong>优先使用interface定义公共API的类型</strong></li>
+<li><strong>使用type定义联合类型和工具类型</strong></li>
+<li><strong>避免过度抽象</strong>：复杂的类型体操可能降低代码可读性</li>
+<li><strong>善用satisfies操作符</strong>（TypeScript 4.9+）进行类型验证</li>
+<li><strong>使用ts-reset等工具库增强类型安全</strong></li>
+</ol>
+<p>掌握TypeScript的高级类型系统，能够写出更具表达力和安全性的代码。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/docker-kubernetes-guide.html"><span class="related-title">Docker与Kubernetes入门实战</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/docker-ru-men.html"><span class="related-title">Docker从入门到精通：容器化部署最佳实践</span><span class="related-meta">技术教程 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=TypeScript%E5%AE%9E%E8%B7%B5%EF%BC%9A%E7%B1%BB%E5%9E%8B%E4%BD%93%E6%93%8D%E3%80%81%E6%B3%9B%E5%9E%8B%E3%80%81%E8%A3%85%E9%A5%B0%E5%99%A8%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95&url=https%3A//aidev.fit/tech/typescript-shijian.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/tech/typescript-shijian.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=TypeScript%E5%AE%9E%E8%B7%B5%EF%BC%9A%E7%B1%BB%E5%9E%8B%E4%BD%93%E6%93%8D%E3%80%81%E6%B3%9B%E5%9E%8B%E3%80%81%E8%A3%85%E9%A5%B0%E5%99%A8%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95&url=https%3A//aidev.fit/tech/typescript-shijian.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/tech/typescript-shijian.html&t=TypeScript%E5%AE%9E%E8%B7%B5%EF%BC%9A%E7%B1%BB%E5%9E%8B%E4%BD%93%E6%93%8D%E3%80%81%E6%B3%9B%E5%9E%8B%E3%80%81%E8%A3%85%E9%A5%B0%E5%99%A8%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=TypeScript%E5%AE%9E%E8%B7%B5%EF%BC%9A%E7%B1%BB%E5%9E%8B%E4%BD%93%E6%93%8D%E3%80%81%E6%B3%9B%E5%9E%8B%E3%80%81%E8%A3%85%E9%A5%B0%E5%99%A8%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95&body=https%3A//aidev.fit/tech/typescript-shijian.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/tech/typescript-shijian.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/tech/serverless-shijian.html" title="Serverless实战：AWS Lambda函数优化、冷启动、监控">← 上一篇<br><small>Serverless实战：AWS Lambda函数优化、冷启动、监控</small></a><a class="next" href="/tech/webfu-wu-qi.html" title="Web服务器对比：Nginx vs Caddy vs Apache，配置与性能">下一篇 →<br><small>Web服务器对比：Nginx vs Caddy vs Apache，配置与性能</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/docker-kubernetes-guide.html"><span class="related-title">Docker与Kubernetes入门实战</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/docker-ru-men.html"><span class="related-title">Docker从入门到精通：容器化部署最佳实践</span><span class="related-meta">技术教程 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#超越基础类型">超越基础类型</a></li><li class="toc-h2"><a href="#类型体操">类型体操</a></li><li class="toc-h3"><a href="#条件类型">条件类型</a></li><li class="toc-h3"><a href="#映射类型">映射类型</a></li><li class="toc-h3"><a href="#递归类型">递归类型</a></li><li class="toc-h3"><a href="#infer关键字">infer关键字</a></li><li class="toc-h2"><a href="#泛型进阶">泛型进阶</a></li><li class="toc-h3"><a href="#泛型约束">泛型约束</a></li><li class="toc-h3"><a href="#泛型工具类型">泛型工具类型</a></li><li class="toc-h3"><a href="#模板字面量类型">模板字面量类型</a></li><li class="toc-h2"><a href="#装饰器">装饰器</a></li><li class="toc-h3"><a href="#类装饰器">类装饰器</a></li><li class="toc-h3"><a href="#方法装饰器">方法装饰器</a></li><li class="toc-h2"><a href="#实践建议">实践建议</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

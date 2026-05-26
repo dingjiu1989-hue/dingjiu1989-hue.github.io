@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="ai" data-exclude="llm-router">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="LLM路由器：根据查询复杂度自动选择模型的工程实现">
+    <meta property="og:description" content="深入讲解LLM路由器的架构设计与工程实现，涵盖查询复杂度评估、模型分级策略、负载均衡和降级机制的完整实践方案。">
+    <meta property="og:url" content="https://aidev.fit/ai/llm-router.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/ai/llm-router.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="AI 教程">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LLM路由器：根据查询复杂度自动选择模型的工程实现">
+    <meta name="twitter:description" content="深入讲解LLM路由器的架构设计与工程实现，涵盖查询复杂度评估、模型分级策略、负载均衡和降级机制的完整实践方案。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/ai/llm-router.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/llm-router.webp" type="image/webp" fetchpriority="high">
+    <title>LLM路由器：根据查询复杂度自动选择模型的工程实现 — AI自习室</title>
+    <meta name="description" content="深入讲解LLM路由器的架构设计与工程实现，涵盖查询复杂度评估、模型分级策略、负载均衡和降级机制的完整实践方案。">
+    <meta name="keywords" content="AI, Machine Learning, LLM">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/ai/llm-router.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai/llm-router.html">
+    <link rel="canonical" href="https://aidev.fit/ai/llm-router.html"><link rel="prev" href="https://aidev.fit/ai/llm-jiaoyi.html">
+<link rel="next" href="https://aidev.fit/ai/model-bushu.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "LLM路由器：根据查询复杂度自动选择模型的工程实现",
+      "description": "深入讲解LLM路由器的架构设计与工程实现，涵盖查询复杂度评估、模型分级策略、负载均衡和降级机制的完整实践方案。",
+      "image": "https://aidev.fit/images/covers/en/ai/llm-router.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1307",
+      "keywords": "AI, Machine Learning, LLM",
+      "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/llm-router.html"},
+      "articleBody": "为什么需要LLM路由器   在实际应用中，不同查询的复杂度和重要性差异很大。有些问题只需简单的事实查询，而有些需要深度推理。使用单一模型要么浪费成本（所有请求都用大模型），要么牺牲效果（所有请求都用小模型）。   LLM路由器根据查询特征动态选择最合适的模型，在成本、效果和延迟之间取得最优平衡。   查询复杂度评估   路由决策的基础是对查询复杂度的准确评估。   评估维度      语义复杂度 ：问题涉及的知识广度和推理深度    领域专业性 ：是否需要特定领域的专业知识    任务类型 ：分类、生成、推理、创作等    上下文长度 ：输入和输出的预期长度    时效性要求 ：是否需要最新信息     评估方法    基于规则的评估：  - 关键词匹配判断问题类型 - 长度阈值判断上下文规模 - 正则表达式识别特定模式    基于小模型的评估：  - 使用轻量级模型对查询进行分类 - 比规则方法更灵活 - 增加了一定延迟和成本    基于统计的评估：  - 分析查询与历史分布的偏离程度 - 使用TF-IDF或向量相似度进行匹配   模型分级策略   三级模型池       L1 - 轻量模型（如Gemini Flash、Claude Haiku）   → 简单查询、模糊匹配、高吞吐场景  L2 - 标准模型（如GPT-4o-mini、Claude Sonnet）   → 一般业务查询、客服对话  L3 - 高级模型（如GPT-4o、Claude Opus）   → 复杂推理、代码生成、敏感场景       路由规则示例        routes  :       -     pattern  :     &quot;翻译|总结|分类&quot;         model  :     &quot;L1&quot;         priority  :     1       -     pattern  :     &quot;代码|分析|对比&quot;         model  :     &quot;L2&quot;         priority  :     2       -     condition  :     &quot;confidence     &lt;     0.8&quot;         model  :     &quot;L3&quot;         priority  :     3       -     default  :     &quot;L2&quot;        负载均衡   策略选择      轮询 ：简单均匀分配，不考虑请求差异    最少连接 ：分配给当前负载最低的模型    权重分配 ：根据模型容量分配流量比例     降级机制   当高等级模型不可用或超时时的处理：      静默降级 ：切换到低一级模型，对用户透明    队列等待 ：请求排队等待模型恢复    缓存命中 ：如果缓存中有相似查询的结果，直接返回    人工介入 ：关键请求转人工处理     工程实现   核心组件        class     LLMRouter  :       def     __init__  (  self  ):           self  .  models   =   {  &quot;L1&quot;  :   fast_model  ,   &quot;L2&quot;  :   standard_model  ,   &quot;L3&quot;  :   premium_model  }           self  .  router   =   self  .  _init_router  ()        def     route  (  self  ,   query  ):           complexity   =   self  .  evaluate_complexity  (  query  )           if   complexity   ==   &quot;simple&quot;  :               return   self  .  models  [  &quot;L1&quot;  ]  .  generate  (  query  )           elif   complexity   ==   &quot;standard&quot;  :               return   self  .  models  [  &quot;L2&quot;  ]  .  generate  (  query  )           else  :               return   self  .  models  [  &quot;L3&quot;  ]  .  generate  (  query  )        监控指标     各级模型的调用比例   路由准确率（降级后是否人工修正）   平均延迟和成本变化   模型不可用次数和持续时间     实际效果   通过LLM路由器的实践，通常可以实现： - API成本降低40%-60% - 平均延迟降低30%-50% - 用户体验无明显下降   LLM路由器是实现成本效益最大化的关键基础设施，值得每个AI应用认真设计和部署。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "AI 教程", "item": "https://aidev.fit/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "LLM路由器：根据查询复杂度自动选择模型的工程实现"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/ai/">AI 教程</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">AI</span>
+          <span class="tag-cat">Machine Learning</span>
+          <span class="tag-cat">LLM</span></div>
+        <h1 class="article-title">LLM路由器：根据查询复杂度自动选择模型的工程实现</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>6 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>1307 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/llm-router.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/llm-router.png" alt="LLM路由器：根据查询复杂度自动选择模型的工程实现" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（14）</summary><ol><li><a href="#为什么需要llm路由器">为什么需要LLM路由器</a></li><li><a href="#查询复杂度评估">查询复杂度评估</a></li><li><a href="#评估维度">评估维度</a></li><li><a href="#评估方法">评估方法</a></li><li><a href="#模型分级策略">模型分级策略</a></li><li><a href="#三级模型池">三级模型池</a></li><li><a href="#路由规则示例">路由规则示例</a></li><li><a href="#负载均衡">负载均衡</a></li><li><a href="#策略选择">策略选择</a></li><li><a href="#降级机制">降级机制</a></li><li><a href="#工程实现">工程实现</a></li><li><a href="#核心组件">核心组件</a></li><li><a href="#监控指标">监控指标</a></li><li><a href="#实际效果">实际效果</a></li></ol></details>
+        <div class="article-body"><h2>为什么需要LLM路由器</h2>
+<p>在实际应用中，不同查询的复杂度和重要性差异很大。有些问题只需简单的事实查询，而有些需要深度推理。使用单一模型要么浪费成本（所有请求都用大模型），要么牺牲效果（所有请求都用小模型）。</p>
+<p>LLM路由器根据查询特征动态选择最合适的模型，在成本、效果和延迟之间取得最优平衡。</p>
+<h2>查询复杂度评估</h2>
+<p>路由决策的基础是对查询复杂度的准确评估。</p>
+<h3>评估维度</h3>
+<ol>
+<li><strong>语义复杂度</strong>：问题涉及的知识广度和推理深度</li>
+<li><strong>领域专业性</strong>：是否需要特定领域的专业知识</li>
+<li><strong>任务类型</strong>：分类、生成、推理、创作等</li>
+<li><strong>上下文长度</strong>：输入和输出的预期长度</li>
+<li><strong>时效性要求</strong>：是否需要最新信息</li>
+</ol>
+<h3>评估方法</h3>
+<p><strong>基于规则的评估：</strong>
+- 关键词匹配判断问题类型
+- 长度阈值判断上下文规模
+- 正则表达式识别特定模式</p>
+<p><strong>基于小模型的评估：</strong>
+- 使用轻量级模型对查询进行分类
+- 比规则方法更灵活
+- 增加了一定延迟和成本</p>
+<p><strong>基于统计的评估：</strong>
+- 分析查询与历史分布的偏离程度
+- 使用TF-IDF或向量相似度进行匹配</p>
+<h2>模型分级策略</h2>
+<h3>三级模型池</h3>
+<div class="codehilite"><pre><span></span><code>L1 - 轻量模型（如Gemini Flash、Claude Haiku）
+  → 简单查询、模糊匹配、高吞吐场景
+
+L2 - 标准模型（如GPT-4o-mini、Claude Sonnet）
+  → 一般业务查询、客服对话
+
+L3 - 高级模型（如GPT-4o、Claude Opus）
+  → 复杂推理、代码生成、敏感场景
+</code></pre></div>
+
+<h3>路由规则示例</h3>
+<div class="codehilite"><pre><span></span><code><span class="nt">routes</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;翻译|总结|分类&quot;</span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;L1&quot;</span>
+<span class="w">    </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;代码|分析|对比&quot;</span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;L2&quot;</span>
+<span class="w">    </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;confidence</span><span class="nv"> </span><span class="s">&lt;</span><span class="nv"> </span><span class="s">0.8&quot;</span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;L3&quot;</span>
+<span class="w">    </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;L2&quot;</span>
+</code></pre></div>
+
+<h2>负载均衡</h2>
+<h3>策略选择</h3>
+<ul>
+<li><strong>轮询</strong>：简单均匀分配，不考虑请求差异</li>
+<li><strong>最少连接</strong>：分配给当前负载最低的模型</li>
+<li><strong>权重分配</strong>：根据模型容量分配流量比例</li>
+</ul>
+<h3>降级机制</h3>
+<p>当高等级模型不可用或超时时的处理：</p>
+<ol>
+<li><strong>静默降级</strong>：切换到低一级模型，对用户透明</li>
+<li><strong>队列等待</strong>：请求排队等待模型恢复</li>
+<li><strong>缓存命中</strong>：如果缓存中有相似查询的结果，直接返回</li>
+<li><strong>人工介入</strong>：关键请求转人工处理</li>
+</ol>
+<h2>工程实现</h2>
+<h3>核心组件</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">LLMRouter</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;L1&quot;</span><span class="p">:</span> <span class="n">fast_model</span><span class="p">,</span> <span class="s2">&quot;L2&quot;</span><span class="p">:</span> <span class="n">standard_model</span><span class="p">,</span> <span class="s2">&quot;L3&quot;</span><span class="p">:</span> <span class="n">premium_model</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">router</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_router</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">route</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+        <span class="n">complexity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluate_complexity</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">complexity</span> <span class="o">==</span> <span class="s2">&quot;simple&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="s2">&quot;L1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">complexity</span> <span class="o">==</span> <span class="s2">&quot;standard&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="s2">&quot;L2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="s2">&quot;L3&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>监控指标</h3>
+<ul>
+<li>各级模型的调用比例</li>
+<li>路由准确率（降级后是否人工修正）</li>
+<li>平均延迟和成本变化</li>
+<li>模型不可用次数和持续时间</li>
+</ul>
+<h2>实际效果</h2>
+<p>通过LLM路由器的实践，通常可以实现：
+- API成本降低40%-60%
+- 平均延迟降低30%-50%
+- 用户体验无明显下降</p>
+<p>LLM路由器是实现成本效益最大化的关键基础设施，值得每个AI应用认真设计和部署。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
+<a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-cost-control.html"><span class="related-title">AI成本控制：缓存策略、批处理、模型降级的实战方案</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=LLM%E8%B7%AF%E7%94%B1%E5%99%A8%EF%BC%9A%E6%A0%B9%E6%8D%AE%E6%9F%A5%E8%AF%A2%E5%A4%8D%E6%9D%82%E5%BA%A6%E8%87%AA%E5%8A%A8%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%AE%9E%E7%8E%B0&url=https%3A//aidev.fit/ai/llm-router.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/ai/llm-router.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=LLM%E8%B7%AF%E7%94%B1%E5%99%A8%EF%BC%9A%E6%A0%B9%E6%8D%AE%E6%9F%A5%E8%AF%A2%E5%A4%8D%E6%9D%82%E5%BA%A6%E8%87%AA%E5%8A%A8%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%AE%9E%E7%8E%B0&url=https%3A//aidev.fit/ai/llm-router.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/ai/llm-router.html&t=LLM%E8%B7%AF%E7%94%B1%E5%99%A8%EF%BC%9A%E6%A0%B9%E6%8D%AE%E6%9F%A5%E8%AF%A2%E5%A4%8D%E6%9D%82%E5%BA%A6%E8%87%AA%E5%8A%A8%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%AE%9E%E7%8E%B0" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=LLM%E8%B7%AF%E7%94%B1%E5%99%A8%EF%BC%9A%E6%A0%B9%E6%8D%AE%E6%9F%A5%E8%AF%A2%E5%A4%8D%E6%9D%82%E5%BA%A6%E8%87%AA%E5%8A%A8%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%AE%9E%E7%8E%B0&body=https%3A//aidev.fit/ai/llm-router.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/ai/llm-router.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/ai/llm-jiaoyi.html" title="LLM交易：微调模型 vs API调用，成本与效果的权衡">← 上一篇<br><small>LLM交易：微调模型 vs API调用，成本与效果的权衡</small></a><a class="next" href="/ai/model-bushu.html" title="模型部署方案：vLLM vs TGI vs Ollama，推理优化技巧">下一篇 →<br><small>模型部署方案：vLLM vs TGI vs Ollama，推理优化技巧</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
+<a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-cost-control.html"><span class="related-title">AI成本控制：缓存策略、批处理、模型降级的实战方案</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#为什么需要llm路由器">为什么需要LLM路由器</a></li><li class="toc-h2"><a href="#查询复杂度评估">查询复杂度评估</a></li><li class="toc-h3"><a href="#评估维度">评估维度</a></li><li class="toc-h3"><a href="#评估方法">评估方法</a></li><li class="toc-h2"><a href="#模型分级策略">模型分级策略</a></li><li class="toc-h3"><a href="#三级模型池">三级模型池</a></li><li class="toc-h3"><a href="#路由规则示例">路由规则示例</a></li><li class="toc-h2"><a href="#负载均衡">负载均衡</a></li><li class="toc-h3"><a href="#策略选择">策略选择</a></li><li class="toc-h3"><a href="#降级机制">降级机制</a></li><li class="toc-h2"><a href="#工程实现">工程实现</a></li><li class="toc-h3"><a href="#核心组件">核心组件</a></li><li class="toc-h3"><a href="#监控指标">监控指标</a></li><li class="toc-h2"><a href="#实际效果">实际效果</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

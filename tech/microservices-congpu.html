@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="tech" data-exclude="microservices-congpu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="微服务从零到一：Spring Boot vs Quarkus 入门实践">
+    <meta property="og:description" content="对比Spring Boot和Quarkus两大微服务框架，从项目初始化、开发体验、性能表现和部署运维等角度进行分析，帮助开发者选择最合适的框架。">
+    <meta property="og:url" content="https://aidev.fit/tech/microservices-congpu.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/microservices-congpu.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="技术教程">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="微服务从零到一：Spring Boot vs Quarkus 入门实践">
+    <meta name="twitter:description" content="对比Spring Boot和Quarkus两大微服务框架，从项目初始化、开发体验、性能表现和部署运维等角度进行分析，帮助开发者选择最合适的框架。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/tech/microservices-congpu.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/microservices-congpu.webp" type="image/webp" fetchpriority="high">
+    <title>微服务从零到一：Spring Boot vs Quarkus 入门实践 — AI自习室</title>
+    <meta name="description" content="对比Spring Boot和Quarkus两大微服务框架，从项目初始化、开发体验、性能表现和部署运维等角度进行分析，帮助开发者选择最合适的框架。">
+    <meta name="keywords" content="Technology, DevOps, Cloud">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/tech/microservices-congpu.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/microservices-congpu.html">
+    <link rel="canonical" href="https://aidev.fit/tech/microservices-congpu.html"><link rel="prev" href="https://aidev.fit/tech/message-queue.html">
+<link rel="next" href="https://aidev.fit/tech/monitoring-stack.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "微服务从零到一：Spring Boot vs Quarkus 入门实践",
+      "description": "对比Spring Boot和Quarkus两大微服务框架，从项目初始化、开发体验、性能表现和部署运维等角度进行分析，帮助开发者选择最合适的框架。",
+      "image": "https://aidev.fit/images/covers/en/tech/microservices-congpu.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1035",
+      "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/microservices-congpu.html"},
+      "articleBody": "微服务架构概述   微服务架构将单体应用拆分为多个独立的服务，每个服务围绕特定业务能力构建。选择合适的技术栈是微服务成功的关键。   Spring Boot   Spring Boot是Java生态中最成熟的微服务框架。   核心优势      生态完善 ：Spring Cloud、Spring Data、Spring Security等组件一应俱全    文档丰富 ：官方文档和社区资源极为丰富    人才储备 ：Java开发者基本都熟悉Spring生态    企业级特性 ：配置中心、服务发现、熔断器等开箱即用     入门示例        @RestController   @RequestMapping  (  &quot;/api/users&quot;  )   public     class   UserController     {          @Autowired         private     UserService     userService  ;          @GetMapping  (  &quot;/{id}&quot;  )         public     ResponseEntity  &lt;  User  &gt;     getUser  (  @PathVariable     Long     id  )     {             return     ResponseEntity  .  ok  (  userService  .  findById  (  id  ));         }   }        局限     启动慢（通常10-30秒），不适合Serverless   内存占用高（基础应用约200MB+）   打包体积大（Fat JAR通常50MB+）     Quarkus   Quarkus是为云原生和Serverless优化的Java框架，由Red Hat开发。   核心优势      启动极快 ：毫秒级启动（0.1-2秒）    内存极低 ：基础应用约20-50MB    编译期处理 ：在编译期完成依赖注入分析    GraalVM支持 ：支持编译为原生可执行文件     入门示例        @Path  (  &quot;/api/users&quot;  )   public     class   UserResource     {          @Inject         UserService     userService  ;          @GET         @Path  (  &quot;/{id}&quot;  )         public     User     getUser  (  @PathParam     Long     id  )     {             return     userService  .  findById  (  id  );         }   }        对比分析         维度   Spring Boot   Quarkus           启动时间   10-30秒   0.1-2秒       内存占用(基础)   ~200MB   ~30MB       打包大小   ~50MB   ~10MB       学习曲线   较低   中等       生态成熟度   极高   高(快速增长)       Serverless   不推荐   推荐       开发效率   高   高         选型建议   选择Spring Boot的场景     企业级大型项目   团队Spring经验丰富   需要丰富的第三方集成   对启动时间不敏感     选择Quarkus的场景     Serverless或FaaS场景   需要快速扩缩容的容器化部署   内存资源有限的场景   新项目，无历史包袱     微服务基础设施   无论选择哪个框架，微服务架构都需要配套的基础设施：      服务注册与发现 ：Consul、Nacos、Eureka    配置中心 ：Nacos、Spring Cloud Config    网关 ：Spring Cloud Gateway、Kong    链路追踪 ：SkyWalking、Jaeger    服务网格 ：Istio、Linkerd     微服务框架的选择没有标准答案，需要综合考量团队技术栈、项目需求和运维能力做出决策。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "技术教程", "item": "https://aidev.fit/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "微服务从零到一：Spring Boot vs Quarkus 入门实践"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/tech/">技术教程</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">Technology</span>
+          <span class="tag-cat">DevOps</span>
+          <span class="tag-cat">Cloud</span></div>
+        <h1 class="article-title">微服务从零到一：Spring Boot vs Quarkus 入门实践</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>5 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>1035 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/microservices-congpu.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/microservices-congpu.png" alt="微服务从零到一：Spring Boot vs Quarkus 入门实践" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（13）</summary><ol><li><a href="#微服务架构概述">微服务架构概述</a></li><li><a href="#spring-boot">Spring Boot</a></li><li><a href="#核心优势">核心优势</a></li><li><a href="#入门示例">入门示例</a></li><li><a href="#局限">局限</a></li><li><a href="#quarkus">Quarkus</a></li><li><a href="#核心优势">核心优势</a></li><li><a href="#入门示例">入门示例</a></li><li><a href="#对比分析">对比分析</a></li><li><a href="#选型建议">选型建议</a></li><li><a href="#选择spring-boot的场景">选择Spring Boot的场景</a></li><li><a href="#选择quarkus的场景">选择Quarkus的场景</a></li><li><a href="#微服务基础设施">微服务基础设施</a></li></ol></details>
+        <div class="article-body"><h2>微服务架构概述</h2>
+<p>微服务架构将单体应用拆分为多个独立的服务，每个服务围绕特定业务能力构建。选择合适的技术栈是微服务成功的关键。</p>
+<h2>Spring Boot</h2>
+<p>Spring Boot是Java生态中最成熟的微服务框架。</p>
+<h3>核心优势</h3>
+<ul>
+<li><strong>生态完善</strong>：Spring Cloud、Spring Data、Spring Security等组件一应俱全</li>
+<li><strong>文档丰富</strong>：官方文档和社区资源极为丰富</li>
+<li><strong>人才储备</strong>：Java开发者基本都熟悉Spring生态</li>
+<li><strong>企业级特性</strong>：配置中心、服务发现、熔断器等开箱即用</li>
+</ul>
+<h3>入门示例</h3>
+<div class="codehilite"><pre><span></span><code><span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/users&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UserService</span><span class="w"> </span><span class="n">userService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/{id}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getUser</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">(</span><span class="n">userService</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>局限</h3>
+<ul>
+<li>启动慢（通常10-30秒），不适合Serverless</li>
+<li>内存占用高（基础应用约200MB+）</li>
+<li>打包体积大（Fat JAR通常50MB+）</li>
+</ul>
+<h2>Quarkus</h2>
+<p>Quarkus是为云原生和Serverless优化的Java框架，由Red Hat开发。</p>
+<h3>核心优势</h3>
+<ul>
+<li><strong>启动极快</strong>：毫秒级启动（0.1-2秒）</li>
+<li><strong>内存极低</strong>：基础应用约20-50MB</li>
+<li><strong>编译期处理</strong>：在编译期完成依赖注入分析</li>
+<li><strong>GraalVM支持</strong>：支持编译为原生可执行文件</li>
+</ul>
+<h3>入门示例</h3>
+<div class="codehilite"><pre><span></span><code><span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;/api/users&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserResource</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Inject</span>
+<span class="w">    </span><span class="n">UserService</span><span class="w"> </span><span class="n">userService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@GET</span>
+<span class="w">    </span><span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;/{id}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="nf">getUser</span><span class="p">(</span><span class="nd">@PathParam</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">userService</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2>对比分析</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Spring Boot</th>
+<th>Quarkus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>启动时间</td>
+<td>10-30秒</td>
+<td>0.1-2秒</td>
+</tr>
+<tr>
+<td>内存占用(基础)</td>
+<td>~200MB</td>
+<td>~30MB</td>
+</tr>
+<tr>
+<td>打包大小</td>
+<td>~50MB</td>
+<td>~10MB</td>
+</tr>
+<tr>
+<td>学习曲线</td>
+<td>较低</td>
+<td>中等</td>
+</tr>
+<tr>
+<td>生态成熟度</td>
+<td>极高</td>
+<td>高(快速增长)</td>
+</tr>
+<tr>
+<td>Serverless</td>
+<td>不推荐</td>
+<td>推荐</td>
+</tr>
+<tr>
+<td>开发效率</td>
+<td>高</td>
+<td>高</td>
+</tr>
+</tbody>
+</table>
+<h2>选型建议</h2>
+<h3>选择Spring Boot的场景</h3>
+<ul>
+<li>企业级大型项目</li>
+<li>团队Spring经验丰富</li>
+<li>需要丰富的第三方集成</li>
+<li>对启动时间不敏感</li>
+</ul>
+<h3>选择Quarkus的场景</h3>
+<ul>
+<li>Serverless或FaaS场景</li>
+<li>需要快速扩缩容的容器化部署</li>
+<li>内存资源有限的场景</li>
+<li>新项目，无历史包袱</li>
+</ul>
+<h2>微服务基础设施</h2>
+<p>无论选择哪个框架，微服务架构都需要配套的基础设施：</p>
+<ul>
+<li><strong>服务注册与发现</strong>：Consul、Nacos、Eureka</li>
+<li><strong>配置中心</strong>：Nacos、Spring Cloud Config</li>
+<li><strong>网关</strong>：Spring Cloud Gateway、Kong</li>
+<li><strong>链路追踪</strong>：SkyWalking、Jaeger</li>
+<li><strong>服务网格</strong>：Istio、Linkerd</li>
+</ul>
+<p>微服务框架的选择没有标准答案，需要综合考量团队技术栈、项目需求和运维能力做出决策。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/docker-kubernetes-guide.html"><span class="related-title">Docker与Kubernetes入门实战</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/docker-ru-men.html"><span class="related-title">Docker从入门到精通：容器化部署最佳实践</span><span class="related-meta">技术教程 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%80%EF%BC%9ASpring%20Boot%20vs%20Quarkus%20%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5&url=https%3A//aidev.fit/tech/microservices-congpu.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/tech/microservices-congpu.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%80%EF%BC%9ASpring%20Boot%20vs%20Quarkus%20%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5&url=https%3A//aidev.fit/tech/microservices-congpu.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/tech/microservices-congpu.html&t=%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%80%EF%BC%9ASpring%20Boot%20vs%20Quarkus%20%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%80%EF%BC%9ASpring%20Boot%20vs%20Quarkus%20%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5&body=https%3A//aidev.fit/tech/microservices-congpu.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/tech/microservices-congpu.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/tech/message-queue.html" title="消息队列选型：Kafka vs RabbitMQ vs Pulsar，场景对比">← 上一篇<br><small>消息队列选型：Kafka vs RabbitMQ vs Pulsar，场景对比</small></a><a class="next" href="/tech/monitoring-stack.html" title="监控体系搭建：Prometheus + Grafana + Alertmanager">下一篇 →<br><small>监控体系搭建：Prometheus + Grafana + Alertmanager</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/docker-kubernetes-guide.html"><span class="related-title">Docker与Kubernetes入门实战</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/docker-ru-men.html"><span class="related-title">Docker从入门到精通：容器化部署最佳实践</span><span class="related-meta">技术教程 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#微服务架构概述">微服务架构概述</a></li><li class="toc-h2"><a href="#spring-boot">Spring Boot</a></li><li class="toc-h3"><a href="#核心优势">核心优势</a></li><li class="toc-h3"><a href="#入门示例">入门示例</a></li><li class="toc-h3"><a href="#局限">局限</a></li><li class="toc-h2"><a href="#quarkus">Quarkus</a></li><li class="toc-h3"><a href="#核心优势">核心优势</a></li><li class="toc-h3"><a href="#入门示例">入门示例</a></li><li class="toc-h2"><a href="#对比分析">对比分析</a></li><li class="toc-h2"><a href="#选型建议">选型建议</a></li><li class="toc-h3"><a href="#选择spring-boot的场景">选择Spring Boot的场景</a></li><li class="toc-h3"><a href="#选择quarkus的场景">选择Quarkus的场景</a></li><li class="toc-h2"><a href="#微服务基础设施">微服务基础设施</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

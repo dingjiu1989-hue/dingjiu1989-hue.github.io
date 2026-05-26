@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="ai" data-exclude="ai-cost-control">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="AI成本控制：缓存策略、批处理、模型降级的实战方案">
+    <meta property="og:description" content="全面讲解AI应用成本控制的工程实践，涵盖语义缓存、请求批处理、模型降级和用量监控等核心策略，帮助开发者优化AI运营成本。">
+    <meta property="og:url" content="https://aidev.fit/ai/ai-cost-control.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/ai/ai-cost-control.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="AI 教程">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI成本控制：缓存策略、批处理、模型降级的实战方案">
+    <meta name="twitter:description" content="全面讲解AI应用成本控制的工程实践，涵盖语义缓存、请求批处理、模型降级和用量监控等核心策略，帮助开发者优化AI运营成本。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/ai/ai-cost-control.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/ai-cost-control.webp" type="image/webp" fetchpriority="high">
+    <title>AI成本控制：缓存策略、批处理、模型降级的实战方案 — AI自习室</title>
+    <meta name="description" content="全面讲解AI应用成本控制的工程实践，涵盖语义缓存、请求批处理、模型降级和用量监控等核心策略，帮助开发者优化AI运营成本。">
+    <meta name="keywords" content="AI, Machine Learning, LLM">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/ai/ai-cost-control.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai/ai-cost-control.html">
+    <link rel="canonical" href="https://aidev.fit/ai/ai-cost-control.html"><link rel="prev" href="https://aidev.fit/ai/ai-chatbot.html">
+<link rel="next" href="https://aidev.fit/ai/ai-jiankong.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "AI成本控制：缓存策略、批处理、模型降级的实战方案",
+      "description": "全面讲解AI应用成本控制的工程实践，涵盖语义缓存、请求批处理、模型降级和用量监控等核心策略，帮助开发者优化AI运营成本。",
+      "image": "https://aidev.fit/images/covers/en/ai/ai-cost-control.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "665",
+      "keywords": "AI, Machine Learning, LLM",
+      "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/ai-cost-control.html"},
+      "articleBody": "AI成本的结构   AI应用的运营成本主要由三部分构成：模型调用费（API或GPU）、基础设施费（服务器、存储、网络）和数据费（向量数据库、搜索服务）。其中模型调用费往往占比最大，也是最需要优化的部分。   缓存策略   缓存是降低AI成本最直接有效的手段。   精确缓存   对完全相同的查询直接返回缓存结果。        cache_key   =   hash  (  query   +   str  (  context  ))   if   cache  .  get  (  cache_key  ):       return   cache  .  get  (  cache_key  )   else  :       result   =   llm  .  generate  (  query  )       cache  .  set  (  cache_key  ,   result  ,   ttl  =  3600  )        适用场景：高频重复查询、固定问答对。   语义缓存   语义缓存识别语义相似的查询，即使措辞不同也能命中缓存。   实现方案： - 将查询转为向量，在缓存中检索相似查询 - 设相似度阈值，高于阈值的查询视为命中 - 需要注意响应准确性和时效性   缓存策略建议         缓存类型   命中率   实现复杂度   适用场景           精确缓存   低   低   高频重复查询       语义缓存   中   中   FAQ类查询       分层缓存   高   高   综合场景         请求批处理   将多个独立的LLM请求合并为一个请求，减少API调用次数。   批处理模式    同步批处理：  将多个非实时的请求收集后一起发送，适用于数据标注、批量生成等场景。    异步批处理：  OpenAI等API支持Batch API，可享受50%的折扣，适合对延迟不敏感的任务。   实现要点     设置合理的批处理窗口（如100ms或累计10个请求）   请求优先级调度（实时请求优先发送）   错误隔离（单个请求失败不影响其他请求）     模型降级策略   动态模型选择   根据请求的复杂度和重要性动态选择模型：       高重要性+高复杂度 → 旗舰模型（GPT-4o/Claude Opus） 高重要性+低复杂度 → 均衡模型（GPT-4o-mini/Claude Sonnet） 低重要性+高复杂度 → 均衡模型 低重要性+低复杂度 → 轻量模型（Gemini Flash/Claude Haiku）       Token预算控制     设置每用户/每天的Token使用上限   限制最大输出长度（一般回答500字以内）   使用更精简的Prompt模板     用量监控与告警   建立全面的成本监控体系：   关键指标      每日Token消耗 ：按模型和用户维度统计    API费用趋势 ：日/周/月环比变化    缓存命中率 ：衡量缓存策略效果    各级模型调用比例 ：检验降级策略执行情况     告警阈值     日消耗超过预算的70%、90%、100%   单个用户消耗异常激增   缓存命中率低于预期     成本优化实践   月度优化流程      第一周 ：分析上月成本数据，识别优化机会    第二周 ：调整缓存策略和路由规则    第三周 ：评估优化效果，微调参数    第四周 ：固化有效策略，形成标准流程     实际效果   良好的成本控制策略可以将AI应用的月度运营成本降低50%-70%，同时保持90%以上的用户体验质量。成本优化是一个持续的过程，需要不断监控、分析和调整。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "AI 教程", "item": "https://aidev.fit/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "AI成本控制：缓存策略、批处理、模型降级的实战方案"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/ai/">AI 教程</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">AI</span>
+          <span class="tag-cat">Machine Learning</span>
+          <span class="tag-cat">LLM</span></div>
+        <h1 class="article-title">AI成本控制：缓存策略、批处理、模型降级的实战方案</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>3 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>665 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-cost-control.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-cost-control.png" alt="AI成本控制：缓存策略、批处理、模型降级的实战方案" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（17）</summary><ol><li><a href="#ai成本的结构">AI成本的结构</a></li><li><a href="#缓存策略">缓存策略</a></li><li><a href="#精确缓存">精确缓存</a></li><li><a href="#语义缓存">语义缓存</a></li><li><a href="#缓存策略建议">缓存策略建议</a></li><li><a href="#请求批处理">请求批处理</a></li><li><a href="#批处理模式">批处理模式</a></li><li><a href="#实现要点">实现要点</a></li><li><a href="#模型降级策略">模型降级策略</a></li><li><a href="#动态模型选择">动态模型选择</a></li><li><a href="#token预算控制">Token预算控制</a></li><li><a href="#用量监控与告警">用量监控与告警</a></li><li><a href="#关键指标">关键指标</a></li><li><a href="#告警阈值">告警阈值</a></li><li><a href="#成本优化实践">成本优化实践</a></li><li><a href="#月度优化流程">月度优化流程</a></li><li><a href="#实际效果">实际效果</a></li></ol></details>
+        <div class="article-body"><h2>AI成本的结构</h2>
+<p>AI应用的运营成本主要由三部分构成：模型调用费（API或GPU）、基础设施费（服务器、存储、网络）和数据费（向量数据库、搜索服务）。其中模型调用费往往占比最大，也是最需要优化的部分。</p>
+<h2>缓存策略</h2>
+<p>缓存是降低AI成本最直接有效的手段。</p>
+<h3>精确缓存</h3>
+<p>对完全相同的查询直接返回缓存结果。</p>
+<div class="codehilite"><pre><span></span><code><span class="n">cache_key</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="n">query</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">context</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cache_key</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">cache_key</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
+</code></pre></div>
+
+<p>适用场景：高频重复查询、固定问答对。</p>
+<h3>语义缓存</h3>
+<p>语义缓存识别语义相似的查询，即使措辞不同也能命中缓存。</p>
+<p>实现方案：
+- 将查询转为向量，在缓存中检索相似查询
+- 设相似度阈值，高于阈值的查询视为命中
+- 需要注意响应准确性和时效性</p>
+<h3>缓存策略建议</h3>
+<table>
+<thead>
+<tr>
+<th>缓存类型</th>
+<th>命中率</th>
+<th>实现复杂度</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>精确缓存</td>
+<td>低</td>
+<td>低</td>
+<td>高频重复查询</td>
+</tr>
+<tr>
+<td>语义缓存</td>
+<td>中</td>
+<td>中</td>
+<td>FAQ类查询</td>
+</tr>
+<tr>
+<td>分层缓存</td>
+<td>高</td>
+<td>高</td>
+<td>综合场景</td>
+</tr>
+</tbody>
+</table>
+<h2>请求批处理</h2>
+<p>将多个独立的LLM请求合并为一个请求，减少API调用次数。</p>
+<h3>批处理模式</h3>
+<p><strong>同步批处理：</strong>
+将多个非实时的请求收集后一起发送，适用于数据标注、批量生成等场景。</p>
+<p><strong>异步批处理：</strong>
+OpenAI等API支持Batch API，可享受50%的折扣，适合对延迟不敏感的任务。</p>
+<h3>实现要点</h3>
+<ul>
+<li>设置合理的批处理窗口（如100ms或累计10个请求）</li>
+<li>请求优先级调度（实时请求优先发送）</li>
+<li>错误隔离（单个请求失败不影响其他请求）</li>
+</ul>
+<h2>模型降级策略</h2>
+<h3>动态模型选择</h3>
+<p>根据请求的复杂度和重要性动态选择模型：</p>
+<div class="codehilite"><pre><span></span><code>高重要性+高复杂度 → 旗舰模型（GPT-4o/Claude Opus）
+高重要性+低复杂度 → 均衡模型（GPT-4o-mini/Claude Sonnet）
+低重要性+高复杂度 → 均衡模型
+低重要性+低复杂度 → 轻量模型（Gemini Flash/Claude Haiku）
+</code></pre></div>
+
+<h3>Token预算控制</h3>
+<ul>
+<li>设置每用户/每天的Token使用上限</li>
+<li>限制最大输出长度（一般回答500字以内）</li>
+<li>使用更精简的Prompt模板</li>
+</ul>
+<h2>用量监控与告警</h2>
+<p>建立全面的成本监控体系：</p>
+<h3>关键指标</h3>
+<ul>
+<li><strong>每日Token消耗</strong>：按模型和用户维度统计</li>
+<li><strong>API费用趋势</strong>：日/周/月环比变化</li>
+<li><strong>缓存命中率</strong>：衡量缓存策略效果</li>
+<li><strong>各级模型调用比例</strong>：检验降级策略执行情况</li>
+</ul>
+<h3>告警阈值</h3>
+<ul>
+<li>日消耗超过预算的70%、90%、100%</li>
+<li>单个用户消耗异常激增</li>
+<li>缓存命中率低于预期</li>
+</ul>
+<h2>成本优化实践</h2>
+<h3>月度优化流程</h3>
+<ol>
+<li><strong>第一周</strong>：分析上月成本数据，识别优化机会</li>
+<li><strong>第二周</strong>：调整缓存策略和路由规则</li>
+<li><strong>第三周</strong>：评估优化效果，微调参数</li>
+<li><strong>第四周</strong>：固化有效策略，形成标准流程</li>
+</ol>
+<h3>实际效果</h3>
+<p>良好的成本控制策略可以将AI应用的月度运营成本降低50%-70%，同时保持90%以上的用户体验质量。成本优化是一个持续的过程，需要不断监控、分析和调整。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
+<a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-jiankong.html"><span class="related-title">AI应用监控：Token消耗追踪、延迟优化、成本控制实战</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=AI%E6%88%90%E6%9C%AC%E6%8E%A7%E5%88%B6%EF%BC%9A%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5%E3%80%81%E6%89%B9%E5%A4%84%E7%90%86%E3%80%81%E6%A8%A1%E5%9E%8B%E9%99%8D%E7%BA%A7%E7%9A%84%E5%AE%9E%E6%88%98%E6%96%B9%E6%A1%88&url=https%3A//aidev.fit/ai/ai-cost-control.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/ai/ai-cost-control.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=AI%E6%88%90%E6%9C%AC%E6%8E%A7%E5%88%B6%EF%BC%9A%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5%E3%80%81%E6%89%B9%E5%A4%84%E7%90%86%E3%80%81%E6%A8%A1%E5%9E%8B%E9%99%8D%E7%BA%A7%E7%9A%84%E5%AE%9E%E6%88%98%E6%96%B9%E6%A1%88&url=https%3A//aidev.fit/ai/ai-cost-control.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/ai/ai-cost-control.html&t=AI%E6%88%90%E6%9C%AC%E6%8E%A7%E5%88%B6%EF%BC%9A%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5%E3%80%81%E6%89%B9%E5%A4%84%E7%90%86%E3%80%81%E6%A8%A1%E5%9E%8B%E9%99%8D%E7%BA%A7%E7%9A%84%E5%AE%9E%E6%88%98%E6%96%B9%E6%A1%88" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=AI%E6%88%90%E6%9C%AC%E6%8E%A7%E5%88%B6%EF%BC%9A%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5%E3%80%81%E6%89%B9%E5%A4%84%E7%90%86%E3%80%81%E6%A8%A1%E5%9E%8B%E9%99%8D%E7%BA%A7%E7%9A%84%E5%AE%9E%E6%88%98%E6%96%B9%E6%A1%88&body=https%3A//aidev.fit/ai/ai-cost-control.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/ai/ai-cost-control.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/ai/ai-chatbot.html" title="构建AI客服系统：意图识别、多轮对话、知识库整合">← 上一篇<br><small>构建AI客服系统：意图识别、多轮对话、知识库整合</small></a><a class="next" href="/ai/ai-jiankong.html" title="AI应用监控：Token消耗追踪、延迟优化、成本控制实战">下一篇 →<br><small>AI应用监控：Token消耗追踪、延迟优化、成本控制实战</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
+<a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-chatbot.html"><span class="related-title">构建AI客服系统：意图识别、多轮对话、知识库整合</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
+<a class="related-card" href="/ai/ai-jiankong.html"><span class="related-title">AI应用监控：Token消耗追踪、延迟优化、成本控制实战</span><span class="related-meta">AI 教程 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#ai成本的结构">AI成本的结构</a></li><li class="toc-h2"><a href="#缓存策略">缓存策略</a></li><li class="toc-h3"><a href="#精确缓存">精确缓存</a></li><li class="toc-h3"><a href="#语义缓存">语义缓存</a></li><li class="toc-h3"><a href="#缓存策略建议">缓存策略建议</a></li><li class="toc-h2"><a href="#请求批处理">请求批处理</a></li><li class="toc-h3"><a href="#批处理模式">批处理模式</a></li><li class="toc-h3"><a href="#实现要点">实现要点</a></li><li class="toc-h2"><a href="#模型降级策略">模型降级策略</a></li><li class="toc-h3"><a href="#动态模型选择">动态模型选择</a></li><li class="toc-h3"><a href="#token预算控制">Token预算控制</a></li><li class="toc-h2"><a href="#用量监控与告警">用量监控与告警</a></li><li class="toc-h3"><a href="#关键指标">关键指标</a></li><li class="toc-h3"><a href="#告警阈值">告警阈值</a></li><li class="toc-h2"><a href="#成本优化实践">成本优化实践</a></li><li class="toc-h3"><a href="#月度优化流程">月度优化流程</a></li><li class="toc-h3"><a href="#实际效果">实际效果</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

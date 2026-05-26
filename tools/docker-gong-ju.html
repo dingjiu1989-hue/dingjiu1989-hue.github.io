@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="tools" data-exclude="docker-gong-ju">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="Docker管理工具：Portainer vs Dockge vs Lazydocker">
+    <meta property="og:description" content="对比Portainer、Dockge和Lazydocker三款Docker管理工具，从功能覆盖、使用场景和操作体验等角度帮助开发者选择最合适的容器管理方案。">
+    <meta property="og:url" content="https://aidev.fit/tools/docker-gong-ju.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/tools/docker-gong-ju.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="工具推荐">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Docker管理工具：Portainer vs Dockge vs Lazydocker">
+    <meta name="twitter:description" content="对比Portainer、Dockge和Lazydocker三款Docker管理工具，从功能覆盖、使用场景和操作体验等角度帮助开发者选择最合适的容器管理方案。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/tools/docker-gong-ju.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tools/docker-gong-ju.webp" type="image/webp" fetchpriority="high">
+    <title>Docker管理工具：Portainer vs Dockge vs Lazydocker — AI自习室</title>
+    <meta name="description" content="对比Portainer、Dockge和Lazydocker三款Docker管理工具，从功能覆盖、使用场景和操作体验等角度帮助开发者选择最合适的容器管理方案。">
+    <meta name="keywords" content="Technology, DevTools, Productivity">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/tools/docker-gong-ju.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tools/docker-gong-ju.html">
+    <link rel="canonical" href="https://aidev.fit/tools/docker-gong-ju.html"><link rel="prev" href="https://aidev.fit/tools/diagram-gong-ju.html">
+<link rel="next" href="https://aidev.fit/tools/git-gong-ju.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Docker管理工具：Portainer vs Dockge vs Lazydocker",
+      "description": "对比Portainer、Dockge和Lazydocker三款Docker管理工具，从功能覆盖、使用场景和操作体验等角度帮助开发者选择最合适的容器管理方案。",
+      "image": "https://aidev.fit/images/covers/en/tools/docker-gong-ju.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "560",
+      "keywords": "Technology, DevTools, Productivity",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tools/docker-gong-ju.html"},
+      "articleBody": "Docker管理的痛点   随着容器数量的增加，纯命令行管理Docker变得越来越低效。可视化或TLUI（终端UI）工具可以显著提升管理效率。   Portainer   Portainer是最流行的Docker Web管理界面，功能最为全面。   核心功能     基于Web的容器管理仪表盘   支持Docker Standalone和Swarm模式   镜像管理（拉取、构建、导入导出）   网络和卷管理   应用模板市场（快速部署常见应用）   用户和团队权限管理   多环境支持（本地、远程、Kubernetes）     部署方式        # 一键部署  docker   run   -d   -p    9000 :9000    \\      -v   /var/run/docker.sock:/var/run/docker.sock    \\      -v   portainer_data:/data    \\      --name   portainer    \\      portainer/portainer-ce       适用场景   团队多用户管理、需要Web管理界面、多环境管理的场景。   Dockge   Dockge是专注于docker-compose管理的现代化工具。   核心功能     专为docker-compose设计   编辑和启动/停止compose文件   实时日志查看   终端界面可以拖拽排序     特点     定位明确：专注于compose管理   轻量级   美观的现代化UI     适用场景   重度使用docker-compose的开发者或家庭服务器用户。   Lazydocker   Lazydocker是终端UI界面的Docker管理工具，追求极致的效率。   核心功能     终端UI，无需浏览器   实时容器状态监控   资源使用情况（CPU/内存）   日志查看   一键执行常用操作（重启、停止、删除）   支持自定义命令     使用体验        # 安装  brew   install   lazydocker   # 启动（在当前目录查找docker-compose.yml）  lazydocker          1-4 ：切换视图（容器、服务、镜像、卷）    e ：编辑配置    r ：重启    d ：删除    / ：搜索     适用场景   终端重度用户、追求操作效率、习惯在终端中工作。   对比总结         工具   界面类型   定位   安装复杂度   资源占用           Portainer   Web UI   全功能管理   中等(Docker方式)   中等       Dockge   Web UI   Compose管理   简单   低       Lazydocker   TUI   效率工具   简单(brew)   极低         选型建议      团队生产环境  → Portainer，权限和监控功能完善    家庭服务器/个人项目  → Dockge或Lazydocker    终端爱好者  → Lazydocker，效率最高    Compose管理为主  → Dockge，专注而简洁     工具的选择取决于使用场景和个人偏好，三款工具可以同时安装互补使用。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "工具推荐", "item": "https://aidev.fit/tools/"},
+        {"@type": "ListItem", "position": 3, "name": "Docker管理工具：Portainer vs Dockge vs Lazydocker"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/tools/">工具推荐</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">Technology</span>
+          <span class="tag-cat">DevTools</span>
+          <span class="tag-cat">Productivity</span></div>
+        <h1 class="article-title">Docker管理工具：Portainer vs Dockge vs Lazydocker</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>2 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>560 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tools/docker-gong-ju.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/docker-gong-ju.png" alt="Docker管理工具：Portainer vs Dockge vs Lazydocker" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（15）</summary><ol><li><a href="#docker管理的痛点">Docker管理的痛点</a></li><li><a href="#portainer">Portainer</a></li><li><a href="#核心功能">核心功能</a></li><li><a href="#部署方式">部署方式</a></li><li><a href="#适用场景">适用场景</a></li><li><a href="#dockge">Dockge</a></li><li><a href="#核心功能">核心功能</a></li><li><a href="#特点">特点</a></li><li><a href="#适用场景">适用场景</a></li><li><a href="#lazydocker">Lazydocker</a></li><li><a href="#核心功能">核心功能</a></li><li><a href="#使用体验">使用体验</a></li><li><a href="#适用场景">适用场景</a></li><li><a href="#对比总结">对比总结</a></li><li><a href="#选型建议">选型建议</a></li></ol></details>
+        <div class="article-body"><h2>Docker管理的痛点</h2>
+<p>随着容器数量的增加，纯命令行管理Docker变得越来越低效。可视化或TLUI（终端UI）工具可以显著提升管理效率。</p>
+<h2>Portainer</h2>
+<p>Portainer是最流行的Docker Web管理界面，功能最为全面。</p>
+<h3>核心功能</h3>
+<ul>
+<li>基于Web的容器管理仪表盘</li>
+<li>支持Docker Standalone和Swarm模式</li>
+<li>镜像管理（拉取、构建、导入导出）</li>
+<li>网络和卷管理</li>
+<li>应用模板市场（快速部署常见应用）</li>
+<li>用户和团队权限管理</li>
+<li>多环境支持（本地、远程、Kubernetes）</li>
+</ul>
+<h3>部署方式</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 一键部署</span>
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">9000</span>:9000<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>/var/run/docker.sock:/var/run/docker.sock<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>portainer_data:/data<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>portainer<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>portainer/portainer-ce
+</code></pre></div>
+
+<h3>适用场景</h3>
+<p>团队多用户管理、需要Web管理界面、多环境管理的场景。</p>
+<h2>Dockge</h2>
+<p>Dockge是专注于docker-compose管理的现代化工具。</p>
+<h3>核心功能</h3>
+<ul>
+<li>专为docker-compose设计</li>
+<li>编辑和启动/停止compose文件</li>
+<li>实时日志查看</li>
+<li>终端界面可以拖拽排序</li>
+</ul>
+<h3>特点</h3>
+<ul>
+<li>定位明确：专注于compose管理</li>
+<li>轻量级</li>
+<li>美观的现代化UI</li>
+</ul>
+<h3>适用场景</h3>
+<p>重度使用docker-compose的开发者或家庭服务器用户。</p>
+<h2>Lazydocker</h2>
+<p>Lazydocker是终端UI界面的Docker管理工具，追求极致的效率。</p>
+<h3>核心功能</h3>
+<ul>
+<li>终端UI，无需浏览器</li>
+<li>实时容器状态监控</li>
+<li>资源使用情况（CPU/内存）</li>
+<li>日志查看</li>
+<li>一键执行常用操作（重启、停止、删除）</li>
+<li>支持自定义命令</li>
+</ul>
+<h3>使用体验</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 安装</span>
+brew<span class="w"> </span>install<span class="w"> </span>lazydocker
+
+<span class="c1"># 启动（在当前目录查找docker-compose.yml）</span>
+lazydocker
+</code></pre></div>
+
+<ul>
+<li><code>1-4</code>：切换视图（容器、服务、镜像、卷）</li>
+<li><code>e</code>：编辑配置</li>
+<li><code>r</code>：重启</li>
+<li><code>d</code>：删除</li>
+<li><code>/</code>：搜索</li>
+</ul>
+<h3>适用场景</h3>
+<p>终端重度用户、追求操作效率、习惯在终端中工作。</p>
+<h2>对比总结</h2>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>界面类型</th>
+<th>定位</th>
+<th>安装复杂度</th>
+<th>资源占用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Portainer</td>
+<td>Web UI</td>
+<td>全功能管理</td>
+<td>中等(Docker方式)</td>
+<td>中等</td>
+</tr>
+<tr>
+<td>Dockge</td>
+<td>Web UI</td>
+<td>Compose管理</td>
+<td>简单</td>
+<td>低</td>
+</tr>
+<tr>
+<td>Lazydocker</td>
+<td>TUI</td>
+<td>效率工具</td>
+<td>简单(brew)</td>
+<td>极低</td>
+</tr>
+</tbody>
+</table>
+<h2>选型建议</h2>
+<ul>
+<li><strong>团队生产环境</strong> → Portainer，权限和监控功能完善</li>
+<li><strong>家庭服务器/个人项目</strong> → Dockge或Lazydocker</li>
+<li><strong>终端爱好者</strong> → Lazydocker，效率最高</li>
+<li><strong>Compose管理为主</strong> → Dockge，专注而简洁</li>
+</ul>
+<p>工具的选择取决于使用场景和个人偏好，三款工具可以同时安装互补使用。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/tools/api-ce-shi.html"><span class="related-title">API测试工具对比：Postman vs Bruno vs Insomnia vs Hoppscotch</span><span class="related-meta">工具推荐 · 2026-05-12</span></a>
+<a class="related-card" href="/tools/automation-tools.html"><span class="related-title">自动化工具集推荐</span><span class="related-meta">工具推荐 · 2026-05-11</span></a>
+<a class="related-card" href="/tools/chrome-devtools-guide.html"><span class="related-title">Chrome DevTools完全指南</span><span class="related-meta">工具推荐 · 2026-05-11</span></a>
+<a class="related-card" href="/tools/cli-gong-ju.html"><span class="related-title">命令行效率工具：bat、htop、duf、ncdu等现代化替代品</span><span class="related-meta">工具推荐 · 2026-05-12</span></a>
+<a class="related-card" href="/tools/db-guan-li.html"><span class="related-title">数据库管理工具：TablePlus vs DBeaver vs DataGrip，谁更好用</span><span class="related-meta">工具推荐 · 2026-05-12</span></a>
+<a class="related-card" href="/tools/diagram-gong-ju.html"><span class="related-title">架构图工具：Draw.io vs Excalidraw vs Mermaid vs Diagrams</span><span class="related-meta">工具推荐 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=Docker%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%9APortainer%20vs%20Dockge%20vs%20Lazydocker&url=https%3A//aidev.fit/tools/docker-gong-ju.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/tools/docker-gong-ju.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Docker%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%9APortainer%20vs%20Dockge%20vs%20Lazydocker&url=https%3A//aidev.fit/tools/docker-gong-ju.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/tools/docker-gong-ju.html&t=Docker%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%9APortainer%20vs%20Dockge%20vs%20Lazydocker" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=Docker%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%9APortainer%20vs%20Dockge%20vs%20Lazydocker&body=https%3A//aidev.fit/tools/docker-gong-ju.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/tools/docker-gong-ju.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/tools/diagram-gong-ju.html" title="架构图工具：Draw.io vs Excalidraw vs Mermaid vs Diagrams">← 上一篇<br><small>架构图工具：Draw.io vs Excalidraw vs Mermaid vs Diagrams</small></a><a class="next" href="/tools/git-gong-ju.html" title="Git GUI工具对比：GitHub Desktop vs Sourcetree vs GitKraken">下一篇 →<br><small>Git GUI工具对比：GitHub Desktop vs Sourcetree vs GitKraken</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/tools/api-ce-shi.html"><span class="related-title">API测试工具对比：Postman vs Bruno vs Insomnia vs Hoppscotch</span><span class="related-meta">工具推荐 · 2026-05-12</span></a>
+<a class="related-card" href="/tools/automation-tools.html"><span class="related-title">自动化工具集推荐</span><span class="related-meta">工具推荐 · 2026-05-11</span></a>
+<a class="related-card" href="/tools/chrome-devtools-guide.html"><span class="related-title">Chrome DevTools完全指南</span><span class="related-meta">工具推荐 · 2026-05-11</span></a>
+<a class="related-card" href="/tools/cli-gong-ju.html"><span class="related-title">命令行效率工具：bat、htop、duf、ncdu等现代化替代品</span><span class="related-meta">工具推荐 · 2026-05-12</span></a>
+<a class="related-card" href="/tools/db-guan-li.html"><span class="related-title">数据库管理工具：TablePlus vs DBeaver vs DataGrip，谁更好用</span><span class="related-meta">工具推荐 · 2026-05-12</span></a>
+<a class="related-card" href="/tools/diagram-gong-ju.html"><span class="related-title">架构图工具：Draw.io vs Excalidraw vs Mermaid vs Diagrams</span><span class="related-meta">工具推荐 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#docker管理的痛点">Docker管理的痛点</a></li><li class="toc-h2"><a href="#portainer">Portainer</a></li><li class="toc-h3"><a href="#核心功能">核心功能</a></li><li class="toc-h3"><a href="#部署方式">部署方式</a></li><li class="toc-h3"><a href="#适用场景">适用场景</a></li><li class="toc-h2"><a href="#dockge">Dockge</a></li><li class="toc-h3"><a href="#核心功能">核心功能</a></li><li class="toc-h3"><a href="#特点">特点</a></li><li class="toc-h3"><a href="#适用场景">适用场景</a></li><li class="toc-h2"><a href="#lazydocker">Lazydocker</a></li><li class="toc-h3"><a href="#核心功能">核心功能</a></li><li class="toc-h3"><a href="#使用体验">使用体验</a></li><li class="toc-h3"><a href="#适用场景">适用场景</a></li><li class="toc-h2"><a href="#对比总结">对比总结</a></li><li class="toc-h2"><a href="#选型建议">选型建议</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

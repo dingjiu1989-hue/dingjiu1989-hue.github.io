@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="tech" data-exclude="python-jin-cheng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="Python异步编程：asyncio、协程、并发模式详解">
+    <meta property="og:description" content="系统讲解Python异步编程的核心概念和实践技巧，涵盖asyncio库使用、协程原理、并发模式设计和常见陷阱的深入分析。">
+    <meta property="og:url" content="https://aidev.fit/tech/python-jin-cheng.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/python-jin-cheng.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="技术教程">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Python异步编程：asyncio、协程、并发模式详解">
+    <meta name="twitter:description" content="系统讲解Python异步编程的核心概念和实践技巧，涵盖asyncio库使用、协程原理、并发模式设计和常见陷阱的深入分析。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/tech/python-jin-cheng.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/python-jin-cheng.webp" type="image/webp" fetchpriority="high">
+    <title>Python异步编程：asyncio、协程、并发模式详解 — AI自习室</title>
+    <meta name="description" content="系统讲解Python异步编程的核心概念和实践技巧，涵盖asyncio库使用、协程原理、并发模式设计和常见陷阱的深入分析。">
+    <meta name="keywords" content="Technology, DevOps, Cloud">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/tech/python-jin-cheng.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/python-jin-cheng.html">
+    <link rel="canonical" href="https://aidev.fit/tech/python-jin-cheng.html"><link rel="prev" href="https://aidev.fit/tech/monitoring-stack.html">
+<link rel="next" href="https://aidev.fit/tech/redis-shijian.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Python异步编程：asyncio、协程、并发模式详解",
+      "description": "系统讲解Python异步编程的核心概念和实践技巧，涵盖asyncio库使用、协程原理、并发模式设计和常见陷阱的深入分析。",
+      "image": "https://aidev.fit/images/covers/en/tech/python-jin-cheng.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1713",
+      "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/python-jin-cheng.html"},
+      "articleBody": "异步编程基础   Python的异步编程通过asyncio库实现，核心概念包括协程、事件循环和Future。理解这些概念是掌握异步编程的前提。   协程与事件循环   协程的定义   协程是使用 async def 定义的函数，调用时返回一个协程对象：        async   def     fetch_data  (  url  ):       async   with   aiohttp  .  ClientSession  ()   as   session  :           async   with   session  .  get  (  url  )   as   response  :               return   await   response  .  json  ()        协程只有在事件循环中执行才会真正运行。   事件循环   事件循环是异步编程的核心调度器，负责管理所有待执行的协程：        async   def     main  ():       result   =   await   fetch_data  (  &quot;https://api.example.com/data&quot;  )    # Python 3.7+ 自动创建事件循环   asyncio  .  run  (  main  ())        并发执行模式   使用asyncio.gather   并发执行多个协程并等待所有完成：        async   def     main  ():       results   =   await   asyncio  .  gather  (           fetch_data  (  &quot;https://api1.com&quot;  ),           fetch_data  (  &quot;https://api2.com&quot;  ),           fetch_data  (  &quot;https://api3.com&quot;  ),           return_exceptions  =  True    # 不因单个异常中断       )        使用asyncio.create_task   创建后台任务，适用于不需要立即等待的场景：        async   def     main  ():       task1   =   asyncio  .  create_task  (  fetch_data  (  &quot;url1&quot;  ))       task2   =   asyncio  .  create_task  (  fetch_data  (  &quot;url2&quot;  ))       # 执行其他操作       await   asyncio  .  sleep  (  1  )       # 等待任务完成       result1   =   await   task1       result2   =   await   task2        高级模式   异步上下文管理器   使用 async with 管理异步资源：        class     AsyncDB  :       async   def     __aenter__  (  self  ):           self  .  conn   =   await   create_connection  ()           return   self  .  conn        async   def     __aexit__  (  self  ,   exc_type  ,   exc_val  ,   exc_tb  ):           await   self  .  conn  .  close  ()        异步迭代器   使用 async for 处理异步数据流：        async   def     read_stream  ():       async   for   chunk   in   stream_reader  :           process  (  chunk  )        限制并发数   使用asyncio.Semaphore控制并发度：        sem   =   asyncio  .  Semaphore  (  10  )    async   def     limited_fetch  (  url  ):       async   with   sem  :           return   await   fetch_data  (  url  )        常见陷阱与最佳实践   避免阻塞事件循环   在协程中使用同步阻塞调用会阻塞整个事件循环。    错误示例：         async   def     bad  ():       time  .  sleep  (  1  )    # 阻塞整个事件循环！         正确做法：         async   def     good  ():       await   asyncio  .  sleep  (  1  )    # 非阻塞       # 或使用线程池执行阻塞操作       result   =   await   asyncio  .  to_thread  (  sync_function  )        线程安全   大部分asyncio对象不是线程安全的，跨线程调用需要使用 loop.call_soon_threadsafe 。   调试异步代码     启用 PYTHONASYNCIODEBUG=1 环境变量   使用 asyncio.run(main(), debug=True)    设置 loop.slow_callback_duration 检测慢回调     异步编程能显著提升IO密集型应用的性能，但需要理解其底层机制才能编写出正确高效的代码。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "技术教程", "item": "https://aidev.fit/tech/"},
+        {"@type": "ListItem", "position": 3, "name": "Python异步编程：asyncio、协程、并发模式详解"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/tech/">技术教程</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">Technology</span>
+          <span class="tag-cat">DevOps</span>
+          <span class="tag-cat">Cloud</span></div>
+        <h1 class="article-title">Python异步编程：asyncio、协程、并发模式详解</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>8 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>1713 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/python-jin-cheng.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/python-jin-cheng.png" alt="Python异步编程：asyncio、协程、并发模式详解" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（15）</summary><ol><li><a href="#异步编程基础">异步编程基础</a></li><li><a href="#协程与事件循环">协程与事件循环</a></li><li><a href="#协程的定义">协程的定义</a></li><li><a href="#事件循环">事件循环</a></li><li><a href="#并发执行模式">并发执行模式</a></li><li><a href="#使用asynciogather">使用asyncio.gather</a></li><li><a href="#使用asynciocreate_task">使用asyncio.create_task</a></li><li><a href="#高级模式">高级模式</a></li><li><a href="#异步上下文管理器">异步上下文管理器</a></li><li><a href="#异步迭代器">异步迭代器</a></li><li><a href="#限制并发数">限制并发数</a></li><li><a href="#常见陷阱与最佳实践">常见陷阱与最佳实践</a></li><li><a href="#避免阻塞事件循环">避免阻塞事件循环</a></li><li><a href="#线程安全">线程安全</a></li><li><a href="#调试异步代码">调试异步代码</a></li></ol></details>
+        <div class="article-body"><h2>异步编程基础</h2>
+<p>Python的异步编程通过asyncio库实现，核心概念包括协程、事件循环和Future。理解这些概念是掌握异步编程的前提。</p>
+<h2>协程与事件循环</h2>
+<h3>协程的定义</h3>
+<p>协程是使用<code>async def</code>定义的函数，调用时返回一个协程对象：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fetch_data</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientSession</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div>
+
+<p>协程只有在事件循环中执行才会真正运行。</p>
+<h3>事件循环</h3>
+<p>事件循环是异步编程的核心调度器，负责管理所有待执行的协程：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;https://api.example.com/data&quot;</span><span class="p">)</span>
+
+<span class="c1"># Python 3.7+ 自动创建事件循环</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</code></pre></div>
+
+<h2>并发执行模式</h2>
+<h3>使用asyncio.gather</h3>
+<p>并发执行多个协程并等待所有完成：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+        <span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;https://api1.com&quot;</span><span class="p">),</span>
+        <span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;https://api2.com&quot;</span><span class="p">),</span>
+        <span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;https://api3.com&quot;</span><span class="p">),</span>
+        <span class="n">return_exceptions</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># 不因单个异常中断</span>
+    <span class="p">)</span>
+</code></pre></div>
+
+<h3>使用asyncio.create_task</h3>
+<p>创建后台任务，适用于不需要立即等待的场景：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">task1</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;url1&quot;</span><span class="p">))</span>
+    <span class="n">task2</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;url2&quot;</span><span class="p">))</span>
+    <span class="c1"># 执行其他操作</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># 等待任务完成</span>
+    <span class="n">result1</span> <span class="o">=</span> <span class="k">await</span> <span class="n">task1</span>
+    <span class="n">result2</span> <span class="o">=</span> <span class="k">await</span> <span class="n">task2</span>
+</code></pre></div>
+
+<h2>高级模式</h2>
+<h3>异步上下文管理器</h3>
+<p>使用<code>async with</code>管理异步资源：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">AsyncDB</span><span class="p">:</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aenter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="k">await</span> <span class="n">create_connection</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aexit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+
+<h3>异步迭代器</h3>
+<p>使用<code>async for</code>处理异步数据流：</p>
+<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">read_stream</span><span class="p">():</span>
+    <span class="k">async</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">stream_reader</span><span class="p">:</span>
+        <span class="n">process</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>限制并发数</h3>
+<p>使用asyncio.Semaphore控制并发度：</p>
+<div class="codehilite"><pre><span></span><code><span class="n">sem</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Semaphore</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">limited_fetch</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">sem</span><span class="p">:</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">fetch_data</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>常见陷阱与最佳实践</h2>
+<h3>避免阻塞事件循环</h3>
+<p>在协程中使用同步阻塞调用会阻塞整个事件循环。</p>
+<p><strong>错误示例：</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">bad</span><span class="p">():</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 阻塞整个事件循环！</span>
+</code></pre></div>
+
+<p><strong>正确做法：</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">good</span><span class="p">():</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 非阻塞</span>
+    <span class="c1"># 或使用线程池执行阻塞操作</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">to_thread</span><span class="p">(</span><span class="n">sync_function</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>线程安全</h3>
+<p>大部分asyncio对象不是线程安全的，跨线程调用需要使用<code>loop.call_soon_threadsafe</code>。</p>
+<h3>调试异步代码</h3>
+<ul>
+<li>启用<code>PYTHONASYNCIODEBUG=1</code>环境变量</li>
+<li>使用<code>asyncio.run(main(), debug=True)</code></li>
+<li>设置<code>loop.slow_callback_duration</code>检测慢回调</li>
+</ul>
+<p>异步编程能显著提升IO密集型应用的性能，但需要理解其底层机制才能编写出正确高效的代码。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/docker-kubernetes-guide.html"><span class="related-title">Docker与Kubernetes入门实战</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/docker-ru-men.html"><span class="related-title">Docker从入门到精通：容器化部署最佳实践</span><span class="related-meta">技术教程 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=Python%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%EF%BC%9Aasyncio%E3%80%81%E5%8D%8F%E7%A8%8B%E3%80%81%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%BC%8F%E8%AF%A6%E8%A7%A3&url=https%3A//aidev.fit/tech/python-jin-cheng.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/tech/python-jin-cheng.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Python%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%EF%BC%9Aasyncio%E3%80%81%E5%8D%8F%E7%A8%8B%E3%80%81%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%BC%8F%E8%AF%A6%E8%A7%A3&url=https%3A//aidev.fit/tech/python-jin-cheng.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/tech/python-jin-cheng.html&t=Python%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%EF%BC%9Aasyncio%E3%80%81%E5%8D%8F%E7%A8%8B%E3%80%81%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%BC%8F%E8%AF%A6%E8%A7%A3" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=Python%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%EF%BC%9Aasyncio%E3%80%81%E5%8D%8F%E7%A8%8B%E3%80%81%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%BC%8F%E8%AF%A6%E8%A7%A3&body=https%3A//aidev.fit/tech/python-jin-cheng.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/tech/python-jin-cheng.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/tech/monitoring-stack.html" title="监控体系搭建：Prometheus + Grafana + Alertmanager">← 上一篇<br><small>监控体系搭建：Prometheus + Grafana + Alertmanager</small></a><a class="next" href="/tech/redis-shijian.html" title="Redis缓存实战：数据类型、过期策略、分布式锁实现">下一篇 →<br><small>Redis缓存实战：数据类型、过期策略、分布式锁实现</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<a class="related-card" href="/tech/docker-kubernetes-guide.html"><span class="related-title">Docker与Kubernetes入门实战</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
+<a class="related-card" href="/tech/docker-ru-men.html"><span class="related-title">Docker从入门到精通：容器化部署最佳实践</span><span class="related-meta">技术教程 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#异步编程基础">异步编程基础</a></li><li class="toc-h2"><a href="#协程与事件循环">协程与事件循环</a></li><li class="toc-h3"><a href="#协程的定义">协程的定义</a></li><li class="toc-h3"><a href="#事件循环">事件循环</a></li><li class="toc-h2"><a href="#并发执行模式">并发执行模式</a></li><li class="toc-h3"><a href="#使用asynciogather">使用asyncio.gather</a></li><li class="toc-h3"><a href="#使用asynciocreate_task">使用asyncio.create_task</a></li><li class="toc-h2"><a href="#高级模式">高级模式</a></li><li class="toc-h3"><a href="#异步上下文管理器">异步上下文管理器</a></li><li class="toc-h3"><a href="#异步迭代器">异步迭代器</a></li><li class="toc-h3"><a href="#限制并发数">限制并发数</a></li><li class="toc-h2"><a href="#常见陷阱与最佳实践">常见陷阱与最佳实践</a></li><li class="toc-h3"><a href="#避免阻塞事件循环">避免阻塞事件循环</a></li><li class="toc-h3"><a href="#线程安全">线程安全</a></li><li class="toc-h3"><a href="#调试异步代码">调试异步代码</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>
