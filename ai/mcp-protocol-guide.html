@@ -58,14 +58,14 @@
       "image": "https://aidev.fit/images/covers/en/ai/mcp-protocol-guide.png",
       "datePublished": "2026-03-19",
       "dateModified": "2026-05-21",
-      "wordCount": "1358",
+      "wordCount": "2820",
       "keywords": "MCP, AI开发, 协议, 教程",
       "about": [{"@type": "Thing", "name": "MCP"}, {"@type": "Thing", "name": "AI开发"}, {"@type": "Thing", "name": "协议"}, {"@type": "Thing", "name": "教程"}],
       "inLanguage": "zh-CN",
       "isAccessibleForFree": true,
       "proficiencyLevel": "Beginner",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "AI自习室"},
+      "author": {"@type": "Person", "name": "AI自习室 编辑部"},
       "publisher": {
         "@type": "Organization",
         "name": "AI自习室",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/mcp-protocol-guide.html"},
-      "articleBody": "如果你用过 Claude Code 或者 Cursor，你可能注意到这些工具能 直接读取你的文件系统、执行终端命令、查询数据库  。这背后是一套标准化的协议在起作用——这就是  MCP（Model Context Protocol，模型上下文协议）  。 MCP 由 Anthropic 在 2024 年底推出，2025-2026 年迅速成为 AI 工具生态的主流标准。它的核心思想很简单： 让 AI 模型通过统一的接口，安全地访问外部工具和数据源  ，就像 USB-C 接口统一了硬件连接一样。 为什么需要 MCP？ 在 MCP 出现之前，每个 AI 应用都要自己实现工具调用（Function Calling）。如果你想接 GitHub API，写一套；接数据库，又写一套；接文件系统，再写一套。这带来三个问题：      重复造轮子  ：每个应用都要实现自己的工具集成层    安全风险  ：各做各的权限控制，容易出漏洞    生态割裂  ：为 Claude 写的工具不能在 Cursor 里用     MCP 解决了这三个问题。它定义了一套 客户端-服务器  架构：      MCP Server  ：暴露工具和数据的服务端。比如一个 GitHub Server 提供\"列出仓库\"\"创建 Issue\"等工具    MCP Client  ：AI 应用（Claude Desktop、Cursor、VS Code 插件等）作为客户端，发现并调用 Server 提供的工具    MCP 协议  ：客户端和服务器之间通过 JSON-RPC 2.0 通信     MCP 的核心概念 MCP 定义了三种核心原语（Primitives）： 1. Tools（工具） 让 AI 模型执行具体操作。比如：搜索网页、发送邮件、创建文件、查询数据库。每个 Tool 有名称、描述和参数 Schema（JSON Schema 格式）。AI 模型通过 Function Calling 选择调用哪个 Tool。 2. Resources（资源） 暴露数据给 AI 模型读取。比如：文件内容、数据库记录、API 响应。Resources 是只读的，模型可以读取但不能修改——这比直接给文件系统权限安全得多。 3. Prompts（提示模板） 预定义的提示词模板。Server 可以提供特定领域的 Prompt 模板，Client 可以直接使用。比如一个 SQL Server 可以提供\"分析这张表的结构\"的 Prompt 模板。 动手：构建一个 MCP Server 以 Python 为例，用官方 SDK 创建一个天气查询 Server：    # weather_server.py from mcp.server import Server, NotificationOptions from mcp.server.models import InitializationCapabilities import mcp.server.stdio import mcp.types as types import httpx  server = Server(&quot;weather-server&quot;)  @server.list_tools() async def handle_list_tools() -&gt; list[types.Tool]:     return [         types.Tool(             name=&quot;get_weather&quot;,             description=&quot;查询指定城市的当前天气&quot;,             inputSchema={                 &quot;type&quot;: &quot;object&quot;,                 &quot;properties&quot;: {                     &quot;city&quot;: {                         &quot;type&quot;: &quot;string&quot;,                         &quot;description&quot;: &quot;城市名称，如 Beijing&quot;                     }                 },                 &quot;required&quot;: [&quot;city&quot;]             }         )     ]  @server.call_tool() async def handle_call_tool(     name: str,     arguments: dict ) -&gt; list[types.TextContent]:     if name == &quot;get_weather&quot;:         city = arguments[&quot;city&quot;]         # 调用真实天气 API         async with httpx.AsyncClient() as client:             resp = await client.get(                 f&quot;https://api.weather.com/v1/{city}&quot;             )             data = resp.json()         return [types.TextContent(             type=&quot;text&quot;,             text=f&quot;{city} 当前温度 {data['temp']}°C，{data['desc']}&quot;         )]     raise ValueError(f&quot;Unknown tool: {name}&quot;)  async def main():     async with mcp.server.stdio.stdio_server() as streams:         await server.run(             streams[0], streams[1],             InitializationCapabilities(                 sampling={},             ),         )  if __name__ == &quot;__main__&quot;:     import asyncio     asyncio.run(main())      在 Claude Desktop 中配置 MCP Server 创建好 Server 后，在 Claude Desktop 的配置文件中注册即可：    // ~/Library/Application Support/Claude/claude_desktop_config.json {   &quot;mcpServers&quot;: {     &quot;weather&quot;: {       &quot;command&quot;: &quot;python3&quot;,       &quot;args&quot;: [&quot;/path/to/weather_server.py&quot;]     },     &quot;filesystem&quot;: {       &quot;command&quot;: &quot;npx&quot;,       &quot;args&quot;: [         &quot;-y&quot;,         &quot;@anthropic/mcp-server-filesystem&quot;,         &quot;/Users/me/Documents&quot;       ]     }   } }            配置完成后，重启 Claude Desktop，在对话中直接说\"帮我查一下北京的天气\"，Claude 就会自动调用你的 MCP Server。 主流的 MCP Server 推荐 社区已经有大量现成的 MCP Server，你不需要从零写： Server   功能   安装命令           Filesystem   安全的文件系统访问    npx @anthropic/mcp-server-filesystem        GitHub   仓库管理、Issue、PR    npx @anthropic/mcp-server-github        Postgres   数据库查询与 Schema 探索    npx @anthropic/mcp-server-postgres        Brave Search   网页搜索能力    npx @anthropic/mcp-server-brave-search        Puppeteer   浏览器自动化（截图、爬取）    npx @anthropic/mcp-server-puppeteer        Slack   消息发送与频道管理    npx @anthropic/mcp-server-slack        MCP 的安全模型 MCP 的设计非常重视安全性：                  用户同意原则  ：AI 调用工具前需要用户确认（可以在设置中调整）    最小权限  ：每个 MCP Server 只暴露必要的工具，不是全部系统权限    沙箱隔离  ：Server 运行在独立的进程中，单个 Server 崩溃不影响其他    传输安全  ：支持 stdio（本地进程通信）和 HTTP+SSE（远程通信），远程通信建议走 HTTPS           MCP vs 传统 Function Calling 特性   MCP   传统 Function Calling           标准化   开放协议，跨模型、跨应用   各家 API 格式不同       复用性   写一次，到处用   每个应用单独集成       发现机制   Client 自动发现 Server 的工具列表   开发者硬编码函数定义       安全模型   内置用户确认 + 沙箱   依赖应用自行实现       生态   社区贡献 500+ Server，覆盖主流服务   各自为战       适用场景 MCP 已经在这几个场景中证明了价值：                  AI 编程助手  ：Claude Code 通过 MCP Server 访问文件系统、Git、包管理器，实现完整开发流程    数据分析  ：AI 通过 MCP 连接数据库，直接写 SQL 查询并返回分析结果    企业内部工具  ：将 Jira、Confluence、Slack 封装为 MCP Server，AI 助手统一接入    个人自动化  ：通过 MCP 让 AI 管理日历、邮件、待办事项     总结 MCP 正在成为 AI 工具生态的\"USB-C 接口\"。它的价值不在于技术有多复杂，而在于 标准化带来的生态效应  ——一个人写的 MCP Server，所有人都能用。如果你在做 AI 应用开发，MCP 是 2026 年必须了解的基础设施。 下一步建议：安装 Claude Desktop 或支持 MCP 的客户端，从官方 Filesystem Server 开始体验，然后再尝试"
+      "articleBody": "如果你用过 Claude Code 或者 Cursor，你可能注意到这些工具能 直接读取你的文件系统、执行终端命令、查询数据库  。这背后是一套标准化的协议在起作用——这就是  MCP（Model Context Protocol，模型上下文协议）  。 MCP 由 Anthropic 在 2024 年底推出，2025-2026 年迅速成为 AI 工具生态的主流标准。它的核心思想很简单： 让 AI 模型通过统一的接口，安全地访问外部工具和数据源  ，就像 USB-C 接口统一了硬件连接一样。 为什么需要 MCP？ 在 MCP 出现之前，每个 AI 应用都要自己实现工具调用（Function Calling）。如果你想接 GitHub API，写一套；接数据库，又写一套；接文件系统，再写一套。这带来三个问题：      重复造轮子  ：每个应用都要实现自己的工具集成层    安全风险  ：各做各的权限控制，容易出漏洞    生态割裂  ：为 Claude 写的工具不能在 Cursor 里用     MCP 解决了这三个问题。它定义了一套 客户端-服务器  架构：      MCP Server  ：暴露工具和数据的服务端。比如一个 GitHub Server 提供\"列出仓库\"\"创建 Issue\"等工具    MCP Client  ：AI 应用（Claude Desktop、Cursor、VS Code 插件等）作为客户端，发现并调用 Server 提供的工具    MCP 协议  ：客户端和服务器之间通过 JSON-RPC 2.0 通信     MCP 的核心概念 MCP 定义了三种核心原语（Primitives）： 1. Tools（工具） 让 AI 模型执行具体操作。比如：搜索网页、发送邮件、创建文件、查询数据库。每个 Tool 有名称、描述和参数 Schema（JSON Schema 格式）。AI 模型通过 Function Calling 选择调用哪个 Tool。 2. Resources（资源） 暴露数据给 AI 模型读取。比如：文件内容、数据库记录、API 响应。Resources 是只读的，模型可以读取但不能修改——这比直接给文件系统权限安全得多。 3. Prompts（提示模板） 预定义的提示词模板。Server 可以提供特定领域的 Prompt 模板，Client 可以直接使用。比如一个 SQL Server 可以提供\"分析这张表的结构\"的 Prompt 模板。 动手：构建一个 MCP Server 以 Python 为例，用官方 SDK 创建一个天气查询 Server：        # weather_server.py   from     mcp.server     import   Server  ,   NotificationOptions   from     mcp.server.models     import   InitializationCapabilities   import     mcp.server.stdio   import     mcp.types     as     types   import     httpx    server   =   Server  (  &quot;weather-server&quot;  )    @server  .  list_tools  ()   async   def     handle_list_tools  ()   -&gt;   list  [  types  .  Tool  ]:       return   [           types  .  Tool  (               name  =  &quot;get_weather&quot;  ,               description  =  &quot;查询指定城市的当前天气&quot;  ,               inputSchema  =  {                   &quot;type&quot;  :   &quot;object&quot;  ,                   &quot;properties&quot;  :   {                       &quot;city&quot;  :   {                           &quot;type&quot;  :   &quot;string&quot;  ,                           &quot;description&quot;  :   &quot;城市名称，如 Beijing&quot;                       }                   },                   &quot;required&quot;  :   [  &quot;city&quot;  ]               }           )       ]    @server  .  call_tool  ()   async   def     handle_call_tool  (       name  :   str  ,       arguments  :   dict   )   -&gt;   list  [  types  .  TextContent  ]:       if   name   ==   &quot;get_weather&quot;  :           city   =   arguments  [  &quot;city&quot;  ]           # 调用真实天气 API           async   with   httpx  .  AsyncClient  ()   as   client  :               resp   =   await   client  .  get  (                   f  &quot;https://api.weather.com/v1/  {  city  }  &quot;               )               data   =   resp  .  json  ()           return   [  types  .  TextContent  (               type  =  &quot;text&quot;  ,               text  =  f  &quot;  {  city  }   当前温度   {  data  [  &#39;temp&#39;  ]  }  °C，  {  data  [  &#39;desc&#39;  ]  }  &quot;           )]       raise   ValueError  (  f  &quot;Unknown tool:   {  name  }  &quot;  )    async   def     main  ():       async   with   mcp  .  server  .  stdio  .  stdio_server  ()   as   streams  :           await   server  .  run  (               streams  [  0  ],   streams  [  1  ],               InitializationCapabilities  (                   sampling  =  {},               ),           )    if   __name__   ==   &quot;__main__&quot;  :       import     asyncio       asyncio  .  run  (  main  ())        在 Claude Desktop 中配置 MCP Server 创建好 Server 后，在 Claude Desktop 的配置文件中注册即可：        // ~/Library/Application Support/Claude/claude_desktop_config.json   {       &quot;mcpServers&quot;  :     {         &quot;weather&quot;  :     {           &quot;command&quot;  :     &quot;python3&quot;  ,           &quot;args&quot;  :     [  &quot;/path/to/weather_server.py&quot;  ]         },         &quot;filesystem&quot;  :     {           &quot;command&quot;  :     &quot;npx&quot;  ,           &quot;args&quot;  :     [             &quot;-y&quot;  ,             &quot;@anthropic/mcp-server-filesystem&quot;  ,             &quot;/Users/me/Documents&quot;           ]         }       }   }              配置完成后，重启 Claude Desktop，在对话中直接说\"帮我查一下北京的天气\"，Claude 就会自动调用你的 MCP Server。 主流的 MCP Server 推荐 社区已经有大量现成的 MCP Server，你不需要从零写： Server   功能   安装命令           Filesystem   安全的文件系统访问    npx @anthropic/mcp-server-filesystem        GitHub   仓库管理、Issue、PR    npx @anthropic/mcp-server-github        Postgres   数据库查询与 Schema 探索    npx @anthropic/mcp-server-postgres        Brave Search   网页搜索能力    npx @anthropic/mcp-server-brave-search        Puppeteer   浏览器自动化（截图、爬取）    npx @anthropic/mcp-server-puppeteer        Slack   消息发送与频道管理    npx @anthropic/mcp-server-slack        MCP 的安全模型 MCP 的设计非常重视安全性：                  用户同意原则  ：AI 调用工具前需要用户确认（可以在设置中调整）    最小权限  ：每个 MCP Server 只暴露必要的工具，不是全部系统权限    沙箱隔离  ：Server 运行在独立的进程中，单个 Server 崩溃不影响其他    传输安全  ：支持 stdio（本地进程通信）和 HTTP+SSE（远程通信），远程通信建议走 HTTPS           MCP vs 传统 Function Calling 特性   MCP   传统 Function Calling   "
     }
     </script>
     <script type="application/ld+json">
@@ -116,15 +116,15 @@
           <span class="tag-cat">教程</span></div>
         <h1 class="article-title">MCP 协议入门：让 AI 模型安全访问你的工具和数据</h1>
         <div class="article-meta">
-          <span class="author-name">By AI自习室</span>
+          <span class="author-name">By AI自习室 编辑部</span>
           <span class="meta-sep">·</span>
           <time datetime="2026-03-19">2026-03-19</time>
           <span class="meta-sep">·</span>
-          <span>6 分钟阅读</span>
+          <span>14 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>1358 字</span>
+          <span>2820 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/mcp-protocol-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/mcp-protocol-guide.png" alt="MCP 协议入门：让 AI 模型安全访问你的工具和数据" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -141,86 +141,86 @@
 <li><strong>MCP 协议</strong> ：客户端和服务器之间通过 JSON-RPC 2.0 通信</li>
 </ul>
 <p>MCP 的核心概念 MCP 定义了三种核心原语（Primitives）： 1. Tools（工具） 让 AI 模型执行具体操作。比如：搜索网页、发送邮件、创建文件、查询数据库。每个 Tool 有名称、描述和参数 Schema（JSON Schema 格式）。AI 模型通过 Function Calling 选择调用哪个 Tool。 2. Resources（资源） 暴露数据给 AI 模型读取。比如：文件内容、数据库记录、API 响应。Resources 是只读的，模型可以读取但不能修改——这比直接给文件系统权限安全得多。 3. Prompts（提示模板） 预定义的提示词模板。Server 可以提供特定领域的 Prompt 模板，Client 可以直接使用。比如一个 SQL Server 可以提供"分析这张表的结构"的 Prompt 模板。 动手：构建一个 MCP Server 以 Python 为例，用官方 SDK 创建一个天气查询 Server：</p>
-<pre class="codehilite"><code># weather_server.py
-from mcp.server import Server, NotificationOptions
-from mcp.server.models import InitializationCapabilities
-import mcp.server.stdio
-import mcp.types as types
-import httpx
+<div class="codehilite"><pre><span></span><code><span class="c1"># weather_server.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcp.server</span><span class="w"> </span><span class="kn">import</span> <span class="n">Server</span><span class="p">,</span> <span class="n">NotificationOptions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcp.server.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">InitializationCapabilities</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mcp.server.stdio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mcp.types</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">types</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">httpx</span>
 
-server = Server(&quot;weather-server&quot;)
+<span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="p">(</span><span class="s2">&quot;weather-server&quot;</span><span class="p">)</span>
 
-@server.list_tools()
-async def handle_list_tools() -&gt; list[types.Tool]:
-    return [
-        types.Tool(
-            name=&quot;get_weather&quot;,
-            description=&quot;查询指定城市的当前天气&quot;,
-            inputSchema={
-                &quot;type&quot;: &quot;object&quot;,
-                &quot;properties&quot;: {
-                    &quot;city&quot;: {
-                        &quot;type&quot;: &quot;string&quot;,
-                        &quot;description&quot;: &quot;城市名称，如 Beijing&quot;
-                    }
-                },
-                &quot;required&quot;: [&quot;city&quot;]
-            }
-        )
-    ]
+<span class="nd">@server</span><span class="o">.</span><span class="n">list_tools</span><span class="p">()</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle_list_tools</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">Tool</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="n">types</span><span class="o">.</span><span class="n">Tool</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;get_weather&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;查询指定城市的当前天气&quot;</span><span class="p">,</span>
+            <span class="n">inputSchema</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;城市名称，如 Beijing&quot;</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;city&quot;</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
 
-@server.call_tool()
-async def handle_call_tool(
-    name: str,
-    arguments: dict
-) -&gt; list[types.TextContent]:
-    if name == &quot;get_weather&quot;:
-        city = arguments[&quot;city&quot;]
-        # 调用真实天气 API
-        async with httpx.AsyncClient() as client:
-            resp = await client.get(
-                f&quot;https://api.weather.com/v1/{city}&quot;
-            )
-            data = resp.json()
-        return [types.TextContent(
-            type=&quot;text&quot;,
-            text=f&quot;{city} 当前温度 {data['temp']}°C，{data['desc']}&quot;
-        )]
-    raise ValueError(f&quot;Unknown tool: {name}&quot;)
+<span class="nd">@server</span><span class="o">.</span><span class="n">call_tool</span><span class="p">()</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle_call_tool</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">arguments</span><span class="p">:</span> <span class="nb">dict</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">TextContent</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;get_weather&quot;</span><span class="p">:</span>
+        <span class="n">city</span> <span class="o">=</span> <span class="n">arguments</span><span class="p">[</span><span class="s2">&quot;city&quot;</span><span class="p">]</span>
+        <span class="c1"># 调用真实天气 API</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;https://api.weather.com/v1/</span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">TextContent</span><span class="p">(</span>
+            <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2"> 当前温度 </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">°C，</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;desc&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)]</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown tool: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-async def main():
-    async with mcp.server.stdio.stdio_server() as streams:
-        await server.run(
-            streams[0], streams[1],
-            InitializationCapabilities(
-                sampling={},
-            ),
-        )
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">mcp</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">stdio</span><span class="o">.</span><span class="n">stdio_server</span><span class="p">()</span> <span class="k">as</span> <span class="n">streams</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">server</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="n">streams</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">streams</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">InitializationCapabilities</span><span class="p">(</span>
+                <span class="n">sampling</span><span class="o">=</span><span class="p">{},</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
 
-if __name__ == &quot;__main__&quot;:
-    import asyncio
-    asyncio.run(main())
-</code></pre>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</code></pre></div>
 
 <p>在 Claude Desktop 中配置 MCP Server 创建好 Server 后，在 Claude Desktop 的配置文件中注册即可：</p>
-<pre class="codehilite"><code>// ~/Library/Application Support/Claude/claude_desktop_config.json
-{
-  &quot;mcpServers&quot;: {
-    &quot;weather&quot;: {
-      &quot;command&quot;: &quot;python3&quot;,
-      &quot;args&quot;: [&quot;/path/to/weather_server.py&quot;]
-    },
-    &quot;filesystem&quot;: {
-      &quot;command&quot;: &quot;npx&quot;,
-      &quot;args&quot;: [
-        &quot;-y&quot;,
-        &quot;@anthropic/mcp-server-filesystem&quot;,
-        &quot;/Users/me/Documents&quot;
-      ]
-    }
-  }
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="c1">// ~/Library/Application Support/Claude/claude_desktop_config.json</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="s">&quot;mcpServers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;weather&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;python3&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;/path/to/weather_server.py&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s">&quot;filesystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;npx&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s">&quot;-y&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;@anthropic/mcp-server-filesystem&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;/Users/me/Documents&quot;</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <table>
 <thead>
@@ -367,7 +367,11 @@ if __name__ == &quot;__main__&quot;:
         <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
         <a href="#giscus-section">留下评论</a>
       </div>
-      <div id="giscus-section" data-giscus-loaded="false"></div>
+      <section class="author-bio">
+          <h4>关于作者</h4>
+          <p>AI自习室是由一群技术从业者维护的AI知识分享平台。我们关注AI工具、编程技术和开发者生态，致力于为中文开发者提供高质量的原创技术内容。<a href="/about.html">了解更多 →</a></p>
+        </section>
+        <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
     <aside class="article-sidebar">
       

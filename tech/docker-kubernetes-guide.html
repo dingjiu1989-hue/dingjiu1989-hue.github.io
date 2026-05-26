@@ -48,7 +48,7 @@
     <link rel="canonical" href="https://aidev.fit/tech/docker-kubernetes-guide.html"><link rel="prev" href="https://aidev.fit/tech/api-design-best-practices.html">
 <link rel="next" href="https://aidev.fit/tech/linux-server-setup.html">
 
-    <meta name="robots" content="noindex, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -58,14 +58,14 @@
       "image": "https://aidev.fit/images/covers/en/tech/docker-kubernetes-guide.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "248",
+      "wordCount": "297",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "zh-CN",
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "AI自习室"},
+      "author": {"@type": "Person", "name": "AI自习室 编辑部"},
       "publisher": {
         "@type": "Organization",
         "name": "AI自习室",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/docker-kubernetes-guide.html"},
-      "articleBody": "Docker基础概念   Docker通过容器技术实现应用的轻量级虚拟化。镜像（Image）是只读的模板，容器（Container）是镜像的运行实例，仓库（Registry）用于存储和分发镜像。理解这三者的关系是掌握Docker的第一步。   Dockerfile编写技巧   编写高效的Dockerfile需要注意多阶段构建（Multi-stage Build）。第一阶段用于编译代码，包含完整的构建工具链；第二阶段仅包含运行环境，将编译产物复制过去，最终镜像体积可以减少数倍。    最佳实践 ：利用层缓存机制，将不常变化的依赖安装命令放在前面，频繁变化的源代码复制放在后面。使用.dockerignore文件排除不必要的文件，进一步减小镜像体积。基础镜像优先选择Alpine或Distroless版本。   Docker Compose编排   单机多容器场景使用Docker Compose管理。编写docker-compose.yml文件定义服务、网络和卷。典型配置包括Web服务、数据库、缓存和消息队列的组合。使用环境变量文件管理不同环境的配置差异。   Kubernetes核心概念   K8s解决了容器编排的关键问题：服务发现与负载均衡、自动伸缩、自愈能力和滚动更新。核心资源包括Pod（最小部署单元）、Service（网络访问入口）、Deployment（声明式更新）和ConfigMap（配置管理）。   集群搭建入门   学习阶段推荐使用Minikube或Kind在本地搭建单节点集群。生产环境则可以选择云服务商提供的托管K8s服务，如阿里云ACK或AWS EKS。    命名空间管理 ：使用Namespace实现多环境隔离。每个项目或团队使用独立的命名空间，配合ResourceQuota限制资源使用，避免相互影响。    Ingress配置 ：集群外部流量通过Ingress控制器路由到内部服务。推荐使用Nginx Ingress Controller或Traefik，配置TLS证书、路径重写和流量分割规则。   日常运维要点   Pod健康状况检查配置Liveness和Readiness探针，确保流量只路由到正常工作的实例。资源限制方面，为每个容器设置requests和limits，避免资源争抢。日志收集建议使用EFK（Elasticsearch+Fluentd+Kibana）或Loki+Promtail方案集中管理。   监控与告警使用Prometheus采集指标，Grafana可视化展示。设置核心指标的告警规则，包括Pod重启次数、CPU和内存使用率超过阈值等情况。"
+      "articleBody": "Docker基础概念   Docker通过容器技术实现应用的轻量级虚拟化。镜像（Image）是只读的模板，容器（Container）是镜像的运行实例，仓库（Registry）用于存储和分发镜像。理解这三者的关系是掌握Docker的第一步。   Dockerfile编写技巧   编写高效的Dockerfile需要注意多阶段构建（Multi-stage Build）。第一阶段用于编译代码，包含完整的构建工具链；第二阶段仅包含运行环境，将编译产物复制过去，最终镜像体积可以减少数倍。    最佳实践 ：利用层缓存机制，将不常变化的依赖安装命令放在前面，频繁变化的源代码复制放在后面。使用.dockerignore文件排除不必要的文件，进一步减小镜像体积。基础镜像优先选择Alpine或Distroless版本。   Docker Compose编排   单机多容器场景使用Docker Compose管理。编写docker-compose.yml文件定义服务、网络和卷。典型配置包括Web服务、数据库、缓存和消息队列的组合。使用环境变量文件管理不同环境的配置差异。   Kubernetes核心概念   K8s解决了容器编排的关键问题：服务发现与负载均衡、自动伸缩、自愈能力和滚动更新。核心资源包括Pod（最小部署单元）、Service（网络访问入口）、Deployment（声明式更新）和ConfigMap（配置管理）。   集群搭建入门   学习阶段推荐使用Minikube或Kind在本地搭建单节点集群。生产环境则可以选择云服务商提供的托管K8s服务，如阿里云ACK或AWS EKS。    命名空间管理 ：使用Namespace实现多环境隔离。每个项目或团队使用独立的命名空间，配合ResourceQuota限制资源使用，避免相互影响。    Ingress配置 ：集群外部流量通过Ingress控制器路由到内部服务。推荐使用Nginx Ingress Controller或Traefik，配置TLS证书、路径重写和流量分割规则。   日常运维要点   Pod健康状况检查配置Liveness和Readiness探针，确保流量只路由到正常工作的实例。资源限制方面，为每个容器设置requests和limits，避免资源争抢。日志收集建议使用EFK（Elasticsearch+Fluentd+Kibana）或Loki+Promtail方案集中管理。   监控与告警使用Prometheus采集指标，Grafana可视化展示。设置核心指标的告警规则，包括Pod重启次数、CPU和内存使用率超过阈值等情况。   常见排错   Pod一直Pending通常是资源不足或节点Selector不匹配；CrashLoopBackOff需要 kubectl logs 查看应用日志；Service无法访问先检查 kubectl get endpoints 确认后端Pod是否就绪。建议收藏 kubectl describe 和 kubectl logs 两个命令——它们能解决80%的日常故障。"
     }
     </script>
     <script type="application/ld+json">
@@ -115,7 +115,7 @@
           <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Docker与Kubernetes入门实战</h1>
         <div class="article-meta">
-          <span class="author-name">By AI自习室</span>
+          <span class="author-name">By AI自习室 编辑部</span>
           <span class="meta-sep">·</span>
           <time datetime="2026-05-11">2026-05-11</time>
           <span class="meta-sep">·</span>
@@ -123,10 +123,10 @@
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>248 字</span>
+          <span>297 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/docker-kubernetes-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/docker-kubernetes-guide.png" alt="Docker与Kubernetes入门实战" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-        <details class="article-toc-inline"><summary>目录（6）</summary><ol><li><a href="#docker基础概念">Docker基础概念</a></li><li><a href="#dockerfile编写技巧">Dockerfile编写技巧</a></li><li><a href="#docker-compose编排">Docker Compose编排</a></li><li><a href="#kubernetes核心概念">Kubernetes核心概念</a></li><li><a href="#集群搭建入门">集群搭建入门</a></li><li><a href="#日常运维要点">日常运维要点</a></li></ol></details>
+        <details class="article-toc-inline"><summary>目录（7）</summary><ol><li><a href="#docker基础概念">Docker基础概念</a></li><li><a href="#dockerfile编写技巧">Dockerfile编写技巧</a></li><li><a href="#docker-compose编排">Docker Compose编排</a></li><li><a href="#kubernetes核心概念">Kubernetes核心概念</a></li><li><a href="#集群搭建入门">集群搭建入门</a></li><li><a href="#日常运维要点">日常运维要点</a></li><li><a href="#常见排错">常见排错</a></li></ol></details>
         <div class="article-body"><h2>Docker基础概念</h2>
 <p>Docker通过容器技术实现应用的轻量级虚拟化。镜像（Image）是只读的模板，容器（Container）是镜像的运行实例，仓库（Registry）用于存储和分发镜像。理解这三者的关系是掌握Docker的第一步。</p>
 <h2>Dockerfile编写技巧</h2>
@@ -142,7 +142,9 @@
 <p><strong>Ingress配置</strong>：集群外部流量通过Ingress控制器路由到内部服务。推荐使用Nginx Ingress Controller或Traefik，配置TLS证书、路径重写和流量分割规则。</p>
 <h2>日常运维要点</h2>
 <p>Pod健康状况检查配置Liveness和Readiness探针，确保流量只路由到正常工作的实例。资源限制方面，为每个容器设置requests和limits，避免资源争抢。日志收集建议使用EFK（Elasticsearch+Fluentd+Kibana）或Loki+Promtail方案集中管理。</p>
-<p>监控与告警使用Prometheus采集指标，Grafana可视化展示。设置核心指标的告警规则，包括Pod重启次数、CPU和内存使用率超过阈值等情况。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
+<p>监控与告警使用Prometheus采集指标，Grafana可视化展示。设置核心指标的告警规则，包括Pod重启次数、CPU和内存使用率超过阈值等情况。</p>
+<h2>常见排错</h2>
+<p>Pod一直Pending通常是资源不足或节点Selector不匹配；CrashLoopBackOff需要<code>kubectl logs</code>查看应用日志；Service无法访问先检查<code>kubectl get endpoints</code>确认后端Pod是否就绪。建议收藏<code>kubectl describe</code>和<code>kubectl logs</code>两个命令——它们能解决80%的日常故障。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
 <a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
 <a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
 <a class="related-card" href="/tech/docker-ru-men.html"><span class="related-title">Docker从入门到精通：容器化部署最佳实践</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
@@ -182,10 +184,14 @@
         <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
         <a href="#giscus-section">留下评论</a>
       </div>
-      <div id="giscus-section" data-giscus-loaded="false"></div>
+      <section class="author-bio">
+          <h4>关于作者</h4>
+          <p>AI自习室是由一群技术从业者维护的AI知识分享平台。我们关注AI工具、编程技术和开发者生态，致力于为中文开发者提供高质量的原创技术内容。<a href="/about.html">了解更多 →</a></p>
+        </section>
+        <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
     <aside class="article-sidebar">
-      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#docker基础概念">Docker基础概念</a></li><li class="toc-h2"><a href="#dockerfile编写技巧">Dockerfile编写技巧</a></li><li class="toc-h2"><a href="#docker-compose编排">Docker Compose编排</a></li><li class="toc-h2"><a href="#kubernetes核心概念">Kubernetes核心概念</a></li><li class="toc-h2"><a href="#集群搭建入门">集群搭建入门</a></li><li class="toc-h2"><a href="#日常运维要点">日常运维要点</a></li></ul></nav>
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#docker基础概念">Docker基础概念</a></li><li class="toc-h2"><a href="#dockerfile编写技巧">Dockerfile编写技巧</a></li><li class="toc-h2"><a href="#docker-compose编排">Docker Compose编排</a></li><li class="toc-h2"><a href="#kubernetes核心概念">Kubernetes核心概念</a></li><li class="toc-h2"><a href="#集群搭建入门">集群搭建入门</a></li><li class="toc-h2"><a href="#日常运维要点">日常运维要点</a></li><li class="toc-h2"><a href="#常见排错">常见排错</a></li></ul></nav>
     </aside>
   </div>
 </main>

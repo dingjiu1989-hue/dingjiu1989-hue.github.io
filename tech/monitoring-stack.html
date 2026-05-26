@@ -58,14 +58,14 @@
       "image": "https://aidev.fit/images/covers/en/tech/monitoring-stack.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "664",
+      "wordCount": "1817",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "zh-CN",
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "AI自习室"},
+      "author": {"@type": "Person", "name": "AI自习室 编辑部"},
       "publisher": {
         "@type": "Organization",
         "name": "AI自习室",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/monitoring-stack.html"},
-      "articleBody": "监控体系概述   一个完整的监控体系需要覆盖四个层次：基础设施监控、应用性能监控、业务指标监控和用户体验监控。Prometheus + Grafana + Alertmanager是目前最流行的开源监控方案组合。   Prometheus指标收集   架构原理   Prometheus采用拉模式（Pull）采集指标，每个被监控的目标暴露HTTP端点，Prometheus定期拉取数据。   核心概念    Metric类型：  -  Counter ：只增不减的计数器，适合请求数、错误数 -  Gauge ：可增可减的度量，适合内存使用、连接数 -  Histogram ：分桶直方图，适合请求延迟分布 -  Summary ：分位数统计，类似Histogram但客户端计算   指标暴露   在应用中集成Prometheus客户端库：    from prometheus_client import Counter, Histogram, generate_latest  REQUEST_COUNT = Counter('http_requests_total', 'Total requests', ['method', 'endpoint']) REQUEST_DURATION = Histogram('http_request_duration_seconds', 'Request duration', ['method'])  @app.route('/api/users') def get_users():     REQUEST_COUNT.labels(method='GET', endpoint='/api/users').inc()     with REQUEST_DURATION.labels(method='GET').time():         return get_users_from_db()      Grafana可视化   数据源配置   Grafana支持Prometheus、InfluxDB、Elasticsearch等多种数据源。配置Prometheus数据源后即可创建仪表盘。   面板设计原则      黄金信号 ：延迟、流量、错误数、饱和度    USE方法 ：使用率、饱和度、错误率（资源视角）    RED方法 ：请求速率、错误数、持续时间（服务视角）     常用面板示例    系统概览面板：     CPU使用率: 100 - (avg by(instance)(rate(node_cpu_seconds_total{mode=&quot;idle&quot;}[5m])) * 100) 内存使用率: (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100 磁盘IO: rate(node_disk_io_time_seconds_total[5m]) 网络流量: rate(node_network_receive_bytes_total[5m])      Alertmanager告警   告警规则配置    groups: - name: server_alerts   rules:   - alert: HighCPUUsage     expr: 100 - (avg by(instance)(rate(node_cpu_seconds_total{mode=&quot;idle&quot;}[5m])) * 100) &gt; 80     for: 5m     labels:       severity: warning     annotations:       summary: &quot;实例 {{ $labels.instance }} CPU使用率超过80%&quot;       description: &quot;CPU使用率当前为 {{ $value }}%&quot;    - alert: DiskSpaceLow     expr: (node_filesystem_avail_bytes / node_filesystem_size_bytes) &lt; 0.1     for: 2m     labels:       severity: critical     annotations:       summary: &quot;{{ $labels.instance }} 磁盘空间不足&quot;      告警路由与通知    route:   receiver: 'team-ops'   routes:   - match:       severity: critical     receiver: 'team-ops-critical'     repeat_interval: 5m  receivers: - name: 'team-ops-critical'   webhook_configs:   - url: 'https://hooks.example.com/alert'      告警管理最佳实践      减少告警噪音 ：避免过度告警，关注真正需要人工介入的事件    设置合理的告警级别 ：Warning（关注）和Critical（立即处理）    定义SLA/SLO ：基于服务等级目标设置告警阈值    告警自愈 ：对常见问题配置自动化修复脚本    告警升级机制 ：长时间未处理逐级升级通知     实战架构    应用/服务器 → Exporter(节点指标) → Prometheus(存储+查询)                                        ↓                                   Alertmanager → 通知(飞书/Slack/邮件)                                        ↓                                   Grafana(可视化 + 告警管理)      完善的监控体系是保障系统稳定性的基础，能够在问题影响用户之前及时发现和处理。"
+      "articleBody": "监控体系概述   一个完整的监控体系需要覆盖四个层次：基础设施监控、应用性能监控、业务指标监控和用户体验监控。Prometheus + Grafana + Alertmanager是目前最流行的开源监控方案组合。   Prometheus指标收集   架构原理   Prometheus采用拉模式（Pull）采集指标，每个被监控的目标暴露HTTP端点，Prometheus定期拉取数据。   核心概念    Metric类型：  -  Counter ：只增不减的计数器，适合请求数、错误数 -  Gauge ：可增可减的度量，适合内存使用、连接数 -  Histogram ：分桶直方图，适合请求延迟分布 -  Summary ：分位数统计，类似Histogram但客户端计算   指标暴露   在应用中集成Prometheus客户端库：        from     prometheus_client     import   Counter  ,   Histogram  ,   generate_latest    REQUEST_COUNT   =   Counter  (  &#39;http_requests_total&#39;  ,   &#39;Total requests&#39;  ,   [  &#39;method&#39;  ,   &#39;endpoint&#39;  ])   REQUEST_DURATION   =   Histogram  (  &#39;http_request_duration_seconds&#39;  ,   &#39;Request duration&#39;  ,   [  &#39;method&#39;  ])    @app  .  route  (  &#39;/api/users&#39;  )   def     get_users  ():       REQUEST_COUNT  .  labels  (  method  =  &#39;GET&#39;  ,   endpoint  =  &#39;/api/users&#39;  )  .  inc  ()       with   REQUEST_DURATION  .  labels  (  method  =  &#39;GET&#39;  )  .  time  ():           return   get_users_from_db  ()        Grafana可视化   数据源配置   Grafana支持Prometheus、InfluxDB、Elasticsearch等多种数据源。配置Prometheus数据源后即可创建仪表盘。   面板设计原则      黄金信号 ：延迟、流量、错误数、饱和度    USE方法 ：使用率、饱和度、错误率（资源视角）    RED方法 ：请求速率、错误数、持续时间（服务视角）     常用面板示例    系统概览面板：        CPU使用率: 100 - (avg by(instance)(rate(node_cpu_seconds_total{mode=&quot;idle&quot;}[5m]))  * 100)   内存使用率: (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) *  100 磁盘IO: rate(node_disk_io_time_seconds_total[5m]) 网络流量: rate(node_network_receive_bytes_total[5m])       Alertmanager告警   告警规则配置        groups  :   -     name  :     server_alerts       rules  :       -     alert  :     HighCPUUsage         expr  :     100 - (avg by(instance)(rate(node_cpu_seconds_total{mode=&quot;idle&quot;}[5m])) * 100) &gt; 80         for  :     5m         labels  :           severity  :     warning         annotations  :           summary  :     &quot;实例     {{     $labels.instance     }}     CPU使用率超过80%&quot;           description  :     &quot;CPU使用率当前为     {{     $value     }}%&quot;        -     alert  :     DiskSpaceLow         expr  :     (node_filesystem_avail_bytes / node_filesystem_size_bytes) &lt; 0.1         for  :     2m         labels  :           severity  :     critical         annotations  :           summary  :     &quot;{{     $labels.instance     }}     磁盘空间不足&quot;        告警路由与通知        route  :       receiver  :     &#39;team-ops&#39;       routes  :       -     match  :           severity  :     critical         receiver  :     &#39;team-ops-critical&#39;         repeat_interval  :     5m    receivers  :   -     name  :     &#39;team-ops-critical&#39;       webhook_configs  :       -     url  :     &#39;https://hooks.example.com/alert&#39;        告警管理最佳实践      减少告警噪音 ：避免过度告警，关注真正需要人工介入的事件    设置合理的告警级别 ：Warning（关注）和Critical（立即处理）    定义SLA/SLO ：基于服务等级目标设置告警阈值    告警自愈 ：对常见问题配置自动化修复脚本    告警升级机制 ：长时间未处理逐级升级通知     实战架构       应用/服务器 → Exporter(节点指标) → Prometheus(存储+查询)                                        ↓                                   Alertmanager → 通知(飞书/Slack/邮件)                                        ↓                                   Grafana(可视化 + 告警管理)       完善的监控体系是保障系统稳定性的基础，能够在问题影响用户之前及时发现和处理。"
     }
     </script>
     <script type="application/ld+json">
@@ -115,15 +115,15 @@
           <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">监控体系搭建：Prometheus + Grafana + Alertmanager</h1>
         <div class="article-meta">
-          <span class="author-name">By AI自习室</span>
+          <span class="author-name">By AI自习室 编辑部</span>
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>3 分钟阅读</span>
+          <span>9 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>664 字</span>
+          <span>1817 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/monitoring-stack.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/monitoring-stack.png" alt="监控体系搭建：Prometheus + Grafana + Alertmanager" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（14）</summary><ol><li><a href="#监控体系概述">监控体系概述</a></li><li><a href="#prometheus指标收集">Prometheus指标收集</a></li><li><a href="#架构原理">架构原理</a></li><li><a href="#核心概念">核心概念</a></li><li><a href="#指标暴露">指标暴露</a></li><li><a href="#grafana可视化">Grafana可视化</a></li><li><a href="#数据源配置">数据源配置</a></li><li><a href="#面板设计原则">面板设计原则</a></li><li><a href="#常用面板示例">常用面板示例</a></li><li><a href="#alertmanager告警">Alertmanager告警</a></li><li><a href="#告警规则配置">告警规则配置</a></li><li><a href="#告警路由与通知">告警路由与通知</a></li><li><a href="#告警管理最佳实践">告警管理最佳实践</a></li><li><a href="#实战架构">实战架构</a></li></ol></details>
@@ -140,17 +140,17 @@
 - <strong>Summary</strong>：分位数统计，类似Histogram但客户端计算</p>
 <h3>指标暴露</h3>
 <p>在应用中集成Prometheus客户端库：</p>
-<pre class="codehilite"><code class="language-python">from prometheus_client import Counter, Histogram, generate_latest
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">prometheus_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">Histogram</span><span class="p">,</span> <span class="n">generate_latest</span>
 
-REQUEST_COUNT = Counter('http_requests_total', 'Total requests', ['method', 'endpoint'])
-REQUEST_DURATION = Histogram('http_request_duration_seconds', 'Request duration', ['method'])
+<span class="n">REQUEST_COUNT</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s1">&#39;http_requests_total&#39;</span><span class="p">,</span> <span class="s1">&#39;Total requests&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">,</span> <span class="s1">&#39;endpoint&#39;</span><span class="p">])</span>
+<span class="n">REQUEST_DURATION</span> <span class="o">=</span> <span class="n">Histogram</span><span class="p">(</span><span class="s1">&#39;http_request_duration_seconds&#39;</span><span class="p">,</span> <span class="s1">&#39;Request duration&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">])</span>
 
-@app.route('/api/users')
-def get_users():
-    REQUEST_COUNT.labels(method='GET', endpoint='/api/users').inc()
-    with REQUEST_DURATION.labels(method='GET').time():
-        return get_users_from_db()
-</code></pre>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/users&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_users</span><span class="p">():</span>
+    <span class="n">REQUEST_COUNT</span><span class="o">.</span><span class="n">labels</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s1">&#39;/api/users&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">inc</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">REQUEST_DURATION</span><span class="o">.</span><span class="n">labels</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;GET&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">time</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">get_users_from_db</span><span class="p">()</span>
+</code></pre></div>
 
 <h2>Grafana可视化</h2>
 <h3>数据源配置</h3>
@@ -163,49 +163,49 @@ def get_users():
 </ol>
 <h3>常用面板示例</h3>
 <p><strong>系统概览面板：</strong></p>
-<pre class="codehilite"><code>CPU使用率: 100 - (avg by(instance)(rate(node_cpu_seconds_total{mode=&quot;idle&quot;}[5m])) * 100)
-内存使用率: (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100
+<div class="codehilite"><pre><span></span><code>CPU使用率: 100 - (avg by(instance)(rate(node_cpu_seconds_total{mode=&quot;idle&quot;}[5m])) <span class="gs">* 100)</span>
+<span class="gs">内存使用率: (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) *</span> 100
 磁盘IO: rate(node_disk_io_time_seconds_total[5m])
 网络流量: rate(node_network_receive_bytes_total[5m])
-</code></pre>
+</code></pre></div>
 
 <h2>Alertmanager告警</h2>
 <h3>告警规则配置</h3>
-<pre class="codehilite"><code class="language-yaml">groups:
-- name: server_alerts
-  rules:
-  - alert: HighCPUUsage
-    expr: 100 - (avg by(instance)(rate(node_cpu_seconds_total{mode=&quot;idle&quot;}[5m])) * 100) &gt; 80
-    for: 5m
-    labels:
-      severity: warning
-    annotations:
-      summary: &quot;实例 {{ $labels.instance }} CPU使用率超过80%&quot;
-      description: &quot;CPU使用率当前为 {{ $value }}%&quot;
+<div class="codehilite"><pre><span></span><code><span class="nt">groups</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">server_alerts</span>
+<span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">alert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HighCPUUsage</span>
+<span class="w">    </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100 - (avg by(instance)(rate(node_cpu_seconds_total{mode=&quot;idle&quot;}[5m])) * 100) &gt; 80</span>
+<span class="w">    </span><span class="nt">for</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5m</span>
+<span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">warning</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;实例</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">$labels.instance</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">CPU使用率超过80%&quot;</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CPU使用率当前为</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">$value</span><span class="nv"> </span><span class="s">}}%&quot;</span>
 
-  - alert: DiskSpaceLow
-    expr: (node_filesystem_avail_bytes / node_filesystem_size_bytes) &lt; 0.1
-    for: 2m
-    labels:
-      severity: critical
-    annotations:
-      summary: &quot;{{ $labels.instance }} 磁盘空间不足&quot;
-</code></pre>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">alert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DiskSpaceLow</span>
+<span class="w">    </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(node_filesystem_avail_bytes / node_filesystem_size_bytes) &lt; 0.1</span>
+<span class="w">    </span><span class="nt">for</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2m</span>
+<span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">critical</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">$labels.instance</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">磁盘空间不足&quot;</span>
+</code></pre></div>
 
 <h3>告警路由与通知</h3>
-<pre class="codehilite"><code class="language-yaml">route:
-  receiver: 'team-ops'
-  routes:
-  - match:
-      severity: critical
-    receiver: 'team-ops-critical'
-    repeat_interval: 5m
+<div class="codehilite"><pre><span></span><code><span class="nt">route</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">receiver</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;team-ops&#39;</span>
+<span class="w">  </span><span class="nt">routes</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">match</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">critical</span>
+<span class="w">    </span><span class="nt">receiver</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;team-ops-critical&#39;</span>
+<span class="w">    </span><span class="nt">repeat_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5m</span>
 
-receivers:
-- name: 'team-ops-critical'
-  webhook_configs:
-  - url: 'https://hooks.example.com/alert'
-</code></pre>
+<span class="nt">receivers</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;team-ops-critical&#39;</span>
+<span class="w">  </span><span class="nt">webhook_configs</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://hooks.example.com/alert&#39;</span>
+</code></pre></div>
 
 <h2>告警管理最佳实践</h2>
 <ol>
@@ -216,12 +216,12 @@ receivers:
 <li><strong>告警升级机制</strong>：长时间未处理逐级升级通知</li>
 </ol>
 <h2>实战架构</h2>
-<pre class="codehilite"><code>应用/服务器 → Exporter(节点指标) → Prometheus(存储+查询)
+<div class="codehilite"><pre><span></span><code>应用/服务器 → Exporter(节点指标) → Prometheus(存储+查询)
                                        ↓
                                   Alertmanager → 通知(飞书/Slack/邮件)
                                        ↓
                                   Grafana(可视化 + 告警管理)
-</code></pre>
+</code></pre></div>
 
 <p>完善的监控体系是保障系统稳定性的基础，能够在问题影响用户之前及时发现和处理。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
 <a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
@@ -263,7 +263,11 @@ receivers:
         <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
         <a href="#giscus-section">留下评论</a>
       </div>
-      <div id="giscus-section" data-giscus-loaded="false"></div>
+      <section class="author-bio">
+          <h4>关于作者</h4>
+          <p>AI自习室是由一群技术从业者维护的AI知识分享平台。我们关注AI工具、编程技术和开发者生态，致力于为中文开发者提供高质量的原创技术内容。<a href="/about.html">了解更多 →</a></p>
+        </section>
+        <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
     <aside class="article-sidebar">
       <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#监控体系概述">监控体系概述</a></li><li class="toc-h2"><a href="#prometheus指标收集">Prometheus指标收集</a></li><li class="toc-h3"><a href="#架构原理">架构原理</a></li><li class="toc-h3"><a href="#核心概念">核心概念</a></li><li class="toc-h3"><a href="#指标暴露">指标暴露</a></li><li class="toc-h2"><a href="#grafana可视化">Grafana可视化</a></li><li class="toc-h3"><a href="#数据源配置">数据源配置</a></li><li class="toc-h3"><a href="#面板设计原则">面板设计原则</a></li><li class="toc-h3"><a href="#常用面板示例">常用面板示例</a></li><li class="toc-h2"><a href="#alertmanager告警">Alertmanager告警</a></li><li class="toc-h3"><a href="#告警规则配置">告警规则配置</a></li><li class="toc-h3"><a href="#告警路由与通知">告警路由与通知</a></li><li class="toc-h2"><a href="#告警管理最佳实践">告警管理最佳实践</a></li><li class="toc-h2"><a href="#实战架构">实战架构</a></li></ul></nav>

@@ -58,14 +58,14 @@
       "image": "https://aidev.fit/images/covers/en/ai/vector-shujuku.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "323",
+      "wordCount": "342",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "zh-CN",
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "AI自习室"},
+      "author": {"@type": "Person", "name": "AI自习室 编辑部"},
       "publisher": {
         "@type": "Organization",
         "name": "AI自习室",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/vector-shujuku.html"},
-      "articleBody": "向量数据库的作用   向量数据库是RAG系统和AI搜索应用的核心组件，专门用于存储和检索高维向量数据。随着Embedding模型的普及，向量数据库已成为AI基础设施的关键一环。   Milvus   Milvus是开源的分布式向量数据库，经历了从Milvus 1.x到Milvus 2.x的重大架构升级。    优势：  - 支持10亿级别向量规模的分布式部署 - 丰富的索引类型（IVF_FLAT、HNSW、DiskANN等） - 支持混合查询（向量+标量过滤） - 提供GPU加速选项    劣势：  - 部署运维复杂，依赖etcd、MinIO等组件 - 小规模场景下资源消耗较高 - 学习曲线相对陡峭    推荐场景：  企业级RAG系统、大规模相似性搜索、推荐系统   Qdrant   Qdrant使用Rust语言编写，以高性能和部署简便著称。    优势：  - 单二进制部署，无外部依赖 - 性能优异，查询延迟低 - 支持过滤、分组、聚合等高级查询 - 提供RESTful和gRPC双重API    劣势：  - 社区生态相对Milvus较小 - 分布式功能相对年轻    推荐场景：  中小规模生产系统、实时搜索、对延迟敏感的应用   Chroma   Chroma专为AI应用设计，追求极致的开发体验。    优势：  - 安装极简（pip install chromadb） - API设计直观，与Python生态深度融合 - 支持内存模式和持久化模式 - 内置Embedding功能    劣势：  - 不适合大规模生产部署 - 分布式支持有限 - 性能无法与专业向量数据库媲美    推荐场景：  原型开发、学习实验、小规模个人项目   性能对比   基于1M 768维向量的基准测试结果：         指标   Milvus   Qdrant   Chroma           查询延迟(p99)   5ms   3ms   15ms       吞吐量(QPS)   5000+   8000+   500+       索引构建时间   快   中等   快       内存占用   高   中   低         选型决策树     数据量 &lt; 1M → Chroma快速原型   数据量 1M-100M，延迟敏感 → Qdrant   数据量 &gt; 100M，需要分布式 → Milvus   需要混合搜索（向量+全文） → Qdrant或Milvus   团队运维能力有限 → Qdrant     根据实际需求选择最合适的向量数据库，避免过度设计。"
+      "articleBody": "向量数据库的作用   向量数据库是RAG系统和AI搜索应用的核心组件，专门用于存储和检索高维向量数据。随着Embedding模型的普及，向量数据库已成为AI基础设施的关键一环。   Milvus   Milvus是开源的分布式向量数据库，经历了从Milvus 1.x到Milvus 2.x的重大架构升级。    优势：  - 支持10亿级别向量规模的分布式部署 - 丰富的索引类型（IVF_FLAT、HNSW、DiskANN等） - 支持混合查询（向量+标量过滤） - 提供GPU加速选项    劣势：  - 部署运维复杂，依赖etcd、MinIO等组件 - 小规模场景下资源消耗较高 - 学习曲线相对陡峭    推荐场景：  企业级RAG系统、大规模相似性搜索、推荐系统   Qdrant   Qdrant使用Rust语言编写，以高性能和部署简便著称。    优势：  - 单二进制部署，无外部依赖 - 性能优异，查询延迟低 - 支持过滤、分组、聚合等高级查询 - 提供RESTful和gRPC双重API    劣势：  - 社区生态相对Milvus较小 - 分布式功能相对年轻    推荐场景：  中小规模生产系统、实时搜索、对延迟敏感的应用   Chroma   Chroma专为AI应用设计，追求极致的开发体验。    优势：  - 安装极简（pip install chromadb） - API设计直观，与Python生态深度融合 - 支持内存模式和持久化模式 - 内置Embedding功能    劣势：  - 不适合大规模生产部署 - 分布式支持有限 - 性能无法与专业向量数据库媲美    推荐场景：  原型开发、学习实验、小规模个人项目   性能对比   基于1M 768维向量的基准测试结果：         指标   Milvus   Qdrant   Chroma           查询延迟(p99)   5ms   3ms   15ms       吞吐量(QPS)   5000+   8000+   500+       索引构建时间   快   中等   快       内存占用   高   中   低         选型决策树     数据量 &lt; 1M → Chroma快速原型   数据量 1M-100M，延迟敏感 → Qdrant   数据量 &gt; 100M，需要分布式 → Milvus   需要混合搜索（向量+全文） → Qdrant或Milvus   团队运维能力有限 → Qdrant     根据实际需求选择最合适的向量数据库，避免过度设计。对于早期项目，从Chroma或Qdrant开始即可满足大部分需求；当数据量突破千万级或需要混合搜索时，再迁移到Milvus。向量数据库的迁移成本较高，建议在项目初期就明确未来6-12个月的规模预期。"
     }
     </script>
     <script type="application/ld+json">
@@ -115,7 +115,7 @@
           <span class="tag-cat">LLM</span></div>
         <h1 class="article-title">向量数据库选型指南：Milvus vs Qdrant vs Chroma</h1>
         <div class="article-meta">
-          <span class="author-name">By AI自习室</span>
+          <span class="author-name">By AI自习室 编辑部</span>
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
@@ -123,7 +123,7 @@
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>323 字</span>
+          <span>342 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/vector-shujuku.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/vector-shujuku.png" alt="向量数据库选型指南：Milvus vs Qdrant vs Chroma" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（6）</summary><ol><li><a href="#向量数据库的作用">向量数据库的作用</a></li><li><a href="#milvus">Milvus</a></li><li><a href="#qdrant">Qdrant</a></li><li><a href="#chroma">Chroma</a></li><li><a href="#性能对比">性能对比</a></li><li><a href="#选型决策树">选型决策树</a></li></ol></details>
@@ -210,7 +210,7 @@
 <li>需要混合搜索（向量+全文） → Qdrant或Milvus</li>
 <li>团队运维能力有限 → Qdrant</li>
 </ol>
-<p>根据实际需求选择最合适的向量数据库，避免过度设计。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
+<p>根据实际需求选择最合适的向量数据库，避免过度设计。对于早期项目，从Chroma或Qdrant开始即可满足大部分需求；当数据量突破千万级或需要混合搜索时，再迁移到Milvus。向量数据库的迁移成本较高，建议在项目初期就明确未来6-12个月的规模预期。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
 <a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
 <a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
 <a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
@@ -250,7 +250,11 @@
         <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
         <a href="#giscus-section">留下评论</a>
       </div>
-      <div id="giscus-section" data-giscus-loaded="false"></div>
+      <section class="author-bio">
+          <h4>关于作者</h4>
+          <p>AI自习室是由一群技术从业者维护的AI知识分享平台。我们关注AI工具、编程技术和开发者生态，致力于为中文开发者提供高质量的原创技术内容。<a href="/about.html">了解更多 →</a></p>
+        </section>
+        <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
     <aside class="article-sidebar">
       <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#向量数据库的作用">向量数据库的作用</a></li><li class="toc-h2"><a href="#milvus">Milvus</a></li><li class="toc-h2"><a href="#qdrant">Qdrant</a></li><li class="toc-h2"><a href="#chroma">Chroma</a></li><li class="toc-h2"><a href="#性能对比">性能对比</a></li><li class="toc-h2"><a href="#选型决策树">选型决策树</a></li></ul></nav>

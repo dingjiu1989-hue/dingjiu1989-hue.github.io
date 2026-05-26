@@ -375,7 +375,7 @@ def make_article_html(art, board_id, board_name, all_posts):
       "inLanguage": "zh-CN",
       "isAccessibleForFree": true{proficiency},
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {{"@type": "Person", "name": "{CN_SITE_NAME}"}},
+      "author": {{"@type": "Person", "name": "{CN_SITE_NAME} 编辑部"}},
       "publisher": {{
         "@type": "Organization",
         "name": "{CN_SITE_NAME}",
@@ -423,7 +423,7 @@ def make_article_html(art, board_id, board_name, all_posts):
         <div class="article-tags">{pin_h}{tags_h}</div>
         <h1 class="article-title">{_esc(art['title'])}</h1>
         <div class="article-meta">
-          <span class="author-name">By {CN_SITE_NAME}</span>
+          <span class="author-name">By {CN_SITE_NAME} 编辑部</span>
           <span class="meta-sep">·</span>
           <time datetime="{pub_date}">{pub_date}</time>
           <span class="meta-sep">·</span>
@@ -457,7 +457,11 @@ def make_article_html(art, board_id, board_name, all_posts):
         <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
         <a href="#giscus-section">留下评论</a>
       </div>
-      <div id="giscus-section" data-giscus-loaded="false"></div>
+      <section class="author-bio">
+          <h4>关于作者</h4>
+          <p>AI自习室是由一群技术从业者维护的AI知识分享平台。我们关注AI工具、编程技术和开发者生态，致力于为中文开发者提供高质量的原创技术内容。<a href="/about.html">了解更多 →</a></p>
+        </section>
+        <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
     <aside class="article-sidebar">
       {toc_sidebar_html}

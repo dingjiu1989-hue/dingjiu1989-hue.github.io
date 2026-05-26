@@ -37,3 +37,7 @@ K8s解决了容器编排的关键问题：服务发现与负载均衡、自动�
 Pod健康状况检查配置Liveness和Readiness探针，确保流量只路由到正常工作的实例。资源限制方面，为每个容器设置requests和limits，避免资源争抢。日志收集建议使用EFK（Elasticsearch+Fluentd+Kibana）或Loki+Promtail方案集中管理。
 
 监控与告警使用Prometheus采集指标，Grafana可视化展示。设置核心指标的告警规则，包括Pod重启次数、CPU和内存使用率超过阈值等情况。
+
+## 常见排错
+
+Pod一直Pending通常是资源不足或节点Selector不匹配；CrashLoopBackOff需要`kubectl logs`查看应用日志；Service无法访问先检查`kubectl get endpoints`确认后端Pod是否就绪。建议收藏`kubectl describe`和`kubectl logs`两个命令——它们能解决80%的日常故障。

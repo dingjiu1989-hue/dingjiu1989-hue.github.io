@@ -58,14 +58,14 @@
       "image": "https://aidev.fit/images/covers/en/ai/openai-api-intro.png",
       "datePublished": "2026-02-20",
       "dateModified": "2026-05-22",
-      "wordCount": "851",
+      "wordCount": "2181",
       "keywords": "OpenAI API, GPT, 编程入门",
       "about": [{"@type": "Thing", "name": "OpenAI API"}, {"@type": "Thing", "name": "GPT"}, {"@type": "Thing", "name": "编程入门"}],
       "inLanguage": "zh-CN",
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "AI自习室"},
+      "author": {"@type": "Person", "name": "AI自习室 编辑部"},
       "publisher": {
         "@type": "Organization",
         "name": "AI自习室",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/openai-api-intro.html"},
-      "articleBody": "调用 GPT API 比你想的简单得多——10 行代码就能让 AI 替你写文案、分析数据、回答问题。这篇文章带你从零到发出第一个 API 请求。 第一步：获取 API Key     打开  platform.openai.com  注册/登录   点击右上角头像 → \"View API keys\"   \"Create new secret key\" → 复制保存（只显示一次！）   设置用量限制（建议先设 $10/月，防止意外超支）      API 是按量付费的，不是订阅制。  你可以只充值 $5 开始试用。GPT-4o mini 的价格大约是 $0.15/1M input tokens —— 处理 100 万字的输入只要一毛多。$5 够你做大量实验。 第二步：安装 SDK    pip install openai      第三步：第一个请求    from openai import OpenAI  client = OpenAI(api_key=&quot;sk-your-key-here&quot;)  response = client.chat.completions.create(     model=&quot;gpt-4o-mini&quot;,     messages=[         {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;你是一个简洁的编程助手，回复不超过三句话。&quot;},         {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Python 中 list 和 tuple 的区别是什么？&quot;}     ] )  print(response.choices[0].message.content)            跑一下——AI 用三句话回答了你的问题。 核心概念拆解 概念   是什么   怎么用            Model    用哪个模型   gpt-4o（最强）、gpt-4o-mini（便宜快速、日常够用）、o1（深度推理）        Messages    对话历史   三中角色：system（设定 AI 行为）、user（你的问题）、assistant（AI 之前的回答）        System Prompt    给 AI 的\"人设\"   最重要的部分。好的 System Prompt 能让 GPT-4o mini 的效果超过乱用的 GPT-4o        Temperature    控制随机性（0-2）   0 = 每次回答一样（适合代码/事实）、1 = 有创造性（适合写作）、1.5+ = 天马行空        max_tokens    限制输出长度   1 token ≈ 0.75 个英文单词 ≈ 0.5 个中文字。设太低回答会被截断       实用示例：多轮对话                messages = [     {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;你是一个 Python 编程导师，用 50 字以内回答。&quot;} ]  while True:     user_input = input(&quot;你: &quot;)     if user_input == &quot;quit&quot;:         break     messages.append({&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: user_input})     response = client.chat.completions.create(         model=&quot;gpt-4o-mini&quot;,         messages=messages     )     reply = response.choices[0].message.content     print(f&quot;AI: {reply}&quot;)     messages.append({&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: reply})      实用示例：用 GPT 做数据分析    # 读取 CSV，让 GPT 写分析代码 import csv  data = [] with open(&quot;sales.csv&quot;) as f:     reader = csv.DictReader(f)     for row in reader:         data.append(row)  data_str = str(data[:5])  # 只传前 5 行作为样本  response = client.chat.completions.create(     model=&quot;gpt-4o&quot;,     messages=[         {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;你是数据分析师。根据提供的数据样本，写出完整的 Python pandas 分析代码。&quot;},         {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: f&quot;分析这个销售数据的前5行，写代码计算每月的销售总额和增长率：{data_str}&quot;}     ] ) print(response.choices[0].message.content) # GPT 会生成可以直接复制运行的 pandas 分析代码      费用控制      设 hard limit  — 在 OpenAI Platform → Billing → Usage limits 设每月上限    用 gpt-4o-mini  — 95% 的场景够用，价格是 GPT-4o 的 1/20    缓存常见回复  — 同样的 prompt 不要反复调用，存起来复用    监控用量  — Usage 页面可以实时看到花了多少钱     下一步 读完这篇文章你应该能跑起第一个 API 调用了。接下来可以：用  stream=True  实现打字机效果、用 Function Calling 让 GPT 调用你的函数、用 Assistants API 构建带知识库的 AI 助手。OpenAI 的官方文档写得很好——把它当参考书，需要时查。 📖 相关推荐      AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选     MCP 协议入门：让 AI 模型安全访问你的工具和数据     AI 绘画变现指南：从出图到接单的完整路径       See also:   Python 入门教程：从零到写出第一个程序 ,  30 个免费又好用的 API 合集：开发者必备 ,  REST API 设计最佳实践：写出让人愿意用的接口 ."
+      "articleBody": "调用 GPT API 比你想的简单得多——10 行代码就能让 AI 替你写文案、分析数据、回答问题。这篇文章带你从零到发出第一个 API 请求。 第一步：获取 API Key     打开  platform.openai.com  注册/登录   点击右上角头像 → \"View API keys\"   \"Create new secret key\" → 复制保存（只显示一次！）   设置用量限制（建议先设 $10/月，防止意外超支）      API 是按量付费的，不是订阅制。  你可以只充值 $5 开始试用。GPT-4o mini 的价格大约是 $0.15/1M input tokens —— 处理 100 万字的输入只要一毛多。$5 够你做大量实验。 第二步：安装 SDK       pip install openai       第三步：第一个请求        from     openai     import   OpenAI    client   =   OpenAI  (  api_key  =  &quot;sk-your-key-here&quot;  )    response   =   client  .  chat  .  completions  .  create  (       model  =  &quot;gpt-4o-mini&quot;  ,       messages  =  [           {  &quot;role&quot;  :   &quot;system&quot;  ,   &quot;content&quot;  :   &quot;你是一个简洁的编程助手，回复不超过三句话。&quot;  },           {  &quot;role&quot;  :   &quot;user&quot;  ,   &quot;content&quot;  :   &quot;Python 中 list 和 tuple 的区别是什么？&quot;  }       ]   )    print  (  response  .  choices  [  0  ]  .  message  .  content  )              跑一下——AI 用三句话回答了你的问题。 核心概念拆解 概念   是什么   怎么用            Model    用哪个模型   gpt-4o（最强）、gpt-4o-mini（便宜快速、日常够用）、o1（深度推理）        Messages    对话历史   三中角色：system（设定 AI 行为）、user（你的问题）、assistant（AI 之前的回答）        System Prompt    给 AI 的\"人设\"   最重要的部分。好的 System Prompt 能让 GPT-4o mini 的效果超过乱用的 GPT-4o        Temperature    控制随机性（0-2）   0 = 每次回答一样（适合代码/事实）、1 = 有创造性（适合写作）、1.5+ = 天马行空        max_tokens    限制输出长度   1 token ≈ 0.75 个英文单词 ≈ 0.5 个中文字。设太低回答会被截断       实用示例：多轮对话                    messages     =     [         {  &quot;role&quot;  :     &quot;system&quot;  ,     &quot;content&quot;  :     &quot;你是一个 Python 编程导师，用 50 字以内回答。&quot;  }   ]    while     True  :         user_input     =     input  (  &quot;你: &quot;  )         if     user_input     ==     &quot;quit&quot;  :             break         messages  .  append  ({  &quot;role&quot;  :     &quot;user&quot;  ,     &quot;content&quot;  :     user_input  })         response     =     client  .  chat  .  completions  .  create  (             model  =  &quot;gpt-4o-mini&quot;  ,             messages  =  messages         )         reply     =     response  .  choices  [  0  ].  message  .  content         print  (  f  &quot;AI: {reply}&quot;  )         messages  .  append  ({  &quot;role&quot;  :     &quot;assistant&quot;  ,     &quot;content&quot;  :     reply  })        实用示例：用 GPT 做数据分析        # 读取 CSV，让 GPT 写分析代码   import     csv    data   =   []   with   open  (  &quot;sales.csv&quot;  )   as   f  :       reader   =   csv  .  DictReader  (  f  )       for   row   in   reader  :           data  .  append  (  row  )    data_str   =   str  (  data  [:  5  ])    # 只传前 5 行作为样本    response   =   client  .  chat  .  completions  .  create  (       model  =  &quot;gpt-4o&quot;  ,       messages  =  [           {  &quot;role&quot;  :   &quot;system&quot;  ,   &quot;content&quot;  :   &quot;你是数据分析师。根据提供的数据样本，写出完整的 Python pandas 分析代码。&quot;  },           {  &quot;role&quot;  :   &quot;user&quot;  ,   &quot;content&quot;  :   f  &quot;分析这个销售数据的前5行，写代码计算每月的销售总额和增长率：  {  data_str  }  &quot;  }       ]   )   print  (  response  .  choices  [  0  ]  .  message  .  content  )   # GPT 会生成可以直接复制运行的 pandas 分析代码        费用控制      设 hard limit  — 在 OpenAI Platform → Billing → Usage limits 设每月上限    用 gpt-4o-mini  — 95% 的场景够用，价格是 GPT-4o 的 1/20    缓存常见回复  — 同样的 prompt 不要反复调用，存起来复用    监控用量  — Usage 页面可以实时看到花了多少钱     下一步 读完这篇文章你应该能跑起第一个 API 调用了。接下来可以：用  stream=True  实现打字机效果、用 Function Calling 让 GPT 调用你的函数、用 Assistants API 构建带知识库的 AI 助手。OpenAI 的官方文档写得很好——把它当参考书，需要时查。 📖 相关推荐      AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选     MCP 协议入门：让 AI 模型安全访问你的工具和数据     AI 绘画变现指南：从出图到接单的完整路径       See also:   Python 入门教程：从零到写出第一个程序 ,  30 个免费又好用的 API 合集：开发者必备 ,  REST API 设计最佳实践：写出让人愿意用的接口 ."
     }
     </script>
     <script type="application/ld+json">
@@ -115,15 +115,15 @@
           <span class="tag-cat">编程入门</span></div>
         <h1 class="article-title">OpenAI API 入门：用 10 行代码调用 GPT</h1>
         <div class="article-meta">
-          <span class="author-name">By AI自习室</span>
+          <span class="author-name">By AI自习室 编辑部</span>
           <span class="meta-sep">·</span>
           <time datetime="2026-02-20">2026-02-20</time>
           <span class="meta-sep">·</span>
-          <span>4 分钟阅读</span>
+          <span>10 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>851 字</span>
+          <span>2181 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/openai-api-intro.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/openai-api-intro.png" alt="OpenAI API 入门：用 10 行代码调用 GPT" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -135,24 +135,24 @@
 <li>设置用量限制（建议先设 $10/月，防止意外超支）</li>
 </ol>
 <p><strong>API 是按量付费的，不是订阅制。</strong> 你可以只充值 $5 开始试用。GPT-4o mini 的价格大约是 $0.15/1M input tokens —— 处理 100 万字的输入只要一毛多。$5 够你做大量实验。 第二步：安装 SDK</p>
-<pre class="codehilite"><code>pip install openai
-</code></pre>
+<div class="codehilite"><pre><span></span><code>pip install openai
+</code></pre></div>
 
 <p>第三步：第一个请求</p>
-<pre class="codehilite"><code>from openai import OpenAI
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">openai</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenAI</span>
 
-client = OpenAI(api_key=&quot;sk-your-key-here&quot;)
+<span class="n">client</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;sk-your-key-here&quot;</span><span class="p">)</span>
 
-response = client.chat.completions.create(
-    model=&quot;gpt-4o-mini&quot;,
-    messages=[
-        {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;你是一个简洁的编程助手，回复不超过三句话。&quot;},
-        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Python 中 list 和 tuple 的区别是什么？&quot;}
-    ]
-)
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o-mini&quot;</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;你是一个简洁的编程助手，回复不超过三句话。&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Python 中 list 和 tuple 的区别是什么？&quot;</span><span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">)</span>
 
-print(response.choices[0].message.content)
-</code></pre>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div>
 
 <table>
 <thead>
@@ -195,46 +195,46 @@ print(response.choices[0].message.content)
 </tr>
 </tbody>
 </table>
-<pre class="codehilite"><code>messages = [
-    {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;你是一个 Python 编程导师，用 50 字以内回答。&quot;}
-]
+<div class="codehilite"><pre><span></span><code><span class="nx">messages</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;system&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;你是一个 Python 编程导师，用 50 字以内回答。&quot;</span><span class="p">}</span>
+<span class="p">]</span>
 
-while True:
-    user_input = input(&quot;你: &quot;)
-    if user_input == &quot;quit&quot;:
-        break
-    messages.append({&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: user_input})
-    response = client.chat.completions.create(
-        model=&quot;gpt-4o-mini&quot;,
-        messages=messages
-    )
-    reply = response.choices[0].message.content
-    print(f&quot;AI: {reply}&quot;)
-    messages.append({&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: reply})
-</code></pre>
+<span class="k">while</span><span class="w"> </span><span class="nx">True</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">user_input</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">input</span><span class="p">(</span><span class="s">&quot;你: &quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">user_input</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;quit&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="k">break</span>
+<span class="w">    </span><span class="nx">messages</span><span class="p">.</span><span class="nx">append</span><span class="p">({</span><span class="s">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;user&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">user_input</span><span class="p">})</span>
+<span class="w">    </span><span class="nx">response</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">chat</span><span class="p">.</span><span class="nx">completions</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">model</span><span class="p">=</span><span class="s">&quot;gpt-4o-mini&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">messages</span><span class="p">=</span><span class="nx">messages</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="w">    </span><span class="nx">reply</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">message</span><span class="p">.</span><span class="nx">content</span>
+<span class="w">    </span><span class="nx">print</span><span class="p">(</span><span class="nx">f</span><span class="s">&quot;AI: {reply}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">messages</span><span class="p">.</span><span class="nx">append</span><span class="p">({</span><span class="s">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;assistant&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">reply</span><span class="p">})</span>
+</code></pre></div>
 
 <p>实用示例：用 GPT 做数据分析</p>
-<pre class="codehilite"><code># 读取 CSV，让 GPT 写分析代码
-import csv
+<div class="codehilite"><pre><span></span><code><span class="c1"># 读取 CSV，让 GPT 写分析代码</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 
-data = []
-with open(&quot;sales.csv&quot;) as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        data.append(row)
+<span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;sales.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 
-data_str = str(data[:5])  # 只传前 5 行作为样本
+<span class="n">data_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>  <span class="c1"># 只传前 5 行作为样本</span>
 
-response = client.chat.completions.create(
-    model=&quot;gpt-4o&quot;,
-    messages=[
-        {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;你是数据分析师。根据提供的数据样本，写出完整的 Python pandas 分析代码。&quot;},
-        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: f&quot;分析这个销售数据的前5行，写代码计算每月的销售总额和增长率：{data_str}&quot;}
-    ]
-)
-print(response.choices[0].message.content)
-# GPT 会生成可以直接复制运行的 pandas 分析代码
-</code></pre>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;你是数据分析师。根据提供的数据样本，写出完整的 Python pandas 分析代码。&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;分析这个销售数据的前5行，写代码计算每月的销售总额和增长率：</span><span class="si">{</span><span class="n">data_str</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="c1"># GPT 会生成可以直接复制运行的 pandas 分析代码</span>
+</code></pre></div>
 
 <p>费用控制</p>
 <ul>
@@ -289,7 +289,11 @@ print(response.choices[0].message.content)
         <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
         <a href="#giscus-section">留下评论</a>
       </div>
-      <div id="giscus-section" data-giscus-loaded="false"></div>
+      <section class="author-bio">
+          <h4>关于作者</h4>
+          <p>AI自习室是由一群技术从业者维护的AI知识分享平台。我们关注AI工具、编程技术和开发者生态，致力于为中文开发者提供高质量的原创技术内容。<a href="/about.html">了解更多 →</a></p>
+        </section>
+        <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
     <aside class="article-sidebar">
       

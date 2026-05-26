@@ -58,14 +58,14 @@
       "image": "https://aidev.fit/images/covers/en/tech/api-she-ji.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "664",
+      "wordCount": "1186",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "zh-CN",
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "AI自习室"},
+      "author": {"@type": "Person", "name": "AI自习室 编辑部"},
       "publisher": {
         "@type": "Organization",
         "name": "AI自习室",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/api-she-ji.html"},
-      "articleBody": "RESTful设计原则   RESTful API设计需要遵循几个核心原则：资源导向、无状态、统一接口和HATEOAS。虽然在实际项目中不必严格遵守所有原则，但理解这些原则有助于设计更规范的API。   资源命名   命名规范     使用名词复数表示资源集合： /users 、 /orders    使用URL路径表示资源层级： /users/{id}/orders    使用查询参数表示过滤和排序： ?status=active&amp;sort=created_at    使用小写字母和连字符： /user-profiles 而非 /userProfiles      最佳实践    GET /users                    # 获取用户列表 GET /users/{id}               # 获取单个用户 POST /users                   # 创建用户 PATCH /users/{id}             # 部分更新用户 DELETE /users/{id}            # 删除用户 GET /users/{id}/orders        # 获取用户的订单列表      常见反模式     使用动词： /getUsers 应为 GET /users    过深的嵌套：超过三级嵌套应考虑展平   不一致的命名：混合使用snake_case和camelCase     HTTP状态码   正确使用HTTP状态码可以让客户端更准确地理解请求结果。   常用状态码      200 OK ：请求成功    201 Created ：资源创建成功    204 No Content ：删除成功，无返回内容    400 Bad Request ：请求参数错误    401 Unauthorized ：未认证    403 Forbidden ：无权限    404 Not Found ：资源不存在    409 Conflict ：资源冲突（如重复创建）    422 Unprocessable Entity ：业务逻辑验证失败    429 Too Many Requests ：请求频率限制    500 Internal Server Error ：服务器内部错误     错误响应格式    {     &quot;error&quot;: {         &quot;code&quot;: &quot;USER_NOT_FOUND&quot;,         &quot;message&quot;: &quot;用户不存在&quot;,         &quot;details&quot;: {             &quot;userId&quot;: &quot;12345&quot;         }     } }      版本管理   版本策略      URL路径版本 ： /v1/users 、 /v2/users ，最常用    请求头版本 ： Accept: application/vnd.myapp.v1+json     查询参数版本 ： /users?version=1      URL路径版本策略最为直观，便于缓存和调试。建议在URL中永久保留版本号。   版本演进     向后兼容的变更：新增字段、新增端点不需要大版本   破坏性变更：修改字段类型、删除字段需要大版本   每个大版本至少维护6-12个月的过渡期     分页设计   分页方案    GET /users?page=1&amp;per_page=20      响应中包含分页元数据：    {     &quot;data&quot;: [...],     &quot;pagination&quot;: {         &quot;page&quot;: 1,         &quot;per_page&quot;: 20,         &quot;total&quot;: 156,         &quot;total_pages&quot;: 8,         &quot;links&quot;: {             &quot;first&quot;: &quot;/users?page=1&quot;,             &quot;prev&quot;: null,             &quot;next&quot;: &quot;/users?page=2&quot;,             &quot;last&quot;: &quot;/users?page=8&quot;         }     } }      游标分页   对于实时数据，游标分页比偏移分页更稳定：    GET /users?cursor=eyJpZCI6MTB9&amp;limit=20      游标分页在数据发生增删时不会导致重复或遗漏，适合社交信息流等场景。   安全与规范     所有API必须使用HTTPS   认证使用Bearer Token或OAuth 2.0   统一时间格式（ISO 8601）   统一错误格式   提供API文档（OpenAPI/Swagger）     遵循一致的API设计规范能降低前后端协作成本，提升API的可维护性和开发者体验。"
+      "articleBody": "RESTful设计原则   RESTful API设计需要遵循几个核心原则：资源导向、无状态、统一接口和HATEOAS。虽然在实际项目中不必严格遵守所有原则，但理解这些原则有助于设计更规范的API。   资源命名   命名规范     使用名词复数表示资源集合： /users 、 /orders    使用URL路径表示资源层级： /users/{id}/orders    使用查询参数表示过滤和排序： ?status=active&amp;sort=created_at    使用小写字母和连字符： /user-profiles 而非 /userProfiles      最佳实践        GET /users                    # 获取用户列表   GET /users/{id}               # 获取单个用户   POST /users                   # 创建用户   PATCH /users/{id}             # 部分更新用户   DELETE /users/{id}            # 删除用户   GET /users/{id}/orders        # 获取用户的订单列表        常见反模式     使用动词： /getUsers 应为 GET /users    过深的嵌套：超过三级嵌套应考虑展平   不一致的命名：混合使用snake_case和camelCase     HTTP状态码   正确使用HTTP状态码可以让客户端更准确地理解请求结果。   常用状态码      200 OK ：请求成功    201 Created ：资源创建成功    204 No Content ：删除成功，无返回内容    400 Bad Request ：请求参数错误    401 Unauthorized ：未认证    403 Forbidden ：无权限    404 Not Found ：资源不存在    409 Conflict ：资源冲突（如重复创建）    422 Unprocessable Entity ：业务逻辑验证失败    429 Too Many Requests ：请求频率限制    500 Internal Server Error ：服务器内部错误     错误响应格式        {         &quot;error&quot;  :     {             &quot;code&quot;  :     &quot;USER_NOT_FOUND&quot;  ,             &quot;message&quot;  :     &quot;用户不存在&quot;  ,             &quot;details&quot;  :     {                 &quot;userId&quot;  :     &quot;12345&quot;             }         }   }        版本管理   版本策略      URL路径版本 ： /v1/users 、 /v2/users ，最常用    请求头版本 ： Accept: application/vnd.myapp.v1+json     查询参数版本 ： /users?version=1      URL路径版本策略最为直观，便于缓存和调试。建议在URL中永久保留版本号。   版本演进     向后兼容的变更：新增字段、新增端点不需要大版本   破坏性变更：修改字段类型、删除字段需要大版本   每个大版本至少维护6-12个月的过渡期     分页设计   分页方案        GET /users?page=1&amp;per_page=20        响应中包含分页元数据：        {         &quot;data&quot;  :     [  ...  ],         &quot;pagination&quot;  :     {             &quot;page&quot;  :     1  ,             &quot;per_page&quot;  :     20  ,             &quot;total&quot;  :     156  ,             &quot;total_pages&quot;  :     8  ,             &quot;links&quot;  :     {                 &quot;first&quot;  :     &quot;/users?page=1&quot;  ,                 &quot;prev&quot;  :     null  ,                 &quot;next&quot;  :     &quot;/users?page=2&quot;  ,                 &quot;last&quot;  :     &quot;/users?page=8&quot;             }         }   }        游标分页   对于实时数据，游标分页比偏移分页更稳定：        GET /users?cursor=eyJpZCI6MTB9&amp;limit=20        游标分页在数据发生增删时不会导致重复或遗漏，适合社交信息流等场景。   安全与规范     所有API必须使用HTTPS   认证使用Bearer Token或OAuth 2.0   统一时间格式（ISO 8601）   统一错误格式   提供API文档（OpenAPI/Swagger）     遵循一致的API设计规范能降低前后端协作成本，提升API的可维护性和开发者体验。"
     }
     </script>
     <script type="application/ld+json">
@@ -115,15 +115,15 @@
           <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</h1>
         <div class="article-meta">
-          <span class="author-name">By AI自习室</span>
+          <span class="author-name">By AI自习室 编辑部</span>
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>3 分钟阅读</span>
+          <span>5 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>664 字</span>
+          <span>1186 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/api-she-ji.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/api-she-ji.png" alt="RESTful API设计规范：资源命名、状态码、版本管理、分页" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（15）</summary><ol><li><a href="#restful设计原则">RESTful设计原则</a></li><li><a href="#资源命名">资源命名</a></li><li><a href="#命名规范">命名规范</a></li><li><a href="#最佳实践">最佳实践</a></li><li><a href="#常见反模式">常见反模式</a></li><li><a href="#http状态码">HTTP状态码</a></li><li><a href="#常用状态码">常用状态码</a></li><li><a href="#错误响应格式">错误响应格式</a></li><li><a href="#版本管理">版本管理</a></li><li><a href="#版本策略">版本策略</a></li><li><a href="#版本演进">版本演进</a></li><li><a href="#分页设计">分页设计</a></li><li><a href="#分页方案">分页方案</a></li><li><a href="#游标分页">游标分页</a></li><li><a href="#安全与规范">安全与规范</a></li></ol></details>
@@ -138,13 +138,13 @@
 <li>使用小写字母和连字符：<code>/user-profiles</code>而非<code>/userProfiles</code></li>
 </ul>
 <h3>最佳实践</h3>
-<pre class="codehilite"><code class="language-http">GET /users                    # 获取用户列表
-GET /users/{id}               # 获取单个用户
-POST /users                   # 创建用户
-PATCH /users/{id}             # 部分更新用户
-DELETE /users/{id}            # 删除用户
-GET /users/{id}/orders        # 获取用户的订单列表
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="err">GET /users                    # 获取用户列表</span>
+<span class="err">GET /users/{id}               # 获取单个用户</span>
+<span class="err">POST /users                   # 创建用户</span>
+<span class="err">PATCH /users/{id}             # 部分更新用户</span>
+<span class="err">DELETE /users/{id}            # 删除用户</span>
+<span class="err">GET /users/{id}/orders        # 获取用户的订单列表</span>
+</code></pre></div>
 
 <h3>常见反模式</h3>
 <ul>
@@ -169,16 +169,16 @@ GET /users/{id}/orders        # 获取用户的订单列表
 <li><strong>500 Internal Server Error</strong>：服务器内部错误</li>
 </ul>
 <h3>错误响应格式</h3>
-<pre class="codehilite"><code class="language-json">{
-    &quot;error&quot;: {
-        &quot;code&quot;: &quot;USER_NOT_FOUND&quot;,
-        &quot;message&quot;: &quot;用户不存在&quot;,
-        &quot;details&quot;: {
-            &quot;userId&quot;: &quot;12345&quot;
-        }
-    }
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;USER_NOT_FOUND&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;用户不存在&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;userId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <h2>版本管理</h2>
 <h3>版本策略</h3>
@@ -196,31 +196,31 @@ GET /users/{id}/orders        # 获取用户的订单列表
 </ul>
 <h2>分页设计</h2>
 <h3>分页方案</h3>
-<pre class="codehilite"><code class="language-http">GET /users?page=1&amp;per_page=20
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="err">GET /users?page=1&amp;per_page=20</span>
+</code></pre></div>
 
 <p>响应中包含分页元数据：</p>
-<pre class="codehilite"><code class="language-json">{
-    &quot;data&quot;: [...],
-    &quot;pagination&quot;: {
-        &quot;page&quot;: 1,
-        &quot;per_page&quot;: 20,
-        &quot;total&quot;: 156,
-        &quot;total_pages&quot;: 8,
-        &quot;links&quot;: {
-            &quot;first&quot;: &quot;/users?page=1&quot;,
-            &quot;prev&quot;: null,
-            &quot;next&quot;: &quot;/users?page=2&quot;,
-            &quot;last&quot;: &quot;/users?page=8&quot;
-        }
-    }
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;pagination&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;per_page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">156</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;total_pages&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;links&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;first&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/users?page=1&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;prev&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;next&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/users?page=2&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;last&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/users?page=8&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <h3>游标分页</h3>
 <p>对于实时数据，游标分页比偏移分页更稳定：</p>
-<pre class="codehilite"><code class="language-http">GET /users?cursor=eyJpZCI6MTB9&amp;limit=20
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="err">GET /users?cursor=eyJpZCI6MTB9&amp;limit=20</span>
+</code></pre></div>
 
 <p>游标分页在数据发生增删时不会导致重复或遗漏，适合社交信息流等场景。</p>
 <h2>安全与规范</h2>
@@ -271,7 +271,11 @@ GET /users/{id}/orders        # 获取用户的订单列表
         <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
         <a href="#giscus-section">留下评论</a>
       </div>
-      <div id="giscus-section" data-giscus-loaded="false"></div>
+      <section class="author-bio">
+          <h4>关于作者</h4>
+          <p>AI自习室是由一群技术从业者维护的AI知识分享平台。我们关注AI工具、编程技术和开发者生态，致力于为中文开发者提供高质量的原创技术内容。<a href="/about.html">了解更多 →</a></p>
+        </section>
+        <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
     <aside class="article-sidebar">
       <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#restful设计原则">RESTful设计原则</a></li><li class="toc-h2"><a href="#资源命名">资源命名</a></li><li class="toc-h3"><a href="#命名规范">命名规范</a></li><li class="toc-h3"><a href="#最佳实践">最佳实践</a></li><li class="toc-h3"><a href="#常见反模式">常见反模式</a></li><li class="toc-h2"><a href="#http状态码">HTTP状态码</a></li><li class="toc-h3"><a href="#常用状态码">常用状态码</a></li><li class="toc-h3"><a href="#错误响应格式">错误响应格式</a></li><li class="toc-h2"><a href="#版本管理">版本管理</a></li><li class="toc-h3"><a href="#版本策略">版本策略</a></li><li class="toc-h3"><a href="#版本演进">版本演进</a></li><li class="toc-h2"><a href="#分页设计">分页设计</a></li><li class="toc-h3"><a href="#分页方案">分页方案</a></li><li class="toc-h3"><a href="#游标分页">游标分页</a></li><li class="toc-h2"><a href="#安全与规范">安全与规范</a></li></ul></nav>

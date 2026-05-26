@@ -58,14 +58,14 @@
       "image": "https://aidev.fit/images/covers/en/tools/postman-advanced.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "318",
+      "wordCount": "747",
       "keywords": "Technology, DevTools, Productivity",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "zh-CN",
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "AI自习室"},
+      "author": {"@type": "Person", "name": "AI自习室 编辑部"},
       "publisher": {
         "@type": "Organization",
         "name": "AI自习室",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tools/postman-advanced.html"},
-      "articleBody": "环境与变量管理   Postman的环境管理让API测试在不同配置间无缝切换。创建development、staging、production三个环境，分别设置base_url、api_key、token等变量。使用 {{variable}} 语法引用变量，切换环境时自动替换。    动态变量 ：Postman内置动态变量如 {{$timestamp}} 、 {{$randomUUID}} 、 {{$randomEmail}} ，在测试数据需要动态生成时非常有用。配合Pre-request Script可以自定义生成更复杂的动态数据。   Pre-request Script实战   Pre-request Script在请求发送前执行，用于复杂的前置操作。最常见的用法是自动获取Token：发送登录请求后将返回的Token设置在环境变量中，后续所有请求自动携带认证信息。   脚本示例： pm.sendRequest 方法在脚本中发起额外的HTTP请求获取签名参数。对于需要时间戳签名的API，在Pre-request中计算签名并设置变量，确保每次请求都有有效的签名。   测试断言编写   Tests标签中的脚本在响应返回后执行。使用pm.test定义测试用例，pm.expect进行断言。覆盖状态码检查、响应体结构验证、字段类型校验和响应时间监控。    pm.test(&quot;响应时间在200ms以内&quot;, () =&gt; {     pm.expect(pm.response.responseTime).to.be.below(200); }); pm.test(&quot;返回数据包含必要字段&quot;, () =&gt; {     const jsonData = pm.response.json();     pm.expect(jsonData).to.have.property(&quot;data&quot;);     pm.expect(jsonData.data.id).to.be.a(&quot;number&quot;); });      Collection Runner与CI集成   Collection Runner批量执行集合中的所有请求。配置数据文件（CSV或JSON）实现数据驱动测试，每次迭代使用不同的测试数据。    Newman 是Postman的命令行工具，可将集合集成到CI/CD流水线。使用 newman run collection.json -e environment.json --reporters cli,htmlextra 在构建过程中自动运行API测试。生成HTML测试报告，包含请求详情和断言结果。   API文档与团队协作   Postman可以将集合发布为API文档。为每个请求添加描述、参数说明和示例响应，生成交互式文档页面，支持直接\"Try it out\"发送测试请求。   团队协作方面，使用Postman Workspace共享集合和环境。结合Postman API将集合管理自动化，通过版本控制同步API变更。API变更时，使用版本对比功能查看差异并通知团队。"
+      "articleBody": "环境与变量管理   Postman的环境管理让API测试在不同配置间无缝切换。创建development、staging、production三个环境，分别设置base_url、api_key、token等变量。使用 {{variable}} 语法引用变量，切换环境时自动替换。    动态变量 ：Postman内置动态变量如 {{$timestamp}} 、 {{$randomUUID}} 、 {{$randomEmail}} ，在测试数据需要动态生成时非常有用。配合Pre-request Script可以自定义生成更复杂的动态数据。   Pre-request Script实战   Pre-request Script在请求发送前执行，用于复杂的前置操作。最常见的用法是自动获取Token：发送登录请求后将返回的Token设置在环境变量中，后续所有请求自动携带认证信息。   脚本示例： pm.sendRequest 方法在脚本中发起额外的HTTP请求获取签名参数。对于需要时间戳签名的API，在Pre-request中计算签名并设置变量，确保每次请求都有有效的签名。   测试断言编写   Tests标签中的脚本在响应返回后执行。使用pm.test定义测试用例，pm.expect进行断言。覆盖状态码检查、响应体结构验证、字段类型校验和响应时间监控。        pm  .  test  (  &quot;响应时间在200ms以内&quot;  ,     ()     =&gt;     {         pm  .  expect  (  pm  .  response  .  responseTime  ).  to  .  be  .  below  (  200  );   });   pm  .  test  (  &quot;返回数据包含必要字段&quot;  ,     ()     =&gt;     {         const     jsonData     =     pm  .  response  .  json  ();         pm  .  expect  (  jsonData  ).  to  .  have  .  property  (  &quot;data&quot;  );         pm  .  expect  (  jsonData  .  data  .  id  ).  to  .  be  .  a  (  &quot;number&quot;  );   });        Collection Runner与CI集成   Collection Runner批量执行集合中的所有请求。配置数据文件（CSV或JSON）实现数据驱动测试，每次迭代使用不同的测试数据。    Newman 是Postman的命令行工具，可将集合集成到CI/CD流水线。使用 newman run collection.json -e environment.json --reporters cli,htmlextra 在构建过程中自动运行API测试。生成HTML测试报告，包含请求详情和断言结果。   API文档与团队协作   Postman可以将集合发布为API文档。为每个请求添加描述、参数说明和示例响应，生成交互式文档页面，支持直接\"Try it out\"发送测试请求。   团队协作方面，使用Postman Workspace共享集合和环境。结合Postman API将集合管理自动化，通过版本控制同步API变更。API变更时，使用版本对比功能查看差异并通知团队。"
     }
     </script>
     <script type="application/ld+json">
@@ -115,15 +115,15 @@
           <span class="tag-cat">Productivity</span></div>
         <h1 class="article-title">Postman高级使用技巧</h1>
         <div class="article-meta">
-          <span class="author-name">By AI自习室</span>
+          <span class="author-name">By AI自习室 编辑部</span>
           <span class="meta-sep">·</span>
           <time datetime="2026-05-11">2026-05-11</time>
           <span class="meta-sep">·</span>
-          <span>1 分钟阅读</span>
+          <span>3 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>318 字</span>
+          <span>747 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tools/postman-advanced.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/postman-advanced.png" alt="Postman高级使用技巧" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（5）</summary><ol><li><a href="#环境与变量管理">环境与变量管理</a></li><li><a href="#pre-request-script实战">Pre-request Script实战</a></li><li><a href="#测试断言编写">测试断言编写</a></li><li><a href="#collection-runner与ci集成">Collection Runner与CI集成</a></li><li><a href="#api文档与团队协作">API文档与团队协作</a></li></ol></details>
@@ -135,15 +135,15 @@
 <p>脚本示例：<code>pm.sendRequest</code>方法在脚本中发起额外的HTTP请求获取签名参数。对于需要时间戳签名的API，在Pre-request中计算签名并设置变量，确保每次请求都有有效的签名。</p>
 <h2>测试断言编写</h2>
 <p>Tests标签中的脚本在响应返回后执行。使用pm.test定义测试用例，pm.expect进行断言。覆盖状态码检查、响应体结构验证、字段类型校验和响应时间监控。</p>
-<pre class="codehilite"><code class="language-javascript">pm.test(&quot;响应时间在200ms以内&quot;, () =&gt; {
-    pm.expect(pm.response.responseTime).to.be.below(200);
-});
-pm.test(&quot;返回数据包含必要字段&quot;, () =&gt; {
-    const jsonData = pm.response.json();
-    pm.expect(jsonData).to.have.property(&quot;data&quot;);
-    pm.expect(jsonData.data.id).to.be.a(&quot;number&quot;);
-});
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="nx">pm</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s2">&quot;响应时间在200ms以内&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">pm</span><span class="p">.</span><span class="nx">expect</span><span class="p">(</span><span class="nx">pm</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">responseTime</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">below</span><span class="p">(</span><span class="mf">200</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">pm</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s2">&quot;返回数据包含必要字段&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">jsonData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pm</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">pm</span><span class="p">.</span><span class="nx">expect</span><span class="p">(</span><span class="nx">jsonData</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">have</span><span class="p">.</span><span class="nx">property</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">pm</span><span class="p">.</span><span class="nx">expect</span><span class="p">(</span><span class="nx">jsonData</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">id</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
 
 <h2>Collection Runner与CI集成</h2>
 <p>Collection Runner批量执行集合中的所有请求。配置数据文件（CSV或JSON）实现数据驱动测试，每次迭代使用不同的测试数据。</p>
@@ -190,7 +190,11 @@ pm.test(&quot;返回数据包含必要字段&quot;, () =&gt; {
         <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
         <a href="#giscus-section">留下评论</a>
       </div>
-      <div id="giscus-section" data-giscus-loaded="false"></div>
+      <section class="author-bio">
+          <h4>关于作者</h4>
+          <p>AI自习室是由一群技术从业者维护的AI知识分享平台。我们关注AI工具、编程技术和开发者生态，致力于为中文开发者提供高质量的原创技术内容。<a href="/about.html">了解更多 →</a></p>
+        </section>
+        <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
     <aside class="article-sidebar">
       <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#环境与变量管理">环境与变量管理</a></li><li class="toc-h2"><a href="#pre-request-script实战">Pre-request Script实战</a></li><li class="toc-h2"><a href="#测试断言编写">测试断言编写</a></li><li class="toc-h2"><a href="#collection-runner与ci集成">Collection Runner与CI集成</a></li><li class="toc-h2"><a href="#api文档与团队协作">API文档与团队协作</a></li></ul></nav>

@@ -58,14 +58,14 @@
       "image": "https://aidev.fit/images/covers/en/ai/llm-fine-tuning.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "285",
+      "wordCount": "317",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "zh-CN",
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "AI自习室"},
+      "author": {"@type": "Person", "name": "AI自习室 编辑部"},
       "publisher": {
         "@type": "Organization",
         "name": "AI自习室",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/llm-fine-tuning.html"},
-      "articleBody": "微调方法概述   大语言模型的微调是将通用模型适配到特定领域或任务的关键技术。目前主流有三种微调范式：全量微调、LoRA和QLoRA，它们在资源消耗、效果和灵活性上各有优劣。   全量微调   全量微调会更新模型的所有参数，理论上能达到最佳效果，但对硬件要求极高。以LLaMA-7B为例，全量微调需要至少4张A100 80GB显卡。全量微调的适用场景包括：     需要彻底改变模型行为模式   有充足的GPU资源   追求极致性能     LoRA微调   LoRA（Low-Rank Adaptation）通过在原始权重旁插入低秩矩阵来微调，只更新这些新增的参数。核心优势包括：     训练参数量仅为原模型的0.1%-1%   单张消费级显卡即可微调7B模型   多个LoRA权重可以动态切换     在实际应用中，LoRA的秩（rank）设置为8-64之间，目标模块通常选择Attention层的Q和V矩阵。   QLoRA微调   QLoRA在LoRA的基础上引入4-bit量化，进一步降低显存占用。使用NF4数据类型的量化结合双重量化技术，可以在保持效果的前提下将显存需求降低4倍。   QLoRA的关键组件包括：      NF4量化 ：基于正态分布的4-bit数据类型，比普通int4更适合模型权重分布。    双重量化 ：对量化常数再次量化，进一步减少显存占用。    分页优化器 ：利用CPU内存作为显存溢出时的缓冲。     数据准备   数据质量决定了微调效果的上限。高质量的数据集应满足：      多样性与覆盖度 ：覆盖目标领域的各种场景    格式标准化 ：统一采用ChatML或ShareGPT格式    质量过滤 ：去除低质量、重复和有偏见的数据     推荐使用 datasets 库进行数据加载和预处理，配合 tokenizers 进行统一的分词处理。   评估方法   微调后的模型评估应从多个维度进行：      自动评估 ：使用BLEU、ROUGE、Perplexity等指标    人工评估 ：构建评估集进行盲测对比    任务特定评估 ：针对目标任务的准确率、召回率等     推荐使用 lm-evaluation-harness 框架进行标准化的模型评估，确保结果的可比性。   选择微调方法时，建议从QLoRA开始快速验证数据有效性，然后根据效果和资源决定是否升级到LoRA或全量微调。"
+      "articleBody": "微调方法概述   大语言模型的微调是将通用模型适配到特定领域或任务的关键技术。目前主流有三种微调范式：全量微调、LoRA和QLoRA，它们在资源消耗、效果和灵活性上各有优劣。   全量微调   全量微调会更新模型的所有参数，理论上能达到最佳效果，但对硬件要求极高。以LLaMA-7B为例，全量微调需要至少4张A100 80GB显卡。全量微调的适用场景包括：     需要彻底改变模型行为模式   有充足的GPU资源   追求极致性能     LoRA微调   LoRA（Low-Rank Adaptation）通过在原始权重旁插入低秩矩阵来微调，只更新这些新增的参数。核心优势包括：     训练参数量仅为原模型的0.1%-1%   单张消费级显卡即可微调7B模型   多个LoRA权重可以动态切换     在实际应用中，LoRA的秩（rank）设置为8-64之间，目标模块通常选择Attention层的Q和V矩阵。   QLoRA微调   QLoRA在LoRA的基础上引入4-bit量化，进一步降低显存占用。使用NF4数据类型的量化结合双重量化技术，可以在保持效果的前提下将显存需求降低4倍。   QLoRA的关键组件包括：      NF4量化 ：基于正态分布的4-bit数据类型，比普通int4更适合模型权重分布。    双重量化 ：对量化常数再次量化，进一步减少显存占用。    分页优化器 ：利用CPU内存作为显存溢出时的缓冲。     数据准备   数据质量决定了微调效果的上限。高质量的数据集应满足：      多样性与覆盖度 ：覆盖目标领域的各种场景    格式标准化 ：统一采用ChatML或ShareGPT格式    质量过滤 ：去除低质量、重复和有偏见的数据     推荐使用 datasets 库进行数据加载和预处理，配合 tokenizers 进行统一的分词处理。   评估方法   微调后的模型评估应从多个维度进行：      自动评估 ：使用BLEU、ROUGE、Perplexity等指标    人工评估 ：构建评估集进行盲测对比    任务特定评估 ：针对目标任务的准确率、召回率等     推荐使用 lm-evaluation-harness 框架进行标准化的模型评估，确保结果的可比性。   选择微调方法时，建议从QLoRA开始快速验证数据有效性，然后根据效果和资源决定是否升级到LoRA或全量微调。   实战建议   微调不是万能药。在决定微调之前，先尝试Prompt工程和Few-shot学习——很多时候精心设计的Prompt就能达到80%的效果。只有当Prompt优化已经穷尽、任务高度特定、且需要高频调用时才值得投入微调。微调失败的头号原因是训练数据质量问题，花在数据清洗上的时间比调参更重要。"
     }
     </script>
     <script type="application/ld+json">
@@ -115,7 +115,7 @@
           <span class="tag-cat">LLM</span></div>
         <h1 class="article-title">LLM微调实战：LoRA vs QLoRA vs 全量微调</h1>
         <div class="article-meta">
-          <span class="author-name">By AI自习室</span>
+          <span class="author-name">By AI自习室 编辑部</span>
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
@@ -123,10 +123,10 @@
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>285 字</span>
+          <span>317 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/llm-fine-tuning.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/llm-fine-tuning.png" alt="LLM微调实战：LoRA vs QLoRA vs 全量微调" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-        <details class="article-toc-inline"><summary>目录（6）</summary><ol><li><a href="#微调方法概述">微调方法概述</a></li><li><a href="#全量微调">全量微调</a></li><li><a href="#lora微调">LoRA微调</a></li><li><a href="#qlora微调">QLoRA微调</a></li><li><a href="#数据准备">数据准备</a></li><li><a href="#评估方法">评估方法</a></li></ol></details>
+        <details class="article-toc-inline"><summary>目录（7）</summary><ol><li><a href="#微调方法概述">微调方法概述</a></li><li><a href="#全量微调">全量微调</a></li><li><a href="#lora微调">LoRA微调</a></li><li><a href="#qlora微调">QLoRA微调</a></li><li><a href="#数据准备">数据准备</a></li><li><a href="#评估方法">评估方法</a></li><li><a href="#实战建议">实战建议</a></li></ol></details>
         <div class="article-body"><h2>微调方法概述</h2>
 <p>大语言模型的微调是将通用模型适配到特定领域或任务的关键技术。目前主流有三种微调范式：全量微调、LoRA和QLoRA，它们在资源消耗、效果和灵活性上各有优劣。</p>
 <h2>全量微调</h2>
@@ -168,7 +168,9 @@
 <li><strong>任务特定评估</strong>：针对目标任务的准确率、召回率等</li>
 </ol>
 <p>推荐使用<code>lm-evaluation-harness</code>框架进行标准化的模型评估，确保结果的可比性。</p>
-<p>选择微调方法时，建议从QLoRA开始快速验证数据有效性，然后根据效果和资源决定是否升级到LoRA或全量微调。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
+<p>选择微调方法时，建议从QLoRA开始快速验证数据有效性，然后根据效果和资源决定是否升级到LoRA或全量微调。</p>
+<h2>实战建议</h2>
+<p>微调不是万能药。在决定微调之前，先尝试Prompt工程和Few-shot学习——很多时候精心设计的Prompt就能达到80%的效果。只有当Prompt优化已经穷尽、任务高度特定、且需要高频调用时才值得投入微调。微调失败的头号原因是训练数据质量问题，花在数据清洗上的时间比调参更重要。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
 <a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
 <a class="related-card" href="/ai/ai-agents-introduction.html"><span class="related-title">AI Agent 入门指南：架构、工具与最佳实践</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
 <a class="related-card" href="/ai/ai-anquan.html"><span class="related-title">AI安全入门：提示注入防御、输出验证、权限控制</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>
@@ -208,10 +210,14 @@
         <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
         <a href="#giscus-section">留下评论</a>
       </div>
-      <div id="giscus-section" data-giscus-loaded="false"></div>
+      <section class="author-bio">
+          <h4>关于作者</h4>
+          <p>AI自习室是由一群技术从业者维护的AI知识分享平台。我们关注AI工具、编程技术和开发者生态，致力于为中文开发者提供高质量的原创技术内容。<a href="/about.html">了解更多 →</a></p>
+        </section>
+        <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
     <aside class="article-sidebar">
-      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#微调方法概述">微调方法概述</a></li><li class="toc-h2"><a href="#全量微调">全量微调</a></li><li class="toc-h2"><a href="#lora微调">LoRA微调</a></li><li class="toc-h2"><a href="#qlora微调">QLoRA微调</a></li><li class="toc-h2"><a href="#数据准备">数据准备</a></li><li class="toc-h2"><a href="#评估方法">评估方法</a></li></ul></nav>
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#微调方法概述">微调方法概述</a></li><li class="toc-h2"><a href="#全量微调">全量微调</a></li><li class="toc-h2"><a href="#lora微调">LoRA微调</a></li><li class="toc-h2"><a href="#qlora微调">QLoRA微调</a></li><li class="toc-h2"><a href="#数据准备">数据准备</a></li><li class="toc-h2"><a href="#评估方法">评估方法</a></li><li class="toc-h2"><a href="#实战建议">实战建议</a></li></ul></nav>
     </aside>
   </div>
 </main>

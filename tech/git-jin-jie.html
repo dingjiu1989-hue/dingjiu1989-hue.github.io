@@ -58,14 +58,14 @@
       "image": "https://aidev.fit/images/covers/en/tech/git-jin-jie.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "400",
+      "wordCount": "597",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "zh-CN",
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "AI自习室"},
+      "author": {"@type": "Person", "name": "AI自习室 编辑部"},
       "publisher": {
         "@type": "Organization",
         "name": "AI自习室",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/git-jin-jie.html"},
-      "articleBody": "超越基础操作   当团队规模扩大或项目历史变得复杂时，基础的Git操作已不够用。交互式Rebase、Bisect调试和子模块管理是通往Git高手的必经之路。   交互式Rebase   交互式Rebase是整理提交历史最强大的工具。   常用命令    git rebase -i HEAD~5      进入交互模式后，可以对最近5个提交执行以下操作：      pick ：保留该提交    reword ：修改提交信息    squash ：合并到上一个提交    fixup ：合并到上一个提交，丢弃提交信息    drop ：删除该提交    edit ：暂停rebase，允许修改提交内容     实践技巧    合并草稿提交 ：开发过程中的临时提交在合并前使用squash合并为一个完整提交，保持历史清晰。    重新排序 ：将相关的修改挪到一起，便于Code Review。   注意事项     永远不要对已推送到公共分支的提交执行Rebase   Rebase可能产生冲突，需逐一解决   使用 git rebase --abort 可以安全退出     Bisect调试   Git Bisect利用二分查找算法快速定位引入Bug的提交。   使用流程    # 开始二分查找 git bisect start  # 标记当前版本为bad git bisect bad  # 标记一个已知的ok版本 git bisect good v1.0  # Git会自动切换到一个中间提交 # 测试后标记 git bisect good  # 如果当前版本没有Bug git bisect bad   # 如果当前版本有Bug  # 重复直到定位到首个bad提交 # 完成后退出 git bisect reset      自动化   对于可以脚本化测试的Bug，使用自动Bisect：    git bisect run npm test      Git会自动二分查找，每次运行测试脚本并根据退出码判断好坏。这可以将数小时的排查工作缩短到几分钟。   子模块管理   当项目依赖其他仓库的特定版本时，子模块是标准解决方案。   基本操作    # 添加子模块 git submodule add https://github.com/example/lib.git libs/lib  # 初始化子模块 git submodule init  # 更新子模块到最新提交 git submodule update --remote      替代方案   Git Subtree提供了另一种依赖管理方式，将外部仓库的代码直接嵌入到主仓库，适合对版本控制要求更严格的场景。   Subtree的优势在于所有代码都在一个仓库中，团队成员不需要额外学习子模块操作。   Git工作流建议      小而频繁的提交 ：每个提交做好一件事    有意义的提交信息 ：说明Why而非What    提交前Review自己的diff ：避免残留调试代码    定期拉取最新代码 ：减少合并冲突     掌握这些进阶技巧后，处理复杂的Git场景将变得游刃有余。"
+      "articleBody": "超越基础操作   当团队规模扩大或项目历史变得复杂时，基础的Git操作已不够用。交互式Rebase、Bisect调试和子模块管理是通往Git高手的必经之路。   交互式Rebase   交互式Rebase是整理提交历史最强大的工具。   常用命令       git rebase -i HEAD~5       进入交互模式后，可以对最近5个提交执行以下操作：      pick ：保留该提交    reword ：修改提交信息    squash ：合并到上一个提交    fixup ：合并到上一个提交，丢弃提交信息    drop ：删除该提交    edit ：暂停rebase，允许修改提交内容     实践技巧    合并草稿提交 ：开发过程中的临时提交在合并前使用squash合并为一个完整提交，保持历史清晰。    重新排序 ：将相关的修改挪到一起，便于Code Review。   注意事项     永远不要对已推送到公共分支的提交执行Rebase   Rebase可能产生冲突，需逐一解决   使用 git rebase --abort 可以安全退出     Bisect调试   Git Bisect利用二分查找算法快速定位引入Bug的提交。   使用流程        # 开始二分查找  git   bisect   start   # 标记当前版本为bad  git   bisect   bad   # 标记一个已知的ok版本  git   bisect   good   v1.0   # Git会自动切换到一个中间提交   # 测试后标记  git   bisect   good     # 如果当前版本没有Bug  git   bisect   bad      # 如果当前版本有Bug    # 重复直到定位到首个bad提交   # 完成后退出  git   bisect   reset       自动化   对于可以脚本化测试的Bug，使用自动Bisect：       git   bisect   run   npm    test        Git会自动二分查找，每次运行测试脚本并根据退出码判断好坏。这可以将数小时的排查工作缩短到几分钟。   子模块管理   当项目依赖其他仓库的特定版本时，子模块是标准解决方案。   基本操作        # 添加子模块  git   submodule   add   https://github.com/example/lib.git   libs/lib   # 初始化子模块  git   submodule   init   # 更新子模块到最新提交  git   submodule   update   --remote       替代方案   Git Subtree提供了另一种依赖管理方式，将外部仓库的代码直接嵌入到主仓库，适合对版本控制要求更严格的场景。   Subtree的优势在于所有代码都在一个仓库中，团队成员不需要额外学习子模块操作。   Git工作流建议      小而频繁的提交 ：每个提交做好一件事    有意义的提交信息 ：说明Why而非What    提交前Review自己的diff ：避免残留调试代码    定期拉取最新代码 ：减少合并冲突     掌握这些进阶技巧后，处理复杂的Git场景将变得游刃有余。"
     }
     </script>
     <script type="application/ld+json">
@@ -115,7 +115,7 @@
           <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Git进阶：交互式Rebase、Bisect调试、子模块管理</h1>
         <div class="article-meta">
-          <span class="author-name">By AI自习室</span>
+          <span class="author-name">By AI自习室 编辑部</span>
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
@@ -123,7 +123,7 @@
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>400 字</span>
+          <span>597 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/git-jin-jie.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/git-jin-jie.png" alt="Git进阶：交互式Rebase、Bisect调试、子模块管理" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（12）</summary><ol><li><a href="#超越基础操作">超越基础操作</a></li><li><a href="#交互式rebase">交互式Rebase</a></li><li><a href="#常用命令">常用命令</a></li><li><a href="#实践技巧">实践技巧</a></li><li><a href="#注意事项">注意事项</a></li><li><a href="#bisect调试">Bisect调试</a></li><li><a href="#使用流程">使用流程</a></li><li><a href="#自动化">自动化</a></li><li><a href="#子模块管理">子模块管理</a></li><li><a href="#基本操作">基本操作</a></li><li><a href="#替代方案">替代方案</a></li><li><a href="#git工作流建议">Git工作流建议</a></li></ol></details>
@@ -132,8 +132,8 @@
 <h2>交互式Rebase</h2>
 <p>交互式Rebase是整理提交历史最强大的工具。</p>
 <h3>常用命令</h3>
-<pre class="codehilite"><code>git rebase -i HEAD~5
-</code></pre>
+<div class="codehilite"><pre><span></span><code>git rebase -i HEAD~5
+</code></pre></div>
 
 <p>进入交互模式后，可以对最近5个提交执行以下操作：</p>
 <ul>
@@ -156,43 +156,43 @@
 <h2>Bisect调试</h2>
 <p>Git Bisect利用二分查找算法快速定位引入Bug的提交。</p>
 <h3>使用流程</h3>
-<pre class="codehilite"><code class="language-bash"># 开始二分查找
-git bisect start
+<div class="codehilite"><pre><span></span><code><span class="c1"># 开始二分查找</span>
+git<span class="w"> </span>bisect<span class="w"> </span>start
 
-# 标记当前版本为bad
-git bisect bad
+<span class="c1"># 标记当前版本为bad</span>
+git<span class="w"> </span>bisect<span class="w"> </span>bad
 
-# 标记一个已知的ok版本
-git bisect good v1.0
+<span class="c1"># 标记一个已知的ok版本</span>
+git<span class="w"> </span>bisect<span class="w"> </span>good<span class="w"> </span>v1.0
 
-# Git会自动切换到一个中间提交
-# 测试后标记
-git bisect good  # 如果当前版本没有Bug
-git bisect bad   # 如果当前版本有Bug
+<span class="c1"># Git会自动切换到一个中间提交</span>
+<span class="c1"># 测试后标记</span>
+git<span class="w"> </span>bisect<span class="w"> </span>good<span class="w">  </span><span class="c1"># 如果当前版本没有Bug</span>
+git<span class="w"> </span>bisect<span class="w"> </span>bad<span class="w">   </span><span class="c1"># 如果当前版本有Bug</span>
 
-# 重复直到定位到首个bad提交
-# 完成后退出
-git bisect reset
-</code></pre>
+<span class="c1"># 重复直到定位到首个bad提交</span>
+<span class="c1"># 完成后退出</span>
+git<span class="w"> </span>bisect<span class="w"> </span>reset
+</code></pre></div>
 
 <h3>自动化</h3>
 <p>对于可以脚本化测试的Bug，使用自动Bisect：</p>
-<pre class="codehilite"><code class="language-bash">git bisect run npm test
-</code></pre>
+<div class="codehilite"><pre><span></span><code>git<span class="w"> </span>bisect<span class="w"> </span>run<span class="w"> </span>npm<span class="w"> </span><span class="nb">test</span>
+</code></pre></div>
 
 <p>Git会自动二分查找，每次运行测试脚本并根据退出码判断好坏。这可以将数小时的排查工作缩短到几分钟。</p>
 <h2>子模块管理</h2>
 <p>当项目依赖其他仓库的特定版本时，子模块是标准解决方案。</p>
 <h3>基本操作</h3>
-<pre class="codehilite"><code class="language-bash"># 添加子模块
-git submodule add https://github.com/example/lib.git libs/lib
+<div class="codehilite"><pre><span></span><code><span class="c1"># 添加子模块</span>
+git<span class="w"> </span>submodule<span class="w"> </span>add<span class="w"> </span>https://github.com/example/lib.git<span class="w"> </span>libs/lib
 
-# 初始化子模块
-git submodule init
+<span class="c1"># 初始化子模块</span>
+git<span class="w"> </span>submodule<span class="w"> </span>init
 
-# 更新子模块到最新提交
-git submodule update --remote
-</code></pre>
+<span class="c1"># 更新子模块到最新提交</span>
+git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--remote
+</code></pre></div>
 
 <h3>替代方案</h3>
 <p>Git Subtree提供了另一种依赖管理方式，将外部仓库的代码直接嵌入到主仓库，适合对版本控制要求更严格的场景。</p>
@@ -244,7 +244,11 @@ git submodule update --remote
         <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
         <a href="#giscus-section">留下评论</a>
       </div>
-      <div id="giscus-section" data-giscus-loaded="false"></div>
+      <section class="author-bio">
+          <h4>关于作者</h4>
+          <p>AI自习室是由一群技术从业者维护的AI知识分享平台。我们关注AI工具、编程技术和开发者生态，致力于为中文开发者提供高质量的原创技术内容。<a href="/about.html">了解更多 →</a></p>
+        </section>
+        <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
     <aside class="article-sidebar">
       <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#超越基础操作">超越基础操作</a></li><li class="toc-h2"><a href="#交互式rebase">交互式Rebase</a></li><li class="toc-h3"><a href="#常用命令">常用命令</a></li><li class="toc-h3"><a href="#实践技巧">实践技巧</a></li><li class="toc-h3"><a href="#注意事项">注意事项</a></li><li class="toc-h2"><a href="#bisect调试">Bisect调试</a></li><li class="toc-h3"><a href="#使用流程">使用流程</a></li><li class="toc-h3"><a href="#自动化">自动化</a></li><li class="toc-h2"><a href="#子模块管理">子模块管理</a></li><li class="toc-h3"><a href="#基本操作">基本操作</a></li><li class="toc-h3"><a href="#替代方案">替代方案</a></li><li class="toc-h2"><a href="#git工作流建议">Git工作流建议</a></li></ul></nav>

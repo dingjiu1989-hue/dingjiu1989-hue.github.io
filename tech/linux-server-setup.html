@@ -48,7 +48,7 @@
     <link rel="canonical" href="https://aidev.fit/tech/linux-server-setup.html"><link rel="prev" href="https://aidev.fit/tech/docker-kubernetes-guide.html">
 <link rel="next" href="https://aidev.fit/tech/web-performance.html">
 
-    <meta name="robots" content="noindex, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -58,14 +58,14 @@
       "image": "https://aidev.fit/images/covers/en/tech/linux-server-setup.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "280",
+      "wordCount": "315",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "zh-CN",
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "AI自习室"},
+      "author": {"@type": "Person", "name": "AI自习室 编辑部"},
       "publisher": {
         "@type": "Organization",
         "name": "AI自习室",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/linux-server-setup.html"},
-      "articleBody": "初始登录与系统更新   拿到新服务器后的第一件事是更新系统。使用 apt update &amp;&amp; apt upgrade -y （Debian/Ubuntu）或 yum update （CentOS/RHEL）将所有软件包更新到最新版本。安装必要的工具集：curl、wget、vim、git、htop、net-tools等。   SSH安全加固   SSH是服务器的首要攻击入口，必须进行加固。第一步，修改默认端口22为高位端口（如2222），减少自动化扫描攻击。第二步，禁用root密码登录，使用密钥认证。编辑 /etc/ssh/sshd_config 设置 PasswordAuthentication no 和 PermitRootLogin prohibit-password 。    密钥管理 ：生成ED25519类型密钥对，相比RSA更安全且性能更好。将公钥添加到 ~/.ssh/authorized_keys ，私钥保存在本地并设置600权限。多个团队成员使用时，每个成员添加独立的公钥，便于权限回收。   防火墙配置   使用iptables或ufw配置防火墙规则。基础策略为默认拒绝入站流量，仅放行必要端口。SSH端口、Web服务（80/443）和运维端口按需开启。   高级配置包括IP白名单（仅允许公司IP访问SSH）、连接频率限制以及端口敲门（Port Knocking）机制。使用fail2ban工具自动封禁多次登录失败的IP地址。   用户与权限管理   遵循最小权限原则。创建普通用户用于日常操作，仅在需要时使用sudo提权。配置sudoers文件时指定具体可执行的命令，避免ALL权限溢出。   示例配置： deploy ALL=(ALL) /usr/bin/systemctl, /usr/bin/journalctl 限制部署用户只能管理系统服务和查看日志。   系统监控与日志   安装系统监控工具：使用netdata或Prometheus Node Exporter采集系统指标，包括CPU使用率、内存占用、磁盘IO和网络流量。配置日志轮转（logrotate）避免日志文件撑满磁盘。    关键指标 ：设置磁盘使用率超过80%自动告警，内存交换分区使用异常时通知运维。使用sysstat工具包采集历史性能数据，便于回溯分析。   开发环境搭建   根据项目需求安装运行时环境。Node.js推荐使用nvm管理多版本；Python使用pyenv或conda管理虚拟环境；Go直接从官网下载二进制包。使用Docker部署应用时，安装Docker CE并配置非root用户运行权限。   所有配置操作建议使用Ansible或Shell脚本实现自动化，确保每次搭建新服务器的流程一致且可重复。将配置脚本纳入版本管理，环境变更应有完整的审计记录。"
+      "articleBody": "初始登录与系统更新   拿到新服务器后的第一件事是更新系统。使用 apt update &amp;&amp; apt upgrade -y （Debian/Ubuntu）或 yum update （CentOS/RHEL）将所有软件包更新到最新版本。安装必要的工具集：curl、wget、vim、git、htop、net-tools等。   SSH安全加固   SSH是服务器的首要攻击入口，必须进行加固。第一步，修改默认端口22为高位端口（如2222），减少自动化扫描攻击。第二步，禁用root密码登录，使用密钥认证。编辑 /etc/ssh/sshd_config 设置 PasswordAuthentication no 和 PermitRootLogin prohibit-password 。    密钥管理 ：生成ED25519类型密钥对，相比RSA更安全且性能更好。将公钥添加到 ~/.ssh/authorized_keys ，私钥保存在本地并设置600权限。多个团队成员使用时，每个成员添加独立的公钥，便于权限回收。   防火墙配置   使用iptables或ufw配置防火墙规则。基础策略为默认拒绝入站流量，仅放行必要端口。SSH端口、Web服务（80/443）和运维端口按需开启。   高级配置包括IP白名单（仅允许公司IP访问SSH）、连接频率限制以及端口敲门（Port Knocking）机制。使用fail2ban工具自动封禁多次登录失败的IP地址。   用户与权限管理   遵循最小权限原则。创建普通用户用于日常操作，仅在需要时使用sudo提权。配置sudoers文件时指定具体可执行的命令，避免ALL权限溢出。   示例配置： deploy ALL=(ALL) /usr/bin/systemctl, /usr/bin/journalctl 限制部署用户只能管理系统服务和查看日志。   系统监控与日志   安装系统监控工具：使用netdata或Prometheus Node Exporter采集系统指标，包括CPU使用率、内存占用、磁盘IO和网络流量。配置日志轮转（logrotate）避免日志文件撑满磁盘。    关键指标 ：设置磁盘使用率超过80%自动告警，内存交换分区使用异常时通知运维。使用sysstat工具包采集历史性能数据，便于回溯分析。   开发环境搭建   根据项目需求安装运行时环境。Node.js推荐使用nvm管理多版本；Python使用pyenv或conda管理虚拟环境；Go直接从官网下载二进制包。使用Docker部署应用时，安装Docker CE并配置非root用户运行权限。   自动安全更新   配置无人值守安全更新可大幅降低漏洞风险。Debian/Ubuntu下安装 unattended-upgrades ，设置仅自动应用安全补丁。配合 apticron 工具在有可用更新时发送邮件通知。生产环境建议设置维护窗口，在低峰时段自动重启受影响的服务。   所有配置操作建议使用Ansible或Shell脚本实现自动化，确保每次搭建新服务器的流程一致且可重复。将配置脚本纳入版本管理，环境变更应有完整的审计记录。"
     }
     </script>
     <script type="application/ld+json">
@@ -115,7 +115,7 @@
           <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Linux服务器初始化配置</h1>
         <div class="article-meta">
-          <span class="author-name">By AI自习室</span>
+          <span class="author-name">By AI自习室 编辑部</span>
           <span class="meta-sep">·</span>
           <time datetime="2026-05-11">2026-05-11</time>
           <span class="meta-sep">·</span>
@@ -123,10 +123,10 @@
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>280 字</span>
+          <span>315 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/linux-server-setup.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/linux-server-setup.png" alt="Linux服务器初始化配置" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-        <details class="article-toc-inline"><summary>目录（6）</summary><ol><li><a href="#初始登录与系统更新">初始登录与系统更新</a></li><li><a href="#ssh安全加固">SSH安全加固</a></li><li><a href="#防火墙配置">防火墙配置</a></li><li><a href="#用户与权限管理">用户与权限管理</a></li><li><a href="#系统监控与日志">系统监控与日志</a></li><li><a href="#开发环境搭建">开发环境搭建</a></li></ol></details>
+        <details class="article-toc-inline"><summary>目录（7）</summary><ol><li><a href="#初始登录与系统更新">初始登录与系统更新</a></li><li><a href="#ssh安全加固">SSH安全加固</a></li><li><a href="#防火墙配置">防火墙配置</a></li><li><a href="#用户与权限管理">用户与权限管理</a></li><li><a href="#系统监控与日志">系统监控与日志</a></li><li><a href="#开发环境搭建">开发环境搭建</a></li><li><a href="#自动安全更新">自动安全更新</a></li></ol></details>
         <div class="article-body"><h2>初始登录与系统更新</h2>
 <p>拿到新服务器后的第一件事是更新系统。使用<code>apt update &amp;&amp; apt upgrade -y</code>（Debian/Ubuntu）或<code>yum update</code>（CentOS/RHEL）将所有软件包更新到最新版本。安装必要的工具集：curl、wget、vim、git、htop、net-tools等。</p>
 <h2>SSH安全加固</h2>
@@ -143,6 +143,8 @@
 <p><strong>关键指标</strong>：设置磁盘使用率超过80%自动告警，内存交换分区使用异常时通知运维。使用sysstat工具包采集历史性能数据，便于回溯分析。</p>
 <h2>开发环境搭建</h2>
 <p>根据项目需求安装运行时环境。Node.js推荐使用nvm管理多版本；Python使用pyenv或conda管理虚拟环境；Go直接从官网下载二进制包。使用Docker部署应用时，安装Docker CE并配置非root用户运行权限。</p>
+<h2>自动安全更新</h2>
+<p>配置无人值守安全更新可大幅降低漏洞风险。Debian/Ubuntu下安装<code>unattended-upgrades</code>，设置仅自动应用安全补丁。配合<code>apticron</code>工具在有可用更新时发送邮件通知。生产环境建议设置维护窗口，在低峰时段自动重启受影响的服务。</p>
 <p>所有配置操作建议使用Ansible或Shell脚本实现自动化，确保每次搭建新服务器的流程一致且可重复。将配置脚本纳入版本管理，环境变更应有完整的审计记录。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
 <a class="related-card" href="/tech/ci-cd-liu-cheng.html"><span class="related-title">CI/CD流水线设计：GitHub Actions从入门到生产级配置</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
 <a class="related-card" href="/tech/code-review.html"><span class="related-title">Code Review最佳实践：流程、规范、工具、团队文化</span><span class="related-meta">技术教程 · 2026-05-12</span></a>
@@ -183,10 +185,14 @@
         <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
         <a href="#giscus-section">留下评论</a>
       </div>
-      <div id="giscus-section" data-giscus-loaded="false"></div>
+      <section class="author-bio">
+          <h4>关于作者</h4>
+          <p>AI自习室是由一群技术从业者维护的AI知识分享平台。我们关注AI工具、编程技术和开发者生态，致力于为中文开发者提供高质量的原创技术内容。<a href="/about.html">了解更多 →</a></p>
+        </section>
+        <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
     <aside class="article-sidebar">
-      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#初始登录与系统更新">初始登录与系统更新</a></li><li class="toc-h2"><a href="#ssh安全加固">SSH安全加固</a></li><li class="toc-h2"><a href="#防火墙配置">防火墙配置</a></li><li class="toc-h2"><a href="#用户与权限管理">用户与权限管理</a></li><li class="toc-h2"><a href="#系统监控与日志">系统监控与日志</a></li><li class="toc-h2"><a href="#开发环境搭建">开发环境搭建</a></li></ul></nav>
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#初始登录与系统更新">初始登录与系统更新</a></li><li class="toc-h2"><a href="#ssh安全加固">SSH安全加固</a></li><li class="toc-h2"><a href="#防火墙配置">防火墙配置</a></li><li class="toc-h2"><a href="#用户与权限管理">用户与权限管理</a></li><li class="toc-h2"><a href="#系统监控与日志">系统监控与日志</a></li><li class="toc-h2"><a href="#开发环境搭建">开发环境搭建</a></li><li class="toc-h2"><a href="#自动安全更新">自动安全更新</a></li></ul></nav>
     </aside>
   </div>
 </main>

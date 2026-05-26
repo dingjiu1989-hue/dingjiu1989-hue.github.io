@@ -25,6 +25,8 @@ XMind| 专业思维导图| 基础免费| 桌面版支持
   * **头脑风暴和流程图** → Miro 或 Excalidraw。前者适合团队，后者适合个人快速画草稿。
   * **考试复习/读书笔记** → XMind。传统思维导图工具中最成熟的，模板丰富。
 
+选型提示 不要同时使用太多工具——工具切换的认知成本往往超过工具本身的效率提升。建议选2个互补的工具组合，如 Obsidian + Excalidraw，覆盖文字笔记和白板思考两个核心场景即可。
+
 📖 相关推荐
 
   * [Notion 完全使用指南：从入门到精通](<https://dingjiu1989-hue.github.io/zh/tools/notion-complete-guide.html>)
