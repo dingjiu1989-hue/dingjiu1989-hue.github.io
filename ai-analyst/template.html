@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- REPLACE: Report title (used in <title> and og:title) -->
+    <title>{{TITLE}} — AI自习室</title>
+    <!-- REPLACE: Meta description (120-160 chars) -->
+    <meta name="description" content="{{DESCRIPTION}}">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+/* ============================================================
+   AI分析师 — 深度研究报告统一样式 v1.0
+   基于特斯拉、华虹半导体、小米集团三份报告提炼
+   ============================================================ */
+
+/* 1. 全局基础 */
+body {
+    line-height: 1.8;
+    color: #1f2937;
+    background-color: #FFFFFF;
+}
+
+.prose-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 80px 50px 80px 50px;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    line-height: 1.8;
+    text-align: left;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+/* 2. 标题层级 (!important 防 Tailwind 覆盖) */
+h1.report-title {
+    font-size: 2.5rem !important;
+    font-weight: 800;
+    color: #000000;
+    line-height: 1.2;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.8rem !important;
+    font-weight: 700;
+    color: #111;
+    margin-top: 2.5rem !important;
+    margin-bottom: 1.5rem !important;
+    border-bottom: 2px solid #F3F4F6;
+    padding-bottom: 0.5rem;
+}
+
+h3 {
+    font-size: 1.4rem !important;
+    font-weight: 600;
+    color: #374151;
+    margin-top: 2rem !important;
+    margin-bottom: 1rem !important;
+}
+
+h4 {
+    font-size: 1.1rem !important;
+    font-weight: 600;
+    color: #374151;
+    margin-top: 1.5rem !important;
+    margin-bottom: 0.8rem !important;
+}
+
+/* 3. 正文 */
+p {
+    font-size: 1.05rem !important;
+    margin-bottom: 1.25em !important;
+    text-align: left;
+    color: #333;
+}
+
+strong { font-weight: 700 !important; }
+
+.prose-container ul, .prose-container ol {
+    list-style: revert;
+    padding-left: 1.75rem;
+    margin: 1.5em 0 !important;
+    font-size: 1.05rem;
+}
+.prose-container li {
+    margin-bottom: 0.8em !important;
+    padding-left: 0.5rem;
+}
+
+/* 4. 组件容器：widget-box */
+.widget-box {
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    background: #FAFAFA;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    margin: 2rem 0;
+    overflow: auto;
+    max-width: 100%;
+}
+.widget-header {
+    background: #F9FAFB;
+    padding: 10px 16px;
+    border-bottom: 1px solid #E5E7EB;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #4B5563;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.05em;
+}
+.widget-body {
+    padding: 20px;
+    font-size: 0.95rem;
+}
+
+/* 5. 图表容器 */
+.chart-container {
+    position: relative;
+    height: 250px;
+    width: 100%;
+}
+.table-container { overflow: auto; }
+
+/* 6. 技术指标网格 */
+.indicator-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: center;
+}
+.indicator-item {
+    background: #F9FAFB;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #F3F4F6;
+}
+.indicator-label { font-size: 0.75rem; color: #6B7280; margin-bottom: 0.25rem; }
+.indicator-value { font-size: 1.25rem; font-weight: 700; color: #111827; }
+.indicator-signal { font-size: 0.7rem; font-weight: 700; padding: 2px 6px; border-radius: 99px; }
+.signal-buy  { background-color: #D1FAE5; color: #065F46; }
+.signal-sell { background-color: #FEE2E2; color: #991B1B; }
+.signal-neutral { background-color: #E5E7EB; color: #374151; }
+
+/* 7. 表格 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2em 0 !important;
+    font-size: 0.9rem;
+}
+th, td {
+    border: 1px solid #E5E7EB;
+    padding: 10px 12px;
+    text-align: left;
+}
+th {
+    background-color: #F9FAFB;
+    font-weight: 600;
+    color: #4B5563;
+}
+tr:nth-child(even) { background-color: #F9FAFB; }
+
+/* 8. 参考来源列表 */
+.references {
+    font-size: 0.85rem;
+    color: #4B5563;
+    line-height: 1.6;
+}
+.references li {
+    margin-bottom: 0.3em !important;
+    word-break: break-all;
+}
+.references a { color: #0969da; }
+
+/* 9. 移动端 */
+@media (max-width: 768px) {
+    .prose-container {
+        padding: 20px;
+        margin: 20px auto;
+        line-height: 1.7;
+    }
+    h1.report-title { font-size: 1.8rem !important; }
+    h2 { font-size: 1.25rem !important; }
+    h3 { font-size: 1.1rem !important; }
+    h4 { font-size: 1rem !important; }
+    p  { font-size: 0.95rem !important; }
+    .prose-container ul, .prose-container ol {
+        padding-left: 1rem;
+        font-size: 0.95rem;
+    }
+}
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="prose-container">
+
+        <!-- ============================================================
+        HEADER: 报告头部
+        替换: {{COMPANY_NAME}} {{BADGE_COLOR}} {{TICKER}}
+        ============================================================ -->
+        <header class="flex flex-col items-center text-center">
+            <div class="flex gap-3 mb-8">
+                <span class="px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-widest rounded">Deep Research</span>
+                <!-- BADGE_COLOR options: blue-600, orange-600, green-600, red-600, purple-600 -->
+                <span class="px-3 py-1 bg-{{BADGE_COLOR}} text-white text-xs font-bold uppercase tracking-widest rounded">{{COMPANY_NAME}}</span>
+            </div>
+            <h1 class="report-title">{{FULL_TITLE}}</h1>
+            <div class="flex items-center text-sm text-gray-500 font-sans mb-4 border-t border-gray-100 pt-4 mt-4">
+                <div class="mr-8"><span class="font-bold">日期:</span><script>document.write(new Date().toLocaleDateString('zh-CN'))</script></div>
+                <div><span class="font-bold">股票:</span> {{TICKER}}</div>
+            </div>
+        </header>
+
+        <!-- ============================================================
+        EXECUTIVE SUMMARY: 核心摘要 (3-column dark box)
+        替换: {{SUMMARY_1}} {{SUMMARY_2}} {{SUMMARY_3}}
+        ============================================================ -->
+        <div class="bg-gray-800 text-white p-8 rounded-xl shadow-lg mb-4 relative overflow-hidden">
+            <h3 class="text-xl font-bold text-white flex items-center gap-3 border-b border-gray-700 pb-4 !mt-0 !mb-6">
+                <i class="fas fa-bolt text-yellow-400"></i>核心摘要
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
+                <div>
+                    <div class="text-sm text-gray-400 uppercase mb-2 font-bold">{{SUMMARY_LABEL_1}}</div>
+                    <div class="text-base text-gray-200 leading-relaxed">{{SUMMARY_1}}</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-400 uppercase mb-2 font-bold">{{SUMMARY_LABEL_2}}</div>
+                    <div class="text-base text-gray-200 leading-relaxed">{{SUMMARY_2}}</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-400 uppercase mb-2 font-bold">{{SUMMARY_LABEL_3}}</div>
+                    <div class="text-base text-gray-200 leading-relaxed">{{SUMMARY_3}}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        REPORT BODY: 8 章节内容
+        按需使用以下组件模式
+        ============================================================ -->
+        {{CONTENT}}
+
+        <!-- ============================================================
+        COMPONENT REFERENCE (删除此注释块后再发布)
+        ----------
+
+        [数据图表]
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-chart-bar"></i> Data Insight: 图表标题</div>
+            <div class="widget-body">
+                <div class="chart-container" style="height:200px">
+                    <canvas id="chart_xxx"></canvas>
+                </div>
+                <script>
+                    new Chart(document.getElementById('chart_xxx'), {
+                        type: 'bar',
+                        data: {
+                            labels: ['A', 'B', 'C'],
+                            datasets: [{
+                                label: '指标',
+                                data: [1, 2, 3],
+                                backgroundColor: ['#3B82F6', '#10B981', '#EF4444'],
+                                borderRadius: 3, barPercentage: 0.5
+                            }]
+                        },
+                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { borderDash: [4, 4] } } } }
+                    });
+                </script>
+            </div>
+        </div>
+
+        [技术指标面板]
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-crosshairs"></i> 技术面分析</div>
+            <div class="widget-body">
+                <div class="indicator-grid">
+                    <div class="indicator-item">
+                        <div class="indicator-label">RSI (14)</div>
+                        <div class="indicator-value">58</div>
+                        <span class="indicator-signal signal-neutral">中性</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        [正面/负面因素对比]
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-balance-scale"></i> 标题</div>
+            <div class="widget-body grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <h4 class="font-bold text-green-700 flex items-center gap-2 !mt-0 !mb-3"><i class="fas fa-plus-circle"></i> 正面</h4>
+                    <ul class="list-none p-0 m-0 space-y-2 text-sm text-gray-700">
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span>内容</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-red-700 flex items-center gap-2 !mt-0 !mb-3"><i class="fas fa-minus-circle"></i> 负面</h4>
+                    <ul class="list-none p-0 m-0 space-y-2 text-sm text-gray-700">
+                        <li class="flex items-start gap-2"><i class="fas fa-times-circle text-red-500 mt-1"></i><span>内容</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        [引用框 - 中性]
+        <div class="my-8 p-6 bg-gray-50 rounded-lg border-l-4 border-gray-700">
+            <div class="flex items-baseline gap-4">
+                <i class="fas fa-quote-left mt-1"></i>
+                <h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">标题</h4>
+            </div>
+            <p class="mt-2 !mb-0 leading-relaxed">内容</p>
+        </div>
+
+        [警告框 - 黄色]
+        <div class="my-8 p-6 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
+            <div class="flex items-baseline gap-4">
+                <i class="fas fa-exclamation-triangle mt-1 text-yellow-500"></i>
+                <h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">风险警告</h4>
+            </div>
+            <p class="mt-2 !mb-0 leading-relaxed">内容</p>
+        </div>
+
+        [危险框 - 红色]
+        <div class="my-8 p-6 bg-red-50 rounded-lg border-l-4 border-red-500">
+            <div class="flex items-baseline gap-4">
+                <i class="fas fa-shield-halved mt-1 text-red-500"></i>
+                <h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">关键风险</h4>
+            </div>
+            <p class="mt-2 !mb-0 leading-relaxed">内容</p>
+        </div>
+
+        [参考来源]
+        <h2>参考来源</h2>
+        <ol class="references">
+            <li><a href="URL" target="_blank" rel="nofollow noopener">标题</a> — 来源</li>
+        </ol>
+        ============================================================ -->
+
+    </div>
+</body>
+</html>
