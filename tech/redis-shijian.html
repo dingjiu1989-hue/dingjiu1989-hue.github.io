@@ -58,7 +58,7 @@
       "image": "https://aidev.fit/images/covers/en/tech/redis-shijian.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1462",
+      "wordCount": "619",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "zh-CN",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/redis-shijian.html"},
-      "articleBody": "Redis数据类型与场景   Redis不仅是一个缓存，更是一个数据结构服务器。理解每种数据类型的特性和适用场景是充分发挥Redis能力的关键。   String   最基本的数据类型，适合缓存、计数器、分布式ID等场景：       SET   user:1001:name    &quot;张三&quot;  INCR   article:123:views SETEX   session:abc    3600     &quot;user_data&quot;      # 带过期时间的设置        Hash   适合存储对象数据，可单独更新某个字段：       HSET   user:1001   name    &quot;张三&quot;    age    28    city    &quot;北京&quot;  HGET   user:1001   name HINCRBY   user:1001   age    1        List   基于链表实现，适合消息队列和时间线场景：       LPUSH   timeline:user:1001    &quot;post:1&quot;  LRANGE   timeline:user:1001    0     9      # 获取最近10条        Set   无序集合，适合标签、去重和社交关系：       SADD   article:1:tags    &quot;技术&quot;     &quot;Redis&quot;     &quot;缓存&quot;  SINTER   article:1:tags   article:2:tags     # 共同标签        Sorted Set   有序集合，适合排行榜、延迟队列等场景：       ZADD   leaderboard    1000     &quot;user1&quot;  ZINCRBY   leaderboard    10     &quot;user1&quot;  ZREVRANGE   leaderboard    0     9    WITHSCORES     # Top 10        过期与淘汰策略   过期策略   Redis使用两种方式清理过期key：      惰性删除 ：访问key时检查是否过期    定期删除 ：每100ms随机检查一批key     内存淘汰策略   当内存达到上限时，根据配置的策略淘汰数据：      noeviction ：不淘汰，写入返回错误（默认）    allkeys-lru ：淘汰最近最少使用的key    volatile-lru ：仅在设置了过期时间的key中淘汰最少使用    allkeys-lfu ：淘汰最不频繁使用的key（Redis 4.0+）    volatile-ttl ：淘汰即将过期的key     建议生产环境使用 allkeys-lru 策略，配合合理的过期时间设置。   分布式锁   基本实现   使用SET命令的NX和EX参数实现：        import     redis    r   =   redis  .  Redis  ()    def     acquire_lock  (  lock_name  ,   acquire_timeout  =  10  ,   lock_timeout  =  30  ):       identifier   =   str  (  uuid  .  uuid4  ())       end   =   time  .  time  ()   +   acquire_timeout       while   time  .  time  ()   &lt;   end  :           if   r  .  set  (  f  &quot;lock:  {  lock_name  }  &quot;  ,   identifier  ,   nx  =  True  ,   ex  =  lock_timeout  ):               return   identifier           time  .  sleep  (  0.01  )       return   None    def     release_lock  (  lock_name  ,   identifier  ):       # 使用Lua脚本保证原子性       script   =   &quot;&quot;&quot;       if redis.call(&quot;get&quot;, KEYS[1]) == ARGV[1] then           return redis.call(&quot;del&quot;, KEYS[1])       else           return 0       end       &quot;&quot;&quot;       return   r  .  eval  (  script  ,   1  ,   f  &quot;lock:  {  lock_name  }  &quot;  ,   identifier  )        Redlock算法   对于需要更高安全性的场景，可以使用Redlock算法在多个Redis节点上获取锁。   注意事项     锁的超时时间需要根据业务执行时间合理设置   使用唯一标识避免误删其他客户端持有的锁   释放锁时使用Lua脚本保证检查和删除的原子性   考虑可重入锁的需求     缓存常见问题   缓存穿透   查询不存在的数据导致请求直接打到数据库。    解决方案 ：缓存空值或使用布隆过滤器。   缓存击穿   热点key过期导致高并发请求直击数据库。    解决方案：  使用互斥锁或设置热点key永不过期。   缓存雪崩   大量key同时过期导致数据库压力激增。    解决方案 ：过期时间增加随机值，避免批量过期。   Redis作为高性能缓存和数据结构服务器，掌握其核心特性和常见问题的处理方案，是后端开发的必备技能。"
+      "articleBody": "Redis数据类型与场景   Redis不仅是一个缓存，更是一个数据结构服务器。理解每种数据类型的特性和适用场景是充分发挥Redis能力的关键。   String   最基本的数据类型，适合缓存、计数器、分布式ID等场景：    SET user:1001:name &quot;张三&quot; INCR article:123:views SETEX session:abc 3600 &quot;user_data&quot;  # 带过期时间的设置      Hash   适合存储对象数据，可单独更新某个字段：    HSET user:1001 name &quot;张三&quot; age 28 city &quot;北京&quot; HGET user:1001 name HINCRBY user:1001 age 1      List   基于链表实现，适合消息队列和时间线场景：    LPUSH timeline:user:1001 &quot;post:1&quot; LRANGE timeline:user:1001 0 9  # 获取最近10条      Set   无序集合，适合标签、去重和社交关系：    SADD article:1:tags &quot;技术&quot; &quot;Redis&quot; &quot;缓存&quot; SINTER article:1:tags article:2:tags  # 共同标签      Sorted Set   有序集合，适合排行榜、延迟队列等场景：    ZADD leaderboard 1000 &quot;user1&quot; ZINCRBY leaderboard 10 &quot;user1&quot; ZREVRANGE leaderboard 0 9 WITHSCORES  # Top 10      过期与淘汰策略   过期策略   Redis使用两种方式清理过期key：      惰性删除 ：访问key时检查是否过期    定期删除 ：每100ms随机检查一批key     内存淘汰策略   当内存达到上限时，根据配置的策略淘汰数据：      noeviction ：不淘汰，写入返回错误（默认）    allkeys-lru ：淘汰最近最少使用的key    volatile-lru ：仅在设置了过期时间的key中淘汰最少使用    allkeys-lfu ：淘汰最不频繁使用的key（Redis 4.0+）    volatile-ttl ：淘汰即将过期的key     建议生产环境使用 allkeys-lru 策略，配合合理的过期时间设置。   分布式锁   基本实现   使用SET命令的NX和EX参数实现：    import redis  r = redis.Redis()  def acquire_lock(lock_name, acquire_timeout=10, lock_timeout=30):     identifier = str(uuid.uuid4())     end = time.time() + acquire_timeout     while time.time() &lt; end:         if r.set(f&quot;lock:{lock_name}&quot;, identifier, nx=True, ex=lock_timeout):             return identifier         time.sleep(0.01)     return None  def release_lock(lock_name, identifier):     # 使用Lua脚本保证原子性     script = &quot;&quot;&quot;     if redis.call(&quot;get&quot;, KEYS[1]) == ARGV[1] then         return redis.call(&quot;del&quot;, KEYS[1])     else         return 0     end     &quot;&quot;&quot;     return r.eval(script, 1, f&quot;lock:{lock_name}&quot;, identifier)      Redlock算法   对于需要更高安全性的场景，可以使用Redlock算法在多个Redis节点上获取锁。   注意事项     锁的超时时间需要根据业务执行时间合理设置   使用唯一标识避免误删其他客户端持有的锁   释放锁时使用Lua脚本保证检查和删除的原子性   考虑可重入锁的需求     缓存常见问题   缓存穿透   查询不存在的数据导致请求直接打到数据库。    解决方案 ：缓存空值或使用布隆过滤器。   缓存击穿   热点key过期导致高并发请求直击数据库。    解决方案：  使用互斥锁或设置热点key永不过期。   缓存雪崩   大量key同时过期导致数据库压力激增。    解决方案 ：过期时间增加随机值，避免批量过期。   Redis作为高性能缓存和数据结构服务器，掌握其核心特性和常见问题的处理方案，是后端开发的必备技能。"
     }
     </script>
     <script type="application/ld+json">
@@ -119,11 +119,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>7 分钟阅读</span>
+          <span>3 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>1462 字</span>
+          <span>619 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/redis-shijian.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/redis-shijian.png" alt="Redis缓存实战：数据类型、过期策略、分布式锁实现" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（17）</summary><ol><li><a href="#redis数据类型与场景">Redis数据类型与场景</a></li><li><a href="#string">String</a></li><li><a href="#hash">Hash</a></li><li><a href="#list">List</a></li><li><a href="#set">Set</a></li><li><a href="#sorted-set">Sorted Set</a></li><li><a href="#过期与淘汰策略">过期与淘汰策略</a></li><li><a href="#过期策略">过期策略</a></li><li><a href="#内存淘汰策略">内存淘汰策略</a></li><li><a href="#分布式锁">分布式锁</a></li><li><a href="#基本实现">基本实现</a></li><li><a href="#redlock算法">Redlock算法</a></li><li><a href="#注意事项">注意事项</a></li><li><a href="#缓存常见问题">缓存常见问题</a></li><li><a href="#缓存穿透">缓存穿透</a></li><li><a href="#缓存击穿">缓存击穿</a></li><li><a href="#缓存雪崩">缓存雪崩</a></li></ol></details>
@@ -131,36 +131,36 @@
 <p>Redis不仅是一个缓存，更是一个数据结构服务器。理解每种数据类型的特性和适用场景是充分发挥Redis能力的关键。</p>
 <h3>String</h3>
 <p>最基本的数据类型，适合缓存、计数器、分布式ID等场景：</p>
-<div class="codehilite"><pre><span></span><code>SET<span class="w"> </span>user:1001:name<span class="w"> </span><span class="s2">&quot;张三&quot;</span>
-INCR<span class="w"> </span>article:123:views
-SETEX<span class="w"> </span>session:abc<span class="w"> </span><span class="m">3600</span><span class="w"> </span><span class="s2">&quot;user_data&quot;</span><span class="w">  </span><span class="c1"># 带过期时间的设置</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">SET user:1001:name &quot;张三&quot;
+INCR article:123:views
+SETEX session:abc 3600 &quot;user_data&quot;  # 带过期时间的设置
+</code></pre>
 
 <h3>Hash</h3>
 <p>适合存储对象数据，可单独更新某个字段：</p>
-<div class="codehilite"><pre><span></span><code>HSET<span class="w"> </span>user:1001<span class="w"> </span>name<span class="w"> </span><span class="s2">&quot;张三&quot;</span><span class="w"> </span>age<span class="w"> </span><span class="m">28</span><span class="w"> </span>city<span class="w"> </span><span class="s2">&quot;北京&quot;</span>
-HGET<span class="w"> </span>user:1001<span class="w"> </span>name
-HINCRBY<span class="w"> </span>user:1001<span class="w"> </span>age<span class="w"> </span><span class="m">1</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">HSET user:1001 name &quot;张三&quot; age 28 city &quot;北京&quot;
+HGET user:1001 name
+HINCRBY user:1001 age 1
+</code></pre>
 
 <h3>List</h3>
 <p>基于链表实现，适合消息队列和时间线场景：</p>
-<div class="codehilite"><pre><span></span><code>LPUSH<span class="w"> </span>timeline:user:1001<span class="w"> </span><span class="s2">&quot;post:1&quot;</span>
-LRANGE<span class="w"> </span>timeline:user:1001<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">9</span><span class="w">  </span><span class="c1"># 获取最近10条</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">LPUSH timeline:user:1001 &quot;post:1&quot;
+LRANGE timeline:user:1001 0 9  # 获取最近10条
+</code></pre>
 
 <h3>Set</h3>
 <p>无序集合，适合标签、去重和社交关系：</p>
-<div class="codehilite"><pre><span></span><code>SADD<span class="w"> </span>article:1:tags<span class="w"> </span><span class="s2">&quot;技术&quot;</span><span class="w"> </span><span class="s2">&quot;Redis&quot;</span><span class="w"> </span><span class="s2">&quot;缓存&quot;</span>
-SINTER<span class="w"> </span>article:1:tags<span class="w"> </span>article:2:tags<span class="w">  </span><span class="c1"># 共同标签</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">SADD article:1:tags &quot;技术&quot; &quot;Redis&quot; &quot;缓存&quot;
+SINTER article:1:tags article:2:tags  # 共同标签
+</code></pre>
 
 <h3>Sorted Set</h3>
 <p>有序集合，适合排行榜、延迟队列等场景：</p>
-<div class="codehilite"><pre><span></span><code>ZADD<span class="w"> </span>leaderboard<span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="s2">&quot;user1&quot;</span>
-ZINCRBY<span class="w"> </span>leaderboard<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="s2">&quot;user1&quot;</span>
-ZREVRANGE<span class="w"> </span>leaderboard<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">9</span><span class="w"> </span>WITHSCORES<span class="w">  </span><span class="c1"># Top 10</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">ZADD leaderboard 1000 &quot;user1&quot;
+ZINCRBY leaderboard 10 &quot;user1&quot;
+ZREVRANGE leaderboard 0 9 WITHSCORES  # Top 10
+</code></pre>
 
 <h2>过期与淘汰策略</h2>
 <h3>过期策略</h3>
@@ -182,30 +182,30 @@ ZREVRANGE<span class="w"> </span>leaderboard<span class="w"> </span><span class=
 <h2>分布式锁</h2>
 <h3>基本实现</h3>
 <p>使用SET命令的NX和EX参数实现：</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">redis</span>
+<pre class="codehilite"><code class="language-python">import redis
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">Redis</span><span class="p">()</span>
+r = redis.Redis()
 
-<span class="k">def</span><span class="w"> </span><span class="nf">acquire_lock</span><span class="p">(</span><span class="n">lock_name</span><span class="p">,</span> <span class="n">acquire_timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">lock_timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
-    <span class="n">identifier</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
-    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="n">acquire_timeout</span>
-    <span class="k">while</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;lock:</span><span class="si">{</span><span class="n">lock_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">nx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ex</span><span class="o">=</span><span class="n">lock_timeout</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">identifier</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
-    <span class="k">return</span> <span class="kc">None</span>
+def acquire_lock(lock_name, acquire_timeout=10, lock_timeout=30):
+    identifier = str(uuid.uuid4())
+    end = time.time() + acquire_timeout
+    while time.time() &lt; end:
+        if r.set(f&quot;lock:{lock_name}&quot;, identifier, nx=True, ex=lock_timeout):
+            return identifier
+        time.sleep(0.01)
+    return None
 
-<span class="k">def</span><span class="w"> </span><span class="nf">release_lock</span><span class="p">(</span><span class="n">lock_name</span><span class="p">,</span> <span class="n">identifier</span><span class="p">):</span>
-    <span class="c1"># 使用Lua脚本保证原子性</span>
-    <span class="n">script</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">    if redis.call(&quot;get&quot;, KEYS[1]) == ARGV[1] then</span>
-<span class="s2">        return redis.call(&quot;del&quot;, KEYS[1])</span>
-<span class="s2">    else</span>
-<span class="s2">        return 0</span>
-<span class="s2">    end</span>
-<span class="s2">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">script</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;lock:</span><span class="si">{</span><span class="n">lock_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">identifier</span><span class="p">)</span>
-</code></pre></div>
+def release_lock(lock_name, identifier):
+    # 使用Lua脚本保证原子性
+    script = &quot;&quot;&quot;
+    if redis.call(&quot;get&quot;, KEYS[1]) == ARGV[1] then
+        return redis.call(&quot;del&quot;, KEYS[1])
+    else
+        return 0
+    end
+    &quot;&quot;&quot;
+    return r.eval(script, 1, f&quot;lock:{lock_name}&quot;, identifier)
+</code></pre>
 
 <h3>Redlock算法</h3>
 <p>对于需要更高安全性的场景，可以使用Redlock算法在多个Redis节点上获取锁。</p>

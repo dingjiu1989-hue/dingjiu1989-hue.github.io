@@ -58,7 +58,7 @@
       "image": "https://aidev.fit/images/covers/en/tech/microservices-congpu.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1035",
+      "wordCount": "523",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "zh-CN",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/microservices-congpu.html"},
-      "articleBody": "微服务架构概述   微服务架构将单体应用拆分为多个独立的服务，每个服务围绕特定业务能力构建。选择合适的技术栈是微服务成功的关键。   Spring Boot   Spring Boot是Java生态中最成熟的微服务框架。   核心优势      生态完善 ：Spring Cloud、Spring Data、Spring Security等组件一应俱全    文档丰富 ：官方文档和社区资源极为丰富    人才储备 ：Java开发者基本都熟悉Spring生态    企业级特性 ：配置中心、服务发现、熔断器等开箱即用     入门示例        @RestController   @RequestMapping  (  &quot;/api/users&quot;  )   public     class   UserController     {          @Autowired         private     UserService     userService  ;          @GetMapping  (  &quot;/{id}&quot;  )         public     ResponseEntity  &lt;  User  &gt;     getUser  (  @PathVariable     Long     id  )     {             return     ResponseEntity  .  ok  (  userService  .  findById  (  id  ));         }   }        局限     启动慢（通常10-30秒），不适合Serverless   内存占用高（基础应用约200MB+）   打包体积大（Fat JAR通常50MB+）     Quarkus   Quarkus是为云原生和Serverless优化的Java框架，由Red Hat开发。   核心优势      启动极快 ：毫秒级启动（0.1-2秒）    内存极低 ：基础应用约20-50MB    编译期处理 ：在编译期完成依赖注入分析    GraalVM支持 ：支持编译为原生可执行文件     入门示例        @Path  (  &quot;/api/users&quot;  )   public     class   UserResource     {          @Inject         UserService     userService  ;          @GET         @Path  (  &quot;/{id}&quot;  )         public     User     getUser  (  @PathParam     Long     id  )     {             return     userService  .  findById  (  id  );         }   }        对比分析         维度   Spring Boot   Quarkus           启动时间   10-30秒   0.1-2秒       内存占用(基础)   ~200MB   ~30MB       打包大小   ~50MB   ~10MB       学习曲线   较低   中等       生态成熟度   极高   高(快速增长)       Serverless   不推荐   推荐       开发效率   高   高         选型建议   选择Spring Boot的场景     企业级大型项目   团队Spring经验丰富   需要丰富的第三方集成   对启动时间不敏感     选择Quarkus的场景     Serverless或FaaS场景   需要快速扩缩容的容器化部署   内存资源有限的场景   新项目，无历史包袱     微服务基础设施   无论选择哪个框架，微服务架构都需要配套的基础设施：      服务注册与发现 ：Consul、Nacos、Eureka    配置中心 ：Nacos、Spring Cloud Config    网关 ：Spring Cloud Gateway、Kong    链路追踪 ：SkyWalking、Jaeger    服务网格 ：Istio、Linkerd     微服务框架的选择没有标准答案，需要综合考量团队技术栈、项目需求和运维能力做出决策。"
+      "articleBody": "微服务架构概述   微服务架构将单体应用拆分为多个独立的服务，每个服务围绕特定业务能力构建。选择合适的技术栈是微服务成功的关键。   Spring Boot   Spring Boot是Java生态中最成熟的微服务框架。   核心优势      生态完善 ：Spring Cloud、Spring Data、Spring Security等组件一应俱全    文档丰富 ：官方文档和社区资源极为丰富    人才储备 ：Java开发者基本都熟悉Spring生态    企业级特性 ：配置中心、服务发现、熔断器等开箱即用     入门示例    @RestController @RequestMapping(&quot;/api/users&quot;) public class UserController {      @Autowired     private UserService userService;      @GetMapping(&quot;/{id}&quot;)     public ResponseEntity&lt;User&gt; getUser(@PathVariable Long id) {         return ResponseEntity.ok(userService.findById(id));     } }      局限     启动慢（通常10-30秒），不适合Serverless   内存占用高（基础应用约200MB+）   打包体积大（Fat JAR通常50MB+）     Quarkus   Quarkus是为云原生和Serverless优化的Java框架，由Red Hat开发。   核心优势      启动极快 ：毫秒级启动（0.1-2秒）    内存极低 ：基础应用约20-50MB    编译期处理 ：在编译期完成依赖注入分析    GraalVM支持 ：支持编译为原生可执行文件     入门示例    @Path(&quot;/api/users&quot;) public class UserResource {      @Inject     UserService userService;      @GET     @Path(&quot;/{id}&quot;)     public User getUser(@PathParam Long id) {         return userService.findById(id);     } }      对比分析         维度   Spring Boot   Quarkus           启动时间   10-30秒   0.1-2秒       内存占用(基础)   ~200MB   ~30MB       打包大小   ~50MB   ~10MB       学习曲线   较低   中等       生态成熟度   极高   高(快速增长)       Serverless   不推荐   推荐       开发效率   高   高         选型建议   选择Spring Boot的场景     企业级大型项目   团队Spring经验丰富   需要丰富的第三方集成   对启动时间不敏感     选择Quarkus的场景     Serverless或FaaS场景   需要快速扩缩容的容器化部署   内存资源有限的场景   新项目，无历史包袱     微服务基础设施   无论选择哪个框架，微服务架构都需要配套的基础设施：      服务注册与发现 ：Consul、Nacos、Eureka    配置中心 ：Nacos、Spring Cloud Config    网关 ：Spring Cloud Gateway、Kong    链路追踪 ：SkyWalking、Jaeger    服务网格 ：Istio、Linkerd     微服务框架的选择没有标准答案，需要综合考量团队技术栈、项目需求和运维能力做出决策。"
     }
     </script>
     <script type="application/ld+json">
@@ -119,11 +119,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>5 分钟阅读</span>
+          <span>2 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>1035 字</span>
+          <span>523 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/microservices-congpu.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/microservices-congpu.png" alt="微服务从零到一：Spring Boot vs Quarkus 入门实践" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（13）</summary><ol><li><a href="#微服务架构概述">微服务架构概述</a></li><li><a href="#spring-boot">Spring Boot</a></li><li><a href="#核心优势">核心优势</a></li><li><a href="#入门示例">入门示例</a></li><li><a href="#局限">局限</a></li><li><a href="#quarkus">Quarkus</a></li><li><a href="#核心优势">核心优势</a></li><li><a href="#入门示例">入门示例</a></li><li><a href="#对比分析">对比分析</a></li><li><a href="#选型建议">选型建议</a></li><li><a href="#选择spring-boot的场景">选择Spring Boot的场景</a></li><li><a href="#选择quarkus的场景">选择Quarkus的场景</a></li><li><a href="#微服务基础设施">微服务基础设施</a></li></ol></details>
@@ -139,19 +139,19 @@
 <li><strong>企业级特性</strong>：配置中心、服务发现、熔断器等开箱即用</li>
 </ul>
 <h3>入门示例</h3>
-<div class="codehilite"><pre><span></span><code><span class="nd">@RestController</span>
-<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/users&quot;</span><span class="p">)</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserController</span><span class="w"> </span><span class="p">{</span>
+<pre class="codehilite"><code class="language-java">@RestController
+@RequestMapping(&quot;/api/users&quot;)
+public class UserController {
 
-<span class="w">    </span><span class="nd">@Autowired</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UserService</span><span class="w"> </span><span class="n">userService</span><span class="p">;</span>
+    @Autowired
+    private UserService userService;
 
-<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/{id}&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getUser</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">(</span><span class="n">userService</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">));</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;User&gt; getUser(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.findById(id));
+    }
+}
+</code></pre>
 
 <h3>局限</h3>
 <ul>
@@ -169,19 +169,19 @@
 <li><strong>GraalVM支持</strong>：支持编译为原生可执行文件</li>
 </ul>
 <h3>入门示例</h3>
-<div class="codehilite"><pre><span></span><code><span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;/api/users&quot;</span><span class="p">)</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserResource</span><span class="w"> </span><span class="p">{</span>
+<pre class="codehilite"><code class="language-java">@Path(&quot;/api/users&quot;)
+public class UserResource {
 
-<span class="w">    </span><span class="nd">@Inject</span>
-<span class="w">    </span><span class="n">UserService</span><span class="w"> </span><span class="n">userService</span><span class="p">;</span>
+    @Inject
+    UserService userService;
 
-<span class="w">    </span><span class="nd">@GET</span>
-<span class="w">    </span><span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;/{id}&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="nf">getUser</span><span class="p">(</span><span class="nd">@PathParam</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">userService</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+    @GET
+    @Path(&quot;/{id}&quot;)
+    public User getUser(@PathParam Long id) {
+        return userService.findById(id);
+    }
+}
+</code></pre>
 
 <h2>对比分析</h2>
 <table>
