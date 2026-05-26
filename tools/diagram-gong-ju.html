@@ -58,7 +58,7 @@
       "image": "https://aidev.fit/images/covers/en/tools/diagram-gong-ju.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "565",
+      "wordCount": "877",
       "keywords": "Technology, DevTools, Productivity",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "zh-CN",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tools/diagram-gong-ju.html"},
-      "articleBody": "架构图工具的选择   技术文档中的架构图、流程图和时序图是沟通设计思路的重要载体。Draw.io、Excalidraw、Mermaid和Diagrams代表了不同的绘图范式。   Draw.io   Draw.io（现更名为diagrams.net）是最经典的在线绘图工具。   核心特性     图形化拖拽绘图   丰富的模板库（架构图、流程图、UML、网络拓扑等）   支持本地存储（Google Drive、OneDrive、GitHub、本地文件）   导出格式多样（PNG、SVG、PDF、HTML）   VS Code插件支持     优劣势      优势 ：功能最全面，上手简单，与VS Code集成    劣势 ：界面略显过时，不适合描述复杂架构的细节     适用场景   流程图、UML图、网络拓扑图、架构概览图。   Excalidraw   Excalidraw以手绘风格著称，适合快速绘制概念图。   核心特性     独特的手绘风格   实时协作   丰富的图形库（Libraries）   端到端加密   导出为SVG/PNG     优劣势      优势 ：视觉风格独特美观，协作体验好，氛围轻松    劣势 ：不适合精确的架构图，功能相对简单     适用场景   白板讨论、概念设计、用户流程图、非正式的技术交流。   Mermaid   Mermaid是基于文本的图表生成工具，使用类似Markdown的语法定义图表。   核心特性     文本即图表，支持版本控制   集成在Markdown中   支持流程图、时序图、类图、甘特图、Git图等   CI/CD可以自动生成图表     语法示例    graph TD     A[用户请求] --&gt; B[API网关]     B --&gt; C{认证}     C --&gt;|通过| D[业务服务]     C --&gt;|失败| E[返回401]     D --&gt; F[数据库]     F --&gt; G[返回数据]      优劣势      优势 ：Git友好，文档即代码，适合集成到文档流程    劣势 ：复杂图表表达受限，样式定制不够灵活     适用场景   技术文档中的图表、自动生成的架构图、README中的流程图。   Diagrams   Diagrams（前称Diagrams as Code）是Python库，用代码定义云架构图。   核心特性     用Python代码定义架构图   支持AWS、Azure、GCP、K8s等云资源图标   自动布局   CI/CD友好     示例    from diagrams import Diagram from diagrams.aws.compute import EC2 from diagrams.aws.database import RDS  with Diagram(&quot;Web Service&quot;, show=False):     EC2(&quot;Web&quot;) &gt;&gt; RDS(&quot;Database&quot;)      优劣势      优势 ：代码版本管理，云资源图标丰富，适合基础设施即代码团队    劣势 ：灵活性有限，不支持手绘风格     适用场景   云架构图、基础设施即代码团队的自动化图表生成。   对比总结         工具   操作方式   版本控制   协作   美观度   学习曲线           Draw.io   拖拽   文件存储   一般   中   低       Excalidraw   拖拽   文件/云端   优秀   高   极低       Mermaid   代码   原生   一般   中   中       Diagrams   代码   原生   一般   中   中高         选型建议      团队白板讨论  → Excalidraw    文档中的图表  → Mermaid    云架构图  → Diagrams或Draw.io    正式技术文档  → Draw.io     多种工具可以组合使用，在不同场景选择最合适的工具。"
+      "articleBody": "架构图工具的选择   技术文档中的架构图、流程图和时序图是沟通设计思路的重要载体。Draw.io、Excalidraw、Mermaid和Diagrams代表了不同的绘图范式。   Draw.io   Draw.io（现更名为diagrams.net）是最经典的在线绘图工具。   核心特性     图形化拖拽绘图   丰富的模板库（架构图、流程图、UML、网络拓扑等）   支持本地存储（Google Drive、OneDrive、GitHub、本地文件）   导出格式多样（PNG、SVG、PDF、HTML）   VS Code插件支持     优劣势      优势 ：功能最全面，上手简单，与VS Code集成    劣势 ：界面略显过时，不适合描述复杂架构的细节     适用场景   流程图、UML图、网络拓扑图、架构概览图。   Excalidraw   Excalidraw以手绘风格著称，适合快速绘制概念图。   核心特性     独特的手绘风格   实时协作   丰富的图形库（Libraries）   端到端加密   导出为SVG/PNG     优劣势      优势 ：视觉风格独特美观，协作体验好，氛围轻松    劣势 ：不适合精确的架构图，功能相对简单     适用场景   白板讨论、概念设计、用户流程图、非正式的技术交流。   Mermaid   Mermaid是基于文本的图表生成工具，使用类似Markdown的语法定义图表。   核心特性     文本即图表，支持版本控制   集成在Markdown中   支持流程图、时序图、类图、甘特图、Git图等   CI/CD可以自动生成图表     语法示例        graph     TD         A  [  用户请求  ]     --&gt; B[API网关]         B     --&gt; C{认证}         C     --&gt;|通过| D[业务服务]         C     --&gt;|失败| E[返回401]         D     --&gt; F[数据库]         F     --&gt; G[返回数据]        优劣势      优势 ：Git友好，文档即代码，适合集成到文档流程    劣势 ：复杂图表表达受限，样式定制不够灵活     适用场景   技术文档中的图表、自动生成的架构图、README中的流程图。   Diagrams   Diagrams（前称Diagrams as Code）是Python库，用代码定义云架构图。   核心特性     用Python代码定义架构图   支持AWS、Azure、GCP、K8s等云资源图标   自动布局   CI/CD友好     示例        from     diagrams     import   Diagram   from     diagrams.aws.compute     import   EC2   from     diagrams.aws.database     import   RDS    with   Diagram  (  &quot;Web Service&quot;  ,   show  =  False  ):       EC2  (  &quot;Web&quot;  )   &gt;&gt;   RDS  (  &quot;Database&quot;  )        优劣势      优势 ：代码版本管理，云资源图标丰富，适合基础设施即代码团队    劣势 ：灵活性有限，不支持手绘风格     适用场景   云架构图、基础设施即代码团队的自动化图表生成。   对比总结         工具   操作方式   版本控制   协作   美观度   学习曲线           Draw.io   拖拽   文件存储   一般   中   低       Excalidraw   拖拽   文件/云端   优秀   高   极低       Mermaid   代码   原生   一般   中   中       Diagrams   代码   原生   一般   中   中高         选型建议      团队白板讨论  → Excalidraw    文档中的图表  → Mermaid    云架构图  → Diagrams或Draw.io    正式技术文档  → Draw.io     多种工具可以组合使用，在不同场景选择最合适的工具。"
     }
     </script>
     <script type="application/ld+json">
@@ -119,11 +119,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>2 分钟阅读</span>
+          <span>4 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>565 字</span>
+          <span>877 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tools/diagram-gong-ju.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/diagram-gong-ju.png" alt="架构图工具：Draw.io vs Excalidraw vs Mermaid vs Diagrams" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（21）</summary><ol><li><a href="#架构图工具的选择">架构图工具的选择</a></li><li><a href="#drawio">Draw.io</a></li><li><a href="#核心特性">核心特性</a></li><li><a href="#优劣势">优劣势</a></li><li><a href="#适用场景">适用场景</a></li><li><a href="#excalidraw">Excalidraw</a></li><li><a href="#核心特性">核心特性</a></li><li><a href="#优劣势">优劣势</a></li><li><a href="#适用场景">适用场景</a></li><li><a href="#mermaid">Mermaid</a></li><li><a href="#核心特性">核心特性</a></li><li><a href="#语法示例">语法示例</a></li><li><a href="#优劣势">优劣势</a></li><li><a href="#适用场景">适用场景</a></li><li><a href="#diagrams">Diagrams</a></li><li><a href="#核心特性">核心特性</a></li><li><a href="#示例">示例</a></li><li><a href="#优劣势">优劣势</a></li><li><a href="#适用场景">适用场景</a></li><li><a href="#对比总结">对比总结</a></li><li><a href="#选型建议">选型建议</a></li></ol></details>
@@ -173,14 +173,14 @@
 <li>CI/CD可以自动生成图表</li>
 </ul>
 <h3>语法示例</h3>
-<pre class="codehilite"><code>graph TD
-    A[用户请求] --&gt; B[API网关]
-    B --&gt; C{认证}
-    C --&gt;|通过| D[业务服务]
-    C --&gt;|失败| E[返回401]
-    D --&gt; F[数据库]
-    F --&gt; G[返回数据]
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="n">graph</span><span class="w"> </span><span class="n">TD</span>
+<span class="w">    </span><span class="n">A</span><span class="o">[</span><span class="n">用户请求</span><span class="o">]</span><span class="w"> </span><span class="c1">--&gt; B[API网关]</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="c1">--&gt; C{认证}</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="c1">--&gt;|通过| D[业务服务]</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="c1">--&gt;|失败| E[返回401]</span>
+<span class="w">    </span><span class="n">D</span><span class="w"> </span><span class="c1">--&gt; F[数据库]</span>
+<span class="w">    </span><span class="n">F</span><span class="w"> </span><span class="c1">--&gt; G[返回数据]</span>
+</code></pre></div>
 
 <h3>优劣势</h3>
 <ul>
@@ -199,13 +199,13 @@
 <li>CI/CD友好</li>
 </ul>
 <h3>示例</h3>
-<pre class="codehilite"><code class="language-python">from diagrams import Diagram
-from diagrams.aws.compute import EC2
-from diagrams.aws.database import RDS
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">diagrams</span><span class="w"> </span><span class="kn">import</span> <span class="n">Diagram</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">diagrams.aws.compute</span><span class="w"> </span><span class="kn">import</span> <span class="n">EC2</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">diagrams.aws.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">RDS</span>
 
-with Diagram(&quot;Web Service&quot;, show=False):
-    EC2(&quot;Web&quot;) &gt;&gt; RDS(&quot;Database&quot;)
-</code></pre>
+<span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="s2">&quot;Web Service&quot;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">EC2</span><span class="p">(</span><span class="s2">&quot;Web&quot;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">RDS</span><span class="p">(</span><span class="s2">&quot;Database&quot;</span><span class="p">)</span>
+</code></pre></div>
 
 <h3>优劣势</h3>
 <ul>

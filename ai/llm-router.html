@@ -58,7 +58,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/llm-router.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "522",
+      "wordCount": "1307",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "zh-CN",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/llm-router.html"},
-      "articleBody": "为什么需要LLM路由器   在实际应用中，不同查询的复杂度和重要性差异很大。有些问题只需简单的事实查询，而有些需要深度推理。使用单一模型要么浪费成本（所有请求都用大模型），要么牺牲效果（所有请求都用小模型）。   LLM路由器根据查询特征动态选择最合适的模型，在成本、效果和延迟之间取得最优平衡。   查询复杂度评估   路由决策的基础是对查询复杂度的准确评估。   评估维度      语义复杂度 ：问题涉及的知识广度和推理深度    领域专业性 ：是否需要特定领域的专业知识    任务类型 ：分类、生成、推理、创作等    上下文长度 ：输入和输出的预期长度    时效性要求 ：是否需要最新信息     评估方法    基于规则的评估：  - 关键词匹配判断问题类型 - 长度阈值判断上下文规模 - 正则表达式识别特定模式    基于小模型的评估：  - 使用轻量级模型对查询进行分类 - 比规则方法更灵活 - 增加了一定延迟和成本    基于统计的评估：  - 分析查询与历史分布的偏离程度 - 使用TF-IDF或向量相似度进行匹配   模型分级策略   三级模型池    L1 - 轻量模型（如Gemini Flash、Claude Haiku）   → 简单查询、模糊匹配、高吞吐场景  L2 - 标准模型（如GPT-4o-mini、Claude Sonnet）   → 一般业务查询、客服对话  L3 - 高级模型（如GPT-4o、Claude Opus）   → 复杂推理、代码生成、敏感场景      路由规则示例    routes:   - pattern: &quot;翻译|总结|分类&quot;     model: &quot;L1&quot;     priority: 1   - pattern: &quot;代码|分析|对比&quot;     model: &quot;L2&quot;     priority: 2   - condition: &quot;confidence &lt; 0.8&quot;     model: &quot;L3&quot;     priority: 3   - default: &quot;L2&quot;      负载均衡   策略选择      轮询 ：简单均匀分配，不考虑请求差异    最少连接 ：分配给当前负载最低的模型    权重分配 ：根据模型容量分配流量比例     降级机制   当高等级模型不可用或超时时的处理：      静默降级 ：切换到低一级模型，对用户透明    队列等待 ：请求排队等待模型恢复    缓存命中 ：如果缓存中有相似查询的结果，直接返回    人工介入 ：关键请求转人工处理     工程实现   核心组件    class LLMRouter:     def __init__(self):         self.models = {&quot;L1&quot;: fast_model, &quot;L2&quot;: standard_model, &quot;L3&quot;: premium_model}         self.router = self._init_router()      def route(self, query):         complexity = self.evaluate_complexity(query)         if complexity == &quot;simple&quot;:             return self.models[&quot;L1&quot;].generate(query)         elif complexity == &quot;standard&quot;:             return self.models[&quot;L2&quot;].generate(query)         else:             return self.models[&quot;L3&quot;].generate(query)      监控指标     各级模型的调用比例   路由准确率（降级后是否人工修正）   平均延迟和成本变化   模型不可用次数和持续时间     实际效果   通过LLM路由器的实践，通常可以实现： - API成本降低40%-60% - 平均延迟降低30%-50% - 用户体验无明显下降   LLM路由器是实现成本效益最大化的关键基础设施，值得每个AI应用认真设计和部署。"
+      "articleBody": "为什么需要LLM路由器   在实际应用中，不同查询的复杂度和重要性差异很大。有些问题只需简单的事实查询，而有些需要深度推理。使用单一模型要么浪费成本（所有请求都用大模型），要么牺牲效果（所有请求都用小模型）。   LLM路由器根据查询特征动态选择最合适的模型，在成本、效果和延迟之间取得最优平衡。   查询复杂度评估   路由决策的基础是对查询复杂度的准确评估。   评估维度      语义复杂度 ：问题涉及的知识广度和推理深度    领域专业性 ：是否需要特定领域的专业知识    任务类型 ：分类、生成、推理、创作等    上下文长度 ：输入和输出的预期长度    时效性要求 ：是否需要最新信息     评估方法    基于规则的评估：  - 关键词匹配判断问题类型 - 长度阈值判断上下文规模 - 正则表达式识别特定模式    基于小模型的评估：  - 使用轻量级模型对查询进行分类 - 比规则方法更灵活 - 增加了一定延迟和成本    基于统计的评估：  - 分析查询与历史分布的偏离程度 - 使用TF-IDF或向量相似度进行匹配   模型分级策略   三级模型池       L1 - 轻量模型（如Gemini Flash、Claude Haiku）   → 简单查询、模糊匹配、高吞吐场景  L2 - 标准模型（如GPT-4o-mini、Claude Sonnet）   → 一般业务查询、客服对话  L3 - 高级模型（如GPT-4o、Claude Opus）   → 复杂推理、代码生成、敏感场景       路由规则示例        routes  :       -     pattern  :     &quot;翻译|总结|分类&quot;         model  :     &quot;L1&quot;         priority  :     1       -     pattern  :     &quot;代码|分析|对比&quot;         model  :     &quot;L2&quot;         priority  :     2       -     condition  :     &quot;confidence     &lt;     0.8&quot;         model  :     &quot;L3&quot;         priority  :     3       -     default  :     &quot;L2&quot;        负载均衡   策略选择      轮询 ：简单均匀分配，不考虑请求差异    最少连接 ：分配给当前负载最低的模型    权重分配 ：根据模型容量分配流量比例     降级机制   当高等级模型不可用或超时时的处理：      静默降级 ：切换到低一级模型，对用户透明    队列等待 ：请求排队等待模型恢复    缓存命中 ：如果缓存中有相似查询的结果，直接返回    人工介入 ：关键请求转人工处理     工程实现   核心组件        class     LLMRouter  :       def     __init__  (  self  ):           self  .  models   =   {  &quot;L1&quot;  :   fast_model  ,   &quot;L2&quot;  :   standard_model  ,   &quot;L3&quot;  :   premium_model  }           self  .  router   =   self  .  _init_router  ()        def     route  (  self  ,   query  ):           complexity   =   self  .  evaluate_complexity  (  query  )           if   complexity   ==   &quot;simple&quot;  :               return   self  .  models  [  &quot;L1&quot;  ]  .  generate  (  query  )           elif   complexity   ==   &quot;standard&quot;  :               return   self  .  models  [  &quot;L2&quot;  ]  .  generate  (  query  )           else  :               return   self  .  models  [  &quot;L3&quot;  ]  .  generate  (  query  )        监控指标     各级模型的调用比例   路由准确率（降级后是否人工修正）   平均延迟和成本变化   模型不可用次数和持续时间     实际效果   通过LLM路由器的实践，通常可以实现： - API成本降低40%-60% - 平均延迟降低30%-50% - 用户体验无明显下降   LLM路由器是实现成本效益最大化的关键基础设施，值得每个AI应用认真设计和部署。"
     }
     </script>
     <script type="application/ld+json">
@@ -119,11 +119,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>2 分钟阅读</span>
+          <span>6 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>522 字</span>
+          <span>1307 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/llm-router.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/llm-router.png" alt="LLM路由器：根据查询复杂度自动选择模型的工程实现" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（14）</summary><ol><li><a href="#为什么需要llm路由器">为什么需要LLM路由器</a></li><li><a href="#查询复杂度评估">查询复杂度评估</a></li><li><a href="#评估维度">评估维度</a></li><li><a href="#评估方法">评估方法</a></li><li><a href="#模型分级策略">模型分级策略</a></li><li><a href="#三级模型池">三级模型池</a></li><li><a href="#路由规则示例">路由规则示例</a></li><li><a href="#负载均衡">负载均衡</a></li><li><a href="#策略选择">策略选择</a></li><li><a href="#降级机制">降级机制</a></li><li><a href="#工程实现">工程实现</a></li><li><a href="#核心组件">核心组件</a></li><li><a href="#监控指标">监控指标</a></li><li><a href="#实际效果">实际效果</a></li></ol></details>
@@ -154,7 +154,7 @@
 - 使用TF-IDF或向量相似度进行匹配</p>
 <h2>模型分级策略</h2>
 <h3>三级模型池</h3>
-<pre class="codehilite"><code>L1 - 轻量模型（如Gemini Flash、Claude Haiku）
+<div class="codehilite"><pre><span></span><code>L1 - 轻量模型（如Gemini Flash、Claude Haiku）
   → 简单查询、模糊匹配、高吞吐场景
 
 L2 - 标准模型（如GPT-4o-mini、Claude Sonnet）
@@ -162,21 +162,21 @@ L2 - 标准模型（如GPT-4o-mini、Claude Sonnet）
 
 L3 - 高级模型（如GPT-4o、Claude Opus）
   → 复杂推理、代码生成、敏感场景
-</code></pre>
+</code></pre></div>
 
 <h3>路由规则示例</h3>
-<pre class="codehilite"><code class="language-yaml">routes:
-  - pattern: &quot;翻译|总结|分类&quot;
-    model: &quot;L1&quot;
-    priority: 1
-  - pattern: &quot;代码|分析|对比&quot;
-    model: &quot;L2&quot;
-    priority: 2
-  - condition: &quot;confidence &lt; 0.8&quot;
-    model: &quot;L3&quot;
-    priority: 3
-  - default: &quot;L2&quot;
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="nt">routes</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;翻译|总结|分类&quot;</span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;L1&quot;</span>
+<span class="w">    </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;代码|分析|对比&quot;</span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;L2&quot;</span>
+<span class="w">    </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;confidence</span><span class="nv"> </span><span class="s">&lt;</span><span class="nv"> </span><span class="s">0.8&quot;</span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;L3&quot;</span>
+<span class="w">    </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;L2&quot;</span>
+</code></pre></div>
 
 <h2>负载均衡</h2>
 <h3>策略选择</h3>
@@ -195,20 +195,20 @@ L3 - 高级模型（如GPT-4o、Claude Opus）
 </ol>
 <h2>工程实现</h2>
 <h3>核心组件</h3>
-<pre class="codehilite"><code class="language-python">class LLMRouter:
-    def __init__(self):
-        self.models = {&quot;L1&quot;: fast_model, &quot;L2&quot;: standard_model, &quot;L3&quot;: premium_model}
-        self.router = self._init_router()
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">LLMRouter</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;L1&quot;</span><span class="p">:</span> <span class="n">fast_model</span><span class="p">,</span> <span class="s2">&quot;L2&quot;</span><span class="p">:</span> <span class="n">standard_model</span><span class="p">,</span> <span class="s2">&quot;L3&quot;</span><span class="p">:</span> <span class="n">premium_model</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">router</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_router</span><span class="p">()</span>
 
-    def route(self, query):
-        complexity = self.evaluate_complexity(query)
-        if complexity == &quot;simple&quot;:
-            return self.models[&quot;L1&quot;].generate(query)
-        elif complexity == &quot;standard&quot;:
-            return self.models[&quot;L2&quot;].generate(query)
-        else:
-            return self.models[&quot;L3&quot;].generate(query)
-</code></pre>
+    <span class="k">def</span><span class="w"> </span><span class="nf">route</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+        <span class="n">complexity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluate_complexity</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">complexity</span> <span class="o">==</span> <span class="s2">&quot;simple&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="s2">&quot;L1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">complexity</span> <span class="o">==</span> <span class="s2">&quot;standard&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="s2">&quot;L2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="s2">&quot;L3&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</code></pre></div>
 
 <h3>监控指标</h3>
 <ul>

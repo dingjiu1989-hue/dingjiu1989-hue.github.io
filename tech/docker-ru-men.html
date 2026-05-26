@@ -58,7 +58,7 @@
       "image": "https://aidev.fit/images/covers/en/tech/docker-ru-men.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "363",
+      "wordCount": "895",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "zh-CN",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/docker-ru-men.html"},
-      "articleBody": "Docker核心概念   Docker通过容器化技术实现应用的轻量级虚拟化。理解三个核心概念是掌握Docker的基础：镜像（Image）、容器（Container）和仓库（Registry）。   镜像是一个只读模板，包含运行应用所需的全部文件；容器是镜像的运行实例；仓库用于存储和分发镜像。   Dockerfile编写技巧   基础镜像选择   选择合适的基础镜像对安全和性能至关重要：      Alpine ：5MB左右，最小化镜像，但兼容性较差    Slim ：Debian的精简版，兼容性好    Distroless ：Google维护，只包含运行时依赖     多阶段构建   多阶段构建是减小镜像体积的最佳实践：    # 构建阶段 FROM golang:1.22 AS builder WORKDIR /app COPY . . RUN go build -o app  # 运行阶段 FROM alpine:3.19 COPY --from=builder /app/app /app CMD [&quot;/app&quot;]      通过这种方式，可以将Golang应用的镜像从1GB以上减小到20MB左右。   层优化     将不变的操作放在Dockerfile前面   合并RUN指令减少层数   使用.dockerignore排除不必要的文件     Docker Compose编排   Docker Compose用于定义和运行多容器应用：    version: '3.8' services:   web:     build: .     ports:       - &quot;8080:8080&quot;     depends_on:       - db   db:     image: postgres:16     volumes:       - pgdata:/var/lib/postgresql/data     environment:       POSTGRES_DB: myapp volumes:   pgdata:      生产环境最佳实践   安全加固     使用非root用户运行容器   限制容器资源使用（CPU、内存）   定期扫描镜像漏洞（Trivy、Snyk）   启用容器运行时的安全选项     日志管理   容器应输出日志到stdout/stderr，由Docker日志驱动统一收集。生产环境推荐使用json-file驱动并配合日志轮转：    docker run --log-opt max-size=10m --log-opt max-file=3 myapp      监控与健康检查   在Dockerfile中定义健康检查指令：    HEALTHCHECK --interval=30s --timeout=3s \\   CMD curl -f http://localhost:8080/health || exit 1      Docker的价值在于标准化应用的构建、分发和部署流程，掌握这些核心实践能显著提升开发和运维效率。"
+      "articleBody": "Docker核心概念   Docker通过容器化技术实现应用的轻量级虚拟化。理解三个核心概念是掌握Docker的基础：镜像（Image）、容器（Container）和仓库（Registry）。   镜像是一个只读模板，包含运行应用所需的全部文件；容器是镜像的运行实例；仓库用于存储和分发镜像。   Dockerfile编写技巧   基础镜像选择   选择合适的基础镜像对安全和性能至关重要：      Alpine ：5MB左右，最小化镜像，但兼容性较差    Slim ：Debian的精简版，兼容性好    Distroless ：Google维护，只包含运行时依赖     多阶段构建   多阶段构建是减小镜像体积的最佳实践：        # 构建阶段   FROM     golang:1.22     AS     builder   WORKDIR     /app   COPY    .   .  RUN    go   build   -o   app   # 运行阶段   FROM     alpine:3.19   COPY    --from = builder   /app/app   /app  CMD     [  &quot;/app&quot;  ]        通过这种方式，可以将Golang应用的镜像从1GB以上减小到20MB左右。   层优化     将不变的操作放在Dockerfile前面   合并RUN指令减少层数   使用.dockerignore排除不必要的文件     Docker Compose编排   Docker Compose用于定义和运行多容器应用：        version  :     &#39;3.8&#39;   services  :       web  :         build  :     .         ports  :           -     &quot;8080:8080&quot;         depends_on  :           -     db       db  :         image  :     postgres:16         volumes  :           -     pgdata:/var/lib/postgresql/data         environment  :           POSTGRES_DB  :     myapp   volumes  :       pgdata  :        生产环境最佳实践   安全加固     使用非root用户运行容器   限制容器资源使用（CPU、内存）   定期扫描镜像漏洞（Trivy、Snyk）   启用容器运行时的安全选项     日志管理   容器应输出日志到stdout/stderr，由Docker日志驱动统一收集。生产环境推荐使用json-file驱动并配合日志轮转：       docker run --log-opt max-size=10m --log-opt max-file=3 myapp       监控与健康检查   在Dockerfile中定义健康检查指令：        HEALTHCHECK    --interval = 30s   --timeout = 3s    \\       CMD    curl   -f   http://localhost:8080/health    ||     exit     1        Docker的价值在于标准化应用的构建、分发和部署流程，掌握这些核心实践能显著提升开发和运维效率。"
     }
     </script>
     <script type="application/ld+json">
@@ -119,11 +119,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>1 分钟阅读</span>
+          <span>4 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>363 字</span>
+          <span>895 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/docker-ru-men.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/docker-ru-men.png" alt="Docker从入门到精通：容器化部署最佳实践" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（10）</summary><ol><li><a href="#docker核心概念">Docker核心概念</a></li><li><a href="#dockerfile编写技巧">Dockerfile编写技巧</a></li><li><a href="#基础镜像选择">基础镜像选择</a></li><li><a href="#多阶段构建">多阶段构建</a></li><li><a href="#层优化">层优化</a></li><li><a href="#docker-compose编排">Docker Compose编排</a></li><li><a href="#生产环境最佳实践">生产环境最佳实践</a></li><li><a href="#安全加固">安全加固</a></li><li><a href="#日志管理">日志管理</a></li><li><a href="#监控与健康检查">监控与健康检查</a></li></ol></details>
@@ -140,17 +140,17 @@
 </ul>
 <h3>多阶段构建</h3>
 <p>多阶段构建是减小镜像体积的最佳实践：</p>
-<pre class="codehilite"><code class="language-dockerfile"># 构建阶段
-FROM golang:1.22 AS builder
-WORKDIR /app
-COPY . .
-RUN go build -o app
+<div class="codehilite"><pre><span></span><code><span class="c"># 构建阶段</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">golang:1.22</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>go<span class="w"> </span>build<span class="w"> </span>-o<span class="w"> </span>app
 
-# 运行阶段
-FROM alpine:3.19
-COPY --from=builder /app/app /app
-CMD [&quot;/app&quot;]
-</code></pre>
+<span class="c"># 运行阶段</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">alpine:3.19</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/app/app<span class="w"> </span>/app
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;/app&quot;</span><span class="p">]</span>
+</code></pre></div>
 
 <p>通过这种方式，可以将Golang应用的镜像从1GB以上减小到20MB左右。</p>
 <h3>层优化</h3>
@@ -161,23 +161,23 @@ CMD [&quot;/app&quot;]
 </ul>
 <h2>Docker Compose编排</h2>
 <p>Docker Compose用于定义和运行多容器应用：</p>
-<pre class="codehilite"><code class="language-yaml">version: '3.8'
-services:
-  web:
-    build: .
-    ports:
-      - &quot;8080:8080&quot;
-    depends_on:
-      - db
-  db:
-    image: postgres:16
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: myapp
-volumes:
-  pgdata:
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.8&#39;</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">web</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8080:8080&quot;</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
+<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:16</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pgdata:/var/lib/postgresql/data</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">POSTGRES_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pgdata</span><span class="p">:</span>
+</code></pre></div>
 
 <h2>生产环境最佳实践</h2>
 <h3>安全加固</h3>
@@ -189,14 +189,14 @@ volumes:
 </ul>
 <h3>日志管理</h3>
 <p>容器应输出日志到stdout/stderr，由Docker日志驱动统一收集。生产环境推荐使用json-file驱动并配合日志轮转：</p>
-<pre class="codehilite"><code>docker run --log-opt max-size=10m --log-opt max-file=3 myapp
-</code></pre>
+<div class="codehilite"><pre><span></span><code>docker run --log-opt max-size=10m --log-opt max-file=3 myapp
+</code></pre></div>
 
 <h3>监控与健康检查</h3>
 <p>在Dockerfile中定义健康检查指令：</p>
-<pre class="codehilite"><code class="language-dockerfile">HEALTHCHECK --interval=30s --timeout=3s \
-  CMD curl -f http://localhost:8080/health || exit 1
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">HEALTHCHECK</span><span class="w"> </span>--interval<span class="o">=</span>30s<span class="w"> </span>--timeout<span class="o">=</span>3s<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="k">CMD</span><span class="w"> </span>curl<span class="w"> </span>-f<span class="w"> </span>http://localhost:8080/health<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+</code></pre></div>
 
 <p>Docker的价值在于标准化应用的构建、分发和部署流程，掌握这些核心实践能显著提升开发和运维效率。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
 <a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>

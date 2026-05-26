@@ -58,7 +58,7 @@
       "image": "https://aidev.fit/images/covers/en/tech/regex-guide.png",
       "datePublished": "2026-05-20",
       "dateModified": "2026-05-20",
-      "wordCount": "498",
+      "wordCount": "1188",
       "keywords": "正则表达式, 编程, 教程",
       "about": [{"@type": "Thing", "name": "正则表达式"}, {"@type": "Thing", "name": "编程"}, {"@type": "Thing", "name": "教程"}],
       "inLanguage": "zh-CN",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/regex-guide.html"},
-      "articleBody": "正则表达式是文本处理的瑞士军刀——验证表单、提取数据、搜索替换，没有比它更强的工具。学会它，一辈子受益。 基础元字符 符号   含义   示例匹配           .   任意单个字符   a.c → abc, a1c       \\d   数字   \\d\\d\\d → 123, 456       \\w   字母数字下划线   \\w+ → hello_world       \\s   空白字符   a\\sb → \"a b\"       [abc]   字符组，匹配 a/b/c   [aeiou] → 元音字母       [^abc]   取反，不匹配 a/b/c   [^0-9] → 非数字       量词 符号   含义          ---   ---          *   0 次或多次          +   1 次或多次          ?   0 次或 1 次          {n}   恰好 n 次          {n,m}   n 到 m 次          实战 5 例                # 1. 验证手机号（中国大陆） ^1[3-9]\\d{9}$  # 2. 提取邮箱地址 [a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}  # 3. 匹配 URL https?://[\\w.-]+(:\\d+)?(/[\\w./-]*)?  # 4. 提取 HTML 标签内容 &gt;([^&lt;]+)&lt;  # 5. 验证日期格式 YYYY-MM-DD ^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$      分组和捕获    # 匹配 &quot;2026-05-07&quot;，分别捕获年月日 (\\d{4})-(\\d{2})-(\\d{2})  # Python 中可以用 group(1) group(2) group(3) 获取 # 等价于 \\1 \\2 \\3 在替换中引用            零宽断言（进阶） 符号   含义   示例           (?=...)   正向前瞻   \\d+(?=元) 匹配\"50元\"中的50       (?&lt;=...)   正向后顾   (?&lt;=¥)\\d+ 匹配\"¥50\"中的50       (?!...)   负向前瞻   \\d+(?!元) 匹配后不跟\"元\"的数字       练习是关键 推荐在  regex101.com  上实操练习，它有交互式解释器、多语言支持和测试用例功能。每天练 2 个正则，一周后你就能随手写出匹配规则了。 📖 相关推荐                  Linux 命令行入门：30 个最常用的命令     Python 入门教程：从零到写出第一个程序     Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战       See also:   Python 入门教程：从零到写出第一个程序 ,  单元测试入门：从零到写出第一个可维护的测试 ,  OpenAI API 入门：用 10 行代码调用 GPT ."
+      "articleBody": "正则表达式是文本处理的瑞士军刀——验证表单、提取数据、搜索替换，没有比它更强的工具。学会它，一辈子受益。 基础元字符 符号   含义   示例匹配           .   任意单个字符   a.c → abc, a1c       \\d   数字   \\d\\d\\d → 123, 456       \\w   字母数字下划线   \\w+ → hello_world       \\s   空白字符   a\\sb → \"a b\"       [abc]   字符组，匹配 a/b/c   [aeiou] → 元音字母       [^abc]   取反，不匹配 a/b/c   [^0-9] → 非数字       量词 符号   含义          ---   ---          *   0 次或多次          +   1 次或多次          ?   0 次或 1 次          {n}   恰好 n 次          {n,m}   n 到 m 次          实战 5 例                    #     1  .    验证手机号（中国大陆）  ^  1  [  3  -  9  ] \\ d  {  9  }$    #     2  .    提取邮箱地址  [  a  -  zA  -  Z0  -  9  .  _%  +-  ]  +@  [  a  -  zA  -  Z0  -  9  .-  ]  + \\ .  [  a  -  zA  -  Z  ]{  2  ,}    #     3  .    匹配    URL   https ? ://  [ \\ w  .-  ]  +  (  : \\ d  +  ) ? (  /  [ \\ w  ./-  ]  *  ) ?   #     4  .    提取    HTML    标签内容  &gt;  ([  ^&lt;  ]  +  )  &lt;    #     5  .    验证日期格式    YYYY  -  MM  -  DD   ^ \\ d  {  4  }  -  (  0  [  1  -  9  ]  |  1  [  0  -  2  ])  -  (  0  [  1  -  9  ]  |  [  12  ] \\ d  |  3  [  01  ])$        分组和捕获       # 匹配 &quot;2026-05-07&quot;，分别捕获年月日 (\\d{4})-(\\d{2})-(\\d{2})  # Python 中可以用 group(1) group(2) group(3) 获取 # 等价于 \\1 \\2 \\3 在替换中引用             零宽断言（进阶） 符号   含义   示例           (?=...)   正向前瞻   \\d+(?=元) 匹配\"50元\"中的50       (?&lt;=...)   正向后顾   (?&lt;=¥)\\d+ 匹配\"¥50\"中的50       (?!...)   负向前瞻   \\d+(?!元) 匹配后不跟\"元\"的数字       练习是关键 推荐在  regex101.com  上实操练习，它有交互式解释器、多语言支持和测试用例功能。每天练 2 个正则，一周后你就能随手写出匹配规则了。 📖 相关推荐                  Linux 命令行入门：30 个最常用的命令     Python 入门教程：从零到写出第一个程序     Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战       See also:   Python 入门教程：从零到写出第一个程序 ,  单元测试入门：从零到写出第一个可维护的测试 ,  OpenAI API 入门：用 10 行代码调用 GPT ."
     }
     </script>
     <script type="application/ld+json">
@@ -119,11 +119,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-20">2026-05-20</time>
           <span class="meta-sep">·</span>
-          <span>2 分钟阅读</span>
+          <span>5 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>498 字</span>
+          <span>1188 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/regex-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/regex-guide.png" alt="正则表达式 30 分钟入门指南" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -208,29 +208,29 @@
 </tr>
 </tbody>
 </table>
-<pre class="codehilite"><code># 1. 验证手机号（中国大陆）
-^1[3-9]\d{9}$
+<div class="codehilite"><pre><span></span><code><span class="o">#</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="w"> </span>验证手机号（中国大陆）
+<span class="o">^</span><span class="mi">1</span><span class="p">[</span><span class="mi">3</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span>\<span class="nv">d</span><span class="p">{</span><span class="mi">9</span><span class="p">}$</span>
 
-# 2. 提取邮箱地址
-[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}
+<span class="o">#</span><span class="w"> </span><span class="mi">2</span><span class="o">.</span><span class="w"> </span>提取邮箱地址
+<span class="p">[</span><span class="nv">a</span><span class="o">-</span><span class="nv">zA</span><span class="o">-</span><span class="nv">Z0</span><span class="o">-</span><span class="mi">9</span><span class="o">.</span><span class="nv">_%</span><span class="o">+-</span><span class="p">]</span><span class="o">+@</span><span class="p">[</span><span class="nv">a</span><span class="o">-</span><span class="nv">zA</span><span class="o">-</span><span class="nv">Z0</span><span class="o">-</span><span class="mi">9</span><span class="o">.-</span><span class="p">]</span><span class="o">+</span>\<span class="o">.</span><span class="p">[</span><span class="nv">a</span><span class="o">-</span><span class="nv">zA</span><span class="o">-</span><span class="nv">Z</span><span class="p">]{</span><span class="mi">2</span><span class="p">,}</span>
 
-# 3. 匹配 URL
-https?://[\w.-]+(:\d+)?(/[\w./-]*)?
+<span class="o">#</span><span class="w"> </span><span class="mi">3</span><span class="o">.</span><span class="w"> </span>匹配<span class="w"> </span><span class="nv">URL</span>
+<span class="nv">https</span>?<span class="o">://</span><span class="p">[</span>\<span class="nv">w</span><span class="o">.-</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="o">:</span>\<span class="nv">d</span><span class="o">+</span><span class="p">)</span>?<span class="p">(</span><span class="o">/</span><span class="p">[</span>\<span class="nv">w</span><span class="o">./-</span><span class="p">]</span><span class="o">*</span><span class="p">)</span>?
 
-# 4. 提取 HTML 标签内容
-&gt;([^&lt;]+)&lt;
+<span class="o">#</span><span class="w"> </span><span class="mi">4</span><span class="o">.</span><span class="w"> </span>提取<span class="w"> </span><span class="nv">HTML</span><span class="w"> </span>标签内容
+<span class="o">&gt;</span><span class="p">([</span><span class="o">^&lt;</span><span class="p">]</span><span class="o">+</span><span class="p">)</span><span class="o">&lt;</span>
 
-# 5. 验证日期格式 YYYY-MM-DD
-^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
-</code></pre>
+<span class="o">#</span><span class="w"> </span><span class="mi">5</span><span class="o">.</span><span class="w"> </span>验证日期格式<span class="w"> </span><span class="nv">YYYY</span><span class="o">-</span><span class="nv">MM</span><span class="o">-</span><span class="nv">DD</span>
+<span class="o">^</span>\<span class="nv">d</span><span class="p">{</span><span class="mi">4</span><span class="p">}</span><span class="o">-</span><span class="p">(</span><span class="mi">0</span><span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span><span class="o">|</span><span class="mi">1</span><span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span><span class="o">-</span><span class="p">(</span><span class="mi">0</span><span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span><span class="o">|</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span>\<span class="nv">d</span><span class="o">|</span><span class="mi">3</span><span class="p">[</span><span class="mi">01</span><span class="p">])$</span>
+</code></pre></div>
 
 <p>分组和捕获</p>
-<pre class="codehilite"><code># 匹配 &quot;2026-05-07&quot;，分别捕获年月日
+<div class="codehilite"><pre><span></span><code># 匹配 &quot;2026-05-07&quot;，分别捕获年月日
 (\d{4})-(\d{2})-(\d{2})
 
 # Python 中可以用 group(1) group(2) group(3) 获取
 # 等价于 \1 \2 \3 在替换中引用
-</code></pre>
+</code></pre></div>
 
 <table>
 <thead>

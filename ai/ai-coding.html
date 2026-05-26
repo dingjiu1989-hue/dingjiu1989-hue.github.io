@@ -58,7 +58,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/ai-coding.png",
       "datePublished": "2026-05-19",
       "dateModified": "2026-05-19",
-      "wordCount": "670",
+      "wordCount": "675",
       "keywords": "AI编程, GitHub Copilot, Claude Code",
       "about": [{"@type": "Thing", "name": "AI编程"}, {"@type": "Thing", "name": "GitHub Copilot"}, {"@type": "Thing", "name": "Claude Code"}],
       "inLanguage": "zh-CN",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/ai-coding.html"},
-      "articleBody": "2024 到 2026 年，AI 编程工具经历了爆发式增长。从最初的代码补全发展到如今的自主编码 Agent，开发者面对的选择越来越多。但工具再多，核心问题只有一个：如何让 AI 真正提升你的编程效率，而不是制造更多 Bug？本文从工具选型到实战工作流，给你一套可落地的方案。 主流 AI 编程工具对比 目前市面上有四款主流的 AI 编程工具，它们的侧重点和适用场景各不相同。 工具   工作模式   最擅长   不足之处   适合人群            GitHub Copilot    IDE 内联补全 + Chat   代码补全速度极快，零切换成本   上下文窗口有限，复杂任务能力弱   所有开发者（VS Code / JetBrains 用户）        Cursor    AI-First IDE   多文件编辑、Composer 模式、项目级理解   重度依赖网络，大项目索引慢   追求全栈 AI 化开发的工程师        Claude Code    终端 CLI Agent   自主执行多步骤任务、读写文件、运行命令   需要授权文件系统操作，学习曲线较陡   资深开发者、DevOps、需要自动化的团队        Cline    VS Code 插件 Agent   开源免费，自定义模型，透明计费   功能迭代不及商业产品快   预算有限、需要自定义模型的开发者       真实工作流：不是\"AI 全写\" 网上流传的\"让 AI 写出整个应用\"的视频大多经过剪辑，真实开发根本不是这样。下面是经过 12 个月实践验证的高效工作流：                        需求拆解（人做）。  把功能需求拆成独立的小任务。AI 擅长 100 行的函数，不擅长 10000 行的系统。你拆得越细，AI 产出质量越高。    架构设计（人做）。  数据库 schema、接口协议、组件树——这些需要人类做决策。AI 可以给建议，但最终拍板的是你。    代码生成（AI 做）。  针对每个小任务写提示词，让 AI 生成实现代码。一次只生成一个函数或一个组件。    人工审查（人做）。  这是最关键的一步。逐行审查 AI 生成的代码，尤其是边界条件、错误处理和安全性。    测试覆盖（人 + AI）。  让 AI 为你的代码生成测试用例，但你需要确认测试是否覆盖了所有重要路径。     代码生成提示词示例 编写清晰的提示词是 AI 编程的核心技能。以下是一个经过优化的实际案例：    请用 TypeScript 实现一个带过期时间的 LRU 缓存。  要求： - 支持 get(key)、set(key, value, ttlSeconds) 方法 - ttl 过期后 get 返回 undefined 并自动删除条目 - 内部使用 Map 保证 O(1) 读写，双向链表维护访问顺序 - 线程安全不是必须的（单线程环境） - 导出类定义和类型接口  输出格式： 1. 完整的 TypeScript 代码 2. 单元测试（使用 Vitest） 3. 使用示例      这个提示词包含了角色暗示（TypeScript 开发）、明确的功能边界（LRU + TTL）、数据结构选择提示（Map + 链表）、以及输出格式要求（代码 + 测试 + 示例）。AI 的生成结果可以直接粘贴到项目中，需要的修改通常不超过 10%。 审查 AI 代码的四个必查点 AI 生成的代码表面看起来可能很完美，但以下四个问题几乎必然出现在 AI 代码中：      幻影函数调用。  AI 经常调用不存在的 API 或库函数。检查每个 import 和第三方调用是否真实存在。    错误处理缺失。  AI 倾向于只写 happy path。检查 catch 块是否为空、边界条件（空数组、null 值、极限输入）是否被处理。    安全漏洞。  AI 不会主动考虑 SQL 注入、XSS、CSRF 等安全问题。检查用户输入的清理和验证逻辑。    性能假设错误。  AI 可能会在不该用递归的地方用递归，或者在大循环中执行数据库查询。检查算法复杂度是否合理。     AI 编程的局限性 坦诚地说，AI 在以下场景中表现很差：老旧代码库的维护（训练数据中缺乏类似代码）、需要深度业务领域知识的逻辑、跨多个服务的调试排错、以及涉及合规审计的系统。这些场景下，AI 更适合做一个\"高级 StackOverflow\"，而不是主力开发者。 总结：AI 编程工具的最佳定位是一个能力极强但判断力为零的初级工程师。它写代码的速度是你的 10 倍，但你需要像 tech lead 一样审查它每一行产出。把 AI 当成队友，而不是替代品，这才是正确的 AI 编程之道。 📖 相关推荐      AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选     GitHub Copilot 完全使用指南：从安装到高效协作     MCP 协议入门：让 AI 模型安全访问你的工具和数据       See also:   AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选 ,  GitHub Copilot 完全使用指南：从安装到高效协作 ,  VS Code vs JetBrains vs Cursor：2026 年代码编辑器终极对比 ."
+      "articleBody": "2024 到 2026 年，AI 编程工具经历了爆发式增长。从最初的代码补全发展到如今的自主编码 Agent，开发者面对的选择越来越多。但工具再多，核心问题只有一个：如何让 AI 真正提升你的编程效率，而不是制造更多 Bug？本文从工具选型到实战工作流，给你一套可落地的方案。 主流 AI 编程工具对比 目前市面上有四款主流的 AI 编程工具，它们的侧重点和适用场景各不相同。 工具   工作模式   最擅长   不足之处   适合人群            GitHub Copilot    IDE 内联补全 + Chat   代码补全速度极快，零切换成本   上下文窗口有限，复杂任务能力弱   所有开发者（VS Code / JetBrains 用户）        Cursor    AI-First IDE   多文件编辑、Composer 模式、项目级理解   重度依赖网络，大项目索引慢   追求全栈 AI 化开发的工程师        Claude Code    终端 CLI Agent   自主执行多步骤任务、读写文件、运行命令   需要授权文件系统操作，学习曲线较陡   资深开发者、DevOps、需要自动化的团队        Cline    VS Code 插件 Agent   开源免费，自定义模型，透明计费   功能迭代不及商业产品快   预算有限、需要自定义模型的开发者       真实工作流：不是\"AI 全写\" 网上流传的\"让 AI 写出整个应用\"的视频大多经过剪辑，真实开发根本不是这样。下面是经过 12 个月实践验证的高效工作流：                        需求拆解（人做）。  把功能需求拆成独立的小任务。AI 擅长 100 行的函数，不擅长 10000 行的系统。你拆得越细，AI 产出质量越高。    架构设计（人做）。  数据库 schema、接口协议、组件树——这些需要人类做决策。AI 可以给建议，但最终拍板的是你。    代码生成（AI 做）。  针对每个小任务写提示词，让 AI 生成实现代码。一次只生成一个函数或一个组件。    人工审查（人做）。  这是最关键的一步。逐行审查 AI 生成的代码，尤其是边界条件、错误处理和安全性。    测试覆盖（人 + AI）。  让 AI 为你的代码生成测试用例，但你需要确认测试是否覆盖了所有重要路径。     代码生成提示词示例 编写清晰的提示词是 AI 编程的核心技能。以下是一个经过优化的实际案例：       请用 TypeScript 实现一个带过期时间的 LRU 缓存。  要求： - 支持 get(key)、set(key, value, ttlSeconds) 方法 - ttl 过期后 get 返回 undefined 并自动删除条目 - 内部使用 Map 保证 O(1) 读写，双向链表维护访问顺序 - 线程安全不是必须的（单线程环境） - 导出类定义和类型接口  输出格式： 1. 完整的 TypeScript 代码 2. 单元测试（使用 Vitest） 3. 使用示例       这个提示词包含了角色暗示（TypeScript 开发）、明确的功能边界（LRU + TTL）、数据结构选择提示（Map + 链表）、以及输出格式要求（代码 + 测试 + 示例）。AI 的生成结果可以直接粘贴到项目中，需要的修改通常不超过 10%。 审查 AI 代码的四个必查点 AI 生成的代码表面看起来可能很完美，但以下四个问题几乎必然出现在 AI 代码中：      幻影函数调用。  AI 经常调用不存在的 API 或库函数。检查每个 import 和第三方调用是否真实存在。    错误处理缺失。  AI 倾向于只写 happy path。检查 catch 块是否为空、边界条件（空数组、null 值、极限输入）是否被处理。    安全漏洞。  AI 不会主动考虑 SQL 注入、XSS、CSRF 等安全问题。检查用户输入的清理和验证逻辑。    性能假设错误。  AI 可能会在不该用递归的地方用递归，或者在大循环中执行数据库查询。检查算法复杂度是否合理。     AI 编程的局限性 坦诚地说，AI 在以下场景中表现很差：老旧代码库的维护（训练数据中缺乏类似代码）、需要深度业务领域知识的逻辑、跨多个服务的调试排错、以及涉及合规审计的系统。这些场景下，AI 更适合做一个\"高级 StackOverflow\"，而不是主力开发者。 总结：AI 编程工具的最佳定位是一个能力极强但判断力为零的初级工程师。它写代码的速度是你的 10 倍，但你需要像 tech lead 一样审查它每一行产出。把 AI 当成队友，而不是替代品，这才是正确的 AI 编程之道。 📖 相关推荐      AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选     GitHub Copilot 完全使用指南：从安装到高效协作     MCP 协议入门：让 AI 模型安全访问你的工具和数据       See also:   AI 编程助手对比 2026：Cursor vs Copilot vs Claude Code 怎么选 ,  GitHub Copilot 完全使用指南：从安装到高效协作 ,  VS Code vs JetBrains vs Cursor：2026 年代码编辑器终极对比 ."
     }
     </script>
     <script type="application/ld+json">
@@ -123,7 +123,7 @@
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>670 字</span>
+          <span>675 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-coding.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-coding.png" alt="用 AI 辅助编程：从零到生产力" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -183,7 +183,7 @@
 <li><strong>测试覆盖（人 + AI）。</strong> 让 AI 为你的代码生成测试用例，但你需要确认测试是否覆盖了所有重要路径。</li>
 </ol>
 <p>代码生成提示词示例 编写清晰的提示词是 AI 编程的核心技能。以下是一个经过优化的实际案例：</p>
-<pre class="codehilite"><code>请用 TypeScript 实现一个带过期时间的 LRU 缓存。
+<div class="codehilite"><pre><span></span><code>请用 TypeScript 实现一个带过期时间的 LRU 缓存。
 
 要求：
 - 支持 get(key)、set(key, value, ttlSeconds) 方法
@@ -196,7 +196,7 @@
 1. 完整的 TypeScript 代码
 2. 单元测试（使用 Vitest）
 3. 使用示例
-</code></pre>
+</code></pre></div>
 
 <p>这个提示词包含了角色暗示（TypeScript 开发）、明确的功能边界（LRU + TTL）、数据结构选择提示（Map + 链表）、以及输出格式要求（代码 + 测试 + 示例）。AI 的生成结果可以直接粘贴到项目中，需要的修改通常不超过 10%。 审查 AI 代码的四个必查点 AI 生成的代码表面看起来可能很完美，但以下四个问题几乎必然出现在 AI 代码中：</p>
 <ul>

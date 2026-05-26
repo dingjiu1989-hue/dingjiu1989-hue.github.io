@@ -17,6 +17,7 @@ CN_BOARD_NAMES = {
     'sidehustle': '副业资源',
     'tools': '工具推荐',
     'ai': 'AI 教程',
+    'ai-analyst': 'AI分析师',
 }
 CN_BOARD_DESCS = {
     'daily': '每日精选AI领域十大新闻，中英双语，附原文来源链接。',
@@ -24,6 +25,7 @@ CN_BOARD_DESCS = {
     'sidehustle': '自由职业、远程工作与开发者副业收入策略。',
     'tools': '精选开发者工具、效率软件与技术栈推荐。',
     'ai': 'AI工具、提示工程与LLM实用指南。',
+    'ai-analyst': 'AI驱动的深度研究报告，涵盖半导体、科技、行业分析与投资洞察。',
 }
 CN_BOARD_KEYWORDS = {
     'daily': 'AI新闻, 人工智能, 科技新闻, AI每日资讯',
@@ -31,6 +33,7 @@ CN_BOARD_KEYWORDS = {
     'sidehustle': '自由职业, 远程工作, 副业收入, 开发者创业',
     'tools': '开发者工具, 效率工具, 软件推荐, 技术栈',
     'ai': 'AI工具, LLM, 提示工程, 机器学习, 人工智能教程',
+    'ai-analyst': 'AI分析, 深度研究, 行业报告, 半导体, 投资分析, 科技研究',
 }
 CN_BOARD_ICONS = {
     'daily': '📰',
@@ -38,7 +41,10 @@ CN_BOARD_ICONS = {
     'sidehustle': '💼',
     'tools': '🛠️',
     'ai': '🤖',
+    'ai-analyst': '🔬',
 }
+# Boards with standalone HTML pages — skip auto-generation to preserve rich content
+STANDALONE_BOARDS = {'ai-analyst'}
 
 
 def md_to_html(md_text):
@@ -877,12 +883,22 @@ def main():
         board_name = CN_BOARD_NAMES.get(board['id'], board['name'])
         for art in board['posts']:
             slug = art['slug']
+            art_dir = ROOT / board['id']
+            art_dir.mkdir(exist_ok=True)
+            out_html = art_dir / f'{slug}.html'
+
+            # Skip standalone boards — they have hand-crafted HTML with rich content
+            if board['id'] in STANDALONE_BOARDS:
+                if out_html.exists():
+                    print(f'  SKIP (standalone): {out_html}')
+                    continue
+                else:
+                    print(f'  WARNING: Standalone HTML missing for {slug}, using template fallback')
+
             md_path = ROOT / 'md' / 'zh' / board['id'] / f'{slug}.md'
             if not md_path.exists():
                 print(f'  WARNING: No md file for {slug}, skipping')
                 continue
-            art_dir = ROOT / board['id']
-            art_dir.mkdir(exist_ok=True)
             p = art_dir / f'{slug}.html'
             p.write_text(make_article_html(art, board['id'], board_name, all_posts), encoding='utf-8')
             created += 1

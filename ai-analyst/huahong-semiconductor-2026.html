@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>华虹半导体投资价值分析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* 1. 全局重置与基础设定 */
+        body {
+            line-height: 1.8;
+            color: #1f2937;
+            background-color: #FFFFFF; /*必须为纯白*/
+        }
+
+        .prose-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 80px 50px 80px 50px;
+            background-color: #FFFFFF; /*必须为纯白 不加 shadow */
+            border-radius: 12px;
+            line-height: 1.8;
+            text-align: justify;
+            word-wrap: break-word;
+        }
+
+        /* 2. 强制标题层级 (使用 !important 防止被 Tailwind 覆盖) */
+        h1.report-title {
+            font-size: 2.5rem !important; /* 40px */
+            font-weight: 800;
+            color: #000000;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.8rem !important; /* 29px */
+            font-weight: 700;
+            color: #111;
+            margin-top: 2.5rem !important; /* 强制大间距，隔开上一章 */
+            margin-bottom: 1.5rem !important;
+            border-bottom: 2px solid #F3F4F6;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.4rem !important; /* 22px */
+            font-weight: 600;
+            color: #374151;
+            margin-top: 2rem !important;
+            margin-bottom: 1rem !important;
+        }
+
+        h4 {
+            font-size: 1.1rem !important; /* 19px */
+            font-weight: 600;
+            color: #374151;
+            margin-top: 1.5rem !important;
+            margin-bottom: 0.8rem !important;
+        }
+
+        /* 3. 正文与 Markdown 元素适配 */
+        p {
+            font-size: 1.05rem !important; /* 17px */
+            margin-bottom: 1.25em !important;
+            text-align: justify;
+            color: #333;
+        }
+
+        strong { font-weight: 700 !important; }
+
+        .prose-container ul, .prose-container ol {
+            list-style: revert; /* 必须添加！*/
+            padding-left: 1.75rem;
+            margin: 1.5em 0 !important;
+            font-size: 1.05rem;
+        }
+        .prose-container li {
+            margin-bottom: 0.8em !important;
+            padding-left: 0.5rem;
+        }
+
+        /* 4. 组件容器美化 */
+        .widget-box {
+            border: 1px solid #E5E7EB;
+            border-radius: 10px;
+            background: #FAFAFA;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin: 2rem 0;
+            overflow: auto;
+            max-width: 100%;
+        }
+        .widget-header {
+            background: #F9FAFB;
+            padding: 10px 16px;
+            border-bottom: 1px solid #E5E7EB;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #4B5563;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.05em;
+        }
+        .widget-body {
+            padding: 20px;
+            font-size: 0.95rem;
+        }
+
+        /* 5. 图表容器限制 */
+        .chart-container {
+            position: relative;
+            height: 250px; /* 强制锁定高度 */
+            width: 100%;
+        }
+
+        .table-container{
+            overflow: auto;
+        }
+
+        /* 6. 技术分析组件专用样式 */
+        .indicator-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-top: 1.5rem; text-align: center; }
+        .indicator-item { background: #F9FAFB; padding: 1rem; border-radius: 8px; border: 1px solid #F3F4F6; }
+        .indicator-label { font-size: 0.75rem; color: #6B7280; margin-bottom: 0.25rem; }
+        .indicator-value { font-size: 1.25rem; font-weight: 700; color: #111827; }
+        .indicator-signal { font-size: 0.7rem; font-weight: 700; padding: 2px 6px; border-radius: 99px; }
+        .signal-buy { background-color: #D1FAE5; color: #065F46; }
+        .signal-sell { background-color: #FEE2E2; color: #991B1B; }
+        .signal-neutral { background-color: #E5E7EB; color: #374151; }
+
+        /* 7. 移动端调整：自行添加其他组件的适配 */
+        @media (max-width: 768px) {
+          .prose-container {
+              padding: 20px;
+              margin: 20px auto;
+              line-height: 1.7;
+          }
+          h1.report-title {
+              font-size: 1.8rem !important;
+          }
+          h2 {
+              font-size: 1.25rem !important;
+          }
+          h3 {
+              font-size: 1.1rem !important;
+          }
+          h4 {
+              font-size: 1rem !important;
+          }
+          p {
+              font-size: 0.95rem !important;
+          }
+          .prose-container ul, .prose-container ol {
+              padding-left: 1rem;
+              font-size: 0.95rem;
+          }
+        }
+
+        /* 8. 自定义表格样式 */
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin: 2em 0;
+        }
+        .custom-table th, .custom-table td {
+            border: 1px solid #E5E7EB;
+            padding: 10px 12px;
+            text-align: left;
+        }
+        .custom-table th {
+            background-color: #F9FAFB;
+            font-weight: 600;
+            color: #4B5563;
+        }
+        .custom-table tr:nth-child(even) {
+            background-color: #F9FAFB;
+        }
+    </style>
+</head>
+<body>
+    <div class="prose-container">
+        <!-- 所有报告内容将在这里生成 -->
+        <header class="flex flex-col items-center text-center">
+            <div class="flex gap-3 mb-8">
+                <span class="px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-widest rounded">Deep Research</span>
+                <span class="px-3 py-1 bg-blue-600 text-white text-xs font-bold uppercase tracking-widest rounded">华虹半导体</span>
+            </div>
+            <h1 class="report-title">华虹半导体全面投资分析报告（2026年）</h1>
+            <div class="flex items-center text-sm text-gray-500 font-sans mb-4 border-t border-gray-100 pt-4 mt-4">
+                <div class="mr-8"><span class="font-bold">日期:</span><script>document.write(new Date().toLocaleDateString('zh-CN'))</script></div>
+                <div><span class="font-bold">股票:</span> 688347.SH / 01347.HK</div>
+            </div>
+        </header>
+
+        <div class="bg-gray-800 text-white p-8 rounded-xl shadow-lg mb-4 relative overflow-hidden">
+            <h3 class="text-xl font-bold text-white flex items-center gap-3 border-b border-gray-700 pb-4 !mt-0 !mb-6">
+                <i class="fas fa-bolt text-yellow-400"></i>核心摘要
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
+                <div>
+                    <div class="text-sm text-gray-400 uppercase mb-2 font-bold">业绩复苏</div>
+                    <div class="text-base text-gray-200 leading-relaxed">2025年营收同比增长20.18%至172.91亿元，2026年Q1净利润同比大增513.10%，毛利率提升至13%。</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-400 uppercase mb-2 font-bold">技术面风险</div>
+                    <div class="text-base text-gray-200 leading-relaxed">A股股价短期暴涨，RSI指标进入超买区域，回调风险加大，需关注228.88元阻力位。</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-400 uppercase mb-2 font-bold">估值与策略</div>
+                    <div class="text-base text-gray-200 leading-relaxed">A股市盈率高达692倍，短期估值压力大，但特色工艺稀缺性支撑中长期价值，建议回调后介入。</div>
+                </div>
+            </div>
+        </div>
+
+        <p><strong>摘要</strong></p>
+        <p>本报告对华虹半导体（A股代码：688347，港股代码：01347）进行全面分析，涵盖公司概况、财务数据、技术分析、市场情绪、竞品对比、估值与健康度以及主要风险等方面。华虹半导体作为全球领先的特色工艺晶圆代工企业，聚焦功率器件、嵌入式存储、模拟与电源管理等高附加值领域，通过"8英寸+12英寸"双线战略实现差异化竞争。公司2025年营收172.91亿元（+20.18%），2026年Q1归母净利润同比大增513.10%，毛利率提升至13%，产能利用率维持在106.1%的高位。技术面上，A股股价近期暴涨，5月25日单日20%涨停创历史新高，但技术指标已进入超买区域，短期回调风险加大。估值方面，A股市盈率高达692.31倍，显著高于行业平均水平，但考虑到公司特色工艺的稀缺性及产能扩张预期，中长期仍有投资价值。本报告建议短期投资者关注228.88元阻力位及160元支撑位，技术指标回落至合理区间后可择机介入；长期投资者可逢低布局，把握特色工艺国产替代与AI算力需求带来的增长机遇。</p>
+
+        <h2>1. 公司概况</h2>
+
+        <h3>1.1 业务模式</h3>
+        <p>华虹半导体有限公司是一家主要从事半导体产品的生产及销售的投资控股公司，<strong>主营业务是提供包括嵌入式和独立式非易失性存储器、功率器件、模拟与电源管理、逻辑与射频等多元化特色工艺平台的晶圆代工及配套服务</strong>。公司采用"8英寸+12英寸"双线发展战略，聚焦"特色IC+功率器件"，避开与台积电等先进制程巨头的直接竞争，专注高需求细分领域。</p>
+        <div class="my-8 p-6 bg-gray-50 rounded-lg border-l-4 border-gray-700">
+            <div class="flex items-baseline gap-4">
+                <i class="fas fa-quote-left mt-1"></i>
+                <h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">核心业务</h4>
+            </div>
+            <p class="mt-2 !mb-0 leading-relaxed">公司主营业务是提供多元化特色工艺平台的晶圆代工及配套服务，采用"8英寸+12英寸"双线发展战略，聚焦"特色IC+功率器件"。</p>
+        </div>
+        <p>公司业务模式特点：</p>
+        <ul>
+            <li><strong>晶圆代工模式</strong>：专注于制造环节，不涉及芯片设计和销售，客户包括芯片设计公司及IDM厂商</li>
+            <li><strong>特色工艺平台</strong>：覆盖六大技术领域，尤其在功率器件（全球产能第一）、MCU、BCD工艺等细分市场具备技术优势</li>
+            <li><strong>产能互补布局</strong>：上海基地以先进逻辑和特色工艺为主，无锡基地专注功率器件和车规级芯片，形成差异化产能布局</li>
+        </ul>
+
+        <h3>1.2 市值与行业地位</h3>
+        <p>华虹半导体为红筹架构企业，<strong>A+H两地上市</strong>（A股代码：688347，2023年8月科创板上市；港股代码：01347，2014年10月上市）。截至2026年5月26日，公司A股市值约3865亿元，港股总市值约2224亿港元，<strong>在全球纯晶圆代工企业中排名第五位，在中国大陆企业中排名第二位</strong>。</p>
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-chart-pie"></i> 全球纯晶圆代工市场份额</div>
+            <div class="widget-body">
+                <div class="chart-container" style="height: 280px;">
+                    <canvas id="chart_market_share"></canvas>
+                </div>
+            </div>
+        </div>
+        <p>细分领域市场地位：</p>
+        <ul>
+            <li><strong>功率器件</strong>：IGBT代工市占率高达35%，DT-SJ MOSFET出货量已突破100万片晶圆</li>
+            <li><strong>嵌入式存储</strong>：全球70%社保卡芯片由其代工，车规级BCD工艺获14家车企认证</li>
+            <li><strong>模拟与电源管理</strong>：0.18μm BCD 120V平台覆盖汽车48V系统，技术对标国际一线</li>
+            <li><strong>车规级芯片</strong>：已成为华为车规级芯片、IoT芯片的核心代工伙伴，与比亚迪、宁德时代等新能源龙头深度绑定</li>
+        </ul>
+
+        <h3>1.3 核心竞争力与护城河</h3>
+        <p>华虹半导体的核心竞争力主要体现在以下几个方面：</p>
+        <p><strong>技术壁垒</strong>：</p>
+        <ul>
+            <li>累计专利超4900项，2025年新增专利306项</li>
+            <li>DT-SJ工艺、55nm eFlash等技术领先，成本比国际巨头低15%-30%</li>
+            <li>BCD工艺已实现90nm量产，支持新能源汽车MCU</li>
+            <li>40nm超低功耗特色工艺成功量产，面向物联网与可穿戴设备市场</li>
+        </ul>
+        <p><strong>产能规模与利用率</strong>：</p>
+        <ul>
+            <li><strong>8英寸月产能18万片</strong>，全球领先，产能利用率超100%</li>
+            <li><strong>12英寸月产能17.75万片</strong>，产能利用率维持在100%以上</li>
+            <li>2025年总体产能利用率达到106.1%，2026年Q1仍保持99.7%的高位</li>
+            <li>拟收购华力微电子（97.4988%股权），交易对价约82.68亿元，将显著提升12英寸产能</li>
+        </ul>
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-industry"></i> 产能布局</div>
+            <div class="widget-body">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                        <div class="text-sm text-blue-700">8英寸月产能</div>
+                        <div class="text-3xl font-bold text-blue-900 my-2">18万片</div>
+                        <div class="text-xs text-blue-600">全球领先，利用率超100%</div>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-100">
+                        <div class="text-sm text-green-700">12英寸月产能</div>
+                        <div class="text-3xl font-bold text-green-900 my-2">17.75万片</div>
+                        <div class="text-xs text-green-600">利用率维持在100%以上</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p><strong>客户资源与战略协同</strong>：</p>
+        <ul>
+            <li>绑定比亚迪、宁德时代、特斯拉等新能源龙头</li>
+            <li>与华为建立深度合作关系，成为其车规级芯片、IoT芯片的核心代工伙伴</li>
+            <li>国家大基金二期持股4833万股，获得政策支持</li>
+            <li><strong>国产替代战略价值</strong>：国产身份证/社保卡芯片市占率超90%，保障信息安全</li>
+        </ul>
+
+        <h2>2. 财务数据分析</h2>
+
+        <h3>2.1 营收趋势（2021-2025年）</h3>
+        <p>华虹半导体2021-2025年营收数据如下：</p>
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>年份</th>
+                    <th>营收（亿元）</th>
+                    <th>同比增长率</th>
+                    <th>主要驱动因素</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2021</td>
+                    <td>104.00</td>
+                    <td>+70%</td>
+                    <td>半导体行业景气周期，产能利用率提升</td>
+                </tr>
+                <tr>
+                    <td>2022</td>
+                    <td>172.00</td>
+                    <td>+65.4%</td>
+                    <td>消费电子需求强劲，产能扩张</td>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td>162.32</td>
+                    <td>-5.8%</td>
+                    <td>全球半导体产业需求疲软，价格竞争</td>
+                </tr>
+                <tr>
+                    <td>2024</td>
+                    <td>143.88</td>
+                    <td>-11.4%</td>
+                    <td>消费电子需求持续低迷，市场竞争加剧</td>
+                </tr>
+                <tr>
+                    <td>2025</td>
+                    <td>172.91</td>
+                    <td>+20.2%</td>
+                    <td>FAB9产能快速爬坡，车规芯片等高增长领域需求回升</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-chart-line"></i> 营收趋势 (2021-2025)</div>
+            <div class="widget-body">
+                <div class="chart-container">
+                    <canvas id="chart_revenue"></canvas>
+                </div>
+            </div>
+        </div>
+        <p><strong>营收结构变化</strong>：</p>
+        <ul>
+            <li><strong>12英寸占比显著提升</strong>：2021年仅20%，2025年已提升至60%</li>
+            <li><strong>高附加值产品增长强劲</strong>：模拟与电源管理平台2025年收入同比增长42.0%；功率器件平台IGBT产品占比快速提升</li>
+            <li><strong>区域收入结构优化</strong>：中国大陆及香港地区收入占比82.19%，北美区收入同比增长31.42%，增速最快</li>
+        </ul>
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-chart-pie"></i> 营收结构变化 (12英寸占比)</div>
+            <div class="widget-body">
+                <div class="chart-container">
+                    <canvas id="chart_12inch_revenue"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <h3>2.2 利润质量分析</h3>
+        <p>华虹半导体2021-2025年利润数据如下：</p>
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>年份</th>
+                    <th>营业收入（亿元）</th>
+                    <th>归母净利润（亿元）</th>
+                    <th>净利率</th>
+                    <th>毛利率</th>
+                    <th>研发费用率</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2021</td>
+                    <td>104.00</td>
+                    <td>19.36</td>
+                    <td>18.6%</td>
+                    <td>28.7%</td>
+                    <td>9.11%</td>
+                </tr>
+                <tr>
+                    <td>2022</td>
+                    <td>172.00</td>
+                    <td>3.81</td>
+                    <td>2.2%</td>
+                    <td>10.2%</td>
+                    <td>11.42%</td>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td>162.32</td>
+                    <td>3.77</td>
+                    <td>2.3%</td>
+                    <td>10.2%</td>
+                    <td>9.11%</td>
+                </tr>
+                <tr>
+                    <td>2024</td>
+                    <td>143.88</td>
+                    <td>3.81</td>
+                    <td>2.6%</td>
+                    <td>10.0%</td>
+                    <td>9.11%</td>
+                </tr>
+                <tr>
+                    <td>2025</td>
+                    <td>172.91</td>
+                    <td>3.77</td>
+                    <td>2.2%</td>
+                    <td>11.8%</td>
+                    <td>11.53%</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>利润质量分析</strong>：</p>
+        <ul>
+            <li><strong>毛利率持续改善</strong>：从2021年的28.7%下降至2024年的10.0%，2025年回升至11.8%，<strong>主要受益于产能利用率提升和产品结构优化</strong></li>
+            <li><strong>净利润波动显著</strong>：2021年达到历史高点19.36亿元，2022年大幅下滑至3.81亿元，2023-2025年维持在3.7-3.8亿元区间，<strong>主因是无锡FAB9项目产能爬坡带来的巨额折旧成本</strong></li>
+            <li><strong>研发投入持续加码</strong>：2025年研发投入19.94亿元，同比增长21.37%，占营收比重11.53%，<strong>远高于行业平均水平</strong>，持续强化技术壁垒</li>
+            <li><strong>合并报表与母公司报表差异</strong>：2025年合并报表净利润亏损，但母公司股东应占利润为正值，<strong>主因是子公司层面的少数股东承担了相当部分亏损</strong></li>
+        </ul>
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-chart-line"></i> 利润质量趋势 (2021-2025)</div>
+            <div class="widget-body">
+                <div class="chart-container">
+                    <canvas id="chart_profit_quality"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <h3>2.3 资产负债结构分析</h3>
+        <p>截至2025年12月31日，华虹半导体的资产负债结构如下：</p>
+        <p><strong>资产结构</strong>：</p>
+        <ul>
+            <li>总资产：1001.23亿元</li>
+            <li>流动资产：464.37亿元，占总资产46.4%</li>
+            <li>固定资产：345.96亿元</li>
+            <li>在建工程：145.72亿元</li>
+            <li>其他非流动资产：537.53亿元</li>
+        </ul>
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-chart-pie"></i> 资产结构 (2025年底)</div>
+            <div class="widget-body">
+                <div class="chart-container">
+                    <canvas id="chart_asset_structure"></canvas>
+                </div>
+            </div>
+        </div>
+        <p><strong>负债结构</strong>：</p>
+        <ul>
+            <li>总负债：370.46亿元，负债率37.0%</li>
+            <li>流动负债：约156亿元</li>
+            <li>长期借款：195.90亿元，同比增长45.37%</li>
+            <li>长期应付款：新增41.79亿元</li>
+            <li><strong>有息负债总额</strong>：约244.69亿元，同比增长约35%</li>
+        </ul>
+        <p><strong>偿债能力指标</strong>：</p>
+        <ul>
+            <li>流动比率：3.56，速动比率：3.15，<strong>短期偿债能力强劲</strong></li>
+            <li><strong>利息覆盖倍数</strong>：约5.34倍（EBITDA约26亿元 vs 利息支出4.88亿元），<strong>短期偿债安全</strong></li>
+            <li><strong>经营性现金流</strong>：50.65亿元，同比增长40.38%，<strong>现金流健康，足以覆盖利息支出</strong></li>
+        </ul>
+
+        <h3>2.4 现金流状况分析</h3>
+        <p>华虹半导体2025年现金流情况如下：</p>
+        <ul>
+            <li><strong>经营活动现金流</strong>：50.65亿元，同比增长40.38%，主要受益于收入增长带动销售回款同步上升</li>
+            <li><strong>投资活动现金流</strong>：-17.86亿美元（约120亿元人民币），主要用于购建固定资产、无形资产及其他长期资产</li>
+            <li><strong>筹资活动现金流</strong>：14.99亿美元（约100亿元人民币），主要用于偿还债务及融资需求</li>
+        </ul>
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-chart-bar"></i> 2025年现金流构成</div>
+            <div class="widget-body">
+                <div class="chart-container">
+                    <canvas id="chart_cash_flow"></canvas>
+                </div>
+            </div>
+        </div>
+        <p><strong>现金流特点</strong>：</p>
+        <ul>
+            <li><strong>经营现金流强劲</strong>：2025年经营现金流50.65亿元，<strong>足以覆盖日常运营和利息支出</strong></li>
+            <li><strong>投资现金流持续流出</strong>：2025年Q1-Q3投资现金流净流出-82亿元，主要用于产能扩张（如华虹九厂）和设备采购</li>
+            <li><strong>自由现金流为负</strong>：由于大规模资本开支，自由现金流持续为负，<strong>依赖外部融资支撑产能扩张</strong></li>
+            <li><strong>产能利用率提升带动现金流改善</strong>：2025年Q1-Q3经营现金流同比增长129.58%，<strong>主要得益于销售商品收到的现金大幅上升</strong></li>
+        </ul>
+
+        <h2>3. 技术分析</h2>
+
+        <h3>3.1 价格趋势分析</h3>
+        <p><strong>A股走势（688347）</strong>：</p>
+        <ul>
+            <li><strong>2024-2025年形成上升通道</strong>：从2024年低点约60元/股开始，逐步震荡上行，2025年累计涨幅达132.13%</li>
+            <li><strong>2026年加速上涨</strong>：截至2026年5月26日，股价已达222.42元，年内累计涨幅近100%</li>
+            <li><strong>近期暴涨</strong>：2026年5月25日单日20%涨停，创历史新高；5月26日继续上涨至222.42元，5日涨幅达45.3%</li>
+            <li><strong>成交量与换手率激增</strong>：5月25日成交额达99.8亿元，换手率12.31%，<strong>显示短期资金关注度极高</strong></li>
+        </ul>
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-chart-line"></i> A股价格趋势 (2024-2026)</div>
+            <div class="widget-body">
+                <div class="chart-container" style="height: 200px;">
+                    <canvas id="chart_price_trend"></canvas>
+                </div>
+                 <div class="indicator-grid !mt-0">
+                    <div class="indicator-item">
+                        <div class="indicator-label">5日涨幅</div>
+                        <div class="indicator-value">+45.3%</div>
+                        <span class="indicator-signal signal-buy">资金关注</span>
+                    </div>
+                    <div class="indicator-item">
+                        <div class="indicator-label">成交额 (5/25)</div>
+                        <div class="indicator-value">99.8亿</div>
+                        <span class="indicator-signal signal-buy">量能放大</span>
+                    </div>
+                    <div class="indicator-item">
+                        <div class="indicator-label">换手率 (5/25)</div>
+                        <div class="indicator-value">12.31%</div>
+                        <span class="indicator-signal signal-buy">交易活跃</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p><strong>港股走势（01347）</strong>：</p>
+        <ul>
+            <li><strong>2026年Q1表现相对滞后</strong>：截至5月26日，股价为88元，年内涨幅约15%</li>
+            <li><strong>近期受并购预期推动</strong>：5月26日上涨15%至88元，但<strong>估值仍显著低于A股</strong>，A股/港股溢价率高达200%</li>
+            <li><strong>技术指标处于超买区域</strong>：5月25日A股RSI2达94.82（极度超买区间），RSI6为83.61（超买），<strong>短期回调压力加大</strong></li>
+        </ul>
+
+        <h3>3.2 关键技术指标分析</h3>
+        <p><strong>A股技术指标（2026年5月25日）</strong>：</p>
+        <ul>
+            <li><strong>RSI指标</strong>：RSI2 94.82（极度超买），RSI6 83.61（超买），RSI12 77.51（超买）</li>
+            <li><strong>MACD</strong>：处于金叉状态，但DIF线接近高位，<strong>存在顶背离风险</strong></li>
+            <li><strong>布林带</strong>：股价已突破上轨，带宽持续扩大，<strong>显示短期波动加剧</strong></li>
+            <li><strong>成交量</strong>：99.8亿元，量比1.33，<strong>成交量显著放大</strong></li>
+            <li><strong>换手率</strong>：12.31%，<strong>远高于历史平均水平</strong></li>
+        </ul>
+        <div class="my-8 p-6 bg-red-50 rounded-lg border-l-4 border-red-500">
+            <div class="flex items-baseline gap-4">
+                <i class="fas fa-exclamation-triangle mt-1 text-red-400"></i>
+                <h4 class="font-bold uppercase mb-2 !mt-0 !mb-1 text-red-700">技术指标警示</h4>
+            </div>
+            <p class="mt-2 !mb-0 leading-relaxed text-red-900">A股技术指标已进入超买区域（RSI2: 94.82），存在顶背离风险，短期回调压力加大。</p>
+        </div>
+        <p><strong>港股技术指标</strong>：</p>
+        <ul>
+            <li><strong>RSI指标</strong>：数据不详</li>
+            <li><strong>MACD</strong>：处于金叉状态，但<strong>动能减弱</strong></li>
+            <li><strong>布林带</strong>：股价处于中上轨之间，<strong>波动相对温和</strong></li>
+            <li><strong>成交量</strong>：数据不详</li>
+            <li><strong>换手率</strong>：数据不详</li>
+        </ul>
+
+        <h3>3.3 关键支撑/阻力位分析</h3>
+        <p><strong>A股关键支撑/阻力位</strong>：</p>
+        <ul>
+            <li><strong>短期阻力位</strong>：228.88元（5月25日历史高点），<strong>突破后或挑战235元</strong></li>
+            <li><strong>中期阻力位</strong>：240-250元区间（2025年高点区域）</li>
+            <li><strong>短期支撑位</strong>：200元（前期高点区域）</li>
+            <li><strong>中期支撑位</strong>：160-170元区间（2026年2-3月震荡平台）</li>
+        </ul>
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-arrows-alt-v"></i> A股关键价位</div>
+            <div class="widget-body space-y-4">
+               <div class="flex gap-4 items-center"><div class="font-bold text-red-600 w-24 text-sm text-right">短期阻力位</div> <div class="text-gray-900 font-bold text-sm">228.88元 (历史高点)</div></div>
+               <div class="flex gap-4 items-center"><div class="font-bold text-red-500 w-24 text-sm text-right">中期阻力位</div> <div class="text-gray-600 text-sm">240-250元区间 (2025年高点)</div></div>
+               <div class="flex gap-4 items-center"><div class="font-bold text-green-600 w-24 text-sm text-right">短期支撑位</div> <div class="text-gray-900 font-bold text-sm">200元 (前期高点)</div></div>
+               <div class="flex gap-4 items-center"><div class="font-bold text-green-500 w-24 text-sm text-right">中期支撑位</div> <div class="text-gray-600 text-sm">160-170元区间 (2026年2-3月平台)</div></div>
+            </div>
+        </div>
+        <p><strong>港股关键支撑/阻力位</strong>：</p>
+        <ul>
+            <li><strong>短期阻力位</strong>：95元（近期高点）</li>
+            <li><strong>中期阻力位</strong>：100元（历史压力位）</li>
+            <li><strong>短期支撑位</strong>：80元（近期低点）</li>
+            <li><strong>中期支撑位</strong>：70-75元区间（2026年1月支撑位）</li>
+        </ul>
+
+        <h2>4. 市场情绪分析</h2>
+
+        <h3>4.1 机构评级与预期</h3>
+        <p><strong>券商评级</strong>：</p>
+        <ul>
+            <li><strong>光大证券</strong>：维持"买入"评级，目标价151港元</li>
+            <li><strong>花旗</strong>：上调目标价，重申"买入"评级，看好90日内表现</li>
+            <li><strong>大摩</strong>：上调目标价，认为"成熟制程上升周期即将到来"</li>
+            <li><strong>中金</strong>：上调目标价至146港元（对应4.8倍2026年市净率），看好"算电协同趋势和存储大周期"</li>
+        </ul>
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-chart-bar"></i> 机构目标价（港股）</div>
+            <div class="widget-body">
+                <div class="chart-container" style="height: 200px;">
+                    <canvas id="chart_target_price"></canvas>
+                </div>
+            </div>
+        </div>
+        <p><strong>市场预期</strong>：</p>
+        <ul>
+            <li><strong>2026年业绩预期</strong>：券商预测2026年营收约30亿美元（+25% YoY），归母净利润约1.56亿美元（+106% YoY）</li>
+            <li><strong>毛利率改善预期</strong>：公司预计2026年毛利率将提升至14%-16%区间</li>
+            <li><strong>产能扩张预期</strong>：华虹九厂（FAB9）预计2026年底形成3-4万片/月产能；华力微收购完成后，12英寸产能将显著提升</li>
+        </ul>
+
+        <h3>4.2 舆情与新闻影响</h3>
+        <p><strong>近期利好消息</strong>：</p>
+        <ul>
+            <li><strong>华为"韬定律"发布</strong>：2026年5月25日华为正式发布"韬定律"，推动功率器件效率提升30%，华虹作为功率器件龙头深度受益</li>
+            <li><strong>2026年Q1业绩超预期</strong>：归母净利润同比大增513.10%，毛利率提升至13%（同比上升3.8个百分点）</li>
+            <li><strong>产能利用率维持高位</strong>：2025年总体产能利用率达106.1%，2026年Q1仍保持99.7%的高位</li>
+            <li><strong>收购华力微进入实质审核</strong>：交易预期于2026年下半年完成，将显著提升12英寸产能</li>
+        </ul>
+        <div class="my-8 p-6 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
+            <div class="flex items-baseline gap-4">
+                <i class="fas fa-bullhorn mt-1 text-yellow-500"></i>
+                <h4 class="font-bold uppercase mb-2 !mt-0 !mb-1 text-yellow-700">关键利好：华为"韬定律"</h4>
+            </div>
+            <p class="mt-2 !mb-0 leading-relaxed text-yellow-900">华为发布"韬定律"，旨在推动功率器件效率提升30%。作为功率器件代工龙头，华虹半导体将深度受益于这一技术趋势。</p>
+        </div>
+        <p><strong>市场情绪特点</strong>：</p>
+        <ul>
+            <li><strong>交易拥挤度高</strong>：主动偏股基金对AI硬件（含半导体）的配置比例与超配幅度已处于历史高位，<strong>部分机构提示短期情绪过热风险</strong></li>
+            <li><strong>杠杆资金持续流入</strong>：2026年4月1日-5月22日，申万半导体指数的融资净买入额超过964亿元，为杠杆资金净流入最多的行业</li>
+            <li><strong>机构分歧加大</strong>：部分机构看好长期成长空间，认为国产大模型适配国产算力芯片将提升订单确定性；也有机构提示存储芯片涨价存在短期供需错配的周期性波动风险</li>
+        </ul>
+
+        <h2>5. 竞品对比分析</h2>
+
+        <h3>5.1 主要竞争对手市场份额</h3>
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>公司</th>
+                    <th>8英寸产能（万片/月）</th>
+                    <th>12英寸产能（万片/月）</th>
+                    <th>全球市场份额</th>
+                    <th>中国大陆市场份额</th>
+                    <th>技术优势领域</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>台积电</td>
+                    <td>300+（含12英寸等效）</td>
+                    <td>300+</td>
+                    <td>54%</td>
+                    <td>25%</td>
+                    <td>先进制程（3nm-7nm）</td>
+                </tr>
+                <tr>
+                    <td>中芯国际</td>
+                    <td>63</td>
+                    <td>25</td>
+                    <td>4.5%</td>
+                    <td>20%</td>
+                    <td>逻辑芯片、特色工艺</td>
+                </tr>
+                <tr>
+                    <td>华虹半导体</td>
+                    <td>18</td>
+                    <td>14.79（等效）</td>
+                    <td>3.8%</td>
+                    <td>18%</td>
+                    <td>功率器件、嵌入式存储</td>
+                </tr>
+                <tr>
+                    <td>格罗方德</td>
+                    <td>45</td>
+                    <td>10</td>
+                    <td>5.2%</td>
+                    <td>5%</td>
+                    <td>射频芯片、汽车电子</td>
+                </tr>
+                <tr>
+                    <td>世界先进</td>
+                    <td>25</td>
+                    <td>-</td>
+                    <td>2.1%</td>
+                    <td>3%</td>
+                    <td>LCD驱动、电源管理</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>华虹半导体的竞争优势</strong>：</p>
+        <ul>
+            <li><strong>功率器件领域全球领先</strong>：IGBT代工市占率35%，全球第一</li>
+            <li><strong>嵌入式存储领域优势明显</strong>：全球70%社保卡芯片由其代工</li>
+            <li><strong>特色工艺平台全面性</strong>：覆盖六大技术领域，技术转化效率高</li>
+            <li><strong>产能利用率行业领先</strong>：2025年总体产能利用率达106.1%，<strong>远高于行业平均水平</strong></li>
+        </ul>
+        <div class="my-8 p-6 bg-gray-50 rounded-lg border-l-4 border-gray-700">
+            <div class="flex items-baseline gap-4">
+                <i class="fas fa-trophy mt-1 text-gray-500"></i>
+                <h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">竞争优势</h4>
+            </div>
+            <p class="mt-2 !mb-0 leading-relaxed">华虹半导体在功率器件（IGBT代工市占率35%）、嵌入式存储（全球70%社保卡芯片代工）领域具备全球领先优势，且产能利用率（106.1%）远超行业平均。</p>
+        </div>
+
+        <h3>5.2 财务指标对比</h3>
+        <p><strong>与中芯国际对比</strong>：</p>
+        <ul>
+            <li><strong>营收规模</strong>：华虹半导体2025年营收172.91亿元，中芯国际约300亿元，<strong>中芯国际规模更大</strong></li>
+            <li><strong>毛利率</strong>：华虹半导体2025年毛利率11.8%，中芯国际约20.4%，<strong>中芯国际盈利能力更强</strong></li>
+            <li><strong>研发投入占比</strong>：华虹半导体11.53%，中芯国际约15%，<strong>研发投入比例相近</strong></li>
+            <li><strong>资产负债率</strong>：华虹半导体37%，中芯国际约45%，<strong>负债水平相对较低</strong></li>
+            <li><strong>产能利用率</strong>：华虹半导体106.1%，中芯国际92.5%，<strong>产能利用率显著更高</strong></li>
+        </ul>
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-balance-scale"></i> 财务指标对比 (2025年)</div>
+            <div class="widget-body">
+                <div class="chart-container">
+                    <canvas id="chart_vs_smic"></canvas>
+                </div>
+            </div>
+        </div>
+        <p><strong>与华虹集团内其他企业对比</strong>：</p>
+        <ul>
+            <li><strong>华虹七厂</strong>：专注8英寸特色工艺，产能利用率超100%</li>
+            <li><strong>华虹九厂</strong>：专注12英寸特色工艺，2025年产能快速爬坡，单月投片量超4万片</li>
+            <li><strong>华虹五厂（华力微）</strong>：设计月产能达3.8万片，主要工艺平台覆盖65/55nm至40nm成熟制程，2024年净利润5.2亿元</li>
+        </ul>
+
+        <h2>6. 估值与健康度分析</h2>
+
+        <h3>6.1 多维度估值分析</h3>
+        <p><strong>A股估值（2026年5月26日）</strong>：</p>
+        <ul>
+            <li>市盈率（TTM）：692.31倍</li>
+            <li>市净率：8.25倍</li>
+            <li>估值溢价：A股/港股溢价率约200%</li>
+        </ul>
+        <p><strong>港股估值（2026年5月26日）</strong>：</p>
+        <ul>
+            <li>市盈率（TTM）：394.05倍</li>
+            <li>市净率：2.85倍</li>
+        </ul>
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-chart-bar"></i> A/H股估值对比 (TTM)</div>
+            <div class="widget-body">
+                <div class="chart-container">
+                    <canvas id="chart_ah_valuation"></canvas>
+                </div>
+            </div>
+        </div>
+        <p><strong>DCF估值分析</strong>：</p>
+        <ul>
+            <li><strong>预测期（2026-2028年）</strong>：营收增长率分别为25%、16%、10%</li>
+            <li><strong>永续增长率</strong>：3%</li>
+            <li><strong>折现率</strong>：10%</li>
+            <li><strong>DCF估值</strong>：约151港元（基于5倍2026年PB），对应4.8倍2026年市净率</li>
+        </ul>
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-stream"></i> DCF 估值路径</div>
+            <div class="widget-body space-y-4">
+               <div class="flex gap-4 items-center"><div class="font-bold text-blue-600 w-28 text-sm">预测期 (23-25)</div> <div class="text-gray-600 text-sm">营收按 25% → 16% → 10% 增长</div></div>
+               <div class="flex gap-4 items-center"><div class="font-bold text-gray-900 w-28 text-sm">永续期 (26+)</div> <div class="text-gray-900 font-bold text-sm">永续增长率为 3%</div></div>
+               <div class="flex gap-4 items-center"><div class="font-bold text-gray-500 w-28 text-sm">折现率</div> <div class="text-gray-500 text-sm">采用 10% 的折现率</div></div>
+               <div class="flex gap-4 items-center"><div class="font-bold text-green-600 w-28 text-sm">DCF 估值结果</div> <div class="text-green-700 font-bold text-sm">约 151 港元</div></div>
+            </div>
+        </div>
+        <p><strong>估值合理性分析</strong>：</p>
+        <ul>
+            <li><strong>A股显著高估</strong>：692倍的市盈率远高于行业平均水平，<strong>短期估值回归风险大</strong></li>
+            <li><strong>长期估值支撑</strong>：特色工艺稀缺性及产能扩张预期可能支撑高估值</li>
+            <li><strong>盈利增长预期</strong>：券商预测2026年净利润同比增106%，<strong>若业绩兑现，估值有望逐步消化</strong></li>
+        </ul>
+
+        <h3>6.2 财务健康度评估</h3>
+        <p><strong>财务健康度评分（1-5分）</strong>：</p>
+        <ul>
+            <li><strong>盈利能力</strong>：2.5分（毛利率低，但增长趋势向好）</li>
+            <li><strong>现金流状况</strong>：4.0分（经营现金流强劲，但投资现金流持续流出）</li>
+            <li><strong>负债结构</strong>：3.5分（有息负债增长快，但利息覆盖倍数尚可）</li>
+            <li><strong>产能利用率</strong>：4.5分（产能利用率超100%，显示需求强劲）</li>
+            <li><strong>研发投入效率</strong>：3.0分（研发投入占比高，但技术转化周期长）</li>
+        </ul>
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-heart-pulse"></i> 财务健康度评分</div>
+            <div class="widget-body">
+                <div class="chart-container" style="height: 220px;">
+                    <canvas id="chart_health_score"></canvas>
+                </div>
+            </div>
+        </div>
+        <p><strong>财务风险点</strong>：</p>
+        <ul>
+            <li><strong>折旧压力</strong>：华虹九厂2025年折旧费用约1.7-1.8亿美元，<strong>对毛利率形成持续压力</strong></li>
+            <li><strong>产能扩张融资需求</strong>：华力微收购将增加长期负债，<strong>需关注融资能力</strong></li>
+            <li><strong>汇率风险</strong>：公司存在大量美元收入，<strong>汇率波动可能影响利润</strong></li>
+        </ul>
+
+        <h2>7. 主要风险分析</h2>
+
+        <h3>7.1 行业竞争风险</h3>
+        <ul>
+            <li><strong>成熟制程价格竞争加剧</strong>：全球半导体产能持续扩张，2025年全球产能增长7%，可能加剧价格竞争</li>
+            <li><strong>国际巨头挤压</strong>：台积电、联电等国际代工厂在成熟制程领域仍有较强竞争力，可能挤压华虹市场份额</li>
+            <li><strong>国内企业崛起</strong>：中芯国际、芯联集成等国内企业也在积极布局特色工艺领域，<strong>行业竞争加剧</strong></li>
+        </ul>
+
+        <h3>7.2 政策风险</h3>
+        <ul>
+            <li><strong>国际贸易摩擦</strong>：美国出口管制政策可能影响高端设备采购</li>
+            <li><strong>国产替代进程</strong>：国产替代政策支持可能减弱，影响公司订单稳定性</li>
+            <li><strong>并购整合风险</strong>：华力微收购若失败，将影响公司12英寸产能扩张计划</li>
+        </ul>
+
+        <h3>7.3 地缘风险</h3>
+        <ul>
+            <li><strong>供应链安全</strong>：关键设备和技术依赖进口，可能面临供应链中断风险</li>
+            <li><strong>区域市场波动</strong>：北美区收入增速虽快，但受地缘政治影响较大</li>
+            <li><strong>汇率波动风险</strong>：公司存在大量美元收入，<strong>汇率波动可能影响利润</strong></li>
+        </ul>
+
+        <h2>8. 结论与投资建议</h2>
+
+        <h3>8.1 短期投资建议（3-6个月）</h3>
+        <p><strong>A股市场</strong>：</p>
+        <ul>
+            <li><strong>短期回调风险高</strong>：RSI指标已进入超买区域，5月25日RSI2达94.82，<strong>短期回调概率大</strong></li>
+            <li><strong>关键支撑位</strong>：160-170元区间（2026年2-3月震荡平台）</li>
+            <li><strong>操作建议</strong>：
+                <ul>
+                    <li><strong>观望为主</strong>：技术指标超买，建议观望等待回调</li>
+                    <li><strong>回调介入</strong>：若股价回调至160-170元区间且技术指标回落至合理区域，可考虑分批建仓</li>
+                    <li><strong>止损设置</strong>：止损位设在150元附近，跌破止损位需果断离场</li>
+                </ul>
+            </li>
+        </ul>
+        <p><strong>港股市场</strong>：</p>
+        <ul>
+            <li><strong>相对估值较低</strong>：市盈率TTM约394倍，低于A股，但<strong>仍处于历史高位</strong></li>
+            <li><strong>技术面相对温和</strong>：RSI指标未进入极度超买区域，<strong>技术面风险低于A股</strong></li>
+            <li><strong>操作建议</strong>：
+                <ul>
+                    <li><strong>逢低布局</strong>：可在80-85元区间逢低布局</li>
+                    <li><strong>关注并表预期</strong>：华力微收购若完成，将显著提升12英寸产能，<strong>可关注相关催化剂</strong></li>
+                    <li><strong>止损设置</strong>：止损位设在75元附近，跌破止损位需果断离场</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>8.2 长期投资建议（1-3年）</h3>
+        <ul>
+            <li><strong>基本面支撑强劲</strong>：特色工艺国产替代与AI算力需求爆发将长期支撑公司业绩</li>
+            <li><strong>产能扩张带来增长</strong>：华虹九厂（FAB9）产能持续释放，华力微收购完成后12英寸产能将显著提升</li>
+            <li><strong>毛利率改善可期</strong>：公司预计2026年毛利率将提升至14%-16%区间，<strong>盈利质量有望改善</strong></li>
+            <li><strong>操作建议</strong>：
+                <ul>
+                    <li><strong>逢低分批建仓</strong>：长期投资者可在A股160-170元、港股70-75元区间逢低分批建仓</li>
+                    <li><strong>持有策略</strong>：若已持有，建议中长期持有，等待业绩增长消化高估值</li>
+                    <li><strong>关注风险因素</strong>：密切跟踪折旧压力、产能利用率变化及汇率波动情况</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>8.3 风险提示</h3>
+        <ul>
+            <li><strong>技术迭代风险</strong>：特色工艺技术迭代可能不及预期，影响公司竞争力</li>
+            <li><strong>产能利用率波动</strong>：若全球半导体需求下滑，产能利用率可能下降，影响毛利率</li>
+            <li><strong>并购整合风险</strong>：华力微收购后可能存在整合风险，影响协同效应</li>
+            <li><strong>汇率波动风险</strong>：公司存在大量美元收入，<strong>汇率波动可能影响利润</strong></li>
+        </ul>
+
+        <h2>9. 总结</h2>
+        <p>华虹半导体作为全球领先的特色工艺晶圆代工企业，<strong>在功率器件、嵌入式存储、模拟与电源管理等领域具备显著竞争优势</strong>。公司通过"8英寸+12英寸"双线战略，聚焦高附加值产品，2025年营收同比增长20.18%，2026年Q1归母净利润同比大增513.10%，<strong>业绩呈现强劲复苏态势</strong>。技术面上，A股短期已进入超买区域，存在回调风险，但<strong>中长期仍有投资价值</strong>。估值方面，A股市盈率高达692.31倍，<strong>短期估值回归压力大</strong>，但特色工艺稀缺性及产能扩张预期可能支撑高估值。</p>
+        <div class="my-8 p-6 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+            <div class="flex items-baseline gap-4">
+                <i class="fas fa-lightbulb mt-1 text-blue-500"></i>
+                <h4 class="font-bold uppercase mb-2 !mt-0 !mb-1 text-blue-700">核心投资逻辑</h4>
+            </div>
+            <p class="mt-2 !mb-0 leading-relaxed text-blue-900">投资华虹半导体的核心在于其<strong>特色工艺的稀缺性</strong>、<strong>产能利用率的高位维持</strong>（2025年达106.1%）、以及<strong>毛利率的持续改善预期</strong>（预计2026年提升至14%-16%），叠加<strong>国产替代与AI算力需求</strong>的长期增长机遇。</p>
+        </div>
+        <p><strong>投资华虹半导体的核心逻辑</strong>在于：</p>
+        <ul>
+            <li><strong>特色工艺的稀缺性</strong>：功率器件、嵌入式存储等领域的技术壁垒高，竞争格局较好</li>
+            <li><strong>产能利用率的高位维持</strong>：2025年总体产能利用率达106.1%，<strong>显示需求强劲</strong></li>
+            <li><strong>毛利率的持续改善</strong>：公司预计2026年毛利率将提升至14%-16%区间，<strong>盈利质量有望提升</strong></li>
+            <li><strong>国产替代与AI算力需求</strong>：国产大模型适配国产算力芯片将提升订单确定性，AI需求外溢将拉动电源管理等周边芯片需求</li>
+        </ul>
+        <p><strong>风险提示</strong>：技术迭代不及预期、产能利用率波动、并购整合风险及汇率波动风险等，投资者需密切关注。</p>
+
+    </div>
+
+    <script>
+        // Chart: 全球纯晶圆代工市场份额
+        new Chart(document.getElementById('chart_market_share'), {
+            type: 'pie',
+            data: {
+                labels: ['台积电', '中芯国际', '华虹半导体', '格罗方德', '世界先进', '其他'],
+                datasets: [{
+                    label: '全球市场份额',
+                    data: [54, 4.5, 3.8, 5.2, 2.1, 30.4],
+                    backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#6366F1', '#8B5CF6', '#9CA3AF'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 2
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom', labels: { padding: 20 } } } }
+        });
+
+        // Chart: 营收趋势
+        new Chart(document.getElementById('chart_revenue'), {
+            type: 'bar',
+            data: {
+                labels: ['2021', '2022', '2023', '2024', '2025'],
+                datasets: [{
+                    label: '营收 (亿元)',
+                    data: [104.00, 172.00, 162.32, 143.88, 172.91],
+                    backgroundColor: '#3B82F6',
+                    borderRadius: 3,
+                    yAxisID: 'y'
+                },{
+                    type: 'line',
+                    label: '同比增长率 (%)',
+                    data: [70, 65.4, -5.8, -11.4, 20.2],
+                    borderColor: '#F59E0B',
+                    backgroundColor: '#F59E0B',
+                    tension: 0.3,
+                    yAxisID: 'y1'
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom' } }, scales: {
+                x: { grid: { display: false } },
+                y: { type: 'linear', display: true, position: 'left', grid: { borderDash: [4, 4] }, title: { display: true, text: '营收 (亿元)' } },
+                y1: { type: 'linear', display: true, position: 'right', grid: { display: false }, title: { display: true, text: '同比增长率 (%)' } }
+            } }
+        });
+
+        // Chart: 12英寸营收占比
+        new Chart(document.getElementById('chart_12inch_revenue'), {
+            type: 'doughnut',
+            data: {
+                labels: ['12英寸营收占比', '其他'],
+                datasets: [{
+                    label: '占比',
+                    data: [60, 40],
+                    backgroundColor: ['#3B82F6', '#E5E7EB'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 4
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { display: true, position: 'bottom' } } }
+        });
+
+        // Chart: 利润质量趋势
+        new Chart(document.getElementById('chart_profit_quality'), {
+            type: 'line',
+            data: {
+                labels: ['2021', '2022', '2023', '2024', '2025'],
+                datasets: [{
+                    label: '毛利率 (%)',
+                    data: [28.7, 10.2, 10.2, 10.0, 11.8],
+                    borderColor: '#3B82F6',
+                    backgroundColor: '#3B82F6',
+                    tension: 0.3
+                }, {
+                    label: '净利率 (%)',
+                    data: [18.6, 2.2, 2.3, 2.6, 2.2],
+                    borderColor: '#F59E0B',
+                    backgroundColor: '#F59E0B',
+                    tension: 0.3
+                }, {
+                    label: '研发费用率 (%)',
+                    data: [9.11, 11.42, 9.11, 9.11, 11.53],
+                    borderColor: '#10B981',
+                    backgroundColor: '#10B981',
+                    tension: 0.3
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom' } }, scales: { x: { grid: { display: false } }, y: { grid: { borderDash: [4, 4] }, title: { display: true, text: '百分比 (%)' } } } }
+        });
+
+        // Chart: 资产结构
+        new Chart(document.getElementById('chart_asset_structure'), {
+            type: 'pie',
+            data: {
+                labels: ['流动资产', '固定资产', '在建工程', '其他非流动资产'],
+                datasets: [{
+                    label: '资产 (亿元)',
+                    data: [464.37, 345.96, 145.72, 537.53],
+                    backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#6366F1'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 2
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom' } } }
+        });
+
+        // Chart: 现金流构成
+        new Chart(document.getElementById('chart_cash_flow'), {
+            type: 'bar',
+            data: {
+                labels: ['经营活动', '投资活动', '筹资活动'],
+                datasets: [{
+                    label: '现金流 (亿元)',
+                    data: [50.65, -120, 100],
+                    backgroundColor: ['#10B981', '#EF4444', '#3B82F6'],
+                    borderRadius: 3
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { grid: { borderDash: [4, 4] }, title: { display: true, text: '现金流 (亿元)' } }, y: { grid: { display: false } } } }
+        });
+
+        // Chart: A股价格趋势
+        new Chart(document.getElementById('chart_price_trend'), {
+            type: 'line',
+            data: {
+                labels: ['2024低点', '2025年底', '2026/5/26'],
+                datasets: [{
+                    label: 'A股价格 (元)',
+                    data: [60, 110, 222.42],
+                    borderColor: '#3B82F6',
+                    borderWidth: 2.5,
+                    tension: 0.3,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#3B82F6'
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { color: '#F3F4F6' }, title: { display: true, text: '价格 (元)' } } } }
+        });
+
+        // Chart: 机构目标价
+        new Chart(document.getElementById('chart_target_price'), {
+            type: 'bar',
+            data: {
+                labels: ['光大证券', '中金公司'],
+                datasets: [{
+                    label: '目标价 (港元)',
+                    data: [151, 146],
+                    backgroundColor: ['#3B82F6', '#10B981'],
+                    borderRadius: 3,
+                    barPercentage: 0.5
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { borderDash: [4, 4] }, title: { display: true, text: '目标价 (港元)' }, beginAtZero: false, min: 140 } } }
+        });
+
+        // Chart: 财务指标对比
+        new Chart(document.getElementById('chart_vs_smic'), {
+            type: 'bar',
+            data: {
+                labels: ['营收规模 (亿元)', '毛利率 (%)', '研发投入占比 (%)', '资产负债率 (%)', '产能利用率 (%)'],
+                datasets: [{
+                    label: '华虹半导体',
+                    data: [172.91, 11.8, 11.53, 37, 106.1],
+                    backgroundColor: '#3B82F6',
+                    borderRadius: 3
+                }, {
+                    label: '中芯国际',
+                    data: [300, 20.4, 15, 45, 92.5],
+                    backgroundColor: '#9CA3AF',
+                    borderRadius: 3
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom' } }, scales: { x: { grid: { display: false } }, y: { grid: { borderDash: [4, 4] }, title: { display: true, text: '数值' } } } }
+        });
+
+        // Chart: A/H股估值对比
+        new Chart(document.getElementById('chart_ah_valuation'), {
+            type: 'bar',
+            data: {
+                labels: ['市盈率 (倍)', '市净率 (倍)'],
+                datasets: [{
+                    label: 'A股',
+                    data: [692.31, 8.25],
+                    backgroundColor: '#3B82F6',
+                    borderRadius: 3,
+                    barPercentage: 0.6
+                },{
+                    label: '港股',
+                    data: [394.05, 2.85],
+                    backgroundColor: '#6B7280',
+                    borderRadius: 3,
+                    barPercentage: 0.6
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom' } }, scales: { x: { grid: { display: false } }, y: { grid: { borderDash: [4, 4] }, title: { display: true, text: '估值倍数' }, type: 'logarithmic' } } }
+        });
+
+        // Chart: 财务健康度评分
+        new Chart(document.getElementById('chart_health_score'), {
+            type: 'bar',
+            data: {
+                labels: ['盈利能力', '现金流状况', '负债结构', '产能利用率', '研发投入效率'],
+                datasets: [{
+                    label: '评分 (1-5分)',
+                    data: [2.5, 4.0, 3.5, 4.5, 3.0],
+                    backgroundColor: ['#FBBF24', '#10B981', '#60A5FA', '#3B82F6', '#A78BFA'],
+                    borderRadius: 3
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { grid: { borderDash: [4, 4] }, max: 5, title: { display: true, text: '分数' } }, y: { grid: { display: false } } } }
+        });
+    </script>
+</body>
+</html>
