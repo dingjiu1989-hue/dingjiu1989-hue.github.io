@@ -880,6 +880,11 @@ def main():
         cat_dir = ROOT / board['id']
         cat_dir.mkdir(exist_ok=True)
         idx = cat_dir / 'index.html'
+        # Skip standalone boards — they have hand-crafted HTML with rich content
+        if board['id'] in STANDALONE_BOARDS:
+            if idx.exists():
+                print(f'  SKIP (standalone): {idx}')
+                continue
         idx.write_text(make_category(data, board['id']), encoding='utf-8')
         created += 1
         print(f'  HTML: {idx}')
