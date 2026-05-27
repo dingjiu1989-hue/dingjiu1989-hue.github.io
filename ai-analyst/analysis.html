@@ -290,6 +290,66 @@
             margin-left: auto;
         }
         .random-btn:hover { border-color: #f59e0b; color: #f59e0b; }
+
+        /* ── Report section ── */
+        .report-section {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 28px 32px;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        .report-section h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #111;
+            margin: 0 0 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #2563eb;
+        }
+        .report-section p {
+            font-size: .95rem;
+            line-height: 1.8;
+            color: #333;
+            margin: 0;
+        }
+        .report-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .report-summary-item {
+            background: #f8faff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 14px;
+            text-align: center;
+        }
+        .report-summary-item .label {
+            font-size: .75rem;
+            color: #888;
+            margin-bottom: 4px;
+        }
+        .report-summary-item .value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111;
+        }
+        .report-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: .82rem;
+            color: #888;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .report-meta-bar strong { color: #555; }
+        .report-error { color: #dc2626; font-size: .9rem; padding: 20px; text-align: center; }
+
         .live-analysis-btn {
             display: inline-block;
             margin-top: 16px;
@@ -681,16 +741,27 @@ function escapeHtml(str) {
 
 /* ── report request ── */
 var WORKER_URL = 'https://ai-analyst.dingjiu1989.workers.dev';
+var REPORT_CACHE = {};
 
 function requestReport() {
     var btn = document.getElementById('requestReportBtn');
     var status = document.getElementById('requestStatus');
+    var area = document.getElementById('liveAnalysisArea');
     var q = (document.getElementById('searchInput').value || '').trim();
     if (!q) { status.textContent = '请先输入公司名称'; return; }
 
+    // Check cache
+    if (REPORT_CACHE[q]) {
+        renderReport(REPORT_CACHE[q], area);
+        var nr = document.getElementById('noResults');
+        if (nr) { var g = document.getElementById('companyGrid'); g.innerHTML = ''; }
+        return;
+    }
+
     btn.disabled = true;
-    btn.textContent = '⏳ 提交中...';
-    status.textContent = '正在提交「' + escapeHtml(q) + '」的生成请求...';
+    btn.textContent = '⏳ 正在生成分析报告...';
+    area.innerHTML = '<div class="live-loading show"><div class="spinner"></div><div class="msg">正在分析「' + escapeHtml(q) + '」...<br><span style="font-size:.78rem;color:#aaa">获取财务数据 → AI 生成分析报告</span></div></div>';
+    status.textContent = '';
 
     fetch(WORKER_URL, {
         method: 'POST',
@@ -700,101 +771,95 @@ function requestReport() {
     .then(function(r) { return r.json(); })
     .then(function(data) {
         if (data.error) {
-            status.textContent = '❌ ' + escapeHtml(data.error);
+            area.innerHTML = '<div class="report-error">❌ ' + escapeHtml(data.error) + '</div>';
             btn.disabled = false;
-            btn.textContent = '📝 请求 Claude 生成报告';
+            btn.textContent = '🤖 请求 AI 在线分析';
             return;
         }
-        status.innerHTML = '✅ 已提交！<strong>' + escapeHtml(q) + '</strong> 的生成请求已发送给 Claude，报告完成后将自动部署上线。';
-        btn.textContent = '✅ 已提交';
-    })
-    .catch(function(err) {
-        status.textContent = '❌ 提交失败：' + escapeHtml(err.message);
-        btn.disabled = false;
-        btn.textContent = '📝 请求 Claude 生成报告';
-    });
-}
-
-function requestLiveAnalysis() {
-    var btn = document.getElementById('liveBtn');
-    var area = document.getElementById('liveAnalysisArea');
-    var q = (document.getElementById('searchInput').value || '').trim();
-    if (!q) q = document.querySelector('.no-results strong')?.textContent || '';
-
-    if (!WORKER_URL) {
-        area.innerHTML = '<div class="live-result-card"><div class="error-text">⚠️ 在线分析服务尚未部署。请先部署 Cloudflare Worker。</div></div>';
-        return;
-    }
-
-    btn.disabled = true;
-    btn.textContent = '⏳ 请求中...';
-    area.innerHTML = '<div class="live-loading show"><div class="spinner"></div><div class="msg">正在分析「' + escapeHtml(q) + '」的财务数据...</div></div>';
-
-    fetch(WORKER_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ company: q }),
-    })
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-        if (data.error && !data.analysis) {
-            area.innerHTML = '<div class="live-result-card"><div class="error-text">' + escapeHtml(data.error) + '</div></div>';
-            return;
-        }
-        if (data.error && data.analysis) {
-            area.innerHTML = '<div class="live-result-card"><div class="error-text">' + escapeHtml(data.error) + '</div></div>';
-            return;
-        }
-        var a = data.analysis || data;
-        var s = a.summary || '';
-        var f = a.financials || {};
-        var md = a.marketData || {};
-        var co = a.company || {};
-
-        var coName = escapeHtml(co.name || q);
-        var coCode = escapeHtml(co.code);
-        var coSector = escapeHtml(co.sector);
-        var coMc = escapeHtml(co.marketCap);
-        var summary = escapeHtml(s);
-
-        function val(v) { return escapeHtml(v); }
-
-        var html = '<div class="live-result-card">' +
-            '<h3>' + coName + (coCode ? ' <span style="font-weight:400;color:#999;font-size:.9rem">' + coCode + '</span>' : '') + '</h3>';
-
-        if (co.sector) html += '<div style="font-size:.82rem;color:#888;margin-bottom:12px">' + coSector + (co.marketCap ? ' · 市值' + val(co.marketCap) : '') + '</div>';
-
-        var hasMetrics = f.revenue || f.netIncome || f.eps || md.latestPrice;
-        if (hasMetrics) {
-            html += '<div class="metric-row">';
-            if (f.revenue) html += '<div class="metric-item"><div class="val">' + val(f.revenue) + '</div><div class="lbl">营收</div></div>';
-            if (f.revenueGrowth) html += '<div class="metric-item"><div class="val" style="color:' + (String(f.revenueGrowth).indexOf('+') >= 0 ? '#16a34a' : '#666') + '">' + val(f.revenueGrowth) + '</div><div class="lbl">营收增长</div></div>';
-            if (f.netIncome) html += '<div class="metric-item"><div class="val">' + val(f.netIncome) + '</div><div class="lbl">净利润</div></div>';
-            if (f.grossMargin) html += '<div class="metric-item"><div class="val">' + val(f.grossMargin) + '</div><div class="lbl">毛利率</div></div>';
-            if (f.eps) html += '<div class="metric-item"><div class="val">' + val(f.eps) + '</div><div class="lbl">EPS</div></div>';
-            if (md.pe) html += '<div class="metric-item"><div class="val">' + val(md.pe) + '</div><div class="lbl">PE</div></div>';
-            if (md.latestPrice) html += '<div class="metric-item"><div class="val">' + val(md.latestPrice) + '</div><div class="lbl">最新价</div></div>';
-            html += '</div>';
-        }
-
-        if (summary) html += '<div class="summary-text">' + summary + '</div>';
-
-        html += '<div style="margin-top:12px;font-size:.75rem;color:#bbb;text-align:right">AI 实时生成 · 仅供参考</div>';
-        html += '</div>';
-
-        area.innerHTML = html;
-        // Hide the no-results message after successful live analysis
+        REPORT_CACHE[q] = data;
+        renderReport(data, area);
+        btn.textContent = '✅ 已生成';
         var nr = document.getElementById('noResults');
-        if (nr) { var g = document.getElementById('companyGrid'); if (g && g.querySelector('.no-results')) { g.innerHTML = ''; } }
+        if (nr) { var g = document.getElementById('companyGrid'); g.innerHTML = ''; }
     })
     .catch(function(err) {
-        area.innerHTML = '<div class="live-result-card"><div class="error-text">⚠️ 分析请求失败：' + escapeHtml(err.message) + '</div></div>';
-    })
-    .finally(function() {
+        area.innerHTML = '<div class="report-error">❌ 分析失败：' + escapeHtml(err.message) + '</div>';
         btn.disabled = false;
         btn.textContent = '🤖 请求 AI 在线分析';
     });
 }
+
+function renderReport(data, area) {
+    if (!data || !data.report) {
+        area.innerHTML = '<div class="report-error">返回数据异常，请重试</div>';
+        return;
+    }
+
+    var co = escapeHtml(data.company || '');
+    var code = escapeHtml(data.code || '');
+    var industry = escapeHtml(data.industry || '');
+    var price = data.latestPrice != null ? escapeHtml(String(data.latestPrice)) : null;
+    var pe = data.pe != null ? escapeHtml(String(data.pe)) : null;
+    var pb = data.pb != null ? escapeHtml(String(data.pb)) : null;
+    var warnings = data.validationIssues && data.validationIssues.length
+        ? '<div style="background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:.82rem;color:#92400e">⚠️ 数据提示：' + data.validationIssues.map(function(w) { return escapeHtml(w); }).join('；') + '</div>' : '';
+
+    var html = '<div class="report-section" style="padding:24px 32px">';
+    html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:8px">' +
+        '<div><strong style="font-size:1.2rem">' + co + '</strong>' +
+        (code ? ' <span style="color:#999;font-size:.85rem">' + code + '</span>' : '') +
+        '</div>' +
+        '<span class="badge" style="background:#2563eb;color:#fff">AI 实时生成</span>' +
+    '</div>';
+
+    if (industry) html += '<div style="font-size:.82rem;color:#888;margin-bottom:12px">' + industry + '</div>';
+
+    // Metrics summary
+    html += '<div class="report-summary-grid">';
+    if (price) html += '<div class="report-summary-item"><div class="label">最新价</div><div class="value">' + price + '</div></div>';
+    if (pe) html += '<div class="report-summary-item"><div class="label">PE</div><div class="value">' + pe + '</div></div>';
+    if (pb) html += '<div class="report-summary-item"><div class="label">PB</div><div class="value">' + pb + '</div></div>';
+    if (data.high52 != null) html += '<div class="report-summary-item"><div class="label">52周最高</div><div class="value">' + escapeHtml(String(data.high52)) + '</div></div>';
+    if (data.low52 != null) html += '<div class="report-summary-item"><div class="label">52周最低</div><div class="value">' + escapeHtml(String(data.low52)) + '</div></div>';
+    html += '</div>';
+
+    html += warnings;
+
+    // Executive summary
+    var exec = data.report.executiveSummary || '';
+    if (exec) {
+        html += '<div style="background:#f0f7ff;border:1px solid #dbeafe;border-radius:8px;padding:16px;margin-bottom:20px;font-size:.9rem;line-height:1.7;color:#1e40af">' +
+            '<strong style="display:block;margin-bottom:8px;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#2563eb">📊 核心摘要</strong>' +
+            exec.replace(/\n/g, '<br>') +
+        '</div>';
+    }
+
+    html += '</div>';
+
+    // Sections
+    var sections = data.report.sections || [];
+    for (var i = 0; i < sections.length; i++) {
+        var s = sections[i];
+        if (!s || !s.content) continue;
+        html += '<div class="report-section" id="gen_' + s.id + '">' +
+            '<h3>' + escapeHtml(s.title || '') + '</h3>' +
+            '<p>' + s.content.replace(/\n/g, '<br>') + '</p>' +
+        '</div>';
+    }
+
+    // Disclaimer
+    html += '<div class="report-section" style="background:#f9fafb;border-color:#e5e7eb">' +
+        '<p style="font-size:.8rem!important;color:#6b7280!important;margin:0!important"><strong>免责声明：</strong>本报告由AI自动生成，仅供参考和学习交流，不构成任何形式的投资建议。报告中的数据和分析基于公开信息和模型估算，可能存在偏差。股市有风险，投资需谨慎。</p>' +
+    '</div>';
+
+    // Source info
+    html += '<div style="text-align:center;font-size:.75rem;color:#bbb;margin-top:8px">' +
+        '数据来源：MCP 股票数据服务 · AI 生成 · ' + new Date().toLocaleString('zh-CN') +
+    '</div>';
+
+    area.innerHTML = html;
+}
+
 </script>
 </body>
 </html>
