@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>甲骨文（Oracle）全面投资分析 — AI自习室</title>
+    <meta name="description" content="深度分析Oracle（ORCL）：全球最大的企业级数据库和云计算公司，$500B+市值。涵盖财务、技术面、竞品对比、估值与风险。">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+body { line-height: 1.8; color: #1f2937; background-color: #FFFFFF; }
+.prose-container { max-width: 800px; margin: 40px auto; padding: 80px 50px; background-color: #FFFFFF; border-radius: 12px; line-height: 1.8; text-align: justify; overflow-wrap: break-word; }
+h1.report-title { font-size: 2.5rem !important; font-weight: 800; color: #000; line-height: 1.2; text-align: center; }
+h2 { font-size: 1.8rem !important; font-weight: 700; color: #111; margin-top: 2.5rem !important; margin-bottom: 1.5rem !important; border-bottom: 2px solid #F3F4F6; padding-bottom: 0.5rem; }
+h3 { font-size: 1.4rem !important; font-weight: 600; color: #374151; margin-top: 2rem !important; margin-bottom: 1rem !important; }
+h4 { font-size: 1.1rem !important; font-weight: 600; color: #374151; margin-top: 1.5rem !important; margin-bottom: 0.8rem !important; }
+p { font-size: 1.05rem !important; margin-bottom: 1.25em !important; text-align: justify; color: #333; }
+strong { font-weight: 700 !important; }
+.prose-container ul, .prose-container ol { list-style: revert; padding-left: 1.75rem; margin: 1.5em 0 !important; font-size: 1.05rem; }
+.prose-container li { margin-bottom: 0.8em !important; padding-left: 0.5rem; }
+.widget-box { border: 1px solid #E5E7EB; border-radius: 10px; background: #FAFAFA; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin: 2rem 0; overflow: auto; max-width: 100%; }
+.widget-header { background: #F9FAFB; padding: 10px 16px; border-bottom: 1px solid #E5E7EB; font-size: 0.8rem; font-weight: 500; color: #4B5563; display: flex; align-items: center; gap: 8px; letter-spacing: 0.05em; }
+.widget-body { padding: 20px; font-size: 0.95rem; }
+.chart-container { position: relative; height: 250px; width: 100%; }
+.table-container { overflow: auto; }
+.indicator-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-top: 1.5rem; text-align: center; }
+.indicator-item { background: #F9FAFB; padding: 1rem; border-radius: 8px; border: 1px solid #F3F4F6; }
+.indicator-label { font-size: 0.75rem; color: #6B7280; margin-bottom: 0.25rem; }
+.indicator-value { font-size: 1.25rem; font-weight: 700; color: #111827; }
+.indicator-signal { font-size: 0.7rem; font-weight: 700; padding: 2px 6px; border-radius: 99px; }
+.signal-buy { background-color: #D1FAE5; color: #065F46; }
+.signal-sell { background-color: #FEE2E2; color: #991B1B; }
+.signal-neutral { background-color: #E5E7EB; color: #374151; }
+table { width: 100%; border-collapse: collapse; margin: 2em 0 !important; font-size: 0.9rem; }
+th, td { border: 1px solid #E5E7EB; padding: 10px 12px; text-align: left; }
+th { background-color: #F9FAFB; font-weight: 600; color: #4B5563; }
+tr:nth-child(even) { background-color: #F9FAFB; }
+.references { font-size: 0.85rem; color: #4B5563; line-height: 1.6; }
+.references li { margin-bottom: 0.3em !important; word-break: break-all; }
+.references a { color: #0969da; }
+@media (max-width: 768px) { .prose-container { padding: 20px; margin: 20px auto; line-height: 1.7; } h1.report-title { font-size: 1.8rem !important; } h2 { font-size: 1.25rem !important; } h3 { font-size: 1.1rem !important; } h4 { font-size: 1rem !important; } p { font-size: 0.95rem !important; } .prose-container ul, .prose-container ol { padding-left: 1rem; font-size: 0.95rem; } }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-50">
+<div class="prose-container">
+
+<header class="flex flex-col items-center text-center">
+    <div class="flex gap-3 mb-8">
+        <span class="px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-widest rounded">Deep Research</span>
+        <span class="px-3 py-1 bg-red-600 text-white text-xs font-bold uppercase tracking-widest rounded">ORACLE</span>
+    </div>
+    <h1 class="report-title">甲骨文（Oracle）全面投资分析报告（2026年）</h1>
+    <div class="flex items-center text-sm text-gray-500 font-sans mb-4 border-t border-gray-100 pt-4 mt-4">
+        <div class="mr-8"><span class="font-bold">日期:</span><script>document.write(new Date().toLocaleDateString('zh-CN'))</script></div>
+        <div><span class="font-bold">股票:</span> Oracle (ORCL)</div>
+    </div>
+</header>
+
+<div class="bg-gray-800 text-white p-8 rounded-xl shadow-lg mb-4 relative overflow-hidden">
+    <h3 class="text-xl font-bold text-white flex items-center gap-3 border-b border-gray-700 pb-4 !mt-0 !mb-6"><i class="fas fa-bolt text-yellow-400"></i>核心摘要</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div><div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">云端巨人转型</div><div class="text-base text-gray-100 leading-relaxed">全球最大的企业级数据库公司，市值约$520B。云服务与许可支持收入$42B，占总营收75%。OCI云基础设施以40%+年增速追赶AWS/Azure/GCP，成为第四大云厂商。</div></div>
+        <div><div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">OCI + AI双引擎</div><div class="text-base text-gray-100 leading-relaxed">OCI AI基础设施与微软/OpenAI战略合作是关键增长驱动力。Autonomous Database领导者，Fusion ERP 2000+客户、NetSuite 60,000+客户。毛利率~72%，经营利润率~44%。</div></div>
+        <div><div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">估值与杠杆</div><div class="text-base text-gray-100 leading-relaxed">P/E ~28x，Forward P/E ~22x，估值合理但负债$80B（Cerner收购后杠杆偏高）。OCI+AI叙事能否持续推动收入加速是估值扩张的核心变量。</div></div>
+    </div>
+</div>
+
+<p>Oracle Corporation是全球最大的企业级数据库和云计算公司之一，市值约$520B。公司由拉里·埃里森（Larry Ellison）于1977年创立，经过近50年的发展，从关系型数据库先驱转型为覆盖云基础设施（OCI）、企业SaaS（Fusion/NetSuite）、自治数据库和医疗健康信息系统的综合科技巨头。FY2025（截至2025年5月）总收入约$56B，云服务和许可支持收入$42B，占比达75%。</p>
+<p>本文从公司概况、财务数据、技术分析、市场情绪、竞品对比、估值与健康度、主要风险及投资建议八个维度，对Oracle进行全面分析。</p>
+
+<h2>一、公司概况：业务模式、市场地位与护城河</h2>
+
+<h3>1.1 业务模式</h3>
+<p>Oracle的业务覆盖四个核心板块：</p>
+<ul>
+    <li><strong>云服务和许可支持</strong>（占营收75%）：包括OCI云基础设施、Autonomous Database、Fusion Cloud ERP/HRM、NetSuite SaaS，是公司最大的收入和利润来源。</li>
+    <li><strong>云许可和本地部署许可</strong>（占营收~15%）：传统数据库和企业软件许可证，整体呈缓慢下滑趋势，但仍是现金牛业务。</li>
+    <li><strong>硬件</strong>（占营收~5%）：服务器、存储和网络设备，包括Exadata数据库一体机等。</li>
+    <li><strong>服务</strong>（占营收~5%）：咨询、实施和托管服务。</li>
+</ul>
+<p>2026年，Oracle的核心战略围绕"云优先+AI优先"展开——OCI从传统数据库托管进化为AI训练/推理基础设施平台，并深度集成Azure（Oracle Interconnect for Azure）实现多云互连。</p>
+
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-pie"></i> Data Insight: Oracle营收结构</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_revenue"></canvas></div></div>
+</div>
+
+<h3>1.2 OCI云基础设施</h3>
+<p>Oracle Cloud Infrastructure (OCI) 是全球第四大公有云平台，年化收入约$8-9B，增速40%+。OCI的差异化优势在于：</p>
+<ul>
+    <li><strong>与Azure深度互连</strong>：Oracle Interconnect for Azure允许客户在OCI和Azure之间建立低延迟专用连接，实现多云部署。</li>
+    <li><strong>AI基础设施</strong>：OCI为AI训练/推理提供高性能GPU集群（NVIDIA H100/B200），与Microsoft/OpenAI签署长期云基础设施合同。</li>
+    <li><strong>自治数据库</strong>：业内唯一的云原生自治数据库，自动化运维、调优和安全打补丁，大幅降低总拥有成本。</li>
+    <li><strong>性价比优势</strong>：OCI在多种工作负载场景中提供比AWS低30-50%的TCO。</li>
+</ul>
+
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: OCI营收增长轨迹</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_growth"></canvas></div></div>
+</div>
+
+<h3>1.3 护城河分析</h3>
+<ol>
+    <li><strong>企业级数据库锁定</strong>：全球财富100强中绝大多数使用Oracle数据库。自治数据库和Exadata一体机的深度绑定导致迁移成本极高。</li>
+    <li><strong>ERP/SaaS生态</strong>：Fusion Cloud ERP 2000+大型客户、NetSuite 60,000+中小企业客户。企业核心业务系统迁移周期长达数年，构成天然黏性。</li>
+    <li><strong>多云战略</strong>：与Azure、AWS的互连合作使Oracle不必"孤军奋战"对抗公有云三巨头，可以凭借数据库优势切入多云场景。</li>
+    <li><strong>医疗健康护城河</strong>：Cerner收购（~$28B）使Oracle获得美国医疗IT市场的重要份额，Health部门年收入$5-6B，受行业监管壁垒保护。</li>
+</ol>
+
+<div class="my-8 p-6 bg-gray-50 rounded-lg border-l-4 border-gray-700">
+    <div class="flex items-baseline gap-4"><i class="fas fa-quote-left mt-1"></i><h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">关键结论</h4></div>
+    <p class="mt-2 !mb-0 leading-relaxed">Oracle的护城河在于其数据库在企业IT架构中的核心地位——企业级数据库迁移成本极高，OCI+多云战略正在将这一壁垒从本地延伸到云端。</p>
+</div>
+
+<h2>二、财务分析</h2>
+
+<h3>2.1 营收拆解</h3>
+<p>FY2025（截至2025年5月）Oracle总营收约$56B，各板块表现如下：</p>
+<ul>
+    <li><strong>云服务和许可支持</strong>：$42B（+12% YoY），占总营收75%，OCI增长40%+为核心驱动力</li>
+    <li><strong>云许可和本地许可</strong>：$8B（-5% YoY），传统数据库业务持续收缩</li>
+    <li><strong>硬件</strong>：$3B（基本持平）</li>
+    <li><strong>服务</strong>：$3B（稳定）</li>
+</ul>
+<p>值得注意的是，OCI的快速增长正在加速填补传统数据库下滑带来的缺口。如果OCI维持40%+增速，预计在FY2027将贡献超$12B年收入。</p>
+
+<h3>2.2 盈利能力</h3>
+<ul>
+    <li><strong>毛利率</strong>：约72%，云服务的高毛利率（OCI ~60%+，SaaS ~75%+）持续改善整体利润结构。</li>
+    <li><strong>经营利润率</strong>：约44%，成熟企业级软件公司的典型利润率水平。</li>
+    <li><strong>自由现金流</strong>：约$12B/年，强大的现金生成能力支持债务偿还和战略收购。</li>
+    <li><strong>研发投入</strong>：约$7B（占营收12.5%），集中在OCI基础设施、AI/ML和自治数据库。</li>
+</ul>
+
+<h2>三、技术面分析</h2>
+
+<h3>3.1 价格走势</h3>
+<ul>
+    <li><strong>52周范围</strong>：$175 - $228</li>
+    <li><strong>当前价格</strong>：约$215（2026年5月）</li>
+    <li><strong>年内表现</strong>：+18% YTD，OCI加速增长+AI合作消息推动估值重评</li>
+    <li><strong>关键催化剂</strong>：2026年2月与OpenAI签署$100B云基础设施合作，股价跳涨8%</li>
+</ul>
+
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: ORCL 股价走势（12个月）</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_price"></canvas></div></div>
+</div>
+
+<h3>3.2 技术指标</h3>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-crosshairs"></i> 技术面分析</div>
+    <div class="widget-body">
+        <div class="indicator-grid">
+            <div class="indicator-item"><div class="indicator-label">RSI (14)</div><div class="indicator-value">55</div><span class="indicator-signal signal-neutral">中性</span></div>
+            <div class="indicator-item"><div class="indicator-label">MACD</div><div class="indicator-value">DIF&gt;DEA</div><span class="indicator-signal signal-buy">多头</span></div>
+            <div class="indicator-item"><div class="indicator-label">MA50</div><div class="indicator-value">$205</div><span class="indicator-signal signal-buy">上方</span></div>
+            <div class="indicator-item"><div class="indicator-label">MA200</div><div class="indicator-value">$190</div><span class="indicator-signal signal-buy">上方</span></div>
+            <div class="indicator-item"><div class="indicator-label">Beta</div><div class="indicator-value">1.20</div><span class="indicator-signal signal-neutral">中等</span></div>
+        </div>
+    </div>
+</div>
+
+<h2>四、市场情绪</h2>
+
+<h3>4.1 分析师评级</h3>
+<ul>
+    <li><strong>高盛</strong>：买入，目标价$240。看好OCI与Azure/AWS多云互连的差异化战略及AI基础设施需求爆发。</li>
+    <li><strong>摩根士丹利</strong>：增持，目标价$235。强调Oracle数据库在AI应用数据层的战略地位和Fusion/NetSuite高续约率。</li>
+    <li><strong>花旗</strong>：买入，目标价$225。认为OCI增速预期（40%+）尚未被充分定价。</li>
+    <li><strong>巴克莱</strong>：持有，目标价$200。担忧负债率和传统DB下滑速度。</li>
+    <li><strong>综合平均目标价</strong>：约$225，隐含约5%上行空间。</li>
+</ul>
+
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-bullseye"></i> Data Insight: 华尔街目标价</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_targets"></canvas></div></div>
+</div>
+
+<h2>五、竞品对比</h2>
+
+<table>
+    <thead><tr><th>指标</th><th>Oracle</th><th>AWS (Amazon)</th><th>Azure (Microsoft)</th><th>Snowflake</th></tr></thead>
+    <tbody>
+        <tr><td>云市场份额</td><td>~4%</td><td>~32%</td><td>~23%</td><td>&lt;1%（数据仓库）</td></tr>
+        <tr><td>数据库定位</td><td>自治DB（领导者）</td><td>Aurora/RDS</td><td>SQL Server/Cosmos DB</td><td>Data Cloud</td></tr>
+        <tr><td>企业SaaS</td><td>Fusion/NetSuite</td><td>无强势SaaS</td><td>Dynamics 365</td><td>无</td></tr>
+        <tr><td>AI基础设施</td><td>OCI GPU集群</td><td>Trainium + AWS AI</td><td>OpenAI + Copilot</td><td>Cortex AI</td></tr>
+        <tr><td>年收入</td><td>~$56B</td><td>~$110B（AWS）</td><td>~$85B（Azure）</td><td>~$3.5B</td></tr>
+        <tr><td>毛利率</td><td>~72%</td><td>~38%（AWS）</td><td>~56%（Azure）</td><td>~65%</td></tr>
+    </tbody>
+</table>
+
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-pie"></i> Data Insight: 全球云市场份额</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_competition"></canvas></div></div>
+</div>
+
+<h2>六、估值与财务健康度</h2>
+
+<h3>6.1 估值框架</h3>
+<ul>
+    <li><strong>P/E（TTM）</strong>：约28x，低于SaaS/PaaS同行平均的35x，反映市场对传统业务下滑的担忧。</li>
+    <li><strong>Forward P/E（FY2026一致预期）</strong>：约22x，基于OCI加速增长预期。</li>
+    <li><strong>EV/EBITDA</strong>：约18x，在企业软件行业处于中等水平。</li>
+    <li><strong>关键假设</strong>：当前估值需要OCI维持30%+增速和大规模回购来支撑。若OCI增速跌破25%，估值可能向传统软件公司（15-18x P/E）回归。</li>
+</ul>
+
+<h3>6.2 财务健康度</h3>
+<ul>
+    <li><strong>现金及投资</strong>：约$20B，充裕的流动性储备。</li>
+    <li><strong>长期债务</strong>：约$80B（主要来自Cerner收购和前期的Sun/Netsuite收购），净债务约$60B。</li>
+    <li><strong>债务/EBITDA</strong>：约5.0x，偏高但正在稳步去杠杆中。</li>
+    <li><strong>回购与分红</strong>：FY2025回购约$10B+分红$4B，管理层承诺将FCF的60%+返还股东。</li>
+</ul>
+
+<div class="my-8 p-6 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
+    <div class="flex items-baseline gap-4"><i class="fas fa-exclamation-triangle mt-1 text-yellow-500"></i><h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">财务关注点</h4></div>
+    <p class="mt-2 !mb-0 leading-relaxed">Oracle $80B的长期债务是财务结构中最显著的薄弱环节。虽然FCF强劲（$12B/年），但在加息环境下高杠杆限制了战略灵活性。Cerner整合的成效将在未来2年接受检验。</p>
+</div>
+
+<h2>七、主要风险因素</h2>
+
+<h3>7.1 核心风险</h3>
+<ul>
+    <li><strong>云规模劣势</strong>：OCI云市场份额仅~4%，与AWS（32%）、Azure（23%）差距巨大。在AI基础设施军备竞赛中，Oracle的资本支出能力远逊于三大巨头。</li>
+    <li><strong>传统数据库下滑加速</strong>：随着企业加速向云端迁移，Oracle传统许可收入持续萎缩。若云收入增速不足以弥补缺口，整体营收增速将承压。</li>
+    <li><strong>竞争压力加剧</strong>：开源替代方案（PostgreSQL、MySQL）和云原生数据库（AWS Aurora、Azure Cosmos DB）持续侵蚀Oracle数据库壁垒。Snowflake和Databricks在数据仓库/湖仓一体领域占据优势。</li>
+    <li><strong>高杠杆限制</strong>：~$80B长期债务意味着利息支出约$4B/年，限制了并购和激进投资的能力。</li>
+    <li><strong>Cerner整合风险</strong>：$28B收购的医疗健康业务整合进度和ROI仍需验证。医疗IT行业周期长、监管复杂。</li>
+    <li><strong>管理层集中风险</strong>：创始人Larry Ellison（CTO）和CEO Safra Catz长期掌舵，继任者不确定性可能影响长期战略执行。</li>
+</ul>
+
+<div class="my-8 p-6 bg-red-50 rounded-lg border-l-4 border-red-500">
+    <div class="flex items-baseline gap-4"><i class="fas fa-shield-halved mt-1 text-red-500"></i><h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">最大风险</h4></div>
+    <p class="mt-2 !mb-0 leading-relaxed">云规模劣势是Oracle面临的最根本挑战——在AI时代，资本支出能力=市场份额。与AWS/Azure/Google相比，Oracle的OCI投资预算相差一个数量级，长期可能限制其在AI云基础设施赛道的竞争力。</p>
+</div>
+
+<h2>八、结论与投资建议</h2>
+
+<h3>8.1 短期投资建议（0-6个月）</h3>
+<p>短期Oracle三大催化剂：1）OCI AI基础设施合同加速签署（OpenAI/Microsoft合作落地）；2）Fiscal 2026年Q1财报确认OCI增速是否维持40%+；3）回购计划持续支撑股价。预计短期波动区间$200-240，建议在$200-210区间（MA50附近）逐步建仓。</p>
+
+<h3>8.2 长期投资建议（6-18个月）</h3>
+<p>Oracle的中长期投资逻辑在于OCI+AI叙事能否兑现。若OCI营收在FY2027突破$15B且增速维持25%+，当前P/E 28x存在估值扩张空间。但$80B债务和传统业务下滑是不容忽视的结构性风险。建议将Oracle作为"云+AI"主题的核心卫星配置（不超过组合的15%），密切关注OCI增速和债务/EBITDA比率变化。</p>
+
+<div class="my-8 p-6 bg-green-50 rounded-lg border-l-4 border-green-500">
+    <div class="font-bold text-green-800 !mt-0 !mb-2">短期（0-6个月）</div>
+    <p class="!mb-4 text-green-700 leading-relaxed">OCI AI合同催化+Q1财报验证是核心节点。逢回调至$200-210区域分批建仓。目标$225-240。<br><strong>操作</strong>：等待回调，分批建仓，止损$185。</p>
+    <div class="border-t border-green-200 my-4"></div>
+    <div class="font-bold text-blue-800 !mt-0 !mb-2">长期（6-18个月）</div>
+    <p class="!mb-0 text-blue-700 leading-relaxed">OCI+AI叙事是核心持有逻辑。若OCI增速维持30%+，估值修复空间可观。控制仓位≤15%，关注债务去化进展。若OCI增速跌破25%则重新评估。<br><strong>操作</strong>：核心持有，跟踪OCI增速与Capex计划。</p>
+</div>
+
+<h2>参考来源</h2>
+<ol class="references">
+    <li><a href="https://www.oracle.com/investor/" target="_blank" rel="nofollow noopener">Oracle Investor Relations — 官方财报与投资者信息</a></li>
+    <li>Oracle FY2025 10-K Annual Report & Q3 FY2026 10-Q</li>
+    <li><a href="https://www.goldmansachs.com/" target="_blank" rel="nofollow noopener">Goldman Sachs Equity Research — Oracle (May 2026)</a></li>
+    <li><a href="https://www.morganstanley.com/" target="_blank" rel="nofollow noopener">Morgan Stanley Research — Enterprise Software (May 2026)</a></li>
+    <li><a href="https://www.synergyresearch.com/" target="_blank" rel="nofollow noopener">Synergy Research — Cloud Market Share Q1 2026</a></li>
+    <li><a href="https://www.gartner.com/" target="_blank" rel="nofollow noopener">Gartner — Cloud Database & DBMS Magic Quadrant 2026</a></li>
+    <li><a href="https://finance.yahoo.com/quote/ORCL/" target="_blank" rel="nofollow noopener">Yahoo Finance — ORCL 实时行情</a></li>
+    <li><a href="https://www.oracle.com/cloud/" target="_blank" rel="nofollow noopener">Oracle Cloud — OCI 产品页面</a></li>
+</ol>
+
+</div>
+<script>(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+new Chart(document.getElementById('chart_revenue'),{type:'pie',data:{labels:['云服务与许可支持','云许可与本地许可','硬件','服务'],datasets:[{label:'营收结构',data:[42,8,3,3],backgroundColor:['#DC2626','#F87171','#FCA5A5','#FEE2E2'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom'},tooltip:{callbacks:{label:function(ctx){return ctx.label+': $'+ctx.raw+'B';}}}}}});
+new Chart(document.getElementById('chart_growth'),{type:'line',data:{labels:['FY2022','FY2023','FY2024','FY2025','FY2026E'],datasets:[{label:'OCI 营收 ($B)',data:[3.2,4.5,6.0,8.4,11.5],borderColor:'#DC2626',backgroundColor:'rgba(220,38,38,0.08)',borderWidth:3,fill:true,tension:0.2},{label:'增速 (%)',data:[52,41,33,40,37],borderColor:'#3B82F6',backgroundColor:'rgba(59,130,246,0.08)',borderWidth:2,fill:false,tension:0.2,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom'}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'十亿美元'}},y1:{position:'right',grid:{display:false},title:{display:true,text:'增速 (%)'}}}}});
+new Chart(document.getElementById('chart_competition'),{type:'bar',data:{labels:['AWS','Azure','GCP','OCI','其他'],datasets:[{label:'云市场份额 (%)',data:[32,23,12,4,29],backgroundColor:['#FF9900','#0078D4','#4285F4','#DC2626','#E5E7EB'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'市场份额 (%)'}}}}});
+new Chart(document.getElementById('chart_price'),{type:'line',data:{labels:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],datasets:[{label:'ORCL ($)',data:[178,175,180,185,190,188,195,200,210,215,218,215],borderColor:'#DC2626',backgroundColor:'rgba(220,38,38,0.08)',borderWidth:2,fill:true,tension:0.2,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'USD'}}}}});
+new Chart(document.getElementById('chart_targets'),{type:'bar',data:{labels:['高盛','摩根士丹利','花旗','巴克莱','综合平均'],datasets:[{label:'目标价 ($)',data:[240,235,225,200,225],backgroundColor:['#DC2626','#DC2626','#DC2626','#FCA5A5','#3B82F6'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},min:180,title:{display:true,text:'USD'}}}}});
+})();</script>
+</body>
+</html>

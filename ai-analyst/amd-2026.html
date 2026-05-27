@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMD 全面投资分析报告（2026年）— AI自习室</title>
+    <meta name="description" content="深度分析 AMD（Advanced Micro Devices）：唯一在AI训练/推理领域与NVIDIA直接竞争的GPU厂商，市值~$320B，FY2025营收$28B（+18%），数据中心$16B占57%。MI300X/MI400 AI加速器、EPYC服务器CPU持续蚕食Intel份额。覆盖财务、技术面、竞品、估值与风险。" />
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+body { line-height: 1.8; color: #1f2937; background-color: #FFFFFF; }
+.prose-container { max-width: 800px; margin: 40px auto; padding: 80px 50px; background-color: #FFFFFF; border-radius: 12px; line-height: 1.8; text-align: justify; overflow-wrap: break-word; }
+h1.report-title { font-size: 2.5rem !important; font-weight: 800; color: #000; line-height: 1.2; text-align: center; }
+h2 { font-size: 1.8rem !important; font-weight: 700; color: #111; margin-top: 2.5rem !important; margin-bottom: 1.5rem !important; border-bottom: 2px solid #F3F4F6; padding-bottom: 0.5rem; }
+h3 { font-size: 1.4rem !important; font-weight: 600; color: #374151; margin-top: 2rem !important; margin-bottom: 1rem !important; }
+h4 { font-size: 1.1rem !important; font-weight: 600; color: #374151; margin-top: 1.5rem !important; margin-bottom: 0.8rem !important; }
+p { font-size: 1.05rem !important; margin-bottom: 1.25em !important; text-align: justify; color: #333; }
+strong { font-weight: 700 !important; }
+.prose-container ul, .prose-container ol { list-style: revert; padding-left: 1.75rem; margin: 1.5em 0 !important; font-size: 1.05rem; }
+.prose-container li { margin-bottom: 0.8em !important; padding-left: 0.5rem; }
+.widget-box { border: 1px solid #E5E7EB; border-radius: 10px; background: #FAFAFA; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin: 2rem 0; overflow: auto; max-width: 100%; }
+.widget-header { background: #F9FAFB; padding: 10px 16px; border-bottom: 1px solid #E5E7EB; font-size: 0.8rem; font-weight: 500; color: #4B5563; display: flex; align-items: center; gap: 8px; letter-spacing: 0.05em; }
+.widget-body { padding: 20px; font-size: 0.95rem; }
+.chart-container { position: relative; height: 250px; width: 100%; }
+.indicator-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-top: 1.5rem; text-align: center; }
+.indicator-item { background: #F9FAFB; padding: 1rem; border-radius: 8px; border: 1px solid #F3F4F6; }
+.indicator-label { font-size: 0.75rem; color: #6B7280; margin-bottom: 0.25rem; }
+.indicator-value { font-size: 1.25rem; font-weight: 700; color: #111827; }
+.indicator-signal { font-size: 0.7rem; font-weight: 700; padding: 2px 6px; border-radius: 99px; }
+.signal-buy { background-color: #D1FAE5; color: #065F46; }
+.signal-sell { background-color: #FEE2E2; color: #991B1B; }
+.signal-neutral { background-color: #E5E7EB; color: #374151; }
+table { width: 100%; border-collapse: collapse; margin: 2em 0 !important; font-size: 0.9rem; }
+th, td { border: 1px solid #E5E7EB; padding: 10px 12px; text-align: left; }
+th { background-color: #F9FAFB; font-weight: 600; color: #4B5563; }
+tr:nth-child(even) { background-color: #F9FAFB; }
+.references { font-size: 0.85rem; color: #4B5563; line-height: 1.6; }
+.references li { margin-bottom: 0.3em !important; word-break: break-all; }
+.references a { color: #0969da; }
+@media (max-width: 768px) { .prose-container { padding: 20px; margin: 20px auto; line-height: 1.7; } h1.report-title { font-size: 1.8rem !important; } h2 { font-size: 1.25rem !important; } h3 { font-size: 1.1rem !important; } h4 { font-size: 1rem !important; } p { font-size: 0.95rem !important; } .prose-container ul, .prose-container ol { padding-left: 1rem; font-size: 0.95rem; } }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-50">
+<div class="prose-container">
+
+<header class="flex flex-col items-center text-center">
+    <div class="flex gap-3 mb-8">
+        <span class="px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-widest rounded">Deep Research</span>
+        <span class="px-3 py-1 bg-orange-600 text-white text-xs font-bold uppercase tracking-widest rounded">AMD</span>
+    </div>
+    <h1 class="report-title">AMD 全面投资分析报告（2026年）</h1>
+    <div class="flex items-center text-sm text-gray-500 font-sans mb-4 border-t border-gray-100 pt-4 mt-4">
+        <div class="mr-8"><span class="font-bold">日期:</span><script>document.write(new Date().toLocaleDateString('zh-CN'))</script></div>
+        <div><span class="font-bold">股票:</span> AMD (AMD)</div>
+    </div>
+</header>
+
+<div class="bg-gray-800 text-white p-8 rounded-xl shadow-lg mb-4 relative overflow-hidden">
+    <h3 class="text-xl font-bold text-white flex items-center gap-3 border-b border-gray-700 pb-4 !mt-0 !mb-6"><i class="fas fa-bolt text-yellow-400"></i>核心摘要</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div><div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">NVIDIA替代方案</div><div class="text-base text-gray-100 leading-relaxed">AMD是AI训练/推理GPU领域唯一真正意义上的NVIDIA竞争对手。MI300X/MI400系列加速器搭配ROCm开源生态，已在超大规模客户中获得12%的AI加速器市场份额。</div></div>
+        <div><div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">数据中心转型</div><div class="text-base text-gray-100 leading-relaxed">数据中心收入已占AMD总营收57%（~$16B），EPYC服务器CPU持续蚕食Intel Xeon份额至35%。公司正从消费级CPU厂商转型为数据中心基础设施巨头。</div></div>
+        <div><div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">估值挑战</div><div class="text-base text-gray-100 leading-relaxed">P/E约58x，市场已将Aggressive的AI营收增长预期定价。AMD需要在MI400、ROCm生态和客户渗透上持续超预期以支撑估值倍数。</div></div>
+    </div>
+</div>
+
+<p>Advanced Micro Devices (AMD) 在CEO苏姿丰（Lisa Su）的领导下完成了半导体行业最引人注目的转型之一——从濒临破产的边缘成长为NVIDIA在AI计算领域最主要的挑战者。通过2017年Ryzen CPU、2019年EPYC服务器处理器、2022年Xilinx收购（~$50B）和2024年MI300X AI加速器等一系列战略举措，AMD构建了CPU + GPU + FPGA + 自适应计算的全栈产品组合。</p>
+<p>截至2026年5月，AMD市值约$320B，FY2025营收$28B（+18% YoY），数据中心部门已成为核心增长引擎。然而，市场对AMD能否真正缩小与NVIDIA在AI领域的CUDA生态差距存在深度分歧。本报告从公司概况、财务数据、技术分析、市场情绪、竞品对比、估值与健康度、主要风险及投资建议八个维度进行全面分析。</p>
+
+<h2>一、公司概况：CPU + GPU + FPGA + 自适应计算全栈平台</h2>
+
+<h3>1.1 业务组合与转型历程</h3>
+<p>AMD的业务横跨四大核心领域：</p>
+<ul>
+    <li><strong>数据中心</strong>（占营收57%）：第四代/第五代EPYC（"Genoa"/"Turin"）服务器CPU、MI300X/MI400系列AI加速器、Pensando DPU/智能网卡。EPYC在服务器CPU市场份额已达~35%，持续从Intel Xeon手中夺取客户。</li>
+    <li><strong>客户端</strong>（占营收25%）：Ryzen桌面和移动处理器（"Ryzen 9000"系列），凭借"Zen 5"架构在单核/多核性能上保持对Intel Core的竞争优势，市场份额稳步提升。</li>
+    <li><strong>游戏</strong>（占营收11%）：Radeon RX 8000系列消费级GPU、Microsoft Xbox和Sony PlayStation定制半定制芯片。受游戏主机生命周期末段和PC GPU市场疲软影响，业务呈结构性下降。</li>
+    <li><strong>嵌入式</strong>（占营收7%）：Xilinx FPGA（Versal、Spartan系列）、自适应SoC。聚焦工业、航空航天、汽车、通信基础设施市场。Xilinx的收购为AMD带来了高利润率、稳定增长的非周期性收入。</li>
+</ul>
+
+<h3>1.2 CEO苏姿丰与"AMD崛起"叙事</h3>
+<p>苏姿丰自2014年接任CEO以来，AMD股价从~$3涨至~$175，涨幅超过50倍。她的战略核心包括：（1）专注高性能计算，将Zen CPU架构确立为行业标杆；（2）激进收购——Xilinx（~$50B，2022年完成）和Pensando（~$2B，2022年），扩展产品线至FPGA和DPU；（3）将AMD定位为NVIDIA在AI训练/推理GPU市场"唯一的真正替代方案"，利用ROCm开源生态和开放的硬件标准吸引超大规模客户。</p>
+<div class="my-8 p-6 bg-gray-50 rounded-lg border-l-4 border-gray-700">
+    <div class="flex items-baseline gap-4"><i class="fas fa-quote-left mt-1"></i><h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">关键结论</h4></div>
+    <p class="mt-2 !mb-0 leading-relaxed">AMD是当今唯一同时具备高性能CPU、GPU和FPGA全栈能力的半导体公司。EPYC在服务器CPU市场的持续渗透和MI系列AI加速器的客户突破，构成了核心增长双引擎。但CUDA生态差距仍是AMD在AI领域追赶NVIDIA的最大障碍。</p>
+</div>
+
+<h3>1.3 行业地位</h3>
+<p>在AI加速器市场，AMD以约12%的份额位居第二，仅次于NVIDIA的~82%。服务器CPU市场AMD以~35%份额持续挑战Intel（~63%），是过去五年中唯一实现显著份额增长的x86处理器供应商。在FPGA市场，Xilinx品牌与Intel (Altera)形成双寡头格局。</p>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-bar"></i> Data Insight: AI加速器市场份额</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_ai_accel"></canvas></div></div>
+</div>
+
+<h2>二、财务分析：数据中心驱动增长，利润率逐步改善</h2>
+
+<h3>2.1 营收结构与趋势</h3>
+<ul>
+    <li><strong>总营收（FY2025）</strong>：~$28B（+18% YoY），连续第三年保持两位数增长</li>
+    <li><strong>数据中心</strong>：~$16B（+45% YoY），占总营收57%，首次超越50%里程碑</li>
+    <li><strong>客户端</strong>：~$7B（+8% YoY），Ryzen CPU市场份额持续提升，PC市场复苏温和</li>
+    <li><strong>游戏</strong>：~$3B（-15% YoY），游戏主机周期后半段和Radeon GPU需求疲软</li>
+    <li><strong>嵌入式</strong>：~$2B（+5% YoY），Xilinx产品线稳定增长，工业与航空航天需求支撑</li>
+</ul>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: 各业务板块营收（FY2025）</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_revenue"></canvas></div></div>
+</div>
+
+<h3>2.2 盈利能力与利润率轨迹</h3>
+<ul>
+    <li><strong>GAAP毛利率</strong>：~53%（FY2025），同比提升约3个百分点。随数据中心（高利润率）占比持续提升，毛利率有望在2026-2027年接近55-57%。</li>
+    <li><strong>GAAP营业利润率</strong>：~22%，显著受益于产品组合向数据中心的持续迁移和规模效应。</li>
+    <li><strong>GAAP净利润</strong>：~$5.5B（FY2025），净利率~20%。非GAAP净利润更高，排除Xilinx收购相关的无形资产摊销。</li>
+    <li><strong>研发投入</strong>：年研发支出约$6B+（占营收~22%），高于行业平均，反映了CPU/GPU/AI架构的多线竞争压力。</li>
+</ul>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: 数据中心营收增长趋势</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_dc_growth"></canvas></div></div>
+</div>
+
+<h2>三、技术面分析</h2>
+<h3>3.1 价格走势</h3>
+<ul>
+    <li><strong>52周范围</strong>：$130 - $195</li>
+    <li><strong>当前价格</strong>：约$175（2026年5月）</li>
+    <li><strong>年内表现</strong>：约+15% YTD。年初受AI营收增速预期下调影响一度回调至$140，3月MI400路线图更新后反弹至近期高点。</li>
+    <li><strong>关键事件</strong>：2026年3月AI投资者日活动上，管理层宣布MI400芯片设计取得关键进展，并与一家大型超大规模客户签约，推动股价突破$170关口。</li>
+</ul>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: AMD 股价走势（52周）</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_price"></canvas></div></div>
+</div>
+
+<h3>3.2 技术指标</h3>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-crosshairs"></i> 技术面分析</div>
+    <div class="widget-body">
+        <div class="indicator-grid">
+            <div class="indicator-item"><div class="indicator-label">RSI (14)</div><div class="indicator-value">55</div><span class="indicator-signal signal-neutral">中性</span></div>
+            <div class="indicator-item"><div class="indicator-label">MACD</div><div class="indicator-value">DIF~DEA</div><span class="indicator-signal signal-neutral">观望</span></div>
+            <div class="indicator-item"><div class="indicator-label">MA50</div><div class="indicator-value">$165</div><span class="indicator-signal signal-buy">上方</span></div>
+            <div class="indicator-item"><div class="indicator-label">MA200</div><div class="indicator-value">$152</div><span class="indicator-signal signal-buy">上方</span></div>
+            <div class="indicator-item"><div class="indicator-label">Beta</div><div class="indicator-value">1.58</div><span class="indicator-signal signal-sell">高波动</span></div>
+        </div>
+    </div>
+</div>
+
+<h2>四、市场情绪：分析师分歧中的乐观共识</h2>
+<h3>4.1 分析师评级与目标价</h3>
+<ul>
+    <li><strong>高盛</strong>：买入，目标价$220。看好MI400在2027年的放量潜力，认为AMD有望在AI加速器市场获得20%+份额。EPYC在服务器CPU市场的持续渗透也是主要增量。</li>
+    <li><strong>摩根士丹利</strong>：增持，目标价$215。强调AMD在数据中心CPU市场的结构性增长和与NVIDIA相比更合理的估值（P/E 58x vs 38x但AMD增速基数更小）。</li>
+    <li><strong>花旗</strong>：买入，目标价$205。认为ROCm生态的持续改善将解锁更多AI推理工作负载订单，Xilinx嵌入式业务提供非周期性稳定支撑。</li>
+    <li><strong>巴克莱</strong>：持有，目标价$195。担忧AI竞争格局恶化——若NVIDIA Rubin性能超越预期，AMD的追赶叙事将受到挑战。</li>
+    <li><strong>瑞银</strong>：中性，目标价$200。指出当前估值已包含过多乐观AI预期，若MI400延迟或客户导入不及预期，估值回调幅度可能超过30%。</li>
+    <li><strong>综合平均目标价</strong>：~$210，距当前价格~$175约有20%上行空间。</li>
+</ul>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-bullseye"></i> Data Insight: 华尔街目标价</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_targets"></canvas></div></div>
+</div>
+
+<h2>五、竞品对比：四强争霸的半导体格局</h2>
+<table>
+    <thead><tr><th>指标</th><th>AMD</th><th>NVIDIA</th><th>Intel</th><th>Arm / Ampere</th></tr></thead>
+    <tbody>
+        <tr><td>市值</td><td>$320B</td><td>$5.8T</td><td>$185B</td><td>$150B (Arm)</td></tr>
+        <tr><td>AI加速器份额</td><td>~12%</td><td>~82%</td><td>&lt;1%</td><td>—</td></tr>
+        <tr><td>数据中心营收（TTM）</td><td>~$16B</td><td>~$141B</td><td>~$14B</td><td>~$3B (Ampere)</td></tr>
+        <tr><td>毛利率</td><td>~53%</td><td>~75%</td><td>~45%</td><td>~65% (Ampere)</td></tr>
+        <tr><td>软件生态</td><td>ROCm（开源）</td><td>CUDA（封闭）</td><td>oneAPI</td><td>—</td></tr>
+        <tr><td>CPU架构</td><td>x86 (Zen 5)</td><td>Arm (Grace)</td><td>x86 (P-core/E-core)</td><td>Arm (Neoverse)</td></tr>
+        <tr><td>FPGA / 自适应</td><td>Xilinx（Versal）</td><td>—</td><td>Altera (Agilex)</td><td>—</td></tr>
+        <tr><td>AI营收目标（CY2026）</td><td>$10B+</td><td>$180B+</td><td>$3-5B</td><td>—</td></tr>
+    </tbody>
+</table>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-pie"></i> Data Insight: 服务器CPU市场份额</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_cpu_share"></canvas></div></div>
+</div>
+
+<h2>六、估值与财务健康度</h2>
+<h3>6.1 估值框架</h3>
+<ul>
+    <li><strong>P/E（TTM）</strong>：约58x，处于半导体公司中较高水平，反映了市场对AI业务爆发的高增长溢价。</li>
+    <li><strong>Forward P/E（FY2026 consensus）</strong>：约42x，假设EPS~$4.20。即使考虑AI营收快速增长，估值仍不便宜。</li>
+    <li><strong>EV/EBITDA</strong>：约38x，显著高于Intel（~12x）和行业平均（~22x），但低于NVIDIA（~45x）。</li>
+    <li><strong>P/S</strong>：约11.5x，高于历史均值（~8x），市场为每美元营收支付了显著溢价。</li>
+    <li><strong>关键假设</strong>：当前估值隐含AI营收在未来3-5年实现50%+ CAGR。若AI加速器市场份额无法从12%提升至20%+，估值倍数将面临系统性下修。</li>
+</ul>
+<h3>6.2 财务健康度</h3>
+<ul>
+    <li><strong>资产负债表</strong>：现金及短期投资~$6B，长期债务~$3B，净现金为正（~$3B）。Xilinx收购后债务水平可控。</li>
+    <li><strong>自由现金流</strong>：~$4B（FY2025），FCF转化率~73%，随利润率改善有望进一步提升。</li>
+    <li><strong>股东回报</strong>：FY2025启动首次季度股息（$0.10/股），并授权$50亿股票回购计划。</li>
+    <li><strong>资本密集度</strong>：2025年CapEx~$1.5B，依赖台积电先进制程（N3/N5），轻资产模式带来较高ROIC。</li>
+</ul>
+
+<div class="my-8 p-6 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
+    <div class="flex items-baseline gap-4"><i class="fas fa-exclamation-triangle mt-1 text-yellow-500"></i><h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">估值警示</h4></div>
+    <p class="mt-2 !mb-0 leading-relaxed">AMD的P/E约58x意味着市场已定价"完美执行"情景——即AMD必须在AI加速器市场将份额从12%提升至20%+，同时EPYC CPU持续蚕食Intel，且MI400芯片性能达到预期。任何环节的偏差都可能导致估值倍数的显著收缩。</p>
+</div>
+
+<h2>七、主要风险因素</h2>
+<h3>7.1 核心风险</h3>
+<ul>
+    <li><strong>NVIDIA CUDA生态护城河</strong>：尽管AMD ROCm持续改善，但与CUDA在开发者工具链、软件库成熟度、企业级支持上的差距仍需多年才能缩小。大多数AI工作负载默认选择CUDA，AMD的"兼容性"叙事说服力有限。</li>
+    <li><strong>AI营收增长预期过高</strong>：$10B+的AI营收目标意味着MI系列产品营收需在2-3年内增长2x以上。若MI400产品延迟或客户导入速度低于预期，AI叙事将面临严重质疑。</li>
+    <li><strong>Intel竞争反扑</strong>：Intel在2025-2026年推出的Granite Rapids/Sierra Forest Xeon处理器以及Intel 18A制程的潜在突破，可能威胁EPYC在服务器CPU市场的份额增长。同时Intel的Gaudi AI加速器计划虽进展有限，但持续增加供给端竞争。</li>
+    <li><strong>游戏业务结构性下滑</strong>：游戏主机（PS5/Xbox）周期进入末期，下一代主机最早2027-2028年。Radeon GPU在消费者DIY GPU市场份额持续萎缩，该业务可能从~$3B进一步收缩至~$2B。</li>
+    <li><strong>Xilinx整合风险</strong>：$50B收购的整合进度和协同效应释放仍需时间验证。Xilinx原团队的文化融合和产品路线图协调可能影响嵌入式业务的长期增长。</li>
+    <li><strong>地缘政治风险</strong>：美国对华芯片出口管制可能进一步扩大范围，AMD对中国市场的营收敞口虽小于Intel和NVIDIA，但仍有显著影响。</li>
+</ul>
+<div class="my-8 p-6 bg-red-50 rounded-lg border-l-4 border-red-500">
+    <div class="flex items-baseline gap-4"><i class="fas fa-shield-halved mt-1 text-red-500"></i><h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">关键风险</h4></div>
+    <p class="mt-2 !mb-0 leading-relaxed">CUDA生态差距是AMD在AI领域面临的最大结构性障碍。尽管MI400硬件规格有望接近NVIDIA同期产品，但软件生态的差距决定了AI开发者难以实质性转向AMD平台。若AMD无法在软件生态上实现跨越式突破，"NVIDIA替代方案"的叙事将始终停留在理论层面，无法转化为实质性营收。</p>
+</div>
+
+<h2>八、结论与投资建议</h2>
+<h3>8.1 短期投资建议（0-6个月）</h3>
+<p>AMD近期受益于EPYC份额持续提升和MI400路线图的市场期待，股价在$160-180区间震荡。建议在$155-165（MA50附近）分批建仓，利用市场对AI叙事短期不确定性的过度反应进行低吸。短期目标$190-200，止损$145。</p>
+<h3>8.2 长期投资建议（6-18个月）</h3>
+<p>AMD是AI主题下最具"追赶弹性"的标的。若MI400在2026年末-2027年初如期量产并在关键客户中取得突破，市值有望从$320B向$450-500B迈进（对应股价$275-300）。但当前P/E 58x意味着投资回报高度依赖于完美执行。建议作为AI主题卫星配置（仓位10-15%），与NVIDIA形成多元化AI GPU敞口组合。核心观察指标：数据中心营收增速（需维持>40% YoY）、MI400客户签约进展、毛利率是否向55%+迈进。</p>
+<div class="my-8 p-6 bg-green-50 rounded-lg border-l-4 border-green-500">
+    <div class="font-bold text-green-800 !mt-0 !mb-2">短期（0-6个月）</div>
+    <p class="!mb-4 text-green-700 leading-relaxed">EPYC份额持续增长 + MI400路线图催化。逢回调至$155-165分批建仓。目标$190-200。<br><strong>操作</strong>：等待回调，分批建仓。</p>
+    <div class="border-t border-green-200 my-4"></div>
+    <div class="font-bold text-blue-800 !mt-0 !mb-2">长期（6-18个月）</div>
+    <p class="!mb-0 text-blue-700 leading-relaxed">若MI400如期放量 + 客户突破，市值有望向$450-500B迈进。核心观测：数据中心增速>40%、毛利率>55%。仓位控制在10-15%。<br><strong>操作</strong>：核心AI补充仓位，严格止损$145。</p>
+</div>
+
+<h2>参考来源</h2>
+<ol class="references">
+    <li><a href="https://ir.amd.com/" target="_blank" rel="nofollow noopener">AMD Investor Relations — 官方财报与SEC文件</a></li>
+    <li>AMD FY2025 10-K Annual Report & Q1 FY2026 10-Q</li>
+    <li><a href="https://www.goldmansachs.com/" target="_blank" rel="nofollow noopener">Goldman Sachs Equity Research — AMD (May 2026)</a></li>
+    <li><a href="https://www.morganstanley.com/" target="_blank" rel="nofollow noopener">Morgan Stanley Research — Semiconductors (May 2026)</a></li>
+    <li><a href="https://www.mercuryresearch.com/" target="_blank" rel="nofollow noopener">Mercury Research — Server CPU & GPU Market Share</a></li>
+    <li><a href="https://www.semianalysis.com/" target="_blank" rel="nofollow noopener">SemiAnalysis — AMD AI Strategy & Competitive Analysis</a></li>
+    <li><a href="https://finance.yahoo.com/quote/AMD/" target="_blank" rel="nofollow noopener">Yahoo Finance — AMD实时行情</a></li>
+</ol>
+
+</div>
+<script>(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+new Chart(document.getElementById('chart_ai_accel'),{type:'bar',data:{labels:['NVIDIA','AMD','Google TPU','Amazon Trn','Broadcom','其他'],datasets:[{label:'份额 (%)',data:[82,12,3,1,1.5,0.5],backgroundColor:['#10B981','#EA580C','#F59E0B','#3B82F6','#8B5CF6','#E5E7EB'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'市场份额 (%)'}}}}});
+new Chart(document.getElementById('chart_revenue'),{type:'bar',data:{labels:['数据中心','客户端','游戏','嵌入式'],datasets:[{label:'营收 ($B)',data:[16,7,3,2],backgroundColor:['#EA580C','#3B82F6','#8B5CF6','#10B981'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'十亿美元'}}}}});
+new Chart(document.getElementById('chart_dc_growth'),{type:'line',data:{labels:['FY2021','FY2022','FY2023','FY2024','FY2025'],datasets:[{label:'数据中心营收 ($B)',data:[3.5,6.0,8.5,12.0,16.0],borderColor:'#EA580C',backgroundColor:'rgba(234,88,12,0.08)',borderWidth:3,fill:true,tension:0.2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'十亿美元'}}}}});
+new Chart(document.getElementById('chart_price'),{type:'line',data:{labels:['6月','7月','8月','9月','10月','11月','12月','1月','2月','3月','4月','5月'],datasets:[{label:'AMD ($)',data:[132,140,148,143,152,158,150,163,160,172,180,175],borderColor:'#EA580C',backgroundColor:'rgba(234,88,12,0.08)',borderWidth:2,fill:true,tension:0.2,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'USD'}}}}});
+new Chart(document.getElementById('chart_targets'),{type:'bar',data:{labels:['高盛','摩根士丹利','花旗','巴克莱','瑞银','综合平均'],datasets:[{label:'目标价 ($)',data:[220,215,205,195,200,210],backgroundColor:['#10B981','#10B981','#10B981','#F59E0B','#F59E0B','#3B82F6'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},min:180,title:{display:true,text:'USD'}}}}});
+new Chart(document.getElementById('chart_cpu_share'),{type:'bar',data:{labels:['Intel (Xeon)','AMD (EPYC)','Arm'],datasets:[{label:'服务器CPU份额 (%)',data:[63,35,2],backgroundColor:['#3B82F6','#EA580C','#8B5CF6'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'市场份额 (%)'}}}}});
+})();</script>
+</body>
+</html>

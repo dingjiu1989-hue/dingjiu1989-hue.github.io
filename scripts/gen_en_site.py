@@ -104,6 +104,7 @@ BOARD_NAMES = {
     'security': 'Security',
     'database': 'Database',
     'architecture': 'Architecture',
+    'ai-analyst': 'AI Analyst',
 }
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -14030,6 +14031,7 @@ def make_category(data, board_id):
         'security': 'Security',
         'database': 'Database',
         'architecture': 'Architecture',
+        'ai-analyst': 'AI Analyst',
     }
     # Board descriptions (extended for SEO)
     board_descs = {
@@ -14042,6 +14044,7 @@ def make_category(data, board_id):
         'security': 'Cybersecurity guides, secure coding, and infrastructure protection.',
         'database': 'Database design, SQL optimization, and data storage best practices.',
         'architecture': 'System design patterns, distributed systems, and software architecture.',
+        'ai-analyst': 'AI-driven deep research reports covering semiconductors, technology, industry analysis, and investment insights.',
     }
     board_keywords = {
         'daily': 'AI news, artificial intelligence, tech news, AI updates',
@@ -14053,6 +14056,7 @@ def make_category(data, board_id):
         'security': 'cybersecurity, secure coding, network security, data protection',
         'database': 'database design, SQL, NoSQL, database optimization, data storage',
         'architecture': 'system design, software architecture, distributed systems, design patterns',
+        'ai-analyst': 'AI investment analysis, deep research, semiconductor analysis, technology research',
     }
     title = board_titles[board_id]
 
@@ -14300,13 +14304,17 @@ def main():
     print(f'  HTML: {all_page}')
 
     # Category pages
+    STANDALONE_BOARDS = {'ai-analyst'}
     for board in data['boards']:
         cat_dir = EN_DIR / board['id']
         cat_dir.mkdir(exist_ok=True)
         idx = cat_dir / 'index.html'
-        idx.write_text(make_category(data, board['id']), encoding='utf-8')
-        created += 1
-        print(f'  HTML: {idx}')
+        if board['id'] in STANDALONE_BOARDS:
+            print(f'  SKIP (standalone): {idx}')
+        else:
+            idx.write_text(make_category(data, board['id']), encoding='utf-8')
+            created += 1
+            print(f'  HTML: {idx}')
 
     # Build flat list of all posts for related posts computation
     all_posts = []

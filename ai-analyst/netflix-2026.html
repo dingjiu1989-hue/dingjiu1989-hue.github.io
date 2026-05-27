@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix 全面投资分析报告（2026年） — AI自习室</title>
+    <meta name="description" content="深度分析 Netflix（NFLX）：全球流媒体霸主，市值~$3800亿，FY2025营收$43B（+16%），运营利润率28.6%。320M+付费用户，广告业务崛起，体育直播拓展。覆盖财务、技术面、竞品对比、估值与风险。">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+body { line-height: 1.8; color: #1f2937; background-color: #FFFFFF; }
+.prose-container { max-width: 800px; margin: 40px auto; padding: 80px 50px; background-color: #FFFFFF; border-radius: 12px; line-height: 1.8; text-align: justify; overflow-wrap: break-word; }
+h1.report-title { font-size: 2.5rem !important; font-weight: 800; color: #000; line-height: 1.2; text-align: center; }
+h2 { font-size: 1.8rem !important; font-weight: 700; color: #111; margin-top: 2.5rem !important; margin-bottom: 1.5rem !important; border-bottom: 2px solid #F3F4F6; padding-bottom: 0.5rem; }
+h3 { font-size: 1.4rem !important; font-weight: 600; color: #374151; margin-top: 2rem !important; margin-bottom: 1rem !important; }
+h4 { font-size: 1.1rem !important; font-weight: 600; color: #374151; margin-top: 1.5rem !important; margin-bottom: 0.8rem !important; }
+p { font-size: 1.05rem !important; margin-bottom: 1.25em !important; text-align: justify; color: #333; }
+strong { font-weight: 700 !important; }
+.prose-container ul, .prose-container ol { list-style: revert; padding-left: 1.75rem; margin: 1.5em 0 !important; font-size: 1.05rem; }
+.prose-container li { margin-bottom: 0.8em !important; padding-left: 0.5rem; }
+.widget-box { border: 1px solid #E5E7EB; border-radius: 10px; background: #FAFAFA; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin: 2rem 0; overflow: auto; max-width: 100%; }
+.widget-header { background: #F9FAFB; padding: 10px 16px; border-bottom: 1px solid #E5E7EB; font-size: 0.8rem; font-weight: 500; color: #4B5563; display: flex; align-items: center; gap: 8px; letter-spacing: 0.05em; }
+.widget-body { padding: 20px; font-size: 0.95rem; }
+.chart-container { position: relative; height: 250px; width: 100%; }
+.table-container { overflow: auto; }
+.indicator-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-top: 1.5rem; text-align: center; }
+.indicator-item { background: #F9FAFB; padding: 1rem; border-radius: 8px; border: 1px solid #F3F4F6; }
+.indicator-label { font-size: 0.75rem; color: #6B7280; margin-bottom: 0.25rem; }
+.indicator-value { font-size: 1.25rem; font-weight: 700; color: #111827; }
+.indicator-signal { font-size: 0.7rem; font-weight: 700; padding: 2px 6px; border-radius: 99px; }
+.signal-buy { background-color: #D1FAE5; color: #065F46; }
+.signal-sell { background-color: #FEE2E2; color: #991B1B; }
+.signal-neutral { background-color: #E5E7EB; color: #374151; }
+table { width: 100%; border-collapse: collapse; margin: 2em 0 !important; font-size: 0.9rem; }
+th, td { border: 1px solid #E5E7EB; padding: 10px 12px; text-align: left; }
+th { background-color: #F9FAFB; font-weight: 600; color: #4B5563; }
+tr:nth-child(even) { background-color: #F9FAFB; }
+.references { font-size: 0.85rem; color: #4B5563; line-height: 1.6; }
+.references li { margin-bottom: 0.3em !important; word-break: break-all; }
+.references a { color: #0969da; }
+@media (max-width: 768px) { .prose-container { padding: 20px; margin: 20px auto; line-height: 1.7; } h1.report-title { font-size: 1.8rem !important; } h2 { font-size: 1.25rem !important; } h3 { font-size: 1.1rem !important; } h4 { font-size: 1rem !important; } p { font-size: 0.95rem !important; } .prose-container ul, .prose-container ol { padding-left: 1rem; font-size: 0.95rem; } }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-50">
+<div class="prose-container">
+
+<header class="flex flex-col items-center text-center">
+    <div class="flex gap-3 mb-8">
+        <span class="px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-widest rounded">Deep Research</span>
+        <span class="px-3 py-1 bg-red-700 text-white text-xs font-bold uppercase tracking-widest rounded">Netflix</span>
+    </div>
+    <h1 class="report-title">Netflix（网飞）全面投资分析报告（2026年）</h1>
+    <div class="flex items-center text-sm text-gray-500 font-sans mb-4 border-t border-gray-100 pt-4 mt-4">
+        <div class="mr-8"><span class="font-bold">日期:</span><script>document.write(new Date().toLocaleDateString('zh-CN'))</script></div>
+        <div><span class="font-bold">股票:</span> Netflix (NFLX)</div>
+    </div>
+</header>
+
+<div class="bg-gray-800 text-white p-8 rounded-xl shadow-lg mb-4 relative overflow-hidden">
+    <h3 class="text-xl font-bold text-white flex items-center gap-3 border-b border-gray-700 pb-4 !mt-0 !mb-6"><i class="fas fa-bolt text-yellow-400"></i>核心摘要</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div><div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">流媒体统治地位</div><div class="text-base text-gray-100 leading-relaxed">全球流媒体霸主，320M+付费用户覆盖190+国家。广告业务转型加速，70M+ MAU广告层用户推动第二增长曲线。运营利润率迈向30%+，自由现金流超$7B。</div></div>
+        <div><div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">内容护城河</div><div class="text-base text-gray-100 leading-relaxed">年内容投入$17B，从授权IP转向自有IP。数据驱动的内容引擎持续产出爆款（鱿鱼游戏、怪奇物语、布里奇顿），游戏业务100+作品发布，体育直播（WWE Raw、NFL）拓展新战场。</div></div>
+        <div><div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">估值与挑战</div><div class="text-base text-gray-100 leading-relaxed">P/E 31x处于合理区间，但用户增长天花板隐现。密码共享打击边际效应递减，体育版权竞购战推高内容成本。广告收入$3B目标能否如期兑现是市场核心关注。</div></div>
+    </div>
+</div>
+
+<p>Netflix是全球最大的订阅视频流媒体服务平台，总部位于美国加利福尼亚州洛斯加托斯。公司由Reed Hastings和Marc Randolph于1997年创立，最初以DVD邮寄租赁业务起家，2007年转型流媒体业务，彻底颠覆了传统电视和电影行业。截至2026年5月，Netflix市值约$3,800亿，全球付费用户超3.2亿，覆盖190多个国家和地区。</p>
+<p>在当前竞争激烈的流媒体市场中，Netflix凭借其规模化的原创内容投入、数据驱动的推荐算法、品牌认知度和全球化运营能力，保持着行业领先地位。2025年营收达到$43B（+16% YoY），运营利润$12.3B（利润率28.6%）。广告订阅层的推出、游戏业务的拓展以及体育直播赛事的加入，正在重塑Netflix的长期增长叙事。本报告从八个维度对Netflix进行全面分析。</p>
+
+<h2>一、公司概况：业务模式、护城河与战略转型</h2>
+
+<h3>1.1 业务模式</h3>
+<p>Netflix的业务以月度订阅制为核心，提供四个主要定价层级：广告支持版（含广告，约$6.99/月）、标准版（无广告，约$15.49/月）、高级版（4K+HDR，约$22.99/月）。收入来源高度集中于订阅费，占比超过98%。随着广告层的扩张，广告收入预计2026年达到$3B，成为新的增长引擎。</p>
+
+<h3>1.2 全球用户结构</h3>
+<p>截至2026年Q1，Netflix全球付费用户约3.3亿，地区分布如下：</p>
+<ul>
+    <li><strong>UCAN（美国/加拿大）</strong>：~8,500万，ARM约$17/月，市场趋于饱和</li>
+    <li><strong>EMEA（欧洲/中东/非洲）</strong>：~1亿，ARM约$11/月，渗透率持续提升</li>
+    <li><strong>LATAM（拉丁美洲）</strong>：~5,000万，ARM约$9/月，价格敏感但增长稳健</li>
+    <li><strong>APAC（亚太）</strong>：~9,500万，ARM约$8/月，日本、韩国、印度为核心增长区域</li>
+</ul>
+<p>全球综合ARM约$12.50/月。密码共享打击（2023-2024年实施）对用户增长产生了显著的短期提振，该效应正在逐步消退。</p>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-bar"></i> Data Insight: 各地区付费用户分布</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_subs"></canvas></div></div>
+</div>
+
+<h3>1.3 广告业务战略转型</h3>
+<p>Netflix于2022年11月推出广告支持订阅层，标志着公司从纯订阅模式向混合模式的重大战略转变。截至2026年，广告层月活跃用户已超过7,000万，广告收入预计达到$3B。Netflix正积极构建自有广告技术平台，减少对微软等第三方合作伙伴的依赖，以提升广告精准度和利润率。</p>
+
+<h3>1.4 内容战略与护城河</h3>
+<ol>
+    <li><strong>原创IP护城河</strong>：年内容投入约$17B（现金），从授权IP大规模转向自有IP。爆款剧集《鱿鱼游戏》《怪奇物语》《布里奇顿》《王冠》构建品牌壁垒。</li>
+    <li><strong>数据驱动的内容引擎</strong>：基于用户观看行为数据的推荐系统日均影响超过80%的内容发现，极大降低用户流失率。</li>
+    <li><strong>全球化生产能力</strong>：在韩国、日本、英国、西班牙、印度等国家建立本地化制作团队，实现"全球本土化"策略。</li>
+    <li><strong>品牌与规模效应</strong>：3.2亿用户的订阅规模分摊内容固定成本，单位经济优于竞争对手。</li>
+</ol>
+
+<h3>1.5 新增长曲线：游戏与直播</h3>
+<ul>
+    <li><strong>游戏业务</strong>：已发布约100款游戏，100+款在开发中。通过内部工作室（Night School、Next Games等）+收购方式布局，目前处于早期拓展阶段。</li>
+    <li><strong>体育直播</strong>：2025年成功直播Jake Paul vs Tyson拳赛，NFL圣诞日比赛，2025-2029年获得WWE Raw独家转播权（$5B/10年）。体育直播是用户增长和广告收入的新催化剂。</li>
+</ul>
+
+<div class="my-8 p-6 bg-gray-50 rounded-lg border-l-4 border-gray-700">
+    <div class="flex items-baseline gap-4"><i class="fas fa-quote-left mt-1"></i><h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">关键结论</h4></div>
+    <p class="mt-2 !mb-0 leading-relaxed">Netflix已经从单纯的流媒体平台进化为全球娱乐生态系统——广告+游戏+体育直播多元驱动，但原创内容的质量和规模仍然是其最核心的长期护城河。</p>
+</div>
+
+<h2>二、财务分析</h2>
+
+<h3>2.1 营收趋势</h3>
+<p>Netflix FY2025（截至2025年12月）核心财务数据强劲：</p>
+<ul>
+    <li><strong>总营收</strong>：$43B（+16% YoY），连续三年保持15%+增速</li>
+    <li><strong>运营利润</strong>：$12.3B，运营利润率28.6%，同比扩张约4个百分点</li>
+    <li><strong>净利润</strong>：约$9.8B，净利率约22.8%</li>
+    <li><strong>自由现金流</strong>：$7B+，内容投资高峰期已过，FCF持续改善</li>
+    <li><strong>FY2026运营利润率目标</strong>：30%+，管理层对成本杠杆有信心</li>
+</ul>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: 营收与运营利润增长趋势</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_revenue"></canvas></div></div>
+</div>
+
+<h3>2.2 盈利能力与ARPU</h3>
+<p>运营利润率从2022年的18%持续提升至2025年的28.6%，主要驱动因素包括：密码共享打击带来的付费用户激增、广告层收入增量、以及内容投资效率改善（从$17B现金内容支出向ROI更高的自有IP倾斜）。全球ARM约$12.50/月，但地区差异明显——UCAN地区ARM近$17/月，而APAC仅$8/月。ARM的提升空间是Netflix长期增长的核心变量。</p>
+
+<h3>2.3 自由现金流与资产负债表</h3>
+<ul>
+    <li><strong>自由现金流</strong>：$7B+（FY2025），显著高于2020-2022年负现金流时期。内容投资已从增长型转向维持型，FCF预计持续扩大。</li>
+    <li><strong>净债务</strong>：约$12B，公司自内容支出巅峰期（2021年$17B现金支出）后持续降杠杆。</li>
+    <li><strong>回购</strong>：2025年进行了约$5B的股票回购，股东回报意识增强。</li>
+</ul>
+
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: 付费用户季度净增趋势</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_growth"></canvas></div></div>
+</div>
+
+<h2>三、技术面分析</h2>
+
+<h3>3.1 价格走势</h3>
+<ul>
+    <li><strong>52周范围</strong>：$580 - $980</li>
+    <li><strong>当前价格</strong>：约$890（2026年5月）</li>
+    <li><strong>年内表现</strong>：+15% YTD，受益于FY2025财报超预期和广告业务进展</li>
+    <li><strong>关键事件</strong>：2026年1月Q4财报显示用户净增超预期，股价跳涨8%；WWE Raw首播后股价再涨5%</li>
+</ul>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: NFLX 股价走势（52周）</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_price"></canvas></div></div>
+</div>
+
+<h3>3.2 技术指标</h3>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-crosshairs"></i> 技术面分析</div>
+    <div class="widget-body">
+        <div class="indicator-grid">
+            <div class="indicator-item"><div class="indicator-label">RSI (14)</div><div class="indicator-value">60</div><span class="indicator-signal signal-neutral">中性</span></div>
+            <div class="indicator-item"><div class="indicator-label">MACD</div><div class="indicator-value">DIF>DEA</div><span class="indicator-signal signal-buy">多头</span></div>
+            <div class="indicator-item"><div class="indicator-label">MA50</div><div class="indicator-value">$820</div><span class="indicator-signal signal-buy">上方</span></div>
+            <div class="indicator-item"><div class="indicator-label">MA200</div><div class="indicator-value">$720</div><span class="indicator-signal signal-buy">上方</span></div>
+            <div class="indicator-item"><div class="indicator-label">Beta</div><div class="indicator-value">1.15</div><span class="indicator-signal signal-neutral">中等</span></div>
+        </div>
+    </div>
+</div>
+
+<h2>四、市场情绪</h2>
+
+<h3>4.1 分析师评级</h3>
+<ul>
+    <li><strong>摩根士丹利</strong>：增持，目标价$1,000。看好广告层变现潜力和运营利润率持续扩张，认为Netflix在流媒体盈利性上优于所有竞争对手。</li>
+    <li><strong>富国银行</strong>：买入，目标价$980。强调全球ARM上行空间和内容IP货币化多元化（游戏、直播、授权）。</li>
+    <li><strong>高盛</strong>：买入，目标价$950。认为体育直播（WWE Raw、NFL）将成为用户增长和广告收入的新催化剂。</li>
+    <li><strong>花旗</strong>：中性，目标价$850。担忧用户增长在密码共享打击效应消退后放缓，以及内容成本通胀压力。</li>
+    <li><strong>综合平均目标价</strong>：约$950，隐含约7%上行空间。</li>
+</ul>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-bullseye"></i> Data Insight: 华尔街目标价</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_targets"></canvas></div></div>
+</div>
+
+<h2>五、竞品对比</h2>
+
+<table>
+    <thead><tr><th>指标</th><th>Netflix</th><th>Disney+</th><th>Max (WBD)</th><th>Prime Video</th><th>YouTube</th></tr></thead>
+    <tbody>
+        <tr><td>全球付费用户</td><td>~330M</td><td>~170M</td><td>~110M</td><td>~200M+*</td><td>~100M+**</td></tr>
+        <tr><td>2025年内容投入</td><td>$17B</td><td>$15B</td><td>$12B</td><td>$10B+</td><td>$5B+</td></tr>
+        <tr><td>广告订阅层</td><td>支持（70M+ MAU）</td><td>支持</td><td>支持</td><td>支持</td><td>支持（YouTube Premium）</td></tr>
+        <tr><td>全球覆盖</td><td>190+国家</td><td>160+国家</td><td>~65国家</td><td>~240国家</td><td>~100国家</td></tr>
+        <tr><td>运营利润率</td><td>28.6%</td><td>~10%</td><td>亏损</td><td>未知***</td><td>未知***</td></tr>
+        <tr><td>原创内容优势</td><td>极强</td><td>强（漫威/星战）</td><td>中等（DC/HBO）</td><td>中等</td><td>用户生成内容</td></tr>
+        <tr><td>体育直播</td><td>NFL/WWE Raw</td><td>ESPN+（合资）</td><td>Bleacher Report</td><td>NFL Thursday</td><td>有限</td></tr>
+        <tr><td>游戏业务</td><td>100+游戏</td><td>有限</td><td>无</td><td>Prime Gaming</td><td>YouTube Gaming</td></tr>
+    </tbody>
+</table>
+<p><small>*Prime Video用户包含在Amazon Prime会员中，非独立付费。<br>**YouTube TV和Premium付费用户。<br>***母公司不单独披露流媒体利润。</small></p>
+
+<p>Netflix在用户规模、运营利润率和全球化覆盖方面明显领先于其他流媒体竞争对手。Disney+在IP储备方面有深度优势（漫威、星战、皮克斯），但内容成本高企且利润率远低于Netflix。Max在HBO核心粉丝群体中保持黏性但全球扩张缓慢。Prime Video作为Amazon Prime附赠服务用户虽多但用户粘性和内容投入密度不及Netflix。YouTube则在用户生成内容领域建立了无可竞争的护城河，与Netflix形成差异化竞争。</p>
+
+<h2>六、估值与财务健康度</h2>
+
+<h3>6.1 估值框架</h3>
+<ul>
+    <li><strong>P/E（TTM）</strong>：约31x，低于信息技术板块平均水平（35x）</li>
+    <li><strong>Forward P/E（FY2026 consensus）</strong>：约26x，基于市场一致预期的~$34 EPS</li>
+    <li><strong>EV/EBITDA</strong>：约19x，略高于行业均值但低于疫情后的峰值（25x+）</li>
+    <li><strong>PEG Ratio</strong>：约1.4x（基于未来2年~15%的EPS增长预期），处于合理偏贵区间</li>
+    <li><strong>核心假设</strong>：当前估值合理反映了Netflix在流媒体行业的盈利领先地位。市值~$3,800B隐含了广告业务成功、ARM持续提升和用户温和增长的预期。</li>
+</ul>
+
+<h3>6.2 财务健康度</h3>
+<ul>
+    <li><strong>净债务</strong>：约$12B，债务/EBITDA约2.0x，处于可控水平。公司自2022年开始主动降杠杆。</li>
+    <li><strong>自由现金流</strong>：$7B+，FCF收益率约1.8%，在媒体行业属优秀水平。</li>
+    <li><strong>内容负债</strong>：约$25B（含长期内容购买承诺），是ROU资产的主要构成，属于行业常态。</li>
+    <li><strong>股东回报</strong>：2025年回购$5B+，管理层表达了持续回购的意向，但尚未开始派息。</li>
+</ul>
+
+<h2>七、主要风险因素</h2>
+
+<h3>7.1 核心风险</h3>
+<ul>
+    <li><strong>用户增长天花板</strong>：全球潜在流媒体用户约7-8亿，Netflix已渗透3.3亿。密码共享打击的短期提振效应在2025年底基本耗尽，新增用户增速将回归自然增长（~10%年化）。</li>
+    <li><strong>内容成本通胀</strong>：体育版权（WWE Raw $5B/10年、潜在F1转播权）和顶级原创内容制作成本持续上升。若内容ROI下降，利润率扩张将受阻。</li>
+    <li><strong>广告收入执行风险</strong>：广告层用户增长快于预期，但广告技术平台自建尚在初期。$3B广告收入目标能否如期实现取决于广告定价能力和库存填充率。</li>
+    <li><strong>竞争加剧</strong>：Disney+捆绑Hulu+ESPN+的组合策略、Max的HBO内容壁垒、YouTube在短视频和直播领域的统治力，各方在用户时间和内容支出上的争夺日趋白热化。</li>
+    <li><strong>汇率风险</strong>：Netflix约60%收入来自海外市场，美元走强将直接压缩营收和利润。</li>
+</ul>
+
+<div class="my-8 p-6 bg-red-50 rounded-lg border-l-4 border-red-500">
+    <div class="flex items-baseline gap-4"><i class="fas fa-shield-halved mt-1 text-red-500"></i><h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">最大风险</h4></div>
+    <p class="mt-2 !mb-0 leading-relaxed">用户增长天花板是Netflix面临的最致命长期风险——当全球流媒体市场渗透率达到顶峰，Netflix将完全依赖ARPU提升和广告收入来驱动增长。若消费者对涨价（pass-the-buck）抵触强烈，营收增速将降至个位数，估值将面临系统性重估。</p>
+</div>
+
+<h2>八、结论与投资建议</h2>
+
+<h3>8.1 短期投资建议（0-6个月）</h3>
+<p>短期看，Netflix股价受广告业务进展和体育直播用户数据驱动。FY2026 Q1/Q2财报将成为关键催化剂。技术面MA50（$820）提供强支撑。建议在$820-850区间逢低建仓。短期目标价$950-980（前高附近）。</p>
+<h3>8.2 长期投资建议（6-18个月）</h3>
+<p>长期来看，Netflix在流媒体行业的结构性优势明显——用户规模最大、运营利润率最高、原创内容能力最强。广告业务和体育直播开辟了新的增长空间。但全球流媒体竞争趋于饱和，成长性溢价需要持续的业绩兑现来支撑。建议作为"核心持仓+阶段性增强"配置，在用户增速和ARM趋势向好的季度增加仓位，反之降低至中性。若广告收入在2026年达到$3B目标，股价有望突破$1,000。</p>
+
+<div class="my-8 p-6 bg-green-50 rounded-lg border-l-4 border-green-500">
+    <div class="font-bold text-green-800 !mt-0 !mb-2">短期（0-6个月）</div>
+    <p class="!mb-4 text-green-700 leading-relaxed">广告业务进展 + 体育直播首年数据 + Q2财报驱动。$820附近（MA50）为建仓良机。目标$950-980。<br><strong>操作</strong>：逢回调分批建仓，关注广告收入数据。</p>
+    <div class="border-t border-green-200 my-4"></div>
+    <div class="font-bold text-blue-800 !mt-0 !mb-2">长期（6-18个月）</div>
+    <p class="!mb-0 text-blue-700 leading-relaxed">流媒体盈利之王，广告+体育打开新空间。但竞争加剧和用户增速放缓制约估值上限。若广告收入达$3B则目标$1,000+。<br><strong>操作</strong>：核心持仓，按用户和ARM趋势动态调整仓位。</p>
+</div>
+
+<h2>参考来源</h2>
+<ol class="references">
+    <li><a href="https://ir.netflix.net/" target="_blank" rel="nofollow noopener">Netflix Investor Relations — 官方财报与股东信</a></li>
+    <li>Netflix FY2025 10-K Annual Report & Q1 2026 Earnings Release</li>
+    <li><a href="https://www.morganstanley.com/" target="_blank" rel="nofollow noopener">Morgan Stanley Equity Research — Netflix (May 2026)</a></li>
+    <li><a href="https://www.wellsfargo.com/" target="_blank" rel="nofollow noopener">Wells Fargo Equity Research — Media & Streaming (May 2026)</a></li>
+    <li><a href="https://www.goldmansachs.com/" target="_blank" rel="nofollow noopener">Goldman Sachs — Internet & Media Research (May 2026)</a></li>
+    <li><a href="https://www.citi.com/" target="_blank" rel="nofollow noopener">Citi Research — US Media Sector (May 2026)</a></li>
+    <li><a href="https://www.bloomberg.com/" target="_blank" rel="nofollow noopener">Bloomberg — Streaming Industry Data & Subscriber Estimates</a></li>
+    <li><a href="https://finance.yahoo.com/quote/NFLX/" target="_blank" rel="nofollow noopener">Yahoo Finance — NFLX 实时行情</a></li>
+</ol>
+
+</div>
+<script>(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+new Chart(document.getElementById('chart_subs'),{type:'bar',data:{labels:['UCAN (美加)','EMEA (欧非中东)','LATAM (拉美)','APAC (亚太)'],datasets:[{label:'付费用户 (百万)',data:[85,100,50,95],backgroundColor:['#DC2626','#3B82F6','#10B981','#F59E0B'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'百万用户'}}}}});
+new Chart(document.getElementById('chart_revenue'),{type:'line',data:{labels:['2020','2021','2022','2023','2024','2025'],datasets:[{label:'总营收 ($B)',data:[25.0,29.7,31.6,33.7,37.0,43.0],borderColor:'#DC2626',backgroundColor:'rgba(220,38,38,0.08)',borderWidth:3,fill:true,tension:0.2},{label:'运营利润 ($B)',data:[4.6,6.2,5.6,5.4,8.7,12.3],borderColor:'#3B82F6',backgroundColor:'rgba(59,130,246,0.08)',borderWidth:3,fill:true,tension:0.2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom'}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'十亿美元'}}}}});
+new Chart(document.getElementById('chart_growth'),{type:'line',data:{labels:['Q1\'24','Q2\'24','Q3\'24','Q4\'24','Q1\'25','Q2\'25','Q3\'25','Q4\'25','Q1\'26'],datasets:[{label:'付费用户 (百万)',data:[269.6,277.7,282.7,295.9,302.8,310.5,316.2,325.0,330.5],borderColor:'#DC2626',backgroundColor:'rgba(220,38,38,0.08)',borderWidth:2,fill:true,tension:0.2,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'百万用户'}}}}});
+new Chart(document.getElementById('chart_price'),{type:'line',data:{labels:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],datasets:[{label:'NFLX ($)',data:[680,720,700,660,750,740,780,850,820,860,920,890],borderColor:'#DC2626',backgroundColor:'rgba(220,38,38,0.08)',borderWidth:2,fill:true,tension:0.2,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'USD'}}}}});
+new Chart(document.getElementById('chart_targets'),{type:'bar',data:{labels:['摩根士丹利','富国银行','高盛','花旗','综合平均'],datasets:[{label:'目标价 ($)',data:[1000,980,950,850,950],backgroundColor:['#DC2626','#DC2626','#DC2626','#F59E0B','#3B82F6'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},min:800,title:{display:true,text:'USD'}}}}});
+})();</script>
+</body>
+</html>
