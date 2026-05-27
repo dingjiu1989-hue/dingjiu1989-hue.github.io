@@ -31,13 +31,43 @@ export default {
       try {
         searchResult = await searchStock(MCP_URL, MCP_TOKEN, company.trim());
       } catch (e) {
-        return json({ error: `未找到「${company}」的数据`, analysis: buildFallback(company) }, 200, CORS_HEADERS);
+        return json({ error: `未找到「${company}」的数据（${e.message}）`, analysis: buildFallback(company) }, 200, CORS_HEADERS);
       }
 
-      // Extract stock code from search results
-      const items = Array.isArray(searchResult) ? searchResult : (searchResult?.data?.list || [searchResult].filter(Boolean));
+      // Extract stock code from search results — handle various response formats
+      const raw = searchResult;
+      console.log('searchResult type:', typeof raw, raw ? Object.keys(raw) : 'null');
+
+      let items = [];
+      let debugInfo = 'searchResult type=' + typeof raw;
+      if (raw && typeof raw === 'object') {
+        const hasRaw = !!raw.raw;
+        const keys = Object.keys(raw).filter(k => k !== 'raw').join(',');
+        debugInfo += ' keys=[' + keys + ']' + (hasRaw ? ' hasRaw' : '');
+        if (hasRaw) debugInfo += ' rawPreview=' + JSON.stringify(raw.raw?.substring(0, 150));
+      } else if (raw && typeof raw === 'string') {
+        debugInfo += ' text=' + raw.substring(0, 150);
+      }
+
+      if (raw?.raw) {
+        console.log('raw text:', raw.raw.substring(0, 200));
+      } else if (Array.isArray(raw)) {
+        items = raw;
+      } else if (Array.isArray(raw?.data)) {
+        items = raw.data;
+      } else if (Array.isArray(raw?.data?.list)) {
+        items = raw.data.list;
+      } else if (Array.isArray(raw?.list)) {
+        items = raw.list;
+      } else if (Array.isArray(raw?.result)) {
+        items = raw.result;
+      } else if (raw?.stocks) {
+        items = raw.stocks;
+      } else {
+        items = [raw].filter(Boolean);
+      }
       if (!items.length) {
-        return json({ error: `未找到「${company}」的数据`, analysis: buildFallback(company) }, 200, CORS_HEADERS);
+        return json({ error: `未找到「${company}」的数据`, debug: debugInfo, analysis: buildFallback(company) }, 200, CORS_HEADERS);
       }
 
       const first = items[0];

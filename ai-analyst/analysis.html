@@ -708,6 +708,16 @@ function requestLiveAnalysis() {
             area.innerHTML = '<div class="live-result-card"><div class="error-text">' + escapeHtml(data.error) + '</div></div>';
             return;
         }
+        if (data.error && data.analysis) {
+            var errorHtml = '<div class="live-result-card"><div class="error-text">' + escapeHtml(data.error) + '</div>';
+            if (data.debug) {
+                errorHtml += '<pre style="font-size:.75rem;color:#999;margin-top:8px;white-space:pre-wrap;word-break:break-all;">' + escapeHtml(JSON.stringify(data.debug)) + '</pre>';
+            }
+            errorHtml += '<pre style="font-size:.75rem;color:#999;margin-top:8px;white-space:pre-wrap;word-break:break-all;">' + escapeHtml(JSON.stringify(data.analysis, null, 2)) + '</pre>';
+            errorHtml += '</div>';
+            area.innerHTML = errorHtml;
+            return;
+        }
         var a = data.analysis || data;
         var s = a.summary || '';
         var f = a.financials || {};
