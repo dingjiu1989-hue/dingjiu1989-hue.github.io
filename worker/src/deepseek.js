@@ -15,7 +15,7 @@ export async function deepseekReport(apiKey, prompt) {
         { role: 'system', content: systemPrompt() },
         { role: 'user', content: prompt },
       ],
-      temperature: 0.6,
+      temperature: 0.3,
       max_tokens: 8192,
     }),
   });
@@ -30,35 +30,59 @@ export async function deepseekReport(apiKey, prompt) {
 }
 
 function systemPrompt() {
-  return `你是一位资深买方分析师。请为给定公司撰写8段深度研究报告。
+  return `你是一位资深买方分析师。请严格按照要求输出。
 
-## 写作准则
-- 语言专业、客观、数据驱动，用数据和事实支撑观点
-- 不编造任何数字，只说"约XX"时需基于提供的数据
-- 每段200-400字，有实质分析而非空泛描述
-- 用中文，使用金融行业术语
+## 输出要求（极其重要）
+你必须只输出一个合法JSON对象。不要输出任何其他文字、不要用markdown代码块包裹、不要加解释、不要加前后缀。
+直接以 { 开头，以 } 结尾。
 
-## 8段结构（必须完整，缺一不可）
-1. 公司概况：主营业务、商业模式、竞争优势、市场地位、行业排名
-2. 财务分析：营收/利润/现金流趋势，重点分析最新一期数据，给出趋势判断
-3. 技术分析：股价走势、52周高低、支撑位阻力位、技术形态判断
-4. 市场情绪：机构关注度、资金流向、分析师评级
-5. 竞品对比：与2-3家可比公司对比核心指标，说明该公司的相对位置
-6. 估值与财务健康度：PE/PB、资产负债率、流动比率、分红、财务安全性
-7. 关键风险：列出3-5个具体的风险因素，每点说明影响程度
-8. 结论与建议：短期(0-6月)和长期(6-18月)观点，说明仓位建议
-
-## 输出格式
-返回JSON对象，包含以下字段：
-- executive_summary: 三段核心摘要（每段2-3句，覆盖业务、财务、投资亮点）
-- sections: 数组，每项 { id: "s1"~"s8", title: "一、公司概况"等, content: "完整段落" }`;
+## JSON结构
+{
+  "executive_summary": "三段核心摘要，每段2-3句，用\\n\\n分隔",
+  "sections": [
+    { "id": "s1", "title": "一、公司概况", "content": "200-400字的完整分析段落" },
+    { "id": "s2", "title": "二、财务分析", "content": "..." },
+    { "id": "s3", "title": "三、技术分析", "content": "..." },
+    { "id": "s4", "title": "四、市场情绪", "content": "..." },
+    { "id": "s5", "title": "五、竞品对比", "content": "..." },
+    { "id": "s6", "title": "六、估值与财务健康度", "content": "..." },
+    { "id": "s7", "title": "七、主要风险", "content": "..." },
+    { "id": "s8", "title": "八、结论与建议", "content": "..." }
+  ]
 }
 
-function parseJSON(text) {
-  // Try parsing raw JSON first
+## 写作准则
+- 语言专业、客观、数据驱动
+- 不编造数字，只说"约XX"时需基于提供的数据
+- 每段200-400字，有实质分析
+- 用中文
+
+## 8段内容指引
+1. 公司概况：主营业务、商业模式、竞争优势、市场地位
+2. 财务分析：营收/利润趋势，重点分析最新数据
+3. 技术分析：股价走势、52周高低、技术形态
+4. 市场情绪：机构关注度、资金流向
+5. 竞品对比：与2-3家可比公司对比
+6. 估值与健康度：PE/PB、负债率、分红
+7. 关键风险：3-5个具体的风险因素
+8. 结论与建议：短期(0-6月)和长期(6-18月)观点`;
+}
+
+export function parseJSON(text) {
+  // Try raw parse
   try { return JSON.parse(text); } catch {}
-  // Try extracting JSON from code fences
-  const m = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+
+  // Try extracting from code fences (json or plain)
+  let m = text.match(/```(?:json)?\s*\n?([\s\S]*?)```/);
   if (m) try { return JSON.parse(m[1].trim()); } catch {}
-  throw new Error('Could not parse DeepSeek response as JSON');
+
+  // Try finding first { and last }
+  const start = text.indexOf('{');
+  const end = text.lastIndexOf('}');
+  if (start !== -1 && end > start) {
+    try { return JSON.parse(text.slice(start, end + 1)); } catch {}
+  }
+
+  // Last resort: show the first 500 chars of response
+  throw new Error(`Could not parse JSON. Response starts: ${text.slice(0, 500)}`);
 }
