@@ -709,7 +709,8 @@ function requestLiveAnalysis() {
             return;
         }
         if (data.error && data.analysis) {
-            area.innerHTML = '<div class="live-result-card"><div class="error-text">' + escapeHtml(data.error) + '</div></div>';
+            var debugPre = data.analysis?._searchDebug ? '<pre style="font-size:.7rem;color:#999;margin-top:8px;white-space:pre-wrap">搜索调试: ' + escapeHtml(JSON.stringify(data.analysis._searchDebug)) + '</pre>' : '';
+            area.innerHTML = '<div class="live-result-card"><div class="error-text">' + escapeHtml(data.error) + '</div>' + debugPre + '</div>';
             return;
         }
         var a = data.analysis || data;
@@ -745,6 +746,10 @@ function requestLiveAnalysis() {
         }
 
         if (summary) html += '<div class="summary-text">' + summary + '</div>';
+
+        if (a._searchDebug) {
+            html += '<div style="font-size:.7rem;color:#bbb;margin-top:8px;white-space:pre-wrap">' + escapeHtml(JSON.stringify(a._searchDebug)) + '</div>';
+        }
 
         html += '<div style="margin-top:12px;font-size:.75rem;color:#bbb;text-align:right">AI 实时生成 · 仅供参考</div>';
         html += '</div>';

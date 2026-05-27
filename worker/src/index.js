@@ -26,7 +26,7 @@ export default {
         return json({ error: '服务配置异常' }, 500, CORS_HEADERS);
       }
 
-      // Step 1: Search MCP for stock code, or try input as code directly
+      // Step 1: Search MCP for stock code
       let stockCode = '';
       try {
         const searchResult = await searchStock(MCP_URL, MCP_TOKEN, company.trim());
@@ -41,11 +41,10 @@ export default {
           stockCode = first.stockCode || first.code || first.secCode || '';
         }
       } catch (e) {
-        // search failed
+        // search failed — continue
       }
 
       if (!stockCode) {
-        // Try using input directly as stock code
         stockCode = company.trim();
       }
 
@@ -57,10 +56,10 @@ export default {
       const beginDate = '2024-01-01';
 
       let income = null, balanceSheet = null, cashFlow = null, quotes = null;
-      try { income = await getIncome(MCP_URL, MCP_TOKEN, stockCode, beginDate, endDate); } catch(e) { income = { _error: e.message }; }
-      try { balanceSheet = await getBalanceSheet(MCP_URL, MCP_TOKEN, stockCode); } catch(e) { balanceSheet = { _error: e.message }; }
-      try { cashFlow = await getCashFlow(MCP_URL, MCP_TOKEN, stockCode, beginDate, endDate); } catch(e) { cashFlow = { _error: e.message }; }
-      try { quotes = await getAdjustedQuotes(MCP_URL, MCP_TOKEN, stockCode, '2025-05-27', endDate); } catch(e) { quotes = { _error: e.message }; }
+      try { income = await getIncome(MCP_URL, MCP_TOKEN, stockCode, beginDate, endDate); } catch(e) { income = null; }
+      try { balanceSheet = await getBalanceSheet(MCP_URL, MCP_TOKEN, stockCode); } catch(e) { balanceSheet = null; }
+      try { cashFlow = await getCashFlow(MCP_URL, MCP_TOKEN, stockCode, beginDate, endDate); } catch(e) { cashFlow = null; }
+      try { quotes = await getAdjustedQuotes(MCP_URL, MCP_TOKEN, stockCode, '2025-05-27', endDate); } catch(e) { quotes = null; }
 
       // Step 4: Build analysis
       const analysis = buildAnalysis(company.trim(), basicInfo, income, balanceSheet, cashFlow, quotes);
