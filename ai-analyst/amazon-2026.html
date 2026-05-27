@@ -40,11 +40,74 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 .references li { margin-bottom: 0.3em !important; word-break: break-all; }
 .references a { color: #0969da; }
 @media (max-width: 768px) { .prose-container { padding: 20px; margin: 20px auto; line-height: 1.7; } h1.report-title { font-size: 1.8rem !important; } h2 { font-size: 1.25rem !important; } h3 { font-size: 1.1rem !important; } h4 { font-size: 1rem !important; } p { font-size: 0.95rem !important; } .prose-container ul, .prose-container ol { padding-left: 1rem; font-size: 0.95rem; } }
-    </style>
+    
+    /* ── TOC Sidebar ── */
+    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
+    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc-sidebar::-webkit-scrollbar { width: 3px; }
+    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
+    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+        display: block; padding: 6px 10px; border-radius: 6px;
+        font-size: .8rem; color: #64748b; text-decoration: none;
+        transition: all .15s; line-height: 1.3;
+    }
+    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
+    .mobile-toc { display: none; }
+    @media (max-width: 1023px) {
+        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    }
+    .btt-btn {
+        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+        border-radius: 50%; background: #2563eb; color: #fff; border: none;
+        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .btt-btn.show { opacity: 1; visibility: visible; }
+    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
+</style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-50">
-<div class="prose-container">
+<div class="report-wrap">
+    <!-- TOC Sidebar -->
+    <nav class="toc-sidebar" aria-label="目录">
+        <div class="toc-title">目录</div>
+        <ul class="toc-list">
+            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> 公司概况</a></li>
+            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> 财务分析</a></li>
+            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> 技术分析</a></li>
+            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> 市场情绪</a></li>
+            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> 竞品对比</a></li>
+            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> 估值与财务健康度</a></li>
+            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> 主要风险</a></li>
+            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> 结论与建议</a></li>
+        </ul>
+    </nav>
+
+    <div class="report-content">
+        <!-- Mobile TOC -->
+        <div class="mobile-toc">
+            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
+                <option value="">— 跳转到章节 —</option>
+                <option value="s1">公司概况</option>
+                <option value="s2">财务分析</option>
+                <option value="s3">技术分析</option>
+                <option value="s4">市场情绪</option>
+                <option value="s5">竞品对比</option>
+                <option value="s6">估值与财务健康度</option>
+                <option value="s7">主要风险</option>
+                <option value="s8">结论与建议</option>
+            </select>
+        </div>
+        <div class="prose-container">
+
 
 <header class="flex flex-col items-center text-center">
     <div class="flex gap-3 mb-8">
@@ -76,7 +139,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <p>从估值的角度回顾，Amazon的P/E历史可分为几个清晰的阶段：2015-2019年，市场以SaaS模式给AWS估值，P/E长期在50-80x之间，但市场接受了低利润的零售业务作为"流量入口"的价值逻辑。2020-2021年，疫情驱动电商暴涨叠加AWS加速，P/E冲至80-120x的极端水平。2022年，利率飙升后P/E从80x压缩至40x，股价腰斩。2023-2025年，随着利率稳定和利润修复，P/E稳定在35-45x区间。每个阶段的估值逻辑都与Amazon的商业叙事高度一致——这提醒投资者，估值不仅仅是数字，更是市场对Amazon商业模式的阶段性解读。</p>
 <p>本文从公司概况、财务数据、技术面分析、市场情绪、竞品对比、估值与财务健康、主要风险及投资建议八个维度，对Amazon进行全面评估。</p>
 
-<h2>一、公司概况：业务模式、护城河及行业地位</h2>
+<h2 id="s1">一、公司概况：业务模式、护城河及行业地位</h2>
 
 <h3>1.1 业务结构</h3>
 <p>Amazon的业务可划分为五大板块，各板块在集团内的定位和财务贡献差异显著：</p>
@@ -135,7 +198,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <div class="widget-body"><div class="chart-container"><canvas id="chart_mcap"></canvas></div></div>
 </div>
 
-<h2>二、财务分析</h2>
+<h2 id="s2">二、财务分析</h2>
 <h3>2.1 营收趋势</h3>
 <p>Amazon FY2021-FY2025营收从$469B增长至$675B（CAGR 9.5%），增速在疫情后回归正常化，但绝对增量依然惊人（五年间累计增加$206B，相当于增加了一个Oracle的年营收）：</p>
 <ul>
@@ -206,7 +269,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 </ul>
 <p>季度数据的另外一个重要关注点是AWS和零售的增速"跷跷板"效应：当零售增速因宏观消费疲弱而下降时，企业往往会加速云迁移以优化IT成本（AWS增速上升），反之亦然。这种跷跷板效应使得Amazon整体营收的波动性低于单一业务公司——这是"三引擎"结构带给投资者的隐性风险缓释。</p>
 
-<h2>三、技术面分析</h2>
+<h2 id="s3">三、技术面分析</h2>
 <h3>3.1 价格走势</h3>
 <ul>
     <li><strong>52周范围</strong>：$160 - $245</li>
@@ -237,7 +300,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <p>从成交量形态来看，AMZN在2025年的上涨过程中成交量温和放大（日均成交约4500万股），明显低于2022年恐慌时期（日均6000-8000万股）以及2023年反弹初期（5000-6000万股）。成交量的"健康收缩"表明筹码集中度在提升——机构持仓比例增加、短线交易者退出，这通常被视为中期趋势健康的信号。然而，需要注意的是，若股价跌破$200的同时成交量显著放大（例如单日超7000万股），则可能意味着机构资金的趋势性减仓，需立即重新评估持仓逻辑。关键观察窗口是FY2026 Q1财报（7月下旬）前后的成交量变化：平稳放量是积极信号，恐慌放量则是预警信号。</p>
 <p>期权市场方面，AMZN的隐含波动率（IV）目前约28%，低于5年均值32%，处于历史偏低分位。平价看涨/看跌期权比率（Put/Call Ratio）约0.65（看涨合约显著多于看跌），显示期权交易者的情绪偏乐观但未至极端。未平仓合约集中在$230（最大看涨OI）和$200（最大看跌OI）两个行权价，从Dealer Gamma flip角度分析，$230-245区间是Gamma空头阻力区，$200-210是Gamma多头支撑区。若股价突破$245，大量Gamma squeeze力量可能推动股价快速向$260-270区间移动。这一期权结构支持"逢回调建仓"而非"追高买入"的策略。</p>
 
-<h2>四、市场情绪</h2>
+<h2 id="s4">四、市场情绪</h2>
 <h3>4.1 分析师评级</h3>
 <p>覆盖Amazon的54位分析师中，48位评级"买入"或"增持"，5位"持有"，1位"卖出"，整体评级高度看多。综合平均目标价$254，隐含约11%上行空间。2026年5月以来共有12位分析师更新评级，其中9位上调目标价、3位维持、0位下调，一致看多情绪未出现裂缝。各主要投行观点如下：</p>
 <ul>
@@ -260,7 +323,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <li><strong>做空比例</strong>：流通股约1.2%，低于5年平均值1.8%，远低于FY2022做空高峰的3.5%。空头规模极小，表明市场对Amazon普遍持乐观态度、缺乏做空催化剂。</li>
 </ul>
 
-<h2>五、竞品对比</h2>
+<h2 id="s5">五、竞品对比</h2>
 <h3>5.1 跨行业全方位对比</h3>
 <table>
     <thead><tr><th>指标</th><th>Amazon (AMZN)</th><th>Microsoft (MSFT)</th><th>Alphabet (GOOGL)</th><th>Walmart (WMT)</th></tr></thead>
@@ -297,7 +360,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <li><strong>新兴业务 (Kuiper/Zoox)</strong>：★★☆☆☆ 长期潜力巨大但商业化路径不确定，投入阶段仍将持续数年。Kuiper若成功有望成为SpaceX Starlink的头号竞争对手，但Starlink的先发优势和卫星产能领先显著。</li>
 </ul>
 
-<h2>六、估值与财务健康度</h2>
+<h2 id="s6">六、估值与财务健康度</h2>
 <h3>6.1 估值框架</h3>
 <ul>
     <li><strong>P/E（TTM）</strong>：约42x，高于5年均值38x，但低于2020-2021年60-80x的超级成长估值区间。与Microsoft（~35x）和Alphabet（~25x）相比存在溢价，但Amazon利润增速（+35% YoY）远高于后两者，PEG视角下溢价是合理的。</li>
@@ -329,7 +392,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <li><strong>股东回报</strong>：从不派息。Bezos和Jassy均明确表示当前应优先再投资。FY2025回购约$25B（约占流通股0.9%），主要用于抵消基于股票的薪酬稀释。2025年董事会授权新增$60B回购额度，总可用回购授权约$85B，意味着即使盈利增速放缓，公司也可以通过加速回购支撑每股收益。</li>
 </ul>
 
-<h2>七、主要风险因素</h2>
+<h2 id="s7">七、主要风险因素</h2>
 <h3>7.1 核心风险</h3>
 <ul>
     <li><strong>AWS增速放缓或利润率下降</strong>：AWS是Amazon利润的绝对支柱（贡献~70%的经营利润）。若Azure借助OpenAI的独家集成能力（Azure OpenAI Service是Bedrock最直接的竞品）持续蚕食企业AI云迁移份额，或GCP凭借Gemini缩小产品差距，AWS的35%+市场份额可能逐步侵蚀。同时AI基础设施的高Capex投资周期较长（数据中心满负荷运营通常需2-3年），若AI推理负载增长不及预期（企业AI应用落地慢于预期），AWS利用率下降将直接压缩利润率。最坏情景：AI云竞争加剧导致AWS增速降至15%以下、利润率从35%降至28%，利润影响约$10B，对应约15-20%股价下行风险。</li>
@@ -351,7 +414,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <p class="mt-2 !mb-0 leading-relaxed">AWS AI货币化速度不及预期是最关键的下行风险。Amazon在AI推理和模型服务层的定价能力远弱于其在IaaS层的控制力——Bedrock面临Azure OpenAI和GCP Vertex AI的激烈价格竞争，客户可以轻松切换大语言模型供应商。如果AI工作负载的增长主要流向Azure而非AWS，$2.7T市值中的AI溢价将迅速消散。叠加零售利润改善已被充分定价，股价可能面临20-30%的显著回调。投资者应密切关注每个季度AWS的AI相关收入披露和与Azure AI增速的对比。</p>
 </div>
 
-<h2>八、结论与投资建议</h2>
+<h2 id="s8">八、结论与投资建议</h2>
 <h3>8.1 短期投资建议（0-6个月）</h3>
 <p>短期来看，AWS AI加速叙事和零售利润率持续改善构成坚实的上行动能，但P/E 42x的估值水平已部分price in了这些利好。建议在$210-215区域（MA50附近）分批建仓，止损设在$190（略低于MA200，约14%下行风险）。</p>
 <p>未来6个月的关键催化剂时间线：</p>
@@ -394,7 +457,22 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <div style="font-size:0.75rem;color:#6B7280;line-height:1.5;border:1px solid #F3F4F6;border-radius:8px;padding:16px;margin-top:2.5rem;background:#F9FAFB;">
     <strong>风险提示：</strong>以上内容基于公开信息、历史数据及模型分析结果整理生成，仅用于信息参考，不构成任何投资建议。存在一定滞后性与局限性，过往表现不预示未来结果，需结合个人风险承受能力综合判断。
 </div>
+
+        </div>
+        <div id="footer-placeholder"></div>
+    </div>
 </div>
+
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="返回顶部"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function(){
+    var btn = document.getElementById('bttBtn');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+    });
+})();
+</script>
 <script>(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
 new Chart(document.getElementById('chart_mcap'),{type:'bar',data:{labels:['Apple','Microsoft','NVIDIA','Amazon','Alphabet','Meta','TSMC'],datasets:[{label:'市值 (十亿美元)',data:[3500,3100,5800,2700,2100,1600,980],backgroundColor:['#6B7280','#3B82F6','#10B981','#F59E0B','#EF4444','#8B5CF6','#EA580C'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'十亿美元'}}}}});
 new Chart(document.getElementById('chart_revenue'),{type:'line',data:{labels:['FY2021','FY2022','FY2023','FY2024','FY2025'],datasets:[{label:'总营收 ($B)',data:[469,514,575,621,675],borderColor:'#F59E0B',backgroundColor:'rgba(245,158,11,0.08)',borderWidth:3,fill:true,tension:0.2},{label:'AWS ($B)',data:[62,80,91,105,128],borderColor:'#3B82F6',backgroundColor:'rgba(59,130,246,0.08)',borderWidth:3,fill:true,tension:0.2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom'}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'十亿美元'}}}}});
@@ -404,3 +482,5 @@ new Chart(document.getElementById('chart_targets'),{type:'bar',data:{labels:['�
 })();</script>
 </body>
 </html>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>

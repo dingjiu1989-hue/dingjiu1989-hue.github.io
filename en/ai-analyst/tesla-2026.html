@@ -194,10 +194,73 @@ tr:nth-child(even) { background-color: #F9FAFB; }
         font-size: 0.95rem;
     }
 }
-    </style>
+    
+    /* ── TOC Sidebar ── */
+    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
+    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc-sidebar::-webkit-scrollbar { width: 3px; }
+    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
+    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+        display: block; padding: 6px 10px; border-radius: 6px;
+        font-size: .8rem; color: #64748b; text-decoration: none;
+        transition: all .15s; line-height: 1.3;
+    }
+    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
+    .mobile-toc { display: none; }
+    @media (max-width: 1023px) {
+        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    }
+    .btt-btn {
+        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+        border-radius: 50%; background: #2563eb; color: #fff; border: none;
+        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .btt-btn.show { opacity: 1; visibility: visible; }
+    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
+</style>
 </head>
 <body class="bg-gray-50">
-    <div class="prose-container">
+    <div class="report-wrap">
+    <!-- TOC Sidebar -->
+    <nav class="toc-sidebar" aria-label="Contents">
+        <div class="toc-title">Contents</div>
+        <ul class="toc-list">
+            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> Company Overview</a></li>
+            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> Financial Analysis</a></li>
+            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> Technical Analysis</a></li>
+            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> Market Sentiment</a></li>
+            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> Competitive Comparison</a></li>
+            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> Valuation & Financial Health</a></li>
+            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> Key Risks</a></li>
+            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> Conclusion & Recommendations</a></li>
+        </ul>
+    </nav>
+
+    <div class="report-content">
+        <!-- Mobile TOC -->
+        <div class="mobile-toc">
+            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
+                <option value="">— Jump to section —</option>
+                <option value="s1">Company Overview</option>
+                <option value="s2">Financial Analysis</option>
+                <option value="s3">Technical Analysis</option>
+                <option value="s4">Market Sentiment</option>
+                <option value="s5">Competitive Comparison</option>
+                <option value="s6">Valuation & Financial Health</option>
+                <option value="s7">Key Risks</option>
+                <option value="s8">Conclusion & Recommendations</option>
+            </select>
+        </div>
+        <div class="prose-container">
+
 
         <!-- HEADER -->
         <header class="flex flex-col items-center text-center">
@@ -236,7 +299,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
         <p>Tesla, Inc., as a pioneer in the global electric vehicle and clean energy sector, is at a critical juncture of strategic transformation from a traditional automaker to a "Physical AI" technology company. In 2025, the company experienced its first annual revenue decline, but Q1 2026 performance rebounded significantly with 16% YoY revenue growth, the highest in nearly three years. Meanwhile, Tesla's market capitalization has continued to climb to $1.54 trillion, far exceeding its traditional automotive peers, reflecting market expectations for high-growth areas such as Full Self-Driving (FSD), the Optimus humanoid robot, and energy storage.</p>
         <p>This report provides a comprehensive analysis of Tesla across eight dimensions: company overview, financial data, technical analysis, market sentiment, competitive comparison, valuation & health, key risk factors, and investment recommendations, offering investors a systematic reference.</p>
 
-        <h2>1. Company Overview: Business Model, Market Cap, Moat & Industry Position</h2>
+        <h2 id="s1">1. Company Overview: Business Model, Market Cap, Moat & Industry Position</h2>
 
         <h3>1.1 Business Model</h3>
         <p>Tesla has evolved from a pure EV manufacturer into an "AI-centric" comprehensive technology company, with business spanning four segments:</p>
@@ -343,7 +406,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
             </div>
         </div>
 
-        <h2>2. Financial Data: Revenue Trends, Profit, Balance Sheet & Cash Flow</h2>
+        <h2 id="s2">2. Financial Data: Revenue Trends, Profit, Balance Sheet & Cash Flow</h2>
 
         <h3>2.1 Revenue Performance</h3>
         <p>Tesla's full-year 2025 revenue was $94.827 billion, down 3% YoY, marking the company's first annual revenue decline in its history. This decline was primarily driven by reduced vehicle deliveries (1.636 million units, -8.6% YoY) and lower regulatory credit revenue.</p>
@@ -461,7 +524,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
             </div>
         </div>
 
-        <h2>3. Technical Analysis: Price Trends, Indicators & Support/Resistance</h2>
+        <h2 id="s3">3. Technical Analysis: Price Trends, Indicators & Support/Resistance</h2>
 
         <h3>3.1 Price Trends</h3>
         <p>Tesla's stock price showed a consolidating pattern in May 2026. As of May 26, 2026, Tesla's stock was trading in the $420-$465 range, within a relatively stable trading zone. From the daily chart, after hitting a recent high of $445 on May 12, the stock pulled back slightly to $426 on May 22, indicating near-term profit-taking pressure.</p>
@@ -530,7 +593,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
             </div>
         </div>
 
-        <h2>4. Market Sentiment: Ratings, Public Opinion & News Impact</h2>
+        <h2 id="s4">4. Market Sentiment: Ratings, Public Opinion & News Impact</h2>
 
         <h3>4.1 Analyst Ratings</h3>
         <p>Wall Street analysts show significant divergence on Tesla:</p>
@@ -599,7 +662,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
             <li><strong>February 14</strong>: Tesla's US website showed the one-time FSD purchase option ended on Feb 14, transitioning to monthly subscription only from Feb 15, signaling the strategic shift from hardware sales to software subscriptions</li>
         </ul>
 
-        <h2>5. Competitive Comparison: Market Share & Financial Metrics</h2>
+        <h2 id="s5">5. Competitive Comparison: Market Share & Financial Metrics</h2>
 
         <h3>5.1 Global EV Market Share Comparison</h3>
         <p>Top three global EV sellers in 2025:</p>
@@ -789,7 +852,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
             </div>
         </div>
 
-        <h2>6. Valuation & Health: PE/PB/DCF and Financial Health Assessment</h2>
+        <h2 id="s6">6. Valuation & Health: PE/PB/DCF and Financial Health Assessment</h2>
 
         <h3>6.1 Valuation Metrics</h3>
         <p>Tesla's current valuation metrics are at historically elevated levels:</p>
@@ -931,7 +994,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
             </div>
         </div>
 
-        <h2>7. Key Risks: Industry Competition, Policy, Geopolitics</h2>
+        <h2 id="s7">7. Key Risks: Industry Competition, Policy, Geopolitics</h2>
 
         <h3>7.1 Industry Competition Risk</h3>
         <p>The competitive risks Tesla faces are primarily reflected in the following areas:</p>
@@ -967,7 +1030,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
             <li><strong>Musk Political Risk</strong>: Musk's frequent involvement in political issues may invite regulatory scrutiny and distract from business focus</li>
         </ul>
 
-        <h2>8. Conclusion: Short-Term & Long-Term Investment Recommendations</h2>
+        <h2 id="s8">8. Conclusion: Short-Term & Long-Term Investment Recommendations</h2>
 
         <h3>8.1 Short-Term Outlook (1-3 Months)</h3>
         <p><strong>Tesla's stock price may face consolidation in the near term</strong>, influenced by the following factors:</p>
@@ -1136,10 +1199,26 @@ tr:nth-child(even) { background-color: #F9FAFB; }
             <li><a href="https://www.pv-magazine.com/" target="_blank" rel="nofollow noopener">Tesla Deploys 9.6 GWh of Batteries in Q2, 10 GWh Nevada Cell Factory 'Nears Completion'</a> — pv magazine USA</li>
             <li><a href="https://www.toutiao.com/" target="_blank" rel="nofollow noopener">Shanghai South Port "Release Upon Declaration" Completes First Order, Boosting Tesla, BYD and Other NEV Scale Exports</a> — Jiemian News</li>
         </ol>
+    
+        </div>
+        <div id="footer-placeholder"></div>
     </div>
+</div>
 
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function(){
+    var btn = document.getElementById('bttBtn');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+    });
+})();
+</script>
 <div class="disclaimer">
     <strong>Disclaimer:</strong> This analysis is for informational and educational purposes only and does not constitute investment advice. It is based on publicly available information, historical data, and model analysis as of the report date, which may involve certain lag and limitations. Past performance does not guarantee future results. Investors should make their own independent assessment and consider their personal risk tolerance before making any investment decisions.
 </div>
 </body>
 </html>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>

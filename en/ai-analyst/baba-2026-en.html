@@ -40,11 +40,74 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 .references li { margin-bottom: 0.3em !important; word-break: break-all; }
 .references a { color: #0969da; }
 @media (max-width: 768px) { .prose-container { padding: 20px; margin: 20px auto; line-height: 1.7; } h1.report-title { font-size: 1.8rem !important; } h2 { font-size: 1.25rem !important; } h3 { font-size: 1.1rem !important; } h4 { font-size: 1rem !important; } p { font-size: 0.95rem !important; } .prose-container ul, .prose-container ol { padding-left: 1rem; font-size: 0.95rem; } }
-    </style>
+    
+    /* ── TOC Sidebar ── */
+    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
+    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc-sidebar::-webkit-scrollbar { width: 3px; }
+    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
+    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+        display: block; padding: 6px 10px; border-radius: 6px;
+        font-size: .8rem; color: #64748b; text-decoration: none;
+        transition: all .15s; line-height: 1.3;
+    }
+    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
+    .mobile-toc { display: none; }
+    @media (max-width: 1023px) {
+        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    }
+    .btt-btn {
+        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+        border-radius: 50%; background: #2563eb; color: #fff; border: none;
+        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .btt-btn.show { opacity: 1; visibility: visible; }
+    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
+</style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-50">
-<div class="prose-container">
+<div class="report-wrap">
+    <!-- TOC Sidebar -->
+    <nav class="toc-sidebar" aria-label="Contents">
+        <div class="toc-title">Contents</div>
+        <ul class="toc-list">
+            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> Company Overview</a></li>
+            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> Financial Analysis</a></li>
+            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> Technical Analysis</a></li>
+            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> Market Sentiment</a></li>
+            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> Competitive Comparison</a></li>
+            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> Valuation & Financial Health</a></li>
+            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> Key Risks</a></li>
+            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> Conclusion & Recommendations</a></li>
+        </ul>
+    </nav>
+
+    <div class="report-content">
+        <!-- Mobile TOC -->
+        <div class="mobile-toc">
+            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
+                <option value="">— Jump to section —</option>
+                <option value="s1">Company Overview</option>
+                <option value="s2">Financial Analysis</option>
+                <option value="s3">Technical Analysis</option>
+                <option value="s4">Market Sentiment</option>
+                <option value="s5">Competitive Comparison</option>
+                <option value="s6">Valuation & Financial Health</option>
+                <option value="s7">Key Risks</option>
+                <option value="s8">Conclusion & Recommendations</option>
+            </select>
+        </div>
+        <div class="prose-container">
+
 
 <header class="flex flex-col items-center text-center">
     <div class="flex gap-3 mb-8">
@@ -70,7 +133,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <p>Alibaba Group, the pioneer and long-time leader of China's internet economy, is at a critical juncture of strategic transformation from a traditional e-commerce platform to an "AI + Cloud" technology infrastructure company. In FY2026 (ended March 31, 2026), the company's annual revenue surpassed ¥1 trillion for the first time, reaching ¥1.024 trillion (+3% reported, +11% excluding divestitures). However, adjusted EBITA declined sharply, while the Cloud Intelligence Group posted 38% YoY revenue growth with AI-related products maintaining triple-digit growth for 11 consecutive quarters — making it the company's brightest growth engine.</p>
 <p>This report provides a comprehensive analysis of Alibaba across eight dimensions: company overview, financial data, technical analysis, market sentiment, competitive comparison, valuation & health, key risk factors, and investment recommendations.</p>
 
-<h2>1. Company Overview: Business Model, Market Cap, Moat & Industry Position</h2>
+<h2 id="s1">1. Company Overview: Business Model, Market Cap, Moat & Industry Position</h2>
 
 <h3>1.1 Business Model</h3>
 <p>Alibaba has evolved from a single e-commerce platform into a comprehensive technology group spanning e-commerce, cloud computing, AI, local services, and international commerce across seven major business segments:</p>
@@ -125,7 +188,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <li><strong>Logistics</strong>: Cainiao reaches 200+ countries, one of China's largest smart logistics platforms.</li>
 </ul>
 
-<h2>2. Financial Analysis</h2>
+<h2 id="s2">2. Financial Analysis</h2>
 
 <h3>2.1 Revenue Trends</h3>
 <p>FY2026 (ended March 31, 2026) saw Alibaba's annual revenue surpass ¥1 trillion for the first time:</p>
@@ -177,7 +240,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <li><strong>Share Repurchases</strong>: ~$15B in FY2026, signaling management's conviction that the stock is undervalued.</li>
 </ul>
 
-<h2>3. Technical Analysis</h2>
+<h2 id="s3">3. Technical Analysis</h2>
 
 <h3>3.1 Price Trend</h3>
 <p>Alibaba ADR (BABA) performance over the past year:</p>
@@ -210,7 +273,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 </div>
 <p>The stock is trading above both MA50 and MA200, with a bullish MACD golden cross signal. However, the neutral RSI suggests limited near-term directional conviction. 52-week volatility of 42% is significantly above the sector average — position sizing warrants attention.</p>
 
-<h2>4. Market Sentiment</h2>
+<h2 id="s4">4. Market Sentiment</h2>
 
 <h3>4.1 Analyst Ratings</h3>
 <p>Wall Street sentiment on Alibaba is predominantly positive but with widening dispersion:</p>
@@ -237,7 +300,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <li><strong>Macro Environment</strong>: China consumption recovery trajectory and US-China relations are critical external variables.</li>
 </ul>
 
-<h2>5. Competitive Comparison</h2>
+<h2 id="s5">5. Competitive Comparison</h2>
 
 <h3>5.1 E-Commerce Competitive Landscape</h3>
 <table>
@@ -271,7 +334,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 </ul>
 <p>Alibaba trades at the lowest P/E and P/S multiples among comparable companies, implying significant re-rating potential if the AI cloud transformation succeeds.</p>
 
-<h2>6. Valuation & Financial Health</h2>
+<h2 id="s6">6. Valuation & Financial Health</h2>
 
 <h3>6.1 SOTP Sum-of-the-Parts Valuation</h3>
 <p>Applying a sum-of-the-parts (SOTP) framework to Alibaba:</p>
@@ -297,7 +360,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <li><strong>Clear Profit Recovery Path</strong>: Management has outlined a 2-3 year AI investment cycle after which capex intensity normalizes.</li>
 </ul>
 
-<h2>7. Key Risk Factors</h2>
+<h2 id="s7">7. Key Risk Factors</h2>
 
 <h3>7.1 Competitive Risks</h3>
 <ul>
@@ -325,7 +388,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <p class="mt-2 !mb-0 leading-relaxed">US chip export controls represent the single largest external threat to Alibaba's AI strategy. The in-house Zhenwu PPU is a necessary but high-risk hedge — if performance iteration falls short of expectations, the AI cloud growth narrative faces serious challenge.</p>
 </div>
 
-<h2>8. Conclusion & Investment Recommendations</h2>
+<h2 id="s8">8. Conclusion & Investment Recommendations</h2>
 
 <h3>8.1 Short-Term Recommendation (0–6 Months)</h3>
 <p>Near-term, Alibaba's share price is likely to be driven by:</p>
@@ -373,8 +436,22 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <li>CAICT — Cloud Computing White Paper (2025)</li>
 </ol>
 
+
+        </div>
+        <div id="footer-placeholder"></div>
+    </div>
 </div>
 
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function(){
+    var btn = document.getElementById('bttBtn');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+    });
+})();
+</script>
 <script>
 (function(){
     if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
@@ -435,3 +512,5 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 </div>
 </body>
 </html>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>

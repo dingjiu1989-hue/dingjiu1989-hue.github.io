@@ -25,8 +25,71 @@ th,td{border:1px solid #E5E7EB;padding:10px 12px;text-align:left}
 th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){background-color:#F9FAFB}
 .references{font-size:.85rem;color:#4B5563;line-height:1.6}.references li{margin-bottom:.3em!important;word-break:break-all}.references a{color:#0969da}
 @media(max-width:768px){.prose-container{padding:20px;margin:20px auto;line-height:1.7}h1.report-title{font-size:1.8rem!important}h2{font-size:1.25rem!important}h3{font-size:1.1rem!important}h4{font-size:1rem!important}p{font-size:.95rem!important}.prose-container ul,.prose-container ol{padding-left:1rem;font-size:.95rem}}
+
+    /* ── TOC Sidebar ── */
+    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
+    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc-sidebar::-webkit-scrollbar { width: 3px; }
+    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
+    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+        display: block; padding: 6px 10px; border-radius: 6px;
+        font-size: .8rem; color: #64748b; text-decoration: none;
+        transition: all .15s; line-height: 1.3;
+    }
+    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
+    .mobile-toc { display: none; }
+    @media (max-width: 1023px) {
+        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    }
+    .btt-btn {
+        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+        border-radius: 50%; background: #2563eb; color: #fff; border: none;
+        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .btt-btn.show { opacity: 1; visibility: visible; }
+    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
 </style><script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head>
-<body class="bg-gray-50"><div class="prose-container">
+<body class="bg-gray-50"><div class="report-wrap">
+    <!-- TOC Sidebar -->
+    <nav class="toc-sidebar" aria-label="Contents">
+        <div class="toc-title">Contents</div>
+        <ul class="toc-list">
+            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> Company Overview</a></li>
+            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> Financial Analysis</a></li>
+            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> Technical Analysis</a></li>
+            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> Market Sentiment</a></li>
+            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> Competitive Comparison</a></li>
+            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> Valuation & Financial Health</a></li>
+            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> Key Risks</a></li>
+            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> Conclusion & Recommendations</a></li>
+        </ul>
+    </nav>
+
+    <div class="report-content">
+        <!-- Mobile TOC -->
+        <div class="mobile-toc">
+            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
+                <option value="">— Jump to section —</option>
+                <option value="s1">Company Overview</option>
+                <option value="s2">Financial Analysis</option>
+                <option value="s3">Technical Analysis</option>
+                <option value="s4">Market Sentiment</option>
+                <option value="s5">Competitive Comparison</option>
+                <option value="s6">Valuation & Financial Health</option>
+                <option value="s7">Key Risks</option>
+                <option value="s8">Conclusion & Recommendations</option>
+            </select>
+        </div>
+        <div class="prose-container">
+
 
 <header class="flex flex-col items-center text-center">
 <div class="flex gap-3 mb-8"><span class="px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-widest rounded">Deep Research</span><span class="px-3 py-1 bg-blue-600 text-white text-xs font-bold uppercase tracking-widest rounded">Alphabet</span></div>
@@ -45,7 +108,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 
 <p>Alphabet Inc. (Google's parent) is the world's largest digital advertising company and an AI technology leader. Google Search commands 90%+ of the global search engine market, while Gemini and TPU chips form the most complete cloud AI infrastructure stack. In 2025, revenue reached $383B, net income $110B, and cash reserves exceeded $115B. The DOJ antitrust lawsuit and the AI search transformation represent significant structural forces reshaping the company's long-term trajectory.</p>
 
-<h2>1. Company Overview</h2>
+<h2 id="s1">1. Company Overview</h2>
 <h3>1.1 Business Model</h3>
 <ul>
 <li><strong>Google Search & Advertising</strong> (57% revenue): Search ads, Display & Video 360, AdSense. AI Overviews now cover 1B+ queries.</li>
@@ -64,7 +127,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <li><strong>TPU Custom Silicon</strong>: TPU v7 delivers superior performance-per-dollar for AI inference vs. NVIDIA GPUs.</li>
 <li><strong>Waymo Technology Lead</strong>: Robotaxi operations across Phoenix, SF, and LA; 30M+ paid monthly miles.</li></ol>
 
-<h2>2. Financial Analysis</h2>
+<h2 id="s2">2. Financial Analysis</h2>
 <ul><li><strong>2025 Revenue</strong>: $383.3B (+14% YoY)</li>
 <li><strong>Search Ads</strong>: $218.5B (+11%), AI Overviews lifted search usage +15%</li>
 <li><strong>YouTube Ads</strong>: $48.2B (+18%), Shorts annualized at $10B</li>
@@ -73,14 +136,14 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <li><strong>FCF</strong>: $78B, Capex $62B (+58% YoY)</li></ul>
 <div class="widget-box"><div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: Revenue & Cloud Growth</div><div class="widget-body"><div class="chart-container"><canvas id="chart_revenue"></canvas></div></div></div>
 
-<h2>3. Technical Analysis</h2>
+<h2 id="s3">3. Technical Analysis</h2>
 <ul><li><strong>52-Week Range</strong>: $165 - $215</li><li><strong>Current</strong>: ~$198</li><li><strong>YTD</strong>: +12%</li></ul>
 <div class="widget-box"><div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: GOOGL 52-Week</div><div class="widget-body"><div class="chart-container"><canvas id="chart_price"></canvas></div></div></div>
 
-<h2>4. Market Sentiment</h2>
+<h2 id="s4">4. Market Sentiment</h2>
 <ul><li><strong>Morgan Stanley</strong>: Overweight, $230 PT</li><li><strong>Goldman Sachs</strong>: Buy, $220 PT — antitrust fears overblown</li><li><strong>UBS</strong>: Neutral, $190 PT</li><li><strong>Consensus</strong>: $212, ~7% upside</li></ul>
 
-<h2>5. Competitive Comparison</h2>
+<h2 id="s5">5. Competitive Comparison</h2>
 <table><thead><tr><th>Metric</th><th>Alphabet</th><th>Meta</th><th>Amazon</th><th>Microsoft</th></tr></thead>
 <tbody>
 <tr><td>Market Cap</td><td>$4.6T</td><td>$1.8T</td><td>$2.7T</td><td>$3.9T</td></tr>
@@ -88,19 +151,19 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <tr><td>Cloud Revenue</td><td>$42B</td><td>—</td><td>$128B</td><td>$112B</td></tr>
 <tr><td>Op Margin</td><td>31.2%</td><td>38%</td><td>25%</td><td>44%</td></tr></tbody></table>
 
-<h2>6. Valuation & Health</h2>
+<h2 id="s6">6. Valuation & Health</h2>
 <ul><li><strong>P/E (TTM)</strong>: 28.0x, Forward P/E: 24.5x</li>
 <li><strong>Cash</strong>: $115B, Net cash $75B</li>
 <li><strong>Buybacks</strong>: $72B in 2025</li></ul>
 
-<h2>7. Key Risks</h2>
+<h2 id="s7">7. Key Risks</h2>
 <ul><li><strong>Antitrust Breakup Risk</strong>: DOJ remedy ruling due Q3 2026. Worst case: forced divestiture of Chrome or AdTech.</li>
 <li><strong>AI Search Impact</strong>: AI Overviews reduce click-through rates. "Zero-click answers" fundamentally challenge the ad monetization model.</li>
 <li><strong>Capex Surge</strong>: Capex doubled from $39B (2024) to $62B (2025). $20B Anthropic investment ROI highly uncertain.</li>
 <li><strong>AI Competition</strong>: OpenAI SearchGPT hits 200M daily queries, gradually eroding search share.</li></ul>
 <div class="my-8 p-6 bg-red-50 rounded-lg border-l-4 border-red-500"><div class="flex items-baseline gap-4"><i class="fas fa-shield-halved mt-1 text-red-500"></i><h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">Critical Risk</h4></div><p class="mt-2 !mb-0 leading-relaxed">AI Overviews' "zero-click answers" are reshaping the search business model — even if search share stays constant, per-query ad monetization value could structurally decline over time.</p></div>
 
-<h2>8. Conclusion & Recommendations</h2>
+<h2 id="s8">8. Conclusion & Recommendations</h2>
 <div class="my-8 p-6 bg-green-50 rounded-lg border-l-4 border-green-500">
 <div class="font-bold text-green-800 !mt-0 !mb-2">Short-Term (0-6 Months)</div>
 <p class="!mb-4 text-green-700 leading-relaxed">DOJ antitrust ruling is the key event. Buy on any $170-180 dip if the ruling is overly aggressive. Target $200-210.<br><strong>Action</strong>: Wait for DOJ clarity.</p>
@@ -121,10 +184,27 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <div class="disclaimer">
     <strong>Disclaimer:</strong> This analysis is for informational and educational purposes only and does not constitute investment advice. It is based on publicly available information, historical data, and model analysis as of the report date, which may involve certain lag and limitations. Past performance does not guarantee future results. Investors should make their own independent assessment and consider their personal risk tolerance before making any investment decisions.
 </div>
+
+        </div>
+        <div id="footer-placeholder"></div>
+    </div>
 </div>
+
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function(){
+    var btn = document.getElementById('bttBtn');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+    });
+})();
+</script>
 <script>(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
 new Chart(document.getElementById('chart_mcap'),{type:'bar',data:{labels:['NVIDIA','Apple','Alphabet','Microsoft','Amazon','Meta'],datasets:[{label:'Market Cap ($T)',data:[5.8,4.5,4.6,3.9,2.7,1.8],backgroundColor:['#10B981','#6B7280','#3B82F6','#F59E0B','#EF4444','#8B5CF6'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'$ Trillions'}}}}});
 new Chart(document.getElementById('chart_revenue'),{type:'line',data:{labels:['2021','2022','2023','2024','2025'],datasets:[{label:'Total Rev ($B)',data:[257.6,282.8,307.4,337.9,383.3],borderColor:'#3B82F6',backgroundColor:'rgba(59,130,246,0.08)',borderWidth:3,fill:true,tension:0.2},{label:'Cloud ($B)',data:[19.2,26.3,33.1,37.6,42.3],borderColor:'#10B981',backgroundColor:'rgba(16,185,129,0.08)',borderWidth:3,fill:true,tension:0.2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom'}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'$ Billions'}}}}});
 new Chart(document.getElementById('chart_price'),{type:'line',data:{labels:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],datasets:[{label:'GOOGL ($)',data:[176,170,165,175,182,180,178,188,192,198,210,198],borderColor:'#3B82F6',backgroundColor:'rgba(59,130,246,0.08)',borderWidth:2,fill:true,tension:0.2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'USD'}}}}});
 })();</script>
 </body></html>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>

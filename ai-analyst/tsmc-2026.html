@@ -31,11 +31,74 @@ th,td{border:1px solid #E5E7EB;padding:10px 12px;text-align:left}
 th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){background-color:#F9FAFB}
 .references{font-size:.85rem;color:#4B5563;line-height:1.6}.references li{margin-bottom:.3em!important;word-break:break-all}.references a{color:#0969da}
 @media(max-width:768px){.prose-container{padding:20px;margin:20px auto;line-height:1.7}h1.report-title{font-size:1.8rem!important}h2{font-size:1.25rem!important}h3{font-size:1.1rem!important}h4{font-size:1rem!important}p{font-size:.95rem!important}.prose-container ul,.prose-container ol{padding-left:1rem;font-size:.95rem}}
+
+    /* ── TOC Sidebar ── */
+    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
+    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc-sidebar::-webkit-scrollbar { width: 3px; }
+    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
+    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+        display: block; padding: 6px 10px; border-radius: 6px;
+        font-size: .8rem; color: #64748b; text-decoration: none;
+        transition: all .15s; line-height: 1.3;
+    }
+    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
+    .mobile-toc { display: none; }
+    @media (max-width: 1023px) {
+        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    }
+    .btt-btn {
+        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+        border-radius: 50%; background: #2563eb; color: #fff; border: none;
+        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .btt-btn.show { opacity: 1; visibility: visible; }
+    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
 </style>
 </head>
 <body>
 
-<div class="prose-container">
+<div class="report-wrap">
+    <!-- TOC Sidebar -->
+    <nav class="toc-sidebar" aria-label="目录">
+        <div class="toc-title">目录</div>
+        <ul class="toc-list">
+            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> 公司概况</a></li>
+            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> 财务分析</a></li>
+            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> 技术分析</a></li>
+            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> 市场情绪</a></li>
+            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> 竞品对比</a></li>
+            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> 估值与财务健康度</a></li>
+            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> 主要风险</a></li>
+            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> 结论与建议</a></li>
+        </ul>
+    </nav>
+
+    <div class="report-content">
+        <!-- Mobile TOC -->
+        <div class="mobile-toc">
+            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
+                <option value="">— 跳转到章节 —</option>
+                <option value="s1">公司概况</option>
+                <option value="s2">财务分析</option>
+                <option value="s3">技术分析</option>
+                <option value="s4">市场情绪</option>
+                <option value="s5">竞品对比</option>
+                <option value="s6">估值与财务健康度</option>
+                <option value="s7">主要风险</option>
+                <option value="s8">结论与建议</option>
+            </select>
+        </div>
+        <div class="prose-container">
+
 
 <!-- Badge -->
 <div class="flex flex-wrap items-center gap-3 mb-6">
@@ -68,7 +131,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 </div>
 
 <!-- Section 1 -->
-<h2>一、公司概览：不可替代的芯片制造基石</h2>
+<h2 id="s1">一、公司概览：不可替代的芯片制造基石</h2>
 
 <h3>1.1 全球地位</h3>
 <p>台积电（Taiwan Semiconductor Manufacturing Company）是全球最大的纯晶圆代工厂，2026 年 5 月市值约 9,800 亿美元，位居全球科技公司第八位。公司于纽约证券交易所（TSM）和台湾证券交易所（2330.TW）双重上市。</p>
@@ -93,7 +156,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 </div>
 </div>
 
-<h2>二、财务分析：盈利质量与成长韧性</h2>
+<h2 id="s2">二、财务分析：盈利质量与成长韧性</h2>
 
 <h3>2.1 营收与利润趋势</h3>
 <p>FY2025 台积电实现营收约 920 亿美元（新台币 2.9 万亿元），同比增长 18.7%；净利润约 380 亿美元（新台币 1.2 万亿元），净利率 41.3%。过去五年（2021–2025）营收 CAGR 约 13.2%，利润 CAGR 约 15.8%，增长质量在半导体行业中位居前列。</p>
@@ -125,7 +188,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <h3>2.4 客户集中度</h3>
 <p>前两大客户 Apple 和 NVIDIA 合计贡献约 45% 营收。其中 Apple 占比约 23%，主要通过 3nm 和 5nm 制程代工 A/M 系列芯片；NVIDIA 占比约 22%，全部为 3nm/5nm AI GPU 和 HPC 芯片。Broadcom、AMD、Qualcomm 分别贡献约 11%、9% 和 7%。虽然客户集中度偏高，但台积电凭借无可替代的工艺优势，议价能力持续增强。</p>
 
-<h2>三、技术面分析</h2>
+<h2 id="s3">三、技术面分析</h2>
 
 <h3>3.1 价格走势</h3>
 <p>TSM ADR 过去 52 周交易区间为 $155–$228，年初至今上涨约 24%。股价在 AI 主题推动下持续创出历史新高，但期间亦经历多次 8%–15% 的回调，主要触发因素包括地缘政治紧张局势升级和美国出口管制政策不确定性。</p>
@@ -148,7 +211,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <div class="indicator-item"><div class="indicator-label">成交量</div><div class="indicator-value">偏高</div><span class="indicator-signal signal-buy">量价齐升</span></div>
 </div>
 
-<h2>四、市场情绪与分析师预期</h2>
+<h2 id="s4">四、市场情绪与分析师预期</h2>
 
 <h3>4.1 卖方共识</h3>
 <p>目前覆盖台积电的分析师中约 85% 给予"买入"评级，15% 给予"持有"评级，无卖出评级。共识 12 个月目标价 $210，隐含约 8.7% 的上行空间。主要看多逻辑包括 AI 芯片需求结构性增长、3nm 产能满载带来的毛利率提升、以及 CoWoS 封装单价持续走高。</p>
@@ -168,7 +231,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <h3>4.3 ESG 与指数权重</h3>
 <p>台积电在 MSCI ESG 评级中获 AA 级，在半导体行业中处于前列。公司在气候变化和水资源管理方面做出明确承诺——2030 年再生能源使用比例达 40%，2050 年实现净零排放。公司也是多个重要 ESG 指数的成分股，包括道琼斯可持续发展指数（DJSI）和 FTSE4Good。</p>
 
-<h2>五、竞争格局分析</h2>
+<h2 id="s5">五、竞争格局分析</h2>
 
 <h3>5.1 纯代工市场三家对比</h3>
 <div class="widget-box">
@@ -193,7 +256,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <h3>5.3 CoWoS：被低估的护城河</h3>
 <p>CoWoS（Chip-on-Wafer-on-Substrate）先进封装技术是台积电一个常被低估但至关重要的护城河。NVIDIA H100/B200、AMD MI300X/MI400 等所有高端 AI 加速器均依赖 CoWoS 实现 HBM 内存与计算芯粒的异构集成。台积电 2025 年 CoWoS 产能同比增长约 100%，但仍供不应求。公司在 2026 年将进一步扩建 CoWoS 产能，以满足 NVIDIA 和 AMD 的强劲需求。</p>
 
-<h2>六、估值与财务健康</h2>
+<h2 id="s6">六、估值与财务健康</h2>
 
 <h3>6.1 估值对比</h3>
 <div class="widget-box">
@@ -217,7 +280,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <h3>6.3 财务健康指标</h3>
 <p>截至 FY2025 年末，台积电资产负债率约 32%，持有现金及等价物约 520 亿美元，净现金头寸约 210 亿美元。流动比率 2.4x，速动比率 2.1x，EBITDA 利息覆盖倍数 45x 以上。公司信用评级为 Aa3（穆迪）/ AA-（标普），为全球半导体行业最高信用评级之一。</p>
 
-<h2>七、关键风险</h2>
+<h2 id="s7">七、关键风险</h2>
 
 <h3>7.1 地缘政治风险（高影响 · 高概率）</h3>
 <p>台积电约 90% 的先进制程产能位于台湾，而台湾海峡的地缘政治紧张局势是公司面临的最大不确定性。任何形式的台海冲突或封锁都将对全球半导体供应链产生灾难性影响。台积电正在通过海外建厂（美国、日本、德国）分散风险，但海外产能占比预计到 2030 年仍将低于 20%。</p>
@@ -234,7 +297,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <h3>7.5 客户过度集中风险（低影响 · 中概率）</h3>
 <p>Apple 和 NVIDIA 合计贡献台积电约 45% 营收。虽然短期内这两大客户的粘性极高（转向其他代工厂的可行方案稀缺），但任何一家的需求放缓或自研芯片策略调整都将对台积电造成显著冲击。</p>
 
-<h2>八、结论与建议</h2>
+<h2 id="s8">八、结论与建议</h2>
 
 <h3>8.1 核心投资逻辑</h3>
 <p>我们看好台积电的核心逻辑建立在三个不可辩驳的事实之上：（1）AI 算力需求仍处于爆发初期，而台积电是唯一能够制造顶级 AI 芯片的公司；（2）先进制程的资本壁垒和 Know-how 壁垒逐年升高，后进者追赶窗口正在关闭；（3）台积电的纯代工模式在 AI 时代获得了更高的战略价值和议价能力。</p>
@@ -280,7 +343,23 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 
 <p class="text-xs text-gray-400 mt-8 text-center border-t border-gray-100 pt-6"><strong>免责声明：</strong>本报告仅供参考和教育目的，不构成投资建议。报告中的数据和观点基于公开信息整理，可能存在不准确性。投资有风险，决策需谨慎。</p>
 
-</div><!-- .prose-container -->
+
+        </div>
+        <div id="footer-placeholder"></div>
+    </div>
+</div>
+
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="返回顶部"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function(){
+    var btn = document.getElementById('bttBtn');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+    });
+})();
+</script>
+<!-- .prose-container -->
 
 <script>
 (function(){
@@ -315,3 +394,5 @@ new Chart(document.getElementById('chart_targets'),{type:'bar',data:{labels:['�
 </div>
 </body>
 </html>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>

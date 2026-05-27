@@ -178,10 +178,73 @@
         .custom-table tr:nth-child(even) {
             background-color: #F9FAFB;
         }
-    </style>
+    
+    /* ── TOC Sidebar ── */
+    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
+    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc-sidebar::-webkit-scrollbar { width: 3px; }
+    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
+    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+        display: block; padding: 6px 10px; border-radius: 6px;
+        font-size: .8rem; color: #64748b; text-decoration: none;
+        transition: all .15s; line-height: 1.3;
+    }
+    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
+    .mobile-toc { display: none; }
+    @media (max-width: 1023px) {
+        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    }
+    .btt-btn {
+        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+        border-radius: 50%; background: #2563eb; color: #fff; border: none;
+        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .btt-btn.show { opacity: 1; visibility: visible; }
+    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
+</style>
 </head>
 <body>
-    <div class="prose-container">
+    <div class="report-wrap">
+    <!-- TOC Sidebar -->
+    <nav class="toc-sidebar" aria-label="目录">
+        <div class="toc-title">目录</div>
+        <ul class="toc-list">
+            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> 公司概况</a></li>
+            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> 财务分析</a></li>
+            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> 技术分析</a></li>
+            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> 市场情绪</a></li>
+            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> 竞品对比</a></li>
+            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> 估值与财务健康度</a></li>
+            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> 主要风险</a></li>
+            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> 结论与建议</a></li>
+        </ul>
+    </nav>
+
+    <div class="report-content">
+        <!-- Mobile TOC -->
+        <div class="mobile-toc">
+            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
+                <option value="">— 跳转到章节 —</option>
+                <option value="s1">公司概况</option>
+                <option value="s2">财务分析</option>
+                <option value="s3">技术分析</option>
+                <option value="s4">市场情绪</option>
+                <option value="s5">竞品对比</option>
+                <option value="s6">估值与财务健康度</option>
+                <option value="s7">主要风险</option>
+                <option value="s8">结论与建议</option>
+            </select>
+        </div>
+        <div class="prose-container">
+
         <!-- 所有报告内容将在这里生成 -->
         <header class="flex flex-col items-center text-center">
             <div class="flex gap-3 mb-8">
@@ -218,7 +281,7 @@
         <p><strong>摘要</strong></p>
         <p>本报告对华虹半导体（A股代码：688347，港股代码：01347）进行全面分析，涵盖公司概况、财务数据、技术分析、市场情绪、竞品对比、估值与健康度以及主要风险等方面。华虹半导体作为全球领先的特色工艺晶圆代工企业，聚焦功率器件、嵌入式存储、模拟与电源管理等高附加值领域，通过"8英寸+12英寸"双线战略实现差异化竞争。公司2025年营收172.91亿元（+20.18%），2026年Q1归母净利润同比大增513.10%，毛利率提升至13%，产能利用率维持在106.1%的高位。技术面上，A股股价近期暴涨，5月25日单日20%涨停创历史新高，但技术指标已进入超买区域，短期回调风险加大。估值方面，A股市盈率高达692.31倍，显著高于行业平均水平，但考虑到公司特色工艺的稀缺性及产能扩张预期，中长期仍有投资价值。本报告建议短期投资者关注228.88元阻力位及160元支撑位，技术指标回落至合理区间后可择机介入；长期投资者可逢低布局，把握特色工艺国产替代与AI算力需求带来的增长机遇。</p>
 
-        <h2>1. 公司概况</h2>
+        <h2 id="s1">1. 公司概况</h2>
 
         <h3>1.1 业务模式</h3>
         <p>华虹半导体有限公司是一家主要从事半导体产品的生产及销售的投资控股公司，<strong>主营业务是提供包括嵌入式和独立式非易失性存储器、功率器件、模拟与电源管理、逻辑与射频等多元化特色工艺平台的晶圆代工及配套服务</strong>。公司采用"8英寸+12英寸"双线发展战略，聚焦"特色IC+功率器件"，避开与台积电等先进制程巨头的直接竞争，专注高需求细分领域。</p>
@@ -295,7 +358,7 @@
             <li><strong>国产替代战略价值</strong>：国产身份证/社保卡芯片市占率超90%，保障信息安全</li>
         </ul>
 
-        <h2>2. 财务数据分析</h2>
+        <h2 id="s2">2. 财务数据分析</h2>
 
         <h3>2.1 营收趋势（2021-2025年）</h3>
         <p>华虹半导体2021-2025年营收数据如下：</p>
@@ -492,7 +555,7 @@
             <li><strong>产能利用率提升带动现金流改善</strong>：2025年Q1-Q3经营现金流同比增长129.58%，<strong>主要得益于销售商品收到的现金大幅上升</strong></li>
         </ul>
 
-        <h2>3. 技术分析</h2>
+        <h2 id="s3">3. 技术分析</h2>
 
         <h3>3.1 价格趋势分析</h3>
         <p><strong>A股走势（688347）</strong>：</p>
@@ -584,7 +647,7 @@
             <li><strong>中期支撑位</strong>：70-75元区间（2026年1月支撑位）</li>
         </ul>
 
-        <h2>4. 市场情绪分析</h2>
+        <h2 id="s4">4. 市场情绪分析</h2>
 
         <h3>4.1 机构评级与预期</h3>
         <p><strong>券商评级</strong>：</p>
@@ -631,7 +694,7 @@
             <li><strong>机构分歧加大</strong>：部分机构看好长期成长空间，认为国产大模型适配国产算力芯片将提升订单确定性；也有机构提示存储芯片涨价存在短期供需错配的周期性波动风险</li>
         </ul>
 
-        <h2>5. 竞品对比分析</h2>
+        <h2 id="s5">5. 竞品对比分析</h2>
 
         <h3>5.1 主要竞争对手市场份额</h3>
         <table class="custom-table">
@@ -727,7 +790,7 @@
             <li><strong>华虹五厂（华力微）</strong>：设计月产能达3.8万片，主要工艺平台覆盖65/55nm至40nm成熟制程，2024年净利润5.2亿元</li>
         </ul>
 
-        <h2>6. 估值与健康度分析</h2>
+        <h2 id="s6">6. 估值与健康度分析</h2>
 
         <h3>6.1 多维度估值分析</h3>
         <p><strong>A股估值（2026年5月26日）</strong>：</p>
@@ -796,7 +859,7 @@
             <li><strong>汇率风险</strong>：公司存在大量美元收入，<strong>汇率波动可能影响利润</strong></li>
         </ul>
 
-        <h2>7. 主要风险分析</h2>
+        <h2 id="s7">7. 主要风险分析</h2>
 
         <h3>7.1 行业竞争风险</h3>
         <ul>
@@ -819,7 +882,7 @@
             <li><strong>汇率波动风险</strong>：公司存在大量美元收入，<strong>汇率波动可能影响利润</strong></li>
         </ul>
 
-        <h2>8. 结论与投资建议</h2>
+        <h2 id="s8">8. 结论与投资建议</h2>
 
         <h3>8.1 短期投资建议（3-6个月）</h3>
         <p><strong>A股市场</strong>：</p>
@@ -887,9 +950,23 @@
         </ul>
         <p><strong>风险提示</strong>：技术迭代不及预期、产能利用率波动、并购整合风险及汇率波动风险等，投资者需密切关注。</p>
 
+    
+        </div>
+        <div id="footer-placeholder"></div>
     </div>
+</div>
 
-    <script>
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="返回顶部"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function(){
+    var btn = document.getElementById('bttBtn');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+    });
+})();
+</script>
+<script>
         // Chart: 全球纯晶圆代工市场份额
         new Chart(document.getElementById('chart_market_share'), {
             type: 'pie',
@@ -1102,3 +1179,5 @@
     </script>
 </body>
 </html>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>

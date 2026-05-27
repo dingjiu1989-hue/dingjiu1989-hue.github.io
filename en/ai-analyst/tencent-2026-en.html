@@ -29,11 +29,74 @@ th,td{border:1px solid #E5E7EB;padding:10px 12px;text-align:left}
 th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){background-color:#F9FAFB}
 .references{font-size:.85rem;color:#4B5563;line-height:1.6}.references li{margin-bottom:.3em!important;word-break:break-all}.references a{color:#0969da}
 @media(max-width:768px){.prose-container{padding:20px;margin:20px auto;line-height:1.7}h1.report-title{font-size:1.8rem!important}h2{font-size:1.25rem!important}h3{font-size:1.1rem!important}h4{font-size:1rem!important}p{font-size:.95rem!important}.prose-container ul,.prose-container ol{padding-left:1rem;font-size:.95rem}}
+
+    /* ── TOC Sidebar ── */
+    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
+    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc-sidebar::-webkit-scrollbar { width: 3px; }
+    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
+    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+        display: block; padding: 6px 10px; border-radius: 6px;
+        font-size: .8rem; color: #64748b; text-decoration: none;
+        transition: all .15s; line-height: 1.3;
+    }
+    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
+    .mobile-toc { display: none; }
+    @media (max-width: 1023px) {
+        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    }
+    .btt-btn {
+        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+        border-radius: 50%; background: #2563eb; color: #fff; border: none;
+        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .btt-btn.show { opacity: 1; visibility: visible; }
+    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
 </style>
 </head>
 <body>
 
-<div class="prose-container">
+<div class="report-wrap">
+    <!-- TOC Sidebar -->
+    <nav class="toc-sidebar" aria-label="Contents">
+        <div class="toc-title">Contents</div>
+        <ul class="toc-list">
+            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> Company Overview</a></li>
+            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> Financial Analysis</a></li>
+            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> Technical Analysis</a></li>
+            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> Market Sentiment</a></li>
+            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> Competitive Comparison</a></li>
+            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> Valuation & Financial Health</a></li>
+            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> Key Risks</a></li>
+            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> Conclusion & Recommendations</a></li>
+        </ul>
+    </nav>
+
+    <div class="report-content">
+        <!-- Mobile TOC -->
+        <div class="mobile-toc">
+            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
+                <option value="">— Jump to section —</option>
+                <option value="s1">Company Overview</option>
+                <option value="s2">Financial Analysis</option>
+                <option value="s3">Technical Analysis</option>
+                <option value="s4">Market Sentiment</option>
+                <option value="s5">Competitive Comparison</option>
+                <option value="s6">Valuation & Financial Health</option>
+                <option value="s7">Key Risks</option>
+                <option value="s8">Conclusion & Recommendations</option>
+            </select>
+        </div>
+        <div class="prose-container">
+
 
 <!-- Header -->
 <div class="flex items-center justify-center gap-4 mb-6">
@@ -73,7 +136,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 </div>
 
 <!-- Section 1: Company Overview -->
-<h2><i class="fas fa-building text-teal-600 mr-2"></i>1. Company Overview</h2>
+<h2 id="s1"><i class="fas fa-building text-teal-600 mr-2"></i>1. Company Overview</h2>
 <p>Tencent Holdings is China's largest internet technology company and one of the most valuable technology firms globally. Through its social platforms WeChat (over 1.4 billion monthly active users) and QQ, the company has built China's largest digital ecosystem, spanning social networking, gaming, digital content, fintech, cloud computing, enterprise services, advertising, and investments. Tencent's core business model revolves around "social traffic + monetization," leveraging WeChat and mini-programs to create a unique super-app ecosystem.</p>
 
 <div class="widget-box">
@@ -88,7 +151,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <p>Tencent's investment portfolio is equally vast, valued at approximately $150 billion, covering both domestic and international quality assets including PDD, Meituan, Epic Games, Snap, and Tesla, offering strategic synergies and financial returns.</p>
 
 <!-- Section 2: Financial Analysis -->
-<h2><i class="fas fa-chart-line text-teal-600 mr-2"></i>2. Financial Analysis</h2>
+<h2 id="s2"><i class="fas fa-chart-line text-teal-600 mr-2"></i>2. Financial Analysis</h2>
 
 <h3>2.1 Revenue Trends</h3>
 <p>Tencent's revenue grew from approximately RMB 560 billion in 2021 to RMB 780 billion in 2025, representing a five-year compound annual growth rate of approximately 8.6%. Value-added services (gaming + social) remain the largest revenue segment, but their share has declined from about 52% in 2021 to approximately 35%, while FinTech and Business Services have risen to ~35% and Online Advertising to ~25%. This structural shift reflects Tencent's successful transformation from a gaming-driven to a multi-engine growth model.</p>
@@ -117,7 +180,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <p>As of the end of 2025, Tencent held approximately RMB 350 billion in cash and equivalents, investment assets of approximately RMB 1.1 trillion, and interest-bearing debt of approximately RMB 420 billion, resulting in a positive net cash position. The company's debt-to-asset ratio of approximately 45% is healthy by large internet company standards. This ample cash reserve provides a solid buffer for navigating regulatory changes, pursuing strategic investments, and sustaining the buyback program.</p>
 
 <!-- Section 3: Technical Analysis -->
-<h2><i class="fas fa-candlestick-chart text-teal-600 mr-2"></i>3. Technical Analysis</h2>
+<h2 id="s3"><i class="fas fa-candlestick-chart text-teal-600 mr-2"></i>3. Technical Analysis</h2>
 
 <p>Tencent's stock has traded in a wide range over the past 52 weeks, approximately between HK$280 and HK$480. As China's internet sector has broadly recovered and the company's fundamentals improved, the stock has rebounded from its 2025 lows. Technically, the price sits above key moving averages. The MACD indicator is above the zero line, and the RSI ranges between 55-65, not yet in overbought territory, suggesting a moderately bullish medium-term trend.</p>
 
@@ -131,7 +194,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <p>Support levels: HK$380 (near the 120-day MA) and HK$340 (previous low). Resistance levels: HK$480 (52-week high) and HK$500 (psychological level). A decisive breakout above HK$480 could open up new upside. Current trading volume remains healthy with no significant signs of distribution.</p>
 
 <!-- Section 4: Market Sentiment -->
-<h2><i class="fas fa-newspaper text-teal-600 mr-2"></i>4. Market Sentiment</h2>
+<h2 id="s4"><i class="fas fa-newspaper text-teal-600 mr-2"></i>4. Market Sentiment</h2>
 
 <p>Analyst ratings for Tencent are predominantly "Buy" and "Hold," with a consensus target price of approximately HK$480. Key bullish drivers include: a rich gaming pipeline (e.g., Honor of Kings international version, Valorant mobile, new PC/console titles), accelerating WeChat video account ad monetization, AI large-model application deployment, and the substantial buyback program providing price support.</p>
 
@@ -145,7 +208,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <p>On the bearish side, the market is monitoring the impact of US-China tech tensions on Tencent Cloud's overseas expansion and the uncertainty of domestic macroeconomic recovery. Overall, however, institutions are optimistic about Tencent's fundamental improvement in 2026. Southbound Stock Connect capital continues to flow in, reflecting mainland Chinese investors' confidence in Hong Kong-listed tech leaders.</p>
 
 <!-- Section 5: Competitive Comparison -->
-<h2><i class="fas fa-chess text-teal-600 mr-2"></i>5. Competitive Landscape</h2>
+<h2 id="s5"><i class="fas fa-chess text-teal-600 mr-2"></i>5. Competitive Landscape</h2>
 
 <p>In China's internet industry, Tencent competes with Alibaba, ByteDance, NetEase, and Meituan in a differentiated competitive landscape. The following table compares the key players across multiple dimensions:</p>
 
@@ -167,7 +230,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <p>The biggest competitive variable for Tencent is ByteDance. Douyin/TikTok has been steadily eroding WeChat and QQ's share of user time and the advertising market. However, Tencent has successfully defended its social base through video accounts and the mini-program ecosystem. In gaming, NetEase is Tencent's primary domestic competitor, but Tencent maintains its lead through global reach and distribution channel advantages. In cloud services, Tencent ranks third, accelerating its catch-up with Alibaba Cloud and Huawei Cloud.</p>
 
 <!-- Section 6: Valuation & Health -->
-<h2><i class="fas fa-heart-pulse text-teal-600 mr-2"></i>6. Valuation &amp; Health Assessment</h2>
+<h2 id="s6"><i class="fas fa-heart-pulse text-teal-600 mr-2"></i>6. Valuation &amp; Health Assessment</h2>
 
 <p>Tencent currently trades at a P/E (TTM) of approximately 25x, below its five-year historical average of ~30x and well below the NASDAQ tech giants' average of 35-40x. Given the company's market position, profitability, buyback intensity, and AI growth optionality, the current valuation appears attractive.</p>
 
@@ -188,7 +251,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <p>Using a DCF model with a WACC of 10%, a perpetual growth rate of 3%, and projected free cash flow growth of 10%-15% over the next five years, Tencent's fair value range is approximately HK$400-550 per share. The current share price sits in the lower-to-middle portion of this range, providing a reasonable margin of safety.</p>
 
 <!-- Section 7: Key Risks -->
-<h2><i class="fas fa-triangle-exclamation text-teal-600 mr-2"></i>7. Key Risk Factors</h2>
+<h2 id="s7"><i class="fas fa-triangle-exclamation text-teal-600 mr-2"></i>7. Key Risk Factors</h2>
 
 <h3>7.1 Macro &amp; Geopolitical Risks</h3>
 <p>Ongoing US-China tensions could impact Tencent's overseas investments and cloud business expansion. Hong Kong stock market liquidity is heavily influenced by global capital flows, and if the Fed maintains a high-interest-rate environment, tech valuations could remain under pressure. A slower-than-expected recovery in China's macroeconomy would directly dampen growth in pro-cyclical segments such as advertising and fintech.</p>
@@ -206,7 +269,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <p>Tencent's approximately $150 billion investment portfolio contains significant unlisted and publicly traded equity stakes. Market fluctuations can materially impact Tencent's non-recurring gains and losses. Some portfolio companies (such as Epic Games and Snap) remain loss-making and carry impairment risks.</p>
 
 <!-- Section 8: Conclusion & Recommendations -->
-<h2><i class="fas fa-flag-checkered text-teal-600 mr-2"></i>8. Conclusion &amp; Recommendations</h2>
+<h2 id="s8"><i class="fas fa-flag-checkered text-teal-600 mr-2"></i>8. Conclusion &amp; Recommendations</h2>
 
 <div class="widget-box">
   <div class="widget-header"><i class="fas fa-clipboard-check"></i>Overall Assessment</div>
@@ -260,8 +323,22 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
   <p style="font-size:.8rem!important;color:#6B7280!important;margin-bottom:0!important"><strong>Disclaimer:</strong> This report is AI-generated and is for informational and educational purposes only. It does not constitute investment advice of any kind. Data and analysis are based on public information and model estimates, which may contain inaccuracies. Stock market investing involves risk. Neither the author nor the platform assumes any liability for losses arising from the use of this report.</p>
 </div>
 
+
+        </div>
+        <div id="footer-placeholder"></div>
+    </div>
 </div>
 
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function(){
+    var btn = document.getElementById('bttBtn');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+    });
+})();
+</script>
 <!-- Chart Init -->
 <script>
 document.addEventListener('DOMContentLoaded',function(){
@@ -282,3 +359,5 @@ new Chart(document.getElementById('chart_targets'),{type:'bar',data:{labels:['Go
 
 </body>
 </html>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>

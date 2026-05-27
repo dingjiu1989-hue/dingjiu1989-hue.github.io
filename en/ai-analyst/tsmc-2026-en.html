@@ -31,11 +31,74 @@ th,td{border:1px solid #E5E7EB;padding:10px 12px;text-align:left}
 th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){background-color:#F9FAFB}
 .references{font-size:.85rem;color:#4B5563;line-height:1.6}.references li{margin-bottom:.3em!important;word-break:break-all}.references a{color:#0969da}
 @media(max-width:768px){.prose-container{padding:20px;margin:20px auto;line-height:1.7}h1.report-title{font-size:1.8rem!important}h2{font-size:1.25rem!important}h3{font-size:1.1rem!important}h4{font-size:1rem!important}p{font-size:.95rem!important}.prose-container ul,.prose-container ol{padding-left:1rem;font-size:.95rem}}
+
+    /* ── TOC Sidebar ── */
+    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
+    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc-sidebar::-webkit-scrollbar { width: 3px; }
+    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
+    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+        display: block; padding: 6px 10px; border-radius: 6px;
+        font-size: .8rem; color: #64748b; text-decoration: none;
+        transition: all .15s; line-height: 1.3;
+    }
+    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
+    .mobile-toc { display: none; }
+    @media (max-width: 1023px) {
+        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    }
+    .btt-btn {
+        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+        border-radius: 50%; background: #2563eb; color: #fff; border: none;
+        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .btt-btn.show { opacity: 1; visibility: visible; }
+    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
 </style>
 </head>
 <body>
 
-<div class="prose-container">
+<div class="report-wrap">
+    <!-- TOC Sidebar -->
+    <nav class="toc-sidebar" aria-label="Contents">
+        <div class="toc-title">Contents</div>
+        <ul class="toc-list">
+            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> Company Overview</a></li>
+            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> Financial Analysis</a></li>
+            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> Technical Analysis</a></li>
+            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> Market Sentiment</a></li>
+            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> Competitive Comparison</a></li>
+            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> Valuation & Financial Health</a></li>
+            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> Key Risks</a></li>
+            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> Conclusion & Recommendations</a></li>
+        </ul>
+    </nav>
+
+    <div class="report-content">
+        <!-- Mobile TOC -->
+        <div class="mobile-toc">
+            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
+                <option value="">— Jump to section —</option>
+                <option value="s1">Company Overview</option>
+                <option value="s2">Financial Analysis</option>
+                <option value="s3">Technical Analysis</option>
+                <option value="s4">Market Sentiment</option>
+                <option value="s5">Competitive Comparison</option>
+                <option value="s6">Valuation & Financial Health</option>
+                <option value="s7">Key Risks</option>
+                <option value="s8">Conclusion & Recommendations</option>
+            </select>
+        </div>
+        <div class="prose-container">
+
 
 <!-- Badge -->
 <div class="flex flex-wrap items-center gap-3 mb-6">
@@ -68,7 +131,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 </div>
 
 <!-- Section 1 -->
-<h2>1. Company Overview: The Irreplaceable Backbone of Chip Manufacturing</h2>
+<h2 id="s1">1. Company Overview: The Irreplaceable Backbone of Chip Manufacturing</h2>
 
 <h3>1.1 Global Standing</h3>
 <p>TSMC (Taiwan Semiconductor Manufacturing Company) is the world's largest pure-play semiconductor foundry. As of May 2026, its market capitalization stands at approximately $980 billion, ranking as the 8th largest global technology company. The company is dual-listed on the New York Stock Exchange (TSM ADR) and the Taiwan Stock Exchange (2330.TW).</p>
@@ -93,7 +156,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 </div>
 </div>
 
-<h2>2. Financial Analysis: Earnings Quality and Growth Resilience</h2>
+<h2 id="s2">2. Financial Analysis: Earnings Quality and Growth Resilience</h2>
 
 <h3>2.1 Revenue and Profit Trends</h3>
 <p>For FY2025, TSMC reported revenue of approximately $92.0 billion (TWD 2.9 trillion), representing 18.7% year-over-year growth. Net income reached approximately $38.0 billion (TWD 1.2 trillion), yielding a net margin of 41.3%. Over the past five years (2021–2025), revenue compounded at a 13.2% CAGR and net income at 15.8% CAGR, placing TSMC among the highest-quality growers in the semiconductor industry.</p>
@@ -125,7 +188,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <h3>2.4 Customer Concentration</h3>
 <p>TSMC's top two customers — Apple and NVIDIA — collectively contributed approximately 45% of FY2025 revenue. Apple accounted for ~23% (primarily A/M-series chips on 3nm/5nm), while NVIDIA represented ~22% (all AI GPU and HPC chips on 3nm/5nm). Broadcom, AMD, and Qualcomm contributed ~11%, ~9%, and ~7% respectively. While customer concentration is elevated, TSMC's irreplaceable process advantage has strengthened its pricing power over time.</p>
 
-<h2>3. Technical Analysis</h2>
+<h2 id="s3">3. Technical Analysis</h2>
 
 <h3>3.1 Price Action</h3>
 <p>TSM ADR has traded in a 52-week range of $155–$228 and is up approximately 24% year-to-date. The stock has repeatedly set new all-time highs driven by the AI thematic, punctuated by several 8%–15% corrections triggered primarily by geopolitical tension escalations and US export control policy uncertainty.</p>
@@ -148,7 +211,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <div class="indicator-item"><div class="indicator-label">Volume</div><div class="indicator-value">Elevated</div><span class="indicator-signal signal-buy">Price-Volume Up</span></div>
 </div>
 
-<h2>4. Market Sentiment & Analyst Expectations</h2>
+<h2 id="s4">4. Market Sentiment & Analyst Expectations</h2>
 
 <h3>4.1 Sell-Side Consensus</h3>
 <p>Approximately 85% of analysts covering TSMC rate it a "Buy," 15% rate it a "Hold," and none rate it a "Sell." The consensus 12-month price target is $210, implying approximately 8.7% upside from current levels. The primary bullish thesis rests on structural AI chip demand growth, gross margin expansion from fully loaded 3nm capacity, and rising CoWoS packaging unit prices.</p>
@@ -168,7 +231,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <h3>4.3 ESG & Index Inclusion</h3>
 <p>TSMC holds an MSCI ESG rating of AA, ranking among the top tier of the semiconductor industry. The company has made explicit climate commitments — 40% renewable energy usage by 2030 and net-zero emissions by 2050. TSMC is a constituent of major ESG indices including the Dow Jones Sustainability Index (DJSI) and FTSE4Good.</p>
 
-<h2>5. Competitive Landscape Analysis</h2>
+<h2 id="s5">5. Competitive Landscape Analysis</h2>
 
 <h3>5.1 Pure-Play Foundry Triopoly</h3>
 <div class="widget-box">
@@ -193,7 +256,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <h3>5.3 CoWoS: The Underappreciated Moat</h3>
 <p>CoWoS (Chip-on-Wafer-on-Substrate) advanced packaging represents a frequently underestimated but critical component of TSMC's moat. Every major AI accelerator — NVIDIA H100/B200, AMD MI300X/MI400, and custom ASICs for hyperscalers — relies on CoWoS technology to integrate HBM memory with compute chiplets. TSMC's CoWoS capacity grew approximately 100% year-over-year in 2025, yet supply remains constrained. The company plans further CoWoS capacity expansion in 2026 to meet insatiable demand from NVIDIA and AMD.</p>
 
-<h2>6. Valuation & Financial Health</h2>
+<h2 id="s6">6. Valuation & Financial Health</h2>
 
 <h3>6.1 Valuation Comparison</h3>
 <div class="widget-box">
@@ -217,7 +280,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <h3>6.3 Financial Health Indicators</h3>
 <p>As of FY2025 year-end, TSMC reported a debt-to-asset ratio of approximately 32%, cash and equivalents of ~$52 billion, and a net cash position of ~$21 billion. The current ratio stands at 2.4x, quick ratio at 2.1x, and EBITDA interest coverage exceeds 45x. TSMC's credit rating is Aa3 (Moody's) / AA- (S&P), among the highest in the global semiconductor industry.</p>
 
-<h2>7. Key Risks</h2>
+<h2 id="s7">7. Key Risks</h2>
 
 <h3>7.1 Geopolitical Risk (High Impact &bull; Elevated Probability)</h3>
 <p>Approximately 90% of TSMC's advanced process capacity is located in Taiwan, making geopolitical tension in the Taiwan Strait the single largest uncertainty facing the company. Any form of conflict or blockade would have catastrophic implications for the global semiconductor supply chain. TSMC is mitigating this through overseas fab expansion (US, Japan, Germany), but overseas capacity is expected to remain below 20% of total even by 2030.</p>
@@ -234,7 +297,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <h3>7.5 Customer Concentration Risk (Low Impact &bull; Medium Probability)</h3>
 <p>Apple and NVIDIA collectively account for approximately 45% of TSMC's revenue. While the switching costs for both customers are extraordinarily high (viable alternative foundries are scarce), any demand slowdown or in-house chip strategy shift by either customer would have a material impact on TSMC's financials.</p>
 
-<h2>8. Conclusion & Recommendations</h2>
+<h2 id="s8">8. Conclusion & Recommendations</h2>
 
 <h3>8.1 Core Investment Logic</h3>
 <p>Our bullish thesis on TSMC rests on three unassailable facts: (1) AI compute demand is still in its early stages of explosive growth, and TSMC is the only company that can manufacture the world's most advanced AI chips; (2) the capital and know-how barriers to entry in leading-edge semiconductor manufacturing are rising each year, closing the window for latecomers; and (3) TSMC's pure-play foundry model commands higher strategic value and pricing power in the AI era than ever before.</p>
@@ -280,7 +343,23 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 
 <p class="text-xs text-gray-400 mt-8 text-center border-t border-gray-100 pt-6"><strong>Disclaimer:</strong> This report is for informational and educational purposes only and does not constitute investment advice. Data and opinions herein are based on publicly available information and may contain inaccuracies. Investing involves risk, including loss of principal.</p>
 
-</div><!-- .prose-container -->
+
+        </div>
+        <div id="footer-placeholder"></div>
+    </div>
+</div>
+
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function(){
+    var btn = document.getElementById('bttBtn');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+    });
+})();
+</script>
+<!-- .prose-container -->
 
 <script>
 (function(){
@@ -311,3 +390,5 @@ new Chart(document.getElementById('chart_targets'),{type:'bar',data:{labels:['Mo
 
 </body>
 </html>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>

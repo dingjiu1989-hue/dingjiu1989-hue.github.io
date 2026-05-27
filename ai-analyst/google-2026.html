@@ -25,8 +25,71 @@ th,td{border:1px solid #E5E7EB;padding:10px 12px;text-align:left}
 th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){background-color:#F9FAFB}
 .references{font-size:.85rem;color:#4B5563;line-height:1.6}.references li{margin-bottom:.3em!important;word-break:break-all}.references a{color:#0969da}
 @media(max-width:768px){.prose-container{padding:20px;margin:20px auto;line-height:1.7}h1.report-title{font-size:1.8rem!important}h2{font-size:1.25rem!important}h3{font-size:1.1rem!important}h4{font-size:1rem!important}p{font-size:.95rem!important}.prose-container ul,.prose-container ol{padding-left:1rem;font-size:.95rem}}
+
+    /* ── TOC Sidebar ── */
+    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
+    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc-sidebar::-webkit-scrollbar { width: 3px; }
+    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
+    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+        display: block; padding: 6px 10px; border-radius: 6px;
+        font-size: .8rem; color: #64748b; text-decoration: none;
+        transition: all .15s; line-height: 1.3;
+    }
+    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
+    .mobile-toc { display: none; }
+    @media (max-width: 1023px) {
+        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    }
+    .btt-btn {
+        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+        border-radius: 50%; background: #2563eb; color: #fff; border: none;
+        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .btt-btn.show { opacity: 1; visibility: visible; }
+    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
 </style><script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head>
-<body class="bg-gray-50"><div class="prose-container">
+<body class="bg-gray-50"><div class="report-wrap">
+    <!-- TOC Sidebar -->
+    <nav class="toc-sidebar" aria-label="目录">
+        <div class="toc-title">目录</div>
+        <ul class="toc-list">
+            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> 公司概况</a></li>
+            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> 财务分析</a></li>
+            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> 技术分析</a></li>
+            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> 市场情绪</a></li>
+            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> 竞品对比</a></li>
+            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> 估值与财务健康度</a></li>
+            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> 主要风险</a></li>
+            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> 结论与建议</a></li>
+        </ul>
+    </nav>
+
+    <div class="report-content">
+        <!-- Mobile TOC -->
+        <div class="mobile-toc">
+            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
+                <option value="">— 跳转到章节 —</option>
+                <option value="s1">公司概况</option>
+                <option value="s2">财务分析</option>
+                <option value="s3">技术分析</option>
+                <option value="s4">市场情绪</option>
+                <option value="s5">竞品对比</option>
+                <option value="s6">估值与财务健康度</option>
+                <option value="s7">主要风险</option>
+                <option value="s8">结论与建议</option>
+            </select>
+        </div>
+        <div class="prose-container">
+
 
 <header class="flex flex-col items-center text-center">
 <div class="flex gap-3 mb-8"><span class="px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-widest rounded">Deep Research</span><span class="px-3 py-1 bg-blue-600 text-white text-xs font-bold uppercase tracking-widest rounded">Alphabet</span></div>
@@ -46,7 +109,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <p>Alphabet Inc.（Google母公司）是全球最大的数字广告公司和AI技术领导者。旗下Google搜索占据全球搜索引擎市场90%+份额，Gemini大模型与TPU芯片构成云端AI训练推理的最完整基础设施。2025年营收达$383B，净利润$110B，现金储备超$1,150亿。然而，美国司法部反垄断诉讼和AI搜索重塑趋势对公司长期格局构成深远影响。</p>
 <p>本文从八个维度进行全面分析。</p>
 
-<h2>一、公司概况</h2>
+<h2 id="s1">一、公司概况</h2>
 <h3>1.1 业务模式</h3>
 <ul>
 <li><strong>Google搜索与广告</strong>（占营收57%）：搜索广告、Display & Video 360、AdSense。AI Overviews已覆盖10亿+搜索请求。</li>
@@ -70,7 +133,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <li><strong>TPU自研芯片</strong>：TPU v7在AI推理场景性能成本比优于NVIDIA，显著降低Cloud客户TCO。</li>
 <li><strong>Waymo技术领先</strong>：Robotaxi在美国亚利桑那、旧金山、洛杉矶运营，月度付费里程超3000万英里。</li></ol>
 
-<h2>二、财务分析</h2>
+<h2 id="s2">二、财务分析</h2>
 <h3>2.1 营收趋势</h3>
 <ul><li><strong>2025全年营收</strong>：$383.3B（+14% YoY）</li>
 <li><strong>搜索广告</strong>：$218.5B（+11% YoY），AI Overviews带动搜索使用量+15%</li>
@@ -87,7 +150,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <li><strong>净利率</strong>：28.7%，净利润$110B</li>
 <li><strong>自由现金流</strong>：$78B（2025全年），资本支出$62B（+58% YoY）</li></ul>
 
-<h2>三、技术面分析</h2>
+<h2 id="s3">三、技术面分析</h2>
 <ul><li><strong>52周范围</strong>：$165 - $215</li>
 <li><strong>当前价格</strong>：~$198（2026年5月）</li>
 <li><strong>YTD</strong>：+12%，受Cloud营收超预期和Gemini 2.5发布推动</li></ul>
@@ -103,7 +166,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <div class="indicator-item"><div class="indicator-label">MA200</div><div class="indicator-value">$178</div><span class="indicator-signal signal-buy">上方</span></div>
 <div class="indicator-item"><div class="indicator-label">Beta</div><div class="indicator-value">1.05</div><span class="indicator-signal signal-neutral">与大盘同步</span></div></div></div></div>
 
-<h2>四、市场情绪</h2>
+<h2 id="s4">四、市场情绪</h2>
 <ul>
 <li><strong>摩根士丹利</strong>：增持，目标价$230。Cloud + AI复苏叠加重组效率提升。</li>
 <li><strong>高盛</strong>：买入，目标价$220。认为反垄断担忧过度，拆分搜索实际可能释放价值。</li>
@@ -111,7 +174,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <li><strong>综合平均目标价</strong>：$212，隐含约7%上行空间。</li>
 </ul>
 
-<h2>五、竞品对比</h2>
+<h2 id="s5">五、竞品对比</h2>
 <table><thead><tr><th>指标</th><th>Alphabet</th><th>Meta</th><th>Amazon</th><th>Microsoft</th></tr></thead>
 <tbody>
 <tr><td>市值</td><td>$4.6T</td><td>$1.8T</td><td>$2.7T</td><td>$3.9T</td></tr>
@@ -120,14 +183,14 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <tr><td>营业利润率</td><td>31.2%</td><td>38%</td><td>25%</td><td>44%</td></tr>
 <tr><td>净现金</td><td>$115B</td><td>$55B</td><td>$48B</td><td>$35B</td></tr></tbody></table>
 
-<h2>六、估值与健康度</h2>
+<h2 id="s6">六、估值与健康度</h2>
 <ul><li><strong>P/E（TTM）</strong>：28.0x</li>
 <li><strong>Forward P/E</strong>：24.5x</li>
 <li><strong>EV/EBITDA</strong>：18.5x</li>
 <li><strong>现金储备</strong>：$1,150亿，净现金$750亿</li>
 <li><strong>回购</strong>：2025年回购$72B，季度股息$0.80/股</li></ul>
 
-<h2>七、主要风险</h2>
+<h2 id="s7">七、主要风险</h2>
 <ul><li><strong>反垄断拆分风险</strong>：DOJ反垄断诉讼裁决即将下达，最坏情形包括搜索默认协议禁令或Google被迫拆分Chrome/AdTech业务。</li>
 <li><strong>AI搜索重塑</strong>：AI Overviews可能降低用户点击广告的比例——若搜索变成"零点击答案"，搜索广告变现模型面临根本性挑战。</li>
 <li><strong>开支增长失控</strong>：Capex从$39B（2024）翻倍至$62B（2025），200亿Anthropic投资回报周期高度不确定。</li>
@@ -136,7 +199,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <div class="flex items-baseline gap-4"><i class="fas fa-shield-halved mt-1 text-red-500"></i><h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">最大风险</h4></div>
 <p class="mt-2 !mb-0 leading-relaxed">AI Overviews"零点击答案"正在改变搜索商业模型——即使搜索份额不变，每次搜索的广告变现价值可能持续下降，这是比反垄断拆分更根本的长期挑战。</p></div>
 
-<h2>八、结论与建议</h2>
+<h2 id="s8">八、结论与建议</h2>
 <h3>8.1 短期</h3>
 <p>DOJ反垄断裁决（预计2026年Q3）是核心事件。Cloud营收增长和AI基础设施投资进度决定基本面方向。建议观望DOJ裁决后再决策，若禁令过于激进可能在$170-180区间出现抄底机会。短期目标$200-210。</p>
 <h3>8.2 长期</h3>
@@ -162,10 +225,27 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <div style="font-size:0.75rem;color:#6B7280;line-height:1.5;border:1px solid #F3F4F6;border-radius:8px;padding:16px;margin-top:2.5rem;background:#F9FAFB;">
     <strong>风险提示：</strong>以上内容基于公开信息、历史数据及模型分析结果整理生成，仅用于信息参考，不构成任何投资建议。存在一定滞后性与局限性，过往表现不预示未来结果，需结合个人风险承受能力综合判断。
 </div>
+
+        </div>
+        <div id="footer-placeholder"></div>
+    </div>
 </div>
+
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="返回顶部"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function(){
+    var btn = document.getElementById('bttBtn');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+    });
+})();
+</script>
 <script>(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
 new Chart(document.getElementById('chart_mcap'),{type:'bar',data:{labels:['NVIDIA','Apple','Alphabet','Microsoft','Amazon','Meta'],datasets:[{label:'市值 ($T)',data:[5.8,4.5,4.6,3.9,2.7,1.8],backgroundColor:['#10B981','#6B7280','#3B82F6','#F59E0B','#EF4444','#8B5CF6'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'$ Trillions'}}}}});
 new Chart(document.getElementById('chart_revenue'),{type:'line',data:{labels:['2021','2022','2023','2024','2025'],datasets:[{label:'总营收 ($B)',data:[257.6,282.8,307.4,337.9,383.3],borderColor:'#3B82F6',backgroundColor:'rgba(59,130,246,0.08)',borderWidth:3,fill:true,tension:0.2},{label:'Cloud ($B)',data:[19.2,26.3,33.1,37.6,42.3],borderColor:'#10B981',backgroundColor:'rgba(16,185,129,0.08)',borderWidth:3,fill:true,tension:0.2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom'}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'$ Billions'}}}}});
 new Chart(document.getElementById('chart_price'),{type:'line',data:{labels:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],datasets:[{label:'GOOGL ($)',data:[176,170,165,175,182,180,178,188,192,198,210,198],borderColor:'#3B82F6',backgroundColor:'rgba(59,130,246,0.08)',borderWidth:2,fill:true,tension:0.2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'USD'}}}}});
 })();</script>
 </body></html>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>

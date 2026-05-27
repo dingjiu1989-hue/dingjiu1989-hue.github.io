@@ -48,11 +48,74 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 .ref-section li:last-child::after { content: ""; }
 .ref-section .disclaimer { text-align: center; font-size: .78rem; color: #94a3b8; margin-top: 14px; padding-top: 14px; border-top: 1px solid #e2e6ed; }
 @media (max-width: 768px) { .prose-container { padding: 20px; margin: 20px auto; line-height: 1.7; } h1.report-title { font-size: 1.8rem !important; } h2 { font-size: 1.25rem !important; } h3 { font-size: 1.1rem !important; } h4 { font-size: 1rem !important; } p { font-size: 0.95rem !important; } .prose-container ul, .prose-container ol { padding-left: 1rem; font-size: 0.95rem; } }
-    </style>
+    
+    /* ── TOC Sidebar ── */
+    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
+    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc-sidebar::-webkit-scrollbar { width: 3px; }
+    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
+    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+        display: block; padding: 6px 10px; border-radius: 6px;
+        font-size: .8rem; color: #64748b; text-decoration: none;
+        transition: all .15s; line-height: 1.3;
+    }
+    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
+    .mobile-toc { display: none; }
+    @media (max-width: 1023px) {
+        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    }
+    .btt-btn {
+        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+        border-radius: 50%; background: #2563eb; color: #fff; border: none;
+        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .btt-btn.show { opacity: 1; visibility: visible; }
+    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
+</style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-50">
-<div class="prose-container">
+<div class="report-wrap">
+    <!-- TOC Sidebar -->
+    <nav class="toc-sidebar" aria-label="目录">
+        <div class="toc-title">目录</div>
+        <ul class="toc-list">
+            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> 公司概况</a></li>
+            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> 财务分析</a></li>
+            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> 技术分析</a></li>
+            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> 市场情绪</a></li>
+            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> 竞品对比</a></li>
+            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> 估值与财务健康度</a></li>
+            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> 主要风险</a></li>
+            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> 结论与建议</a></li>
+        </ul>
+    </nav>
+
+    <div class="report-content">
+        <!-- Mobile TOC -->
+        <div class="mobile-toc">
+            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
+                <option value="">— 跳转到章节 —</option>
+                <option value="s1">公司概况</option>
+                <option value="s2">财务分析</option>
+                <option value="s3">技术分析</option>
+                <option value="s4">市场情绪</option>
+                <option value="s5">竞品对比</option>
+                <option value="s6">估值与财务健康度</option>
+                <option value="s7">主要风险</option>
+                <option value="s8">结论与建议</option>
+            </select>
+        </div>
+        <div class="prose-container">
+
 
 <header class="flex flex-col items-center text-center">
     <div class="flex gap-3 mb-8">
@@ -78,7 +141,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <p>Micron Technology is the leading provider of semiconductor memory solutions and the only DRAM manufacturer headquartered in the United States. Its product portfolio spans DRAM, NAND Flash, and 3D XPoint memory, serving data centers, PCs, mobile devices, and automotive electronics. The generative AI megatrend has created explosive demand for High Bandwidth Memory (HBM), and Micron's first-mover advantage with HBM3E has positioned it as a critical link in the AI compute supply chain. However, the memory industry's inherent cyclicality and shifting competitive dynamics remain key investment variables.</p>
 <p>This report covers eight sections: Company Overview, Financial Analysis, Technical Analysis, Market Sentiment, Competitive Comparison, Valuation & Financial Health, Key Risks, and Conclusion & Recommendations.</p>
 
-<h2>1. Company Overview: Key Player in the Memory Market</h2>
+<h2 id="s1">1. Company Overview: Key Player in the Memory Market</h2>
 
 <h3>1.1 History & Market Position</h3>
 <p>Founded in 1978 and headquartered in Boise, Idaho, Micron has grown into the world's third-largest DRAM supplier (~25% market share) and fifth-largest NAND Flash supplier (~12%). Ranked among the top 10 global semiconductor companies by revenue with a market cap of ~$100B. As the only U.S.-based DRAM manufacturer, Micron holds strategic significance amid ongoing technology supply chain realignment.</p>
@@ -102,7 +165,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <h3>1.4 The AI Opportunity</h3>
 <p>AI servers carry dramatically higher HBM content compared to traditional server DRAM. An NVIDIA H100 server requires ~80 HBM3 chips, while GB200 systems pack up to 2,880GB of HBM. The HBM addressable market is projected to grow from ~$20B (CY2024) to $100B+ (CY2028), with HBM commanding significantly higher margins than commodity DRAM.</p>
 
-<h2>2. Financial Analysis: Cyclical Recovery Powered by HBM</h2>
+<h2 id="s2">2. Financial Analysis: Cyclical Recovery Powered by HBM</h2>
 
 <h3>2.1 Revenue & Profit Trends</h3>
 <p>FY2024 (ended August 2024) revenue of ~$25.1B marked a strong recovery from the FY2023 trough of $15.5B, though still below the FY2022 peak of $30.8B. FY2025E revenue is projected at $32-35B (+30-40% YoY), driven primarily by HBM. On profitability, FY2023 recorded a net loss of $5.8B, while FY2024 returned to profitability with ~$1.5B net income. FY2025E net income is estimated at $6-8B as utilization improves and HBM mix increases.</p>
@@ -129,7 +192,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <h3>2.3 Capital Expenditure</h3>
 <p>FY2024 CAPEX of ~$8B (~32% of revenue). FY2025E CAPEX is expected to rise to $10-12B, focused on HBM packaging in Boise and the new New York fab (partially funded by CHIPS Act). HBM capacity is the core expansion target, with Micron planning to triple HBM output from FY2024 to FY2026.</p>
 
-<h2>3. Technical Analysis</h2>
+<h2 id="s3">3. Technical Analysis</h2>
 
 <h3>3.1 Price Action</h3>
 <p>Micron's stock has shown strong momentum, driven by HBM demand and the broader AI investment wave. The 52-week range is approximately $80-165, with the current price around $140-150. The rally from the FY2023 trough (~$50) represents both a cyclical recovery and structural AI-driven growth premium.</p>
@@ -155,7 +218,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <h3>3.3 Chart Pattern</h3>
 <p>The weekly chart shows a clear uptrend with higher highs and higher lows since the FY2023 bottom. MACD remains above the zero line on the medium-term timeframe, confirming the bullish trend. RSI at ~55 is in neutral territory. The stock is ~10% below its 52-week high, indicating overhead resistance. Key support at $130 (200-day MA), resistance at $165 (52-week high).</p>
 
-<h2>4. Market Sentiment & Fund Flows</h2>
+<h2 id="s4">4. Market Sentiment & Fund Flows</h2>
 
 <h3>4.1 Institutional Holdings</h3>
 <p>Institutional ownership stands at ~75% of shares outstanding. Vanguard, BlackRock, and State Street are top shareholders. Key focus areas for institutional investors: HBM production ramp trajectory, NVIDIA certification status, and memory pricing trends.</p>
@@ -166,7 +229,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <h3>4.3 AI Supply Chain Positioning</h3>
 <p>Micron sits at the core of AI compute infrastructure, deeply embedded with NVIDIA's GPU ecosystem. With HBM3E deployed in H200 and B200 GPUs, Micron has become an indispensable link in the AI chip supply chain. The competitive landscape against Samsung and SK Hynix in HBM is evolving — Micron is gaining share through technology leadership.</p>
 
-<h2>5. Competitive Comparison: Memory Big 3</h2>
+<h2 id="s5">5. Competitive Comparison: Memory Big 3</h2>
 
 <div class="widget-box">
     <div class="widget-header"><i class="fas fa-table text-orange-600"></i>Memory Industry Big 3 Comparison (CY2025E)</div>
@@ -195,7 +258,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 
 <p>Among the Big 3, Micron's distinct characteristics: (1) Pure-play memory with focused R&D; (2) Sole US DRAM manufacturer benefiting from CHIPS Act; (3) Smaller scale than Korean rivals but fast HBM technology ramp. Samsung offers the broadest technology portfolio, while SK Hynix is the traditional HBM leader. Micron has caught up rapidly in HBM and now forms a duopoly with SK Hynix in the premium segment.</p>
 
-<h2>6. Valuation & Financial Health</h2>
+<h2 id="s6">6. Valuation & Financial Health</h2>
 
 <h3>6.1 Valuation Analysis</h3>
 <p>At ~15-18x forward PE (based on FY2025E EPS of $8-10), Micron appears reasonably valued given the mid-cycle position. PB of ~2.8x is in line with historical averages. EV/EBITDA of ~8-10x is attractive for a semiconductor company in the upswing phase of the cycle. PEG ratio of ~0.5x (based on 3-year earnings growth) suggests undervaluation.</p>
@@ -225,7 +288,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <li><strong>Inventory</strong>: Days of inventory declined from ~200 (FY2023 peak) to ~150 — normalization largely complete.</li>
 </ul>
 
-<h2>7. Key Risks</h2>
+<h2 id="s7">7. Key Risks</h2>
 
 <h3>7.1 Memory Cycle Risk</h3>
 <p>The defining risk for Micron investors. The memory industry follows a ~3-4 year cycle. Currently in the upswing phase (2024-2026), but rapid supply expansion or demand disappointment could trigger a downturn. DRAM and NAND ASP volatility can exceed ±50%, with outsized profit impact.</p>
@@ -242,7 +305,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <h3>7.5 Customer Concentration</h3>
 <p>Growing HBM revenue increases dependency on NVIDIA. Single-customer concentration risk affects pricing power and revenue diversification. Data center DRAM customers (NVIDIA, Intel, AMD, hyperscalers) already represent a concentrated base.</p>
 
-<h2>8. Conclusion & Recommendations</h2>
+<h2 id="s8">8. Conclusion & Recommendations</h2>
 
 <h3>8.1 Short-Term View (0-6 Months)</h3>
 <p><span class="indicator-signal signal-buy">Tilt Bullish</span></p>
@@ -303,12 +366,25 @@ tr:nth-child(even) { background-color: #F9FAFB; }
                 <div class="disclaimer">Risk Warning: The above content is compiled based on public information, historical data, and model analysis results, intended only for informational reference and does not constitute any investment advice. There may be certain lag and limitations; past performance does not indicate future results. Individual risk tolerance should be considered when making judgments.</div>
             </div>
 
-</div><!-- /.prose-container -->
+
+        </div>
+
+    </div>
+</div>
+
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="返回顶部"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function(){
+    var btn = document.getElementById('bttBtn');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+    });
+})();
+</script>
+<!-- /.prose-container -->
 
 <div id="footer-placeholder"></div>
-<script src="/js/include.js"></script>
-<script src="/js/render.js"></script>
-
 <script>
 (function(){
     if(typeof Chart === 'undefined'){ setTimeout(arguments.callee, 100); return; }
@@ -360,3 +436,5 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <script src="/js/cookie-banner.js"></script>
 </body>
 </html>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>

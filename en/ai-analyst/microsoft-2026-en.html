@@ -26,11 +26,74 @@ th,td{border:1px solid #E5E7EB;padding:10px 12px;text-align:left}
 th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){background-color:#F9FAFB}
 .references{font-size:.85rem;color:#4B5563;line-height:1.6}.references li{margin-bottom:.3em!important;word-break:break-all}.references a{color:#0969da}
 @media(max-width:768px){.prose-container{padding:20px;margin:20px auto;line-height:1.7}h1.report-title{font-size:1.8rem!important}h2{font-size:1.25rem!important}h3{font-size:1.1rem!important}h4{font-size:1rem!important}p{font-size:.95rem!important}.prose-container ul,.prose-container ol{padding-left:1rem;font-size:.95rem}}
+
+    /* ── TOC Sidebar ── */
+    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
+    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc-sidebar::-webkit-scrollbar { width: 3px; }
+    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
+    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+        display: block; padding: 6px 10px; border-radius: 6px;
+        font-size: .8rem; color: #64748b; text-decoration: none;
+        transition: all .15s; line-height: 1.3;
+    }
+    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
+    .mobile-toc { display: none; }
+    @media (max-width: 1023px) {
+        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    }
+    .btt-btn {
+        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+        border-radius: 50%; background: #2563eb; color: #fff; border: none;
+        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .btt-btn.show { opacity: 1; visibility: visible; }
+    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 </head>
 <body>
-<div class="prose-container">
+<div class="report-wrap">
+    <!-- TOC Sidebar -->
+    <nav class="toc-sidebar" aria-label="Contents">
+        <div class="toc-title">Contents</div>
+        <ul class="toc-list">
+            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> Company Overview</a></li>
+            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> Financial Analysis</a></li>
+            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> Technical Analysis</a></li>
+            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> Market Sentiment</a></li>
+            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> Competitive Comparison</a></li>
+            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> Valuation & Financial Health</a></li>
+            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> Key Risks</a></li>
+            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> Conclusion & Recommendations</a></li>
+        </ul>
+    </nav>
+
+    <div class="report-content">
+        <!-- Mobile TOC -->
+        <div class="mobile-toc">
+            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
+                <option value="">— Jump to section —</option>
+                <option value="s1">Company Overview</option>
+                <option value="s2">Financial Analysis</option>
+                <option value="s3">Technical Analysis</option>
+                <option value="s4">Market Sentiment</option>
+                <option value="s5">Competitive Comparison</option>
+                <option value="s6">Valuation & Financial Health</option>
+                <option value="s7">Key Risks</option>
+                <option value="s8">Conclusion & Recommendations</option>
+            </select>
+        </div>
+        <div class="prose-container">
+
 
 <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:1rem;flex-wrap:wrap">
 <span style="background:#9333EA;color:#fff;font-size:.7rem;font-weight:700;padding:4px 10px;border-radius:99px;letter-spacing:.05em">Microsoft</span>
@@ -65,7 +128,7 @@ This report provides a deep-dive analysis of Microsoft&rsquo;s business segments
 </div>
 
 <!-- 1 Business Overview -->
-<h2>1. Business Overview &amp; Segment Breakdown</h2>
+<h2 id="s1">1. Business Overview &amp; Segment Breakdown</h2>
 <p>
 Microsoft&rsquo;s operations are organized into three reporting segments: <strong>Intelligent Cloud</strong> (Azure, enterprise services, GitHub), <strong>Productivity and Business Processes</strong> (Office 365, LinkedIn, Dynamics), and <strong>More Personal Computing</strong> (Windows, Gaming, Search &amp; Devices). The company&rsquo;s strategic pivot toward cloud and AI has fundamentally reshaped its revenue mix over the past five years.
 </p>
@@ -107,7 +170,7 @@ The <strong>$68.7 billion Activision Blizzard acquisition</strong>, closed in la
 </p>
 
 <!-- 2 Market Cap -->
-<h2>2. Market Capitalization &amp; Valuation Context</h2>
+<h2 id="s2">2. Market Capitalization &amp; Valuation Context</h2>
 
 <div class="widget-box">
 <div class="widget-header">&#128200; Market Capitalization Trend</div>
@@ -124,7 +187,7 @@ At 35x trailing earnings, Microsoft trades at a premium to its 5-year average of
 </p>
 
 <!-- 3 Revenue -->
-<h2>3. Revenue Growth &amp; Trajectory</h2>
+<h2 id="s3">3. Revenue Growth &amp; Trajectory</h2>
 
 <div class="widget-box">
 <div class="widget-header">&#128200; Revenue Growth (FY2022 &ndash; FY2025)</div>
@@ -147,7 +210,7 @@ Microsoft&rsquo;s revenue has grown from approximately <strong>$198 billion in F
 </ul>
 
 <!-- 4 Profitability -->
-<h2>4. Profitability &amp; Margin Analysis</h2>
+<h2 id="s4">4. Profitability &amp; Margin Analysis</h2>
 <p>
 Microsoft&rsquo;s operating margin has steadily expanded from 42% in FY2022 to an estimated <strong>47% in FY2025</strong>, driven by operating leverage in cloud infrastructure, higher-margin AI service attach rates, and disciplined cost management. Net income of <strong>$103.5 billion</strong> translates to a net margin of approximately 40.8%, among the highest for any company of comparable scale.
 </p>
@@ -161,7 +224,7 @@ Microsoft&rsquo;s operating margin has steadily expanded from 42% in FY2022 to a
 </ul>
 
 <!-- 5 AI & M&A -->
-<h2>5. AI Strategy &amp; Capital Allocation</h2>
+<h2 id="s5">5. AI Strategy &amp; Capital Allocation</h2>
 <h3>5.1 The OpenAI Partnership</h3>
 <p>
 Microsoft&rsquo;s <strong>$13 billion+ investment</strong> in OpenAI represents the most consequential corporate partnership in the AI industry. Microsoft has exclusive rights to OpenAI&rsquo;s GPT models for commercial cloud products, deeply integrated into Azure, M365 Copilot, GitHub Copilot, Bing, and Windows. The partnership has given Microsoft a multi-year lead in enterprise AI, with capabilities that competitors have struggled to match.
@@ -183,7 +246,7 @@ Beyond Activision Blizzard, Microsoft has selectively acquired AI-native compani
 </p>
 
 <!-- 6 Price -->
-<h2>6. Stock Price &amp; Technical Analysis</h2>
+<h2 id="s6">6. Stock Price &amp; Technical Analysis</h2>
 
 <div class="widget-box">
 <div class="widget-header">&#128200; Stock Price Trajectory (2023 &ndash; 2026)</div>
@@ -204,7 +267,7 @@ Microsoft&rsquo;s stock has appreciated significantly, rising from approximately
 </ul>
 
 <!-- 7 Valuation -->
-<h2>7. Valuation &amp; Price Targets</h2>
+<h2 id="s7">7. Valuation &amp; Price Targets</h2>
 
 <div class="widget-box">
 <div class="widget-header">&#128200; Analyst Price Target Distribution</div>
@@ -242,7 +305,7 @@ Wall Street remains overwhelmingly bullish on Microsoft. The consensus analyst r
 </p>
 
 <!-- 8 Risk -->
-<h2>8. Risks &amp; Challenges</h2>
+<h2 id="s8">8. Risks &amp; Challenges</h2>
 <p>
 While Microsoft&rsquo;s long-term trajectory appears robust, several material risks warrant consideration:
 </p>
@@ -302,7 +365,23 @@ The key thesis for Microsoft in 2026 is that <strong>AI services will transition
 <li><a href="https://finance.yahoo.com/quote/MSFT/" target="_blank" rel="noopener">Yahoo Finance &mdash; MSFT Stock Price, Valuation &amp; Analyst Estimates</a></li>
 </ol>
 
-</div><!-- /prose-container -->
+
+        </div>
+        <div id="footer-placeholder"></div>
+    </div>
+</div>
+
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function(){
+    var btn = document.getElementById('bttBtn');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+    });
+})();
+</script>
+<!-- /prose-container -->
 
 <script>
 (function() {
@@ -434,3 +513,5 @@ The key thesis for Microsoft in 2026 is that <strong>AI services will transition
 </script>
 </body>
 </html>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>

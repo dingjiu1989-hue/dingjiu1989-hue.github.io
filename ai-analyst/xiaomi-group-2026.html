@@ -146,10 +146,73 @@
         .custom-table tr:nth-child(even) {
             background-color: #F9FAFB;
         }
-    </style>
+    
+    /* ── TOC Sidebar ── */
+    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
+    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc-sidebar::-webkit-scrollbar { width: 3px; }
+    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
+    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+        display: block; padding: 6px 10px; border-radius: 6px;
+        font-size: .8rem; color: #64748b; text-decoration: none;
+        transition: all .15s; line-height: 1.3;
+    }
+    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
+    .mobile-toc { display: none; }
+    @media (max-width: 1023px) {
+        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    }
+    .btt-btn {
+        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+        border-radius: 50%; background: #2563eb; color: #fff; border: none;
+        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .btt-btn.show { opacity: 1; visibility: visible; }
+    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
+</style>
 </head>
 <body>
-    <div class="prose-container">
+    <div class="report-wrap">
+    <!-- TOC Sidebar -->
+    <nav class="toc-sidebar" aria-label="目录">
+        <div class="toc-title">目录</div>
+        <ul class="toc-list">
+            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> 公司概况</a></li>
+            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> 财务分析</a></li>
+            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> 技术分析</a></li>
+            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> 市场情绪</a></li>
+            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> 竞品对比</a></li>
+            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> 估值与财务健康度</a></li>
+            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> 主要风险</a></li>
+            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> 结论与建议</a></li>
+        </ul>
+    </nav>
+
+    <div class="report-content">
+        <!-- Mobile TOC -->
+        <div class="mobile-toc">
+            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
+                <option value="">— 跳转到章节 —</option>
+                <option value="s1">公司概况</option>
+                <option value="s2">财务分析</option>
+                <option value="s3">技术分析</option>
+                <option value="s4">市场情绪</option>
+                <option value="s5">竞品对比</option>
+                <option value="s6">估值与财务健康度</option>
+                <option value="s7">主要风险</option>
+                <option value="s8">结论与建议</option>
+            </select>
+        </div>
+        <div class="prose-container">
+
         <header class="flex flex-col items-center text-center">
             <div class="flex gap-3 mb-8">
                 <span class="px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-widest rounded">Deep Research</span>
@@ -185,7 +248,7 @@
         <p><strong>摘要</strong></p>
         <p>本报告对小米集团（01810.HK）进行了全方位分析，重点关注其业务模式转型、财务表现、技术实力、市场情绪、竞品对比、估值合理性及主要风险。小米已从单一手机厂商转型为"人车家全生态"的科技巨头，2025年实现营收4573亿元、经调整净利润392亿元，创历史新高。2026年Q1财报显示营收991亿元、经调整净利润61亿元，手机业务ASP创历史新高，汽车业务交付量同比增长6.6%。然而，存储芯片价格暴涨导致手机业务毛利率承压，汽车业务尚未实现盈利。当前小米港股市值约7690亿港元，处于合理区间中枢。综合分析认为，小米短期面临存储成本压力与盈利修复挑战，但长期受益于高端化、全球化与AI战略的协同效应，建议投资者根据风险偏好采取差异化策略。</p>
 
-        <h2>1. 公司概况：业务模式、市值、护城河及行业地位</h2>
+        <h2 id="s1">1. 公司概况：业务模式、市值、护城河及行业地位</h2>
 
         <h3>1.1 业务模式：从"手机+互联网"到"人车家全生态"</h3>
         <p>小米集团已从早期的"硬件+互联网"双轮驱动模式，成功转型为<strong>"人车家全生态"</strong>的科技巨头。目前，小米业务架构清晰分为三大板块：</p>
@@ -266,7 +329,7 @@
             </div>
         </div>
 
-        <h2>2. 财务数据：营收趋势、利润、资产负债与现金流</h2>
+        <h2 id="s2">2. 财务数据：营收趋势、利润、资产负债与现金流</h2>
 
         <h3>2.1 营收结构：汽车业务高速增长，传统业务承压</h3>
         <p>小米集团2025年全年营收4573亿元，同比增长25.0%，经调整净利润392亿元，同比增长43.8%，均创历史新高。从分业务收入看：</p>
@@ -319,7 +382,7 @@
         <p>2025年全年：经营活动现金流净额341.4亿元（-13.6%），投资活动现金流净额-945.7亿元（研发投入和汽车工厂建设），融资活动现金流净额247.7亿元，自由现金流-356.6亿元（连续三年为负），反映小米处于高投入扩张期。</p>
         <p>2026年Q1：经营活动现金流净额-179.2亿元（同比转负），主因汽车业务亏损31亿元、手机库存积压清仓、应付账款因供应链紧张被迫提前支付。资本开支32.7亿元（+12.7%），主要用于汽车工厂扩建和AI研发设备。研发投入90亿元（+33.4%）。</p>
 
-        <h2>3. 技术分析：价格趋势、指标及支撑/阻力位</h2>
+        <h2 id="s3">3. 技术分析：价格趋势、指标及支撑/阻力位</h2>
 
         <h3>3.1 价格趋势分析：从高点回落，但企稳迹象显现</h3>
         <p>小米集团港股（01810.HK）自2025年6月触达61.45港元的高点后，一路下跌至2026年5月的29.76港元，跌幅近52%。2026年Q1财报发布后，股价在30港元附近波动，呈现企稳迹象。股价下跌主要反映市场对存储芯片涨价周期下手机业务毛利率承压的担忧，以及对汽车业务盈利可持续性的质疑。</p>
@@ -381,7 +444,7 @@
             <li><strong>长期信号</strong>：汽车业务实现稳定盈利且AI技术商业化落地，股价有望重回40港元以上</li>
         </ul>
 
-        <h2>4. 市场情绪：评级、舆情与新闻影响</h2>
+        <h2 id="s4">4. 市场情绪：评级、舆情与新闻影响</h2>
 
         <h3>4.1 分析师评级：整体中性偏多，但目标价下调</h3>
         <p>截至2026年5月26日，24家投行对小米的评级中，近90天内有24家给出"买入"评级，目标均价为42.47港元，显示分析师对小米长期价值的认可。但部分投行已下调目标价：高盛从47.5港元下调至41港元，杰富瑞从43港元下调至39港元，瑞银从40港元下调至36港元。</p>
@@ -395,7 +458,7 @@
         <p><strong>积极影响</strong>：2026年3月发布Xiaomi MiMo-V2-Pro大模型并开源；2026年5月成立北京小米景旭科技进军电池制造；小米汽车累计交付量突破65.5万辆；小米YU7 GT刷新纽北SUV圈速纪录；宣布200亿港元回购计划。</p>
         <p><strong>消极影响</strong>：2025年Q4手机毛利率跌至8.3%；2026年Q1经营现金流净流出179.2亿元；首代SU7停产、产能重构；印度税务纠纷面临资产冻结；库存积压、高端化转型受阻传闻。</p>
 
-        <h2>5. 竞品对比：竞争对手市场份额和财务指标</h2>
+        <h2 id="s5">5. 竞品对比：竞争对手市场份额和财务指标</h2>
 
         <h3>5.1 智能手机市场：高端化竞争加剧，小米份额承压</h3>
         <div class="table-container">
@@ -443,7 +506,7 @@
             </div>
         </div>
 
-        <h2>6. 估值与健康：PE/PB/DCF估值合理性及财务健康度</h2>
+        <h2 id="s6">6. 估值与健康：PE/PB/DCF估值合理性及财务健康度</h2>
 
         <h3>6.1 估值方法：SOTP分部加总法更适用</h3>
         <p>小米集团不适合单一PE估值法，因其业务结构复杂多元，应采用SOTP（分部加总）估值法。综合估值区间为6290亿-7990亿元人民币，当前市值约7690亿元人民币（按汇率1:0.9计算），处于合理区间中枢，估值较为合理。</p>
@@ -463,7 +526,7 @@
             </div>
         </div>
 
-        <h2>7. 主要风险：行业竞争风险、政策风险、地缘风险</h2>
+        <h2 id="s7">7. 主要风险：行业竞争风险、政策风险、地缘风险</h2>
 
         <h3>7.1 行业竞争风险：多赛道竞争加剧</h3>
         <p><strong>手机业务</strong>：存储芯片价格持续上涨（2026年Q1 DRAM价格同比上涨超300%），中端市场萎缩（2026年Q1中国2000-4000元价位段手机销量同比下滑12%），华为强势回归（2026年4月中国手机市场份额达25.8%）。</p>
@@ -476,7 +539,7 @@
         <h3>7.3 地缘风险：全球供应链不确定性</h3>
         <p>供应链分散风险：小米汽车核心电芯仍依赖宁德时代（80%）和比亚迪（17.9%），手机关键零部件如SiC MOSFET芯片仍依赖英飞凌、博世等国际供应商，全球地缘政治紧张加剧芯片等关键零部件供应不确定性。海外市场风险：印度市场面临税务纠纷与资产冻结，东南亚市场面临OPPO、vivo等本土品牌压力，欧洲市场面临严格的数据隐私法规和高成本压力。</p>
 
-        <h2>8. 结论建议：短期、中期与长期投资策略</h2>
+        <h2 id="s8">8. 结论建议：短期、中期与长期投资策略</h2>
 
         <h3>8.1 短期投资建议（1-6个月）：谨慎观望，等待右侧时机</h3>
         <p><strong>短期风险</strong>：存储芯片价格可能继续上涨，2026年Q2-Q3手机毛利率压力仍存。</p>
@@ -599,9 +662,23 @@
             <li>一份财报，两个小米 — 澎湃新闻 <a href="https://www.thepaper.cn/newsDetail_forward_31445750" style="color: #3B82F6;">链接</a></li>
         </ol>
         <p style="text-align: center; color: #9CA3AF; font-size: 0.75rem; margin-top: 2rem;">报告由AI生成，仅供参考，不构成投资建议。数据截至2026年5月26日。</p>
+    
+        </div>
+        <div id="footer-placeholder"></div>
     </div>
+</div>
 
-    <script>
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="返回顶部"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function(){
+    var btn = document.getElementById('bttBtn');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+    });
+})();
+</script>
+<script>
         // Chart: Revenue Structure
         new Chart(document.getElementById('chart_revenue'), {
             type: 'doughnut',
@@ -668,3 +745,5 @@
 </div>
 </body>
 </html>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>

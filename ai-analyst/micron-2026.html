@@ -45,11 +45,74 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 .ref-section li:last-child::after { content: ""; }
 .ref-section .disclaimer { text-align: center; font-size: .78rem; color: #94a3b8; margin-top: 14px; padding-top: 14px; border-top: 1px solid #e2e6ed; }
 @media (max-width: 768px) { .prose-container { padding: 20px; margin: 20px auto; line-height: 1.7; } h1.report-title { font-size: 1.8rem !important; } h2 { font-size: 1.25rem !important; } h3 { font-size: 1.1rem !important; } h4 { font-size: 1rem !important; } p { font-size: 0.95rem !important; } .prose-container ul, .prose-container ol { padding-left: 1rem; font-size: 0.95rem; } }
-    </style>
+    
+    /* ── TOC Sidebar ── */
+    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
+    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc-sidebar::-webkit-scrollbar { width: 3px; }
+    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
+    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+        display: block; padding: 6px 10px; border-radius: 6px;
+        font-size: .8rem; color: #64748b; text-decoration: none;
+        transition: all .15s; line-height: 1.3;
+    }
+    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
+    .mobile-toc { display: none; }
+    @media (max-width: 1023px) {
+        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    }
+    .btt-btn {
+        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+        border-radius: 50%; background: #2563eb; color: #fff; border: none;
+        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .btt-btn.show { opacity: 1; visibility: visible; }
+    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
+</style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-50">
-<div class="prose-container">
+<div class="report-wrap">
+    <!-- TOC Sidebar -->
+    <nav class="toc-sidebar" aria-label="目录">
+        <div class="toc-title">目录</div>
+        <ul class="toc-list">
+            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> 公司概况</a></li>
+            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> 财务分析</a></li>
+            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> 技术分析</a></li>
+            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> 市场情绪</a></li>
+            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> 竞品对比</a></li>
+            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> 估值与财务健康度</a></li>
+            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> 主要风险</a></li>
+            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> 结论与建议</a></li>
+        </ul>
+    </nav>
+
+    <div class="report-content">
+        <!-- Mobile TOC -->
+        <div class="mobile-toc">
+            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
+                <option value="">— 跳转到章节 —</option>
+                <option value="s1">公司概况</option>
+                <option value="s2">财务分析</option>
+                <option value="s3">技术分析</option>
+                <option value="s4">市场情绪</option>
+                <option value="s5">竞品对比</option>
+                <option value="s6">估值与财务健康度</option>
+                <option value="s7">主要风险</option>
+                <option value="s8">结论与建议</option>
+            </select>
+        </div>
+        <div class="prose-container">
+
 
 <header class="flex flex-col items-center text-center">
     <div class="flex gap-3 mb-8">
@@ -75,7 +138,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <p>美光科技（Micron Technology, Inc.）是全球领先的半导体存储器解决方案供应商，也是美国唯一的DRAM制造商。公司产品涵盖DRAM、NAND Flash和3D XPoint存储器，广泛应用于数据中心、PC、移动设备和汽车电子。随着生成式AI和大语言模型对高带宽内存（HBM）的爆发式需求，美光凭借HBM3E技术的先发优势，成功卡位AI算力产业链的关键环节。然而，存储器行业固有的强周期性特点和竞争格局变化构成了投资的核心变量。</p>
 <p>本文从公司概况、财务分析、技术面、市场情绪、竞品对比、估值与健康度、主要风险因素及投资建议八个维度，对美光科技进行全面分析。</p>
 
-<h2>一、公司概况：存储器市场的关键玩家</h2>
+<h2 id="s1">一、公司概况：存储器市场的关键玩家</h2>
 
 <h3>1.1 发展历程与市场地位</h3>
 <p>美光科技成立于1978年，总部位于美国爱达荷州博伊西市。经过四十余年发展，美光已成为全球第三大DRAM供应商（约占DRAM市场份额25%）、第五大NAND Flash供应商（约占12%）。在全球半导体行业排名前十，市值约$1000亿。美光也是美国本土唯一的DRAM制造商，这一身份在当前的科技地缘政治背景下具有重要的战略意义。</p>
@@ -99,7 +162,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <h3>1.4 AI时代的历史机遇</h3>
 <p>AI服务器的HBM含量较传统服务器DRAM含量高出数倍。一台NVIDIA H100服务器需要约80颗HBM3，而GB200等高端系统的HBM配置更达到2880GB。美光预计HBM可寻址市场将从CY2024年的约$20B增长至CY2028年的$100B以上。HBM不仅是美光增速最快的产品线，也是盈利最强的产品线——HBM的毛利率显著高于通用DRAM。</p>
 
-<h2>二、财务分析：周期底部复苏，HBM驱动增长</h2>
+<h2 id="s2">二、财务分析：周期底部复苏，HBM驱动增长</h2>
 
 <h3>2.1 营收与盈利趋势</h3>
 <p>美光FY2024（截至2024年8月）营收约$25.1B，虽然仍低于FY2022高峰期$30.8B，但标志着从FY2023谷底（$15.5B）的强劲复苏。FY2025预计营收$32-35B，同比增长约30-40%。HBM收入是核心驱动力，预计FY2025 HBM收入将超过$10B，占总营收约30%。</p>
@@ -127,7 +190,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <h3>2.3 资本支出与产能扩张</h3>
 <p>美光在FY2024的资本支出约$8B，占营收约32%。为满足HBM和DDR5的强劲需求，公司计划在FY2025将资本支出提升至$10-12B，重点投入博伊西HBM封装厂和纽约新晶圆厂（受益于CHIPS法案）。HBM产能是当前扩产的核心，美光预计HBM产能将在FY2026年较FY2024年提升3倍以上。</p>
 
-<h2>三、技术分析</h2>
+<h2 id="s3">三、技术分析</h2>
 
 <h3>3.1 股价走势</h3>
 <p>美光科技股价近期表现强势，受HBM需求爆发和AI投资热潮推动。52周价格区间约$80-165，当前价格约$140-150区间。股价从FY2023低谷（~$50）大幅反弹，体现了存储器行业周期反转和AI驱动的结构性增长预期的双重利好。</p>
@@ -153,7 +216,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <h3>3.3 技术形态分析</h3>
 <p>从周线级别看，美光股价自FY2023低谷形成了高点和低点均不断抬高的上升趋势结构。MACD在中长期处于零轴上方，表明中期趋势向好。RSI约55，处于中性区间，既未超买也未超卖。但需注意，股价距52周高点约10%，说明近期面临一定阻力。关键支撑$130（200日均线附近），强阻力$165（52周高点）。</p>
 
-<h2>四、市场情绪与资金面</h2>
+<h2 id="s4">四、市场情绪与资金面</h2>
 
 <h3>4.1 机构持仓</h3>
 <p>美光科技受到机构投资者的广泛关注。截至2026年Q1，共同基金和ETF持仓占比约75%。Vanguard、BlackRock等顶级资产管理公司是前十大股东。近期主要关注点包括HBM产能爬坡速度、NVIDIA认证进展和存储器定价走势。</p>
@@ -164,7 +227,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <h3>4.3 AI产业链定位</h3>
 <p>在AI产业链中，美光处于"算力基础设施"的核心位置，与NVIDIA深度绑定。随着HBM3E在H200和B200 GPU上的广泛应用，美光已成为AI芯片生态中不可替代的环节。与三星、SK海力士在HBM领域的竞争格局也在发生变化，美光正凭借技术先发优势扩大市场份额。</p>
 
-<h2>五、竞品对比：存储器三巨头</h2>
+<h2 id="s5">五、竞品对比：存储器三巨头</h2>
 
 <div class="widget-box">
     <div class="widget-header"><i class="fas fa-table text-orange-600"></i>存储器行业三巨头对比（CY2025E）</div>
@@ -193,7 +256,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 
 <p>在存储器三巨头中，美光的特点是：（1）唯一纯存储器厂商，经营集中度高；（2）美国本土DRAM制造商，享地缘红利（CHIPS法案）；（3）市值和产能规模小于韩国两家竞争对手，但HBM技术追赶迅速。三星凭借综合实力（半导体+手机+家电）拥有最强的投资韧性，而SK海力士是传统HBM领导者。当前美光在HBM领域实现了对三星的赶超，与SK海力士形成双雄格局。</p>
 
-<h2>六、估值与财务健康度</h2>
+<h2 id="s6">六、估值与财务健康度</h2>
 
 <h3>6.1 估值分析</h3>
 <p>美光当前估值反映了强周期属性和AI增长预期的叠加。基于FY2025预估盈利$8-10 EPS，当前PE约15-18x。考虑到行业处于上行周期中段，当前PE处于合理偏低水平。从PB看，当前约2.5-3倍，低于历史平均。EV/EBITDA约8-10x，对于周期上行阶段的半导体公司来说具有吸引力。</p>
@@ -224,7 +287,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <li><strong>库存水平</strong>：库存周转天数从FY2023高点的约200天降至约150天，库存消化基本完成，供需趋于健康。</li>
 </ul>
 
-<h2>七、主要风险因素</h2>
+<h2 id="s7">七、主要风险因素</h2>
 
 <h3>7.1 存储器周期波动风险</h3>
 <p>这是美光投资中最核心的风险。存储器行业历史上呈现约3-4年的周期波动。当前处于上行周期（2024-2026），但若供给扩张过快或需求不及预期，可能提前进入下行周期。DRAM和NAND产品ASP波动可达±50%以上，对利润影响巨大。</p>
@@ -241,7 +304,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <h3>7.5 客户集中度风险</h3>
 <p>随着HBM业务占比提升，美光对NVIDIA的依赖度也在增加。单一客户占比过高可能带来议价能力弱化和收入集中度风险。数据中心DRAM客户集中度也较高（NVIDIA、Intel、AMD等超大规模客户）。</p>
 
-<h2>八、结论与投资建议</h2>
+<h2 id="s8">八、结论与投资建议</h2>
 
 <h3>8.1 短期观点（0-6个月）</h3>
 <p><span class="indicator-signal signal-buy">偏向积极</span></p>
@@ -303,12 +366,25 @@ tr:nth-child(even) { background-color: #F9FAFB; }
                 <div class="disclaimer">风险提示：以上内容基于公开信息、历史数据及模型分析结果整理生成，仅用于信息参考，不构成任何投资建议。存在一定滞后性与局限性，过往表现不预示未来结果，需结合个人风险承受能力综合判断。</div>
             </div>
 
-</div><!-- /.prose-container -->
+
+        </div>
+
+    </div>
+</div>
+
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="返回顶部"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function(){
+    var btn = document.getElementById('bttBtn');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+    });
+})();
+</script>
+<!-- /.prose-container -->
 
 <div id="footer-placeholder"></div>
-<script src="/js/include.js"></script>
-<script src="/js/render.js"></script>
-
 <script>
 (function(){
     if(typeof Chart === 'undefined'){ setTimeout(arguments.callee, 100); return; }
@@ -363,3 +439,5 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <script src="/js/cookie-banner.js"></script>
 </body>
 </html>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>

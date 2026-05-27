@@ -31,11 +31,74 @@ th,td{border:1px solid #E5E7EB;padding:10px 12px;text-align:left}
 th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){background-color:#F9FAFB}
 .references{font-size:.85rem;color:#4B5563;line-height:1.6}.references li{margin-bottom:.3em!important;word-break:break-all}.references a{color:#0969da}
 @media(max-width:768px){.prose-container{padding:20px;margin:20px auto;line-height:1.7}h1.report-title{font-size:1.8rem!important}h2{font-size:1.25rem!important}h3{font-size:1.1rem!important}h4{font-size:1rem!important}p{font-size:.95rem!important}.prose-container ul,.prose-container ol{padding-left:1rem;font-size:.95rem}}
+
+    /* ── TOC Sidebar ── */
+    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
+    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc-sidebar::-webkit-scrollbar { width: 3px; }
+    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
+    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+        display: block; padding: 6px 10px; border-radius: 6px;
+        font-size: .8rem; color: #64748b; text-decoration: none;
+        transition: all .15s; line-height: 1.3;
+    }
+    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
+    .mobile-toc { display: none; }
+    @media (max-width: 1023px) {
+        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    }
+    .btt-btn {
+        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+        border-radius: 50%; background: #2563eb; color: #fff; border: none;
+        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .btt-btn.show { opacity: 1; visibility: visible; }
+    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
 </style>
 </head>
 <body>
 
-<div class="prose-container">
+<div class="report-wrap">
+    <!-- TOC Sidebar -->
+    <nav class="toc-sidebar" aria-label="目录">
+        <div class="toc-title">目录</div>
+        <ul class="toc-list">
+            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> 公司概况</a></li>
+            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> 财务分析</a></li>
+            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> 技术分析</a></li>
+            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> 市场情绪</a></li>
+            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> 竞品对比</a></li>
+            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> 估值与财务健康度</a></li>
+            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> 主要风险</a></li>
+            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> 结论与建议</a></li>
+        </ul>
+    </nav>
+
+    <div class="report-content">
+        <!-- Mobile TOC -->
+        <div class="mobile-toc">
+            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
+                <option value="">— 跳转到章节 —</option>
+                <option value="s1">公司概况</option>
+                <option value="s2">财务分析</option>
+                <option value="s3">技术分析</option>
+                <option value="s4">市场情绪</option>
+                <option value="s5">竞品对比</option>
+                <option value="s6">估值与财务健康度</option>
+                <option value="s7">主要风险</option>
+                <option value="s8">结论与建议</option>
+            </select>
+        </div>
+        <div class="prose-container">
+
 
 <!-- Badge -->
 <div class="flex flex-wrap items-center gap-3 mb-6">
@@ -68,7 +131,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 </div>
 
 <!-- Section 1 -->
-<h2>一、公司概览：光刻世界的绝对统治者</h2>
+<h2 id="s1">一、公司概览：光刻世界的绝对统治者</h2>
 
 <h3>1.1 全球地位</h3>
 <p>ASML Holding N.V.（阿斯麦控股），总部位于荷兰费尔德霍芬，是全球最大的光刻系统供应商，也是全球唯一能够制造极紫外（EUV）光刻机的公司。2026 年 5 月市值约 3,800 亿美元，是欧洲市值最大的科技公司。公司股票在纳斯达克（ASML）和阿姆斯特丹泛欧交易所（ASML.AS）双重上市。</p>
@@ -92,7 +155,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 </div>
 </div>
 
-<h2>二、财务分析：高质量盈利与结构性增长</h2>
+<h2 id="s2">二、财务分析：高质量盈利与结构性增长</h2>
 
 <h3>2.1 营收概况</h3>
 <p>FY2025 ASML 实现营收约 320 亿美元，同比增长 8%。其中 EUV 系统贡献约 45%，DUV 系统贡献约 30%，安装基数服务贡献约 25%。过去五年，公司营收从 2021 年的约 220 亿美元增长到 2025 年的 320 亿美元，CAGR 约 9.8%。EUV 出货量从 2021 年的 42 台增长到 2025 年的约 60 台，High-NA 机型开始贡献增量单价。</p>
@@ -124,7 +187,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 </div>
 </div>
 
-<h2>三、技术面分析</h2>
+<h2 id="s3">三、技术面分析</h2>
 
 <h3>3.1 价格走势</h3>
 <p>ASML 过去 52 周交易区间为 $750–$1,120，年初至今上涨约 18%。股价在 AI 驱动的半导体设备超级周期中表现强劲，但期间也经历了多轮回调，主要原因包括荷兰政府出口管制政策升级、中国需求不确定性以及对全球半导体周期拐点的担忧。</p>
@@ -147,7 +210,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <div class="indicator-item"><div class="indicator-label">成交量</div><div class="indicator-value">中等</div><span class="indicator-signal signal-neutral">正常</span></div>
 </div>
 
-<h2>四、市场情绪与分析师预期</h2>
+<h2 id="s4">四、市场情绪与分析师预期</h2>
 
 <h3>4.1 卖方共识</h3>
 <p>目前覆盖 ASML 的分析师中约 75% 给予"买入"评级，20% 给予"持有"，5% 给予"卖出"。共识 12 个月目标价约 $1,100，隐含约 15% 的上行空间。主要看多逻辑包括：High-NA EUV 加速放量带来的 ASP 提升、中国 DUV 出货韧性强于预期（在全面管制前抢购）、以及 AI 驱动的先进逻辑与存储芯片产能扩张。主要空方观点聚焦在中国出口管制对营收的实质冲击和 2026–2027 年潜在半导体周期下行。</p>
@@ -167,7 +230,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <h3>4.3 机构持仓与 ESG</h3>
 <p>截至 2026 年 Q1，主要机构股东包括 Vanguard（~7.5%）、BlackRock（~6.2%）、Capital Group（~4.8%）和 Fidelity。过去两个季度机构净增持约 2,000 万股，显示长期资金持续看好。ASML 在 MSCI ESG 评级中获 AAA 级，为半导体设备行业最高评级。公司承诺 2030 年实现运营碳中和，2025 年可再生能源使用比例已达 70%。</p>
 
-<h2>五、竞争格局分析</h2>
+<h2 id="s5">五、竞争格局分析</h2>
 
 <h3>5.1 半导体设备五强对比</h3>
 <div class="widget-box">
@@ -198,7 +261,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 </div>
 </div>
 
-<h2>六、估值与财务健康</h2>
+<h2 id="s6">六、估值与财务健康</h2>
 
 <h3>6.1 估值对比</h3>
 <div class="widget-box">
@@ -221,7 +284,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <h3>6.3 财务健康指标</h3>
 <p>截至 FY2025 年末，ASML 资产负债率约 55%（包含大量预收款和递延收入），但净债务/EBITDA 仅约 0.5x。持有现金及等价物约 95 亿欧元，流动性充足。流动比率 1.4x，EBITDA 利息覆盖倍数 35x+。公司信用评级 A1（穆迪）/ A+（标普），在资本设备同行中领先。公司保持"轻制造"模式——大部分零部件外包给供应商，自身聚焦系统设计、集成和测试，资产周转率高于同类公司。</p>
 
-<h2>七、关键风险</h2>
+<h2 id="s7">七、关键风险</h2>
 
 <div class="widget-box" style="border-left:4px solid #DC2626;border-radius:4px 10px 10px 4px;">
 <div class="widget-body">
@@ -244,7 +307,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <h3>7.5 汇率风险（低影响 · 高概率）</h3>
 <p>ASML 以欧元计成本、以美元计营收，欧元兑美元汇率的波动直接影响公司报告利润。根据 ASML 披露，欧元每升值 5 美分，净利润将受到约 3–4% 的负面影响。公司采用外汇对冲策略来缓解部分风险，但无法完全对冲。</p>
 
-<h2>八、结论与建议</h2>
+<h2 id="s8">八、结论与建议</h2>
 
 <h3>8.1 核心投资逻辑</h3>
 <p>我们看好 ASML 的核心逻辑基于三个结构性趋势：<strong>（1）先进制程的光刻密度持续提升</strong>——从 7nm 到 3nm 到 2nm，每一代制程所需的 EUV 层数从个位数增长到 20+ 层，这意味着即使晶圆产能不变，对 EUV 设备的需求也在结构性增长；<strong>（2）High-NA 升级带来的价值量跃升</strong>——High-NA EUV 单价是传统 EUV 的 2 倍以上，且盈利弹性更高，2026–2028 年预计进入批量交付期，拉动整体毛利率向 54–56% 攀升；<strong>（3）安装基数服务带来的护城河复利</strong>——7,000+ 台已装设备的服务收入以高个位数年增速有机增长，为营收提供稳定缓冲。</p>
@@ -296,7 +359,23 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 
 <p class="text-xs text-gray-400 mt-8 text-center border-t border-gray-100 pt-6"><strong>免责声明：</strong>本报告仅供参考和教育目的，不构成投资建议。报告中的数据和观点基于公开信息整理，可能存在不准确性。投资有风险，决策需谨慎。</p>
 
-</div><!-- .prose-container -->
+
+        </div>
+        <div id="footer-placeholder"></div>
+    </div>
+</div>
+
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="返回顶部"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function(){
+    var btn = document.getElementById('bttBtn');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+    });
+})();
+</script>
+<!-- .prose-container -->
 
 <script>
 (function(){
@@ -332,3 +411,5 @@ new Chart(document.getElementById('chart_targets'),{type:'bar',data:{labels:['�
 </div>
 </body>
 </html>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>

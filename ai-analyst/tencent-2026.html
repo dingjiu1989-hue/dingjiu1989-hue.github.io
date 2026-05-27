@@ -29,11 +29,74 @@ th,td{border:1px solid #E5E7EB;padding:10px 12px;text-align:left}
 th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){background-color:#F9FAFB}
 .references{font-size:.85rem;color:#4B5563;line-height:1.6}.references li{margin-bottom:.3em!important;word-break:break-all}.references a{color:#0969da}
 @media(max-width:768px){.prose-container{padding:20px;margin:20px auto;line-height:1.7}h1.report-title{font-size:1.8rem!important}h2{font-size:1.25rem!important}h3{font-size:1.1rem!important}h4{font-size:1rem!important}p{font-size:.95rem!important}.prose-container ul,.prose-container ol{padding-left:1rem;font-size:.95rem}}
+
+    /* ── TOC Sidebar ── */
+    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
+    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc-sidebar::-webkit-scrollbar { width: 3px; }
+    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
+    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+        display: block; padding: 6px 10px; border-radius: 6px;
+        font-size: .8rem; color: #64748b; text-decoration: none;
+        transition: all .15s; line-height: 1.3;
+    }
+    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
+    .mobile-toc { display: none; }
+    @media (max-width: 1023px) {
+        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    }
+    .btt-btn {
+        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+        border-radius: 50%; background: #2563eb; color: #fff; border: none;
+        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .btt-btn.show { opacity: 1; visibility: visible; }
+    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
 </style>
 </head>
 <body>
 
-<div class="prose-container">
+<div class="report-wrap">
+    <!-- TOC Sidebar -->
+    <nav class="toc-sidebar" aria-label="目录">
+        <div class="toc-title">目录</div>
+        <ul class="toc-list">
+            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> 公司概况</a></li>
+            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> 财务分析</a></li>
+            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> 技术分析</a></li>
+            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> 市场情绪</a></li>
+            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> 竞品对比</a></li>
+            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> 估值与财务健康度</a></li>
+            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> 主要风险</a></li>
+            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> 结论与建议</a></li>
+        </ul>
+    </nav>
+
+    <div class="report-content">
+        <!-- Mobile TOC -->
+        <div class="mobile-toc">
+            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
+                <option value="">— 跳转到章节 —</option>
+                <option value="s1">公司概况</option>
+                <option value="s2">财务分析</option>
+                <option value="s3">技术分析</option>
+                <option value="s4">市场情绪</option>
+                <option value="s5">竞品对比</option>
+                <option value="s6">估值与财务健康度</option>
+                <option value="s7">主要风险</option>
+                <option value="s8">结论与建议</option>
+            </select>
+        </div>
+        <div class="prose-container">
+
 
 <!-- Header -->
 <div class="flex items-center justify-center gap-4 mb-6">
@@ -73,7 +136,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 </div>
 
 <!-- Section 1: Company Overview -->
-<h2><i class="fas fa-building text-teal-600 mr-2"></i>一、公司概览</h2>
+<h2 id="s1"><i class="fas fa-building text-teal-600 mr-2"></i>一、公司概览</h2>
 <p>腾讯控股有限公司是中国最大的互联网科技公司，也是全球市值最高的科技企业之一。公司通过社交平台微信（月活用户超14亿）和QQ建立了中国最大的数字生态系统，业务涵盖社交、游戏、数字内容、金融科技、云计算与企业服务、广告以及投资等多个领域。腾讯以"社交流量+变现"为核心商业模式，通过微信和小程序构建了独特的超级应用生态。</p>
 
 <div class="widget-box">
@@ -88,7 +151,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <p>腾讯的投资版图同样庞大，投资组合估值约1500亿美元，覆盖拼多多、美团、Epic Games、Snap、特斯拉等海内外优质资产，兼具战略协同与财务回报双重价值。</p>
 
 <!-- Section 2: Financial Analysis -->
-<h2><i class="fas fa-chart-line text-teal-600 mr-2"></i>二、财务分析</h2>
+<h2 id="s2"><i class="fas fa-chart-line text-teal-600 mr-2"></i>二、财务分析</h2>
 
 <h3>2.1 营收趋势</h3>
 <p>腾讯的营收从2021年的约5600亿元人民币增长至2025年的约7800亿元人民币，五年复合增长率约8.6%。增值服务（游戏+社交）仍是最大收入来源，但占比已从2021年的约52%下降至约35%，金融科技与企业服务占比提升至约35%，广告业务占比约25%。这一结构性变化反映了腾讯从游戏驱动向多元驱动转型的战略成效。</p>
@@ -117,7 +180,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <p>截至2025年末，腾讯持有现金及等价物约3500亿元人民币，投资性资产约1.1万亿元，有息负债约4200亿元，净现金头寸为正。公司的资产负债率约45%，在大型互联网公司中处于健康水平。充裕的现金储备为公司应对监管变化、进行战略性投资和持续回购提供了坚实保障。</p>
 
 <!-- Section 3: Technical Analysis -->
-<h2><i class="fas fa-candlestick-chart text-teal-600 mr-2"></i>三、技术分析</h2>
+<h2 id="s3"><i class="fas fa-candlestick-chart text-teal-600 mr-2"></i>三、技术分析</h2>
 
 <p>腾讯股价在过去52周内呈现宽幅震荡格局，区间约在280-480港元之间。随着中国互联网板块整体回暖以及公司基本面改善，股价从2025年低点逐步反弹。技术面上，股价已站上主要均线，MACD指标处于零轴上方，RSI在55-65之间，尚未进入超买区间，中期趋势偏多。</p>
 
@@ -131,7 +194,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <p>支撑位：380港元（120日均线附近）、340港元（前低）；阻力位：480港元（52周高点）、500港元（心理关口）。若股价能有效突破480港元阻力位，可能打开新的上行空间。当前成交量维持在健康水平，未见明显派发迹象。</p>
 
 <!-- Section 4: Market Sentiment -->
-<h2><i class="fas fa-newspaper text-teal-600 mr-2"></i>四、市场情绪分析</h2>
+<h2 id="s4"><i class="fas fa-newspaper text-teal-600 mr-2"></i>四、市场情绪分析</h2>
 
 <p>分析师对腾讯的评级以"买入"和"持有"为主，共识目标价约480港元。主要看好逻辑包括：游戏业务管线丰富（如《王者荣耀》国际版、Valorant手游、新端游大作）、微信视频号广告货币化加速、AI大模型应用落地、大幅回购提供股价支撑。</p>
 
@@ -145,7 +208,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <p>负面因素方面，市场关注中美科技博弈对腾讯云海外业务的影响，以及国内宏观经济复苏节奏的不确定性。但整体而言，机构对腾讯2026年的基本面改善持乐观态度。南向资金持续净流入，显示内地投资者对港股科技龙头的信心。</p>
 
 <!-- Section 5: Competitive Comparison -->
-<h2><i class="fas fa-chess text-teal-600 mr-2"></i>五、竞争格局对比</h2>
+<h2 id="s5"><i class="fas fa-chess text-teal-600 mr-2"></i>五、竞争格局对比</h2>
 
 <p>在中国互联网行业，腾讯与阿里巴巴、字节跳动、网易、美团等巨头形成差异化竞争格局。以下从多个维度进行比较：</p>
 
@@ -167,7 +230,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <p>腾讯最大的竞争变量来自字节跳动。抖音/TikTok在用户时长和广告市场持续侵蚀微信和QQ的份额，但腾讯通过视频号和小程序生态成功守住了社交基本盘。在游戏领域，网易是腾讯的主要竞争对手，但腾讯凭借全球布局和渠道优势保持领先。在云服务领域，腾讯位居第三，加速追赶阿里云和华为云。</p>
 
 <!-- Section 6: Valuation & Health -->
-<h2><i class="fas fa-heart-pulse text-teal-600 mr-2"></i>六、估值与健康度评估</h2>
+<h2 id="s6"><i class="fas fa-heart-pulse text-teal-600 mr-2"></i>六、估值与健康度评估</h2>
 
 <p>当前腾讯市盈率（TTM）约25倍，低于其五年历史均值约30倍，也低于纳斯达克科技巨头平均35-40倍的估值水平。考虑到公司的市场地位、盈利能力、回购力度和AI增长期权，当前估值具有吸引力。</p>
 
@@ -188,7 +251,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <p>采用DCF模型估算，假设WACC为10%，永续增长率3%，未来五年自由现金流年增长10%-15%，腾讯的合理估值区间约为每股400-550港元。当前股价处在此区间的中下部，提供了较好的安全边际。</p>
 
 <!-- Section 7: Key Risks -->
-<h2><i class="fas fa-triangle-exclamation text-teal-600 mr-2"></i>七、主要风险因素</h2>
+<h2 id="s7"><i class="fas fa-triangle-exclamation text-teal-600 mr-2"></i>七、主要风险因素</h2>
 
 <h3>7.1 宏观与地缘政治风险</h3>
 <p>中美关系持续紧张可能影响腾讯的海外投资布局和云业务扩展。港股市场流动性受全球资本流动影响较大，若美联储维持高利率环境，可能压制科技股估值。中国宏观经济复苏节奏慢于预期，将直接削弱广告和金融科技等顺周期业务的增长动力。</p>
@@ -206,7 +269,7 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
 <p>腾讯持有的约1500亿美元投资组合包含大量未上市和上市股权，市场波动会显著影响腾讯的非经常性损益。部分被投企业（如Epic Games、Snap）仍处于亏损状态，存在减值风险。</p>
 
 <!-- Section 8: Conclusion & Recommendations -->
-<h2><i class="fas fa-flag-checkered text-teal-600 mr-2"></i>八、结论与建议</h2>
+<h2 id="s8"><i class="fas fa-flag-checkered text-teal-600 mr-2"></i>八、结论与建议</h2>
 
 <div class="widget-box">
   <div class="widget-header"><i class="fas fa-clipboard-check"></i>综合评估</div>
@@ -260,8 +323,22 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
   <p style="font-size:.8rem!important;color:#6B7280!important;margin-bottom:0!important"><strong>免责声明：</strong>本报告由AI自动生成，仅供参考和学习交流，不构成任何形式的投资建议。报告中的数据和分析基于公开信息和模型估算，可能存在偏差。股市有风险，投资需谨慎。作者和平台不对因使用本报告而产生的任何损失承担责任。</p>
 </div>
 
+
+        </div>
+        <div id="footer-placeholder"></div>
+    </div>
 </div>
 
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="返回顶部"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function(){
+    var btn = document.getElementById('bttBtn');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+    });
+})();
+</script>
 <!-- Chart Init -->
 <script>
 document.addEventListener('DOMContentLoaded',function(){
@@ -286,3 +363,5 @@ new Chart(document.getElementById('chart_targets'),{type:'bar',data:{labels:['�
 </div>
 </body>
 </html>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>

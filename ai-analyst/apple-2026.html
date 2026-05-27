@@ -40,11 +40,74 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 .references li { margin-bottom: 0.3em !important; word-break: break-all; }
 .references a { color: #0969da; }
 @media (max-width: 768px) { .prose-container { padding: 20px; margin: 20px auto; line-height: 1.7; } h1.report-title { font-size: 1.8rem !important; } h2 { font-size: 1.25rem !important; } h3 { font-size: 1.1rem !important; } h4 { font-size: 1rem !important; } p { font-size: 0.95rem !important; } .prose-container ul, .prose-container ol { padding-left: 1rem; font-size: 0.95rem; } }
-    </style>
+    
+    /* ── TOC Sidebar ── */
+    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
+    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc-sidebar::-webkit-scrollbar { width: 3px; }
+    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
+    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+        display: block; padding: 6px 10px; border-radius: 6px;
+        font-size: .8rem; color: #64748b; text-decoration: none;
+        transition: all .15s; line-height: 1.3;
+    }
+    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
+    .mobile-toc { display: none; }
+    @media (max-width: 1023px) {
+        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    }
+    .btt-btn {
+        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+        border-radius: 50%; background: #2563eb; color: #fff; border: none;
+        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .btt-btn.show { opacity: 1; visibility: visible; }
+    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
+</style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-50">
-<div class="prose-container">
+<div class="report-wrap">
+    <!-- TOC Sidebar -->
+    <nav class="toc-sidebar" aria-label="目录">
+        <div class="toc-title">目录</div>
+        <ul class="toc-list">
+            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> 公司概况</a></li>
+            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> 财务分析</a></li>
+            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> 技术分析</a></li>
+            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> 市场情绪</a></li>
+            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> 竞品对比</a></li>
+            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> 估值与财务健康度</a></li>
+            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> 主要风险</a></li>
+            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> 结论与建议</a></li>
+        </ul>
+    </nav>
+
+    <div class="report-content">
+        <!-- Mobile TOC -->
+        <div class="mobile-toc">
+            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
+                <option value="">— 跳转到章节 —</option>
+                <option value="s1">公司概况</option>
+                <option value="s2">财务分析</option>
+                <option value="s3">技术分析</option>
+                <option value="s4">市场情绪</option>
+                <option value="s5">竞品对比</option>
+                <option value="s6">估值与财务健康度</option>
+                <option value="s7">主要风险</option>
+                <option value="s8">结论与建议</option>
+            </select>
+        </div>
+        <div class="prose-container">
+
 
 <header class="flex flex-col items-center text-center">
     <div class="flex gap-3 mb-8">
@@ -70,7 +133,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <p>Apple Inc. 是全球最具价值的科技公司之一，以硬件+服务双引擎模式驱动增长。FY2026 Q2（截至2026年3月28日），公司总收入达$111.2B（+17% YoY），其中iPhone收入$57.0B创季度新高，服务收入$31.0B连续第三个季度创历史新高。然而，Apple也面临AI竞争加剧、欧盟DMA合规罚款、供应链多元化成本上升等多重挑战。</p>
 <p>本文从公司概况、财务分析、技术分析、市场情绪、竞品对比、估值与健康度、主要风险因素及投资建议八个维度，对Apple进行全面分析。</p>
 
-<h2>一、公司概况：业务模式、市值、护城河及行业地位</h2>
+<h2 id="s1">一、公司概况：业务模式、市值、护城河及行业地位</h2>
 
 <h3>1.1 业务模式</h3>
 <p>Apple采用硬件销售与高利润服务相结合的双引擎业务模式。硬件板块主要包括iPhone（占总营收51.3%）、Mac、iPad以及可穿戴设备（Apple Watch、AirPods等）。服务板块涵盖App Store、Apple Music、iCloud、Apple Pay及其他数字服务，目前贡献总营收的约28%，毛利率高达76.7%，显著高于硬件业务的38.7%。</p>
@@ -130,7 +193,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     </div>
 </div>
 
-<h2>二、财务分析</h2>
+<h2 id="s2">二、财务分析</h2>
 
 <h3>2.1 营收趋势</h3>
 <p>Apple近几个季度财务表现强劲：</p>
@@ -201,7 +264,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <li><strong>自由现金流收益率</strong>：约2.5%，表明市场以较高溢价对公司进行估值。</li>
 </ul>
 
-<h2>三、技术面分析</h2>
+<h2 id="s3">三、技术面分析</h2>
 
 <h3>3.1 价格趋势</h3>
 <p>Apple股价近几个月呈上升趋势：</p>
@@ -229,7 +292,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <p class="mt-2 !mb-0 leading-relaxed"><strong>支撑位:</strong> $290, $270<br><strong>阻力位:</strong> $320, $340</p>
 </div>
 
-<h2>四、市场情绪</h2>
+<h2 id="s4">四、市场情绪</h2>
 
 <h3>4.1 分析师评级</h3>
 <p>分析师对Apple的情绪总体偏正面：</p>
@@ -268,7 +331,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <h3>4.3 社交媒体与公众认知</h3>
 <p>社交媒体上对Apple的情绪总体正面，许多用户称赞公司创新和产品品质。但Vision Pro的高定价以及公司在AI能力上依赖第三方模型（如Google Gemini）也受到一定批评。</p>
 
-<h2>五、竞品对比</h2>
+<h2 id="s5">五、竞品对比</h2>
 
 <h3>5.1 市场份额对比</h3>
 <p>Apple在其核心市场面临多方竞争：</p>
@@ -302,7 +365,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 </div>
 <p>Apple的利润率低于Microsoft但高于Samsung和Alphabet，凭借高营收和强劲现金流，在行业中保持财务巨擘地位。</p>
 
-<h2>六、估值与财务健康度</h2>
+<h2 id="s6">六、估值与财务健康度</h2>
 
 <h3>6.1 市盈率分析</h3>
 <ul>
@@ -340,7 +403,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 </ul>
 <p>Apple财务健康度的核心特征是以强劲现金流支撑股东回报。但公司高度依赖股票回购来提升每股收益，这可能引发对其长期投资策略的关注。</p>
 
-<h2>七、主要风险因素</h2>
+<h2 id="s7">七、主要风险因素</h2>
 
 <h3>7.1 行业竞争风险</h3>
 <ul>
@@ -373,7 +436,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     </div>
 </div>
 
-<h2>八、结论与投资建议</h2>
+<h2 id="s8">八、结论与投资建议</h2>
 
 <h3>8.1 短期投资建议（0-6个月）</h3>
 <p>短期内Apple股价可能维持区间震荡，上行动力来自：</p>
@@ -416,8 +479,22 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <li><a href="https://www.bloomberg.com/" target="_blank" rel="nofollow noopener">Bloomberg — Apple供应链多元化与印度产能报道</a></li>
 </ol>
 
+
+        </div>
+        <div id="footer-placeholder"></div>
+    </div>
 </div>
 
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="返回顶部"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function(){
+    var btn = document.getElementById('bttBtn');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+    });
+})();
+</script>
 <script>
 (function(){
     if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
@@ -512,3 +589,5 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 </div>
 </body>
 </html>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>

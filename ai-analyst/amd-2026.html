@@ -39,11 +39,74 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 .references li { margin-bottom: 0.3em !important; word-break: break-all; }
 .references a { color: #0969da; }
 @media (max-width: 768px) { .prose-container { padding: 20px; margin: 20px auto; line-height: 1.7; } h1.report-title { font-size: 1.8rem !important; } h2 { font-size: 1.25rem !important; } h3 { font-size: 1.1rem !important; } h4 { font-size: 1rem !important; } p { font-size: 0.95rem !important; } .prose-container ul, .prose-container ol { padding-left: 1rem; font-size: 0.95rem; } }
-    </style>
+    
+    /* ── TOC Sidebar ── */
+    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
+    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc-sidebar::-webkit-scrollbar { width: 3px; }
+    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
+    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+        display: block; padding: 6px 10px; border-radius: 6px;
+        font-size: .8rem; color: #64748b; text-decoration: none;
+        transition: all .15s; line-height: 1.3;
+    }
+    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
+    .mobile-toc { display: none; }
+    @media (max-width: 1023px) {
+        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    }
+    .btt-btn {
+        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+        border-radius: 50%; background: #2563eb; color: #fff; border: none;
+        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .btt-btn.show { opacity: 1; visibility: visible; }
+    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
+</style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-50">
-<div class="prose-container">
+<div class="report-wrap">
+    <!-- TOC Sidebar -->
+    <nav class="toc-sidebar" aria-label="目录">
+        <div class="toc-title">目录</div>
+        <ul class="toc-list">
+            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> 公司概况</a></li>
+            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> 财务分析</a></li>
+            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> 技术分析</a></li>
+            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> 市场情绪</a></li>
+            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> 竞品对比</a></li>
+            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> 估值与财务健康度</a></li>
+            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> 主要风险</a></li>
+            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> 结论与建议</a></li>
+        </ul>
+    </nav>
+
+    <div class="report-content">
+        <!-- Mobile TOC -->
+        <div class="mobile-toc">
+            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
+                <option value="">— 跳转到章节 —</option>
+                <option value="s1">公司概况</option>
+                <option value="s2">财务分析</option>
+                <option value="s3">技术分析</option>
+                <option value="s4">市场情绪</option>
+                <option value="s5">竞品对比</option>
+                <option value="s6">估值与财务健康度</option>
+                <option value="s7">主要风险</option>
+                <option value="s8">结论与建议</option>
+            </select>
+        </div>
+        <div class="prose-container">
+
 
 <header class="flex flex-col items-center text-center">
     <div class="flex gap-3 mb-8">
@@ -69,7 +132,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <p>Advanced Micro Devices (AMD) 在CEO苏姿丰（Lisa Su）的领导下完成了半导体行业最引人注目的转型之一——从濒临破产的边缘成长为NVIDIA在AI计算领域最主要的挑战者。通过2017年Ryzen CPU、2019年EPYC服务器处理器、2022年Xilinx收购（~$50B）和2024年MI300X AI加速器等一系列战略举措，AMD构建了CPU + GPU + FPGA + 自适应计算的全栈产品组合。</p>
 <p>截至2026年5月，AMD市值约$320B，FY2025营收$28B（+18% YoY），数据中心部门已成为核心增长引擎。然而，市场对AMD能否真正缩小与NVIDIA在AI领域的CUDA生态差距存在深度分歧。本报告从公司概况、财务数据、技术分析、市场情绪、竞品对比、估值与健康度、主要风险及投资建议八个维度进行全面分析。</p>
 
-<h2>一、公司概况：CPU + GPU + FPGA + 自适应计算全栈平台</h2>
+<h2 id="s1">一、公司概况：CPU + GPU + FPGA + 自适应计算全栈平台</h2>
 
 <h3>1.1 业务组合与转型历程</h3>
 <p>AMD的业务横跨四大核心领域：</p>
@@ -94,7 +157,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <div class="widget-body"><div class="chart-container"><canvas id="chart_ai_accel"></canvas></div></div>
 </div>
 
-<h2>二、财务分析：数据中心驱动增长，利润率逐步改善</h2>
+<h2 id="s2">二、财务分析：数据中心驱动增长，利润率逐步改善</h2>
 
 <h3>2.1 营收结构与趋势</h3>
 <ul>
@@ -121,7 +184,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <div class="widget-body"><div class="chart-container"><canvas id="chart_dc_growth"></canvas></div></div>
 </div>
 
-<h2>三、技术面分析</h2>
+<h2 id="s3">三、技术面分析</h2>
 <h3>3.1 价格走势</h3>
 <ul>
     <li><strong>52周范围</strong>：$130 - $195</li>
@@ -148,7 +211,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     </div>
 </div>
 
-<h2>四、市场情绪：分析师分歧中的乐观共识</h2>
+<h2 id="s4">四、市场情绪：分析师分歧中的乐观共识</h2>
 <h3>4.1 分析师评级与目标价</h3>
 <ul>
     <li><strong>高盛</strong>：买入，目标价$220。看好MI400在2027年的放量潜力，认为AMD有望在AI加速器市场获得20%+份额。EPYC在服务器CPU市场的持续渗透也是主要增量。</li>
@@ -163,7 +226,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <div class="widget-body"><div class="chart-container"><canvas id="chart_targets"></canvas></div></div>
 </div>
 
-<h2>五、竞品对比：四强争霸的半导体格局</h2>
+<h2 id="s5">五、竞品对比：四强争霸的半导体格局</h2>
 <table>
     <thead><tr><th>指标</th><th>AMD</th><th>NVIDIA</th><th>Intel</th><th>Arm / Ampere</th></tr></thead>
     <tbody>
@@ -182,7 +245,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <div class="widget-body"><div class="chart-container"><canvas id="chart_cpu_share"></canvas></div></div>
 </div>
 
-<h2>六、估值与财务健康度</h2>
+<h2 id="s6">六、估值与财务健康度</h2>
 <h3>6.1 估值框架</h3>
 <ul>
     <li><strong>P/E（TTM）</strong>：约58x，处于半导体公司中较高水平，反映了市场对AI业务爆发的高增长溢价。</li>
@@ -204,7 +267,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <p class="mt-2 !mb-0 leading-relaxed">AMD的P/E约58x意味着市场已定价"完美执行"情景——即AMD必须在AI加速器市场将份额从12%提升至20%+，同时EPYC CPU持续蚕食Intel，且MI400芯片性能达到预期。任何环节的偏差都可能导致估值倍数的显著收缩。</p>
 </div>
 
-<h2>七、主要风险因素</h2>
+<h2 id="s7">七、主要风险因素</h2>
 <h3>7.1 核心风险</h3>
 <ul>
     <li><strong>NVIDIA CUDA生态护城河</strong>：尽管AMD ROCm持续改善，但与CUDA在开发者工具链、软件库成熟度、企业级支持上的差距仍需多年才能缩小。大多数AI工作负载默认选择CUDA，AMD的"兼容性"叙事说服力有限。</li>
@@ -219,7 +282,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <p class="mt-2 !mb-0 leading-relaxed">CUDA生态差距是AMD在AI领域面临的最大结构性障碍。尽管MI400硬件规格有望接近NVIDIA同期产品，但软件生态的差距决定了AI开发者难以实质性转向AMD平台。若AMD无法在软件生态上实现跨越式突破，"NVIDIA替代方案"的叙事将始终停留在理论层面，无法转化为实质性营收。</p>
 </div>
 
-<h2>八、结论与投资建议</h2>
+<h2 id="s8">八、结论与投资建议</h2>
 <h3>8.1 短期投资建议（0-6个月）</h3>
 <p>AMD近期受益于EPYC份额持续提升和MI400路线图的市场期待，股价在$160-180区间震荡。建议在$155-165（MA50附近）分批建仓，利用市场对AI叙事短期不确定性的过度反应进行低吸。短期目标$190-200，止损$145。</p>
 <h3>8.2 长期投资建议（6-18个月）</h3>
@@ -247,7 +310,22 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <div style="font-size:0.75rem;color:#6B7280;line-height:1.5;border:1px solid #F3F4F6;border-radius:8px;padding:16px;margin-top:2.5rem;background:#F9FAFB;">
     <strong>风险提示：</strong>以上内容基于公开信息、历史数据及模型分析结果整理生成，仅用于信息参考，不构成任何投资建议。存在一定滞后性与局限性，过往表现不预示未来结果，需结合个人风险承受能力综合判断。
 </div>
+
+        </div>
+        <div id="footer-placeholder"></div>
+    </div>
 </div>
+
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="返回顶部"><i class="fas fa-arrow-up"></i></button>
+<script>
+(function(){
+    var btn = document.getElementById('bttBtn');
+    if(!btn) return;
+    window.addEventListener('scroll', function(){
+        btn.classList.toggle('show', window.scrollY > 400);
+    });
+})();
+</script>
 <script>(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
 new Chart(document.getElementById('chart_ai_accel'),{type:'bar',data:{labels:['NVIDIA','AMD','Google TPU','Amazon Trn','Broadcom','其他'],datasets:[{label:'份额 (%)',data:[82,12,3,1,1.5,0.5],backgroundColor:['#10B981','#EA580C','#F59E0B','#3B82F6','#8B5CF6','#E5E7EB'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'市场份额 (%)'}}}}});
 new Chart(document.getElementById('chart_revenue'),{type:'bar',data:{labels:['数据中心','客户端','游戏','嵌入式'],datasets:[{label:'营收 ($B)',data:[16,7,3,2],backgroundColor:['#EA580C','#3B82F6','#8B5CF6','#10B981'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'十亿美元'}}}}});
@@ -258,3 +336,5 @@ new Chart(document.getElementById('chart_cpu_share'),{type:'bar',data:{labels:['
 })();</script>
 </body>
 </html>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
