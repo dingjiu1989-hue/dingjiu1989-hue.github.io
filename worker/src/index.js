@@ -17,6 +17,9 @@ export default {
       if (!company || typeof company !== 'string' || company.trim().length === 0) {
         return json({ error: '请输入公司名称' }, 400, CORS_HEADERS);
       }
+      if (company.length > 200) {
+        return json({ error: '公司名称过长' }, 400, CORS_HEADERS);
+      }
 
       const { MCP_URL, MCP_TOKEN } = env;
       if (!MCP_URL || !MCP_TOKEN) {

@@ -656,7 +656,8 @@ function renderHistory() {
     if (h.length === 0) { el.classList.remove('show'); return; }
     el.classList.add('show');
     container.innerHTML = h.map(function(name) {
-        return '<span class="search-history-item" onclick="historySearch(\'' + name.replace(/'/g, "\\'") + '\')">' + name + '</span>';
+        var safe = escapeHtml(name);
+        return '<span class="search-history-item" onclick="historySearch(\'' + safe.replace(/'/g, "\\'") + '\')">' + safe + '</span>';
     }).join('');
 }
 function historySearch(name) {
@@ -670,6 +671,12 @@ function historySearch(name) {
 function clearHistory() {
     localStorage.removeItem('ai_analyst_history');
     renderHistory();
+}
+
+/* ── escape HTML to prevent XSS ── */
+function escapeHtml(str) {
+    if (str == null) return '';
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 /* ── live AI analysis ── */
@@ -688,7 +695,7 @@ function requestLiveAnalysis() {
 
     btn.disabled = true;
     btn.textContent = '⏳ 请求中...';
-    area.innerHTML = '<div class="live-loading show"><div class="spinner"></div><div class="msg">正在分析「' + q + '」的财务数据...</div></div>';
+    area.innerHTML = '<div class="live-loading show"><div class="spinner"></div><div class="msg">正在分析「' + escapeHtml(q) + '」的财务数据...</div></div>';
 
     fetch(WORKER_URL, {
         method: 'POST',
@@ -698,36 +705,42 @@ function requestLiveAnalysis() {
     .then(function(r) { return r.json(); })
     .then(function(data) {
         if (data.error && !data.analysis) {
-            area.innerHTML = '<div class="live-result-card"><div class="error-text">' + data.error + '</div></div>';
+            area.innerHTML = '<div class="live-result-card"><div class="error-text">' + escapeHtml(data.error) + '</div></div>';
             return;
         }
         var a = data.analysis || data;
         var s = a.summary || '';
         var f = a.financials || {};
-        var bs = a.balanceSheet || {};
         var md = a.marketData || {};
         var co = a.company || {};
-        var fc = a.cashFlow || {};
+
+        var coName = escapeHtml(co.name || q);
+        var coCode = escapeHtml(co.code);
+        var coSector = escapeHtml(co.sector);
+        var coMc = escapeHtml(co.marketCap);
+        var summary = escapeHtml(s);
+
+        function val(v) { return escapeHtml(v); }
 
         var html = '<div class="live-result-card">' +
-            '<h3>' + (co.name || q) + (co.code ? ' <span style="font-weight:400;color:#999;font-size:.9rem">' + co.code + '</span>' : '') + '</h3>';
+            '<h3>' + coName + (coCode ? ' <span style="font-weight:400;color:#999;font-size:.9rem">' + coCode + '</span>' : '') + '</h3>';
 
-        if (co.sector) html += '<div style="font-size:.82rem;color:#888;margin-bottom:12px">' + co.sector + (co.marketCap ? ' · 市值' + co.marketCap : '') + '</div>';
+        if (co.sector) html += '<div style="font-size:.82rem;color:#888;margin-bottom:12px">' + coSector + (co.marketCap ? ' · 市值' + val(co.marketCap) : '') + '</div>';
 
         var hasMetrics = f.revenue || f.netIncome || f.eps || md.latestPrice;
         if (hasMetrics) {
             html += '<div class="metric-row">';
-            if (f.revenue) html += '<div class="metric-item"><div class="val">' + f.revenue + '</div><div class="lbl">营收</div></div>';
-            if (f.revenueGrowth) html += '<div class="metric-item"><div class="val" style="color:' + (f.revenueGrowth.indexOf('+') >= 0 ? '#16a34a' : '#666') + '">' + f.revenueGrowth + '</div><div class="lbl">营收增长</div></div>';
-            if (f.netIncome) html += '<div class="metric-item"><div class="val">' + f.netIncome + '</div><div class="lbl">净利润</div></div>';
-            if (f.grossMargin) html += '<div class="metric-item"><div class="val">' + f.grossMargin + '</div><div class="lbl">毛利率</div></div>';
-            if (f.eps) html += '<div class="metric-item"><div class="val">' + f.eps + '</div><div class="lbl">EPS</div></div>';
-            if (md.pe) html += '<div class="metric-item"><div class="val">' + md.pe + '</div><div class="lbl">PE</div></div>';
-            if (md.latestPrice) html += '<div class="metric-item"><div class="val">' + md.latestPrice + '</div><div class="lbl">最新价</div></div>';
+            if (f.revenue) html += '<div class="metric-item"><div class="val">' + val(f.revenue) + '</div><div class="lbl">营收</div></div>';
+            if (f.revenueGrowth) html += '<div class="metric-item"><div class="val" style="color:' + (String(f.revenueGrowth).indexOf('+') >= 0 ? '#16a34a' : '#666') + '">' + val(f.revenueGrowth) + '</div><div class="lbl">营收增长</div></div>';
+            if (f.netIncome) html += '<div class="metric-item"><div class="val">' + val(f.netIncome) + '</div><div class="lbl">净利润</div></div>';
+            if (f.grossMargin) html += '<div class="metric-item"><div class="val">' + val(f.grossMargin) + '</div><div class="lbl">毛利率</div></div>';
+            if (f.eps) html += '<div class="metric-item"><div class="val">' + val(f.eps) + '</div><div class="lbl">EPS</div></div>';
+            if (md.pe) html += '<div class="metric-item"><div class="val">' + val(md.pe) + '</div><div class="lbl">PE</div></div>';
+            if (md.latestPrice) html += '<div class="metric-item"><div class="val">' + val(md.latestPrice) + '</div><div class="lbl">最新价</div></div>';
             html += '</div>';
         }
 
-        if (s) html += '<div class="summary-text">' + s + '</div>';
+        if (summary) html += '<div class="summary-text">' + summary + '</div>';
 
         html += '<div style="margin-top:12px;font-size:.75rem;color:#bbb;text-align:right">AI 实时生成 · 仅供参考</div>';
         html += '</div>';
@@ -735,7 +748,7 @@ function requestLiveAnalysis() {
         area.innerHTML = html;
     })
     .catch(function(err) {
-        area.innerHTML = '<div class="live-result-card"><div class="error-text">⚠️ 分析请求失败：' + err.message + '</div></div>';
+        area.innerHTML = '<div class="live-result-card"><div class="error-text">⚠️ 分析请求失败：' + escapeHtml(err.message) + '</div></div>';
     })
     .finally(function() {
         btn.disabled = false;
