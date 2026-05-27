@@ -36,9 +36,14 @@ table { width: 100%; border-collapse: collapse; margin: 2em 0 !important; font-s
 th, td { border: 1px solid #E5E7EB; padding: 10px 12px; text-align: left; }
 th { background-color: #F9FAFB; font-weight: 600; color: #4B5563; }
 tr:nth-child(even) { background-color: #F9FAFB; }
-.references { font-size: 0.85rem; color: #4B5563; line-height: 1.6; }
-.references li { margin-bottom: 0.3em !important; word-break: break-all; }
-.references a { color: #0969da; }
+.references { font-size: 0.82rem; color: #94a3b8; line-height: 1.6; }
+.ref-section { background: #f3f5f8; border-radius: 10px; padding: 28px 24px; margin-top: 32px; }
+.ref-section h2 { font-size: .8rem !important; color: #64748b !important; margin: 0 0 14px !important; padding: 0 !important; border: none !important; font-weight: 600 !important; letter-spacing: .06em; text-align: center; }
+.ref-section ul { text-align: center; list-style: none !important; padding: 0 !important; margin: 0 !important; }
+.ref-section li { display: inline; margin: 0 !important; padding: 0 !important; }
+.ref-section li::after { content: "  ·  "; color: #cbd5e1; }
+.ref-section li:last-child::after { content: ""; }
+.ref-section .disclaimer { text-align: center; font-size: .78rem; color: #94a3b8; margin-top: 14px; padding-top: 14px; border-top: 1px solid #e2e6ed; }
 @media (max-width: 768px) { .prose-container { padding: 20px; margin: 20px auto; line-height: 1.7; } h1.report-title { font-size: 1.8rem !important; } h2 { font-size: 1.25rem !important; } h3 { font-size: 1.1rem !important; } h4 { font-size: 1rem !important; } p { font-size: 0.95rem !important; } .prose-container ul, .prose-container ol { padding-left: 1rem; font-size: 0.95rem; } }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -286,15 +291,17 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <h3>8.5 关键观察指标</h3>
 <p>投资者应重点关注：（1）DRAM/NAND合约价格趋势 （2）HBM出货量和客户认证进展（3）NVIDIA和AMD的AI芯片出货指引（4）美光季度毛利率和经营利润率走势（5）库存周转天数和资本支出计划变化。</p>
 
-<h2>附录：数据来源说明</h2>
-<ul class="references">
-    <li>财务数据：美光科技年报（10-K、10-Q）、财报电话会议记录</li>
-    <li>行业数据：IC Insights、TrendForce、Gartner 存储器市场报告</li>
-    <li>价格数据：公开市场行情</li>
-    <li>部分前瞻性数据和市场份额为基于公开信息的合理估算，已标注"约"值</li>
-    <li>数据截止日期：2026年5月27日</li>
-    <li><strong>免责声明：</strong>本报告仅供参考，不构成投资建议。报告中的分析基于公开信息和 AI 模型生成，可能存在误差。投资有风险，决策需谨慎。</li>
-</ul>
+            <div class="ref-section">
+                <h2>数据来源</h2>
+                <ul>
+                    <li>美光科技年报（10-K、10-Q）</li>
+                    <li>IC Insights、TrendForce、Gartner</li>
+                    <li>公开市场行情</li>
+                    <li>数据截止日期：2026年5月27日</li>
+                    <li>部分前瞻性数据为基于公开信息的合理估算，已标注"约"值</li>
+                </ul>
+                <div class="disclaimer">风险提示：以上内容基于公开信息、历史数据及模型分析结果整理生成，仅用于信息参考，不构成任何投资建议。存在一定滞后性与局限性，过往表现不预示未来结果，需结合个人风险承受能力综合判断。</div>
+            </div>
 
 </div><!-- /.prose-container -->
 

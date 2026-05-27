@@ -39,9 +39,14 @@ table { width: 100%; border-collapse: collapse; margin: 2em 0 !important; font-s
 th, td { border: 1px solid #E5E7EB; padding: 10px 12px; text-align: left; }
 th { background-color: #F9FAFB; font-weight: 600; color: #4B5563; }
 tr:nth-child(even) { background-color: #F9FAFB; }
-.references { font-size: 0.85rem; color: #4B5563; line-height: 1.6; }
-.references li { margin-bottom: 0.3em !important; word-break: break-all; }
-.references a { color: #0969da; }
+.references { font-size: 0.82rem; color: #94a3b8; line-height: 1.6; }
+.ref-section { background: #f3f5f8; border-radius: 10px; padding: 28px 24px; margin-top: 32px; }
+.ref-section h2 { font-size: .8rem !important; color: #64748b !important; margin: 0 0 14px !important; padding: 0 !important; border: none !important; font-weight: 600 !important; letter-spacing: .06em; text-align: center; }
+.ref-section ul { text-align: center; list-style: none !important; padding: 0 !important; margin: 0 !important; }
+.ref-section li { display: inline; margin: 0 !important; padding: 0 !important; }
+.ref-section li::after { content: "  ·  "; color: #cbd5e1; }
+.ref-section li:last-child::after { content: ""; }
+.ref-section .disclaimer { text-align: center; font-size: .78rem; color: #94a3b8; margin-top: 14px; padding-top: 14px; border-top: 1px solid #e2e6ed; }
 @media (max-width: 768px) { .prose-container { padding: 20px; margin: 20px auto; line-height: 1.7; } h1.report-title { font-size: 1.8rem !important; } h2 { font-size: 1.25rem !important; } h3 { font-size: 1.1rem !important; } h4 { font-size: 1rem !important; } p { font-size: 0.95rem !important; } .prose-container ul, .prose-container ol { padding-left: 1rem; font-size: 0.95rem; } }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -287,15 +292,16 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 <h3>8.5 Key Watch Items</h3>
 <p>Monitor: (1) DRAM/NAND contract pricing; (2) HBM shipment volume and customer qualification progress; (3) NVIDIA and AMD AI chip shipment guidance; (4) Micron's quarterly gross and operating margin trajectory; (5) Inventory days and CAPEX plan changes.</p>
 
-<h2>Appendix: Data Sources</h2>
-<ul class="references">
-    <li>Financial data: Micron annual reports (10-K, 10-Q), earnings call transcripts</li>
-    <li>Industry data: IC Insights, TrendForce, Gartner memory market reports</li>
-    <li>Price data: Public market data</li>
-    <li>Forward-looking data and market share figures are reasonable estimates based on public information; "~" denotes approximate values</li>
-    <li>Data as of: May 27, 2026</li>
-    <li><strong>Disclaimer:</strong> This report is for informational purposes only and does not constitute investment advice. Analyses are based on public information and AI-generated content, which may contain errors. Investing involves risk.</li>
-</ul>
+            <div class="ref-section">
+                <h2>Data Sources</h2>
+                <ul>
+                    <li>Micron Annual Reports (10-K, 10-Q)</li>
+                    <li>IC Insights, TrendForce, Gartner</li>
+                    <li>Public Market Data</li>
+                    <li>Data as of: May 27, 2026</li>
+                </ul>
+                <div class="disclaimer">Risk Warning: The above content is compiled based on public information, historical data, and model analysis results, intended only for informational reference and does not constitute any investment advice. There may be certain lag and limitations; past performance does not indicate future results. Individual risk tolerance should be considered when making judgments.</div>
+            </div>
 
 </div><!-- /.prose-container -->
 
