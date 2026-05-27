@@ -776,9 +776,14 @@ function requestReport() {
             btn.textContent = '🤖 请求 AI 在线分析';
             return;
         }
-        REPORT_CACHE[q] = data;
-        renderReport(data, area);
-        btn.textContent = '✅ 已生成';
+        // Report generated and saved to KV — redirect to full report page
+        if (data.ok && data.url) {
+            window.location.href = data.url;
+        } else {
+            area.innerHTML = '<div class="report-error">返回数据异常，请重试</div>';
+            btn.disabled = false;
+            btn.textContent = '🤖 请求 AI 在线分析';
+        }
         var nr = document.getElementById('noResults');
         if (nr) { var g = document.getElementById('companyGrid'); g.innerHTML = ''; }
     })
