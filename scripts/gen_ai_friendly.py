@@ -31,12 +31,46 @@ h.unicode_snob = True
 
 # ── 1. Generate Markdown copies ────────────────────────────────────────
 
-def extract_body(html):
-    """Extract article body HTML and convert to Markdown."""
-    m = re.search(r'<div class="article-body">(.*?)</div>', html, re.DOTALL)
+def _extract_div_content(html, class_name):
+    """Extract content from a div with given class, handling nested divs properly."""
+    pattern = rf'<div class="{re.escape(class_name)}">'
+    m = re.search(pattern, html)
     if not m:
         return None
-    body_html = m.group(1)
+    start = m.end()
+    pos = start
+    level = 1
+    while pos < len(html) and level > 0:
+        next_open = html.find('<div', pos)
+        next_close = html.find('</div>', pos)
+        if next_close == -1:
+            return None
+        if next_open != -1 and next_open < next_close:
+            level += 1
+            pos = next_open + 4
+        else:
+            level -= 1
+            if level == 0:
+                return html[start:next_close]
+            pos = next_close + 6
+    return None
+
+def extract_body(html):
+    """Extract article body HTML and convert to Markdown."""
+    body_html = _extract_div_content(html, 'article-body')
+    if not body_html:
+        body_html = _extract_div_content(html, 'prose-container')
+    if not body_html:
+        # Try report-content (CCB-style layout)
+        body_html = _extract_div_content(html, 'report-content')
+        if body_html:
+            # Strip chart cards, mobile TOC, disclaimer from CCB layout
+            body_html = re.sub(r'<div class="mobile-toc">.*?</div>', '', body_html, flags=re.DOTALL)
+            body_html = re.sub(r'<div class="chart-card">.*?</div>', '', body_html, flags=re.DOTALL)
+            body_html = re.sub(r'<div class="disclaimer">.*?</div>', '', body_html, flags=re.DOTALL)
+            body_html = re.sub(r'<div id="footer-placeholder">.*?</div>', '', body_html, flags=re.DOTALL)
+    if not body_html:
+        return None
     return h.handle(body_html).strip()
 
 
@@ -55,10 +89,18 @@ def gen_markdown_copies():
     local_h.unicode_snob = True
 
     def _extract(html):
-        m = re.search(r'<div class="article-body">(.*?)</div>', html, re.DOTALL)
-        if not m:
+        body = _extract_div_content(html, 'article-body')
+        if not body:
+            body = _extract_div_content(html, 'prose-container')
+        if not body:
+            # Try report-content (CCB-style layout)
+            body = _extract_div_content(html, 'report-content')
+            if body:
+                body = re.sub(r'<div class="mobile-toc">.*?</div>', '', body, flags=re.DOTALL)
+                body = re.sub(r'<div class="chart-card">.*?</div>', '', body, flags=re.DOTALL)
+                body = re.sub(r'<div class="disclaimer">.*?</div>', '', body, flags=re.DOTALL)
+        if not body:
             return None
-        body = m.group(1)
         body = re.sub(r'<p class="see-also"[^>]*>.*?</p>', '', body, flags=re.DOTALL)
         return local_h.handle(body).strip()
 
@@ -94,7 +136,7 @@ url: {BASE}/en/{board['id']}/{art['slug']}.html
             (MD_DIR / "en" / board["id"] / f'{art["slug"]}.md').write_text(md, encoding="utf-8")
             total += 1
 
-    # Chinese articles (count existing markdown files — no ZH HTML generated)
+    # Chinese articles — generate from HTML (ai-analyst reports exist as HTML)
     cn_md_dir = MD_DIR / "zh"
     cn_md_dir.mkdir(exist_ok=True)
     if CN_ARTICLES.exists():
@@ -102,9 +144,31 @@ url: {BASE}/en/{board['id']}/{art['slug']}.html
         for board in cn_data.get("boards", []):
             (cn_md_dir / board["id"]).mkdir(exist_ok=True)
             for art in board.get("posts", []):
-                path = cn_md_dir / board["id"] / f'{art["slug"]}.md'
-                if path.exists():
+                md_path = cn_md_dir / board["id"] / f'{art["slug"]}.md'
+                if md_path.exists():
                     total += 1
+                    continue
+                # Try to generate from HTML (ai-analyst reports have HTML but no md)
+                html_path = ROOT / board["id"] / f'{art["slug"]}.html'
+                if html_path.exists():
+                    html = html_path.read_text(encoding="utf-8")
+                    md_body = _extract(html)
+                    if md_body:
+                        md = f"""---
+title: "{art['title']}"
+description: "{art.get('description', '')}"
+date: {art['date']}
+board: {board['id']}
+url: {BASE}/{board['id']}/{art['slug']}.html
+---
+
+# {art['title']}
+
+{md_body}
+"""
+                        md_path.write_text(md, encoding="utf-8")
+                        total += 1
+                        print(f'  MD(CN): {md_path}')
 
     print(f"  Markdown copies: {total} articles -> /md/")
     return total
@@ -350,10 +414,18 @@ def gen_llms_full():
     local_h.unicode_snob = True
 
     def _extract(html):
-        m = re.search(r'<div class="article-body">(.*?)</div>', html, re.DOTALL)
-        if not m:
+        body = _extract_div_content(html, 'article-body')
+        if not body:
+            body = _extract_div_content(html, 'prose-container')
+        if not body:
+            # Try report-content (CCB-style layout)
+            body = _extract_div_content(html, 'report-content')
+            if body:
+                body = re.sub(r'<div class="mobile-toc">.*?</div>', '', body, flags=re.DOTALL)
+                body = re.sub(r'<div class="chart-card">.*?</div>', '', body, flags=re.DOTALL)
+                body = re.sub(r'<div class="disclaimer">.*?</div>', '', body, flags=re.DOTALL)
+        if not body:
             return None
-        body = m.group(1)
         body = re.sub(r'<p class="see-also"[^>]*>.*?</p>', '', body, flags=re.DOTALL)
         return local_h.handle(body).strip()
 
