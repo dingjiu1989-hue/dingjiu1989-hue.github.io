@@ -58,9 +58,19 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
     }
     .btt-btn.show { opacity: 1; visibility: visible; }
     .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
+
+     .nav-pill { font-size: .72rem; padding: 4px 10px; } }
+    
+
+    /* ── Section Navigation ── */
+    .section-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; justify-content: center; }
+    .nav-pill { display: inline-block; padding: 5px 12px; font-size: .78rem; font-weight: 600; border-radius: 999px; background: #f1f5f9; color: #475569; text-decoration: none; transition: all .15s; white-space: nowrap; }
+    .nav-pill:hover { background: #2563eb; color: #fff; }
+    @media (max-width: 480px) { .section-nav { gap: 4px; } .nav-pill { font-size: .72rem; padding: 4px 10px; } }
+    
 </style>
 </head>
-<body>
+<body class="bg-gray-50">
 <div class="report-wrap">
     <!-- TOC Sidebar -->
     <nav class="toc-sidebar" aria-label="Contents">
@@ -93,9 +103,11 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
             </select>
         </div>
         <div class="prose-container">
-
-
-<h1 class="report-title">Amazon (AMZN) Comprehensive Investment Analysis</h1>
+    <!-- Section Navigation -->
+    <div class="section-nav">
+        <a href="#s1" class="nav-pill">Overview</a> <a href="#s2" class="nav-pill">Financials</a> <a href="#s3" class="nav-pill">Technical</a> <a href="#s4" class="nav-pill">Sentiment</a> <a href="#s5" class="nav-pill">Competition</a> <a href="#s6" class="nav-pill">Valuation</a> <a href="#s7" class="nav-pill">Risks</a> <a href="#s8" class="nav-pill">Conclusion</a>
+    </div>
+    <h1 class="report-title">Amazon (AMZN) Comprehensive Investment Analysis</h1>
 <p style="text-align:center;color:#6B7280;font-size:.9rem!important;margin-top:-.5rem">Fiscal Year 2025 &mdash; Mid-2026 Outlook</p>
 <p style="text-align:center;color:#9CA3AF;font-size:.8rem!important">Published May 27, 2026 &middot; Exchange: NASDAQ &middot; Sector: Consumer Cyclical / Technology</p>
 
@@ -551,7 +563,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <div class="disclaimer">
     <strong>Disclaimer:</strong> This analysis is for informational and educational purposes only and does not constitute investment advice. It is based on publicly available information, historical data, and model analysis as of the report date, which may involve certain lag and limitations. Past performance does not guarantee future results. Investors should make their own independent assessment and consider their personal risk tolerance before making any investment decisions.
 </div>
-</body>
-</html>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+</body>
+</html>

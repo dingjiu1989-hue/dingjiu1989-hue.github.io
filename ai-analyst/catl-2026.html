@@ -70,6 +70,16 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     }
     .btt-btn.show { opacity: 1; visibility: visible; }
     .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
+
+     .nav-pill { font-size: .72rem; padding: 4px 10px; } }
+    
+
+    /* ── Section Navigation ── */
+    .section-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; justify-content: center; }
+    .nav-pill { display: inline-block; padding: 5px 12px; font-size: .78rem; font-weight: 600; border-radius: 999px; background: #f1f5f9; color: #475569; text-decoration: none; transition: all .15s; white-space: nowrap; }
+    .nav-pill:hover { background: #2563eb; color: #fff; }
+    @media (max-width: 480px) { .section-nav { gap: 4px; } .nav-pill { font-size: .72rem; padding: 4px 10px; } }
+    
 </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -106,9 +116,11 @@ tr:nth-child(even) { background-color: #F9FAFB; }
             </select>
         </div>
         <div class="prose-container">
-
-
-<header class="flex flex-col items-center text-center">
+    <!-- Section Navigation -->
+    <div class="section-nav">
+        <a href="#s1" class="nav-pill">公司概况</a> <a href="#s2" class="nav-pill">财务分析</a> <a href="#s3" class="nav-pill">技术分析</a> <a href="#s4" class="nav-pill">市场情绪</a> <a href="#s5" class="nav-pill">竞品对比</a> <a href="#s6" class="nav-pill">估值</a> <a href="#s7" class="nav-pill">风险</a> <a href="#s8" class="nav-pill">结论</a>
+    </div>
+    <header class="flex flex-col items-center text-center">
     <div class="flex gap-3 mb-8">
         <span class="px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-widest rounded">深度研究</span>
         <span class="px-3 py-1 bg-green-600 text-white text-xs font-bold uppercase tracking-widest rounded">宁德时代</span>
@@ -341,7 +353,7 @@ new Chart(document.getElementById('chart_balance'),{type:'bar',data:{labels:['�
 new Chart(document.getElementById('chart_price'),{type:'line',data:{labels:['6月','7月','8月','9月','10月','11月','12月','1月','2月','3月','4月','5月'],datasets:[{label:'CATL（¥）',data:[247,260,301,396,383,367,362,345,337,396,436,402],borderColor:'#059669',backgroundColor:'rgba(5,150,105,0.08)',borderWidth:2,fill:true,tension:0.2,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'¥'}}}}});
 new Chart(document.getElementById('chart_targets'),{type:'bar',data:{labels:['中信证券','华泰证券','摩根士丹利','高盛','共识'],datasets:[{label:'目标价（¥）',data:[520,480,430,500,478],backgroundColor:['#059669','#059669','#F59E0B','#059669','#3B82F6'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},min:350,title:{display:true,text:'¥'}}}}});
 })();</script>
-</body>
-</html>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+</body>
+</html>

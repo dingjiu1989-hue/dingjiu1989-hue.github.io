@@ -56,6 +56,16 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
     }
     .btt-btn.show { opacity: 1; visibility: visible; }
     .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
+
+     .nav-pill { font-size: .72rem; padding: 4px 10px; } }
+    
+
+    /* ── Section Navigation ── */
+    .section-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; justify-content: center; }
+    .nav-pill { display: inline-block; padding: 5px 12px; font-size: .78rem; font-weight: 600; border-radius: 999px; background: #f1f5f9; color: #475569; text-decoration: none; transition: all .15s; white-space: nowrap; }
+    .nav-pill:hover { background: #2563eb; color: #fff; }
+    @media (max-width: 480px) { .section-nav { gap: 4px; } .nav-pill { font-size: .72rem; padding: 4px 10px; } }
+    
 </style><script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head>
 <body class="bg-gray-50"><div class="report-wrap">
     <!-- TOC Sidebar -->
@@ -89,9 +99,11 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
             </select>
         </div>
         <div class="prose-container">
-
-
-<header class="flex flex-col items-center text-center">
+    <!-- Section Navigation -->
+    <div class="section-nav">
+        <a href="#s1" class="nav-pill">Overview</a> <a href="#s2" class="nav-pill">Financials</a> <a href="#s3" class="nav-pill">Technical</a> <a href="#s4" class="nav-pill">Sentiment</a> <a href="#s5" class="nav-pill">Competition</a> <a href="#s6" class="nav-pill">Valuation</a> <a href="#s7" class="nav-pill">Risks</a> <a href="#s8" class="nav-pill">Conclusion</a>
+    </div>
+    <header class="flex flex-col items-center text-center">
 <div class="flex gap-3 mb-8"><span class="px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-widest rounded">Deep Research</span><span class="px-3 py-1 bg-blue-700 text-white text-xs font-bold uppercase tracking-widest rounded">Meta</span></div>
 <h1 class="report-title">Meta Platforms Comprehensive Investment Analysis</h1>
 <div class="flex items-center text-sm text-gray-500 font-sans mb-4 border-t border-gray-100 pt-4 mt-4">
@@ -217,6 +229,6 @@ new Chart(document.getElementById('chart_mcap'),{type:'bar',data:{labels:['NVIDI
 new Chart(document.getElementById('chart_revenue'),{type:'line',data:{labels:['2021','2022','2023','2024','2025'],datasets:[{label:'Total Rev ($B)',data:[117.9,116.6,134.9,156.5,172.4],borderColor:'#3B82F6',backgroundColor:'rgba(59,130,246,0.08)',borderWidth:3,fill:true,tension:0.2},{label:'Op Margin (%)',data:[39.7,24.8,34.7,36.2,38],borderColor:'#10B981',borderWidth:3,fill:false,tension:0.2,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom'}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'$ Billions'}},y1:{position:'right',title:{display:true,text:'Margin (%)'},grid:{display:false}}}}});
 new Chart(document.getElementById('chart_price'),{type:'line',data:{labels:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],datasets:[{label:'META ($)',data:[470,450,465,490,510,535,520,540,560,590,620,580],borderColor:'#8B5CF6',backgroundColor:'rgba(139,92,246,0.08)',borderWidth:2,fill:true,tension:0.2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'USD'}}}}});
 })();</script>
-</body></html>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+</body></html>

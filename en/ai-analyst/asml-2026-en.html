@@ -62,9 +62,19 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
     }
     .btt-btn.show { opacity: 1; visibility: visible; }
     .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
+
+     .nav-pill { font-size: .72rem; padding: 4px 10px; } }
+    
+
+    /* ── Section Navigation ── */
+    .section-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; justify-content: center; }
+    .nav-pill { display: inline-block; padding: 5px 12px; font-size: .78rem; font-weight: 600; border-radius: 999px; background: #f1f5f9; color: #475569; text-decoration: none; transition: all .15s; white-space: nowrap; }
+    .nav-pill:hover { background: #2563eb; color: #fff; }
+    @media (max-width: 480px) { .section-nav { gap: 4px; } .nav-pill { font-size: .72rem; padding: 4px 10px; } }
+    
 </style>
 </head>
-<body>
+<body class="bg-gray-50">
 
 <div class="report-wrap">
     <!-- TOC Sidebar -->
@@ -98,9 +108,11 @@ th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){bac
             </select>
         </div>
         <div class="prose-container">
-
-
-<!-- Badge -->
+    <!-- Section Navigation -->
+    <div class="section-nav">
+        <a href="#s1" class="nav-pill">Overview</a> <a href="#s2" class="nav-pill">Financials</a> <a href="#s3" class="nav-pill">Technical</a> <a href="#s4" class="nav-pill">Sentiment</a> <a href="#s5" class="nav-pill">Competition</a> <a href="#s6" class="nav-pill">Valuation</a> <a href="#s7" class="nav-pill">Risks</a> <a href="#s8" class="nav-pill">Conclusion</a>
+    </div>
+    <!-- Badge -->
 <div class="flex flex-wrap items-center gap-3 mb-6">
 <span class="bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full">ASML</span>
 <span class="text-xs text-gray-500"><i class="far fa-calendar-alt mr-1"></i>May 27, 2026</span>
@@ -405,7 +417,7 @@ new Chart(document.getElementById('chart_targets'),{type:'bar',data:{labels:['Mo
 })();
 </script>
 
-</body>
-</html>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+</body>
+</html>
