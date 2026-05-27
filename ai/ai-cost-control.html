@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/ai-cost-control.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "665",
+      "wordCount": "448",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "zh-CN",
@@ -75,7 +75,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/ai-cost-control.html"},
-      "articleBody": "AI成本的结构   AI应用的运营成本主要由三部分构成：模型调用费（API或GPU）、基础设施费（服务器、存储、网络）和数据费（向量数据库、搜索服务）。其中模型调用费往往占比最大，也是最需要优化的部分。   缓存策略   缓存是降低AI成本最直接有效的手段。   精确缓存   对完全相同的查询直接返回缓存结果。        cache_key   =   hash  (  query   +   str  (  context  ))   if   cache  .  get  (  cache_key  ):       return   cache  .  get  (  cache_key  )   else  :       result   =   llm  .  generate  (  query  )       cache  .  set  (  cache_key  ,   result  ,   ttl  =  3600  )        适用场景：高频重复查询、固定问答对。   语义缓存   语义缓存识别语义相似的查询，即使措辞不同也能命中缓存。   实现方案： - 将查询转为向量，在缓存中检索相似查询 - 设相似度阈值，高于阈值的查询视为命中 - 需要注意响应准确性和时效性   缓存策略建议         缓存类型   命中率   实现复杂度   适用场景           精确缓存   低   低   高频重复查询       语义缓存   中   中   FAQ类查询       分层缓存   高   高   综合场景         请求批处理   将多个独立的LLM请求合并为一个请求，减少API调用次数。   批处理模式    同步批处理：  将多个非实时的请求收集后一起发送，适用于数据标注、批量生成等场景。    异步批处理：  OpenAI等API支持Batch API，可享受50%的折扣，适合对延迟不敏感的任务。   实现要点     设置合理的批处理窗口（如100ms或累计10个请求）   请求优先级调度（实时请求优先发送）   错误隔离（单个请求失败不影响其他请求）     模型降级策略   动态模型选择   根据请求的复杂度和重要性动态选择模型：       高重要性+高复杂度 → 旗舰模型（GPT-4o/Claude Opus） 高重要性+低复杂度 → 均衡模型（GPT-4o-mini/Claude Sonnet） 低重要性+高复杂度 → 均衡模型 低重要性+低复杂度 → 轻量模型（Gemini Flash/Claude Haiku）       Token预算控制     设置每用户/每天的Token使用上限   限制最大输出长度（一般回答500字以内）   使用更精简的Prompt模板     用量监控与告警   建立全面的成本监控体系：   关键指标      每日Token消耗 ：按模型和用户维度统计    API费用趋势 ：日/周/月环比变化    缓存命中率 ：衡量缓存策略效果    各级模型调用比例 ：检验降级策略执行情况     告警阈值     日消耗超过预算的70%、90%、100%   单个用户消耗异常激增   缓存命中率低于预期     成本优化实践   月度优化流程      第一周 ：分析上月成本数据，识别优化机会    第二周 ：调整缓存策略和路由规则    第三周 ：评估优化效果，微调参数    第四周 ：固化有效策略，形成标准流程     实际效果   良好的成本控制策略可以将AI应用的月度运营成本降低50%-70%，同时保持90%以上的用户体验质量。成本优化是一个持续的过程，需要不断监控、分析和调整。"
+      "articleBody": "AI成本的结构   AI应用的运营成本主要由三部分构成：模型调用费（API或GPU）、基础设施费（服务器、存储、网络）和数据费（向量数据库、搜索服务）。其中模型调用费往往占比最大，也是最需要优化的部分。   缓存策略   缓存是降低AI成本最直接有效的手段。   精确缓存   对完全相同的查询直接返回缓存结果。    cache_key = hash(query + str(context)) if cache.get(cache_key):     return cache.get(cache_key) else:     result = llm.generate(query)     cache.set(cache_key, result, ttl=3600)      适用场景：高频重复查询、固定问答对。   语义缓存   语义缓存识别语义相似的查询，即使措辞不同也能命中缓存。   实现方案： - 将查询转为向量，在缓存中检索相似查询 - 设相似度阈值，高于阈值的查询视为命中 - 需要注意响应准确性和时效性   缓存策略建议         缓存类型   命中率   实现复杂度   适用场景           精确缓存   低   低   高频重复查询       语义缓存   中   中   FAQ类查询       分层缓存   高   高   综合场景         请求批处理   将多个独立的LLM请求合并为一个请求，减少API调用次数。   批处理模式    同步批处理：  将多个非实时的请求收集后一起发送，适用于数据标注、批量生成等场景。    异步批处理：  OpenAI等API支持Batch API，可享受50%的折扣，适合对延迟不敏感的任务。   实现要点     设置合理的批处理窗口（如100ms或累计10个请求）   请求优先级调度（实时请求优先发送）   错误隔离（单个请求失败不影响其他请求）     模型降级策略   动态模型选择   根据请求的复杂度和重要性动态选择模型：    高重要性+高复杂度 → 旗舰模型（GPT-4o/Claude Opus） 高重要性+低复杂度 → 均衡模型（GPT-4o-mini/Claude Sonnet） 低重要性+高复杂度 → 均衡模型 低重要性+低复杂度 → 轻量模型（Gemini Flash/Claude Haiku）      Token预算控制     设置每用户/每天的Token使用上限   限制最大输出长度（一般回答500字以内）   使用更精简的Prompt模板     用量监控与告警   建立全面的成本监控体系：   关键指标      每日Token消耗 ：按模型和用户维度统计    API费用趋势 ：日/周/月环比变化    缓存命中率 ：衡量缓存策略效果    各级模型调用比例 ：检验降级策略执行情况     告警阈值     日消耗超过预算的70%、90%、100%   单个用户消耗异常激增   缓存命中率低于预期     成本优化实践   月度优化流程      第一周 ：分析上月成本数据，识别优化机会    第二周 ：调整缓存策略和路由规则    第三周 ：评估优化效果，微调参数    第四周 ：固化有效策略，形成标准流程     实际效果   良好的成本控制策略可以将AI应用的月度运营成本降低50%-70%，同时保持90%以上的用户体验质量。成本优化是一个持续的过程，需要不断监控、分析和调整。"
     }
     </script>
     <script type="application/ld+json">
@@ -120,11 +120,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>3 分钟阅读</span>
+          <span>2 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>665 字</span>
+          <span>448 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-cost-control.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-cost-control.png" alt="AI成本控制：缓存策略、批处理、模型降级的实战方案" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（17）</summary><ol><li><a href="#ai成本的结构">AI成本的结构</a></li><li><a href="#缓存策略">缓存策略</a></li><li><a href="#精确缓存">精确缓存</a></li><li><a href="#语义缓存">语义缓存</a></li><li><a href="#缓存策略建议">缓存策略建议</a></li><li><a href="#请求批处理">请求批处理</a></li><li><a href="#批处理模式">批处理模式</a></li><li><a href="#实现要点">实现要点</a></li><li><a href="#模型降级策略">模型降级策略</a></li><li><a href="#动态模型选择">动态模型选择</a></li><li><a href="#token预算控制">Token预算控制</a></li><li><a href="#用量监控与告警">用量监控与告警</a></li><li><a href="#关键指标">关键指标</a></li><li><a href="#告警阈值">告警阈值</a></li><li><a href="#成本优化实践">成本优化实践</a></li><li><a href="#月度优化流程">月度优化流程</a></li><li><a href="#实际效果">实际效果</a></li></ol></details>
@@ -134,13 +134,13 @@
 <p>缓存是降低AI成本最直接有效的手段。</p>
 <h3>精确缓存</h3>
 <p>对完全相同的查询直接返回缓存结果。</p>
-<div class="codehilite"><pre><span></span><code><span class="n">cache_key</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="n">query</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">context</span><span class="p">))</span>
-<span class="k">if</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cache_key</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-    <span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">cache_key</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">cache_key = hash(query + str(context))
+if cache.get(cache_key):
+    return cache.get(cache_key)
+else:
+    result = llm.generate(query)
+    cache.set(cache_key, result, ttl=3600)
+</code></pre>
 
 <p>适用场景：高频重复查询、固定问答对。</p>
 <h3>语义缓存</h3>
@@ -196,11 +196,11 @@ OpenAI等API支持Batch API，可享受50%的折扣，适合对延迟不敏感�
 <h2>模型降级策略</h2>
 <h3>动态模型选择</h3>
 <p>根据请求的复杂度和重要性动态选择模型：</p>
-<div class="codehilite"><pre><span></span><code>高重要性+高复杂度 → 旗舰模型（GPT-4o/Claude Opus）
+<pre class="codehilite"><code>高重要性+高复杂度 → 旗舰模型（GPT-4o/Claude Opus）
 高重要性+低复杂度 → 均衡模型（GPT-4o-mini/Claude Sonnet）
 低重要性+高复杂度 → 均衡模型
 低重要性+低复杂度 → 轻量模型（Gemini Flash/Claude Haiku）
-</code></pre></div>
+</code></pre>
 
 <h3>Token预算控制</h3>
 <ul>
