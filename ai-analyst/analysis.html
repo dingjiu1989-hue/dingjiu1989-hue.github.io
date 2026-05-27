@@ -290,6 +290,76 @@
             margin-left: auto;
         }
         .random-btn:hover { border-color: #f59e0b; color: #f59e0b; }
+        .live-analysis-btn {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: .95rem;
+            cursor: pointer;
+            transition: transform .15s, box-shadow .15s;
+        }
+        .live-analysis-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(37,99,235,.3); }
+        .live-analysis-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+        .live-loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        .live-loading.show { display: block; }
+        .live-loading .spinner {
+            display: inline-block;
+            width: 32px; height: 32px;
+            border: 3px solid #e5e7eb;
+            border-top-color: #2563eb;
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .live-loading .msg { margin-top: 12px; color: #888; font-size: .9rem; }
+        .live-result-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 16px;
+            text-align: left;
+        }
+        .live-result-card h3 { margin: 0 0 16px; font-size: 1.1rem; }
+        .live-result-card .metric-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .live-result-card .metric-item {
+            flex: 1;
+            min-width: 100px;
+        }
+        .live-result-card .metric-item .val {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111;
+        }
+        .live-result-card .metric-item .lbl {
+            font-size: .75rem;
+            color: #999;
+        }
+        .live-result-card .summary-text {
+            font-size: .9rem;
+            color: #555;
+            line-height: 1.7;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .live-result-card .error-text {
+            color: #dc2626;
+            font-size: .9rem;
+        }
         .no-results {
             text-align: center;
             padding: 60px 20px;
@@ -346,6 +416,7 @@
             </div>
             <h2 id="gridTitle">全部公司</h2>
             <div class="company-grid" id="companyGrid"></div>
+            <div id="liveAnalysisArea" style="max-width:640px;margin:0 auto;"></div>
         </div>
     </div>
 </main>
@@ -405,7 +476,7 @@
     function renderGrid(list) {
         var grid = document.getElementById('companyGrid');
         if (list.length === 0) {
-            grid.innerHTML = '<div class="no-results"><strong>未找到匹配公司</strong><br>试试其他关键词，如 "NVIDIA"、"台积电"或使用英文名搜索</div>';
+            grid.innerHTML = '<div class="no-results" id="noResults"><strong>未找到匹配公司</strong><br>目前覆盖 17 家头部科技公司，试试其他关键词如 "NVIDIA"、"台积电"、"宁德时代"<br><button class="live-analysis-btn" id="liveBtn" onclick="requestLiveAnalysis()">🤖 请求 AI 在线分析</button><br><span style="font-size:.8rem;color:#bbb;margin-top:8px;display:inline-block;">将通过实时数据生成初步分析</span></div>';
             return;
         }
         grid.innerHTML = list.map(renderCard).join('');
@@ -517,6 +588,11 @@
                     return;
                 }
             }
+            // No match — scroll to results area for feedback
+            var gridTitle = document.getElementById('gridTitle');
+            if (gridTitle) {
+                gridTitle.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         } else if (e.key === 'Escape') {
             document.getElementById('autocompleteList').classList.remove('show');
         }
@@ -594,6 +670,77 @@ function historySearch(name) {
 function clearHistory() {
     localStorage.removeItem('ai_analyst_history');
     renderHistory();
+}
+
+/* ── live AI analysis ── */
+var WORKER_URL = ''; // Set to deployed Worker URL, e.g. 'https://ai-analyst.your-name.workers.dev'
+
+function requestLiveAnalysis() {
+    var btn = document.getElementById('liveBtn');
+    var area = document.getElementById('liveAnalysisArea');
+    var q = (document.getElementById('searchInput').value || '').trim();
+    if (!q) q = document.querySelector('.no-results strong')?.textContent || '';
+
+    if (!WORKER_URL) {
+        area.innerHTML = '<div class="live-result-card"><div class="error-text">⚠️ 在线分析服务尚未部署。请先部署 Cloudflare Worker。</div></div>';
+        return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = '⏳ 请求中...';
+    area.innerHTML = '<div class="live-loading show"><div class="spinner"></div><div class="msg">正在分析「' + q + '」的财务数据...</div></div>';
+
+    fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ company: q }),
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        if (data.error && !data.analysis) {
+            area.innerHTML = '<div class="live-result-card"><div class="error-text">' + data.error + '</div></div>';
+            return;
+        }
+        var a = data.analysis || data;
+        var s = a.summary || '';
+        var f = a.financials || {};
+        var bs = a.balanceSheet || {};
+        var md = a.marketData || {};
+        var co = a.company || {};
+        var fc = a.cashFlow || {};
+
+        var html = '<div class="live-result-card">' +
+            '<h3>' + (co.name || q) + (co.code ? ' <span style="font-weight:400;color:#999;font-size:.9rem">' + co.code + '</span>' : '') + '</h3>';
+
+        if (co.sector) html += '<div style="font-size:.82rem;color:#888;margin-bottom:12px">' + co.sector + (co.marketCap ? ' · 市值' + co.marketCap : '') + '</div>';
+
+        var hasMetrics = f.revenue || f.netIncome || f.eps || md.latestPrice;
+        if (hasMetrics) {
+            html += '<div class="metric-row">';
+            if (f.revenue) html += '<div class="metric-item"><div class="val">' + f.revenue + '</div><div class="lbl">营收</div></div>';
+            if (f.revenueGrowth) html += '<div class="metric-item"><div class="val" style="color:' + (f.revenueGrowth.indexOf('+') >= 0 ? '#16a34a' : '#666') + '">' + f.revenueGrowth + '</div><div class="lbl">营收增长</div></div>';
+            if (f.netIncome) html += '<div class="metric-item"><div class="val">' + f.netIncome + '</div><div class="lbl">净利润</div></div>';
+            if (f.grossMargin) html += '<div class="metric-item"><div class="val">' + f.grossMargin + '</div><div class="lbl">毛利率</div></div>';
+            if (f.eps) html += '<div class="metric-item"><div class="val">' + f.eps + '</div><div class="lbl">EPS</div></div>';
+            if (md.pe) html += '<div class="metric-item"><div class="val">' + md.pe + '</div><div class="lbl">PE</div></div>';
+            if (md.latestPrice) html += '<div class="metric-item"><div class="val">' + md.latestPrice + '</div><div class="lbl">最新价</div></div>';
+            html += '</div>';
+        }
+
+        if (s) html += '<div class="summary-text">' + s + '</div>';
+
+        html += '<div style="margin-top:12px;font-size:.75rem;color:#bbb;text-align:right">AI 实时生成 · 仅供参考</div>';
+        html += '</div>';
+
+        area.innerHTML = html;
+    })
+    .catch(function(err) {
+        area.innerHTML = '<div class="live-result-card"><div class="error-text">⚠️ 分析请求失败：' + err.message + '</div></div>';
+    })
+    .finally(function() {
+        btn.disabled = false;
+        btn.textContent = '🤖 请求 AI 在线分析';
+    });
 }
 </script>
 </body>
