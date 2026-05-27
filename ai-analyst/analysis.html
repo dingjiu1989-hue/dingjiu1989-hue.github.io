@@ -7,7 +7,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="alternate icon" href="/favicon.ico">
     <meta property="og:title" content="AI分析师 — 智能公司搜索">
-    <meta property="og:description" content="搜索全球科技公司，快速获取 AI 驱动的深度投资分析报告。覆盖 NVIDIA、Apple、台积电、宁德时代等 17 家头部公司。">
+    <meta property="og:description" content="搜索全球科技公司，快速获取 AI 驱动的深度投资分析报告。覆盖 NVIDIA、Apple、台积电、宁德时代等 19 家头部公司。">
     <meta property="og:url" content="https://aidev.fit/ai-analyst/analysis.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="AI自习室">
@@ -18,7 +18,7 @@
     <meta name="twitter:description" content="搜索全球科技公司，快速获取 AI 驱动的深度投资分析报告。">
     <meta name="twitter:image" content="https://aidev.fit/images/logo.png">
     <title>AI分析师 — 智能公司搜索</title>
-    <meta name="description" content="搜索全球科技公司，快速获取 AI 驱动的深度投资分析报告。覆盖 NVIDIA、Apple、台积电、宁德时代等 17 家头部公司。">
+    <meta name="description" content="搜索全球科技公司，快速获取 AI 驱动的深度投资分析报告。覆盖 NVIDIA、Apple、台积电、宁德时代等 19 家头部公司。">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="canonical" href="https://aidev.fit/ai-analyst/analysis.html">
     <style>
@@ -476,7 +476,7 @@
     function renderGrid(list) {
         var grid = document.getElementById('companyGrid');
         if (list.length === 0) {
-            grid.innerHTML = '<div class="no-results" id="noResults"><strong>未找到匹配公司</strong><br>目前覆盖 17 家头部科技公司，试试其他关键词如 "NVIDIA"、"台积电"、"宁德时代"<br><button class="live-analysis-btn" id="liveBtn" onclick="requestLiveAnalysis()">🤖 请求 AI 在线分析</button><br><span style="font-size:.8rem;color:#bbb;margin-top:8px;display:inline-block;">将通过实时数据生成初步分析</span></div>';
+            grid.innerHTML = '<div class="no-results" id="noResults"><strong>未找到匹配公司</strong><br>目前覆盖 19 家头部科技公司。<br><br><button class="live-analysis-btn" id="requestReportBtn" onclick="requestReport()">📝 请求 Claude 生成报告</button><br><span id="requestStatus" style="font-size:.85rem;color:#888;margin-top:8px;display:inline-block;">提交后将通知 AI 助手生成完整 8 段式深度分析报告</span></div>';
             return;
         }
         grid.innerHTML = list.map(renderCard).join('');
@@ -679,8 +679,41 @@ function escapeHtml(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
-/* ── live AI analysis ── */
+/* ── report request ── */
 var WORKER_URL = 'https://ai-analyst.dingjiu1989.workers.dev';
+
+function requestReport() {
+    var btn = document.getElementById('requestReportBtn');
+    var status = document.getElementById('requestStatus');
+    var q = (document.getElementById('searchInput').value || '').trim();
+    if (!q) { status.textContent = '请先输入公司名称'; return; }
+
+    btn.disabled = true;
+    btn.textContent = '⏳ 提交中...';
+    status.textContent = '正在提交「' + escapeHtml(q) + '」的生成请求...';
+
+    fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ company: q }),
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        if (data.error) {
+            status.textContent = '❌ ' + escapeHtml(data.error);
+            btn.disabled = false;
+            btn.textContent = '📝 请求 Claude 生成报告';
+            return;
+        }
+        status.innerHTML = '✅ 已提交！<strong>' + escapeHtml(q) + '</strong> 的生成请求已发送给 Claude，报告完成后将自动部署上线。';
+        btn.textContent = '✅ 已提交';
+    })
+    .catch(function(err) {
+        status.textContent = '❌ 提交失败：' + escapeHtml(err.message);
+        btn.disabled = false;
+        btn.textContent = '📝 请求 Claude 生成报告';
+    });
+}
 
 function requestLiveAnalysis() {
     var btn = document.getElementById('liveBtn');
