@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/tools/cli-gong-ju.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "447",
+      "wordCount": "928",
       "keywords": "Technology, DevTools, Productivity",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "zh-CN",
@@ -75,7 +75,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tools/cli-gong-ju.html"},
-      "articleBody": "为什么使用现代化替代   经典的Unix命令行工具功能强大，但界面和交互方式相对原始。近年来涌现出一批现代化替代品，它们在保持兼容性的同时，提供了更友好的界面和更丰富的功能。   bat：cat的现代化替代   bat是带有语法高亮和行号的cat增强版。   核心特性     自动语法高亮（支持数百种语言）   行号显示   Git变更标记   非打印字符显示   支持分页器      # 基本使用 bat file.py  # 显示非打印字符 bat -A file.txt  # 与管道结合使用 bat file.json | jq .      配置建议    # 别名设置 alias cat='bat'  # 设置主题 export BAT_THEME='Dracula'      htop：top的现代替代   htop提供更直观的进程管理和系统监控界面。   核心功能     彩色显示，直观易读   可滚动进程列表   树形视图查看进程关系   鼠标支持   快捷键操作（F键菜单）      替代品：  btop（更美观，支持GPU和磁盘监控）   duf：df的现代替代   duf以表格形式展示磁盘使用情况，比df的输出更加直观。    # 基本使用 duf  # 只显示本地文件系统 duf --only local  # 按使用率排序 duf --sort usage      输出包含：文件系统、类型、大小、已用、可用、使用率和挂载点，一目了然。   ncdu：du的现代替代   ncdu提供交互式的磁盘空间分析界面。    # 扫描当前目录 ncdu  # 扫描并导出结果 ncdu -o scan.json /home ncdu -f scan.json  # 导入查看      使用方向键导航，可以快速找出占用空间最大的目录和文件。   更多现代化工具   fd：find的替代    # 查找文件 fd &quot;pattern&quot;       # 比 find . -name &quot;pattern&quot; 快得多  # 正则搜索 fd '\\.py$'  # 排除特定目录 fd &quot;config&quot; --exclude node_modules      sd：sed的替代    # 更直观的替换语法 sd &quot;old_text&quot; &quot;new_text&quot; file.txt sd &quot;foo&quot; &quot;bar&quot; **/*.rs  # 递归替换      delta：diff的替代   提供语法高亮和行号的diff输出，与Git深度集成。    # Git配置 [core]     pager = delta [delta]     navigate = true      procs：ps的替代    # 更可读的进程信息 procs procs --tree   # 树形视图 procs docker   # 按关键词过滤      安装方式    # macOS brew install bat htop duf ncdu fd sd delta procs  # Linux # 各自项目的Release页面下载      这些现代化工具可以让终端工作变得更加高效和愉悦，值得逐步替换到日常工具箱中。"
+      "articleBody": "为什么使用现代化替代   经典的Unix命令行工具功能强大，但界面和交互方式相对原始。近年来涌现出一批现代化替代品，它们在保持兼容性的同时，提供了更友好的界面和更丰富的功能。   bat：cat的现代化替代   bat是带有语法高亮和行号的cat增强版。   核心特性     自动语法高亮（支持数百种语言）   行号显示   Git变更标记   非打印字符显示   支持分页器          # 基本使用  bat   file.py   # 显示非打印字符  bat   -A   file.txt   # 与管道结合使用  bat   file.json    |    jq   .       配置建议        # 别名设置   alias     cat  =  &#39;bat&#39;    # 设置主题   export     BAT_THEME  =  &#39;Dracula&#39;        htop：top的现代替代   htop提供更直观的进程管理和系统监控界面。   核心功能     彩色显示，直观易读   可滚动进程列表   树形视图查看进程关系   鼠标支持   快捷键操作（F键菜单）      替代品：  btop（更美观，支持GPU和磁盘监控）   duf：df的现代替代   duf以表格形式展示磁盘使用情况，比df的输出更加直观。        # 基本使用  duf   # 只显示本地文件系统  duf   --only    local    # 按使用率排序  duf   --sort   usage       输出包含：文件系统、类型、大小、已用、可用、使用率和挂载点，一目了然。   ncdu：du的现代替代   ncdu提供交互式的磁盘空间分析界面。        # 扫描当前目录  ncdu   # 扫描并导出结果  ncdu   -o   scan.json   /home ncdu   -f   scan.json     # 导入查看        使用方向键导航，可以快速找出占用空间最大的目录和文件。   更多现代化工具   fd：find的替代        # 查找文件  fd    &quot;pattern&quot;           # 比 find . -name &quot;pattern&quot; 快得多    # 正则搜索  fd    &#39;\\.py$&#39;    # 排除特定目录  fd    &quot;config&quot;    --exclude   node_modules       sd：sed的替代        # 更直观的替换语法  sd    &quot;old_text&quot;     &quot;new_text&quot;    file.txt sd    &quot;foo&quot;     &quot;bar&quot;    **/*.rs     # 递归替换        delta：diff的替代   提供语法高亮和行号的diff输出，与Git深度集成。        # Git配置   [ core ]         pager     =    delta  [ delta ]         navigate     =     true        procs：ps的替代        # 更可读的进程信息  procs procs   --tree      # 树形视图  procs   docker      # 按关键词过滤        安装方式        # macOS  brew   install   bat   htop   duf   ncdu   fd   sd   delta   procs   # Linux   # 各自项目的Release页面下载        这些现代化工具可以让终端工作变得更加高效和愉悦，值得逐步替换到日常工具箱中。"
     }
     </script>
     <script type="application/ld+json">
@@ -120,11 +120,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>2 分钟阅读</span>
+          <span>4 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>447 字</span>
+          <span>928 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tools/cli-gong-ju.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/cli-gong-ju.png" alt="命令行效率工具：bat、htop、duf、ncdu等现代化替代品" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（14）</summary><ol><li><a href="#为什么使用现代化替代">为什么使用现代化替代</a></li><li><a href="#batcat的现代化替代">bat：cat的现代化替代</a></li><li><a href="#核心特性">核心特性</a></li><li><a href="#配置建议">配置建议</a></li><li><a href="#htoptop的现代替代">htop：top的现代替代</a></li><li><a href="#核心功能">核心功能</a></li><li><a href="#dufdf的现代替代">duf：df的现代替代</a></li><li><a href="#ncdudu的现代替代">ncdu：du的现代替代</a></li><li><a href="#更多现代化工具">更多现代化工具</a></li><li><a href="#fdfind的替代">fd：find的替代</a></li><li><a href="#sdsed的替代">sd：sed的替代</a></li><li><a href="#deltadiff的替代">delta：diff的替代</a></li><li><a href="#procsps的替代">procs：ps的替代</a></li><li><a href="#安装方式">安装方式</a></li></ol></details>
@@ -140,23 +140,23 @@
 <li>非打印字符显示</li>
 <li>支持分页器</li>
 </ul>
-<pre class="codehilite"><code class="language-bash"># 基本使用
-bat file.py
+<div class="codehilite"><pre><span></span><code><span class="c1"># 基本使用</span>
+bat<span class="w"> </span>file.py
 
-# 显示非打印字符
-bat -A file.txt
+<span class="c1"># 显示非打印字符</span>
+bat<span class="w"> </span>-A<span class="w"> </span>file.txt
 
-# 与管道结合使用
-bat file.json | jq .
-</code></pre>
+<span class="c1"># 与管道结合使用</span>
+bat<span class="w"> </span>file.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>.
+</code></pre></div>
 
 <h3>配置建议</h3>
-<pre class="codehilite"><code class="language-bash"># 别名设置
-alias cat='bat'
+<div class="codehilite"><pre><span></span><code><span class="c1"># 别名设置</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">cat</span><span class="o">=</span><span class="s1">&#39;bat&#39;</span>
 
-# 设置主题
-export BAT_THEME='Dracula'
-</code></pre>
+<span class="c1"># 设置主题</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">BAT_THEME</span><span class="o">=</span><span class="s1">&#39;Dracula&#39;</span>
+</code></pre></div>
 
 <h2>htop：top的现代替代</h2>
 <p>htop提供更直观的进程管理和系统监控界面。</p>
@@ -171,69 +171,69 @@ export BAT_THEME='Dracula'
 <p><strong>替代品：</strong> btop（更美观，支持GPU和磁盘监控）</p>
 <h2>duf：df的现代替代</h2>
 <p>duf以表格形式展示磁盘使用情况，比df的输出更加直观。</p>
-<pre class="codehilite"><code class="language-bash"># 基本使用
+<div class="codehilite"><pre><span></span><code><span class="c1"># 基本使用</span>
 duf
 
-# 只显示本地文件系统
-duf --only local
+<span class="c1"># 只显示本地文件系统</span>
+duf<span class="w"> </span>--only<span class="w"> </span><span class="nb">local</span>
 
-# 按使用率排序
-duf --sort usage
-</code></pre>
+<span class="c1"># 按使用率排序</span>
+duf<span class="w"> </span>--sort<span class="w"> </span>usage
+</code></pre></div>
 
 <p>输出包含：文件系统、类型、大小、已用、可用、使用率和挂载点，一目了然。</p>
 <h2>ncdu：du的现代替代</h2>
 <p>ncdu提供交互式的磁盘空间分析界面。</p>
-<pre class="codehilite"><code class="language-bash"># 扫描当前目录
+<div class="codehilite"><pre><span></span><code><span class="c1"># 扫描当前目录</span>
 ncdu
 
-# 扫描并导出结果
-ncdu -o scan.json /home
-ncdu -f scan.json  # 导入查看
-</code></pre>
+<span class="c1"># 扫描并导出结果</span>
+ncdu<span class="w"> </span>-o<span class="w"> </span>scan.json<span class="w"> </span>/home
+ncdu<span class="w"> </span>-f<span class="w"> </span>scan.json<span class="w">  </span><span class="c1"># 导入查看</span>
+</code></pre></div>
 
 <p>使用方向键导航，可以快速找出占用空间最大的目录和文件。</p>
 <h2>更多现代化工具</h2>
 <h3>fd：find的替代</h3>
-<pre class="codehilite"><code class="language-bash"># 查找文件
-fd &quot;pattern&quot;       # 比 find . -name &quot;pattern&quot; 快得多
+<div class="codehilite"><pre><span></span><code><span class="c1"># 查找文件</span>
+fd<span class="w"> </span><span class="s2">&quot;pattern&quot;</span><span class="w">       </span><span class="c1"># 比 find . -name &quot;pattern&quot; 快得多</span>
 
-# 正则搜索
-fd '\.py$'
+<span class="c1"># 正则搜索</span>
+fd<span class="w"> </span><span class="s1">&#39;\.py$&#39;</span>
 
-# 排除特定目录
-fd &quot;config&quot; --exclude node_modules
-</code></pre>
+<span class="c1"># 排除特定目录</span>
+fd<span class="w"> </span><span class="s2">&quot;config&quot;</span><span class="w"> </span>--exclude<span class="w"> </span>node_modules
+</code></pre></div>
 
 <h3>sd：sed的替代</h3>
-<pre class="codehilite"><code class="language-bash"># 更直观的替换语法
-sd &quot;old_text&quot; &quot;new_text&quot; file.txt
-sd &quot;foo&quot; &quot;bar&quot; **/*.rs  # 递归替换
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 更直观的替换语法</span>
+sd<span class="w"> </span><span class="s2">&quot;old_text&quot;</span><span class="w"> </span><span class="s2">&quot;new_text&quot;</span><span class="w"> </span>file.txt
+sd<span class="w"> </span><span class="s2">&quot;foo&quot;</span><span class="w"> </span><span class="s2">&quot;bar&quot;</span><span class="w"> </span>**/*.rs<span class="w">  </span><span class="c1"># 递归替换</span>
+</code></pre></div>
 
 <h3>delta：diff的替代</h3>
 <p>提供语法高亮和行号的diff输出，与Git深度集成。</p>
-<pre class="codehilite"><code class="language-bash"># Git配置
-[core]
-    pager = delta
-[delta]
-    navigate = true
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Git配置</span>
+<span class="o">[</span>core<span class="o">]</span>
+<span class="w">    </span><span class="nv">pager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>delta
+<span class="o">[</span>delta<span class="o">]</span>
+<span class="w">    </span><span class="nv">navigate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
+</code></pre></div>
 
 <h3>procs：ps的替代</h3>
-<pre class="codehilite"><code class="language-bash"># 更可读的进程信息
+<div class="codehilite"><pre><span></span><code><span class="c1"># 更可读的进程信息</span>
 procs
-procs --tree   # 树形视图
-procs docker   # 按关键词过滤
-</code></pre>
+procs<span class="w"> </span>--tree<span class="w">   </span><span class="c1"># 树形视图</span>
+procs<span class="w"> </span>docker<span class="w">   </span><span class="c1"># 按关键词过滤</span>
+</code></pre></div>
 
 <h2>安装方式</h2>
-<pre class="codehilite"><code class="language-bash"># macOS
-brew install bat htop duf ncdu fd sd delta procs
+<div class="codehilite"><pre><span></span><code><span class="c1"># macOS</span>
+brew<span class="w"> </span>install<span class="w"> </span>bat<span class="w"> </span>htop<span class="w"> </span>duf<span class="w"> </span>ncdu<span class="w"> </span>fd<span class="w"> </span>sd<span class="w"> </span>delta<span class="w"> </span>procs
 
-# Linux
-# 各自项目的Release页面下载
-</code></pre>
+<span class="c1"># Linux</span>
+<span class="c1"># 各自项目的Release页面下载</span>
+</code></pre></div>
 
 <p>这些现代化工具可以让终端工作变得更加高效和愉悦，值得逐步替换到日常工具箱中。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/tools/api-ce-shi.html"><span class="related-title">API测试工具对比：Postman vs Bruno vs Insomnia vs Hoppscotch</span><span class="related-meta">工具推荐 · 2026-05-12</span></a>
 <a class="related-card" href="/tools/automation-tools.html"><span class="related-title">自动化工具集推荐</span><span class="related-meta">工具推荐 · 2026-05-11</span></a>

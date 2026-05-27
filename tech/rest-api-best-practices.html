@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/tech/rest-api-best-practices.png",
       "datePublished": "2026-04-07",
       "dateModified": "2026-05-15",
-      "wordCount": "531",
+      "wordCount": "536",
       "keywords": "REST API, 后端, 最佳实践",
       "about": [{"@type": "Thing", "name": "REST API"}, {"@type": "Thing", "name": "后端"}, {"@type": "Thing", "name": "最佳实践"}],
       "inLanguage": "zh-CN",
@@ -75,7 +75,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/rest-api-best-practices.html"},
-      "articleBody": "好的 API 设计让调用方心情愉悦，坏的 API 让他们想砸键盘。这篇文章总结 10 条实战验证的设计原则。 URL 设计原则      用名词复数而非动词  —  GET /users  不是  GET /getUsers 。HTTP 方法已经表达了动作。    层级关系用嵌套 URL  —  GET /users/123/orders  清晰表达了\"用户 123 的订单\"。    不要超过 3 层  —  /users/123/orders/456/items  太深了，这种情况拆成  /orders/456/items 。    用 kebab-case 不用 camelCase  —  /shipping-address  不是  /shippingAddress 。SEO 友好，肉眼易读。           HTTP 方法正确使用 方法   操作   幂等?   示例           GET   读取   ✅    GET /articles        POST   创建   ❌    POST /articles        PUT   全量更新   ✅    PUT /articles/1        PATCH   部分更新   ❌    PATCH /articles/1        DELETE   删除   ✅    DELETE /articles/1        响应格式规范                   {   &quot;data&quot;: { &quot;id&quot;: 1, &quot;title&quot;: &quot;...&quot; },   &quot;meta&quot;: { &quot;page&quot;: 1, &quot;per_page&quot;: 20, &quot;total&quot;: 150 },   &quot;errors&quot;: null }      错误处理      用正确的 HTTP 状态码  — 400 参数错误、401 未认证、403 无权限、404 不存在、422 参数校验失败、429 频率限制、500 服务器错误。    错误信息结构化  — 返回  {\"errors\":[{\"code\":\"VALIDATION_ERROR\",\"field\":\"email\",\"message\":\"邮箱格式不正确\"}]} ，不要只返回一个字符串。     五大常见反模式      所有操作都用 POST  — 这是 RPC 不是 REST    返回所有字段  — 支持  ?fields=id,title  让客户端选择需要的字段    不版本化  — URL 加  /v1/  前缀或在 Header 中指定版本    不限制分页  —  per_page  最大 100，防止一次请求拖垮数据库    不写 API 文档  — OpenAPI/Swagger 规范是标配     📖 相关推荐      Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战     单元测试入门：从零到写出第一个可维护的测试     正则表达式 30 分钟入门指南       See also:   30 个免费又好用的 API 合集：开发者必备 ,  OpenAI API 入门：用 10 行代码调用 GPT ,  AI 自动化工作流实战：让 AI 替你干重复活 ."
+      "articleBody": "好的 API 设计让调用方心情愉悦，坏的 API 让他们想砸键盘。这篇文章总结 10 条实战验证的设计原则。 URL 设计原则      用名词复数而非动词  —  GET /users  不是  GET /getUsers 。HTTP 方法已经表达了动作。    层级关系用嵌套 URL  —  GET /users/123/orders  清晰表达了\"用户 123 的订单\"。    不要超过 3 层  —  /users/123/orders/456/items  太深了，这种情况拆成  /orders/456/items 。    用 kebab-case 不用 camelCase  —  /shipping-address  不是  /shippingAddress 。SEO 友好，肉眼易读。           HTTP 方法正确使用 方法   操作   幂等?   示例           GET   读取   ✅    GET /articles        POST   创建   ❌    POST /articles        PUT   全量更新   ✅    PUT /articles/1        PATCH   部分更新   ❌    PATCH /articles/1        DELETE   删除   ✅    DELETE /articles/1        响应格式规范                      {   &quot;data&quot;: { &quot;id&quot;: 1, &quot;title&quot;: &quot;...&quot; },   &quot;meta&quot;: { &quot;page&quot;: 1, &quot;per_page&quot;: 20, &quot;total&quot;: 150 },   &quot;errors&quot;: null }       错误处理      用正确的 HTTP 状态码  — 400 参数错误、401 未认证、403 无权限、404 不存在、422 参数校验失败、429 频率限制、500 服务器错误。    错误信息结构化  — 返回  {\"errors\":[{\"code\":\"VALIDATION_ERROR\",\"field\":\"email\",\"message\":\"邮箱格式不正确\"}]} ，不要只返回一个字符串。     五大常见反模式      所有操作都用 POST  — 这是 RPC 不是 REST    返回所有字段  — 支持  ?fields=id,title  让客户端选择需要的字段    不版本化  — URL 加  /v1/  前缀或在 Header 中指定版本    不限制分页  —  per_page  最大 100，防止一次请求拖垮数据库    不写 API 文档  — OpenAPI/Swagger 规范是标配     📖 相关推荐      Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战     单元测试入门：从零到写出第一个可维护的测试     正则表达式 30 分钟入门指南       See also:   30 个免费又好用的 API 合集：开发者必备 ,  OpenAI API 入门：用 10 行代码调用 GPT ,  AI 自动化工作流实战：让 AI 替你干重复活 ."
     }
     </script>
     <script type="application/ld+json">
@@ -124,7 +124,7 @@
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>531 字</span>
+          <span>536 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/rest-api-best-practices.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/rest-api-best-practices.png" alt="REST API 设计最佳实践：写出让人愿意用的接口" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -183,12 +183,12 @@
 </tr>
 </tbody>
 </table>
-<pre class="codehilite"><code>{
+<div class="codehilite"><pre><span></span><code>{
   &quot;data&quot;: { &quot;id&quot;: 1, &quot;title&quot;: &quot;...&quot; },
   &quot;meta&quot;: { &quot;page&quot;: 1, &quot;per_page&quot;: 20, &quot;total&quot;: 150 },
   &quot;errors&quot;: null
 }
-</code></pre>
+</code></pre></div>
 
 <p>错误处理</p>
 <ul>
