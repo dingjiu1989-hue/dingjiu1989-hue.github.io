@@ -750,11 +750,9 @@ function requestReport() {
     var q = (document.getElementById('searchInput').value || '').trim();
     if (!q) { status.textContent = '请先输入公司名称'; return; }
 
-    // Check cache
-    if (REPORT_CACHE[q]) {
-        renderReport(REPORT_CACHE[q], area);
-        var nr = document.getElementById('noResults');
-        if (nr) { var g = document.getElementById('companyGrid'); g.innerHTML = ''; }
+    // Check cache — redirect to report URL if already generated
+    if (REPORT_CACHE[q] && REPORT_CACHE[q].url) {
+        window.location.href = REPORT_CACHE[q].url;
         return;
     }
 
