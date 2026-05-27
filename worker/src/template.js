@@ -70,7 +70,6 @@ export function buildAnalysis(company, basicInfo, income, balanceSheet, cashFlow
     },
     summary: buildSummary(basicInfo, latestIncome, latestBS),
     _sources: ['mcp'],
-    _debugBasicInfo: basicInfo && typeof basicInfo === 'object' ? Object.keys(basicInfo).slice(0,20) : typeof basicInfo,
   };
 }
 

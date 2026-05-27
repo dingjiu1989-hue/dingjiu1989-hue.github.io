@@ -61,8 +61,11 @@ export default {
       try { cashFlow = await getCashFlow(MCP_URL, MCP_TOKEN, stockCode, beginDate, endDate); } catch(e) { cashFlow = null; }
       try { quotes = await getAdjustedQuotes(MCP_URL, MCP_TOKEN, stockCode, '2025-05-27', endDate); } catch(e) { quotes = null; }
 
-      // Step 4: Build analysis
+      // Step 4: Build analysis and strip debug fields
       const analysis = buildAnalysis(company.trim(), basicInfo, income, balanceSheet, cashFlow, quotes);
+      // Remove debug fields from response
+      delete analysis._debugBasicInfo;
+      delete analysis._searchDebug;
 
       return json({ ok: true, analysis }, 200, CORS_HEADERS);
 
