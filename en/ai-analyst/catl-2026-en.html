@@ -131,7 +131,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <li><strong>Total Liabilities</strong>: ¥652.1B, debt-to-asset ratio 62.4%</li>
     <li><strong>Equity</strong>: ¥394.2B</li>
     <li><strong>Cash Reserves</strong>: ~¥260B, ample liquidity</li>
-    <li><strong>Capex</strong>: ~¥48B in FY2025, primarily for overseas capacity expansion</li>
+    <li><strong>Capex</strong>: ~¥42.3B in FY2025 (MCP data), primarily overseas capacity</li>
 </ul>
 
 <div class="widget-box">
@@ -141,12 +141,15 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 
 <h2>3. Technical Analysis</h2>
 <ul>
-    <li><strong>Last Close</strong>: ¥402.50 (May 2026)</li>
+    <li><strong>Last Close</strong>: ¥402.50 (May 26, 2026)</li>
     <li><strong>Market Cap</strong>: ~¥1.86T (~$260B)</li>
     <li><strong>P/E (TTM)</strong>: 23.26x</li>
     <li><strong>P/B</strong>: 5.14x</li>
-    <li><strong>Turnover</strong>: 0.82%, relatively stable shareholding structure</li>
+    <li><strong>52-Week High</strong>: ¥468.75</li>
+    <li><strong>52-Week Low</strong>: ¥233.51</li>
+    <li><strong>Avg Turnover</strong>: 0.72%, relatively stable shareholding</li>
 </ul>
+<p>Data source: Alibaba Cloud MCP Stock Data Service, adjusted daily quotes (242 trading days, May 2025–May 2026). CATL shares climbed from ~¥250 to ¥400+ over the past 12 months. September saw a 31% monthly surge driven by global EV policy catalysts and lithium price stabilization. The stock hit its 52-week high of ¥468.75 in April 2026 before pulling back with the broader market.</p>
 <div class="widget-box">
     <div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: CATL 12-Month Price Trend</div>
     <div class="widget-body"><div class="chart-container"><canvas id="chart_price"></canvas></div></div>
@@ -165,8 +168,8 @@ tr:nth-child(even) { background-color: #F9FAFB; }
 </div>
 
 <h2>4. Market Sentiment</h2>
-<h3>4.1 Institutional Holdings</h3>
-<p>Q1 2026 data shows mutual funds, pension funds, and northbound capital continue to hold significant CATL positions. As the largest weight stock on the ChiNext board, CATL commands allocation of 8-12% in new-energy themed funds. Northbound (foreign) ownership stands at ~8%, reflecting long-term allocation intent toward China's new-energy champion. However, some foreign investors trimmed positions in H2 2025, reflecting geopolitical uncertainty.</p>
+<h3>4.1 Institutional Holdings (Real MCP Data)</h3>
+<p>Per Alibaba Cloud MCP Stock Data: As of March 31, 2026 (Q1 filing), institutions held 2.164B A-float shares of CATL (50.84% of A-float), totaling 2.564B A-shares (58.17% of total A-shares). Mutual funds held ~400M shares (9.07% of total A-shares). Institutions reduced positions by ~2.76M shares (-0.11%) in Q1, while mutual funds were net sellers of ~118.6M shares (-22.87%), reflecting profit-taking. The 58%+ institutional ownership confirms CATL remains a core heavy-weight allocation in China A-share market.</p>
 
 <h3>4.2 Analyst Ratings</h3>
 <ul>
@@ -201,8 +204,11 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <li><strong>PEG</strong>: ~0.9x, reasonable for 20%+ growth expectations</li>
     <li><strong>Debt/Assets</strong>: 62.4%, healthy for a manufacturing company</li>
     <li><strong>Current Ratio</strong>: ~1.5x, adequate short-term solvency</li>
-    <li><strong>Free Cash Flow</strong>: ~¥52B in FY2025, strong operational quality</li>
-    <li><strong>Cash Reserves</strong>: ~¥260B, sufficient to fund 3+ years of capex</li>
+    <li><strong>Operating Cash Flow</strong>: ¥133.2B in FY2025 (MCP data), strong cash generation</li>
+    <li><strong>Investing Cash Flow</strong>: -¥94.5B, primarily for capacity expansion</li>
+    <li><strong>Financing Cash Flow</strong>: -¥6.3B, dividends + debt repayment</li>
+    <li><strong>Free Cash Flow (CFO-Capex)</strong>: ~¥90.9B, exceptional cash conversion</li>
+    <li><strong>Year-End Cash</strong>: ~¥300B (cash & equivalents), sufficient for 3+ years of capex</li>
 </ul>
 <p>Overall, CATL is trading at historically low valuation multiples. Buying the global battery leader at 23x P/E with ~20% earnings growth implies a PEG below 1x, offering some margin of safety. However, the valuation compression reflects market concerns about growth deceleration — if net profit growth slows to 10-15% in the next two years, current valuation may not represent a "floor price."</p>
 
@@ -242,6 +248,7 @@ tr:nth-child(even) { background-color: #F9FAFB; }
     <li><a href="https://www.goldmansachs.com/" target="_blank" rel="nofollow noopener">Goldman Sachs — Global Energy Research (May 2026)</a></li>
     <li><a href="https://www.morganstanley.com/" target="_blank" rel="nofollow noopener">Morgan Stanley — Auto & Battery Research (May 2026)</a></li>
     <li><a href="https://finance.yahoo.com/quote/300750.SZ/" target="_blank" rel="nofollow noopener">Yahoo Finance — 300750.SZ</a></li>
+    <li>Alibaba Cloud MCP Stock Data Service — Financials, Adjusted Quotes, Institutional Holdings (queried May 2026)</li>
 </ol>
 
 <div class="disclaimer">
@@ -254,7 +261,7 @@ new Chart(document.getElementById('chart_market_share'),{type:'doughnut',data:{l
 new Chart(document.getElementById('chart_revenue_profit'),{type:'line',data:{labels:['2021','2022','2023','2024','2025','Q1 26A'],datasets:[{label:'Rev (¥B)',data:[130.4,328.6,400.9,338.9,423.7,516.4],borderColor:'#059669',backgroundColor:'rgba(5,150,105,0.08)',borderWidth:3,fill:true,tension:0.2},{label:'Net Profit (¥B)',data:[15.9,30.7,44.1,50.7,72.2,83],borderColor:'#3B82F6',backgroundColor:'rgba(59,130,246,0.08)',borderWidth:3,fill:true,tension:0.2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom'}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'¥B'}}}}});
 new Chart(document.getElementById('chart_margins'),{type:'line',data:{labels:['2021','2022','2023','2024','2025'],datasets:[{label:'Gross Margin (%)',data:[26.3,20.3,22.9,24.4,27.0],borderColor:'#059669',borderWidth:3,fill:false,tension:0.2},{label:'Net Margin (%)',data:[12.2,9.3,11.0,15.0,17.0],borderColor:'#3B82F6',borderWidth:3,fill:false,tension:0.2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom'}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'%'}}}}});
 new Chart(document.getElementById('chart_balance'),{type:'bar',data:{labels:['Assets','Liabilities','Equity','Cash'],datasets:[{data:[10460,6521,3942,2600],backgroundColor:['#059669','#EF4444','#3B82F6','#F59E0B'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'¥B'}}}}});
-new Chart(document.getElementById('chart_price'),{type:'line',data:{labels:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],datasets:[{label:'CATL (¥)',data:[335,350,328,310,295,340,360,355,375,390,410,402],borderColor:'#059669',backgroundColor:'rgba(5,150,105,0.08)',borderWidth:2,fill:true,tension:0.2,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'¥'}}}}});
+new Chart(document.getElementById('chart_price'),{type:'line',data:{labels:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],datasets:[{label:'CATL (¥)',data:[247,260,301,396,383,367,362,345,337,396,436,402],borderColor:'#059669',backgroundColor:'rgba(5,150,105,0.08)',borderWidth:2,fill:true,tension:0.2,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'¥'}}}}});
 new Chart(document.getElementById('chart_targets'),{type:'bar',data:{labels:['CITIC','Huatai','MS','Goldman','Consensus'],datasets:[{label:'Target (¥)',data:[520,480,430,500,478],backgroundColor:['#059669','#059669','#F59E0B','#059669','#3B82F6'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},min:350,title:{display:true,text:'¥'}}}}});
 })();</script>
 </body>

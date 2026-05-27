@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <meta property="og:title" content="AI分析师 — 智能公司搜索">
+    <meta property="og:description" content="搜索全球科技公司，快速获取 AI 驱动的深度投资分析报告。覆盖 NVIDIA、Apple、台积电、宁德时代等 17 家头部公司。">
+    <meta property="og:url" content="https://aidev.fit/ai-analyst/analysis.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:image" content="https://aidev.fit/images/logo.png">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI分析师 — 智能公司搜索">
+    <meta name="twitter:description" content="搜索全球科技公司，快速获取 AI 驱动的深度投资分析报告。">
+    <meta name="twitter:image" content="https://aidev.fit/images/logo.png">
+    <title>AI分析师 — 智能公司搜索</title>
+    <meta name="description" content="搜索全球科技公司，快速获取 AI 驱动的深度投资分析报告。覆盖 NVIDIA、Apple、台积电、宁德时代等 17 家头部公司。">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="canonical" href="https://aidev.fit/ai-analyst/analysis.html">
+    <style>
+        .search-section {
+            text-align: center;
+            padding: 60px 0 30px;
+        }
+        .search-section h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .search-section p {
+            color: #666;
+            margin-bottom: 24px;
+        }
+        .search-box-wrap {
+            position: relative;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+        .search-input {
+            width: 100%;
+            padding: 16px 20px 16px 52px;
+            font-size: 1.1rem;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            outline: none;
+            transition: border-color .2s, box-shadow .2s;
+            box-sizing: border-box;
+            background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") 16px 50% no-repeat;
+        }
+        .search-input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+        }
+        .search-hint {
+            font-size: .78rem;
+            color: #aaa;
+            margin-top: 8px;
+        }
+        .search-hint kbd {
+            display: inline-block;
+            padding: 1px 6px;
+            font-size: .72rem;
+            font-family: inherit;
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            margin: 0 1px;
+        }
+        .search-history {
+            max-width: 640px;
+            margin: 12px auto 0;
+            text-align: left;
+            display: none;
+        }
+        .search-history.show { display: block; }
+        .search-history-label {
+            font-size: .78rem;
+            color: #999;
+            margin-bottom: 6px;
+        }
+        .search-history-item {
+            display: inline-block;
+            font-size: .82rem;
+            color: #555;
+            background: #f3f4f6;
+            padding: 4px 12px;
+            border-radius: 14px;
+            margin: 0 6px 6px 0;
+            cursor: pointer;
+            transition: background .15s;
+        }
+        .search-history-item:hover { background: #e5e7eb; }
+        .search-history-clear {
+            font-size: .75rem;
+            color: #999;
+            cursor: pointer;
+            float: right;
+            line-height: 1.6;
+        }
+        .search-history-clear:hover { color: #666; }
+        .autocomplete-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,.12);
+            z-index: 100;
+            display: none;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .autocomplete-list.show { display: block; }
+        .autocomplete-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background .15s;
+            gap: 12px;
+        }
+        .autocomplete-item:last-child { border-bottom: none; }
+        .autocomplete-item:hover, .autocomplete-item.highlight {
+            background: #f5f7ff;
+        }
+        .autocomplete-item .ticker {
+            font-family: monospace;
+            font-size: .85rem;
+            color: #666;
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            min-width: 70px;
+            text-align: center;
+        }
+        .autocomplete-item .company-name {
+            font-weight: 600;
+            flex: 1;
+        }
+        .autocomplete-item .rating-badge {
+            font-size: .8rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            color: #fff;
+            white-space: nowrap;
+        }
+        .autocomplete-item .sector-tag {
+            font-size: .78rem;
+            color: #888;
+        }
+        .grid-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+        .grid-section h2 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+        .company-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            transition: box-shadow .2s, transform .15s;
+            cursor: pointer;
+        }
+        .company-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,.08);
+            transform: translateY(-2px);
+        }
+        .company-card .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .company-card .card-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+        .company-card .card-name-cn {
+            font-size: .85rem;
+            color: #888;
+            font-weight: 400;
+        }
+        .company-card .card-ticker {
+            font-family: monospace;
+            font-size: .8rem;
+            color: #555;
+            background: #f3f4f6;
+            padding: 3px 10px;
+            border-radius: 6px;
+        }
+        .company-card .card-summary {
+            font-size: .9rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 14px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .company-card .card-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .company-card .metric {
+            text-align: center;
+        }
+        .company-card .metric-value {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #111;
+        }
+        .company-card .metric-label {
+            font-size: .73rem;
+            color: #999;
+        }
+        .company-card .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .company-card .card-sector {
+            font-size: .8rem;
+            color: #888;
+        }
+        .company-card .card-link {
+            font-size: .85rem;
+            color: #2563eb;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .company-card .card-link:hover { text-decoration: underline; }
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        .filter-bar-label {
+            font-size: .82rem;
+            color: #888;
+            margin-right: 4px;
+        }
+        .filter-chip {
+            font-size: .82rem;
+            padding: 5px 14px;
+            border-radius: 16px;
+            border: 1px solid #ddd;
+            background: #fff;
+            cursor: pointer;
+            transition: all .15s;
+            color: #555;
+        }
+        .filter-chip:hover { border-color: #2563eb; color: #2563eb; }
+        .filter-chip.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+        .random-btn {
+            font-size: .82rem;
+            padding: 5px 14px;
+            border-radius: 16px;
+            border: 1px solid #ddd;
+            background: #fff;
+            cursor: pointer;
+            transition: all .15s;
+            color: #888;
+            margin-left: auto;
+        }
+        .random-btn:hover { border-color: #f59e0b; color: #f59e0b; }
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        .no-results strong { color: #555; }
+        .company-card {
+            opacity: 0;
+            animation: fadeIn .35s ease forwards;
+        }
+        @keyframes fadeIn { to { opacity: 1; } }
+        @media (max-width: 640px) {
+            .search-section { padding: 40px 0 30px; }
+            .search-section h1 { font-size: 1.5rem; }
+            .company-grid { grid-template-columns: 1fr; }
+            .company-card .card-metrics { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<main>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/">首页</a> › <a href="/ai-analyst/">AI分析师</a> › 智能搜索
+        </div>
+
+        <div class="search-section">
+            <h1>🔍 智能公司搜索</h1>
+            <p>输入公司名称（中英文均可），快速跳转至深度分析报告</p>
+            <div class="search-box-wrap">
+                <input type="text" class="search-input" id="searchInput"
+                       placeholder="输入公司名称，如 NVIDIA、台积电、宁德时代..."
+                       autocomplete="off">
+                <div class="autocomplete-list" id="autocompleteList"></div>
+            </div>
+            <div class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> 选择 · <kbd>Enter</kbd> 跳转报告 · <kbd>Esc</kbd> 关闭</div>
+            <div class="search-history" id="searchHistory">
+                <div class="search-history-label">最近搜索 <span class="search-history-clear" onclick="clearHistory()">清除</span></div>
+                <div id="historyItems"></div>
+            </div>
+        </div>
+
+        <div class="grid-section">
+            <div class="filter-bar">
+                <span class="filter-bar-label">行业：</span>
+                <span class="filter-chip active" data-filter="all" onclick="setFilter('all',this)">全部</span>
+                <span class="filter-chip" data-filter="半导体" onclick="setFilter('半导体',this)">半导体</span>
+                <span class="filter-chip" data-filter="科技" onclick="setFilter('科技',this)">科技</span>
+                <span class="filter-chip" data-filter="新能源" onclick="setFilter('新能源',this)">新能源</span>
+                <button class="random-btn" onclick="pickRandom()">🎲 随机推荐</button>
+            </div>
+            <h2 id="gridTitle">全部公司</h2>
+            <div class="company-grid" id="companyGrid"></div>
+        </div>
+    </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<script>
+(function() {
+    var companies = [];
+    var allCompanies = [];
+
+    function ratingColor(color) {
+        var map = {
+            'green-600': '#16a34a',
+            'green-700': '#15803d',
+            'blue-600': '#2563eb',
+            'blue-700': '#1d4ed8',
+            'blue-800': '#1e40af',
+            'orange-500': '#f97316',
+            'orange-600': '#ea580c',
+            'red-500': '#ef4444',
+            'red-600': '#dc2626',
+            'red-700': '#b91c1c',
+            'yellow-600': '#ca8a04',
+            'indigo-600': '#4f46e5'
+        };
+        return map[color] || '#666';
+    }
+
+    function renderCard(c) {
+        return '<div class="company-card" onclick="window.location.href=\'' + c.reportUrl + '\'">' +
+            '<div class="card-header">' +
+                '<div>' +
+                    '<div class="card-name">' + c.name + '</div>' +
+                    (c.nameCn ? '<div class="card-name-cn">' + c.nameCn + '</div>' : '') +
+                '</div>' +
+                '<span class="card-ticker">' + c.ticker + '</span>' +
+            '</div>' +
+            '<div class="card-summary">' + c.summary + '</div>' +
+            '<div class="card-metrics">' +
+                '<div class="metric"><div class="metric-value">' + c.marketCap + '</div><div class="metric-label">市值</div></div>' +
+                '<div class="metric"><div class="metric-value">' + c.revenue + '</div><div class="metric-label">营收</div></div>' +
+                '<div class="metric"><div class="metric-value" style="color:' + (c.revenueGrowth.indexOf('+') >= 0 ? '#16a34a' : '#666') + '">' + c.revenueGrowth + '</div><div class="metric-label">营收增长</div></div>' +
+            '</div>' +
+            '<div class="card-footer">' +
+                '<div>' +
+                    '<span class="card-sector">' + c.sector + '</span>' +
+                    '&nbsp;&nbsp;<span class="rating-badge" style="background:' + ratingColor(c.ratingColor) + ';color:#fff;padding:2px 10px;border-radius:10px;font-size:.78rem;">' + c.rating + '</span>' +
+                '</div>' +
+                '<a href="' + c.reportUrl + '" class="card-link">查看完整报告 →</a>' +
+            '</div>' +
+        '</div>';
+    }
+
+    function renderGrid(list) {
+        var grid = document.getElementById('companyGrid');
+        if (list.length === 0) {
+            grid.innerHTML = '<div class="no-results"><strong>未找到匹配公司</strong><br>试试其他关键词，如 "NVIDIA"、"台积电"或使用英文名搜索</div>';
+            return;
+        }
+        grid.innerHTML = list.map(renderCard).join('');
+    }
+
+    function doSearch(query) {
+        var q = query.trim().toLowerCase();
+        if (!q) {
+            document.getElementById('gridTitle').textContent = '全部公司';
+            renderGrid(allCompanies);
+            return;
+        }
+        var filtered = allCompanies.filter(function(c) {
+            return c.name.toLowerCase().indexOf(q) >= 0 ||
+                   (c.nameCn && c.nameCn.indexOf(q) >= 0) ||
+                   c.ticker.toLowerCase().indexOf(q) >= 0 ||
+                   c.sector.indexOf(q) >= 0;
+        });
+        document.getElementById('gridTitle').textContent = '搜索结果（' + filtered.length + '）';
+        renderGrid(filtered);
+    }
+
+    function buildAutocomplete(query) {
+        var list = document.getElementById('autocompleteList');
+        var q = query.trim().toLowerCase();
+        if (!q || q.length < 1) { list.classList.remove('show'); return; }
+
+        var matches = allCompanies.filter(function(c) {
+            return c.name.toLowerCase().indexOf(q) >= 0 ||
+                   (c.nameCn && c.nameCn.indexOf(q) >= 0) ||
+                   c.ticker.toLowerCase().indexOf(q) >= 0;
+        }).slice(0, 8);
+
+        if (matches.length === 0) { list.classList.remove('show'); return; }
+
+        var html = '';
+        for (var i = 0; i < matches.length; i++) {
+            var c = matches[i];
+            html += '<div class="autocomplete-item" onclick="window.location.href=\'' + c.reportUrl + '\'"' +
+                    ' onmouseenter="highlightItem(this)" data-index="' + i + '">' +
+                '<span class="ticker">' + c.ticker + '</span>' +
+                '<span class="company-name">' + c.name + (c.nameCn ? ' <span style="font-weight:400;color:#999">' + c.nameCn + '</span>' : '') + '</span>' +
+                '<span class="sector-tag">' + c.sector + '</span>' +
+                '<span class="rating-badge" style="background:' + ratingColor(c.ratingColor) + '">' + c.rating + '</span>' +
+            '</div>';
+        }
+        list.innerHTML = html;
+        list.classList.add('show');
+    }
+
+    var highlightIdx = -1;
+    function highlightItem(el) {
+        var items = document.querySelectorAll('.autocomplete-item');
+        items.forEach(function(i) { i.classList.remove('highlight'); });
+        if (el) { el.classList.add('highlight'); }
+    }
+
+    var searchInput = document.getElementById('searchInput');
+    var lastValue = '';
+
+    searchInput.addEventListener('input', function() {
+        var val = this.value;
+        lastValue = val;
+        highlightIdx = -1;
+        buildAutocomplete(val);
+        doSearch(val);
+    });
+
+    searchInput.addEventListener('keydown', function(e) {
+        var items = document.querySelectorAll('.autocomplete-item');
+        if (items.length === 0) return;
+
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            highlightIdx = Math.min(highlightIdx + 1, items.length - 1);
+            items.forEach(function(i, idx) {
+                i.classList.toggle('highlight', idx === highlightIdx);
+            });
+            if (highlightIdx >= 0) items[highlightIdx].scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            highlightIdx = Math.max(highlightIdx - 1, 0);
+            items.forEach(function(i, idx) {
+                i.classList.toggle('highlight', idx === highlightIdx);
+            });
+            if (highlightIdx >= 0) items[highlightIdx].scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (highlightIdx >= 0 && items[highlightIdx]) {
+                items[highlightIdx].click();
+                return;
+            }
+            var q = searchInput.value.trim().toLowerCase();
+            if (!q) return;
+            for (var i = 0; i < allCompanies.length; i++) {
+                var c = allCompanies[i];
+                if (c.name.toLowerCase() === q || c.ticker.toLowerCase() === q ||
+                    (c.nameCn && c.nameCn === q)) {
+                    window.location.href = c.reportUrl;
+                    return;
+                }
+            }
+            for (var i = 0; i < allCompanies.length; i++) {
+                var c = allCompanies[i];
+                if (c.name.toLowerCase().indexOf(q) >= 0 ||
+                    (c.nameCn && c.nameCn.indexOf(q) >= 0) ||
+                    c.ticker.toLowerCase().indexOf(q) >= 0) {
+                    window.location.href = c.reportUrl;
+                    return;
+                }
+            }
+        } else if (e.key === 'Escape') {
+            document.getElementById('autocompleteList').classList.remove('show');
+        }
+    });
+
+    searchInput.addEventListener('blur', function() {
+        setTimeout(function() {
+            document.getElementById('autocompleteList').classList.remove('show');
+        }, 200);
+    });
+
+    searchInput.addEventListener('focus', function() {
+        if (this.value.trim()) buildAutocomplete(this.value);
+    });
+
+    var COMPANIES_DATA = {"meta": {"description": "AI分析师公司数据库 — 覆盖全球科技公司深度研究报告", "updatedAt": "2026-05-27", "totalCompanies": 17}, "companies": [{"slug": "nvidia-2026", "name": "NVIDIA", "nameCn": "英伟达", "ticker": "NVDA", "exchange": "NASDAQ", "sector": "半导体", "sectorEn": "Semiconductor", "marketCap": "$5.8T", "revenue": "$130.5B", "revenueGrowth": "+114%", "netIncome": "$72.2B", "revenueRank": "全球最高市值公司，AI加速器市占率80%+", "pe": "~45x", "grossMargin": "75%+", "operatingMargin": "62%", "rating": "看涨", "ratingEn": "Bullish", "ratingColor": "green-600", "summary": "全球AI加速器龙头，CUDA生态构筑极深护城河。数据中心$115.2B（+142%），Blackwell架构引领推理市场。", "highlights": ["AI加速器市占率80%+", "数据中心$115.2B(+142%)", "CUDA生态开发者600万+"], "reportDate": "2026-05-27", "reportUrl": "nvidia-2026.html"}, {"slug": "google-2026", "name": "Alphabet (Google)", "nameCn": "谷歌", "ticker": "GOOGL", "exchange": "NASDAQ", "sector": "科技", "sectorEn": "Technology", "marketCap": "$4.6T", "revenue": "$383B", "revenueGrowth": "+15%", "netIncome": "$98B", "revenueRank": "全球第三大市值科技公司", "pe": "~28x", "grossMargin": "58%", "operatingMargin": "32%", "rating": "看涨", "ratingEn": "Bullish", "ratingColor": "yellow-600", "summary": "Gemini AI生态+云计算+搜索三引擎驱动。云业务增长超40%，AI Overviews重塑搜索体验。", "highlights": ["Gemini AI生态全面布局", "云业务增长超40%", "搜索广告年收入$200B+"], "reportDate": "2026-05-27", "reportUrl": "google-2026.html"}, {"slug": "microsoft-2026", "name": "Microsoft", "nameCn": "微软", "ticker": "MSFT", "exchange": "NASDAQ", "sector": "科技", "sectorEn": "Technology", "marketCap": "$3.9T", "revenue": "$253.8B", "revenueGrowth": "+16%", "netIncome": "$103.5B", "revenueRank": "全球第四大市值科技公司", "pe": "~35x", "grossMargin": "69%", "operatingMargin": "45%", "rating": "看涨", "ratingEn": "Bullish", "ratingColor": "blue-600", "summary": "Azure增长33%+AI服务年化收入$25B+，M365 Copilot覆盖50万+企业。企业级AI领导者。", "highlights": ["Azure增长33%+", "AI服务年化$25B+", "M365 Copilot覆盖50万+企业"], "reportDate": "2026-05-27", "reportUrl": "microsoft-2026.html"}, {"slug": "amazon-2026", "name": "Amazon", "nameCn": "亚马逊", "ticker": "AMZN", "exchange": "NASDAQ", "sector": "科技", "sectorEn": "Technology", "marketCap": "$2.7T", "revenue": "$675B", "revenueGrowth": "+11%", "netIncome": "$59B", "revenueRank": "全球第二大电商和最大云服务商", "pe": "~42x", "grossMargin": "45%", "operatingMargin": "10%+", "rating": "看涨", "ratingEn": "Bullish", "ratingColor": "orange-500", "summary": "AWS全球云市场份额35%+，贡献70%+营业利润。广告$64B（+25%）成为第三增长极。", "highlights": ["AWS全球云市场35%+份额", "广告业务$64B(+25%)", "区域化履约成本降低15%"], "reportDate": "2026-05-27", "reportUrl": "amazon-2026.html"}, {"slug": "meta-2026", "name": "Meta Platforms", "nameCn": "Meta", "ticker": "META", "exchange": "NASDAQ", "sector": "科技", "sectorEn": "Technology", "marketCap": "$1.2T+", "revenue": "$172B", "revenueGrowth": "+22%", "netIncome": "$55B", "revenueRank": "全球最大社交平台公司", "pe": "~22x", "grossMargin": "81%", "operatingMargin": "38%", "rating": "看涨", "ratingEn": "Bullish", "ratingColor": "blue-800", "summary": "Family of Apps日活36亿，开源LLaMA模型生态+AI推荐引擎。广告收入持续高增长。", "highlights": ["36亿日活用户", "LLaMA开源模型生态", "AI推荐引擎提升广告效率"], "reportDate": "2026-05-27", "reportUrl": "meta-2026.html"}, {"slug": "tsmc-2026", "name": "TSMC", "nameCn": "台积电", "ticker": "TSM", "exchange": "NYSE", "sector": "半导体", "sectorEn": "Semiconductor", "marketCap": "$1.0T", "revenue": "$86.5B", "revenueGrowth": "+25%", "netIncome": "$37B", "revenueRank": "全球最大芯片代工厂", "pe": "~28x", "grossMargin": "55%+", "operatingMargin": "43%", "rating": "看涨", "ratingEn": "Bullish", "ratingColor": "green-700", "summary": "全球先进制程（7nm以下）市场份额90%+，AI芯片制造核心供应商。3nm产能满载，2nm即将量产。", "highlights": ["先进制程90%+份额", "AI芯片核心代工厂", "3nm良率超80%"], "reportDate": "2026-05-27", "reportUrl": "tsmc-2026.html"}, {"slug": "broadcom-2026", "name": "Broadcom", "nameCn": "博通", "ticker": "AVGO", "exchange": "NASDAQ", "sector": "半导体", "sectorEn": "Semiconductor", "marketCap": "$850B+", "revenue": "$51B", "revenueGrowth": "+44%", "netIncome": "$12B", "revenueRank": "全球网络与AI定制芯片领导者", "pe": "~35x", "grossMargin": "75%", "operatingMargin": "42%", "rating": "看涨", "ratingEn": "Bullish", "ratingColor": "red-500", "summary": "网络芯片全球领导者，VMware收购后转型云基础设施。AI定制芯片（TPU/ASIC）高增长。", "highlights": ["AI定制芯片核心供应商", "VMware加码云基础设施", "网络芯片全球份额第一"], "reportDate": "2026-05-27", "reportUrl": "broadcom-2026.html"}, {"slug": "tencent-2026", "name": "Tencent", "nameCn": "腾讯", "ticker": "0700.HK", "exchange": "HKEX", "sector": "科技", "sectorEn": "Technology", "marketCap": "~$500B", "revenue": "¥660B+", "revenueGrowth": "+10%", "netIncome": "¥180B", "revenueRank": "中国最大互联网公司", "pe": "~20x", "grossMargin": "48%", "operatingMargin": "30%", "rating": "中性偏涨", "ratingEn": "Moderate Bullish", "ratingColor": "blue-700", "summary": "游戏+社交+广告三引擎，微信生态12亿+MAU。企业服务与AI赋能广告持续提升变现效率。", "highlights": ["微信12亿+月活", "游戏全球收入领先", "AI赋能广告增长超20%"], "reportDate": "2026-05-27", "reportUrl": "tencent-2026.html"}, {"slug": "apple-2026", "name": "Apple", "nameCn": "苹果", "ticker": "AAPL", "exchange": "NASDAQ", "sector": "科技", "sectorEn": "Technology", "marketCap": "$3.0T", "revenue": "$411B", "revenueGrowth": "+5%", "netIncome": "$100B", "revenueRank": "全球第一大市值公司（历史最高）", "pe": "~30x", "grossMargin": "46.5%", "operatingMargin": "32%", "rating": "中性", "ratingEn": "Neutral", "ratingColor": "blue-600", "summary": "硬件+服务双引擎，Q2 2026营收$111.2B（+17%），服务毛利率76.7%。Apple Intelligence驱动换机周期。", "highlights": ["服务毛利率76.7%", "Apple Intelligence驱动换机", "2.2B+活跃设备生态"], "reportDate": "2026-05-27", "reportUrl": "apple-2026.html"}, {"slug": "baba-2026", "name": "Alibaba", "nameCn": "阿里巴巴", "ticker": "BABA", "exchange": "NYSE", "sector": "科技", "sectorEn": "Technology", "marketCap": "~$250B", "revenue": "¥1T+", "revenueGrowth": "+8%", "netIncome": "¥100B+", "revenueRank": "中国最大云计算和电商公司", "pe": "~15x", "grossMargin": "38%", "operatingMargin": "15%", "rating": "看涨", "ratingEn": "Bullish", "ratingColor": "orange-600", "summary": "从电商巨头向AI云科技公司转型，FY2026营收突破1万亿人民币，云业务增长38%，AI连续11季度三位数增长。", "highlights": ["AI连续11季度三位数增长", "云业务增长38%", "FY2026营收突破¥1万亿"], "reportDate": "2026-05-27", "reportUrl": "baba-2026.html"}, {"slug": "xiaomi-group-2026", "name": "Xiaomi", "nameCn": "小米集团", "ticker": "1810.HK", "exchange": "HKEX", "sector": "科技", "sectorEn": "Technology", "marketCap": "~$80B", "revenue": "¥380B", "revenueGrowth": "+20%+", "netIncome": "¥22B", "revenueRank": "全球第三大智能手机厂商", "pe": "~25x", "grossMargin": "22%", "operatingMargin": "7%", "rating": "看涨", "ratingEn": "Bullish", "ratingColor": "orange-600", "summary": "智能手机+IoT+智能电动汽车三线推进。SU7大定超15万辆，人车家全生态构建差异化竞争力。", "highlights": ["SU7大定超15万辆", "智能手机全球前三", "IoT生态连接数7亿+"], "reportDate": "2026-05-26", "reportUrl": "xiaomi-group-2026.html"}, {"slug": "huahong-semiconductor-2026", "name": "Huahong Semiconductor", "nameCn": "华虹半导体", "ticker": "688347.SH", "exchange": "SSE STAR", "sector": "半导体", "sectorEn": "Semiconductor", "marketCap": "~¥80B", "revenue": "¥17B", "revenueGrowth": "+8%", "netIncome": "¥2.5B", "revenueRank": "中国第二大晶圆代工厂", "pe": "~35x", "grossMargin": "28%", "operatingMargin": "15%", "rating": "中性", "ratingEn": "Neutral", "ratingColor": "blue-800", "summary": "中国第二大晶圆代工厂，聚焦特色工艺（eNVM、BCD、IGBT等）。国产替代受益，但技术节点与台积电差距较大。", "highlights": ["中国第二大代工厂", "特色工艺差异化", "国产替代直接受益"], "reportDate": "2026-05-26", "reportUrl": "huahong-semiconductor-2026.html"}, {"slug": "oracle-2026", "name": "Oracle", "nameCn": "甲骨文", "ticker": "ORCL", "exchange": "NYSE", "sector": "科技", "sectorEn": "Technology", "marketCap": "$500B+", "revenue": "$55B", "revenueGrowth": "+12%", "netIncome": "$12B", "revenueRank": "全球最大企业级数据库公司", "pe": "~30x", "grossMargin": "72%", "operatingMargin": "40%", "rating": "看涨", "ratingEn": "Bullish", "ratingColor": "red-600", "summary": "OCI云基础设施+Autonomous Database双轮驱动，Cerner医疗+云计算转型，AI推理工作负载推动需求。", "highlights": ["OCI云基础设施高增长", "Autonomous Database领先", "AI推理工作负载需求增长"], "reportDate": "2026-05-27", "reportUrl": "oracle-2026.html"}, {"slug": "netflix-2026", "name": "Netflix", "nameCn": "网飞", "ticker": "NFLX", "exchange": "NASDAQ", "sector": "科技", "sectorEn": "Technology", "marketCap": "~$380B", "revenue": "$43B", "revenueGrowth": "+16%", "netIncome": "$9B", "revenueRank": "全球最大流媒体平台", "pe": "~38x", "grossMargin": "45%", "operatingMargin": "28.6%", "rating": "看涨", "ratingEn": "Bullish", "ratingColor": "red-700", "summary": "全球流媒体霸主，320M+付费用户，运营利润率28.6%。广告业务崛起+体育直播拓展第二增长曲线。", "highlights": ["320M+付费用户", "广告业务快速增长", "运营利润率28.6%"], "reportDate": "2026-05-27", "reportUrl": "netflix-2026.html"}, {"slug": "asml-2026", "name": "ASML", "nameCn": "阿斯麦", "ticker": "ASML", "exchange": "NASDAQ", "sector": "半导体", "sectorEn": "Semiconductor", "marketCap": "~$400B", "revenue": "$30B", "revenueGrowth": "+15%", "netIncome": "$8B", "revenueRank": "全球光刻机绝对垄断者", "pe": "~38x", "grossMargin": "51%", "operatingMargin": "32%", "rating": "看涨", "ratingEn": "Bullish", "ratingColor": "indigo-600", "summary": "EUV光刻机全球绝对垄断（100%市场份额），High-NA EUV已交付。AI芯片需求驱动先进制程光刻需求。", "highlights": ["EUV光刻机100%垄断", "High-NA EUV已交付", "AI芯片驱动先进制程需求"], "reportDate": "2026-05-27", "reportUrl": "asml-2026.html"}, {"slug": "amd-2026", "name": "AMD", "nameCn": "AMD", "ticker": "AMD", "exchange": "NASDAQ", "sector": "半导体", "sectorEn": "Semiconductor", "marketCap": "~$320B", "revenue": "$28B", "revenueGrowth": "+18%", "netIncome": "$4B", "revenueRank": "全球第二大GPU厂商", "pe": "~55x", "grossMargin": "52%", "operatingMargin": "18%", "rating": "中性偏涨", "ratingEn": "Moderate Bullish", "ratingColor": "orange-600", "summary": "唯一在AI训练/推理领域与NVIDIA直接竞争的GPU厂商。MI300X/MI400持续迭代，EPYC CPU蚕食Intel份额。", "highlights": ["MI300X/MI400 AI加速器", "EPYC CPU持续蚕食Intel", "数据中心$16B占57%营收"], "reportDate": "2026-05-27", "reportUrl": "amd-2026.html"}, {"slug": "catl-2026", "name": "CATL", "nameCn": "宁德时代", "ticker": "300750.SZ", "exchange": "SZSE", "sector": "新能源", "sectorEn": "New Energy", "marketCap": "¥1.1T", "revenue": "¥423.7B", "revenueGrowth": "+25%", "netIncome": "¥72.2B", "revenueRank": "全球最大动力电池制造商", "pe": "~23.3x", "grossMargin": "27%", "operatingMargin": "22%", "rating": "看涨", "ratingEn": "Bullish", "ratingColor": "green-600", "summary": "全球最大动力电池制造商，市值超1万亿元。FY2025营收4237亿元（+25%），净利润722亿元。钠离子电池+固态电池下一代技术领先。", "highlights": ["全球动力电池市占率37%+", "净利润722亿元", "钠离子+固态电池领先"], "reportDate": "2026-05-27", "reportUrl": "catl-2026.html"}]};
+    allCompanies = COMPANIES_DATA.companies;
+    renderGrid(allCompanies);
+    renderHistory();
+
+    window.allCompanies = allCompanies;
+    window.renderGrid = renderGrid;
+    window.buildAutocomplete = buildAutocomplete;
+    window.doSearch = doSearch;
+})();
+
+/* ── sector filter ── */
+var currentFilter = 'all';
+function setFilter(filter, el) {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-chip').forEach(function(c) {
+        c.classList.toggle('active', c.dataset.filter === filter);
+    });
+    document.getElementById('searchInput').value = '';
+    document.getElementById('autocompleteList').classList.remove('show');
+    var list = filter === 'all' ? allCompanies : allCompanies.filter(function(c) { return c.sector === filter; });
+    document.getElementById('gridTitle').textContent = filter === 'all' ? '全部公司' : filter + '（' + list.length + '）';
+    renderGrid(list);
+}
+
+/* ── random pick ── */
+function pickRandom() {
+    var c = allCompanies[Math.floor(Math.random() * allCompanies.length)];
+    window.location.href = c.reportUrl;
+}
+
+/* ── search history ── */
+function saveHistory(name) {
+    var h = JSON.parse(localStorage.getItem('ai_analyst_history') || '[]');
+    h = h.filter(function(x) { return x !== name; });
+    h.unshift(name);
+    if (h.length > 8) h = h.slice(0, 8);
+    localStorage.setItem('ai_analyst_history', JSON.stringify(h));
+    renderHistory();
+}
+function renderHistory() {
+    var h = JSON.parse(localStorage.getItem('ai_analyst_history') || '[]');
+    var el = document.getElementById('searchHistory');
+    var container = document.getElementById('historyItems');
+    if (!el || !container) return;
+    if (h.length === 0) { el.classList.remove('show'); return; }
+    el.classList.add('show');
+    container.innerHTML = h.map(function(name) {
+        return '<span class="search-history-item" onclick="historySearch(\'' + name.replace(/'/g, "\\'") + '\')">' + name + '</span>';
+    }).join('');
+}
+function historySearch(name) {
+    document.getElementById('searchInput').value = name;
+    document.getElementById('searchInput').focus();
+    if (typeof buildAutocomplete === 'function' && typeof doSearch === 'function') {
+        buildAutocomplete(name);
+        doSearch(name);
+    }
+}
+function clearHistory() {
+    localStorage.removeItem('ai_analyst_history');
+    renderHistory();
+}
+</script>
+</body>
+</html>
