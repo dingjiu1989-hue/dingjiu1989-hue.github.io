@@ -1,20 +1,28 @@
 /** Template builder: MCP data → structured analysis JSON */
 
+function extractRows(data) {
+  if (Array.isArray(data)) return data;
+  if (data?.data && Array.isArray(data.data)) return data.data;
+  if (data?.data?.list && Array.isArray(data.data.list)) return data.data.list;
+  if (data?.list && Array.isArray(data.list)) return data.list;
+  return [];
+}
+
 export function buildAnalysis(company, basicInfo, income, balanceSheet, cashFlow, quotes) {
   // Extract latest year income statement
-  const incomeRows = Array.isArray(income) ? income : (income?.data?.list || []);
+  const incomeRows = extractRows(income);
   const latestIncome = incomeRows[0] || {};
 
   // Extract latest balance sheet
-  const bsRows = Array.isArray(balanceSheet) ? balanceSheet : (balanceSheet?.data?.list || []);
+  const bsRows = extractRows(balanceSheet);
   const latestBS = bsRows[0] || {};
 
   // Extract cash flow
-  const cfRows = Array.isArray(cashFlow) ? cashFlow : (cashFlow?.data?.list || []);
+  const cfRows = extractRows(cashFlow);
   const latestCF = cfRows[0] || {};
 
   // Extract quotes for price data
-  const quoteRows = Array.isArray(quotes) ? quotes : (quotes?.data?.list || []);
+  const quoteRows = extractRows(quotes);
   const prices = quoteRows.map(q => ({
     date: q.tradeDate || q.date,
     close: q.closePrice || q.close,

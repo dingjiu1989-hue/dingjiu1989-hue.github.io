@@ -26,54 +26,27 @@ export default {
         return json({ error: '服务配置异常' }, 500, CORS_HEADERS);
       }
 
-      // Step 1: Search MCP for stock code
-      let searchResult;
+      // Step 1: Search MCP for stock code, or try input as code directly
+      let stockCode = '';
       try {
-        searchResult = await searchStock(MCP_URL, MCP_TOKEN, company.trim());
+        const searchResult = await searchStock(MCP_URL, MCP_TOKEN, company.trim());
+        const raw = searchResult;
+        const items = Array.isArray(raw) ? raw
+          : Array.isArray(raw?.data) ? raw.data
+          : Array.isArray(raw?.data?.list) ? raw.data.list
+          : Array.isArray(raw?.list) ? raw.list
+          : [raw].filter(Boolean);
+        if (items.length) {
+          const first = items[0];
+          stockCode = first.stockCode || first.code || first.secCode || '';
+        }
       } catch (e) {
-        return json({ error: `未找到「${company}」的数据（${e.message}）`, analysis: buildFallback(company) }, 200, CORS_HEADERS);
+        // search failed
       }
 
-      // Extract stock code from search results — handle various response formats
-      const raw = searchResult;
-      console.log('searchResult type:', typeof raw, raw ? Object.keys(raw) : 'null');
-
-      let items = [];
-      let debugInfo = 'searchResult type=' + typeof raw;
-      if (raw && typeof raw === 'object') {
-        const hasRaw = !!raw.raw;
-        const keys = Object.keys(raw).filter(k => k !== 'raw').join(',');
-        debugInfo += ' keys=[' + keys + ']' + (hasRaw ? ' hasRaw' : '');
-        if (hasRaw) debugInfo += ' rawPreview=' + JSON.stringify(raw.raw?.substring(0, 150));
-      } else if (raw && typeof raw === 'string') {
-        debugInfo += ' text=' + raw.substring(0, 150);
-      }
-
-      if (raw?.raw) {
-        console.log('raw text:', raw.raw.substring(0, 200));
-      } else if (Array.isArray(raw)) {
-        items = raw;
-      } else if (Array.isArray(raw?.data)) {
-        items = raw.data;
-      } else if (Array.isArray(raw?.data?.list)) {
-        items = raw.data.list;
-      } else if (Array.isArray(raw?.list)) {
-        items = raw.list;
-      } else if (Array.isArray(raw?.result)) {
-        items = raw.result;
-      } else if (raw?.stocks) {
-        items = raw.stocks;
-      } else {
-        items = [raw].filter(Boolean);
-      }
-      if (!items.length) {
-        return json({ error: `未找到「${company}」的数据`, debug: debugInfo, analysis: buildFallback(company) }, 200, CORS_HEADERS);
-      }
-
-      const first = items[0];
-      const stockCode = first.stockCode || first.code || first.secCode;
       if (!stockCode) {
-        return json({ error: `未找到「${company}」的股票代码`, analysis: buildFallback(company) }, 200, CORS_HEADERS);
+        // Try using input directly as stock code
+        stockCode = company.trim();
       }
 
       // Step 2: Get basic info for company overview
@@ -83,12 +56,11 @@ export default {
       const endDate = '2026-05-27';
       const beginDate = '2024-01-01';
 
-      const [income, balanceSheet, cashFlow, quotes] = await Promise.all([
-        getIncome(MCP_URL, MCP_TOKEN, stockCode, beginDate, endDate).catch(() => null),
-        getBalanceSheet(MCP_URL, MCP_TOKEN, stockCode).catch(() => null),
-        getCashFlow(MCP_URL, MCP_TOKEN, stockCode, beginDate, endDate).catch(() => null),
-        getAdjustedQuotes(MCP_URL, MCP_TOKEN, stockCode, '2025-05-27', endDate).catch(() => null),
-      ]);
+      let income = null, balanceSheet = null, cashFlow = null, quotes = null;
+      try { income = await getIncome(MCP_URL, MCP_TOKEN, stockCode, beginDate, endDate); } catch(e) { income = { _error: e.message }; }
+      try { balanceSheet = await getBalanceSheet(MCP_URL, MCP_TOKEN, stockCode); } catch(e) { balanceSheet = { _error: e.message }; }
+      try { cashFlow = await getCashFlow(MCP_URL, MCP_TOKEN, stockCode, beginDate, endDate); } catch(e) { cashFlow = { _error: e.message }; }
+      try { quotes = await getAdjustedQuotes(MCP_URL, MCP_TOKEN, stockCode, '2025-05-27', endDate); } catch(e) { quotes = { _error: e.message }; }
 
       // Step 4: Build analysis
       const analysis = buildAnalysis(company.trim(), basicInfo, income, balanceSheet, cashFlow, quotes);
