@@ -596,7 +596,7 @@ def make_homepage(data):
 <main>
   <section class="hero">
     <div class="container">
-      <h1>📚 欢迎来到 AI 自习室</h1>
+      <h1 aria-label="欢迎来到 AI 自习室"><span aria-hidden="true">📚</span> 欢迎来到 AI 自习室</h1>
       <p>{site['tagline']}</p>
       <div class="hero-stats" id="hero-stats">
         <span class="hero-stat">📂 {total_boards} 个板块</span>
@@ -607,7 +607,7 @@ def make_homepage(data):
 
   <div class="container">
     <div class="search-bar">
-      <input type="text" id="search-input" placeholder="搜索文章标题、标签或关键词..." autocomplete="off">
+      <input type="text" id="search-input" placeholder="搜索文章标题、标签或关键词…" autocomplete="off" aria-label="搜索文章">
       <div id="search-results" class="search-results"></div>
     </div>
 
@@ -749,7 +749,7 @@ def make_category(data, board_id):
 
     <div class="page-header">
       <div>
-        <h1>{icon} {title}</h1>
+        <h1 aria-label="{title}"><span aria-hidden="true">{icon}</span> {title}</h1>
         <p class="board-description">{desc}（{count} 篇文章）</p>
       </div>
       <span class="sort-indicator">排序：最新 ↓</span>

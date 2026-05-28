@@ -13963,7 +13963,7 @@ def make_homepage(data):
 <main>
   <section class="hero">
     <div class="container">
-      <h1>📚 Welcome to AI Study Room</h1>
+      <h1 aria-label="Welcome to AI Study Room"><span aria-hidden="true">📚</span> Welcome to AI Study Room</h1>
       <p>{site['tagline']}</p>
       <div class="hero-stats" id="hero-stats">
         <span class="hero-stat">📂 {total_boards} boards</span>
@@ -13974,7 +13974,7 @@ def make_homepage(data):
 
   <div class="container">
     <div class="search-bar">
-      <input type="text" id="search-input" placeholder="Search articles by title, tag, or keyword..." autocomplete="off">
+      <input type="text" id="search-input" placeholder="Search articles by title, tag, or keyword…" autocomplete="off" aria-label="Search articles">
       <div id="search-results" class="search-results"></div>
     </div>
 
@@ -14168,7 +14168,7 @@ def make_category(data, board_id):
 
     <div class="page-header">
       <div>
-        <h1>{board['icon']} {title}</h1>
+        <h1 aria-label="{title}"><span aria-hidden="true">{board['icon']}</span> {title}</h1>
         <p class="board-description">{board_descs[board_id]} ({count} articles)</p>
       </div>
       <span class="sort-indicator">Sort: Newest ↓</span>
