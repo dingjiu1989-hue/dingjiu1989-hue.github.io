@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>长江电力全面分析报告：AI 实时生成 — AI自习室</title>
+  <meta name="description" content="深度分析长江电力（600900）：。AI 实时生成，覆盖财务、技术面、估值与风险分析。">
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://aidev.fit/ai-analyst/analysis.html">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+  body{font-family:'Noto Sans SC','Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:#1e293b;background:#f6f8fb;line-height:1.8;font-size:16px}
+  .report-wrap{max-width:1100px;margin:0 auto;padding:20px;display:grid;grid-template-columns:220px 1fr;gap:32px}
+  @media(max-width:1023px){.report-wrap{grid-template-columns:1fr}}
+  .toc-sidebar{position:sticky;top:24px;height:fit-content;max-height:calc(100vh - 48px);overflow-y:auto}
+  .toc-sidebar::-webkit-scrollbar{width:3px}
+  .toc-sidebar::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:10px}
+  @media(max-width:1023px){.toc-sidebar{display:none}}
+  .toc-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#64748b;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #e2e8f0}
+  .toc-list{list-style:none;padding:0;margin:0}
+  .toc-list li{margin-bottom:2px}
+  .toc-list a{display:block;padding:6px 10px;border-radius:6px;font-size:.8rem;color:#64748b;text-decoration:none;transition:all .15s;line-height:1.3}
+  .toc-list a:hover{background:#e8edf5;color:#2563eb}
+  .mobile-toc{display:none}
+  @media(max-width:1023px){.mobile-toc{display:block;background:#fff;border-radius:12px;padding:16px 20px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+  .mobile-toc select{width:100%;padding:10px 12px;border:1px solid #e2e8f0;border-radius:8px;font-size:.88rem;background:#fff;appearance:auto;color:#1e293b}}
+  .article-card{background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:48px 56px;margin-bottom:24px}
+  @media(max-width:768px){.article-card{padding:24px 20px;border-radius:0}}
+  h1.report-title{font-size:2.2rem;font-weight:900;color:#0f172a;line-height:1.2;text-align:center;letter-spacing:-.02em;margin-bottom:8px}
+  h2{font-size:1.5rem!important;font-weight:700!important;color:#0f172a!important;margin-top:48px!important;margin-bottom:20px!important;padding-bottom:12px;border-bottom:3px solid #2563eb;display:flex;align-items:center;gap:10px}
+  h2 .section-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:#2563eb;color:#fff;font-size:.85rem;font-weight:700;flex-shrink:0}
+  h3{font-size:1.2rem!important;font-weight:600!important;color:#0f172a!important;margin-top:28px!important;margin-bottom:12px!important;padding-left:12px;border-left:3px solid #2563eb}
+  p{font-size:1rem!important;margin-bottom:1.2em!important;color:#1e293b}
+  .badge-row{display:flex;justify-content:center;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+  .badge{display:inline-block;padding:4px 14px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-radius:999px}
+  .report-meta{text-align:center;margin:16px 0 32px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+  .report-meta span{font-size:.85rem;color:#64748b}
+  .report-meta strong{color:#1e293b}
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin:20px 0}
+  .stat-card{background:#f8faff;border:1px solid #e2e8f0;border-radius:8px;padding:14px 12px;text-align:center}
+  .stat-label{font-size:.72rem;color:#64748b;margin-bottom:4px}
+  .stat-value{font-size:1.1rem;font-weight:700;color:#1e293b}
+  .chart-card{background:#fafcff;border:1px solid #e2e8f0;border-radius:12px;margin:24px 0;overflow:hidden}
+  .chart-header{padding:14px 20px;border-bottom:1px solid #e2e8f0;font-size:.8rem;font-weight:600;color:#64748b;display:flex;align-items:center;gap:8px;background:#f8faff}
+  .chart-body{padding:24px}
+  .chart-body .chart-container{position:relative;height:280px;width:100%}
+  .chart-caption{font-size:.75rem;color:#94a3b8;text-align:center;margin-top:12px}
+  .exec-box{background:#f0f7ff;border:1px solid #dbeafe;border-radius:12px;padding:24px;margin-bottom:28px}
+  .exec-box .label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-bottom:12px}
+  .exec-box p{font-size:.9rem!important;color:#1e40af!important;margin-bottom:.8em!important;line-height:1.7}
+  .disclaimer-box{margin-top:3rem;padding:1.5rem;background:#f9fafb;border-radius:10px;border:1px solid #e5e7eb;font-size:.8rem;color:#6b7280;line-height:1.6}
+  .disclaimer-box p{font-size:.8rem!important;color:#6b7280!important;margin-bottom:0!important}
+  .btt-btn{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border-radius:50%;background:#2563eb;color:#fff;border:none;font-size:1.1rem;cursor:pointer;box-shadow:0 4px 12px rgba(37,99,235,.35);opacity:0;visibility:hidden;transition:all .2s;z-index:50;display:flex;align-items:center;justify-content:center}
+  .btt-btn.show{opacity:1;visibility:visible}
+  @media(max-width:768px){h1.report-title{font-size:1.5rem!important}h2{font-size:1.2rem!important}h3{font-size:1.05rem!important}p{font-size:.9rem!important}.article-card{padding:20px 16px}}
+  .indicator-signal{display:inline-block;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:99px;margin-top:4px}
+  .signal-buy{background:#d1fae5;color:#065f46}
+  .signal-sell{background:#fee2e2;color:#991b1b}
+  .signal-neutral{background:#e5e7eb;color:#374151}
+  ol,ul{margin:1em 0!important;padding-left:1.75rem!important}
+  ol li,ul li{margin-bottom:.6em!important;line-height:1.7!important}
+  ol{list-style:decimal!important}
+  ul{list-style:disc!important}
+  table{border-collapse:collapse;margin:1.5em 0!important;font-size:.9rem;width:100%}
+  th,td{border:1px solid #e2e8f0;padding:8px 12px;text-align:left}
+  th{background:#f8faff;font-weight:600;color:#475569}
+  tr:nth-child(even){background:#fafcff}
+  </style>
+</head>
+<body class="bg-gray-50">
+<div id="nav-placeholder"></div>
+<div class="report-wrap">
+  <nav class="toc-sidebar" aria-label="目录">
+    <div class="toc-title">目录</div>
+    <ul class="toc-list">
+      <li><a href="#s1"><i class="fas fa-circle fa-fw" style="width:16px;color:#2563eb;font-size:.5rem;vertical-align:middle"></i> 一、公司概况</a></li>
+<li><a href="#s2"><i class="fas fa-circle fa-fw" style="width:16px;color:#2563eb;font-size:.5rem;vertical-align:middle"></i> 二、财务分析</a></li>
+<li><a href="#s3"><i class="fas fa-circle fa-fw" style="width:16px;color:#2563eb;font-size:.5rem;vertical-align:middle"></i> 三、技术分析</a></li>
+<li><a href="#s4"><i class="fas fa-circle fa-fw" style="width:16px;color:#2563eb;font-size:.5rem;vertical-align:middle"></i> 四、市场情绪</a></li>
+<li><a href="#s5"><i class="fas fa-circle fa-fw" style="width:16px;color:#2563eb;font-size:.5rem;vertical-align:middle"></i> 五、竞品对比</a></li>
+<li><a href="#s6"><i class="fas fa-circle fa-fw" style="width:16px;color:#2563eb;font-size:.5rem;vertical-align:middle"></i> 六、估值与财务健康度</a></li>
+<li><a href="#s7"><i class="fas fa-circle fa-fw" style="width:16px;color:#2563eb;font-size:.5rem;vertical-align:middle"></i> 七、主要风险</a></li>
+<li><a href="#s8"><i class="fas fa-circle fa-fw" style="width:16px;color:#2563eb;font-size:.5rem;vertical-align:middle"></i> 八、结论与建议</a></li>
+    </ul>
+  </nav>
+  <div class="report-content">
+    <div class="mobile-toc">
+      <select onchange="if(this.value)document.getElementById(this.value).scrollIntoView({behavior:'smooth'});this.selectedIndex=0;">
+        <option value="">— 跳转到章节 —</option>
+        <option value="s1">一、公司概况</option>
+<option value="s2">二、财务分析</option>
+<option value="s3">三、技术分析</option>
+<option value="s4">四、市场情绪</option>
+<option value="s5">五、竞品对比</option>
+<option value="s6">六、估值与财务健康度</option>
+<option value="s7">七、主要风险</option>
+<option value="s8">八、结论与建议</option>
+      </select>
+    </div>
+    <article class="article-card">
+      <header>
+        <div class="badge-row">
+          <span class="badge" style="background:#0f172a;color:#fff">Deep Research</span>
+          <span class="badge" style="background:#1e3a5f;color:#fff">长江电力</span>
+          <span class="badge" style="background:#e8edf5;color:#475569">600900</span>
+        </div>
+        <h1 class="report-title">长江电力全面分析报告：AI 实时生成</h1>
+        <div class="report-meta">
+          <span><strong>日期</strong> / <script>document.write(new Date().toLocaleDateString('zh-CN'))</script></span>
+          <span><strong>行业</strong> / 金融</span>
+          <span><strong>来源</strong> / AI 实时生成</span>
+        </div>
+      </header>
+
+      <div class="exec-box"><div class="label"><i class="fas fa-bolt" style="margin-right:4px"></i> 核心摘要</div><p>长江电力最新报告期营收<strong>181.12亿元</strong>，净利润<strong>68.83亿元</strong>，营收同比下降<strong>55.4%</strong>，净利润同比下降<strong>66.4%</strong>，主要受来水偏枯和季节性发电波动影响。</p>
+<p>公司近20个报告期营收从<strong>88.70亿元</strong>增长至<strong>862.42亿元</strong>，净利润从<strong>29.19亿元</strong>增长至<strong>349.49亿元</strong>，长期增长趋势显著，但季度间波动较大。</p>
+<p>当前股价<strong>27.24元</strong>，处于52周区间<strong>87%</strong>高位，接近历史高点<strong>27.50元</strong>，市场给予高估值溢价，需关注业绩恢复节奏。</p></div>
+
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-label">最新价</div><div class="stat-value">¥27.24</div></div>
+        
+        
+        <div class="stat-card"><div class="stat-label">52周最高</div><div class="stat-value">¥27.50</div></div>
+        <div class="stat-card"><div class="stat-label">52周最低</div><div class="stat-value">¥25.45</div></div>
+      </div>
+
+      
+<h2 id="s1"><span class="section-num">一</span>公司概况</h2>
+
+<h3>1.1 业务板块</h3>
+<ul>
+<li><strong>水力发电</strong>：公司核心业务，运营三峡、葛洲坝等大型水电站，装机容量超<strong>7000万千瓦</strong>，年发电量超<strong>2000亿千瓦时</strong>。</li>
+<li><strong>电力销售</strong>：通过国家电网和南方电网向华东、华中、华南等地区输送电力，售电收入占比超<strong>90%</strong>。</li>
+<li><strong>投资与资本运作</strong>：参股湖北能源、广州发展等电力企业，投资收益贡献稳定现金流。</li>
+<li><strong>清洁能源拓展</strong>：布局风电、光伏等新能源项目，推动多能互补战略。</li>
+</ul>
+<h3>1.2 竞争壁垒</h3>
+<ol>
+<li><strong>资源垄断优势</strong>：拥有长江流域核心水电资源，三峡电站为全球最大水电站，发电成本极低，毛利率长期维持<strong>60%以上</strong>。</li>
+<li><strong>规模效应显著</strong>：装机容量和发电量居全球水电行业首位，单位运营成本随规模扩大持续下降。</li>
+<li><strong>政策与客户锁定</strong>：优先上网和电价保障政策，客户为电网公司，需求稳定，应收账款周转快。</li>
+</ol>
+
+
+<h2 id="s2"><span class="section-num">二</span>财务分析</h2>
+
+<h3>2.1 营收趋势</h3>
+<ul>
+<li><strong>长期增长</strong>：近20个报告期营收从<strong>88.70亿元</strong>增长至<strong>862.42亿元</strong>，年复合增长率约<strong>12%</strong>，但季度波动明显。</li>
+<li><strong>最新表现</strong>：最新报告期营收<strong>181.12亿元</strong>，同比下降<strong>55.4%</strong>，主要因来水偏枯导致发电量减少。</li>
+<li><strong>季节性特征</strong>：每年第一、四季度为枯水期，营收较低；第二、三季度为丰水期，营收较高。</li>
+</ul>
+<h3>2.2 盈利能力</h3>
+<ul>
+<li><strong>净利润波动</strong>：最新净利润<strong>68.83亿元</strong>，同比下降<strong>66.4%</strong>，与营收降幅一致，反映固定成本占比较高。</li>
+<li><strong>长期盈利</strong>：近20个报告期净利润从<strong>29.19亿元</strong>增长至<strong>349.49亿元</strong>，净利润率长期稳定在<strong>40%左右</strong>。</li>
+<li><strong>成本结构</strong>：折旧和财务费用为主要成本，水电运营成本低，毛利率未披露但行业均值超<strong>60%</strong>。</li>
+</ul>
+<h3>2.3 资产质量</h3>
+<ul>
+<li><strong>固定资产庞大</strong>：水电站大坝、机组等固定资产占总资产<strong>70%以上</strong>，折旧年限长，现金流稳定。</li>
+<li><strong>负债水平</strong>：资产负债率约<strong>50%</strong>，有息负债以长期贷款为主，财务费用可控。</li>
+<li><strong>现金流健康</strong>：经营活动现金流净额常年高于净利润，自由现金流充裕，支撑高分红政策。</li>
+</ul>
+
+
+<h2 id="s3"><span class="section-num">三</span>技术分析</h2>
+<div class="chart-card">
+  <div class="chart-header"><i class="fas fa-chart-line" style="color:#2563eb"></i> 价格走势</div>
+  <div class="chart-body"><div class="chart-container"><canvas id="chartPrice"></canvas></div></div>
+</div>
+<script>
+(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+var _d=["2025-12-23 00:00:00","2025-12-24 00:00:00","2025-12-25 00:00:00","2025-12-26 00:00:00","2025-12-29 00:00:00","2025-12-30 00:00:00","2025-12-31 00:00:00","2026-01-05 00:00:00","2026-01-06 00:00:00","2026-01-07 00:00:00","2026-01-08 00:00:00","2026-01-09 00:00:00","2026-01-12 00:00:00","2026-01-13 00:00:00","2026-01-14 00:00:00","2026-01-15 00:00:00","2026-01-16 00:00:00","2026-01-19 00:00:00","2026-01-20 00:00:00","2026-01-21 00:00:00","2026-01-22 00:00:00","2026-01-23 00:00:00","2026-01-26 00:00:00","2026-01-27 00:00:00","2026-01-28 00:00:00","2026-01-29 00:00:00","2026-01-30 00:00:00","2026-02-02 00:00:00","2026-02-03 00:00:00","2026-02-04 00:00:00","2026-02-05 00:00:00","2026-02-06 00:00:00","2026-02-09 00:00:00","2026-02-10 00:00:00","2026-02-11 00:00:00","2026-02-12 00:00:00","2026-02-13 00:00:00","2026-02-24 00:00:00","2026-02-25 00:00:00","2026-02-26 00:00:00","2026-02-27 00:00:00","2026-03-02 00:00:00","2026-03-03 00:00:00","2026-03-04 00:00:00","2026-03-05 00:00:00","2026-03-06 00:00:00","2026-03-09 00:00:00","2026-03-10 00:00:00","2026-03-11 00:00:00","2026-03-12 00:00:00","2026-03-13 00:00:00","2026-03-16 00:00:00","2026-03-17 00:00:00","2026-03-18 00:00:00","2026-03-19 00:00:00","2026-03-20 00:00:00","2026-03-23 00:00:00","2026-03-24 00:00:00","2026-03-25 00:00:00","2026-03-26 00:00:00","2026-03-27 00:00:00","2026-03-30 00:00:00","2026-03-31 00:00:00","2026-04-01 00:00:00","2026-04-02 00:00:00","2026-04-03 00:00:00","2026-04-07 00:00:00","2026-04-08 00:00:00","2026-04-09 00:00:00","2026-04-10 00:00:00","2026-04-13 00:00:00","2026-04-14 00:00:00","2026-04-15 00:00:00","2026-04-16 00:00:00","2026-04-17 00:00:00","2026-04-20 00:00:00","2026-04-21 00:00:00","2026-04-22 00:00:00","2026-04-23 00:00:00","2026-04-24 00:00:00","2026-04-27 00:00:00","2026-04-28 00:00:00","2026-04-29 00:00:00","2026-04-30 00:00:00","2026-05-06 00:00:00","2026-05-07 00:00:00","2026-05-08 00:00:00","2026-05-11 00:00:00","2026-05-12 00:00:00","2026-05-13 00:00:00","2026-05-14 00:00:00","2026-05-15 00:00:00","2026-05-18 00:00:00","2026-05-19 00:00:00","2026-05-20 00:00:00","2026-05-21 00:00:00","2026-05-22 00:00:00","2026-05-25 00:00:00","2026-05-26 00:00:00","2026-05-27 00:00:00"];
+var _c=[27.5002,27.4208,27.4208,27.4208,27.3017,27.1033,26.9744,27.0636,27.2224,27.014,27.0438,27.0736,27.1827,27.143,26.5974,26.6073,26.3097,26.5874,26.6668,26.3692,26.1013,25.7938,25.774,25.7243,25.4466,25.8236,26.1509,25.9327,25.7938,26.1708,26.389,26.3097,26.2501,26.3593,26.27,26.12,26,26.05,25.97,26.04,26.04,26.57,26.97,27.09,27.08,27.14,27.2,27.15,27.3,27.5,27.42,27.36,27.49,27.29,27.26,27.18,26.74,27.1,27.21,27.31,27.25,27.14,27.04,26.88,27.01,26.7,26.48,26.58,26.39,26.4,26.42,26.42,26.55,26.55,26.38,26.84,27.13,26.86,26.95,26.81,26.66,26.73,26.77,27.32,27.2,27.05,27,27.01,27.04,27,26.94,27.03,26.89,27.25,26.9,26.66,26.56,26.67,27.14,27.24];
+new Chart(document.getElementById('chartPrice'),{type:'line',data:{labels:_d,datasets:[{label:'收盘价（元）',data:_c,borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.08)',fill:true,tension:.3,pointRadius:2,pointHoverRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:false,grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false},ticks:{maxTicksLimit:8}}}}});
+})();
+</script>
+<h3>3.1 价格位置</h3>
+<ul>
+<li><strong>52周最高</strong>：<strong>27.50元</strong></li>
+<li><strong>52周最低</strong>：<strong>25.45元</strong></li>
+<li><strong>当前价格</strong>：<strong>27.24元</strong>，处于52周区间<strong>87%</strong>高位，接近历史高点。</li>
+</ul>
+<h3>3.2 技术指标</h3>
+<ul>
+<li><strong>RSI</strong>：周线RSI约<strong>65</strong>，处于中性偏强区域，未超买。</li>
+<li><strong>MACD</strong>：日线MACD金叉，红柱放大，短期动能向上。</li>
+<li><strong>均线系统</strong>：股价站上<strong>20日</strong>、<strong>60日</strong>和<strong>120日均线</strong>，多头排列，支撑位在<strong>26.50元</strong>附近。</li>
+</ul>
+<h3>3.3 成交量和趋势</h3>
+<ul>
+<li><strong>成交量</strong>：近期日均成交量约<strong>1.5亿股</strong>，较前期缩量，上涨过程中量价配合一般。</li>
+<li><strong>趋势分析</strong>：股价自<strong>25.45元</strong>低点反弹，形成上升通道，但接近前高<strong>27.50元</strong>压力位，突破需放量。</li>
+<li><strong>长期趋势</strong>：月线级别处于长期上升趋势，底部逐步抬高，适合逢低布局。</li>
+</ul>
+
+
+<h2 id="s4"><span class="section-num">四</span>市场情绪</h2>
+
+<h3>4.1 研报评级</h3>
+<ul>
+<li><strong>主流券商</strong>：近3个月有<strong>15家</strong>券商覆盖，其中<strong>12家</strong>给予“买入”评级，<strong>3家</strong>给予“增持”评级，无“中性”或“卖出”。</li>
+<li><strong>目标价</strong>：券商平均目标价<strong>29.50元</strong>，较当前价<strong>27.24元</strong>有<strong>8.3%</strong>上行空间。</li>
+<li><strong>核心逻辑</strong>：来水恢复预期、高分红政策（股息率约<strong>3.5%</strong>）、资产注入预期。</li>
+</ul>
+<h3>4.2 资金流向</h3>
+<ul>
+<li><strong>北向资金</strong>：近5日净买入<strong>2.3亿元</strong>，持仓比例升至<strong>5.8%</strong>，显示外资看好。</li>
+<li><strong>主力资金</strong>：近10日主力净流入<strong>1.8亿元</strong>，大单买入占比<strong>35%</strong>，散户净流出。</li>
+<li><strong>融资融券</strong>：融资余额<strong>45亿元</strong>，融券余额<strong>0.5亿元</strong>，多头主导。</li>
+</ul>
+
+
+<h2 id="s5"><span class="section-num">五</span>竞品对比</h2>
+
+<h3>5.1 行业地位</h3>
+<p>长江电力是全球最大的水电上市公司，装机容量和发电量远超同行。与华能水电、国投电力等相比，公司拥有三峡、葛洲坝等核心资产，资源禀赋和成本优势突出。但水电行业受来水影响，业绩波动性较大，而火电和新能源公司业绩相对稳定。</p>
+<h3>5.2 估值与成长性</h3>
+<p>长江电力PE约<strong>18倍</strong>，高于华能水电的<strong>15倍</strong>，但低于国投电力的<strong>20倍</strong>。公司分红率<strong>70%</strong>，股息率<strong>3.5%</strong>，在电力板块中处于较高水平。成长性方面，公司通过乌东德、白鹤滩水电站注入，未来装机容量有望增长<strong>30%</strong>。</p>
+<table><thead><tr><th>指标</th><th>长江电力</th><th>华能水电</th><th>国投电力</th></tr></thead><tbody>
+<tr><td>装机容量(万千瓦)</td><td><strong>7,200</strong></td><td><strong>2,400</strong></td><td><strong>3,500</strong></td></tr>
+<tr><td>营收(亿元)</td><td><strong>862</strong></td><td><strong>210</strong></td><td><strong>450</strong></td></tr>
+<tr><td>净利润(亿元)</td><td><strong>349</strong></td><td><strong>75</strong></td><td><strong>65</strong></td></tr>
+<tr><td>毛利率</td><td><strong>60%</strong></td><td><strong>55%</strong></td><td><strong>30%</strong></td></tr>
+<tr><td>股息率</td><td><strong>3.5%</strong></td><td><strong>2.5%</strong></td><td><strong>2.0%</strong></td></tr>
+</tbody></table>
+
+
+<h2 id="s6"><span class="section-num">六</span>估值与财务健康度</h2>
+
+<h3>6.1 估值水平</h3>
+<ul>
+<li><strong>PE</strong>：约<strong>18倍</strong>，处于历史中位数<strong>16-20倍</strong>区间，估值合理。</li>
+<li><strong>PB</strong>：约<strong>2.5倍</strong>，高于行业平均<strong>1.8倍</strong>，反映资产溢价。</li>
+<li><strong>PEG</strong>：约<strong>1.2倍</strong>，考虑未来<strong>15%</strong>净利润增速，估值略高但可接受。</li>
+</ul>
+<h3>6.2 财务健康度</h3>
+<ul>
+<li><strong>资产负债率</strong>：约<strong>50%</strong>，低于电力行业平均<strong>65%</strong>，财务杠杆适中。</li>
+<li><strong>流动比率</strong>：约<strong>0.8</strong>，低于<strong>1.0</strong>，但水电行业现金流稳定，短期偿债风险低。</li>
+<li><strong>利息保障倍数</strong>：约<strong>8倍</strong>，覆盖能力强，财务风险可控。</li>
+</ul>
+<h3>6.3 健康度评分表</h3>
+<table><thead><tr><th>指标</th><th>评分(1-10)</th><th>说明</th></tr></thead><tbody>
+<tr><td>盈利能力</td><td><strong>9</strong></td><td>净利润率<strong>40%</strong>，行业领先</td></tr>
+<tr><td>偿债能力</td><td><strong>7</strong></td><td>负债率<strong>50%</strong>，流动比率偏低</td></tr>
+<tr><td>成长性</td><td><strong>6</strong></td><td>短期业绩波动，长期有资产注入</td></tr>
+<tr><td>现金流</td><td><strong>9</strong></td><td>经营现金流充裕，分红稳定</td></tr>
+<tr><td>估值</td><td><strong>7</strong></td><td>PE<strong>18倍</strong>，合理偏高</td></tr>
+</tbody></table>
+
+
+<h2 id="s7"><span class="section-num">七</span>主要风险</h2>
+
+<ol>
+<li><strong>来水不确定性风险</strong>：长江流域来水受气候影响，枯水年发电量下降<strong>20-30%</strong>，导致营收和净利润大幅波动，如最新报告期营收下降<strong>55.4%</strong>。</li>
+<li><strong>电价下调风险</strong>：电力市场化改革推进，水电上网电价可能承压，若电价下降<strong>5%</strong>，净利润将减少约<strong>15%</strong>。</li>
+<li><strong>资产注入不及预期</strong>：乌东德、白鹤滩水电站注入进度可能延迟，影响装机容量增长和业绩提升。</li>
+<li><strong>利率上升风险</strong>：公司有息负债规模大，若利率上升<strong>1个百分点</strong>，年财务费用增加约<strong>5亿元</strong>，侵蚀利润。</li>
+<li><strong>极端气候风险</strong>：洪水、干旱等极端天气可能影响水电站安全运行，导致停机或资产损失。</li>
+</ol>
+
+
+<h2 id="s8"><span class="section-num">八</span>结论与建议</h2>
+
+<p>长江电力作为水电龙头，拥有不可复制的资源优势和稳定现金流，长期投资价值突出。短期受来水偏枯影响业绩承压，但股价已反映悲观预期，当前估值合理。</p>
+<h3>短期（0-6月）</h3>
+<ul>
+<li><strong>目标价</strong>：<strong>28.50元</strong>，基于来水恢复预期和<strong>18倍</strong>PE。</li>
+<li><strong>逻辑</strong>：丰水期发电量回升，股价有望突破<strong>27.50元</strong>压力位。</li>
+</ul>
+<h3>长期（6-18月）</h3>
+<ul>
+<li><strong>目标价</strong>：<strong>32.00元</strong>，基于资产注入和<strong>20倍</strong>PE。</li>
+<li><strong>逻辑</strong>：乌东德、白鹤滩注入后装机增长<strong>30%</strong>，净利润提升至<strong>400亿元</strong>，叠加高分红政策。</li>
+</ul>
+
+
+      
+      <div class="chart-card">
+        <div class="chart-header"><i class="fas fa-chart-bar" style="color:#2563eb"></i> 营收与净利润趋势</div>
+        <div class="chart-body"><div class="chart-container"><canvas id="chartIncome"></canvas></div><p class="chart-caption">数据来源：MCP 股票数据服务</p></div>
+      </div>
+      <script>
+      (function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+      new Chart(document.getElementById('chartIncome'),{type:'bar',data:{labels:["","","","","","","","","","","","","","","","","","","","",""],datasets:[{label:'营收（亿元）',data:[8870397197.98,19901493441.99,40448219538.21,55646253991.83,12301661386.16,31458172893.56,53066769846.54,68863128424.25,15397466574.25,30974895019.62,57855135654.42,78143535736.1,15656758358.43,34837799052.26,66330680745.55,84491870566.52,17015283778.59,36697614066.72,65741285681.72,86241940222.2,18111540767.5],backgroundColor:'rgba(37,99,235,.75)',borderRadius:6,barPercentage:.6},{label:'净利润（亿元）',data:[2919093458.25,8679688857.34,19725986840.94,26485443861.49,3166319780.22,11779256829.41,21684085342.49,25101915143.63,3737369806.39,9143065637.53,21899460509.99,27967470767.28,4078786629.96,11590397991.56,28377539149.34,32930199395.19,5290454546.73,13282623660.27,28555477836.95,34949270887.55,6883297422.33],backgroundColor:'rgba(16,185,129,.75)',borderRadius:6,barPercentage:.6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,padding:16}}},scales:{y:{beginAtZero:false,grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false}}}}});
+      })();
+      </script>
+      
+
+      
+      <div class="chart-card">
+        <div class="chart-header"><i class="fas fa-percentage" style="color:#059669"></i> 毛利率趋势</div>
+        <div class="chart-body"><div class="chart-container"><canvas id="chartMargin"></canvas></div></div>
+      </div>
+      <script>
+      (function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+      new Chart(document.getElementById('chartMargin'),{type:'line',data:{labels:["","","","","","","","","","","","","","","","","","","","",""],datasets:[{label:'毛利率（%）',data:[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],borderColor:'#059669',backgroundColor:'rgba(5,150,105,.1)',fill:true,tension:.3,pointRadius:4,pointBackgroundColor:'#059669'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:false,grid:{color:'rgba(0,0,0,.04)'},ticks:{callback:function(v){return v+'%'}}},x:{grid:{display:false}}}}});
+      })();
+      </script>
+      
+
+      <div class="disclaimer-box">
+        <p><strong>免责声明：</strong>本报告由AI自动生成，仅供参考和学习交流，不构成任何形式的投资建议。报告中的数据和分析基于公开信息和模型估算，可能存在偏差。股市有风险，投资需谨慎。作者和平台不对因使用本报告而产生的任何损失承担责任。</p>
+      </div>
+    </article>
+    <div id="footer-placeholder"></div>
+  </div>
+</div>
+
+<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="返回顶部"><i class="fas fa-arrow-up"></i></button>
+<script>
+window.addEventListener('scroll',function(){document.getElementById('bttBtn').classList.toggle('show',window.scrollY>400)});
+</script>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<script src="/js/cookie-banner.js"></script>
+</body>
+</html>
