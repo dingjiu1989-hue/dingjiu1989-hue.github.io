@@ -144,10 +144,67 @@ def main():
     with open(INDEX_HTML, "w", encoding="utf-8") as f:
         f.write(index_content)
 
+    # 4e. Update analysis.html COMPANIES_DATA
+    ANALYSIS_HTML = os.path.join(REPORTS_DIR, "analysis.html")
+    with open(ANALYSIS_HTML, encoding="utf-8") as f:
+        analysis_content = f.read()
+
+    marker = "var COMPANIES_DATA = "
+    cd_start = analysis_content.index(marker) + len(marker)
+    # Find matching closing brace of the outer JSON object
+    depth = 0
+    cd_end = cd_start
+    for i in range(cd_start, len(analysis_content)):
+        ch = analysis_content[i]
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                cd_end = i + 1
+                break
+
+    cd_data = json.loads(analysis_content[cd_start:cd_end])
+    companies_list = cd_data["companies"]
+    new_url = filename
+    if not any(c.get("slug") == slug for c in companies_list):
+        companies_list.append({
+            "slug": slug,
+            "name": company_name,
+            "nameCn": company_name,
+            "ticker": stock_code or "",
+            "exchange": "",
+            "sector": "",
+            "sectorEn": "",
+            "marketCap": "待估算",
+            "revenue": "待估算",
+            "revenueGrowth": "",
+            "netIncome": "",
+            "revenueRank": "",
+            "pe": "",
+            "grossMargin": None,
+            "operatingMargin": "",
+            "rating": "中性",
+            "ratingEn": "Neutral",
+            "ratingColor": "blue-600",
+            "summary": f"AI 自动生成的深度分析报告，覆盖{company_name}（{stock_code}）。",
+            "highlights": ["AI 生成"],
+            "reportDate": TODAY,
+            "reportUrl": filename,
+        })
+        cd_data["meta"]["totalCompanies"] = len(companies_list)
+        new_cd_json = json.dumps(cd_data, ensure_ascii=False)
+        analysis_content = analysis_content[:cd_start] + new_cd_json + analysis_content[cd_end:]
+        with open(ANALYSIS_HTML, "w", encoding="utf-8") as f:
+            f.write(analysis_content)
+        print(f"  analysis.html COMPANIES_DATA updated ({len(companies_list)} companies)")
+    else:
+        print(f"  analysis.html already contains this entry, skipping")
+
     # 5. Commit & push
     if do_commit:
         subprocess.run(
-            ["git", "add", filepath, ARTICLES_JSON, INDEX_HTML],
+            ["git", "add", filepath, ARTICLES_JSON, INDEX_HTML, ANALYSIS_HTML],
             cwd=BASE_DIR, check=True,
         )
         subprocess.run(
@@ -157,7 +214,7 @@ def main():
         subprocess.run(["git", "push"], cwd=BASE_DIR, check=True)
         print(f"  Committed and pushed")
     else:
-        print(f"\nTo commit: git add ai-analyst/{filename} articles.json ai-analyst/index.html && git commit -m 'Register {company_name} report' && git push")
+        print(f"\nTo commit: git add ai-analyst/{filename} articles.json ai-analyst/index.html ai-analyst/analysis.html && git commit -m 'Register {company_name} report' && git push")
 
     print(f"\n  https://aidev.fit/ai-analyst/{filename}")
 
