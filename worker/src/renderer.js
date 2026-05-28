@@ -86,7 +86,7 @@ ${s.content ? parseMarkdown(s.content) : '<p>数据不足，暂无法生成该�
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>${co}全面分析报告：AI 实时生成 — AI自习室</title>
+  <title>${co} 全面分析报告：AI 深度研究 — AI自习室</title>
   <meta name="description" content="深度分析${co}（${code}）：${industry}。AI 实时生成，覆盖财务、技术面、估值与风险分析。">
   <meta name="robots" content="noindex,follow">
   <link rel="canonical" href="https://aidev.fit/ai-analyst/analysis.html">
@@ -176,11 +176,11 @@ ${s.content ? parseMarkdown(s.content) : '<p>数据不足，暂无法生成该�
           <span class="badge" style="background:${badgeColor};color:#fff">${escapeHtml(co)}</span>
           <span class="badge" style="background:#e8edf5;color:#475569">${escapeHtml(code)}</span>
         </div>
-        <h1 class="report-title">${escapeHtml(co)}全面分析报告：AI 实时生成</h1>
+        <h1 class="report-title">${escapeHtml(co)} 全面分析报告：AI 深度研究</h1>
         <div class="report-meta">
           <span><strong>日期</strong> / <script>document.write(new Date().toLocaleDateString('zh-CN'))</script></span>
           <span><strong>行业</strong> / ${escapeHtml(industry || '金融')}</span>
-          <span><strong>来源</strong> / AI 实时生成</span>
+          <span><strong>来源</strong> / AI 生成</span>
         </div>
       </header>
 
