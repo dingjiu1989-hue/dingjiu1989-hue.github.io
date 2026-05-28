@@ -1265,6 +1265,11 @@ def generate_one(name, code, sector):
     low52 = min(p['close'] for p in prices) if prices else None
     latest_price = prices[-1]['close'] if prices else None
 
+    # Debug: print MCP income data structure
+    if income_rows:
+        print(f'  Income rows: {len(income_rows)}, keys: {list(income_rows[0].keys())[:15]}')
+        print(f'  Sample: yr={income_rows[0].get(\"endDate\",\"N/A\")}, rev={income_rows[0].get(\"revenue\",\"N/A\")}, opr={income_rows[0].get(\"operatingRevenue\",\"N/A\")}')
+
     # 4. Chart data (multi-year)
     years = []
     rev_data = []
