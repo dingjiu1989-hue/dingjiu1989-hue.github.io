@@ -377,30 +377,37 @@ def render_report_cn(data):
     # Income chart
     income_chart = ''
     if len(years) >= 3:
-        income_chart = f'''
+        _iy = json.dumps(years)
+        _ir = json.dumps(round_to_billion(rev_data))
+        _ip = json.dumps(round_to_billion(profit_data))
+        income_chart = '''\
 <div class="chart-card">
   <div class="chart-header"><i class="fas fa-chart-bar" style="color:#2563eb"></i> 营收与净利润趋势</div>
   <div class="chart-body"><div class="chart-container"><canvas id="chartIncome"></canvas></div><p class="chart-caption">数据来源：MCP 股票数据服务</p></div>
 </div>
 <script>
-(function(){{if(typeof Chart==='undefined'){{setTimeout(arguments.callee,100);return;}}
-new Chart(document.getElementById('chartIncome'),{{type:'bar',data:{labels:{json.dumps(years)},datasets:[{{label:'营收（亿元）',data:{json.dumps(round_to_billion(rev_data))},backgroundColor:'rgba(37,99,235,.75)',borderRadius:6,barPercentage:.6}},{{label:'净利润（亿元）',data:{json.dumps(round_to_billion(profit_data))},backgroundColor:'rgba(16,185,129,.75)',borderRadius:6,barPercentage:.6}}]}},options:{{responsive:true,maintainAspectRatio:false,plugins:{{legend:{{position:'top',labels:{{boxWidth:12,padding:16}}}}}},scales:{{y:{{beginAtZero:false,grid:{{color:'rgba(0,0,0,.04)'}}}},x:{{grid:{{display:false}}}}}}}}}});
-}})();
+(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+new Chart(document.getElementById('chartIncome'),{type:'bar',data:{labels:YEARS,datasets:[{label:'营收（亿元）',data:REVENUE,backgroundColor:'rgba(37,99,235,.75)',borderRadius:6,barPercentage:.6},{label:'净利润（亿元）',data:PROFIT,backgroundColor:'rgba(16,185,129,.75)',borderRadius:6,barPercentage:.6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,padding:16}}},scales:{y:{beginAtZero:false,grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false}}}}});
+})();
 </script>'''
+        income_chart = income_chart.replace('YEARS', _iy).replace('REVENUE', _ir).replace('PROFIT', _ip)
 
     # Margin chart
     margin_chart = ''
     if has_margin and len(years) >= 3:
-        margin_chart = f'''
+        _my = json.dumps(years)
+        _md = json.dumps(margin_data)
+        margin_chart = '''\
 <div class="chart-card">
   <div class="chart-header"><i class="fas fa-percentage" style="color:#059669"></i> 毛利率趋势</div>
   <div class="chart-body"><div class="chart-container"><canvas id="chartMargin"></canvas></div></div>
 </div>
 <script>
-(function(){{if(typeof Chart==='undefined'){{setTimeout(arguments.callee,100);return;}}
-new Chart(document.getElementById('chartMargin'),{{type:'line',data:{labels:{json.dumps(years)},datasets:[{{label:'毛利率（%）',data:{json.dumps(margin_data)},borderColor:'#059669',backgroundColor:'rgba(5,150,105,.1)',fill:true,tension:.3,pointRadius:4,pointBackgroundColor:'#059669'}}]}},options:{{responsive:true,maintainAspectRatio:false,plugins:{{legend:{{display:false}}}},scales:{{y:{{beginAtZero:false,grid:{{color:'rgba(0,0,0,.04)'}},ticks:{{callback:function(v){{return v+'%'}}}}}},x:{{grid:{{display:false}}}}}}}}}});
-}})();
+(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+new Chart(document.getElementById('chartMargin'),{type:'line',data:{labels:YEARS,datasets:[{label:'毛利率（%）',data:MARGIN,borderColor:'#059669',backgroundColor:'rgba(5,150,105,.1)',fill:true,tension:.3,pointRadius:4,pointBackgroundColor:'#059669'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:false,grid:{color:'rgba(0,0,0,.04)'},ticks:{callback:function(v){return v+'%'}}}},x:{grid:{display:false}}}}});
+})();
 </script>'''
+        margin_chart = margin_chart.replace('YEARS', _my).replace('MARGIN', _md)
 
     exec_html = ''
     if exec_summary:
@@ -610,29 +617,36 @@ def render_report_en(data):
 
     income_chart = ''
     if len(years) >= 3:
-        income_chart = f'''
+        _iy = json.dumps(years)
+        _ir = json.dumps(round_to_billion(rev_data))
+        _ip = json.dumps(round_to_billion(profit_data))
+        income_chart = '''\
 <div class="chart-card">
   <div class="chart-header"><i class="fas fa-chart-bar" style="color:#2563eb"></i> Revenue & Net Income Trend</div>
   <div class="chart-body"><div class="chart-container"><canvas id="chartIncome"></canvas></div><p class="chart-caption">Source: MCP Stock Data</p></div>
 </div>
 <script>
-(function(){{if(typeof Chart==='undefined'){{setTimeout(arguments.callee,100);return;}}
-new Chart(document.getElementById('chartIncome'),{{type:'bar',data:{labels:{json.dumps(years)},datasets:[{{label:'Revenue (CNY B)',data:{json.dumps(round_to_billion(rev_data))},backgroundColor:'rgba(37,99,235,.75)',borderRadius:6,barPercentage:.6}},{{label:'Net Income (CNY B)',data:{json.dumps(round_to_billion(profit_data))},backgroundColor:'rgba(16,185,129,.75)',borderRadius:6,barPercentage:.6}}]}},options:{{responsive:true,maintainAspectRatio:false,plugins:{{legend:{{position:'top',labels:{{boxWidth:12,padding:16}}}}}},scales:{{y:{{beginAtZero:false,grid:{{color:'rgba(0,0,0,.04)'}}}},x:{{grid:{{display:false}}}}}}}}}});
-}})();
+(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+new Chart(document.getElementById('chartIncome'),{type:'bar',data:{labels:YEARS,datasets:[{label:'Revenue (CNY B)',data:REVENUE,backgroundColor:'rgba(37,99,235,.75)',borderRadius:6,barPercentage:.6},{label:'Net Income (CNY B)',data:PROFIT,backgroundColor:'rgba(16,185,129,.75)',borderRadius:6,barPercentage:.6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,padding:16}}},scales:{y:{beginAtZero:false,grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false}}}}});
+})();
 </script>'''
+        income_chart = income_chart.replace('YEARS', _iy).replace('REVENUE', _ir).replace('PROFIT', _ip)
 
     margin_chart = ''
     if has_margin and len(years) >= 3:
-        margin_chart = f'''
+        _my = json.dumps(years)
+        _md = json.dumps(margin_data)
+        margin_chart = '''\
 <div class="chart-card">
   <div class="chart-header"><i class="fas fa-percentage" style="color:#059669"></i> Gross Margin Trend</div>
   <div class="chart-body"><div class="chart-container"><canvas id="chartMargin"></canvas></div></div>
 </div>
 <script>
-(function(){{if(typeof Chart==='undefined'){{setTimeout(arguments.callee,100);return;}}
-new Chart(document.getElementById('chartMargin'),{{type:'line',data:{labels:{json.dumps(years)},datasets:[{{label:'Gross Margin (%)',data:{json.dumps(margin_data)},borderColor:'#059669',backgroundColor:'rgba(5,150,105,.1)',fill:true,tension:.3,pointRadius:4,pointBackgroundColor:'#059669'}}]}},options:{{responsive:true,maintainAspectRatio:false,plugins:{{legend:{{display:false}}}},scales:{{y:{{beginAtZero:false,grid:{{color:'rgba(0,0,0,.04)'}},ticks:{{callback:function(v){{return v+'%'}}}}}},x:{{grid:{{display:false}}}}}}}}}});
-}})();
+(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+new Chart(document.getElementById('chartMargin'),{type:'line',data:{labels:YEARS,datasets:[{label:'Gross Margin (%)',data:MARGIN,borderColor:'#059669',backgroundColor:'rgba(5,150,105,.1)',fill:true,tension:.3,pointRadius:4,pointBackgroundColor:'#059669'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:false,grid:{color:'rgba(0,0,0,.04)'},ticks:{callback:function(v){return v+'%'}}}},x:{grid:{display:false}}}}});
+})();
 </script>'''
+        margin_chart = margin_chart.replace('YEARS', _my).replace('MARGIN', _md)
 
     exec_html = ''
     if exec_summary:
@@ -832,17 +846,17 @@ def price_chart_html(prices):
         return ''
     dates = json.dumps([p.get('date', '') for p in prices])
     closes = json.dumps([p.get('close', 0) for p in prices])
-    return f'''<div class="chart-card">
+    return '''<div class="chart-card">
   <div class="chart-header"><i class="fas fa-chart-line" style="color:#2563eb"></i> Price Trend</div>
   <div class="chart-body"><div class="chart-container"><canvas id="chartPrice"></canvas></div></div>
 </div>
 <script>
-(function(){{if(typeof Chart==='undefined'){{setTimeout(arguments.callee,100);return;}}
-var _d={dates};
-var _c={closes};
-new Chart(document.getElementById('chartPrice'),{{type:'line',data:{{labels:_d,datasets:[{{label:'Close (CNY)',data:_c,borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.08)',fill:true,tension:.3,pointRadius:2,pointHoverRadius:4}}]}},options:{{responsive:true,maintainAspectRatio:false,plugins:{{legend:{{display:false}}}},scales:{{y:{{beginAtZero:false,grid:{{color:'rgba(0,0,0,.04)'}}}},x:{{grid:{{display:false}},ticks:{{maxTicksLimit:8}}}}}}}}}});
-}})();
-</script>'''
+(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+var _d=DATES;
+var _c=CLOSES;
+new Chart(document.getElementById('chartPrice'),{type:'line',data:{labels:_d,datasets:[{label:'Close (CNY)',data:_c,borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.08)',fill:true,tension:.3,pointRadius:2,pointHoverRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:false,grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false},ticks:{maxTicksLimit:8}}}}});
+})();
+</script>'''.replace('DATES', dates).replace('CLOSES', closes)
 
 
 # ═══════════════════════════════ Markdown Parser ═══════════════════════════════
