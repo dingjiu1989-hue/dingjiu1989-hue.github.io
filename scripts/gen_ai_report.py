@@ -278,12 +278,12 @@ def build_prompt(data):
             m = f'{margin_data[i]:.1f}%' if i < len(margin_data) and margin_data[i] is not None else '—'
             lines.append(f'| {years[i]} | {r} | {p} | {m} |')
 
-    if len(rev_data) >= 2 and rev_data[0] and rev_data[1]:
-        rev_yoy = (rev_data[0] - rev_data[1]) / rev_data[1] * 100
-        lines.append(f'\n营收YoY：{rev_yoy:.1f}%')
-        if len(profit_data) >= 2 and profit_data[0] and profit_data[1]:
-            profit_yoy = (profit_data[0] - profit_data[1]) / profit_data[1] * 100
-            lines.append(f'净利润YoY：{profit_yoy:.1f}%')
+    if len(rev_data) >= 2 and rev_data[-1] and rev_data[-2] and rev_data[-2] > 0:
+        rev_yoy = (rev_data[-1] - rev_data[-2]) / rev_data[-2] * 100
+        lines.append(f'\n最新营收同比增速：{rev_yoy:.1f}%')
+        if len(profit_data) >= 2 and profit_data[-1] and profit_data[-2] and profit_data[-2] > 0:
+            profit_yoy = (profit_data[-1] - profit_data[-2]) / profit_data[-2] * 100
+            lines.append(f'最新净利润同比增速：{profit_yoy:.1f}%')
 
     lines.append('')
     lines.append('## 市场数据')
@@ -334,6 +334,16 @@ def render_report_cn(data):
     prices = chart_data.get('prices', [])
 
     has_margin = any(v is not None for v in (margin_data or []))
+
+    # YoY growth data (rev_data is oldest→latest, compute latest→oldest)
+    yoy_labels = years[1:] if len(years) > 1 else []
+    yoy_data = []
+    for i in range(len(rev_data) - 1):
+        if rev_data[i] and rev_data[i] > 0:
+            yoy_data.append(round((rev_data[i + 1] - rev_data[i]) / rev_data[i] * 100, 1))
+        else:
+            yoy_data.append(None)
+    has_yoy = len(yoy_data) >= 2
 
     # Indicator grid data
     pct = None
@@ -412,6 +422,27 @@ new Chart(document.getElementById('chartMargin'),{type:'line',data:{labels:YEARS
 })();
 </script>'''
         margin_chart = margin_chart.replace('YEARS', _my).replace('MARGIN', _md)
+
+    # YoY growth chart
+    yoy_chart = ''
+    if has_yoy:
+        _yoy_labels = json.dumps(yoy_labels)
+        _yoy_data = json.dumps(yoy_data)
+        yoy_chart = '''\
+<div class="chart-card">
+  <div class="chart-header"><i class="fas fa-arrow-trend-up" style="color:#059669"></i> 营收同比增长率</div>
+  <div class="chart-body"><div class="chart-container"><canvas id="chartYoY"></canvas></div>
+  <p class="chart-caption" style="margin-top:8px;font-size:.7rem;color:#94a3b8">
+    <span style="display:inline-block;width:10px;height:10px;background:rgba(16,185,129,.75);border-radius:2px;margin-right:4px;vertical-align:middle"></span> 正增长
+    <span style="display:inline-block;width:10px;height:10px;background:rgba(239,68,68,.75);border-radius:2px;margin-right:4px;margin-left:12px;vertical-align:middle"></span> 负增长
+  </p>
+  </div>
+</div>
+<script>
+(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+new Chart(document.getElementById('chartYoY'),{type:'bar',data:{labels:YOY_LABELS,datasets:[{label:'YoY %',data:YOY_DATA,backgroundColor:function(c){var v=c.raw;return v>=0?'rgba(16,185,129,.75)':'rgba(239,68,68,.75)'},borderRadius:6,barPercentage:.6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'rgba(0,0,0,.04)'},ticks:{callback:function(v){return v+'%'}}}},x:{grid:{display:false}}}}});
+})();
+</script>'''.replace('YOY_LABELS', _yoy_labels).replace('YOY_DATA', _yoy_data)
 
     exec_html = ''
     if exec_summary:
@@ -531,6 +562,7 @@ new Chart(document.getElementById('chartMargin'),{type:'line',data:{labels:YEARS
 
       {income_chart}
       {margin_chart}
+      {yoy_chart}
 
       <div class="disclaimer-box">
         <p><strong>免责声明：</strong>本报告由AI自动生成，仅供参考和学习交流，不构成任何形式的投资建议。报告中的数据和分析基于公开信息和模型估算，可能存在偏差。股市有风险，投资需谨慎。作者和平台不对因使用本报告而产生的任何损失承担责任。</p>
@@ -573,6 +605,17 @@ def render_report_en(data):
     prices = chart_data.get('prices', [])
 
     has_margin = any(v is not None for v in (margin_data or []))
+
+    # YoY growth data
+    yoy_labels = years[1:] if len(years) > 1 else []
+    yoy_data = []
+    for i in range(len(rev_data) - 1):
+        if rev_data[i] and rev_data[i] > 0:
+            yoy_data.append(round((rev_data[i + 1] - rev_data[i]) / rev_data[i] * 100, 1))
+        else:
+            yoy_data.append(None)
+    has_yoy = len(yoy_data) >= 2
+
     pct = None
     if price is not None and high52 is not None and low52 is not None and high52 > low52:
         pct = (price - low52) / (high52 - low52) * 100
@@ -651,6 +694,27 @@ new Chart(document.getElementById('chartMargin'),{type:'line',data:{labels:YEARS
 })();
 </script>'''
         margin_chart = margin_chart.replace('YEARS', _my).replace('MARGIN', _md)
+
+    # YoY growth chart
+    yoy_chart = ''
+    if has_yoy:
+        _yoy_labels = json.dumps(yoy_labels)
+        _yoy_data = json.dumps(yoy_data)
+        yoy_chart = '''\
+<div class="chart-card">
+  <div class="chart-header"><i class="fas fa-arrow-trend-up" style="color:#059669"></i> Revenue YoY Growth</div>
+  <div class="chart-body"><div class="chart-container"><canvas id="chartYoY"></canvas></div>
+  <p class="chart-caption" style="margin-top:8px;font-size:.7rem;color:#94a3b8">
+    <span style="display:inline-block;width:10px;height:10px;background:rgba(16,185,129,.75);border-radius:2px;margin-right:4px;vertical-align:middle"></span> Positive
+    <span style="display:inline-block;width:10px;height:10px;background:rgba(239,68,68,.75);border-radius:2px;margin-right:4px;margin-left:12px;vertical-align:middle"></span> Negative
+  </p>
+  </div>
+</div>
+<script>
+(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+new Chart(document.getElementById('chartYoY'),{type:'bar',data:{labels:YOY_LABELS,datasets:[{label:'YoY %',data:YOY_DATA,backgroundColor:function(c){var v=c.raw;return v>=0?'rgba(16,185,129,.75)':'rgba(239,68,68,.75)'},borderRadius:6,barPercentage:.6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'rgba(0,0,0,.04)'},ticks:{callback:function(v){return v+'%'}}}},x:{grid:{display:false}}}}});
+})();
+</script>'''.replace('YOY_LABELS', _yoy_labels).replace('YOY_DATA', _yoy_data)
 
     exec_html = ''
     if exec_summary:
@@ -768,6 +832,7 @@ new Chart(document.getElementById('chartMargin'),{type:'line',data:{labels:YEARS
 
       {income_chart}
       {margin_chart}
+      {yoy_chart}
 
       <div class="disclaimer-box">
         <p><strong>Disclaimer:</strong> This report is AI-generated for informational purposes only and does not constitute investment advice. Analyses are based on public data and model estimates, which may contain errors. Investing involves risk.</p>
@@ -906,8 +971,9 @@ def parse_markdown(text):
 
         # Table row |...|
         if trimmed.startswith('|') and trimmed.endswith('|'):
-            close_lists()
             cells = [inline_md(escape(c.strip())) for c in trimmed.split('|') if c.strip()]
+            if not cells:
+                continue
             next_is_header = (i + 1 < len(lines)) and bool(re.match(r'^\|[\s\-:|]+\|$', lines[i + 1].strip()))
             if next_is_header:
                 if in_table:
@@ -917,7 +983,8 @@ def parse_markdown(text):
             elif in_table:
                 out.append('<tr>' + ''.join(f'<td>{c}</td>' for c in cells) + '</tr>')
             else:
-                out.append('<table><tbody><tr>' + ''.join(f'<td>{c}</td>' for c in cells) + '</tr></tbody></table>')
+                out.append('<table><tbody><tr>' + ''.join(f'<td>{c}</td>' for c in cells) + '</tr>')
+                in_table = True
             continue
 
         # Unordered list
