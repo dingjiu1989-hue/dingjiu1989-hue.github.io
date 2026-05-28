@@ -1,4 +1,4 @@
-/** HTML report renderer — generates full report pages matching existing format */
+/** HTML report renderer — generates full report pages with markdown parsing, indicator grid, and charts */
 
 export function renderReportHTML(data) {
   const co = escapeHtml(data.company || '');
@@ -18,20 +18,63 @@ export function renderReportHTML(data) {
   const profitData = chartData.netIncome || [];
   const marginData = chartData.grossMargin || [];
 
+  // -- Indicator grid data --
+  const d3Price = price != null ? parseFloat(price).toFixed(2) : null;
+  const d3Pe = pe != null ? parseFloat(pe).toFixed(1) + 'x' : null;
+  const d3Pb = pb != null ? parseFloat(pb).toFixed(2) + 'x' : null;
+  const pct = (price != null && high52 != null && low52 != null && high52 > low52)
+    ? ((price - low52) / (high52 - low52) * 100).toFixed(0) : null;
+  const d3Pos = pct != null ? pct + '%' : null;
+  const d3Pct = pct != null ? parseFloat(pct) : 50;
+
   const sectionNav = sections.map((s, i) =>
-    `<li><a href="#s${i + 1}"><i class="fas fa-circle fa-fw" style="width:16px;color:#2563eb;font-size:.5rem;vertical-align:middle"></i> ${escapeHtml(s.title || '')}</a></li>`
+    `<li><a href="#s${i+1}"><i class="fas fa-circle fa-fw" style="width:16px;color:#2563eb;font-size:.5rem;vertical-align:middle"></i> ${escapeHtml(s.title || '')}</a></li>`
   ).join('\n');
 
   const mobileOptions = sections.map((s, i) =>
-    `<option value="s${i + 1}">${escapeHtml(s.title || '')}</option>`
+    `<option value="s${i+1}">${escapeHtml(s.title || '')}</option>`
   ).join('\n');
 
+  // Build price chart HTML (line chart)
+  const prices = chartData.prices || [];
+  const priceChartHtml = (prices.length >= 5)
+    ? `<div class="chart-card">
+  <div class="chart-header"><i class="fas fa-chart-line" style="color:#2563eb"></i> 价格走势</div>
+  <div class="chart-body"><div class="chart-container"><canvas id="chartPrice"></canvas></div></div>
+</div>
+<script>
+(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+var _d=${JSON.stringify(prices.map(function(p){return p.date;}))};
+var _c=${JSON.stringify(prices.map(function(p){return p.close;}))};
+new Chart(document.getElementById('chartPrice'),{type:'line',data:{labels:_d,datasets:[{label:'收盘价（元）',data:_c,borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.08)',fill:true,tension:.3,pointRadius:2,pointHoverRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:false,grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false},ticks:{maxTicksLimit:8}}}}});
+})();
+</script>` : '';
+
+  // Indicator grid placed before technical analysis section
+  const showInd = d3Price && d3Pe;
+  const indGrid = showInd
+    ? `<div class="chart-card">
+  <div class="chart-header"><i class="fas fa-gauge-high" style="color:#2563eb"></i> 核心指标</div>
+  <div class="chart-body">
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-label">PE</div><div class="stat-value">${d3Pe}</div><span class="indicator-signal signal-neutral">${pe > 50 ? '偏高' : pe < 15 ? '偏低' : '适中'}</span></div>
+      <div class="stat-card"><div class="stat-label">PB</div><div class="stat-value">${d3Pb}</div><span class="indicator-signal signal-neutral">${pb > 5 ? '偏高' : pb < 1 ? '偏低' : '适中'}</span></div>
+      <div class="stat-card"><div class="stat-label">52周位置</div><div class="stat-value">${d3Pos || '—'}</div><span class="indicator-signal ${d3Pct > 80 ? 'signal-sell' : d3Pct < 20 ? 'signal-buy' : 'signal-neutral'}">${d3Pct > 80 ? '高位' : d3Pct < 20 ? '低位' : '中位'}</span></div>
+      <div class="stat-card"><div class="stat-label">当前价</div><div class="stat-value">¥${d3Price}</div><span class="indicator-signal ${d3Pct > 80 ? 'signal-sell' : d3Pct < 30 ? 'signal-buy' : 'signal-neutral'}">${d3Pct > 80 ? '关注回调' : d3Pct < 30 ? '关注反弹' : '区间震荡'}</span></div>
+    </div>
+  </div>
+</div>` : '';
+
+  // Render sections with markdown parsing
+  const numLabels = ['一','二','三','四','五','六','七','八'];
   const sectionHTML = sections.map((s, i) => {
-    const titles = ['一、公司概况','二、财务分析','三、技术分析','四、市场情绪','五、竞品对比','六、估值与财务健康度','七、主要风险','八、结论与建议'];
-    const title = s.title || titles[i] || '';
+    const titles = ['公司概况','财务分析','技术分析','市场情绪','竞品对比','估值与财务健康度','主要风险','结论与建议'];
+    const title = s.title || '';
+    const extra = (i === 2) ? indGrid + priceChartHtml : '';
     return `
-<h2 id="s${i + 1}"><span class="section-num">${['一','二','三','四','五','六','七','八'][i] || ''}</span>${escapeHtml(title.replace(/^[一二三四五六七八]、\s*/, ''))}</h2>
-${s.content ? s.content.split('\n').filter(Boolean).map(p => `<p>${escapeHtml(p)}</p>`).join('\n') : '<p>数据不足，暂无法生成该章节详细分析。</p>'}
+<h2 id="s${i+1}"><span class="section-num">${numLabels[i] || ''}</span>${escapeHtml(title.replace(/^[一二三四五六七八]、\s*/, ''))}</h2>
+${extra}
+${s.content ? parseMarkdown(s.content) : '<p>数据不足，暂无法生成该章节详细分析。</p>'}
 `;
   }).join('\n');
 
@@ -71,6 +114,7 @@ ${s.content ? s.content.split('\n').filter(Boolean).map(p => `<p>${escapeHtml(p)
   h1.report-title{font-size:2.2rem;font-weight:900;color:#0f172a;line-height:1.2;text-align:center;letter-spacing:-.02em;margin-bottom:8px}
   h2{font-size:1.5rem!important;font-weight:700!important;color:#0f172a!important;margin-top:48px!important;margin-bottom:20px!important;padding-bottom:12px;border-bottom:3px solid #2563eb;display:flex;align-items:center;gap:10px}
   h2 .section-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:#2563eb;color:#fff;font-size:.85rem;font-weight:700;flex-shrink:0}
+  h3{font-size:1.2rem!important;font-weight:600!important;color:#0f172a!important;margin-top:28px!important;margin-bottom:12px!important;padding-left:12px;border-left:3px solid #2563eb}
   p{font-size:1rem!important;margin-bottom:1.2em!important;color:#1e293b}
   .badge-row{display:flex;justify-content:center;gap:8px;margin-bottom:20px;flex-wrap:wrap}
   .badge{display:inline-block;padding:4px 14px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-radius:999px}
@@ -93,7 +137,19 @@ ${s.content ? s.content.split('\n').filter(Boolean).map(p => `<p>${escapeHtml(p)
   .disclaimer-box p{font-size:.8rem!important;color:#6b7280!important;margin-bottom:0!important}
   .btt-btn{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border-radius:50%;background:#2563eb;color:#fff;border:none;font-size:1.1rem;cursor:pointer;box-shadow:0 4px 12px rgba(37,99,235,.35);opacity:0;visibility:hidden;transition:all .2s;z-index:50;display:flex;align-items:center;justify-content:center}
   .btt-btn.show{opacity:1;visibility:visible}
-  @media(max-width:768px){h1.report-title{font-size:1.5rem!important}h2{font-size:1.2rem!important}p{font-size:.9rem!important}.article-card{padding:20px 16px}}
+  @media(max-width:768px){h1.report-title{font-size:1.5rem!important}h2{font-size:1.2rem!important}h3{font-size:1.05rem!important}p{font-size:.9rem!important}.article-card{padding:20px 16px}}
+  .indicator-signal{display:inline-block;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:99px;margin-top:4px}
+  .signal-buy{background:#d1fae5;color:#065f46}
+  .signal-sell{background:#fee2e2;color:#991b1b}
+  .signal-neutral{background:#e5e7eb;color:#374151}
+  ol,ul{margin:1em 0!important;padding-left:1.75rem!important}
+  ol li,ul li{margin-bottom:.6em!important;line-height:1.7!important}
+  ol{list-style:decimal!important}
+  ul{list-style:disc!important}
+  table{border-collapse:collapse;margin:1.5em 0!important;font-size:.9rem;width:100%}
+  th,td{border:1px solid #e2e8f0;padding:8px 12px;text-align:left}
+  th{background:#f8faff;font-weight:600;color:#475569}
+  tr:nth-child(even){background:#fafcff}
   </style>
 </head>
 <body class="bg-gray-50">
@@ -127,7 +183,7 @@ ${s.content ? s.content.split('\n').filter(Boolean).map(p => `<p>${escapeHtml(p)
         </div>
       </header>
 
-      ${execSummary ? `<div class="exec-box"><div class="label"><i class="fas fa-bolt" style="margin-right:4px"></i> 核心摘要</div>${execSummary.split('\n').filter(Boolean).map(p => `<p>${escapeHtml(p)}</p>`).join('\n')}</div>` : ''}
+      ${execSummary ? `<div class="exec-box"><div class="label"><i class="fas fa-bolt" style="margin-right:4px"></i> 核心摘要</div>${parseMarkdown(execSummary)}</div>` : ''}
 
       <div class="stat-grid">
         ${price != null ? `<div class="stat-card"><div class="stat-label">最新价</div><div class="stat-value">¥${parseFloat(price).toFixed(2)}</div></div>` : ''}
@@ -151,6 +207,18 @@ ${s.content ? s.content.split('\n').filter(Boolean).map(p => `<p>${escapeHtml(p)
       </script>
       ` : ''}
 
+      ${chartData.marginData && chartData.marginData.length >= 3 ? `
+      <div class="chart-card">
+        <div class="chart-header"><i class="fas fa-percentage" style="color:#059669"></i> 毛利率趋势</div>
+        <div class="chart-body"><div class="chart-container"><canvas id="chartMargin"></canvas></div></div>
+      </div>
+      <script>
+      (function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+      new Chart(document.getElementById('chartMargin'),{type:'line',data:{labels:${JSON.stringify(years)},datasets:[{label:'毛利率（%）',data:${JSON.stringify(marginData)},borderColor:'#059669',backgroundColor:'rgba(5,150,105,.1)',fill:true,tension:.3,pointRadius:4,pointBackgroundColor:'#059669'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:false,grid:{color:'rgba(0,0,0,.04)'},ticks:{callback:function(v){return v+'%'}}},x:{grid:{display:false}}}}});
+      })();
+      </script>
+      ` : ''}
+
       <div class="disclaimer-box">
         <p><strong>免责声明：</strong>本报告由AI自动生成，仅供参考和学习交流，不构成任何形式的投资建议。报告中的数据和分析基于公开信息和模型估算，可能存在偏差。股市有风险，投资需谨慎。作者和平台不对因使用本报告而产生的任何损失承担责任。</p>
       </div>
@@ -168,6 +236,90 @@ window.addEventListener('scroll',function(){document.getElementById('bttBtn').cl
 <script src="/js/cookie-banner.js"></script>
 </body>
 </html>`;
+}
+
+/**
+ * Parse basic markdown → HTML
+ * Supports: ### headings, **bold**, - lists, 1. numbered lists, | tables |
+ */
+function parseMarkdown(text) {
+  if (!text) return '';
+  const lines = text.split('\n');
+  const out = [];
+  let inUl = false, inOl = false, inTable = false;
+  for (let i = 0; i < lines.length; i++) {
+    const raw = lines[i];
+    const trimmed = raw.trim();
+
+    // Empty line — close any open list/table
+    if (!trimmed) {
+      if (inUl) { out.push('</ul>'); inUl = false; }
+      if (inOl) { out.push('</ol>'); inOl = false; }
+      if (inTable) { out.push('</tbody></table>'); inTable = false; }
+      continue;
+    }
+
+    // ### Heading
+    if (/^###\s/.test(trimmed)) {
+      if (inUl) { out.push('</ul>'); inUl = false; }
+      if (inOl) { out.push('</ol>'); inOl = false; }
+      if (inTable) { out.push('</tbody></table>'); inTable = false; }
+      out.push('<h3>' + inlineMd(escapeHtml(trimmed.replace(/^###\s+/, ''))) + '</h3>');
+      continue;
+    }
+
+    // Table row |...|
+    if (/^\|.+\|$/.test(trimmed) && !/^\|[\s-:]+\|/.test(trimmed)) {
+      if (inUl) { out.push('</ul>'); inUl = false; }
+      if (inOl) { out.push('</ol>'); inOl = false; }
+      const _c = trimmed.split('|').filter(Boolean).map(function(x){ return inlineMd(escapeHtml(x.trim())); });
+      const _h = (i + 1 < lines.length) && /^\|[\s\-:|]+\|$/.test(lines[i + 1].trim());
+      if (_h) {
+        if (inTable) { out.push('</tbody></table>'); }
+        out.push('<table><thead><tr>' + _c.map(function(x){return '<th>'+x+'</th>';}).join('') + '</tr></thead><tbody>');
+        inTable = true;
+        i++;
+      } else if (inTable) {
+        out.push('<tr>' + _c.map(function(x){return '<td>'+x+'</td>';}).join('') + '</tr>');
+      } else {
+        out.push('<table><tbody><tr>' + _c.map(function(x){return '<td>'+x+'</td>';}).join('') + '</tr></tbody></table>');
+      }
+      continue;
+    }
+
+    // Unordered list
+    if (/^[-*]\s/.test(trimmed)) {
+      if (inOl) { out.push('</ol>'); inOl = false; }
+      if (inTable) { out.push('</tbody></table>'); inTable = false; }
+      if (!inUl) { out.push('<ul>'); inUl = true; }
+      out.push('<li>' + inlineMd(escapeHtml(trimmed.replace(/^[-*]\s+/, ''))) + '</li>');
+      continue;
+    }
+
+    // Ordered list
+    if (/^\d+[.)]\s/.test(trimmed)) {
+      if (inUl) { out.push('</ul>'); inUl = false; }
+      if (inTable) { out.push('</tbody></table>'); inTable = false; }
+      if (!inOl) { out.push('<ol>'); inOl = true; }
+      out.push('<li>' + inlineMd(escapeHtml(trimmed.replace(/^\d+[.)]\s+/, ''))) + '</li>');
+      continue;
+    }
+
+    // Regular paragraph
+    if (inUl) { out.push('</ul>'); inUl = false; }
+    if (inOl) { out.push('</ol>'); inOl = false; }
+    if (inTable) { out.push('</tbody></table>'); inTable = false; }
+    out.push('<p>' + inlineMd(escapeHtml(trimmed)) + '</p>');
+  }
+  if (inUl) out.push('</ul>');
+  if (inOl) out.push('</ol>');
+  if (inTable) out.push('</tbody></table>');
+  return out.join('\n');
+}
+
+/** Inline markdown: **bold** */
+function inlineMd(text) {
+  return text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 }
 
 function escapeHtml(str) {

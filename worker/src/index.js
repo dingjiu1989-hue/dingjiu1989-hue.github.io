@@ -125,21 +125,12 @@ export default {
       const prompt = buildPrompt({
         name: stockName, code, industry: basicInfo?.industry || stock.industry || '',
         marketCap: formatNum(basicInfo?.totalMarketCap),
-        revenue: latestIncome?.revenue || latestIncome?.operatingRevenue,
-        netIncome: latestIncome?.netProfit || latestIncome?.netIncome,
-        grossMargin: latestIncome?.grossProfitMargin,
-        netMargin: latestIncome?.netProfitMargin,
-        eps: latestIncome?.eps || latestIncome?.basicEps,
-        totalAssets: latestBS?.totalAssets,
-        totalLiabilities: latestBS?.totalLiabilities,
-        equity: latestBS?.totalEquity || latestBS?.totalShareholdersEquity,
-        debtRatio: latestBS?.totalLiabilities && latestBS?.totalAssets
-          ? ((latestBS.totalLiabilities / latestBS.totalAssets) * 100).toFixed(1) + '%' : null,
         price: latestPrice, high52, low52,
         pe: basicInfo?.peRatio || basicInfo?.pe,
         pb: basicInfo?.pbRatio || basicInfo?.pb,
-        issues: validationIssues,
         years, revData, profitData, marginData,
+        incomeRows,
+        issues: validationIssues,
       });
 
       let report;
@@ -165,7 +156,7 @@ export default {
           executiveSummary: report?.executive_summary || '',
           sections: (report?.sections || []).map(s => ({ id: s.id, title: s.title, content: s.content })),
         },
-        chartData: { years, revenue: revData, netIncome: profitData, grossMargin: marginData },
+        chartData: { years, revenue: revData, netIncome: profitData, grossMargin: marginData, marginData: marginData, prices },
       };
 
       const fullHTML = renderReportHTML(reportData);
@@ -213,32 +204,58 @@ function makeSlug(name, code) {
 }
 
 function buildPrompt(d) {
-  return `请分析「${d.name}」并生成深度研究报告。
+  // Build richer prompt with multi-year data
+  const _rows = d.incomeRows || [];
+  const _years = d.years || [];
+  const _rev = d.revData || [];
+  const _profit = d.profitData || [];
+  const _margin = d.marginData || [];
+  const _latest = _rows[0] || {};
+  let _tbl = '';
+  if (_years.length) {
+    _tbl = '\n## 历年财务数据\n\n| 年份 | 营收(万元) | 净利润(万元) | 毛利率 |\n|------|-----------|-------------|-------|\n';
+    for (let _i = 0; _i < _years.length; _i++) {
+      _tbl += '| ' + _years[_i] + ' | ' + (_rev[_i] != null ? Number(_rev[_i]).toLocaleString() : '—') + ' | ' + (_profit[_i] != null ? Number(_profit[_i]).toLocaleString() : '—') + ' | ' + (_margin[_i] != null ? _margin[_i].toFixed(1) + '%' : '—') + ' |\n';
+    }
+  }
+  let _gr = '';
+  if (_rev.length >= 2 && _rev[0] > 0 && _rev[1] > 0) {
+    _gr = '营收YoY：' + ((_rev[0] - _rev[1]) / _rev[1] * 100).toFixed(1) + '%';
+    if (_profit[0] > 0 && _profit[1] > 0) _gr += '，净利润YoY：' + ((_profit[0] - _profit[1]) / _profit[1] * 100).toFixed(1) + '%';
+  }
+  const _rStr = _rev.map(function(v){ return v != null ? formatNum(v) : '—'; }).join(' → ');
+  const _pStr = _profit.map(function(v){ return v != null ? formatNum(v) : '—'; }).join(' → ');
+  const _mStr = _margin.map(function(v){ return v != null ? v.toFixed(1) + '%' : '—'; }).join(' → ');
+
+  return `请分析「${d.name}」（${d.code}）并生成深度研究报告。
 
 ## 公司信息
-名称：${d.name}（${d.code}）
+名称：${d.name}
+股票代码：${d.code}
 行业：${d.industry || '未知'}
 市值：${d.marketCap || '未知'}
 
-## 最新财务数据
-营收：${formatNum(d.revenue)}
-净利润：${formatNum(d.netIncome)}
-毛利率：${d.grossMargin || '暂缺'}
-净利率：${d.netMargin || '暂缺'}
-每股收益：${d.eps || '暂缺'}
+## 最新财务数据（最新报告期）
+营收：${formatNum(_latest.revenue || _latest.operatingRevenue)}
+净利润：${formatNum(_latest.netProfit || _latest.netIncome)}
+毛利率：${_latest.grossProfitMargin != null ? _latest.grossProfitMargin + '%' : '—'}
+净利率：${_latest.netProfitMargin != null ? _latest.netProfitMargin + '%' : '—'}
+每股收益：${_latest.eps || _latest.basicEps || '—'}
+${_gr ? '营收增长：' + _gr : ''}
 
-## 资产负债
-总资产：${formatNum(d.totalAssets)}
-总负债：${formatNum(d.totalLiabilities)}
-净资产：${formatNum(d.equity)}
-资产负债率：${d.debtRatio || '暂缺'}
+## 历年财务趋势
+营收逐年：${_rStr}
+净利润逐年：${_pStr}
+毛利率逐年：${_mStr}
+${_tbl}
 
 ## 市场数据
-最新价：${d.price}
-52周最高：${d.high52}
-52周最低：${d.low52}
-PE：${d.pe}
-PB：${d.pb}
+最新价：${d.price != null ? d.price.toFixed(2) + '元' : '—'}
+52周最高：${d.high52 != null ? d.high52.toFixed(2) + '元' : '—'}
+52周最低：${d.low52 != null ? d.low52.toFixed(2) + '元' : '—'}
+PE：${d.pe != null ? d.pe.toFixed(1) + 'x' : '—'}
+PB：${d.pb != null ? d.pb.toFixed(2) + 'x' : '—'}
+价格在52周区间位置：${d.high52 && d.low52 && d.price ? (( (d.price - d.low52) / (d.high52 - d.low52) * 100).toFixed(0) + '%') : '—'}
 
-${d.issues?.length ? `数据异常提示：${d.issues.join('；')}` : ''}`;
+${d.issues?.length ? '## 数据异常\n' + d.issues.map(function(x,i){ return (i+1) + '. ' + x; }).join('\n') : '## 数据完整性\n所有数据均已通过合理性校验。'}`;
 }
