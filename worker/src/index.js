@@ -164,14 +164,14 @@ export default {
       // Step 8: Save to KV
       await kv.put(`report:${slug}`, fullHTML, { expirationTtl: 86400 * 7 }); // 7 days
 
-      // Step 9: Return redirect info (full URL to the report page on the worker)
-      const baseUrl = `${url.protocol}//${url.host}`;
+      // Step 9: Return report data including full HTML for frontend rendering
       return json({
         ok: true,
         company: stockName,
         code,
         slug,
-        url: `${baseUrl}/report/${slug}`,
+        url: `/ai-analyst/${slug}.html`,
+        html: fullHTML,
       });
     } catch (e) {
       return json({ error: `分析失败：${e.message}` }, 500);
