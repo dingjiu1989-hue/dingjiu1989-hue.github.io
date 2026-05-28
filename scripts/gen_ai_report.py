@@ -1162,7 +1162,8 @@ def generate_one(name, code, sector):
     print(f'\n── Generating report for {name} ({code}) ──')
 
     # 1. Basic info
-    basic = get_basic_info(code)
+    basic_rows = mcp_extract_rows(get_basic_info(code))
+    basic = basic_rows[0] if basic_rows else {}
     print(f'  Industry: {basic.get("industry", "N/A")}')
 
     # 2. Financial data
