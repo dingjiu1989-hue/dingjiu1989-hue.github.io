@@ -1,1224 +1,868 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-render="related" data-board="ai-analyst" data-exclude="tesla-2026">
 <head>
     <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tesla Comprehensive Investment Analysis — AI Study Room</title>
-    <meta name="description" content="In-depth analysis of Tesla (TSLA): strategic transformation from automaker to physical AI company. Q1 2026 revenue +16% YoY, FSD paid subscribers 1.28M (+51%), market cap $1.54T. Covers financials, technicals, competitors, valuation & risks.">
-    <meta name="robots" content="index, follow, max-image-preview:large">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-/* ============================================================
-   AI Analyst — Deep Research Report Unified Styles v1.0
-   Based on Tesla, Huahong Semiconductor, Xiaomi reports
-   ============================================================ */
-
-/* 1. Global base */
-body {
-    line-height: 1.8;
-    color: #1f2937;
-    background-color: #FFFFFF;
-}
-
-.prose-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 80px 50px 80px 50px;
-    background-color: #FFFFFF;
-    border-radius: 12px;
-    line-height: 1.8;
-    text-align: left;
-    overflow-wrap: break-word;
-    hyphens: auto;
-}
-
-/* 2. Heading hierarchy (!important to prevent Tailwind override) */
-h1.report-title {
-    font-size: 2.5rem !important;
-    font-weight: 800;
-    color: #000000;
-    line-height: 1.2;
-    text-align: center;
-}
-
-h2 {
-    font-size: 1.8rem !important;
-    font-weight: 700;
-    color: #111;
-    margin-top: 2.5rem !important;
-    margin-bottom: 1.5rem !important;
-    border-bottom: 2px solid #F3F4F6;
-    padding-bottom: 0.5rem;
-}
-
-h3 {
-    font-size: 1.4rem !important;
-    font-weight: 600;
-    color: #374151;
-    margin-top: 2rem !important;
-    margin-bottom: 1rem !important;
-}
-
-h4 {
-    font-size: 1.1rem !important;
-    font-weight: 600;
-    color: #374151;
-    margin-top: 1.5rem !important;
-    margin-bottom: 0.8rem !important;
-}
-
-/* 3. Body text */
-p {
-    font-size: 1.05rem !important;
-    margin-bottom: 1.25em !important;
-    text-align: left;
-    color: #333;
-}
-
-strong { font-weight: 700 !important; }
-
-.prose-container ul, .prose-container ol {
-    list-style: revert;
-    padding-left: 1.75rem;
-    margin: 1.5em 0 !important;
-    font-size: 1.05rem;
-}
-.prose-container li {
-    margin-bottom: 0.8em !important;
-    padding-left: 0.5rem;
-}
-
-/* 4. Component containers: widget-box */
-.widget-box {
-    border: 1px solid #E5E7EB;
-    border-radius: 10px;
-    background: #FAFAFA;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    margin: 2rem 0;
-    overflow: auto;
-    max-width: 100%;
-}
-.widget-header {
-    background: #F9FAFB;
-    padding: 10px 16px;
-    border-bottom: 1px solid #E5E7EB;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: #4B5563;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    letter-spacing: 0.05em;
-}
-.widget-body {
-    padding: 20px;
-    font-size: 0.95rem;
-}
-
-/* 5. Chart containers */
-.chart-container {
-    position: relative;
-    height: 250px;
-    width: 100%;
-}
-.table-container { overflow: auto; }
-
-/* 6. Technical indicator grid */
-.indicator-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1rem;
-    margin-top: 1.5rem;
-    text-align: center;
-}
-.indicator-item {
-    background: #F9FAFB;
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid #F3F4F6;
-}
-.indicator-label { font-size: 0.75rem; color: #6B7280; margin-bottom: 0.25rem; }
-.indicator-value { font-size: 1.25rem; font-weight: 700; color: #111827; }
-.indicator-signal { font-size: 0.7rem; font-weight: 700; padding: 2px 6px; border-radius: 99px; }
-.signal-buy  { background-color: #D1FAE5; color: #065F46; }
-.signal-sell { background-color: #FEE2E2; color: #991B1B; }
-.signal-neutral { background-color: #E5E7EB; color: #374151; }
-
-/* 7. Tables */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 2em 0 !important;
-    font-size: 0.9rem;
-}
-th, td {
-    border: 1px solid #E5E7EB;
-    padding: 10px 12px;
-    text-align: left;
-}
-th {
-    background-color: #F9FAFB;
-    font-weight: 600;
-    color: #4B5563;
-}
-tr:nth-child(even) { background-color: #F9FAFB; }
-
-/* 8. References */
-.references {
-    font-size: 0.85rem;
-    color: #4B5563;
-    line-height: 1.6;
-}
-.references li {
-    margin-bottom: 0.3em !important;
-    word-break: break-all;
-}
-.references a { color: #0969da; }
-
-/* 9. Mobile responsive */
-@media (max-width: 768px) {
-    .prose-container {
-        padding: 20px;
-        margin: 20px auto;
-        line-height: 1.7;
+    <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="Tesla Comprehensive Investment Analysis (2026)">
+    <meta property="og:description" content="In-depth analysis of Tesla (TSLA): global EV + energy + Robotaxi leader. Covers vehicle deliveries, Full Self-Driving, energy storage, competitive landscape, valuation.">
+    <meta property="og:url" content="https://aidev.fit/en/ai-analyst/tesla-2026.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI Study Room">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/ai-analyst/tesla-2026.png">
+    <meta property="og:image:alt" content="Tesla Comprehensive Investment Analysis (2026)">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tesla Comprehensive Investment Analysis (2026)">
+    <meta name="twitter:description" content="In-depth analysis of Tesla (TSLA): global EV + energy + Robotaxi leader. Covers vehicle deliveries, Full Self-Driving, energy storage, competitive landscape, valuation.">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/ai-analyst/tesla-2026.png">
+    <meta property="article:published_time" content="2026-05-27">
+    <meta property="article:modified_time" content="2026-05-27">
+    <meta property="article:section" content="AI Analyst">
+    <meta property="article:tag" content="AI Analyst, Investment Analysis, Deep Research">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai-analyst/tesla-2026.webp" type="image/webp" fetchpriority="high">
+    <title>Tesla Comprehensive Investment Analysis (2026) — AI Study Room</title>
+    <meta name="description" content="In-depth analysis of Tesla (TSLA): global EV + energy + Robotaxi leader. Covers vehicle deliveries, Full Self-Driving, energy storage, competitive landscape, valuation.">
+    <meta name="keywords" content="AI Analyst, Investment Analysis, Deep Research">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai-analyst/tesla-2026.html">
+    <link rel="canonical" href="https://aidev.fit/en/ai-analyst/tesla-2026.html">
+    <link rel="prev" href="https://aidev.fit/en/ai-analyst/micron-2026-en.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Tesla Comprehensive Investment Analysis (2026)",
+      "description": "In-depth analysis of Tesla (TSLA): global EV + energy + Robotaxi leader. Covers vehicle deliveries, Full Self-Driving, energy storage, competitive landscape, valuation.",
+      "image": "https://aidev.fit/images/covers/en/ai-analyst/tesla-2026.png",
+      "datePublished": "2026-05-27",
+      "dateModified": "2026-05-27",
+      "wordCount": "6455",
+      "keywords": "AI Analyst, Investment Analysis, Deep Research",
+      "about": [{"@type": "Thing", "name": "AI Analyst"}, {"@type": "Thing", "name": "Investment Analysis"}, {"@type": "Thing", "name": "Deep Research"}],
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/ai-analyst/tesla-2026.html"},
+      "articleBody": "In-depth analysis of Tesla (TSLA): global EV + energy + Robotaxi leader. Covers vehicle deliveries, Full Self-Driving, energy storage, competitive landscape, valuation."
     }
-    h1.report-title { font-size: 1.8rem !important; }
-    h2 { font-size: 1.25rem !important; }
-    h3 { font-size: 1.1rem !important; }
-    h4 { font-size: 1rem !important; }
-    p  { font-size: 0.95rem !important; }
-    .prose-container ul, .prose-container ol {
-        padding-left: 1rem;
-        font-size: 0.95rem;
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://aidev.fit/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Analyst", "item": "https://aidev.fit/en/ai-analyst/"},
+        {"@type": "ListItem", "position": 3, "name": "Tesla Comprehensive Investment Analysis (2026)"}
+      ]
     }
-}
-    
-    /* ── TOC Sidebar ── */
-    .report-wrap { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
-    @media (max-width: 1023px) { .report-wrap { grid-template-columns: 1fr; } }
-    .toc-sidebar { position: sticky; top: 24px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; }
-    .toc-sidebar::-webkit-scrollbar { width: 3px; }
-    .toc-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-    @media (max-width: 1023px) { .toc-sidebar { display: none; } }
-    .toc-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
-    .toc-list { list-style: none; padding: 0; margin: 0; }
-    .toc-list li { margin-bottom: 2px; }
-    .toc-list a {
-        display: block; padding: 6px 10px; border-radius: 6px;
-        font-size: .8rem; color: #64748b; text-decoration: none;
-        transition: all .15s; line-height: 1.3;
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Tesla Comprehensive Investment Analysis (2026)",
+      "description": "In-depth analysis of Tesla (TSLA): global EV + energy + Robotaxi leader. Covers vehicle deliveries, Full Self-Driving, energy storage, competitive landscape, valuation.",
+      "step": [
+          {
+        "@type": "HowToStep",
+        "position": "1",
+        "name": "1 Business Model",
+        "text": "Tesla has evolved from a pure EV manufacturer into an \"AI-centric\" comprehensive technology company, with business spanning four segments: Automotive : Sales and leasing of Model S, Model 3, Model X, Model Y, and Cybertruck, representing the company's primary revenue source Energy : Solar energy sys"
+      },
+      {
+        "@type": "HowToStep",
+        "position": "1",
+        "name": "2 Market Cap &amp; Ranking",
+        "text": "As of May 26, 2026, Tesla's market capitalization stands at approximately $1.54 trillion, ranking first among global listed automakers, ahead of Toyota ($1.06T), Xiaomi ($878B), and BYD ($870B). However, compared to tech giants, Tesla's market cap is only 44.6% of NVIDIA's ($3.45T), reflecting marke"
+      },
+      {
+        "@type": "HowToStep",
+        "position": "1",
+        "name": "3 Moat &amp; Industry Position",
+        "text": "Tesla's core competitive moat is reflected in the following areas: Technology Leadership : 4680 battery cell mass production yield rate exceeded 90%, with dry electrode process reducing production costs by 18%-30% FSD Ecosystem : As of Q1 2026, global FSD paid subscribers reached 1.28 million, up 51"
+      },
+      {
+        "@type": "HowToStep",
+        "position": "2",
+        "name": "1 Revenue Performance",
+        "text": "Tesla's full-year 2025 revenue was $94.827 billion, down 3% YoY, marking the company's first annual revenue decline in its history. This decline was primarily driven by reduced vehicle deliveries (1.636 million units, -8.6% YoY) and lower regulatory credit revenue. By business segment: Automotive re"
+      },
+      {
+        "@type": "HowToStep",
+        "position": "2",
+        "name": "2 Profit &amp; Profitability",
+        "text": "Tesla's full-year 2025 net income was $3.794 billion, down 46% YoY, primarily impacted by: Continued decline in automotive gross margin, with full-year automotive gross margin at 17.8%, marking the fourth consecutive year of decline Regulatory credit revenue decreased from $2.17 billion in 2024 to $"
+      },
+      {
+        "@type": "HowToStep",
+        "position": "2",
+        "name": "3 Balance Sheet &amp; Cash Flow",
+        "text": "Tesla's balance sheet structure is relatively healthy. As of December 31, 2025: Total assets: $1,437.24 billion Current assets: $697.48 billion Cash and cash equivalents: $16.603 billion Total liabilities: $589.22 billion Current liabilities: $341.38 billion Debt-to-asset ratio: approximately 19% Cu"
+      },
+      {
+        "@type": "HowToStep",
+        "position": "3",
+        "name": "1 Price Trends",
+        "text": "Tesla's stock price showed a consolidating pattern in May 2026. As of May 26, 2026, Tesla's stock was trading in the $420-$465 range, within a relatively stable trading zone. From the daily chart, after hitting a recent high of $445 on May 12, the stock pulled back slightly to $426 on May 22, indica"
+      },
+      {
+        "@type": "HowToStep",
+        "position": "3",
+        "name": "2 Technical Indicators",
+        "text": "Tesla's key technical indicators present mixed signals: MACD : Daily MACD histogram declining from highs, indicating weakening bullish momentum; weekly MACD remains in neutral territory RSI : Daily RSI around 58, in neutral territory; weekly RSI around 55, also neutral Moving Averages : Price above "
+      },
+      {
+        "@type": "HowToStep",
+        "position": "3",
+        "name": "3 Event-Driven Factors",
+        "text": "Key events recently affecting Tesla's stock price: __Recent Event Drivers __Positive __Shanghai factory export surge: +1,050% YoY to South Korea __FSD paid users reached 1.28M in April, +51% YoY, all-time high __Shanghai factory export efficiency gains from \"release upon declaration\" policy __FSD (S"
+      },
+      {
+        "@type": "HowToStep",
+        "position": "4",
+        "name": "1 Analyst Ratings",
+        "text": "Wall Street analysts show significant divergence on Tesla: Buy Rating : Wedbush Securities raised its target price by 60.55% to $600, arguing Tesla is severely undervalued, particularly in the Optimus robot business Hold Rating : Morgan Stanley raised its Tesla price target by 11% to $415; Goldman S"
+      }
+      ]
     }
-    .toc-list a:hover { background: #e8edf5; color: #2563eb; }
-    .mobile-toc { display: none; }
-    @media (max-width: 1023px) {
-        .mobile-toc { display: block; background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
-        .mobile-toc select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: .88rem; background: #fff; appearance: auto; color: #1e293b; }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
-    .btt-btn {
-        position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
-        border-radius: 50%; background: #2563eb; color: #fff; border: none;
-        font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,.35);
-        opacity: 0; visibility: hidden; transition: all .2s; z-index: 50;
-        display: flex; align-items: center; justify-content: center;
-    }
-    .btt-btn.show { opacity: 1; visibility: visible; }
-    .btt-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,.45); }
-
-</style>
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+    <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
-<body class="bg-gray-50">
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
-<div class="report-wrap">
-    <!-- TOC Sidebar -->
-    <nav class="toc-sidebar" aria-label="Contents">
-        <div class="toc-title">Contents</div>
-        <ul class="toc-list">
-            <li><a href="#s1"><i class="fas fa-building fa-fw" style="width:16px;color:#2563eb"></i> Company Overview</a></li>
-            <li><a href="#s2"><i class="fas fa-chart-line fa-fw" style="width:16px;color:#2563eb"></i> Financial Analysis</a></li>
-            <li><a href="#s3"><i class="fas fa-candlestick-chart fa-fw" style="width:16px;color:#2563eb"></i> Technical Analysis</a></li>
-            <li><a href="#s4"><i class="fas fa-users fa-fw" style="width:16px;color:#2563eb"></i> Market Sentiment</a></li>
-            <li><a href="#s5"><i class="fas fa-table-cells-large fa-fw" style="width:16px;color:#2563eb"></i> Competitive Comparison</a></li>
-            <li><a href="#s6"><i class="fas fa-calculator fa-fw" style="width:16px;color:#2563eb"></i> Valuation & Financial Health</a></li>
-            <li><a href="#s7"><i class="fas fa-triangle-exclamation fa-fw" style="width:16px;color:#2563eb"></i> Key Risks</a></li>
-            <li><a href="#s8"><i class="fas fa-bullseye fa-fw" style="width:16px;color:#2563eb"></i> Conclusion & Recommendations</a></li>
-        </ul>
-    </nav>
-
-    <div class="report-content">
-        <!-- Mobile TOC -->
-        <div class="mobile-toc">
-            <select onchange="if(this.value) document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.selectedIndex=0;">
-                <option value="">— Jump to section —</option>
-                <option value="s1">Company Overview</option>
-                <option value="s2">Financial Analysis</option>
-                <option value="s3">Technical Analysis</option>
-                <option value="s4">Market Sentiment</option>
-                <option value="s5">Competitive Comparison</option>
-                <option value="s6">Valuation & Financial Health</option>
-                <option value="s7">Key Risks</option>
-                <option value="s8">Conclusion & Recommendations</option>
-            </select>
+<main>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai-analyst/">AI Analyst</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">AI Analyst</span>
+        <span class="tag-cat">Investment Analysis</span>
+        <span class="tag-cat">Deep Research</span></div>
+        <h1 class="article-title">Tesla Comprehensive Investment Analysis (2026)</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-27">2026-05-27</time>
+          <span class="meta-sep">·</span>
+          <span>32 min read</span>
+          <span class="meta-sep">·</span>
+          <span>234 views</span>
+          <span class="meta-sep">·</span>
+          <span>6455 words</span>
         </div>
-        <div class="prose-container">
-<!-- HEADER -->
-        <header class="flex flex-col items-center text-center">
-            <div class="flex gap-3 mb-8">
-                <span class="px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-widest rounded">Deep Research</span>
-                <span class="px-3 py-1 bg-blue-600 text-white text-xs font-bold uppercase tracking-widest rounded">Tesla</span>
-            </div>
-            <h1 class="report-title">Tesla Comprehensive Investment Analysis</h1>
-            <div class="flex items-center text-sm text-gray-500 font-sans mb-4 border-t border-gray-100 pt-4 mt-4">
-                <div class="mr-8"><span class="font-bold">Date:</span><script>document.write(new Date().toLocaleDateString('en-US'))</script></div>
-                <div><span class="font-bold">Ticker:</span> TSLA</div>
-            </div>
-        </header>
-
-        <!-- EXECUTIVE SUMMARY -->
-        <div class="bg-gray-800 text-white p-8 rounded-xl shadow-lg mb-4 relative overflow-hidden">
-            <h3 class="text-xl font-bold text-white flex items-center gap-3 border-b border-gray-700 pb-4 !mt-0 !mb-6">
-                <i class="fas fa-bolt text-yellow-400"></i>Executive Summary
-            </h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                <div>
-                    <div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">Strategic Transformation</div>
-                    <div class="text-base text-gray-100 leading-relaxed">Tesla is pivoting from a pure automaker to a "Physical AI" technology company, redirecting resources toward FSD, Robotaxi, and Optimus humanoid robots.</div>
-                </div>
-                <div>
-                    <div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">Financial Recovery</div>
-                    <div class="text-base text-gray-100 leading-relaxed">Despite its first annual revenue decline in 2025, Q1 2026 rebounded with 16% YoY growth — the fastest pace in nearly three years — and free cash flow turned positive.</div>
-                </div>
-                <div>
-                    <div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">Market Position</div>
-                    <div class="text-base text-gray-100 leading-relaxed">Market cap has reached $1.54 trillion, far exceeding all traditional automakers, as investors price in the option value of AI, robotics, and energy storage.</div>
-                </div>
-            </div>
-        </div>
-
-        <p>Tesla, Inc., as a pioneer in the global electric vehicle and clean energy sector, is at a critical juncture of strategic transformation from a traditional automaker to a "Physical AI" technology company. In 2025, the company experienced its first annual revenue decline, but Q1 2026 performance rebounded significantly with 16% YoY revenue growth, the highest in nearly three years. Meanwhile, Tesla's market capitalization has continued to climb to $1.54 trillion, far exceeding its traditional automotive peers, reflecting market expectations for high-growth areas such as Full Self-Driving (FSD), the Optimus humanoid robot, and energy storage.</p>
-        <p>This report provides a comprehensive analysis of Tesla across eight dimensions: company overview, financial data, technical analysis, market sentiment, competitive comparison, valuation & health, key risk factors, and investment recommendations, offering investors a systematic reference.</p>
-
-        <h2 id="s1">1. Company Overview: Business Model, Market Cap, Moat & Industry Position</h2>
-
-        <h3>1.1 Business Model</h3>
-        <p>Tesla has evolved from a pure EV manufacturer into an "AI-centric" comprehensive technology company, with business spanning four segments:</p>
-        <ul>
-            <li><strong>Automotive</strong>: Sales and leasing of Model S, Model 3, Model X, Model Y, and Cybertruck, representing the company's primary revenue source</li>
-            <li><strong>Energy</strong>: Solar energy systems (Solar Roof) and battery storage products (Powerwall, Megapack), serving as the company's second growth curve</li>
-            <li><strong>Services & Other</strong>: Vehicle maintenance, Supercharger network services, software subscriptions (e.g., FSD), and auto insurance</li>
-            <li><strong>AI & Robotics</strong>: Represented by the FSD autonomous driving system and Optimus humanoid robot, these are the primary drivers of future growth</li>
-        </ul>
-        <p>Notably, Tesla is accelerating its strategic pivot, planning to discontinue Model S/X by the end of 2026 and redirect resources toward high-growth areas such as Cybertruck, Optimus robots, and the Robotaxi autonomous ride-hailing service. Musk stated during the Q1 2026 earnings call: "Tesla is likely to become the first company to build a humanoid AGI."</p>
-        <div class="my-8 p-6 bg-gray-50 rounded-lg border-l-4 border-gray-700">
-            <div class="flex items-baseline gap-4">
-                <i class="fas fa-quote-left mt-1"></i>
-                <h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">Key Insight</h4>
-            </div>
-            <p class="mt-2 !mb-0 leading-relaxed">Tesla is likely to become the first company to build a humanoid AGI.</p>
-        </div>
-
-        <h3>1.2 Market Cap & Ranking</h3>
-        <p>As of May 26, 2026, Tesla's market capitalization stands at approximately $1.54 trillion, ranking first among global listed automakers, ahead of Toyota ($1.06T), Xiaomi ($878B), and BYD ($870B). However, compared to tech giants, Tesla's market cap is only 44.6% of NVIDIA's ($3.45T), reflecting market expectations for its AI transformation.</p>
-        <div class="widget-box">
-            <div class="widget-header"><i class="fas fa-chart-pie"></i> Data Insight: Market Cap Comparison</div>
-            <div class="widget-body">
-                <div class="chart-container">
-                    <canvas id="chart_market_cap"></canvas>
-                </div>
-                <script>
-                    new Chart(document.getElementById('chart_market_cap'), {
-                        type: 'bar',
-                        data: {
-                            labels: ['Tesla', 'NVIDIA', 'Toyota', 'Xiaomi', 'BYD'],
-                            datasets: [{
-                                label: 'Market Cap (Trillion USD)',
-                                data: [1.54, 3.45, 1.06, 0.878, 0.870],
-                                backgroundColor: ['#3B82F6', '#10B981', '#6B7280', '#F59E0B', '#EF4444'],
-                                borderRadius: 3
-                            }]
-                        },
-                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { borderDash: [4, 4] }, ticks: { callback: function(value) { return '$' + value + 'T'; } } } } }
-                    });
-                </script>
-            </div>
-        </div>
-        <p>Tesla's global automotive brand value ranking has declined for three consecutive years, dropping from a peak of $66.2 billion in early 2023 to $43 billion in early 2025, and further to $27.61 billion in 2026, with its ranking falling from 36th to 75th. This decline is primarily attributed to consumer concerns about insufficient brand innovation and high pricing, as well as the negative impact of Musk's increasing involvement in geopolitical issues on the company's reputation.</p>
-        <div class="widget-box">
-            <div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: Brand Value Trend</div>
-            <div class="widget-body">
-                <div class="chart-container">
-                    <canvas id="chart_brand_value"></canvas>
-                </div>
-                <script>
-                    new Chart(document.getElementById('chart_brand_value'), {
-                        type: 'line',
-                        data: {
-                            labels: ['Early 2023', 'Early 2025', '2026'],
-                            datasets: [{
-                                label: 'Brand Value (Billion USD)',
-                                data: [66.2, 43.0, 27.61],
-                                backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                                borderColor: '#EF4444',
-                                fill: true,
-                                tension: 0.1
-                            }]
-                        },
-                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom' } }, scales: { x: { grid: { display: false } }, y: { grid: { borderDash: [4, 4] } } } }
-                    });
-                </script>
-            </div>
-        </div>
-
-        <h3>1.3 Moat & Industry Position</h3>
-        <p>Tesla's core competitive moat is reflected in the following areas:</p>
-        <ul>
-            <li><strong>Technology Leadership</strong>: 4680 battery cell mass production yield rate exceeded 90%, with dry electrode process reducing production costs by 18%-30%</li>
-            <li><strong>FSD Ecosystem</strong>: As of Q1 2026, global FSD paid subscribers reached 1.28 million, up 51% YoY</li>
-            <li><strong>Charging Network Advantage</strong>: Global Supercharger count exceeds 80,000; NACS charging standard accounts for 48% of total DC fast charging share in North America</li>
-            <li><strong>Software-Defined Vehicle</strong>: Continuous vehicle performance and feature optimization via OTA updates, enhancing user stickiness</li>
-            <li><strong>Economies of Scale</strong>: Shanghai Gigafactory capacity continues to ramp up, with December 2025 monthly deliveries exceeding 97,100 units</li>
-        </ul>
-        <p>In terms of industry position, Tesla ranked second in global EV sales in 2025 with a 14% market share, but has lost its global BEV sales crown to BYD (BEV sales of 2.2567 million units). Model Y and Model 3 remain the world's two best-selling EVs, with cumulative global Model Y sales surpassing 4 million units.</p>
-        <p>In the Chinese market, Tesla's share is facing increasing pressure. In 2025, Tesla's total deliveries in China were 625,698 units, down 4.78% YoY. During the same period, Xiaomi SU7 deliveries surpassed Model 3 for the first time, exceeding it by nearly 30%. However, Tesla's Shanghai factory deliveries maintained strong growth, with Q1 2026 Shanghai factory deliveries reaching 213,000 units, up 23.5% YoY, accounting for 60% of Tesla's global deliveries.</p>
-        <div class="widget-box">
-            <div class="widget-header"><i class="fas fa-industry"></i> Data Insight: China Market Deliveries Comparison (2025)</div>
-            <div class="widget-body">
-                <div class="chart-container">
-                    <canvas id="chart_china_market"></canvas>
-                </div>
-                <script>
-                    new Chart(document.getElementById('chart_china_market'), {
-                        type: 'bar',
-                        data: {
-                            labels: ['Tesla (Model 3)', 'Xiaomi (SU7)'],
-                            datasets: [{
-                                label: 'Deliveries (Units)',
-                                data: [625698, 625698 * 1.3],
-                                backgroundColor: ['#3B82F6', '#F59E0B'],
-                                borderRadius: 3,
-                                barPercentage: 0.5
-                            }]
-                        },
-                        options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { grid: { borderDash: [4, 4] } }, y: { grid: { display: false } } } }
-                    });
-                </script>
-            </div>
-        </div>
-
-        <h2 id="s2">2. Financial Data: Revenue Trends, Profit, Balance Sheet & Cash Flow</h2>
-
-        <h3>2.1 Revenue Performance</h3>
-        <p>Tesla's full-year 2025 revenue was $94.827 billion, down 3% YoY, marking the company's first annual revenue decline in its history. This decline was primarily driven by reduced vehicle deliveries (1.636 million units, -8.6% YoY) and lower regulatory credit revenue.</p>
-        <p>By business segment:</p>
-        <ul>
-            <li>Automotive revenue: $69.526 billion, down 10% YoY</li>
-            <li>Energy revenue: $12.771 billion, up 26.6% YoY</li>
-            <li>Services & Other revenue: $12.53 billion, up 19% YoY</li>
-        </ul>
-        <p>In Q1 2026, Tesla's revenue reached $22.387 billion, up 16% YoY, the highest growth rate in nearly three years:</p>
-        <ul>
-            <li>Automotive revenue: $16.234 billion, up 16% YoY</li>
-            <li>Energy revenue: $2.408 billion, down 12% YoY</li>
-            <li>Services & Other revenue: $3.745 billion, up 42% YoY</li>
-        </ul>
-        <div class="widget-box">
-            <div class="widget-header"><i class="fas fa-chart-bar"></i> Data Insight: Revenue Growth by Segment (Q1 2026)</div>
-            <div class="widget-body">
-                <div class="chart-container">
-                    <canvas id="chart_revenue_growth"></canvas>
-                </div>
-                <script>
-                    new Chart(document.getElementById('chart_revenue_growth'), {
-                        type: 'bar',
-                        data: {
-                            labels: ['Automotive', 'Energy', 'Services & Other'],
-                            datasets: [{
-                                label: 'Revenue YoY Growth (%)',
-                                data: [16, -12, 42],
-                                backgroundColor: [ '#3B82F6', '#EF4444', '#10B981' ],
-                                borderRadius: 3
-                            }]
-                        },
-                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { borderDash: [4, 4] }, ticks: { callback: function(value) { return value + '%'; } } } } }
-                    });
-                </script>
-            </div>
-        </div>
-
-        <h3>2.2 Profit & Profitability</h3>
-        <p>Tesla's full-year 2025 net income was $3.794 billion, down 46% YoY, primarily impacted by:</p>
-        <ul>
-            <li>Continued decline in automotive gross margin, with full-year automotive gross margin at 17.8%, marking the fourth consecutive year of decline</li>
-            <li>Regulatory credit revenue decreased from $2.17 billion in 2024 to $1.45 billion in 2025</li>
-            <li>Digital asset (e.g., Bitcoin) impairments of $69 million and $222 million in Q4 2025 and Q1 2026, respectively</li>
-            <li>Significant increase in R&D expenses, with Q1 2026 R&D reaching $1.946 billion, up 37% YoY</li>
-        </ul>
-        <p>In Q1 2026, Tesla's net income was $477 million, up 17% YoY but down significantly QoQ. Notably, Tesla achieved $1.444 billion in free cash flow in Q1 2026, up 117% YoY, far exceeding market expectations of a $1.43 billion loss.</p>
-        <div class="widget-box">
-            <div class="widget-header"><i class="fas fa-water"></i> Data Insight: Free Cash Flow (FCF)</div>
-            <div class="widget-body">
-                <div class="chart-container" style="height:200px">
-                    <canvas id="chart_fcf"></canvas>
-                </div>
-                <script>
-                    new Chart(document.getElementById('chart_fcf'), {
-                        type: 'bar',
-                        data: {
-                            labels: ['Q1 2026'],
-                            datasets: [{
-                                label: 'Free Cash Flow (Billion USD)',
-                                data: [1.444],
-                                backgroundColor: '#10B981',
-                                borderRadius: 3,
-                                barPercentage: 0.3
-                            }]
-                        },
-                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { borderDash: [4, 4] } } } }
-                    });
-                </script>
-            </div>
-        </div>
-
-        <h3>2.3 Balance Sheet & Cash Flow</h3>
-        <p>Tesla's balance sheet structure is relatively healthy. As of December 31, 2025:</p>
-        <ul>
-            <li>Total assets: $1,437.24 billion</li>
-            <li>Current assets: $697.48 billion</li>
-            <li>Cash and cash equivalents: $16.603 billion</li>
-            <li>Total liabilities: $589.22 billion</li>
-            <li>Current liabilities: $341.38 billion</li>
-            <li>Debt-to-asset ratio: approximately 19%</li>
-            <li>Current ratio: 2.02</li>
-        </ul>
-        <p>Cash flow metrics:</p>
-        <ul>
-            <li>FY2025 operating cash flow: $14.7 billion</li>
-            <li>FY2025 free cash flow: $6.2 billion</li>
-            <li>Q1 2026 operating cash flow: $3.94 billion, up 83% YoY</li>
-            <li>Q1 2026 free cash flow: $1.444 billion, up 117% YoY</li>
-        </ul>
-        <p>However, Tesla management warned that 2026 capital expenditures will surge to over $25 billion (compared to only $9 billion in 2025), primarily allocated to AI computing infrastructure, new production lines (e.g., Cybercab, Optimus), and battery material production. This investment plan could lead to negative free cash flow in the remaining quarters of 2026 and potentially require additional financing in 2027.</p>
-        <div class="widget-box">
-            <div class="widget-header"><i class="fas fa-coins"></i> Data Insight: CapEx Plan</div>
-            <div class="widget-body">
-                <div class="chart-container" style="height:200px">
-                    <canvas id="chart_capex"></canvas>
-                </div>
-                <script>
-                    new Chart(document.getElementById('chart_capex'), {
-                        type: 'bar',
-                        data: {
-                            labels: ['FY2025', 'FY2026 Plan'],
-                            datasets: [{
-                                label: 'CapEx (Billion USD)',
-                                data: [9, 25],
-                                backgroundColor: ['#6B7280', '#3B82F6'],
-                                borderRadius: 3,
-                                barPercentage: 0.4
-                            }]
-                        },
-                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { borderDash: [4, 4] } } } }
-                    });
-                </script>
-            </div>
-        </div>
-
-        <h2 id="s3">3. Technical Analysis: Price Trends, Indicators & Support/Resistance</h2>
-
-        <h3>3.1 Price Trends</h3>
-        <p>Tesla's stock price showed a consolidating pattern in May 2026. As of May 26, 2026, Tesla's stock was trading in the $420-$465 range, within a relatively stable trading zone. From the daily chart, after hitting a recent high of $445 on May 12, the stock pulled back slightly to $426 on May 22, indicating near-term profit-taking pressure.</p>
-        <p>From weekly and monthly charts, Tesla's stock showed a strong upward trend from January to May 2026, gaining nearly 30%, but momentum has weakened since May. From an annual perspective, Tesla's stock has been trending downward since 2025, down approximately 22% from its 2025 high as of May 2026.</p>
-
-        <h3>3.2 Technical Indicators</h3>
-        <p>Tesla's key technical indicators present mixed signals:</p>
-        <ul>
-            <li><strong>MACD</strong>: Daily MACD histogram declining from highs, indicating weakening bullish momentum; weekly MACD remains in neutral territory</li>
-            <li><strong>RSI</strong>: Daily RSI around 58, in neutral territory; weekly RSI around 55, also neutral</li>
-            <li><strong>Moving Averages</strong>: Price above the 20-day MA ($409.26) and 50-day MA ($388.33), but below the 200-day MA ($410.03)</li>
-            <li><strong>Volatility</strong>: ATR (Average True Range) at 18.202, indicating elevated near-term volatility</li>
-            <li><strong>Support & Resistance</strong>: Key support at $420 (Shanghai factory export growth and Optimus mass production expectations); key resistance at $450-$465 (Cybertruck recall risk and overvaluation concerns)</li>
-        </ul>
-        <div class="widget-box">
-            <div class="widget-header"><i class="fas fa-crosshairs"></i> Technical Analysis</div>
-            <div class="widget-body">
-                <div class="indicator-grid">
-                    <div class="indicator-item">
-                        <div class="indicator-label">RSI (14)</div>
-                        <div class="indicator-value">58</div>
-                        <span class="indicator-signal signal-neutral">Neutral</span>
-                    </div>
-                    <div class="indicator-item">
-                        <div class="indicator-label">MACD</div>
-                        <div class="indicator-value">Declining</div>
-                        <span class="indicator-signal signal-neutral">Weakening</span>
-                    </div>
-                    <div class="indicator-item">
-                        <div class="indicator-label">MA (20)</div>
-                        <div class="indicator-value">409.26</div>
-                        <span class="indicator-signal signal-buy">Support</span>
-                    </div>
-                     <div class="indicator-item">
-                        <div class="indicator-label">MA (200)</div>
-                        <div class="indicator-value">410.03</div>
-                        <span class="indicator-signal signal-sell">Resistance</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <h3>3.3 Event-Driven Factors</h3>
-        <p>Key events recently affecting Tesla's stock price:</p>
-        <div class="widget-box">
-            <div class="widget-header"><i class="fas fa-balance-scale"></i> Recent Event Drivers</div>
-            <div class="widget-body grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                   <h4 class="font-bold text-green-700 flex items-center gap-2 !mt-0 !mb-3"><i class="fas fa-plus-circle"></i> Positive</h4>
-                   <ul class="list-none p-0 m-0 space-y-2 text-sm text-gray-700">
-                       <li class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span>Shanghai factory export surge: +1,050% YoY to South Korea</span></li>
-                       <li class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span>FSD paid users reached 1.28M in April, +51% YoY, all-time high</span></li>
-                       <li class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span>Shanghai factory export efficiency gains from "release upon declaration" policy</span></li>
-                       <li class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span>FSD (Supervised) available in China, unlocking the largest single market</span></li>
-                   </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-red-700 flex items-center gap-2 !mt-0 !mb-3"><i class="fas fa-minus-circle"></i> Negative</h4>
-                   <ul class="list-none p-0 m-0 space-y-2 text-sm text-gray-700">
-                       <li class="flex items-start gap-2"><i class="fas fa-times-circle text-red-500 mt-1"></i><span>Cybertruck recalled in the US (173 units) due to brake disc cracking</span></li>
-                       <li class="flex items-start gap-2"><i class="fas fa-times-circle text-red-500 mt-1"></i><span>CapEx plan exceeding $25B raises cash flow concerns</span></li>
-                       <li class="flex items-start gap-2"><i class="fas fa-times-circle text-red-500 mt-1"></i><span>US "Big and Beautiful Bill" threatens to eliminate EV tax credits</span></li>
-                       <li class="flex items-start gap-2"><i class="fas fa-times-circle text-red-500 mt-1"></i><span>China EV penetration rate exceeds 60%, intensifying competition</span></li>
-                   </ul>
-                </div>
-            </div>
-        </div>
-
-        <h2 id="s4">4. Market Sentiment: Ratings, Public Opinion & News Impact</h2>
-
-        <h3>4.1 Analyst Ratings</h3>
-        <p>Wall Street analysts show significant divergence on Tesla:</p>
-        <ul>
-            <li><strong>Buy Rating</strong>: Wedbush Securities raised its target price by 60.55% to $600, arguing Tesla is severely undervalued, particularly in the Optimus robot business</li>
-            <li><strong>Hold Rating</strong>: Morgan Stanley raised its Tesla price target by 11% to $415; Goldman Sachs maintains "Hold" with target slightly adjusted to $375 (March data)</li>
-            <li><strong>Sell Rating</strong>: Wells Fargo analysts cut their target price by 66.55% to $125, citing massive investment needs and potential negative future cash flow</li>
-            <li><strong>Institutional Holdings</strong>: Institutional ownership at 44.88%, up 0.51% QoQ, but attitudes are markedly divided. For instance, Mairs and Power increased holdings while Fifth Third Bank and Avantis US Equity Fund reduced positions</li>
-        </ul>
-        <div class="widget-box">
-            <div class="widget-header"><i class="fas fa-chart-pie"></i> Data Insight: Analyst Target Price Divergence</div>
-            <div class="widget-body">
-                <div class="chart-container" style="height:200px">
-                    <canvas id="chart_analyst_price"></canvas>
-                </div>
-                <script>
-                    new Chart(document.getElementById('chart_analyst_price'), {
-                        type: 'bar',
-                        data: {
-                            labels: ['Wedbush (Buy)', 'Morgan Stanley (Hold)', 'Wells Fargo (Sell)'],
-                            datasets: [{
-                                label: 'Target Price (USD)',
-                                data: [600, 415, 125],
-                                backgroundColor: ['#10B981', '#6B7280', '#EF4444'],
-                                borderRadius: 3
-                            }]
-                        },
-                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { borderDash: [4, 4] } } } }
-                    });
-                </script>
-            </div>
-        </div>
-
-        <h3>4.2 Sentiment Analysis</h3>
-        <p>Recent sentiment characteristics around Tesla:</p>
-        <div class="widget-box">
-            <div class="widget-header"><i class="fas fa-comments"></i> Sentiment Analysis</div>
-            <div class="widget-body grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                   <h4 class="font-bold text-green-700 flex items-center gap-2 !mt-0 !mb-3"><i class="fas fa-thumbs-up"></i> Positive Sentiment</h4>
-                   <ul class="list-none p-0 m-0 space-y-2 text-sm text-gray-700">
-                       <li class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span>Shanghai factory export efficiency gains driving APAC market growth</span></li>
-                       <li class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span>Optimus humanoid robot mass production plan accelerating</span></li>
-                       <li class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span>FSD (Supervised) approved in China — a key milestone for AI strategy</span></li>
-                       <li class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span>Owner brand loyalty improved from 90% to 92%</span></li>
-                   </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-red-700 flex items-center gap-2 !mt-0 !mb-3"><i class="fas fa-thumbs-down"></i> Negative Sentiment</h4>
-                   <ul class="list-none p-0 m-0 space-y-2 text-sm text-gray-700">
-                       <li class="flex items-start gap-2"><i class="fas fa-times-circle text-red-500 mt-1"></i><span>Cybertruck recall raises market concerns about product quality</span></li>
-                       <li class="flex items-start gap-2"><i class="fas fa-times-circle text-red-500 mt-1"></i><span>Model S/X discontinuation causing dissatisfaction among premium owners</span></li>
-                       <li class="flex items-start gap-2"><i class="fas fa-times-circle text-red-500 mt-1"></i><span>Musk's frequent involvement in political issues distracting from business focus</span></li>
-                       <li class="flex items-start gap-2"><i class="fas fa-times-circle text-red-500 mt-1"></i><span>High CapEx plan raising concerns about near-term profitability and cash flow</span></li>
-                   </ul>
-                </div>
-            </div>
-        </div>
-
-        <h3>4.3 News Impact</h3>
-        <p>Key news events recently affecting Tesla's stock price:</p>
-        <ul>
-            <li><strong>May 21</strong>: Tesla announced FSD (Supervised) availability in China; stock rose 3.9% to close at $445</li>
-            <li><strong>May 13</strong>: Tesla officially discontinued Model S/X; market interpreted this as a positive signal of strategic focus; stock rose 1.9%</li>
-            <li><strong>April 23</strong>: Tesla released Q1 2026 earnings, with revenue and net income beating expectations; stock rose 4% in after-hours trading but subsequently declined due to sharply increased CapEx guidance</li>
-            <li><strong>February 14</strong>: Tesla's US website showed the one-time FSD purchase option ended on Feb 14, transitioning to monthly subscription only from Feb 15, signaling the strategic shift from hardware sales to software subscriptions</li>
-        </ul>
-
-        <h2 id="s5">5. Competitive Comparison: Market Share & Financial Metrics</h2>
-
-        <h3>5.1 Global EV Market Share Comparison</h3>
-        <p>Top three global EV sellers in 2025:</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Company</th>
-                    <th>Global EV Sales</th>
-                    <th>Market Share</th>
-                    <th>YoY Growth</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>BYD</td>
-                    <td>4,602,400</td>
-                    <td>28.3%</td>
-                    <td>+7.73%</td>
-                </tr>
-                <tr>
-                    <td>Tesla</td>
-                    <td>1,636,000</td>
-                    <td>14.0%</td>
-                    <td>-8.6%</td>
-                </tr>
-                <tr>
-                    <td>Volkswagen Group</td>
-                    <td>983,100</td>
-                    <td>6.1%</td>
-                    <td>+32.0%</td>
-                </tr>
-            </tbody>
-        </table>
-        <p>Notably, Tesla's EV sales have declined for two consecutive years, while BYD has maintained steady growth. In the European market, Tesla faces intense competition from traditional automakers such as Volkswagen and BMW, with Nordic market sales plunging over 60% for six consecutive months. In China, Xiaomi SU7 and other emerging brand models have surpassed Tesla Model 3 in sales, demonstrating the rise of Chinese brands.</p>
-        <div class="widget-box">
-            <div class="widget-header"><i class="fas fa-chart-pie"></i> Data Insight: 2025 Global EV Market Share</div>
-            <div class="widget-body">
-                <div class="chart-container">
-                    <canvas id="chart_market_share"></canvas>
-                </div>
-                <script>
-                    new Chart(document.getElementById('chart_market_share'), {
-                        type: 'pie',
-                        data: {
-                            labels: ['BYD', 'Tesla', 'Volkswagen Group', 'Others'],
-                            datasets: [{
-                                label: 'Market Share',
-                                data: [28.3, 14.0, 6.1, 41.6],
-                                backgroundColor: ['#EF4444', '#3B82F6', '#8B5CF6', '#6B7280'],
-                            }]
-                        },
-                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom' } } }
-                    });
-                </script>
-            </div>
-        </div>
-
-        <h3>5.2 Key Competitor Financial Metrics</h3>
-        <p>Significant differences exist in the financial metrics of automakers directly competing with Tesla:</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Metric</th>
-                    <th>Tesla</th>
-                    <th>BYD</th>
-                    <th>BMW</th>
-                    <th>Mercedes-Benz</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>2025 Revenue</td>
-                    <td>$94.827B</td>
-                    <td>¥803.965B</td>
-                    <td>€133.453B</td>
-                    <td>€132.214B</td>
-                </tr>
-                <tr>
-                    <td>2025 Net Income</td>
-                    <td>$3.794B</td>
-                    <td>¥32.619B</td>
-                    <td>€7.451B</td>
-                    <td>€5.331B</td>
-                </tr>
-                <tr>
-                    <td>2025 Gross Margin</td>
-                    <td>18.0%</td>
-                    <td>15.5%</td>
-                    <td>6.3%</td>
-                    <td>5.0%</td>
-                </tr>
-                <tr>
-                    <td>2025 R&D Spend</td>
-                    <td>¥63.4B</td>
-                    <td>¥63.4B</td>
-                    <td>€9.680B</td>
-                    <td>€10.0B</td>
-                </tr>
-                <tr>
-                    <td>R&D as % of Revenue</td>
-                    <td>7.9%</td>
-                    <td>7.9%</td>
-                    <td>7.3%</td>
-                    <td>7.8%</td>
-                </tr>
-                <tr>
-                    <td>2025 EV Sales</td>
-                    <td>1,636,000</td>
-                    <td>4,602,400</td>
-                    <td>442,100</td>
-                    <td>168,800</td>
-                </tr>
-                <tr>
-                    <td>2025 EV Sales Growth</td>
-                    <td>-8.6%</td>
-                    <td>+7.73%</td>
-                    <td>+3.6%</td>
-                    <td>-4.0%</td>
-                </tr>
-            </tbody>
-        </table>
-        <p>In terms of financial metrics, Tesla has larger revenue scale compared to traditional automakers but lower profit margins. Notably, Tesla's profitability is highly dependent on regulatory credit sales and digital asset gains; in 2025, these two items together accounted for 40% of its net income.</p>
-        <p>Compared to peers, Tesla's R&D spend ratio is at the industry-leading level, on par with BYD but below BMW and Mercedes-Benz. In EV sales, Tesla has lost the global #1 position to BYD but remains highly competitive in the premium EV market.</p>
-
-        <h3>5.3 China Market Performance Comparison</h3>
-        <p>In the Chinese market, Tesla's share is facing rapid erosion:</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Company</th>
-                    <th>April 2026 China EV Sales</th>
-                    <th>Market Share</th>
-                    <th>YoY Growth</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>BYD</td>
-                    <td>182,025</td>
-                    <td>65.2%</td>
-                    <td>-7.2%</td>
-                </tr>
-                <tr>
-                    <td>Geely</td>
-                    <td>95,585</td>
-                    <td>65.2%</td>
-                    <td>+7.0%</td>
-                </tr>
-                <tr>
-                    <td>Xiaomi</td>
-                    <td>36,702</td>
-                    <td>4.3%</td>
-                    <td>+40.0%</td>
-                </tr>
-                <tr>
-                    <td>Tesla</td>
-                    <td>25,956</td>
-                    <td>3.1%</td>
-                    <td>-0.1%</td>
-                </tr>
-            </tbody>
-        </table>
-        <p>Tesla's China market share has fallen from 18% in 2024 to 14% in 2025, and further to 3.1% in April 2026. In contrast, BYD maintains over 65% share in China, while Xiaomi has grown from 3.1% in 2025 to 4.3% in April 2026, demonstrating strong growth momentum.</p>
-        <div class="widget-box">
-            <div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: Tesla China Market Share Trend</div>
-            <div class="widget-body">
-                <div class="chart-container">
-                    <canvas id="chart_china_share"></canvas>
-                </div>
-                <script>
-                    new Chart(document.getElementById('chart_china_share'), {
-                        type: 'line',
-                        data: {
-                            labels: ['2024', '2025', 'Apr 2026'],
-                            datasets: [{
-                                label: 'Market Share (%)',
-                                data: [18, 14, 3.1],
-                                backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                                borderColor: '#EF4444',
-                                fill: true,
-                                tension: 0.1
-                            }]
-                        },
-                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom' } }, scales: { x: { grid: { display: false } }, y: { grid: { borderDash: [4, 4] }, ticks: { callback: function(value) { return value + '%'; } } } } }
-                    });
-                </script>
-            </div>
-        </div>
-
-        <h2 id="s6">6. Valuation & Health: PE/PB/DCF and Financial Health Assessment</h2>
-
-        <h3>6.1 Valuation Metrics</h3>
-        <p>Tesla's current valuation metrics are at historically elevated levels:</p>
-        <ul>
-            <li><strong>P/E Ratio (TTM)</strong>: As of May 26, 2026, Tesla's P/E stands at 838.56x, significantly above the auto industry average (Ford at 10.19x, GM at 15x, BMW at 15x)</li>
-            <li><strong>P/S Ratio</strong>: Tesla's P/S ratio is 13.36x, far exceeding other automakers</li>
-            <li><strong>P/B Ratio</strong>: Tesla's P/B ratio is 18.85x, also at the high end of the industry</li>
-        </ul>
-        <div class="widget-box">
-            <div class="widget-header"><i class="fas fa-balance-scale-right"></i> Data Insight: P/E Ratio (TTM) Comparison</div>
-            <div class="widget-body">
-                <div class="chart-container" style="height:200px">
-                    <canvas id="chart_pe_ratio"></canvas>
-                </div>
-                <script>
-                    new Chart(document.getElementById('chart_pe_ratio'), {
-                        type: 'bar',
-                        data: {
-                            labels: ['Tesla', 'Ford', 'GM', 'BMW'],
-                            datasets: [{
-                                label: 'P/E Ratio (x)',
-                                data: [838.56, 10.19, 15, 15],
-                                backgroundColor: ['#3B82F6', '#6B7280', '#6B7280', '#6B7280'],
-                                borderRadius: 3,
-                                barPercentage: 0.5
-                            }]
-                        },
-                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { borderDash: [4, 4] }, type: 'logarithmic' } } }
-                    });
-                </script>
-            </div>
-        </div>
-        <p>Analyzing Tesla's valuation by business segment, the high valuation primarily stems from the option value of future businesses:</p>
-        <ul>
-            <li><strong>Automotive</strong>: ~$600 billion, based on 18x P/E</li>
-            <li><strong>Energy</strong>: ~$150 billion, based on 18x P/E</li>
-            <li><strong>Software/Services</strong>: ~$800 billion, based on 25x P/S</li>
-            <li><strong>Robotaxi</strong>: ~$850 billion, based on 25x P/S</li>
-            <li><strong>Optimus Robot</strong>: ~$500 billion, based on 40x P/S</li>
-        </ul>
-        <div class="widget-box">
-            <div class="widget-header"><i class="fas fa-lightbulb-dollar"></i> Data Insight: Option Value by Business Segment</div>
-            <div class="widget-body">
-                <div class="chart-container">
-                    <canvas id="chart_business_value"></canvas>
-                </div>
-                <script>
-                    new Chart(document.getElementById('chart_business_value'), {
-                        type: 'bar',
-                        data: {
-                            labels: ['Robotaxi', 'Software/Services', 'Automotive', 'Energy', 'Optimus'],
-                            datasets: [{
-                                label: 'Option Value (Billion USD)',
-                                data: [850, 800, 600, 150, 50],
-                                backgroundColor: ['#10B981', '#3B82F6', '#6B7280', '#F59E0B', '#8B5CF6'],
-                                borderRadius: 3
-                            }]
-                        },
-                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { borderDash: [4, 4] } } } }
-                    });
-                </script>
-            </div>
-        </div>
-
-        <h3>6.2 DCF Valuation Analysis</h3>
-        <p>DCF-based valuation analysis for Tesla reveals significant divergence in intrinsic value estimates:</p>
-        <ul>
-            <li><strong>Conservative Scenario</strong> (WACC 12%, terminal growth 2.5%): Intrinsic value ~$538 billion, well below current market cap</li>
-            <li><strong>Base Scenario</strong> (WACC 11.2%, terminal growth 2.5%): Intrinsic value ~$1.34 trillion, close to current market cap</li>
-            <li><strong>Bull Scenario</strong> (WACC 10.7%, terminal growth 3.0%): Intrinsic value ~$1.8 trillion, mainly dependent on rapid commercialization of second-curve businesses such as Robotaxi and Optimus</li>
-        </ul>
-        <div class="widget-box">
-            <div class="widget-header"><i class="fas fa-chart-bar"></i> Data Insight: DCF Valuation Scenarios</div>
-            <div class="widget-body">
-                <div class="chart-container" style="height:200px">
-                    <canvas id="chart_dcf"></canvas>
-                </div>
-                <script>
-                    new Chart(document.getElementById('chart_dcf'), {
-                        type: 'bar',
-                        data: {
-                            labels: ['Conservative', 'Base', 'Bull'],
-                            datasets: [{
-                                label: 'Intrinsic Value (Trillion USD)',
-                                data: [0.538, 1.34, 1.8],
-                                backgroundColor: ['#EF4444', '#6B7280', '#10B981'],
-                                borderRadius: 3,
-                                barPercentage: 0.5
-                            }]
-                        },
-                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { borderDash: [4, 4] } } } }
-                    });
-                </script>
-            </div>
-        </div>
-        <p>Notably, DCF valuation for Tesla is highly dependent on assumptions about second-curve businesses. If these businesses fail to commercialize as planned, Tesla's valuation could decline significantly. For instance, Morgan Stanley analysts warn that if Tesla's second-curve businesses (e.g., Robotaxi) progress slower than expected, Tesla's valuation could be halved to $800 billion by 2027.</p>
-        <div class="my-8 p-6 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
-            <div class="flex items-baseline gap-4">
-                <i class="fas fa-exclamation-triangle mt-1 text-yellow-500"></i>
-                <h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">Risk Warning</h4>
-            </div>
-            <p class="mt-2 !mb-0 leading-relaxed">If Tesla's second-curve businesses (e.g., Robotaxi) progress slower than expected, Tesla's valuation could be halved to $800 billion by 2027.</p>
-        </div>
-
-        <h3>6.3 Financial Health Assessment</h3>
-        <p>Tesla's financial health exhibits short-term robustness but long-term pressure:</p>
-        <ul>
-            <li><strong>Short-Term Metrics</strong>: Current ratio 2.02 (Q4 2025), quick ratio 1.61, cash and investments totaling $44.7 billion (Q1 2026) — strong near-term liquidity</li>
-            <li><strong>Long-Term Metrics</strong>: 2026 CapEx plan exceeds $25 billion, up 177% from 2025, potentially leading to sustained negative free cash flow</li>
-            <li><strong>Earnings Quality</strong>: Approximately 40% of 2025 net income depended on regulatory credit sales and digital asset gains; core automotive business profit was only $2.28 billion</li>
-            <li><strong>Inventory Management</strong>: Q1 2026 inventory days rose to 27, up 8 days YoY; delivery-production gap reached 50,000 units, indicating worsening inventory buildup</li>
-            <li><strong>Working Capital</strong>: Tesla's working capital of $31.125 billion is significantly positive, indicating current assets well above current liabilities and strong short-term liquidity</li>
-        </ul>
-        <div class="widget-box">
-            <div class="widget-header"><i class="fas fa-heart-pulse"></i> Financial Health Snapshot</div>
-            <div class="widget-body">
-                <div class="indicator-grid">
-                    <div class="indicator-item">
-                        <div class="indicator-label">Current Ratio</div>
-                        <div class="indicator-value">2.02</div>
-                        <span class="indicator-signal signal-buy">Healthy</span>
-                    </div>
-                    <div class="indicator-item">
-                        <div class="indicator-label">Quick Ratio</div>
-                        <div class="indicator-value">1.61</div>
-                        <span class="indicator-signal signal-buy">Good</span>
-                    </div>
-                    <div class="indicator-item">
-                        <div class="indicator-label">Working Capital</div>
-                        <div class="indicator-value">+$31.13B</div>
-                        <span class="indicator-signal signal-buy">Strong</span>
-                    </div>
-                     <div class="indicator-item">
-                        <div class="indicator-label">Inventory Days</div>
-                        <div class="indicator-value">27 Days</div>
-                        <span class="indicator-signal signal-sell">Under Pressure</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <h2 id="s7">7. Key Risks: Industry Competition, Policy, Geopolitics</h2>
-
-        <h3>7.1 Industry Competition Risk</h3>
-        <p>The competitive risks Tesla faces are primarily reflected in the following areas:</p>
-        <ul>
-            <li><strong>Rise of Chinese Brands</strong>: BYD, Xiaomi, and other Chinese brands directly compete with Tesla in technology innovation and cost control. For example, Xiaomi SU7 has surpassed Model 3 as one of China's best-selling EVs, with more competitive pricing</li>
-            <li><strong>Legacy Automaker Transformation</strong>: BMW, Mercedes-Benz, Volkswagen, and other traditional automakers are accelerating their electrification transition, launching increasingly competitive EV products</li>
-            <li><strong>Slowing Product Iteration</strong>: Model 3/Y have been on the market for years without fundamental exterior or interior redesigns, relying only on minor tweaks to maintain freshness, leading to declining consumer appeal</li>
-            <li><strong>Inventory Buildup Risk</strong>: Q1 2026 Tesla produced 408,386 units but delivered only 358,023, resulting in an inventory buildup exceeding 50,000 units — a record high</li>
-        </ul>
-
-        <h3>7.2 Policy Risk</h3>
-        <p>Policy risk represents the largest systemic risk for Tesla:</p>
-        <ul>
-            <li><strong>US Localization Policy</strong>: The "Advanced Manufacturing Leadership Strategy" bill requires 70% EV battery localization by 2025 or loss of federal subsidies. Tesla's Nevada factory battery localization rate is only 60%, potentially costing over $12 billion annually in lost subsidies</li>
-            <li><strong>Tax Credit Policy</strong>: The "Big and Beautiful Bill" threatens to eliminate EV tax credits; if implemented before the end of September, Tesla's North American sales could plummet by 40%</li>
-            <li><strong>EU Carbon Tariffs</strong>: EU countervailing duties on Chinese-made BEVs combined with the 10% base tariff could result in a maximum composite rate of 45.3%. Tesla must accept a "Minimum Import Price" (MIP) commitment, potentially weakening price competitiveness</li>
-            <li><strong>FSD Regulatory Constraints</strong>: NHTSA is introducing stricter regulatory requirements for autonomous driving systems, limiting Tesla's ability to market FSD as a near-complete solution, potentially impacting commercialization progress</li>
-        </ul>
-        <div class="my-8 p-6 bg-red-50 rounded-lg border-l-4 border-red-500">
-            <div class="flex items-baseline gap-4">
-                <i class="fas fa-shield-halved mt-1 text-red-500"></i>
-                <h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">Critical Policy Risk</h4>
-            </div>
-            <p class="mt-2 !mb-0 leading-relaxed">If the "Big and Beautiful Bill" is implemented before the end of September, Tesla's North American sales could plummet by 40%.</p>
-        </div>
-
-        <h3>7.3 Geopolitical Risk</h3>
-        <p>Geopolitical risks affect Tesla primarily through supply chain and market access channels:</p>
-        <ul>
-            <li><strong>Supply Chain Decoupling Pressure</strong>: Escalating US-China trade tensions; Tesla relies on Chinese supply chains for 50% of its components, facing rising tariff costs and supply chain restructuring pressure</li>
-            <li><strong>Technology Restriction Risk</strong>: China restricts LFP technology exports; Tesla's Texas factory Malaysian chip yield rate is only 65%; Nevada factory environmental litigation adds $120 million in costs</li>
-            <li><strong>European Market Access</strong>: EU implements carbon tariffs and countervailing duties; Tesla must raise Shanghai factory prices to meet MIP requirements, potentially weakening European market competitiveness</li>
-            <li><strong>Musk Political Risk</strong>: Musk's frequent involvement in political issues may invite regulatory scrutiny and distract from business focus</li>
-        </ul>
-
-        <h2 id="s8">8. Conclusion: Short-Term & Long-Term Investment Recommendations</h2>
-
-        <h3>8.1 Short-Term Outlook (1-3 Months)</h3>
-        <p><strong>Tesla's stock price may face consolidation in the near term</strong>, influenced by the following factors:</p>
-        <ol>
-            <li><strong>Positive Catalysts</strong>:
-                <ul>
-                    <li>Shanghai factory export efficiency gains driving APAC market growth</li>
-                    <li>FSD (Supervised) rollout progress in China (expected Q3 2026)</li>
-                    <li>Optimus robot mass production plan advancement (production line construction expected to begin Q2 2026)</li>
-                </ul>
-            </li>
-            <li><strong>Negative Catalysts</strong>:
-                <ul>
-                    <li>Negative impact of Cybertruck recall on brand trust</li>
-                    <li>Potential elimination of EV tax credits under the US "Big and Beautiful Bill"</li>
-                    <li>Market concerns about cash flow due to high CapEx plans</li>
-                </ul>
-            </li>
-            <li><strong>Technical Analysis</strong>:
-                <ul>
-                    <li>Stock trading in the $420-$465 range, with support at $420 and resistance at $450-$465</li>
-                    <li>Technical indicators present mixed signals: MACD bullish momentum weakening, RSI in neutral territory</li>
-                    <li>Short-term moving averages provide support, but long-term moving averages diverge in direction</li>
-                </ul>
-            </li>
-        </ol>
-        <p><strong>Based on the above analysis, short-term investment recommendations are as follows:</strong></p>
-        <ol>
-            <li><strong>Cautious Observation</strong>: Tesla's current valuation is at historically elevated levels, with a P/E (TTM) of 838.56x, significantly above the industry average. Investors are advised to remain cautious when the stock approaches resistance levels ($450-$465) and wait for pullback opportunities.</li>
-            <li><strong>Monitor FSD Progress in China</strong>: On May 21, Tesla announced FSD (Supervised) availability in China, but it is currently limited to a staged rollout; full deployment still awaits regulatory approval. FSD progress in China will be a key near-term catalyst for the stock.</li>
-            <li><strong>Watch for Policy Risk</strong>: The US "Big and Beautiful Bill" could eliminate EV tax credits. If implemented before the end of September, North American sales could plummet by 40%. Investors are advised to closely monitor related legislative developments as near-term risk indicators.</li>
-            <li><strong>Monitor Inventory Management</strong>: Q1 2026 inventory days rose to 27, up 8 days YoY, with worsening inventory buildup risk. If inventory is not effectively absorbed in subsequent quarters, it may trigger a stock price correction.</li>
-        </ol>
-
-        <h3>8.2 Long-Term Outlook (6-12 Months)</h3>
-        <p><strong>Tesla's long-term investment value depends on the commercialization of its second-curve businesses</strong>. Key analysis:</p>
-        <ol>
-            <li><strong>Strategic Transformation Opportunity</strong>:
-                <ul>
-                    <li>Tesla is transitioning from a traditional automaker to a "Physical AI" technology company, with strategic focus shifting to FSD, Robotaxi, and Optimus robots</li>
-                    <li>If these businesses can successfully commercialize and achieve scale, Tesla could realize significant valuation uplift</li>
-                    <li>Key metrics to watch: FSD paid user growth rate, Robotaxi commercialization progress, Optimus mass production timeline</li>
-                </ul>
-            </li>
-            <li><strong>Risk Factors</strong>:
-                <ul>
-                    <li><strong>Policy Risk</strong>: Changes in US localization and tax credit policies could significantly impact Tesla's North American business</li>
-                    <li><strong>Geopolitical Risk</strong>: Supply chain decoupling pressure and technology restriction risks could increase production costs and operational complexity</li>
-                    <li><strong>Competitive Risk</strong>: Accelerated electrification by Chinese brands and traditional automakers could further erode Tesla's market share</li>
-                    <li><strong>Financial Risk</strong>: High CapEx plans could lead to sustained negative free cash flow, increasing financial pressure</li>
-                </ul>
-            </li>
-            <li><strong>Valuation Reasonableness</strong>:
-                <ul>
-                    <li>Tesla's current market cap of $1.54 trillion far exceeds its traditional automotive business valuation (~$600 billion)</li>
-                    <li>The market's high valuation of Tesla is primarily based on the option value of its second-curve businesses</li>
-                    <li>DCF valuation shows significant divergence in Tesla's intrinsic value, ranging from $538 billion (conservative) to $1.8 trillion (bull case)</li>
-                </ul>
-            </li>
-        </ol>
-        <p><strong>Based on the above analysis, long-term investment recommendations are as follows:</strong></p>
-        <ol>
-            <li><strong>Phased Position Building</strong>: Tesla's long-term investment value is high, but so are the risks. Investors are advised to adopt a phased position-building strategy, buying in tranches when the stock pulls back to the $400-$420 range to reduce single-point entry risk.</li>
-            <li><strong>Focus on Second-Curve Businesses</strong>: Long-term investors should closely monitor the commercialization progress of Tesla's second-curve businesses, including FSD user growth, Robotaxi, and Optimus mass production timelines. Progress in these areas will be decisive for Tesla's long-term valuation.</li>
-            <li><strong>Watch Financial Risk</strong>: Tesla's 2026 CapEx plan exceeds $25 billion, potentially leading to sustained negative free cash flow. Investors are advised to closely monitor cash flow metrics in quarterly earnings reports as important risk indicators.</li>
-            <li><strong>Diversify Investments</strong>: Given the policy, geopolitical, and competitive risks Tesla faces, investors are advised not to concentrate excessive capital in a single stock and should diversify to spread risk.</li>
-        </ol>
-
-        <h2>Appendix: Key Data Quick Reference</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Metric</th>
-                    <th>Value</th>
-                    <th>Period / Note</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>Market Cap</td><td>$1.54 Trillion</td><td>May 26, 2026</td></tr>
-                <tr><td>FY2025 Revenue</td><td>$94.827 Billion</td><td>-3% YoY</td></tr>
-                <tr><td>Q1 2026 Revenue</td><td>$22.387 Billion</td><td>+16% YoY</td></tr>
-                <tr><td>FY2025 Net Income</td><td>$3.794 Billion</td><td>-46% YoY</td></tr>
-                <tr><td>Q1 2026 Net Income</td><td>$477 Million</td><td>+17% YoY</td></tr>
-                <tr><td>Q1 2026 Free Cash Flow</td><td>$1.444 Billion</td><td>+117% YoY</td></tr>
-                <tr><td>FY2025 Global EV Sales</td><td>1,636,000 Units</td><td>14% Market Share</td></tr>
-                <tr><td>FSD Paid Subscribers</td><td>1.28 Million</td><td>Q1 2026, +51% YoY</td></tr>
-                <tr><td>Supercharger Count</td><td>>80,000</td><td>As of Q1 2026</td></tr>
-                <tr><td>P/E Ratio (TTM)</td><td>838.56x</td><td>May 26, 2026</td></tr>
-                <tr><td>P/S Ratio</td><td>13.36x</td><td>May 26, 2026</td></tr>
-                <tr><td>P/B Ratio</td><td>18.85x</td><td>May 26, 2026</td></tr>
-                <tr><td>4680 Cell Yield Rate</td><td>90%</td><td>Mass Production Milestone</td></tr>
-                <tr><td>Shanghai Factory Monthly Deliveries</td><td>97,100 Units</td><td>December 2025</td></tr>
-                <tr><td>Shanghai Factory Q1 2026 Deliveries</td><td>213,000 Units</td><td>+23.5% YoY</td></tr>
-                <tr><td>2026 CapEx Plan</td><td>>$25 Billion</td><td>Primarily AI Computing & New Production Lines</td></tr>
-            </tbody>
-        </table>
-
-        <h2>References</h2>
-        <ol class="references">
-            <li><a href="https://www.toutiao.com/a7644021612677530146/" target="_blank" rel="nofollow noopener">Is Tesla the Leading Brand in Electric Vehicles?</a> — Toutiao</li>
-            <li><a href="http://www.dingxinwen.com/news/145FD4E247BF4573" target="_blank" rel="nofollow noopener">2026 Top 100 Auto Brands: 24 Chinese Brands on the List</a> — Dingxin News</li>
-            <li><a href="https://baike.baidu.com/item/%E7%89%B9%E6%96%AF%E6%8B%892025%E5%B9%B4%E7%AC%AC%E5%9B%9B%E5%AD%A3%E5%BA%A6%E5%8F%8A%E5%85%A8%E5%B9%B4%E8%B4%A2%E6%8A%A5/67322775" target="_blank" rel="nofollow noopener">Tesla Q4 2025 and Full-Year Earnings Report</a> — Baidu Baike</li>
-            <li><a href="https://finance.eastmoney.com/a/202601283632689093.html" target="_blank" rel="nofollow noopener">Tesla Brand Value Falls for Third Consecutive Year; Musk's Political Involvement Weighs on Reputation</a> — East Money</li>
-            <li><a href="https://i.ifeng.com/c/8qJ4QgUqHNd" target="_blank" rel="nofollow noopener">Tesla's First Annual Revenue Decline: Streamlining Auto Business, Pushing Autonomous Driving, Humanoid Robots, xAI</a> — Ifeng</li>
-            <li><a href="https://news.qq.com/rain/a/20260105A06XHY00" target="_blank" rel="nofollow noopener">Global Automaker Market Cap Rankings: Tesla First, Xiaomi Third, BYD Fourth</a> — QQ News</li>
-            <li><a href="https://www.tfcaijing.com/index.php/article/page/79323474716f6d5541357765474d57374d716b6173413d3d" target="_blank" rel="nofollow noopener">First Annual Revenue Decline! Automotive Down 10%: Does Tesla's Trillion-Dollar Valuation Depend on Musk or Robots?</a> — TF Finance</li>
-            <li><a href="https://m.jrj.com.cn/madapter/finance/2026/01/11171155011104.shtml" target="_blank" rel="nofollow noopener">Global Automaker Market Cap Reshuffled: Tesla Leads Toyota, Xiaomi Surpasses BYD</a> — JRJ</li>
-            <li><a href="https://www.mrjjxw.com/articles/2026-01-29/4240401.html" target="_blank" rel="nofollow noopener">First Annual Revenue Decline, Discontinuing Two Models! Tesla Releases Latest Earnings</a> — Daily Economic News</li>
-            <li><a href="https://i.ifeng.com/c/8oyPb157lhX" target="_blank" rel="nofollow noopener">Q3 2025 Global Best-Selling EVs: Tesla Model 3/Y, Geely Star</a> — Ifeng</li>
-            <li><a href="https://quote.eastmoney.com/uk/105.TSLA.html" target="_blank" rel="nofollow noopener">Tesla (TSLA) Latest Price Quotes and Charts</a> — East Money</li>
-            <li><a href="https://www.ccidnet.com/p1/news/20260302/1096880.html" target="_blank" rel="nofollow noopener">Tesla (TSLA) FY2025 Comprehensive Financial Analysis: First Annual Revenue Decline in History</a> — CCIDnet</li>
-            <li><a href="https://www.futunn.com/stock/TSLA-US/earnings?chain_id=R4zpmhChsb3T18.1koevtu" target="_blank" rel="nofollow noopener">Tesla Earnings Dates, Financial Reports and Conference Calls</a> — Futu</li>
-            <li><a href="https://www.futunn.com/stock/TSLA-US?code=002323&type=distribute" target="_blank" rel="nofollow noopener">Tesla (TSLA) Stock Price, News, Quotes and Charts</a> — Futu</li>
-            <li><a href="https://stock.stockstar.com/IG2026042300054632.shtml" target="_blank" rel="nofollow noopener">Tesla, Inc. (TSLA) Q1 2026 Earnings Summary</a> — StockStar</li>
-            <li><a href="https://marketsgonewild.com/stock-news/2026/04/23/teslas-q1-2026-financial-results-solid-numbers-bold-ambitions-implications-for-savings-borrowing-and-the-world/" target="_blank" rel="nofollow noopener">Tesla's Q1 2026 Financial Results: Solid Numbers, Bold Ambitions</a> — Markets Gone Wild</li>
-            <li><a href="https://t.10jqka.com.cn/pid_617157249.shtml" target="_blank" rel="nofollow noopener">Tesla Q1 2026 Profit Beats Expectations, Free Cash Flow Turns Positive</a> — 10jqka</li>
-            <li><a href="https://www.eeo.com.cn/2026/0427/853444.shtml" target="_blank" rel="nofollow noopener">Tesla Releases Q1 Earnings, Discloses Autonomous Driving and Robot Business Progress</a> — Economic Observer</li>
-            <li><a href="https://cn.investing.com/news/stock-market-news/article-3324963" target="_blank" rel="nofollow noopener">Tesla Q1 Profit Beats, Free Cash Flow Unexpectedly Positive, Stock Up ~4% After Hours</a> — Investing.com</li>
-            <li><a href="https://markets.financialcontent.com/wral/article/predictstreet-2025-12-22-tesla-tsla-2025-deep-dive-the-shift-from-evs-to-physical-ai-and-the-139-billion-pay-package-reinstatement" target="_blank" rel="nofollow noopener">Tesla (TSLA) 2025 Deep Dive: The Shift from EVs to Physical AI</a> — PredictStreet</li>
-            <li><a href="https://www.bitauto.com/article/1003107151835/" target="_blank" rel="nofollow noopener">Tesla 2025 Earnings: APAC Deliveries Hit Record High, Offsetting Industry Headwinds</a> — BitAuto</li>
-            <li><a href="https://www.tradingkey.com/zh-hans/markets/stocks/nasdaq-tsla/stock-analysis" target="_blank" rel="nofollow noopener">Tesla (TSLA) Stock Rating & Comprehensive Analysis</a> — TradingKey</li>
-            <li><a href="https://www.toutiao.com/w/1865026826461321/" target="_blank" rel="nofollow noopener">Tesla Today | May 13 Update: Pullback from Highs, Closed Lower</a> — Toutiao</li>
-            <li><a href="https://www.tradingkey.com/zh-hans/markets/stocks/nasdaq-tsla" target="_blank" rel="nofollow noopener">Tesla Real-Time Quotes — TSLA Stock Live Price</a> — TradingKey</li>
-            <li><a href="https://www.toutiao.com/w/1864956656697417/" target="_blank" rel="nofollow noopener">Tesla Today | May 12 Update: Surge on Heavy Volume, New High</a> — Toutiao</li>
-            <li><a href="https://intellectia.ai/stock/TSLA/technical" target="_blank" rel="nofollow noopener">TSLA Technical Analysis & Stock Price Forecast</a> — Intellectia</li>
-            <li><a href="http://zh.tradingeconomics.com/tsla:us" target="_blank" rel="nofollow noopener">Tesla | TSLA Stock Price Live Quotes Historical Charts</a> — Trading Economics</li>
-            <li><a href="https://www.sohu.com/a/1021869588_121118712" target="_blank" rel="nofollow noopener">Tesla Model S and Model X Officially Discontinued, Musk Says "An Era Has Ended"</a> — Sohu Auto</li>
-            <li><a href="https://tradersunion.com/news/financial-news/show/1489885-tesla-trades-flat-today-at/" target="_blank" rel="nofollow noopener">Tesla Stock Consolidates as Investors Adjust Positions</a> — TradersUnion</li>
-            <li><a href="https://xueqiu.com/1620763583/346329939" target="_blank" rel="nofollow noopener">Tesla Q2 2025 Working Capital Analysis</a> — Xueqiu</li>
-            <li><a href="https://finance.sina.com.cn/stock/usstock/c/2026-01-23/doc-inhihwxr6421016.shtml" target="_blank" rel="nofollow noopener">Tesla: Clear Skies in 2026, but 2027 Storm Could Halve Valuation</a> — Sina Finance</li>
-            <li><a href="https://www.stock-analysis-on.net/NASDAQ/Company/Tesla-Inc/Ratios/Liquidity" target="_blank" rel="nofollow noopener">Tesla Inc. (NASDAQ:TSLA) | Analysis of Liquidity Ratios</a> — Stock Analysis</li>
-            <li><a href="http://www.shifd.net/huiyi/detail/10357.html" target="_blank" rel="nofollow noopener">PEGR: The Valuation Revolution That Ends the DCF Perpetuity Illusion</a> — Shanghai Institute for Finance & Development</li>
-            <li><a href="https://valueinvesting.io/TSLA/valuation/wacc" target="_blank" rel="nofollow noopener">Tesla WACC, Cost of Equity, Cost of Debt and CAPM</a> — ValueInvesting</li>
-            <li><a href="https://www.gurufocus.com/term/intrinsic-value-dcf-earnings-based/FRA:TL00" target="_blank" rel="nofollow noopener">Tesla (FRA:TL00) Intrinsic Value: DCF (Earnings Based)</a> — GuruFocus</li>
-            <li><a href="https://caibaobang.cn/sanpk/mh-zbs?code=TSLA&tag=pe" target="_blank" rel="nofollow noopener">Tesla P/E Ratio Historical Trend Yearly Data Comparison</a> — CaiBaoBang</li>
-            <li><a href="https://www.fortunechina.com/shangye/c/2026-02/02/content_471876.htm" target="_blank" rel="nofollow noopener">After Excluding Non-Recurring Profits, Tesla's Stock Valuation Hits All-Time High</a> — Fortune China</li>
-            <li><a href="https://m.jrj.com.cn/madapter/stock/2026/04/23131856858252.shtml" target="_blank" rel="nofollow noopener">Earnings Growth Can't Hide Concerns! Tesla Raises CapEx, Bets Big on Robots and Autonomous Driving</a> — JRJ</li>
-            <li><a href="https://www.yoojia.com/article/9344746034415745900.html?sa=pc_ss_article" target="_blank" rel="nofollow noopener">Who Is Really Paying for Tesla's Trillion-Dollar Valuation?</a> — YouJia</li>
-            <li><a href="https://www.zaker.cn/news/article_new.php?pk=69e03a118e9f096c7124c1ae" target="_blank" rel="nofollow noopener">How Much Is Tesla Really Worth?</a> — ZAKER News</li>
-            <li><a href="https://stock.jrj.com.cn/2026/01/28132955374468.shtml" target="_blank" rel="nofollow noopener">Tesla Brand Value Shrinks 36% in 2025, Third Consecutive Year of Decline; BYD Grows 23% Against Trend</a> — JRJ</li>
-            <li><a href="https://stock.10jqka.com.cn/20260423/c676204952.shtml" target="_blank" rel="nofollow noopener">Tesla Q1 Profit Beats, Musk Announces "Significant Investment Increase," Targets Annual Production of One Million Optimus Units</a> — 10jqka</li>
-            <li><a href="https://3g.china.com/act/news/10000169/20260214/49252607.html" target="_blank" rel="nofollow noopener">How Long Can Tesla Keep Its "Magnificent Seven" Label? Overvalued vs. Fundamental Divergence</a> — China.com</li>
-            <li><a href="https://www.nbd.com.cn/articles/2026-04-23/4353740.html" target="_blank" rel="nofollow noopener">Tesla Q1 Earnings Beat, Revenue +16% YoY, Highest in Nearly Three Years</a> — National Business Daily</li>
-            <li><a href="https://www.eeo.com.cn/2026/0506/865369.shtml" target="_blank" rel="nofollow noopener">Tesla Q2 2026 Multi-Business Advancement, CapEx Sharply Raised to Over $25 Billion</a> — Economic Observer</li>
-            <li><a href="http://t.cj.sina.com.cn/articles/view/1163218074/45554c9a00102mtd8" target="_blank" rel="nofollow noopener">Tesla Earnings Decoded: AI Monetization and the Cash Flow Moat</a> — Sina Finance</li>
-            <li><a href="https://www.163.com/dy/article/KR6E3NER0519QIKK.html" target="_blank" rel="nofollow noopener">$25 Billion: Tesla Raises This Year's CapEx Forecast</a> — NetEase</li>
-            <li><a href="https://guba.sina.com.cn/?bid=21046&s=thread&tid=64947" target="_blank" rel="nofollow noopener">Tesla: After Breaking the Trillion Mark, Market Cap Aiming for $3 Trillion — What's the Future Value?</a> — Sina Stock Forum</li>
-            <li><a href="https://zhuanlan.zhihu.com/p/1957781884114306981" target="_blank" rel="nofollow noopener">Tesla October Market: Jo Bhakdi & Herbert Ong In-Depth Analysis</a> — Zhihu</li>
-            <li><a href="https://www.odaily.news/zh-CN/post/5210458" target="_blank" rel="nofollow noopener">Tesla Q1 2026 Earnings Released, Long-Term Bets Further Raised</a> — Odaily</li>
-            <li><a href="https://www.fxbaogao.com/detail/5390014" target="_blank" rel="nofollow noopener">[Guotai Haitong Securities] Tesla FY2026 Q1 Earnings Review: Auto Business Profit Decline Halted and Recovering</a> — FX Report</li>
-            <li><a href="https://www.hstong.com/news/detail/10260330175732140" target="_blank" rel="nofollow noopener">Tesla (TSLA) 2026 Deep Research: 5x Pricing Divergence — Sunset Automaker or AI Giant?</a> — Huashengtong</li>
-            <li><a href="https://pure-oai.bham.ac.uk/ws/files/18236659/Hardman_Shiu_SteinbergerWilckens_Changing_f" target="_blank" rel="nofollow noopener">Changing the Fate of Fuel Cell Vehicles: Can Lessons Be Learnt from Tesla Motors?</a> — University of Birmingham</li>
-            <li><a href="https://www.ainvest.com/news/regulatory-headwinds-tesla-trillion-dollar-valuation-reassessment-policy-risks-2510/" target="_blank" rel="nofollow noopener">Regulatory Headwinds and Tesla's Trillion-Dollar Valuation: A Reassessment of Policy Risks</a> — AInvest</li>
-            <li><a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=TSLA" target="_blank" rel="nofollow noopener">Tesla (TSLA) 10-K Annual Report (2026-01-29)</a> — SEC</li>
-            <li><a href="https://www.sohu.com/a/1021869588_121118712" target="_blank" rel="nofollow noopener">Tesla Drops Nearly 5% in Pre-Market: Policy Risk and Weak Demand Batter Investor Confidence</a> — Sohu</li>
-            <li><a href="https://www.toutiao.com/" target="_blank" rel="nofollow noopener">50% of Components Depend on China! Tesla to Cut Off Chinese Suppliers Within Two Years</a> — Toutiao</li>
-            <li><a href="https://www.163.com/" target="_blank" rel="nofollow noopener">Why Tesla Sales Were Overtaken: Exploring the EV Market Transformation</a> — NetEase</li>
-            <li><a href="https://stock.stockstar.com/" target="_blank" rel="nofollow noopener">Tesla's Carbon Credit Revenue May Face Depletion</a> — StockStar</li>
-            <li><a href="https://www.bitauto.com/" target="_blank" rel="nofollow noopener">EU Carbon Tariffs Fully Implemented in 2026: New Export Hurdles for Chinese New Energy</a> — BitAuto</li>
-            <li><a href="https://www.toutiao.com/" target="_blank" rel="nofollow noopener">Up to 45.3% Tariff Plus New EU Regulations: What Compliance Pressures Does China's Auto Export Face?</a> — Toutiao</li>
-            <li><a href="https://www.bitauto.com/" target="_blank" rel="nofollow noopener">Tesla Accelerates "De-Chinaization" Battery Supply Chain Strategy</a> — BitAuto</li>
-            <li><a href="https://www.bitauto.com/" target="_blank" rel="nofollow noopener">The "Big and Beautiful Bill": Tearing Apart the Last Hope of America's Lithium Battery Industry</a> — BitAuto</li>
-            <li><a href="https://news.caijingmobile.com/article/detail/562480" target="_blank" rel="nofollow noopener">Price for Tax: A New Starting Point in China-EU EV Negotiations</a> — Caijing</li>
-            <li><a href="https://m.caijing.com.cn/article/202601/392072" target="_blank" rel="nofollow noopener">Price for Tax: A New Starting Point in China-EU EV Negotiations</a> — Caijing Web</li>
-            <li><a href="https://economictimes.indiatimes.com/news/international/business/eu-slashes-planned-tariff-on-teslas-china-made-evs-to-9/printarticle/112652397.cms" target="_blank" rel="nofollow noopener">EU Slashes Planned Tariff on Tesla's China-Made EVs to 9%</a> — The Economic Times</li>
-            <li><a href="https://www.pv-magazine.com/" target="_blank" rel="nofollow noopener">Tesla Deploys 9.6 GWh of Batteries in Q2, 10 GWh Nevada Cell Factory 'Nears Completion'</a> — pv magazine USA</li>
-            <li><a href="https://www.toutiao.com/" target="_blank" rel="nofollow noopener">Shanghai South Port "Release Upon Declaration" Completes First Order, Boosting Tesla, BYD and Other NEV Scale Exports</a> — Jiemian News</li>
-        </ol>
-    
-        </div>
-        <div id="footer-placeholder"></div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai-analyst/tesla-2026.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai-analyst/tesla-2026.png" alt="Tesla Comprehensive Investment Analysis (2026)" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (34)</summary><ol><li><a href="#executive-summary">__Executive Summary</a></li><li><a href="#1-company-overview-business-model-market-cap-moat-amp-industry-position">1. Company Overview: Business Model, Market Cap, Moat &amp; Industry Position</a></li><li><a href="#11-business-model">1.1 Business Model</a></li><li><a href="#12-market-cap-amp-ranking">1.2 Market Cap &amp; Ranking</a></li><li><a href="#13-moat-amp-industry-position">1.3 Moat &amp; Industry Position</a></li><li><a href="#2-financial-data-revenue-trends-profit-balance-sheet-amp-cash-flow">2. Financial Data: Revenue Trends, Profit, Balance Sheet &amp; Cash Flow</a></li><li><a href="#21-revenue-performance">2.1 Revenue Performance</a></li><li><a href="#22-profit-amp-profitability">2.2 Profit &amp; Profitability</a></li><li><a href="#23-balance-sheet-amp-cash-flow">2.3 Balance Sheet &amp; Cash Flow</a></li><li><a href="#3-technical-analysis-price-trends-indicators-amp-supportresistance">3. Technical Analysis: Price Trends, Indicators &amp; Support/Resistance</a></li><li><a href="#31-price-trends">3.1 Price Trends</a></li><li><a href="#32-technical-indicators">3.2 Technical Indicators</a></li><li><a href="#33-event-driven-factors">3.3 Event-Driven Factors</a></li><li><a href="#4-market-sentiment-ratings-public-opinion-amp-news-impact">4. Market Sentiment: Ratings, Public Opinion &amp; News Impact</a></li><li><a href="#41-analyst-ratings">4.1 Analyst Ratings</a></li><li><a href="#42-sentiment-analysis">4.2 Sentiment Analysis</a></li><li><a href="#43-news-impact">4.3 News Impact</a></li><li><a href="#5-competitive-comparison-market-share-amp-financial-metrics">5. Competitive Comparison: Market Share &amp; Financial Metrics</a></li><li><a href="#51-global-ev-market-share-comparison">5.1 Global EV Market Share Comparison</a></li><li><a href="#52-key-competitor-financial-metrics">5.2 Key Competitor Financial Metrics</a></li><li><a href="#53-china-market-performance-comparison">5.3 China Market Performance Comparison</a></li><li><a href="#6-valuation-amp-health-pepbdcf-and-financial-health-assessment">6. Valuation &amp; Health: PE/PB/DCF and Financial Health Assessment</a></li><li><a href="#61-valuation-metrics">6.1 Valuation Metrics</a></li><li><a href="#62-dcf-valuation-analysis">6.2 DCF Valuation Analysis</a></li><li><a href="#63-financial-health-assessment">6.3 Financial Health Assessment</a></li><li><a href="#7-key-risks-industry-competition-policy-geopolitics">7. Key Risks: Industry Competition, Policy, Geopolitics</a></li><li><a href="#71-industry-competition-risk">7.1 Industry Competition Risk</a></li><li><a href="#72-policy-risk">7.2 Policy Risk</a></li><li><a href="#73-geopolitical-risk">7.3 Geopolitical Risk</a></li><li><a href="#8-conclusion-short-term-amp-long-term-investment-recommendations">8. Conclusion: Short-Term &amp; Long-Term Investment Recommendations</a></li><li><a href="#81-short-term-outlook-1-3-months">8.1 Short-Term Outlook (1-3 Months)</a></li><li><a href="#82-long-term-outlook-6-12-months">8.2 Long-Term Outlook (6-12 Months)</a></li><li><a href="#appendix-key-data-quick-reference">Appendix: Key Data Quick Reference</a></li><li><a href="#references">References</a></li></ol></details>
+        <div class="article-body"><p>Deep Research Tesla</p><picture><source srcset="https://aidev.fit/images/covers/en/ai-analyst/tesla-2026.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai-analyst/tesla-2026.png" alt="Tesla Comprehensive Investment Analysis (2026)" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+<p>Date:</p>
+<p>Ticker: TSLA</p>
+<h3>__Executive Summary</h3>
+<p>Strategic Transformation</p>
+<p>Tesla is pivoting from a pure automaker to a "Physical AI" technology company, redirecting resources toward FSD, Robotaxi, and Optimus humanoid robots.</p>
+<p>Financial Recovery</p>
+<p>Despite its first annual revenue decline in 2025, Q1 2026 rebounded with 16% YoY growth — the fastest pace in nearly three years — and free cash flow turned positive.</p>
+<p>Market Position</p>
+<p>Market cap has reached $1.54 trillion, far exceeding all traditional automakers, as investors price in the option value of AI, robotics, and energy storage.</p>
+<p>Tesla, Inc., as a pioneer in the global electric vehicle and clean energy sector, is at a critical juncture of strategic transformation from a traditional automaker to a "Physical AI" technology company. In 2025, the company experienced its first annual revenue decline, but Q1 2026 performance rebounded significantly with 16% YoY revenue growth, the highest in nearly three years. Meanwhile, Tesla's market capitalization has continued to climb to $1.54 trillion, far exceeding its traditional automotive peers, reflecting market expectations for high-growth areas such as Full Self-Driving (FSD), the Optimus humanoid robot, and energy storage.</p>
+<p>This report provides a comprehensive analysis of Tesla across eight dimensions: company overview, financial data, technical analysis, market sentiment, competitive comparison, valuation &amp; health, key risk factors, and investment recommendations, offering investors a systematic reference.</p>
+<h2>1. Company Overview: Business Model, Market Cap, Moat &amp; Industry Position</h2>
+<h3>1.1 Business Model</h3>
+<p>Tesla has evolved from a pure EV manufacturer into an "AI-centric" comprehensive technology company, with business spanning four segments:</p>
+<ul>
+<li><strong>Automotive</strong> : Sales and leasing of Model S, Model 3, Model X, Model Y, and Cybertruck, representing the company's primary revenue source</li>
+<li><strong>Energy</strong> : Solar energy systems (Solar Roof) and battery storage products (Powerwall, Megapack), serving as the company's second growth curve</li>
+<li><strong>Services &amp; Other</strong>: Vehicle maintenance, Supercharger network services, software subscriptions (e.g., FSD), and auto insurance</li>
+<li><strong>AI &amp; Robotics</strong>: Represented by the FSD autonomous driving system and Optimus humanoid robot, these are the primary drivers of future growth</li>
+</ul>
+<p>Notably, Tesla is accelerating its strategic pivot, planning to discontinue Model S/X by the end of 2026 and redirect resources toward high-growth areas such as Cybertruck, Optimus robots, and the Robotaxi autonomous ride-hailing service. Musk stated during the Q1 2026 earnings call: "Tesla is likely to become the first company to build a humanoid AGI."</p>
+<p>__</p>
+<h4>Key Insight</h4>
+<p>Tesla is likely to become the first company to build a humanoid AGI.</p>
+<h3>1.2 Market Cap &amp; Ranking</h3>
+<p>As of May 26, 2026, Tesla's market capitalization stands at approximately $1.54 trillion, ranking first among global listed automakers, ahead of Toyota ($1.06T), Xiaomi ($878B), and BYD ($870B). However, compared to tech giants, Tesla's market cap is only 44.6% of NVIDIA's ($3.45T), reflecting market expectations for its AI transformation.</p>
+<p>__Data Insight: Market Cap Comparison</p>
+<p>Tesla's global automotive brand value ranking has declined for three consecutive years, dropping from a peak of $66.2 billion in early 2023 to $43 billion in early 2025, and further to $27.61 billion in 2026, with its ranking falling from 36th to 75th. This decline is primarily attributed to consumer concerns about insufficient brand innovation and high pricing, as well as the negative impact of Musk's increasing involvement in geopolitical issues on the company's reputation.</p>
+<p>__Data Insight: Brand Value Trend</p>
+<h3>1.3 Moat &amp; Industry Position</h3>
+<p>Tesla's core competitive moat is reflected in the following areas:</p>
+<ul>
+<li><strong>Technology Leadership</strong> : 4680 battery cell mass production yield rate exceeded 90%, with dry electrode process reducing production costs by 18%-30%</li>
+<li><strong>FSD Ecosystem</strong> : As of Q1 2026, global FSD paid subscribers reached 1.28 million, up 51% YoY</li>
+<li><strong>Charging Network Advantage</strong> : Global Supercharger count exceeds 80,000; NACS charging standard accounts for 48% of total DC fast charging share in North America</li>
+<li><strong>Software-Defined Vehicle</strong> : Continuous vehicle performance and feature optimization via OTA updates, enhancing user stickiness</li>
+<li><strong>Economies of Scale</strong> : Shanghai Gigafactory capacity continues to ramp up, with December 2025 monthly deliveries exceeding 97,100 units</li>
+</ul>
+<p>In terms of industry position, Tesla ranked second in global EV sales in 2025 with a 14% market share, but has lost its global BEV sales crown to BYD (BEV sales of 2.2567 million units). Model Y and Model 3 remain the world's two best-selling EVs, with cumulative global Model Y sales surpassing 4 million units.</p>
+<p>In the Chinese market, Tesla's share is facing increasing pressure. In 2025, Tesla's total deliveries in China were 625,698 units, down 4.78% YoY. During the same period, Xiaomi SU7 deliveries surpassed Model 3 for the first time, exceeding it by nearly 30%. However, Tesla's Shanghai factory deliveries maintained strong growth, with Q1 2026 Shanghai factory deliveries reaching 213,000 units, up 23.5% YoY, accounting for 60% of Tesla's global deliveries.</p>
+<p>__Data Insight: China Market Deliveries Comparison (2025)</p>
+<h2>2. Financial Data: Revenue Trends, Profit, Balance Sheet &amp; Cash Flow</h2>
+<h3>2.1 Revenue Performance</h3>
+<p>Tesla's full-year 2025 revenue was $94.827 billion, down 3% YoY, marking the company's first annual revenue decline in its history. This decline was primarily driven by reduced vehicle deliveries (1.636 million units, -8.6% YoY) and lower regulatory credit revenue.</p>
+<p>By business segment:</p>
+<ul>
+<li>Automotive revenue: $69.526 billion, down 10% YoY</li>
+<li>Energy revenue: $12.771 billion, up 26.6% YoY</li>
+<li>Services &amp; Other revenue: $12.53 billion, up 19% YoY</li>
+</ul>
+<p>In Q1 2026, Tesla's revenue reached $22.387 billion, up 16% YoY, the highest growth rate in nearly three years:</p>
+<ul>
+<li>Automotive revenue: $16.234 billion, up 16% YoY</li>
+<li>Energy revenue: $2.408 billion, down 12% YoY</li>
+<li>Services &amp; Other revenue: $3.745 billion, up 42% YoY</li>
+</ul>
+<p>__Data Insight: Revenue Growth by Segment (Q1 2026)</p>
+<h3>2.2 Profit &amp; Profitability</h3>
+<p>Tesla's full-year 2025 net income was $3.794 billion, down 46% YoY, primarily impacted by:</p>
+<ul>
+<li>Continued decline in automotive gross margin, with full-year automotive gross margin at 17.8%, marking the fourth consecutive year of decline</li>
+<li>Regulatory credit revenue decreased from $2.17 billion in 2024 to $1.45 billion in 2025</li>
+<li>Digital asset (e.g., Bitcoin) impairments of $69 million and $222 million in Q4 2025 and Q1 2026, respectively</li>
+<li>Significant increase in R&D; expenses, with Q1 2026 R&D; reaching $1.946 billion, up 37% YoY</li>
+</ul>
+<p>In Q1 2026, Tesla's net income was $477 million, up 17% YoY but down significantly QoQ. Notably, Tesla achieved $1.444 billion in free cash flow in Q1 2026, up 117% YoY, far exceeding market expectations of a $1.43 billion loss.</p>
+<p>__Data Insight: Free Cash Flow (FCF)</p>
+<h3>2.3 Balance Sheet &amp; Cash Flow</h3>
+<p>Tesla's balance sheet structure is relatively healthy. As of December 31, 2025:</p>
+<ul>
+<li>Total assets: $1,437.24 billion</li>
+<li>Current assets: $697.48 billion</li>
+<li>Cash and cash equivalents: $16.603 billion</li>
+<li>Total liabilities: $589.22 billion</li>
+<li>Current liabilities: $341.38 billion</li>
+<li>Debt-to-asset ratio: approximately 19%</li>
+<li>Current ratio: 2.02</li>
+</ul>
+<p>Cash flow metrics:</p>
+<ul>
+<li>FY2025 operating cash flow: $14.7 billion</li>
+<li>FY2025 free cash flow: $6.2 billion</li>
+<li>Q1 2026 operating cash flow: $3.94 billion, up 83% YoY</li>
+<li>Q1 2026 free cash flow: $1.444 billion, up 117% YoY</li>
+</ul>
+<p>However, Tesla management warned that 2026 capital expenditures will surge to over $25 billion (compared to only $9 billion in 2025), primarily allocated to AI computing infrastructure, new production lines (e.g., Cybercab, Optimus), and battery material production. This investment plan could lead to negative free cash flow in the remaining quarters of 2026 and potentially require additional financing in 2027.</p>
+<p>__Data Insight: CapEx Plan</p>
+<h2>3. Technical Analysis: Price Trends, Indicators &amp; Support/Resistance</h2>
+<h3>3.1 Price Trends</h3>
+<p>Tesla's stock price showed a consolidating pattern in May 2026. As of May 26, 2026, Tesla's stock was trading in the $420-$465 range, within a relatively stable trading zone. From the daily chart, after hitting a recent high of $445 on May 12, the stock pulled back slightly to $426 on May 22, indicating near-term profit-taking pressure.</p>
+<p>From weekly and monthly charts, Tesla's stock showed a strong upward trend from January to May 2026, gaining nearly 30%, but momentum has weakened since May. From an annual perspective, Tesla's stock has been trending downward since 2025, down approximately 22% from its 2025 high as of May 2026.</p>
+<h3>3.2 Technical Indicators</h3>
+<p>Tesla's key technical indicators present mixed signals:</p>
+<ul>
+<li><strong>MACD</strong> : Daily MACD histogram declining from highs, indicating weakening bullish momentum; weekly MACD remains in neutral territory</li>
+<li><strong>RSI</strong> : Daily RSI around 58, in neutral territory; weekly RSI around 55, also neutral</li>
+<li><strong>Moving Averages</strong> : Price above the 20-day MA ($409.26) and 50-day MA ($388.33), but below the 200-day MA ($410.03)</li>
+<li><strong>Volatility</strong> : ATR (Average True Range) at 18.202, indicating elevated near-term volatility</li>
+<li><strong>Support &amp; Resistance</strong>: Key support at $420 (Shanghai factory export growth and Optimus mass production expectations); key resistance at $450-$465 (Cybertruck recall risk and overvaluation concerns)</li>
+</ul>
+<p>__Technical Analysis</p>
+<p>RSI (14)</p>
+<p>58</p>
+<p>Neutral</p>
+<p>MACD</p>
+<p>Declining</p>
+<p>Weakening</p>
+<p>MA (20)</p>
+<p>409.26</p>
+<p>Support</p>
+<p>MA (200)</p>
+<p>410.03</p>
+<p>Resistance</p>
+<h3>3.3 Event-Driven Factors</h3>
+<p>Key events recently affecting Tesla's stock price:</p>
+<p>__Recent Event Drivers</p>
+<h4>__Positive</h4>
+<ul>
+<li>__Shanghai factory export surge: +1,050% YoY to South Korea</li>
+<li>__FSD paid users reached 1.28M in April, +51% YoY, all-time high</li>
+<li>__Shanghai factory export efficiency gains from "release upon declaration" policy</li>
+<li>__FSD (Supervised) available in China, unlocking the largest single market</li>
+</ul>
+<h4>__Negative</h4>
+<ul>
+<li>__Cybertruck recalled in the US (173 units) due to brake disc cracking</li>
+<li>__CapEx plan exceeding $25B raises cash flow concerns</li>
+<li>__US "Big and Beautiful Bill" threatens to eliminate EV tax credits</li>
+<li>__China EV penetration rate exceeds 60%, intensifying competition</li>
+</ul>
+<h2>4. Market Sentiment: Ratings, Public Opinion &amp; News Impact</h2>
+<h3>4.1 Analyst Ratings</h3>
+<p>Wall Street analysts show significant divergence on Tesla:</p>
+<ul>
+<li><strong>Buy Rating</strong> : Wedbush Securities raised its target price by 60.55% to $600, arguing Tesla is severely undervalued, particularly in the Optimus robot business</li>
+<li><strong>Hold Rating</strong> : Morgan Stanley raised its Tesla price target by 11% to $415; Goldman Sachs maintains "Hold" with target slightly adjusted to $375 (March data)</li>
+<li><strong>Sell Rating</strong> : Wells Fargo analysts cut their target price by 66.55% to $125, citing massive investment needs and potential negative future cash flow</li>
+<li><strong>Institutional Holdings</strong> : Institutional ownership at 44.88%, up 0.51% QoQ, but attitudes are markedly divided. For instance, Mairs and Power increased holdings while Fifth Third Bank and Avantis US Equity Fund reduced positions</li>
+</ul>
+<p>__Data Insight: Analyst Target Price Divergence</p>
+<h3>4.2 Sentiment Analysis</h3>
+<p>Recent sentiment characteristics around Tesla:</p>
+<p>__Sentiment Analysis</p>
+<h4>__Positive Sentiment</h4>
+<ul>
+<li>__Shanghai factory export efficiency gains driving APAC market growth</li>
+<li>__Optimus humanoid robot mass production plan accelerating</li>
+<li>__FSD (Supervised) approved in China — a key milestone for AI strategy</li>
+<li>__Owner brand loyalty improved from 90% to 92%</li>
+</ul>
+<h4>__Negative Sentiment</h4>
+<ul>
+<li>__Cybertruck recall raises market concerns about product quality</li>
+<li>__Model S/X discontinuation causing dissatisfaction among premium owners</li>
+<li>__Musk's frequent involvement in political issues distracting from business focus</li>
+<li>__High CapEx plan raising concerns about near-term profitability and cash flow</li>
+</ul>
+<h3>4.3 News Impact</h3>
+<p>Key news events recently affecting Tesla's stock price:</p>
+<ul>
+<li><strong>May 21</strong> : Tesla announced FSD (Supervised) availability in China; stock rose 3.9% to close at $445</li>
+<li><strong>May 13</strong> : Tesla officially discontinued Model S/X; market interpreted this as a positive signal of strategic focus; stock rose 1.9%</li>
+<li><strong>April 23</strong> : Tesla released Q1 2026 earnings, with revenue and net income beating expectations; stock rose 4% in after-hours trading but subsequently declined due to sharply increased CapEx guidance</li>
+<li><strong>February 14</strong> : Tesla's US website showed the one-time FSD purchase option ended on Feb 14, transitioning to monthly subscription only from Feb 15, signaling the strategic shift from hardware sales to software subscriptions</li>
+</ul>
+<h2>5. Competitive Comparison: Market Share &amp; Financial Metrics</h2>
+<h3>5.1 Global EV Market Share Comparison</h3>
+<p>Top three global EV sellers in 2025:</p>
+<table>
+<thead>
+<tr>
+<th>Company</th>
+<th>Global EV Sales</th>
+<th>Market Share</th>
+<th>YoY Growth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BYD</td>
+<td>4,602,400</td>
+<td>28.3%</td>
+<td>+7.73%</td>
+</tr>
+<tr>
+<td>Tesla</td>
+<td>1,636,000</td>
+<td>14.0%</td>
+<td>-8.6%</td>
+</tr>
+<tr>
+<td>Volkswagen Group</td>
+<td>983,100</td>
+<td>6.1%</td>
+<td>+32.0%</td>
+</tr>
+</tbody>
+</table>
+<p>Notably, Tesla's EV sales have declined for two consecutive years, while BYD has maintained steady growth. In the European market, Tesla faces intense competition from traditional automakers such as Volkswagen and BMW, with Nordic market sales plunging over 60% for six consecutive months. In China, Xiaomi SU7 and other emerging brand models have surpassed Tesla Model 3 in sales, demonstrating the rise of Chinese brands.</p>
+<p>__Data Insight: 2025 Global EV Market Share</p>
+<h3>5.2 Key Competitor Financial Metrics</h3>
+<p>Significant differences exist in the financial metrics of automakers directly competing with Tesla:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Tesla</th>
+<th>BYD</th>
+<th>BMW</th>
+<th>Mercedes-Benz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025 Revenue</td>
+<td>$94.827B</td>
+<td>¥803.965B</td>
+<td>€133.453B</td>
+<td>€132.214B</td>
+</tr>
+<tr>
+<td>2025 Net Income</td>
+<td>$3.794B</td>
+<td>¥32.619B</td>
+<td>€7.451B</td>
+<td>€5.331B</td>
+</tr>
+<tr>
+<td>2025 Gross Margin</td>
+<td>18.0%</td>
+<td>15.5%</td>
+<td>6.3%</td>
+<td>5.0%</td>
+</tr>
+<tr>
+<td>2025 R&D; Spend</td>
+<td>¥63.4B</td>
+<td>¥63.4B</td>
+<td>€9.680B</td>
+<td>€10.0B</td>
+</tr>
+<tr>
+<td>R&D; as % of Revenue</td>
+<td>7.9%</td>
+<td>7.9%</td>
+<td>7.3%</td>
+<td>7.8%</td>
+</tr>
+<tr>
+<td>2025 EV Sales</td>
+<td>1,636,000</td>
+<td>4,602,400</td>
+<td>442,100</td>
+<td>168,800</td>
+</tr>
+<tr>
+<td>2025 EV Sales Growth</td>
+<td>-8.6%</td>
+<td>+7.73%</td>
+<td>+3.6%</td>
+<td>-4.0%</td>
+</tr>
+</tbody>
+</table>
+<p>In terms of financial metrics, Tesla has larger revenue scale compared to traditional automakers but lower profit margins. Notably, Tesla's profitability is highly dependent on regulatory credit sales and digital asset gains; in 2025, these two items together accounted for 40% of its net income.</p>
+<p>Compared to peers, Tesla's R&D; spend ratio is at the industry-leading level, on par with BYD but below BMW and Mercedes-Benz. In EV sales, Tesla has lost the global #1 position to BYD but remains highly competitive in the premium EV market.</p>
+<h3>5.3 China Market Performance Comparison</h3>
+<p>In the Chinese market, Tesla's share is facing rapid erosion:</p>
+<table>
+<thead>
+<tr>
+<th>Company</th>
+<th>April 2026 China EV Sales</th>
+<th>Market Share</th>
+<th>YoY Growth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BYD</td>
+<td>182,025</td>
+<td>65.2%</td>
+<td>-7.2%</td>
+</tr>
+<tr>
+<td>Geely</td>
+<td>95,585</td>
+<td>65.2%</td>
+<td>+7.0%</td>
+</tr>
+<tr>
+<td>Xiaomi</td>
+<td>36,702</td>
+<td>4.3%</td>
+<td>+40.0%</td>
+</tr>
+<tr>
+<td>Tesla</td>
+<td>25,956</td>
+<td>3.1%</td>
+<td>-0.1%</td>
+</tr>
+</tbody>
+</table>
+<p>Tesla's China market share has fallen from 18% in 2024 to 14% in 2025, and further to 3.1% in April 2026. In contrast, BYD maintains over 65% share in China, while Xiaomi has grown from 3.1% in 2025 to 4.3% in April 2026, demonstrating strong growth momentum.</p>
+<p>__Data Insight: Tesla China Market Share Trend</p>
+<h2>6. Valuation &amp; Health: PE/PB/DCF and Financial Health Assessment</h2>
+<h3>6.1 Valuation Metrics</h3>
+<p>Tesla's current valuation metrics are at historically elevated levels:</p>
+<ul>
+<li><strong>P/E Ratio (TTM)</strong> : As of May 26, 2026, Tesla's P/E stands at 838.56x, significantly above the auto industry average (Ford at 10.19x, GM at 15x, BMW at 15x)</li>
+<li><strong>P/S Ratio</strong> : Tesla's P/S ratio is 13.36x, far exceeding other automakers</li>
+<li><strong>P/B Ratio</strong> : Tesla's P/B ratio is 18.85x, also at the high end of the industry</li>
+</ul>
+<p>__Data Insight: P/E Ratio (TTM) Comparison</p>
+<p>Analyzing Tesla's valuation by business segment, the high valuation primarily stems from the option value of future businesses:</p>
+<ul>
+<li><strong>Automotive</strong> : ~$600 billion, based on 18x P/E</li>
+<li><strong>Energy</strong> : ~$150 billion, based on 18x P/E</li>
+<li><strong>Software/Services</strong> : ~$800 billion, based on 25x P/S</li>
+<li><strong>Robotaxi</strong> : ~$850 billion, based on 25x P/S</li>
+<li><strong>Optimus Robot</strong> : ~$500 billion, based on 40x P/S</li>
+</ul>
+<p>__Data Insight: Option Value by Business Segment</p>
+<h3>6.2 DCF Valuation Analysis</h3>
+<p>DCF-based valuation analysis for Tesla reveals significant divergence in intrinsic value estimates:</p>
+<ul>
+<li><strong>Conservative Scenario</strong> (WACC 12%, terminal growth 2.5%): Intrinsic value ~$538 billion, well below current market cap</li>
+<li><strong>Base Scenario</strong> (WACC 11.2%, terminal growth 2.5%): Intrinsic value ~$1.34 trillion, close to current market cap</li>
+<li><strong>Bull Scenario</strong> (WACC 10.7%, terminal growth 3.0%): Intrinsic value ~$1.8 trillion, mainly dependent on rapid commercialization of second-curve businesses such as Robotaxi and Optimus</li>
+</ul>
+<p>__Data Insight: DCF Valuation Scenarios</p>
+<p>Notably, DCF valuation for Tesla is highly dependent on assumptions about second-curve businesses. If these businesses fail to commercialize as planned, Tesla's valuation could decline significantly. For instance, Morgan Stanley analysts warn that if Tesla's second-curve businesses (e.g., Robotaxi) progress slower than expected, Tesla's valuation could be halved to $800 billion by 2027.</p>
+<p>__</p>
+<h4>Risk Warning</h4>
+<p>If Tesla's second-curve businesses (e.g., Robotaxi) progress slower than expected, Tesla's valuation could be halved to $800 billion by 2027.</p>
+<h3>6.3 Financial Health Assessment</h3>
+<p>Tesla's financial health exhibits short-term robustness but long-term pressure:</p>
+<ul>
+<li><strong>Short-Term Metrics</strong> : Current ratio 2.02 (Q4 2025), quick ratio 1.61, cash and investments totaling $44.7 billion (Q1 2026) — strong near-term liquidity</li>
+<li><strong>Long-Term Metrics</strong> : 2026 CapEx plan exceeds $25 billion, up 177% from 2025, potentially leading to sustained negative free cash flow</li>
+<li><strong>Earnings Quality</strong> : Approximately 40% of 2025 net income depended on regulatory credit sales and digital asset gains; core automotive business profit was only $2.28 billion</li>
+<li><strong>Inventory Management</strong> : Q1 2026 inventory days rose to 27, up 8 days YoY; delivery-production gap reached 50,000 units, indicating worsening inventory buildup</li>
+<li><strong>Working Capital</strong> : Tesla's working capital of $31.125 billion is significantly positive, indicating current assets well above current liabilities and strong short-term liquidity</li>
+</ul>
+<p>__Financial Health Snapshot</p>
+<p>Current Ratio</p>
+<p>2.02</p>
+<p>Healthy</p>
+<p>Quick Ratio</p>
+<p>1.61</p>
+<p>Good</p>
+<p>Working Capital</p>
+<p>+$31.13B</p>
+<p>Strong</p>
+<p>Inventory Days</p>
+<p>27 Days</p>
+<p>Under Pressure</p>
+<h2>7. Key Risks: Industry Competition, Policy, Geopolitics</h2>
+<h3>7.1 Industry Competition Risk</h3>
+<p>The competitive risks Tesla faces are primarily reflected in the following areas:</p>
+<ul>
+<li><strong>Rise of Chinese Brands</strong> : BYD, Xiaomi, and other Chinese brands directly compete with Tesla in technology innovation and cost control. For example, Xiaomi SU7 has surpassed Model 3 as one of China's best-selling EVs, with more competitive pricing</li>
+<li><strong>Legacy Automaker Transformation</strong> : BMW, Mercedes-Benz, Volkswagen, and other traditional automakers are accelerating their electrification transition, launching increasingly competitive EV products</li>
+<li><strong>Slowing Product Iteration</strong> : Model 3/Y have been on the market for years without fundamental exterior or interior redesigns, relying only on minor tweaks to maintain freshness, leading to declining consumer appeal</li>
+<li><strong>Inventory Buildup Risk</strong> : Q1 2026 Tesla produced 408,386 units but delivered only 358,023, resulting in an inventory buildup exceeding 50,000 units — a record high</li>
+</ul>
+<h3>7.2 Policy Risk</h3>
+<p>Policy risk represents the largest systemic risk for Tesla:</p>
+<ul>
+<li><strong>US Localization Policy</strong> : The "Advanced Manufacturing Leadership Strategy" bill requires 70% EV battery localization by 2025 or loss of federal subsidies. Tesla's Nevada factory battery localization rate is only 60%, potentially costing over $12 billion annually in lost subsidies</li>
+<li><strong>Tax Credit Policy</strong> : The "Big and Beautiful Bill" threatens to eliminate EV tax credits; if implemented before the end of September, Tesla's North American sales could plummet by 40%</li>
+<li><strong>EU Carbon Tariffs</strong> : EU countervailing duties on Chinese-made BEVs combined with the 10% base tariff could result in a maximum composite rate of 45.3%. Tesla must accept a "Minimum Import Price" (MIP) commitment, potentially weakening price competitiveness</li>
+<li><strong>FSD Regulatory Constraints</strong> : NHTSA is introducing stricter regulatory requirements for autonomous driving systems, limiting Tesla's ability to market FSD as a near-complete solution, potentially impacting commercialization progress</li>
+</ul>
+<p>__</p>
+<h4>Critical Policy Risk</h4>
+<p>If the "Big and Beautiful Bill" is implemented before the end of September, Tesla's North American sales could plummet by 40%.</p>
+<h3>7.3 Geopolitical Risk</h3>
+<p>Geopolitical risks affect Tesla primarily through supply chain and market access channels:</p>
+<ul>
+<li><strong>Supply Chain Decoupling Pressure</strong> : Escalating US-China trade tensions; Tesla relies on Chinese supply chains for 50% of its components, facing rising tariff costs and supply chain restructuring pressure</li>
+<li><strong>Technology Restriction Risk</strong> : China restricts LFP technology exports; Tesla's Texas factory Malaysian chip yield rate is only 65%; Nevada factory environmental litigation adds $120 million in costs</li>
+<li><strong>European Market Access</strong> : EU implements carbon tariffs and countervailing duties; Tesla must raise Shanghai factory prices to meet MIP requirements, potentially weakening European market competitiveness</li>
+<li><strong>Musk Political Risk</strong> : Musk's frequent involvement in political issues may invite regulatory scrutiny and distract from business focus</li>
+</ul>
+<h2>8. Conclusion: Short-Term &amp; Long-Term Investment Recommendations</h2>
+<h3>8.1 Short-Term Outlook (1-3 Months)</h3>
+<p><strong>Tesla's stock price may face consolidation in the near term</strong> , influenced by the following factors:</p>
+<ol>
+<li><strong>Positive Catalysts</strong> : <ul>
+<li>Shanghai factory export efficiency gains driving APAC market growth</li>
+<li>FSD (Supervised) rollout progress in China (expected Q3 2026)</li>
+<li>Optimus robot mass production plan advancement (production line construction expected to begin Q2 2026)</li>
+</ul>
+</li>
+<li><strong>Negative Catalysts</strong> : <ul>
+<li>Negative impact of Cybertruck recall on brand trust</li>
+<li>Potential elimination of EV tax credits under the US "Big and Beautiful Bill"</li>
+<li>Market concerns about cash flow due to high CapEx plans</li>
+</ul>
+</li>
+<li><strong>Technical Analysis</strong> : <ul>
+<li>Stock trading in the $420-$465 range, with support at $420 and resistance at $450-$465</li>
+<li>Technical indicators present mixed signals: MACD bullish momentum weakening, RSI in neutral territory</li>
+<li>Short-term moving averages provide support, but long-term moving averages diverge in direction</li>
+</ul>
+</li>
+</ol>
+<p><strong>Based on the above analysis, short-term investment recommendations are as follows:</strong></p>
+<ol>
+<li><strong>Cautious Observation</strong> : Tesla's current valuation is at historically elevated levels, with a P/E (TTM) of 838.56x, significantly above the industry average. Investors are advised to remain cautious when the stock approaches resistance levels ($450-$465) and wait for pullback opportunities.</li>
+<li><strong>Monitor FSD Progress in China</strong> : On May 21, Tesla announced FSD (Supervised) availability in China, but it is currently limited to a staged rollout; full deployment still awaits regulatory approval. FSD progress in China will be a key near-term catalyst for the stock.</li>
+<li><strong>Watch for Policy Risk</strong> : The US "Big and Beautiful Bill" could eliminate EV tax credits. If implemented before the end of September, North American sales could plummet by 40%. Investors are advised to closely monitor related legislative developments as near-term risk indicators.</li>
+<li><strong>Monitor Inventory Management</strong> : Q1 2026 inventory days rose to 27, up 8 days YoY, with worsening inventory buildup risk. If inventory is not effectively absorbed in subsequent quarters, it may trigger a stock price correction.</li>
+</ol>
+<h3>8.2 Long-Term Outlook (6-12 Months)</h3>
+<p><strong>Tesla's long-term investment value depends on the commercialization of its second-curve businesses</strong>. Key analysis:</p>
+<ol>
+<li><strong>Strategic Transformation Opportunity</strong> : <ul>
+<li>Tesla is transitioning from a traditional automaker to a "Physical AI" technology company, with strategic focus shifting to FSD, Robotaxi, and Optimus robots</li>
+<li>If these businesses can successfully commercialize and achieve scale, Tesla could realize significant valuation uplift</li>
+<li>Key metrics to watch: FSD paid user growth rate, Robotaxi commercialization progress, Optimus mass production timeline</li>
+</ul>
+</li>
+<li><strong>Risk Factors</strong> : <ul>
+<li><strong>Policy Risk</strong> : Changes in US localization and tax credit policies could significantly impact Tesla's North American business</li>
+<li><strong>Geopolitical Risk</strong> : Supply chain decoupling pressure and technology restriction risks could increase production costs and operational complexity</li>
+<li><strong>Competitive Risk</strong> : Accelerated electrification by Chinese brands and traditional automakers could further erode Tesla's market share</li>
+<li><strong>Financial Risk</strong> : High CapEx plans could lead to sustained negative free cash flow, increasing financial pressure</li>
+</ul>
+</li>
+<li><strong>Valuation Reasonableness</strong> : <ul>
+<li>Tesla's current market cap of $1.54 trillion far exceeds its traditional automotive business valuation (~$600 billion)</li>
+<li>The market's high valuation of Tesla is primarily based on the option value of its second-curve businesses</li>
+<li>DCF valuation shows significant divergence in Tesla's intrinsic value, ranging from $538 billion (conservative) to $1.8 trillion (bull case)</li>
+</ul>
+</li>
+</ol>
+<p><strong>Based on the above analysis, long-term investment recommendations are as follows:</strong></p>
+<ol>
+<li><strong>Phased Position Building</strong> : Tesla's long-term investment value is high, but so are the risks. Investors are advised to adopt a phased position-building strategy, buying in tranches when the stock pulls back to the $400-$420 range to reduce single-point entry risk.</li>
+<li><strong>Focus on Second-Curve Businesses</strong> : Long-term investors should closely monitor the commercialization progress of Tesla's second-curve businesses, including FSD user growth, Robotaxi, and Optimus mass production timelines. Progress in these areas will be decisive for Tesla's long-term valuation.</li>
+<li><strong>Watch Financial Risk</strong> : Tesla's 2026 CapEx plan exceeds $25 billion, potentially leading to sustained negative free cash flow. Investors are advised to closely monitor cash flow metrics in quarterly earnings reports as important risk indicators.</li>
+<li><strong>Diversify Investments</strong> : Given the policy, geopolitical, and competitive risks Tesla faces, investors are advised not to concentrate excessive capital in a single stock and should diversify to spread risk.</li>
+</ol>
+<h2>Appendix: Key Data Quick Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Period / Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Market Cap</td>
+<td>$1.54 Trillion</td>
+<td>May 26, 2026</td>
+</tr>
+<tr>
+<td>FY2025 Revenue</td>
+<td>$94.827 Billion</td>
+<td>-3% YoY</td>
+</tr>
+<tr>
+<td>Q1 2026 Revenue</td>
+<td>$22.387 Billion</td>
+<td>+16% YoY</td>
+</tr>
+<tr>
+<td>FY2025 Net Income</td>
+<td>$3.794 Billion</td>
+<td>-46% YoY</td>
+</tr>
+<tr>
+<td>Q1 2026 Net Income</td>
+<td>$477 Million</td>
+<td>+17% YoY</td>
+</tr>
+<tr>
+<td>Q1 2026 Free Cash Flow</td>
+<td>$1.444 Billion</td>
+<td>+117% YoY</td>
+</tr>
+<tr>
+<td>FY2025 Global EV Sales</td>
+<td>1,636,000 Units</td>
+<td>14% Market Share</td>
+</tr>
+<tr>
+<td>FSD Paid Subscribers</td>
+<td>1.28 Million</td>
+<td>Q1 2026, +51% YoY</td>
+</tr>
+<tr>
+<td>Supercharger Count</td>
+<td>&gt;80,000</td>
+<td>As of Q1 2026</td>
+</tr>
+<tr>
+<td>P/E Ratio (TTM)</td>
+<td>838.56x</td>
+<td>May 26, 2026</td>
+</tr>
+<tr>
+<td>P/S Ratio</td>
+<td>13.36x</td>
+<td>May 26, 2026</td>
+</tr>
+<tr>
+<td>P/B Ratio</td>
+<td>18.85x</td>
+<td>May 26, 2026</td>
+</tr>
+<tr>
+<td>4680 Cell Yield Rate</td>
+<td>90%</td>
+<td>Mass Production Milestone</td>
+</tr>
+<tr>
+<td>Shanghai Factory Monthly Deliveries</td>
+<td>97,100 Units</td>
+<td>December 2025</td>
+</tr>
+<tr>
+<td>Shanghai Factory Q1 2026 Deliveries</td>
+<td>213,000 Units</td>
+<td>+23.5% YoY</td>
+</tr>
+<tr>
+<td>2026 CapEx Plan</td>
+<td>&gt;$25 Billion</td>
+<td>Primarily AI Computing &amp; New Production Lines</td>
+</tr>
+</tbody>
+</table>
+<h2>References</h2>
+<ol>
+<li><a href="https://www.toutiao.com/a7644021612677530146/">Is Tesla the Leading Brand in Electric Vehicles?</a> — Toutiao</li>
+<li><a href="http://www.dingxinwen.com/news/145FD4E247BF4573">2026 Top 100 Auto Brands: 24 Chinese Brands on the List</a> — Dingxin News</li>
+<li><a href="https://baike.baidu.com/item/%E7%89%B9%E6%96%AF%E6%8B%892025%E5%B9%B4%E7%AC%AC%E5%9B%9B%E5%AD%A3%E5%BA%A6%E5%8F%8A%E5%85%A8%E5%B9%B4%E8%B4%A2%E6%8A%A5/67322775">Tesla Q4 2025 and Full-Year Earnings Report</a> — Baidu Baike</li>
+<li><a href="https://finance.eastmoney.com/a/202601283632689093.html">Tesla Brand Value Falls for Third Consecutive Year; Musk's Political Involvement Weighs on Reputation</a> — East Money</li>
+<li><a href="https://i.ifeng.com/c/8qJ4QgUqHNd">Tesla's First Annual Revenue Decline: Streamlining Auto Business, Pushing Autonomous Driving, Humanoid Robots, xAI</a> — Ifeng</li>
+<li><a href="https://news.qq.com/rain/a/20260105A06XHY00">Global Automaker Market Cap Rankings: Tesla First, Xiaomi Third, BYD Fourth</a> — QQ News</li>
+<li><a href="https://www.tfcaijing.com/index.php/article/page/79323474716f6d5541357765474d57374d716b6173413d3d">First Annual Revenue Decline! Automotive Down 10%: Does Tesla's Trillion-Dollar Valuation Depend on Musk or Robots?</a> — TF Finance</li>
+<li><a href="https://m.jrj.com.cn/madapter/finance/2026/01/11171155011104.shtml">Global Automaker Market Cap Reshuffled: Tesla Leads Toyota, Xiaomi Surpasses BYD</a> — JRJ</li>
+<li><a href="https://www.mrjjxw.com/articles/2026-01-29/4240401.html">First Annual Revenue Decline, Discontinuing Two Models! Tesla Releases Latest Earnings</a> — Daily Economic News</li>
+<li><a href="https://i.ifeng.com/c/8oyPb157lhX">Q3 2025 Global Best-Selling EVs: Tesla Model 3/Y, Geely Star</a> — Ifeng</li>
+<li><a href="https://quote.eastmoney.com/uk/105.TSLA.html">Tesla (TSLA) Latest Price Quotes and Charts</a> — East Money</li>
+<li><a href="https://www.ccidnet.com/p1/news/20260302/1096880.html">Tesla (TSLA) FY2025 Comprehensive Financial Analysis: First Annual Revenue Decline in History</a> — CCIDnet</li>
+<li><a href="https://www.futunn.com/stock/TSLA-US/earnings?chain_id=R4zpmhChsb3T18.1koevtu">Tesla Earnings Dates, Financial Reports and Conference Calls</a> — Futu</li>
+<li><a href="https://www.futunn.com/stock/TSLA-US?code=002323&amp;type=distribute">Tesla (TSLA) Stock Price, News, Quotes and Charts</a> — Futu</li>
+<li><a href="https://stock.stockstar.com/IG2026042300054632.shtml">Tesla, Inc. (TSLA) Q1 2026 Earnings Summary</a> — StockStar</li>
+<li><a href="https://marketsgonewild.com/stock-news/2026/04/23/teslas-q1-2026-financial-results-solid-numbers-bold-ambitions-implications-for-savings-borrowing-and-the-world/">Tesla's Q1 2026 Financial Results: Solid Numbers, Bold Ambitions</a> — Markets Gone Wild</li>
+<li><a href="https://t.10jqka.com.cn/pid_617157249.shtml">Tesla Q1 2026 Profit Beats Expectations, Free Cash Flow Turns Positive</a> — 10jqka</li>
+<li><a href="https://www.eeo.com.cn/2026/0427/853444.shtml">Tesla Releases Q1 Earnings, Discloses Autonomous Driving and Robot Business Progress</a> — Economic Observer</li>
+<li><a href="https://cn.investing.com/news/stock-market-news/article-3324963">Tesla Q1 Profit Beats, Free Cash Flow Unexpectedly Positive, Stock Up ~4% After Hours</a> — Investing.com</li>
+<li><a href="https://markets.financialcontent.com/wral/article/predictstreet-2025-12-22-tesla-tsla-2025-deep-dive-the-shift-from-evs-to-physical-ai-and-the-139-billion-pay-package-reinstatement">Tesla (TSLA) 2025 Deep Dive: The Shift from EVs to Physical AI</a> — PredictStreet</li>
+<li><a href="https://www.bitauto.com/article/1003107151835/">Tesla 2025 Earnings: APAC Deliveries Hit Record High, Offsetting Industry Headwinds</a> — BitAuto</li>
+<li><a href="https://www.tradingkey.com/zh-hans/markets/stocks/nasdaq-tsla/stock-analysis">Tesla (TSLA) Stock Rating &amp; Comprehensive Analysis</a> — TradingKey</li>
+<li><a href="https://www.toutiao.com/w/1865026826461321/">Tesla Today | May 13 Update: Pullback from Highs, Closed Lower</a> — Toutiao</li>
+<li><a href="https://www.tradingkey.com/zh-hans/markets/stocks/nasdaq-tsla">Tesla Real-Time Quotes — TSLA Stock Live Price</a> — TradingKey</li>
+<li><a href="https://www.toutiao.com/w/1864956656697417/">Tesla Today | May 12 Update: Surge on Heavy Volume, New High</a> — Toutiao</li>
+<li><a href="https://intellectia.ai/stock/TSLA/technical">TSLA Technical Analysis &amp; Stock Price Forecast</a> — Intellectia</li>
+<li><a href="http://zh.tradingeconomics.com/tsla:us">Tesla | TSLA Stock Price Live Quotes Historical Charts</a> — Trading Economics</li>
+<li><a href="https://www.sohu.com/a/1021869588_121118712">Tesla Model S and Model X Officially Discontinued, Musk Says "An Era Has Ended"</a> — Sohu Auto</li>
+<li><a href="https://tradersunion.com/news/financial-news/show/1489885-tesla-trades-flat-today-at/">Tesla Stock Consolidates as Investors Adjust Positions</a> — TradersUnion</li>
+<li><a href="https://xueqiu.com/1620763583/346329939">Tesla Q2 2025 Working Capital Analysis</a> — Xueqiu</li>
+<li><a href="https://finance.sina.com.cn/stock/usstock/c/2026-01-23/doc-inhihwxr6421016.shtml">Tesla: Clear Skies in 2026, but 2027 Storm Could Halve Valuation</a> — Sina Finance</li>
+<li><a href="https://www.stock-analysis-on.net/NASDAQ/Company/Tesla-Inc/Ratios/Liquidity">Tesla Inc. (NASDAQ:TSLA) | Analysis of Liquidity Ratios</a> — Stock Analysis</li>
+<li><a href="http://www.shifd.net/huiyi/detail/10357.html">PEGR: The Valuation Revolution That Ends the DCF Perpetuity Illusion</a> — Shanghai Institute for Finance &amp; Development</li>
+<li><a href="https://valueinvesting.io/TSLA/valuation/wacc">Tesla WACC, Cost of Equity, Cost of Debt and CAPM</a> — ValueInvesting</li>
+<li><a href="https://www.gurufocus.com/term/intrinsic-value-dcf-earnings-based/FRA:TL00">Tesla (FRA:TL00) Intrinsic Value: DCF (Earnings Based)</a> — GuruFocus</li>
+<li><a href="https://caibaobang.cn/sanpk/mh-zbs?code=TSLA&amp;tag=pe">Tesla P/E Ratio Historical Trend Yearly Data Comparison</a> — CaiBaoBang</li>
+<li><a href="https://www.fortunechina.com/shangye/c/2026-02/02/content_471876.htm">After Excluding Non-Recurring Profits, Tesla's Stock Valuation Hits All-Time High</a> — Fortune China</li>
+<li><a href="https://m.jrj.com.cn/madapter/stock/2026/04/23131856858252.shtml">Earnings Growth Can't Hide Concerns! Tesla Raises CapEx, Bets Big on Robots and Autonomous Driving</a> — JRJ</li>
+<li><a href="https://www.yoojia.com/article/9344746034415745900.html?sa=pc_ss_article">Who Is Really Paying for Tesla's Trillion-Dollar Valuation?</a> — YouJia</li>
+<li><a href="https://www.zaker.cn/news/article_new.php?pk=69e03a118e9f096c7124c1ae">How Much Is Tesla Really Worth?</a> — ZAKER News</li>
+<li><a href="https://stock.jrj.com.cn/2026/01/28132955374468.shtml">Tesla Brand Value Shrinks 36% in 2025, Third Consecutive Year of Decline; BYD Grows 23% Against Trend</a> — JRJ</li>
+<li><a href="https://stock.10jqka.com.cn/20260423/c676204952.shtml">Tesla Q1 Profit Beats, Musk Announces "Significant Investment Increase," Targets Annual Production of One Million Optimus Units</a> — 10jqka</li>
+<li><a href="https://3g.china.com/act/news/10000169/20260214/49252607.html">How Long Can Tesla Keep Its "Magnificent Seven" Label? Overvalued vs. Fundamental Divergence</a> — China.com</li>
+<li><a href="https://www.nbd.com.cn/articles/2026-04-23/4353740.html">Tesla Q1 Earnings Beat, Revenue +16% YoY, Highest in Nearly Three Years</a> — National Business Daily</li>
+<li><a href="https://www.eeo.com.cn/2026/0506/865369.shtml">Tesla Q2 2026 Multi-Business Advancement, CapEx Sharply Raised to Over $25 Billion</a> — Economic Observer</li>
+<li><a href="http://t.cj.sina.com.cn/articles/view/1163218074/45554c9a00102mtd8">Tesla Earnings Decoded: AI Monetization and the Cash Flow Moat</a> — Sina Finance</li>
+<li><a href="https://www.163.com/dy/article/KR6E3NER0519QIKK.html">$25 Billion: Tesla Raises This Year's CapEx Forecast</a> — NetEase</li>
+<li><a href="https://guba.sina.com.cn/?bid=21046&amp;s=thread&amp;tid=64947">Tesla: After Breaking the Trillion Mark, Market Cap Aiming for $3 Trillion — What's the Future Value?</a> — Sina Stock Forum</li>
+<li><a href="https://zhuanlan.zhihu.com/p/1957781884114306981">Tesla October Market: Jo Bhakdi &amp; Herbert Ong In-Depth Analysis</a> — Zhihu</li>
+<li><a href="https://www.odaily.news/zh-CN/post/5210458">Tesla Q1 2026 Earnings Released, Long-Term Bets Further Raised</a> — Odaily</li>
+<li><a href="https://www.fxbaogao.com/detail/5390014">[Guotai Haitong Securities] Tesla FY2026 Q1 Earnings Review: Auto Business Profit Decline Halted and Recovering</a> — FX Report</li>
+<li><a href="https://www.hstong.com/news/detail/10260330175732140">Tesla (TSLA) 2026 Deep Research: 5x Pricing Divergence — Sunset Automaker or AI Giant?</a> — Huashengtong</li>
+<li><a href="https://pure-oai.bham.ac.uk/ws/files/18236659/Hardman_Shiu_SteinbergerWilckens_Changing_f">Changing the Fate of Fuel Cell Vehicles: Can Lessons Be Learnt from Tesla Motors?</a> — University of Birmingham</li>
+<li><a href="https://www.ainvest.com/news/regulatory-headwinds-tesla-trillion-dollar-valuation-reassessment-policy-risks-2510/">Regulatory Headwinds and Tesla's Trillion-Dollar Valuation: A Reassessment of Policy Risks</a> — AInvest</li>
+<li><a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;CIK=TSLA">Tesla (TSLA) 10-K Annual Report (2026-01-29)</a> — SEC</li>
+<li><a href="https://www.sohu.com/a/1021869588_121118712">Tesla Drops Nearly 5% in Pre-Market: Policy Risk and Weak Demand Batter Investor Confidence</a> — Sohu</li>
+<li><a href="https://www.toutiao.com/">50% of Components Depend on China! Tesla to Cut Off Chinese Suppliers Within Two Years</a> — Toutiao</li>
+<li><a href="https://www.163.com/">Why Tesla Sales Were Overtaken: Exploring the EV Market Transformation</a> — NetEase</li>
+<li><a href="https://stock.stockstar.com/">Tesla's Carbon Credit Revenue May Face Depletion</a> — StockStar</li>
+<li><a href="https://www.bitauto.com/">EU Carbon Tariffs Fully Implemented in 2026: New Export Hurdles for Chinese New Energy</a> — BitAuto</li>
+<li><a href="https://www.toutiao.com/">Up to 45.3% Tariff Plus New EU Regulations: What Compliance Pressures Does China's Auto Export Face?</a> — Toutiao</li>
+<li><a href="https://www.bitauto.com/">Tesla Accelerates "De-Chinaization" Battery Supply Chain Strategy</a> — BitAuto</li>
+<li><a href="https://www.bitauto.com/">The "Big and Beautiful Bill": Tearing Apart the Last Hope of America's Lithium Battery Industry</a> — BitAuto</li>
+<li><a href="https://news.caijingmobile.com/article/detail/562480">Price for Tax: A New Starting Point in China-EU EV Negotiations</a> — Caijing</li>
+<li><a href="https://m.caijing.com.cn/article/202601/392072">Price for Tax: A New Starting Point in China-EU EV Negotiations</a> — Caijing Web</li>
+<li><a href="https://economictimes.indiatimes.com/news/international/business/eu-slashes-planned-tariff-on-teslas-china-made-evs-to-9/printarticle/112652397.cms">EU Slashes Planned Tariff on Tesla's China-Made EVs to 9%</a> — The Economic Times</li>
+<li><a href="https://www.pv-magazine.com/">Tesla Deploys 9.6 GWh of Batteries in Q2, 10 GWh Nevada Cell Factory 'Nears Completion'</a> — pv magazine USA</li>
+<li><a href="https://www.toutiao.com/">Shanghai South Port "Release Upon Declaration" Completes First Order, Boosting Tesla, BYD and Other NEV Scale Exports</a> — Jiemian News</li>
+</ol></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai-analyst/catl-2026-en.html">CATL Comprehensive Investment Analysis (2026)</a></li><li><a href="/en/ai-analyst/baba-2026-en.html">Alibaba Comprehensive Investment Analysis (2026)</a></li><li><a href="/en/ai-analyst/micron-2026-en.html">Micron Technology Comprehensive Investment Analysis (2026)</a></li></ul></div>
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3258394111169733"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-</div>
-
-<button class="btt-btn" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
-<script>
-(function(){
-    var btn = document.getElementById('bttBtn');
-    if(!btn) return;
-    window.addEventListener('scroll', function(){
-        btn.classList.toggle('show', window.scrollY > 400);
-    });
-})();
-</script>
-<div class="disclaimer">
-    <strong>Disclaimer:</strong> This analysis is for informational and educational purposes only and does not constitute investment advice. It is based on publicly available information, historical data, and model analysis as of the report date, which may involve certain lag and limitations. Past performance does not guarantee future results. Investors should make their own independent assessment and consider their personal risk tolerance before making any investment decisions.
-</div>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Tesla%20Comprehensive%20Investment%20Analysis%20%282026%29&url=https%3A//aidev.fit/en/ai-analyst/tesla-2026.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai-analyst/tesla-2026.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Tesla%20Comprehensive%20Investment%20Analysis%20%282026%29&url=https%3A//aidev.fit/en/ai-analyst/tesla-2026.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Tesla%20Comprehensive%20Investment%20Analysis%20%282026%29&u=https%3A//aidev.fit/en/ai-analyst/tesla-2026.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Tesla%20Comprehensive%20Investment%20Analysis%20%282026%29&body=https%3A//aidev.fit/en/ai-analyst/tesla-2026.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai-analyst/tesla-2026.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai-analyst/micron-2026-en.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Micron Technology Comprehensive Investment Analysis (2026)</span></a><span class="prev-next-btn next-link disabled"><span class="pn-label">Next →</span><span class="pn-title">Latest article</span></span></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai-analyst/google-2026-en.html" class="related-card"><span class="rc-title">Alphabet (Google) Comprehensive Investment Analysis (2026)</span><span class="rc-desc">In-depth analysis of Alphabet/Google (GOOGL): ~$4.6T market cap, Gemini AI ecosystem + Cloud + Search. FY2025 revenue $3</span></a><a href="/en/ai-analyst/oracle-2026-en.html" class="related-card"><span class="rc-title">Oracle Comprehensive Investment Analysis (2026)</span><span class="rc-desc">In-depth analysis of Oracle (ORCL): world's largest enterprise database and cloud company, ~$520B market cap. OCI infras</span></a><a href="/en/ai-analyst/apple-2026-en.html" class="related-card"><span class="rc-title">Apple Comprehensive Investment Analysis (2026)</span><span class="rc-desc">In-depth analysis of Apple (AAPL): hardware + services dual engine, ~$4.54T market cap. Q2 FY2026 revenue $111.2B (+17%)</span></a><a href="/en/ai-analyst/netflix-2026-en.html" class="related-card"><span class="rc-title">Netflix Comprehensive Investment Analysis (2026)</span><span class="rc-desc">In-depth analysis of Netflix (NFLX): world's largest streaming platform, ~$380B market cap, 330M+ paid subscribers. Ad-t</span></a><a href="/en/ai-analyst/asml-2026-en.html" class="related-card"><span class="rc-title">ASML Comprehensive Investment Analysis (2026)</span><span class="rc-desc">In-depth analysis of ASML Holding: world's only EUV lithography supplier, ~$380B market cap. FY2025 revenue $32B, High-N</span></a><a href="/en/ai-analyst/amd-2026-en.html" class="related-card"><span class="rc-title">AMD Comprehensive Investment Analysis (2026)</span><span class="rc-desc">In-depth analysis of AMD: NVIDIA's primary AI GPU competitor, ~$320B market cap. FY2025 revenue $28B, Data Center 57%. M</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#executive-summary">__Executive Summary</a></li><li><a href="#1-company-overview-business-model-market-cap-moat-amp-industry-position">1. Company Overview: Business Model, Market Cap, Moat &amp; Industry Position</a></li><li><a href="#11-business-model">1.1 Business Model</a></li><li><a href="#12-market-cap-amp-ranking">1.2 Market Cap &amp; Ranking</a></li><li><a href="#13-moat-amp-industry-position">1.3 Moat &amp; Industry Position</a></li><li><a href="#2-financial-data-revenue-trends-profit-balance-sheet-amp-cash-flow">2. Financial Data: Revenue Trends, Profit, Balance Sheet &amp; Cash Flow</a></li><li><a href="#21-revenue-performance">2.1 Revenue Performance</a></li><li><a href="#22-profit-amp-profitability">2.2 Profit &amp; Profitability</a></li><li><a href="#23-balance-sheet-amp-cash-flow">2.3 Balance Sheet &amp; Cash Flow</a></li><li><a href="#3-technical-analysis-price-trends-indicators-amp-supportresistance">3. Technical Analysis: Price Trends, Indicators &amp; Support/Resistance</a></li><li><a href="#31-price-trends">3.1 Price Trends</a></li><li><a href="#32-technical-indicators">3.2 Technical Indicators</a></li><li><a href="#33-event-driven-factors">3.3 Event-Driven Factors</a></li><li><a href="#4-market-sentiment-ratings-public-opinion-amp-news-impact">4. Market Sentiment: Ratings, Public Opinion &amp; News Impact</a></li><li><a href="#41-analyst-ratings">4.1 Analyst Ratings</a></li><li><a href="#42-sentiment-analysis">4.2 Sentiment Analysis</a></li><li><a href="#43-news-impact">4.3 News Impact</a></li><li><a href="#5-competitive-comparison-market-share-amp-financial-metrics">5. Competitive Comparison: Market Share &amp; Financial Metrics</a></li><li><a href="#51-global-ev-market-share-comparison">5.1 Global EV Market Share Comparison</a></li><li><a href="#52-key-competitor-financial-metrics">5.2 Key Competitor Financial Metrics</a></li><li><a href="#53-china-market-performance-comparison">5.3 China Market Performance Comparison</a></li><li><a href="#6-valuation-amp-health-pepbdcf-and-financial-health-assessment">6. Valuation &amp; Health: PE/PB/DCF and Financial Health Assessment</a></li><li><a href="#61-valuation-metrics">6.1 Valuation Metrics</a></li><li><a href="#62-dcf-valuation-analysis">6.2 DCF Valuation Analysis</a></li><li><a href="#63-financial-health-assessment">6.3 Financial Health Assessment</a></li><li><a href="#7-key-risks-industry-competition-policy-geopolitics">7. Key Risks: Industry Competition, Policy, Geopolitics</a></li><li><a href="#71-industry-competition-risk">7.1 Industry Competition Risk</a></li><li><a href="#72-policy-risk">7.2 Policy Risk</a></li><li><a href="#73-geopolitical-risk">7.3 Geopolitical Risk</a></li><li><a href="#8-conclusion-short-term-amp-long-term-investment-recommendations">8. Conclusion: Short-Term &amp; Long-Term Investment Recommendations</a></li><li><a href="#81-short-term-outlook-1-3-months">8.1 Short-Term Outlook (1-3 Months)</a></li><li><a href="#82-long-term-outlook-6-12-months">8.2 Long-Term Outlook (6-12 Months)</a></li><li><a href="#appendix-key-data-quick-reference">Appendix: Key Data Quick Reference</a></li><li><a href="#references">References</a></li></ol>
+    </nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
+<div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

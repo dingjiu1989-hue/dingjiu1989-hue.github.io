@@ -10,8 +10,6 @@ url: https://aidev.fit/en/ai-analyst/tsmc-2026-en.html
 
 TSMC __May 27, 2026 __28-Page Deep Dive
 
-# Taiwan Semiconductor (TSM.N / 2330.TW)
-
 Equity Research Report — 2026 Outlook
 
 The World's Pure-Play Foundry Leader · Sole Manufacturer of Advanced AI Chips
@@ -42,13 +40,13 @@ TSMC is executing a strategic geographic diversification: **Arizona Fab 1–3** 
 
 __TSMC Process Technology Roadmap
 
-Node| Volume Production| Key Customers| Status  
+Node | Volume Production | Key Customers | Status  
 ---|---|---|---  
-N3 (3nm)| H2 2023| Apple, NVIDIA, AMD| High volume, fully loaded  
-N3E| 2024| Apple, Qualcomm, MediaTek| Yield mature  
-N3P| H2 2026| NVIDIA, AMD, Broadcom| Ramping to volume  
-N2 (2nm)| H2 2025| Apple, NVIDIA| Trial production, yield ramp  
-N2P| 2027| High-end HPC / AI| Under development  
+N3 (3nm) | H2 2023 | Apple, NVIDIA, AMD | High volume, fully loaded  
+N3E | 2024 | Apple, Qualcomm, MediaTek | Yield mature  
+N3P | H2 2026 | NVIDIA, AMD, Broadcom | Ramping to volume  
+N2 (2nm) | H2 2025 | Apple, NVIDIA | Trial production, yield ramp  
+N2P | 2027 | High-end HPC / AI | Under development  
   
 ## 2\. Financial Analysis: Earnings Quality and Growth Resilience
 
@@ -146,15 +144,15 @@ TSMC holds an MSCI ESG rating of AA, ranking among the top tier of the semicondu
 
 __Foundry Competitive Comparison
 
-Dimension| TSMC| Samsung Foundry| Intel Foundry (IFS)  
+Dimension | TSMC | Samsung Foundry | Intel Foundry (IFS)  
 ---|---|---|---  
-Most Advanced Node| 3nm (N3/N3E)| 3nm (SF3)| 18A (equiv. 1.8nm)  
-3nm Yield Estimate| ~80%+| ~60–65%| N/A (internal priority)  
-2025 Foundry Revenue| ~$92B| ~$12B| ~$5B  
-AI Chip Customers| NVIDIA, AMD, Broadcom| Limited internal + potential| Primarily internal  
-Advanced Packaging| CoWoS (market leader)| I-Cube, X-Cube| EMIB, Foveros  
-Fab Footprint| 15 fabs globally| 5 fabs in Korea| 10+ fabs in US/EU  
-Customer Trust| Pure-play, no conflict| Competes with customers| Competes with customers  
+Most Advanced Node | 3nm (N3/N3E) | 3nm (SF3) | 18A (equiv. 1.8nm)  
+3nm Yield Estimate | ~80%+ | ~60–65% | N/A (internal priority)  
+2025 Foundry Revenue | ~$92B | ~$12B | ~$5B  
+AI Chip Customers | NVIDIA, AMD, Broadcom | Limited internal + potential | Primarily internal  
+Advanced Packaging | CoWoS (market leader) | I-Cube, X-Cube | EMIB, Foveros  
+Fab Footprint | 15 fabs globally | 5 fabs in Korea | 10+ fabs in US/EU  
+Customer Trust | Pure-play, no conflict | Competes with customers | Competes with customers  
   
 ### 5.2 TSMC's Competitive Advantages
 
@@ -170,14 +168,14 @@ CoWoS (Chip-on-Wafer-on-Substrate) advanced packaging represents a frequently un
 
 __Semiconductor Peer Valuation
 
-Company| Market Cap ($B)| P/E (TTM)| EV/EBITDA| Gross Margin| Rev Growth  
+Company | Market Cap ($B) | P/E (TTM) | EV/EBITDA | Gross Margin | Rev Growth  
 ---|---|---|---|---|---  
-TSMC| $980| 26.0x| 17.5x| 58%| 18.7%  
-NVIDIA| $2,850| 38.5x| 32.0x| 75%| 52%  
-Broadcom| $820| 30.2x| 22.5x| 68%| 25%  
-ASML| $350| 34.0x| 25.0x| 51%| 12%  
-AMD| $230| 42.0x| 30.0x| 52%| 14%  
-Samsung (Semi)| $370| 18.0x| 10.0x| 42%| 5%  
+TSMC | $980 | 26.0x | 17.5x | 58% | 18.7%  
+NVIDIA | $2,850 | 38.5x | 32.0x | 75% | 52%  
+Broadcom | $820 | 30.2x | 22.5x | 68% | 25%  
+ASML | $350 | 34.0x | 25.0x | 51% | 12%  
+AMD | $230 | 42.0x | 30.0x | 52% | 14%  
+Samsung (Semi) | $370 | 18.0x | 10.0x | 42% | 5%  
   
 ### 6.2 Valuation Analysis
 
@@ -219,12 +217,12 @@ Our bullish thesis on TSMC rests on three unassailable facts: (1) AI compute dem
 
 __Investment Rating
 
-Item| Rating / Data  
+Item | Rating / Data  
 ---|---  
-Investment Rating| **Overweight**  
-12-Month Price Target| **$210–$225** (corresponds to 2026E P/E of ~27–29x)  
-Catalysts| N3P volume ramp • Kumamoto Fab 2 launch • CoWoS expansion • N2 mass production in 2027  
-Downside Risks| Geopolitical escalation • Tighter export controls • AI capex cycle peak  
+Investment Rating | **Overweight**  
+12-Month Price Target | **$210–$225** (corresponds to 2026E P/E of ~27–29x)  
+Catalysts | N3P volume ramp • Kumamoto Fab 2 launch • CoWoS expansion • N2 mass production in 2027  
+Downside Risks | Geopolitical escalation • Tighter export controls • AI capex cycle peak  
   
 ### 8.3 Scenario Analysis
 

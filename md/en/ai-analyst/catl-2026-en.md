@@ -10,8 +10,6 @@ url: https://aidev.fit/en/ai-analyst/catl-2026-en.html
 
 Deep Research CATL
 
-# CATL Comprehensive Investment Analysis
-
 Date:
 
 Ticker: CATL (300750.SZ)
@@ -167,13 +165,13 @@ __Data Insight: Analyst Price Targets
 
 ## 5\. Competitive Comparison
 
-Metric| CATL| BYD (Battery)| LG Energy| Panasonic| CALB  
+Metric | CATL | BYD (Battery) | LG Energy | Panasonic | CALB  
 ---|---|---|---|---|---  
-Global Share| 36.8%| 16.2%| 13.6%| 8.5%| 5.3%  
-2025 Rev (¥B)| 4,237| ~900| ~1,200| ~680| ~350  
-Gross Margin| ~27%| ~20%| ~22%| ~18%| ~14%  
-Tech Routes| NCM+LFP+Na+Condensed| Blade (LFP)| NCM+LFP| NCM| NCM+LFP  
-Overseas Plants| Ger+Hun+IDN| Hun+BRA| USA+POL| USA+JPN| EU (planning)  
+Global Share | 36.8% | 16.2% | 13.6% | 8.5% | 5.3%  
+2025 Rev (¥B) | 4,237 | ~900 | ~1,200 | ~680 | ~350  
+Gross Margin | ~27% | ~20% | ~22% | ~18% | ~14%  
+Tech Routes | NCM+LFP+Na+Condensed | Blade (LFP) | NCM+LFP | NCM | NCM+LFP  
+Overseas Plants | Ger+Hun+IDN | Hun+BRA | USA+POL | USA+JPN | EU (planning)  
   
 CATL's core advantages vs. competitors: ① Largest scale and steepest cost curve; ② Broadcast technology roadmap (covering NCM, LFP, sodium-ion, condensed matter, solid-state); ③ Deepest vertical integration. The main disadvantage: overseas plants face greater political headwinds, and the US market is effectively inaccessible.
 

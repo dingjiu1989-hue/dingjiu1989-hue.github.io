@@ -10,13 +10,11 @@ url: https://aidev.fit/en/ai-analyst/tesla-2026.html
 
 Deep Research Tesla
 
-# Tesla Comprehensive Investment Analysis
-
 Date:
 
 Ticker: TSLA
 
-###  __Executive Summary
+### __Executive Summary
 
 Strategic Transformation
 
@@ -506,22 +504,22 @@ Geopolitical risks affect Tesla primarily through supply chain and market access
 
 Metric | Value | Period / Note  
 ---|---|---  
-Market Cap| $1.54 Trillion| May 26, 2026  
-FY2025 Revenue| $94.827 Billion| -3% YoY  
-Q1 2026 Revenue| $22.387 Billion| +16% YoY  
-FY2025 Net Income| $3.794 Billion| -46% YoY  
-Q1 2026 Net Income| $477 Million| +17% YoY  
-Q1 2026 Free Cash Flow| $1.444 Billion| +117% YoY  
-FY2025 Global EV Sales| 1,636,000 Units| 14% Market Share  
-FSD Paid Subscribers| 1.28 Million| Q1 2026, +51% YoY  
-Supercharger Count| >80,000| As of Q1 2026  
-P/E Ratio (TTM)| 838.56x| May 26, 2026  
-P/S Ratio| 13.36x| May 26, 2026  
-P/B Ratio| 18.85x| May 26, 2026  
-4680 Cell Yield Rate| 90%| Mass Production Milestone  
-Shanghai Factory Monthly Deliveries| 97,100 Units| December 2025  
-Shanghai Factory Q1 2026 Deliveries| 213,000 Units| +23.5% YoY  
-2026 CapEx Plan| >$25 Billion| Primarily AI Computing & New Production Lines  
+Market Cap | $1.54 Trillion | May 26, 2026  
+FY2025 Revenue | $94.827 Billion | -3% YoY  
+Q1 2026 Revenue | $22.387 Billion | +16% YoY  
+FY2025 Net Income | $3.794 Billion | -46% YoY  
+Q1 2026 Net Income | $477 Million | +17% YoY  
+Q1 2026 Free Cash Flow | $1.444 Billion | +117% YoY  
+FY2025 Global EV Sales | 1,636,000 Units | 14% Market Share  
+FSD Paid Subscribers | 1.28 Million | Q1 2026, +51% YoY  
+Supercharger Count | >80,000 | As of Q1 2026  
+P/E Ratio (TTM) | 838.56x | May 26, 2026  
+P/S Ratio | 13.36x | May 26, 2026  
+P/B Ratio | 18.85x | May 26, 2026  
+4680 Cell Yield Rate | 90% | Mass Production Milestone  
+Shanghai Factory Monthly Deliveries | 97,100 Units | December 2025  
+Shanghai Factory Q1 2026 Deliveries | 213,000 Units | +23.5% YoY  
+2026 CapEx Plan | >$25 Billion | Primarily AI Computing & New Production Lines  
   
 ## References
 

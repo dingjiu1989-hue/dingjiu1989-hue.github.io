@@ -10,8 +10,6 @@ url: https://aidev.fit/en/ai-analyst/micron-2026-en.html
 
 Deep Research Micron
 
-# Micron Technology — Comprehensive Investment Analysis
-
 Date:
 
 Stock: Micron Technology (MU)
@@ -146,17 +144,17 @@ Micron sits at the core of AI compute infrastructure, deeply embedded with NVIDI
 
 __Memory Industry Big 3 Comparison (CY2025E)
 
-Metric| Micron (MU)| Samsung DS| SK Hynix  
+Metric | Micron (MU) | Samsung DS | SK Hynix  
 ---|---|---|---  
-Ticker| MU (NASDAQ)| 005930 (KRX)| 000660 (KRX)  
-DRAM Share| ~25%| ~40%| ~30%  
-NAND Share| ~12%| ~35%| ~18%  
-HBM Technology| HBM3E (Leading)| HBM3E (Catching up)| HBM3E (Leading)  
-HBM Customers| NVIDIA| NVIDIA| NVIDIA, AMD  
-Revenue ($B)| ~32-35| ~200 (DS)| ~55-60  
-Gross Margin| ~35-38%| ~35-40%| ~35-40%  
-CAPEX ($B)| ~10-12| ~30 (DS)| ~15  
-HBM Capacity (FY2025E)| Medium| Largest| Largest  
+Ticker | MU (NASDAQ) | 005930 (KRX) | 000660 (KRX)  
+DRAM Share | ~25% | ~40% | ~30%  
+NAND Share | ~12% | ~35% | ~18%  
+HBM Technology | HBM3E (Leading) | HBM3E (Catching up) | HBM3E (Leading)  
+HBM Customers | NVIDIA | NVIDIA | NVIDIA, AMD  
+Revenue ($B) | ~32-35 | ~200 (DS) | ~55-60  
+Gross Margin | ~35-38% | ~35-40% | ~35-40%  
+CAPEX ($B) | ~10-12 | ~30 (DS) | ~15  
+HBM Capacity (FY2025E) | Medium | Largest | Largest  
   
 Data source: Company reports, industry research. DS = Semiconductor business.
 
@@ -170,12 +168,12 @@ At ~15-18x forward PE (based on FY2025E EPS of $8-10), Micron appears reasonably
 
 __Valuation Snapshot (Based on FY2025E)
 
-Metric| Current| Peer Avg| Hist. Median| Assessment  
+Metric | Current | Peer Avg | Hist. Median | Assessment  
 ---|---|---|---|---  
-PE (Fwd)| ~15-18x| ~20x| ~15x| Fair  
-PB| ~2.8x| ~3.0x| ~2.5x| Fair  
-EV/EBITDA| ~8-10x| ~12x| ~8x| Low  
-PEG (3yr growth)| ~0.5x| ~0.8x| ~0.7x| Undervalued  
+PE (Fwd) | ~15-18x | ~20x | ~15x | Fair  
+PB | ~2.8x | ~3.0x | ~2.5x | Fair  
+EV/EBITDA | ~8-10x | ~12x | ~8x | Low  
+PEG (3yr growth) | ~0.5x | ~0.8x | ~0.7x | Undervalued  
   
 ### 6.2 Financial Health
 
@@ -236,13 +234,13 @@ Cautiously Positive
 
 __Investment Thesis Matrix
 
-Dimension| Bullish Factors| Bearish Factors  
+Dimension | Bullish Factors | Bearish Factors  
 ---|---|---  
-Cycle| Mid-cycle upswing; pricing trending up| Memory cycle 3-4 years; ceiling visible  
-HBM| First-mover advantage; NVIDIA lock-in| Samsung catching up; competition intensifying  
-Financials| Revenue recovering; margins improving| High CAPEX; FCF pressure  
-Geopolitics| CHIPS Act; supply chain security beneficiary| China revenue restricted  
-Valuation| Forward PE ~18x; PEG ~0.5x attractive| Peak-cycle PE could compress to ~10x  
+Cycle | Mid-cycle upswing; pricing trending up | Memory cycle 3-4 years; ceiling visible  
+HBM | First-mover advantage; NVIDIA lock-in | Samsung catching up; competition intensifying  
+Financials | Revenue recovering; margins improving | High CAPEX; FCF pressure  
+Geopolitics | CHIPS Act; supply chain security beneficiary | China revenue restricted  
+Valuation | Forward PE ~18x; PEG ~0.5x attractive | Peak-cycle PE could compress to ~10x  
   
 ### 8.4 Recommended Positioning
 

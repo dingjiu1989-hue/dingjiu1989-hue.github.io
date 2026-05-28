@@ -8,8 +8,6 @@ url: https://aidev.fit/en/ai-analyst/amazon-2026-en.html
 
 # Amazon Comprehensive Investment Analysis (2026)
 
-# Amazon (AMZN) Comprehensive Investment Analysis
-
 Fiscal Year 2025 — Mid-2026 Outlook
 
 Published May 27, 2026 · Exchange: NASDAQ · Sector: Consumer Cyclical / Technology
@@ -114,13 +112,13 @@ Free cash flow has swung from negative in 2022 (heavy capex) to strongly positiv
 
 ### 3.4 Segment Profitability Breakdown
 
-Segment| FY2025 Revenue| Est. Op. Profit| Op. Margin| YoY Growth  
+Segment | FY2025 Revenue | Est. Op. Profit | Op. Margin | YoY Growth  
 ---|---|---|---|---  
-North America| $410B| $28B| ~6.8%| +11%  
-International| $145B| $1B| ~0.7%| +10%  
-AWS| $128B| $45B| ~35%| +22%  
-Advertising| $64B| N/A (included)| High margin| +25%  
-Consolidated| $675B| $68B| ~10%| +13%  
+North America | $410B | $28B | ~6.8% | +11%  
+International | $145B | $1B | ~0.7% | +10%  
+AWS | $128B | $45B | ~35% | +22%  
+Advertising | $64B | N/A (included) | High margin | +25%  
+Consolidated | $675B | $68B | ~10% | +13%  
   
 📊 Segment Revenue Composition (FY2025)
 
@@ -142,13 +140,13 @@ With hundreds of millions of active customers and vast transaction data, Amazon 
 
 ### 4.4 Key Competitors
 
-Segment| Primary Competitors| Amazon Advantage  
+Segment | Primary Competitors | Amazon Advantage  
 ---|---|---  
-Cloud (AWS)| Microsoft Azure, Google Cloud| Largest revenue, broadest IaaS/PaaS, AI flexibility  
-E-Commerce| Walmart, Shopify, Alibaba| Logistics density, Prime loyalty, 3P ecosystem  
-Advertising| Google, Meta, TikTok| Purchase-intent data, closed-loop attribution  
-Streaming| Netflix, Disney+, Apple| Bundled with Prime, ad-tier growth  
-AI / LLM| OpenAI (Microsoft), Google| Bedrock multi-model, custom silicon, SageMaker  
+Cloud (AWS) | Microsoft Azure, Google Cloud | Largest revenue, broadest IaaS/PaaS, AI flexibility  
+E-Commerce | Walmart, Shopify, Alibaba | Logistics density, Prime loyalty, 3P ecosystem  
+Advertising | Google, Meta, TikTok | Purchase-intent data, closed-loop attribution  
+Streaming | Netflix, Disney+, Apple | Bundled with Prime, ad-tier growth  
+AI / LLM | OpenAI (Microsoft), Google | Bedrock multi-model, custom silicon, SageMaker  
   
 ## 5\. Catalysts & Risk Factors
 

@@ -10,8 +10,6 @@ url: https://aidev.fit/en/ai-analyst/baba-2026-en.html
 
 Deep Research Alibaba
 
-# Alibaba Comprehensive Investment Analysis
-
 Date:
 
 Ticker: BABA (NYSE) / 9988.HK
@@ -212,21 +210,21 @@ __Data Insight: Wall Street Price Targets
 
 ### 5.1 E-Commerce Competitive Landscape
 
-Metric| Alibaba| PDD Holdings| JD.com| Douyin E-Com  
+Metric | Alibaba | PDD Holdings | JD.com | Douyin E-Com  
 ---|---|---|---|---  
-GMV (Trillion ¥)| ~8.5| ~4.8| ~3.9| ~3.5  
-Market Share| ~40%| ~23%| ~19%| ~17%  
-Revenue (¥100B)| 10.2| ~4.0| ~12.1| N/A  
-Strategic Focus| AI + Cloud pivot| Globalization (Temu)| Supply chain efficiency| Content + interest-based  
+GMV (Trillion ¥) | ~8.5 | ~4.8 | ~3.9 | ~3.5  
+Market Share | ~40% | ~23% | ~19% | ~17%  
+Revenue (¥100B) | 10.2 | ~4.0 | ~12.1 | N/A  
+Strategic Focus | AI + Cloud pivot | Globalization (Temu) | Supply chain efficiency | Content + interest-based  
   
 ### 5.2 Cloud Computing Competitive Landscape
 
-Metric| Alibaba Cloud| Huawei Cloud| Tencent Cloud| AWS China  
+Metric | Alibaba Cloud | Huawei Cloud | Tencent Cloud | AWS China  
 ---|---|---|---|---  
-Market Share| 35.8%| 18.2%| 15.6%| 8.5%  
-AI Cloud Share| 38.5%| 16.8%| 14.2%| 7.5%  
-Revenue Growth| +38%| +28%| +22%| +15%  
-Custom Silicon| Zhenwu PPU / Hanguang NPU| Ascend Series| Canghai Chip| Trainium  
+Market Share | 35.8% | 18.2% | 15.6% | 8.5%  
+AI Cloud Share | 38.5% | 16.8% | 14.2% | 7.5%  
+Revenue Growth | +38% | +28% | +22% | +15%  
+Custom Silicon | Zhenwu PPU / Hanguang NPU | Ascend Series | Canghai Chip | Trainium  
   
 ### 5.3 Cross-Company Valuation Comparison
 

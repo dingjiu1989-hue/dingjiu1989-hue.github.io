@@ -10,8 +10,6 @@ url: https://aidev.fit/en/ai-analyst/oracle-2026-en.html
 
 Deep Research ORACLE
 
-# Oracle Comprehensive Investment Analysis (2026)
-
 Date:
 
 Ticker: Oracle (ORCL)
@@ -166,14 +164,14 @@ __Data Insight: Wall Street Targets
 
 ## 5\. Competitive Comparison
 
-Metric| Oracle| AWS (Amazon)| Azure (Microsoft)| Snowflake  
+Metric | Oracle | AWS (Amazon) | Azure (Microsoft) | Snowflake  
 ---|---|---|---|---  
-Cloud Market Share| ~4%| ~32%| ~23%| <1% (DW)  
-Database Position| Autonomous DB (Leader)| Aurora/RDS| SQL Server/Cosmos DB| Data Cloud  
-Enterprise SaaS| Fusion/NetSuite| No strong SaaS| Dynamics 365| None  
-AI Infrastructure| OCI GPU clusters| Trainium + AWS AI| OpenAI + Copilot| Cortex AI  
-Annual Revenue| ~$56B| ~$110B (AWS)| ~$85B (Azure)| ~$3.5B  
-Gross Margin| ~72%| ~38% (AWS)| ~56% (Azure)| ~65%  
+Cloud Market Share | ~4% | ~32% | ~23% | <1% (DW)  
+Database Position | Autonomous DB (Leader) | Aurora/RDS | SQL Server/Cosmos DB | Data Cloud  
+Enterprise SaaS | Fusion/NetSuite | No strong SaaS | Dynamics 365 | None  
+AI Infrastructure | OCI GPU clusters | Trainium + AWS AI | OpenAI + Copilot | Cortex AI  
+Annual Revenue | ~$56B | ~$110B (AWS) | ~$85B (Azure) | ~$3.5B  
+Gross Margin | ~72% | ~38% (AWS) | ~56% (Azure) | ~65%  
   
 __Data Insight: Global Cloud Market Share
 

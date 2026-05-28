@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/tech/unit-testing-guide.png",
       "datePublished": "2026-05-20",
       "dateModified": "2026-05-20",
-      "wordCount": "1500",
+      "wordCount": "463",
       "keywords": "单元测试, Python, 测试",
       "about": [{"@type": "Thing", "name": "单元测试"}, {"@type": "Thing", "name": "Python"}, {"@type": "Thing", "name": "测试"}],
       "inLanguage": "zh-CN",
@@ -75,7 +75,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/unit-testing-guide.html"},
-      "articleBody": "写单元测试是你从\"会写代码\"到\"专业开发者\"的分水岭。这篇文章用最少的理论带你直接上手。 为什么必须写测试      重构有底气  — 有测试覆盖的代码，改完跑一次就知道有没有破坏现有功能    文档即测试  — 测试描述了函数在各种输入下应该如何表现，比注释更可靠    减少回归 Bug  — 修一个 Bug 加一个测试，同样的错不会再犯第二次     AAA 模式（Arrange-Act-Assert）       def test_add_two_numbers():     # Arrange（准备）     a, b = 2, 3     # Act（执行）     result = add(a, b)     # Assert（断言）     assert result == 5       第一个真实测试        #     user_service  .  py   def     get_full_name  (  user  ):         return     f  &quot;{user.first_name} {user.last_name}&quot;    #     test_user_service  .  py   def     test_get_full_name  ():         user     =     type  (  &#39;  User  &#39;  ,     (),     {  &#39;  first_name  &#39;  :     &#39;张&#39;  ,     &#39;  last_name  &#39;  :     &#39;三&#39;  })()         assert     get_full_name  (  user  )     ==     &quot;张 三&quot;    def     test_get_full_name_empty_last  ():         user     =     type  (  &#39;  User  &#39;  ,     (),     {  &#39;  first_name  &#39;  :     &#39;李&#39;  ,     &#39;  last_name  &#39;  :     &#39;&#39;  })()         assert     get_full_name  (  user  )     ==     &quot;李 &quot;        Mock 和 Fixture        #     Fixture  :     共享的测试数据   @pytest  .  fixture   def     sample_user  ()  :         return     User  (  id  =  1  ,     name  =  &quot;张三&quot;  ,     email  =  &quot;zhang@test.com&quot;  )    def     test_user_email  (  sample_user  )  :         assert     sample_user  .  email     ==     &quot;zhang@test.com&quot;    #     Mock  :     隔离外部依赖   @patch  (  &quot;requests.get&quot;  )   def     test_fetch_user  (  mock_get  )  :         mock_get  .  return_value  .  json  .  return_value     =     {  &quot;name&quot;  :     &quot;张三&quot;  }         result     =     fetch_user  (  1  )         assert     result  [  &quot;name&quot;  ]     ==     &quot;张三&quot;        什么该测、什么不该测      该测  — 业务逻辑、边界条件、错误路径、数据转换    不该测  — 简单的 getter/setter、框架代码、第三方库的内部行为     起步建议不用追求 100% 覆盖率——那会增加大量维护负担。先给核心业务逻辑写测试，看到覆盖率数字攀升的成就感会推着你继续写。 📖 相关推荐      Python 入门教程：从零到写出第一个程序     Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战     REST API 设计最佳实践：写出让人愿意用的接口       See also:   Python 入门教程：从零到写出第一个程序 ,  正则表达式 30 分钟入门指南 ,  OpenAI API 入门：用 10 行代码调用 GPT ."
+      "articleBody": "写单元测试是你从\"会写代码\"到\"专业开发者\"的分水岭。这篇文章用最少的理论带你直接上手。 为什么必须写测试      重构有底气  — 有测试覆盖的代码，改完跑一次就知道有没有破坏现有功能    文档即测试  — 测试描述了函数在各种输入下应该如何表现，比注释更可靠    减少回归 Bug  — 修一个 Bug 加一个测试，同样的错不会再犯第二次     AAA 模式（Arrange-Act-Assert）    def test_add_two_numbers():     # Arrange（准备）     a, b = 2, 3     # Act（执行）     result = add(a, b)     # Assert（断言）     assert result == 5      第一个真实测试    # user_service.py def get_full_name(user):     return f&quot;{user.first_name} {user.last_name}&quot;  # test_user_service.py def test_get_full_name():     user = type('User', (), {'first_name': '张', 'last_name': '三'})()     assert get_full_name(user) == &quot;张 三&quot;  def test_get_full_name_empty_last():     user = type('User', (), {'first_name': '李', 'last_name': ''})()     assert get_full_name(user) == &quot;李 &quot;      Mock 和 Fixture    # Fixture: 共享的测试数据 @pytest.fixture def sample_user():     return User(id=1, name=&quot;张三&quot;, email=&quot;zhang@test.com&quot;)  def test_user_email(sample_user):     assert sample_user.email == &quot;zhang@test.com&quot;  # Mock: 隔离外部依赖 @patch(&quot;requests.get&quot;) def test_fetch_user(mock_get):     mock_get.return_value.json.return_value = {&quot;name&quot;: &quot;张三&quot;}     result = fetch_user(1)     assert result[&quot;name&quot;] == &quot;张三&quot;      什么该测、什么不该测      该测  — 业务逻辑、边界条件、错误路径、数据转换    不该测  — 简单的 getter/setter、框架代码、第三方库的内部行为     起步建议不用追求 100% 覆盖率——那会增加大量维护负担。先给核心业务逻辑写测试，看到覆盖率数字攀升的成就感会推着你继续写。 📖 相关推荐      Python 入门教程：从零到写出第一个程序     Git 进阶：交互式 rebase、cherry-pick 和 bisect 实战     REST API 设计最佳实践：写出让人愿意用的接口       See also:   Python 入门教程：从零到写出第一个程序 ,  正则表达式 30 分钟入门指南 ,  OpenAI API 入门：用 10 行代码调用 GPT ."
     }
     </script>
     <script type="application/ld+json">
@@ -120,11 +120,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-20">2026-05-20</time>
           <span class="meta-sep">·</span>
-          <span>7 分钟阅读</span>
+          <span>2 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>1500 字</span>
+          <span>463 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/unit-testing-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/unit-testing-guide.png" alt="单元测试入门：从零到写出第一个可维护的测试" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -135,46 +135,46 @@
 <li><strong>减少回归 Bug</strong> — 修一个 Bug 加一个测试，同样的错不会再犯第二次</li>
 </ul>
 <p>AAA 模式（Arrange-Act-Assert）</p>
-<div class="codehilite"><pre><span></span><code>def test_add_two_numbers():
+<pre class="codehilite"><code>def test_add_two_numbers():
     # Arrange（准备）
     a, b = 2, 3
     # Act（执行）
     result = add(a, b)
     # Assert（断言）
     assert result == 5
-</code></pre></div>
+</code></pre>
 
 <p>第一个真实测试</p>
-<div class="codehilite"><pre><span></span><code><span class="err">#</span><span class="w"> </span><span class="nx">user_service</span><span class="p">.</span><span class="nx">py</span>
-<span class="nx">def</span><span class="w"> </span><span class="nx">get_full_name</span><span class="p">(</span><span class="nx">user</span><span class="p">):</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">f</span><span class="s">&quot;{user.first_name} {user.last_name}&quot;</span>
+<pre class="codehilite"><code># user_service.py
+def get_full_name(user):
+    return f&quot;{user.first_name} {user.last_name}&quot;
 
-<span class="err">#</span><span class="w"> </span><span class="nx">test_user_service</span><span class="p">.</span><span class="nx">py</span>
-<span class="nx">def</span><span class="w"> </span><span class="nx">test_get_full_name</span><span class="p">():</span>
-<span class="w">    </span><span class="nx">user</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">type</span><span class="p">(</span><span class="err">&#39;</span><span class="nx">User</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(),</span><span class="w"> </span><span class="p">{</span><span class="err">&#39;</span><span class="nx">first_name</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="sc">&#39;张&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">last_name</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="sc">&#39;三&#39;</span><span class="p">})()</span>
-<span class="w">    </span><span class="nx">assert</span><span class="w"> </span><span class="nx">get_full_name</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;张 三&quot;</span>
+# test_user_service.py
+def test_get_full_name():
+    user = type('User', (), {'first_name': '张', 'last_name': '三'})()
+    assert get_full_name(user) == &quot;张 三&quot;
 
-<span class="nx">def</span><span class="w"> </span><span class="nx">test_get_full_name_empty_last</span><span class="p">():</span>
-<span class="w">    </span><span class="nx">user</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">type</span><span class="p">(</span><span class="err">&#39;</span><span class="nx">User</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(),</span><span class="w"> </span><span class="p">{</span><span class="err">&#39;</span><span class="nx">first_name</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="sc">&#39;李&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">last_name</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="err">&#39;&#39;</span><span class="p">})()</span>
-<span class="w">    </span><span class="nx">assert</span><span class="w"> </span><span class="nx">get_full_name</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;李 &quot;</span>
-</code></pre></div>
+def test_get_full_name_empty_last():
+    user = type('User', (), {'first_name': '李', 'last_name': ''})()
+    assert get_full_name(user) == &quot;李 &quot;
+</code></pre>
 
 <p>Mock 和 Fixture</p>
-<div class="codehilite"><pre><span></span><code><span class="err">#</span><span class="w"> </span><span class="nl">Fixture</span><span class="p">:</span><span class="w"> </span><span class="n">共享的测试数据</span>
-<span class="nv">@pytest</span><span class="p">.</span><span class="n">fixture</span>
-<span class="n">def</span><span class="w"> </span><span class="n">sample_user</span><span class="p">()</span><span class="err">:</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">User</span><span class="p">(</span><span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;张三&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="o">=</span><span class="ss">&quot;zhang@test.com&quot;</span><span class="p">)</span>
+<pre class="codehilite"><code># Fixture: 共享的测试数据
+@pytest.fixture
+def sample_user():
+    return User(id=1, name=&quot;张三&quot;, email=&quot;zhang@test.com&quot;)
 
-<span class="n">def</span><span class="w"> </span><span class="n">test_user_email</span><span class="p">(</span><span class="n">sample_user</span><span class="p">)</span><span class="err">:</span>
-<span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="n">sample_user</span><span class="p">.</span><span class="n">email</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;zhang@test.com&quot;</span>
+def test_user_email(sample_user):
+    assert sample_user.email == &quot;zhang@test.com&quot;
 
-<span class="err">#</span><span class="w"> </span><span class="nl">Mock</span><span class="p">:</span><span class="w"> </span><span class="n">隔离外部依赖</span>
-<span class="nv">@patch</span><span class="p">(</span><span class="ss">&quot;requests.get&quot;</span><span class="p">)</span>
-<span class="n">def</span><span class="w"> </span><span class="n">test_fetch_user</span><span class="p">(</span><span class="n">mock_get</span><span class="p">)</span><span class="err">:</span>
-<span class="w">    </span><span class="n">mock_get</span><span class="p">.</span><span class="n">return_value</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">return_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;name&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;张三&quot;</span><span class="err">}</span>
-<span class="w">    </span><span class="k">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fetch_user</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="k">result</span><span class="o">[</span><span class="n">&quot;name&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;张三&quot;</span>
-</code></pre></div>
+# Mock: 隔离外部依赖
+@patch(&quot;requests.get&quot;)
+def test_fetch_user(mock_get):
+    mock_get.return_value.json.return_value = {&quot;name&quot;: &quot;张三&quot;}
+    result = fetch_user(1)
+    assert result[&quot;name&quot;] == &quot;张三&quot;
+</code></pre>
 
 <p>什么该测、什么不该测</p>
 <ul>

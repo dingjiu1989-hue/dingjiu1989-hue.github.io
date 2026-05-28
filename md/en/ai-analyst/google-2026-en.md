@@ -10,8 +10,6 @@ url: https://aidev.fit/en/ai-analyst/google-2026-en.html
 
 Deep ResearchAlphabet
 
-# Alphabet (Google) Comprehensive Investment Analysis
-
 Date:
 
 Ticker: Alphabet (GOOGL)
@@ -98,12 +96,12 @@ __Data Insight: GOOGL 52-Week
 
 ## 5\. Competitive Comparison
 
-Metric| Alphabet| Meta| Amazon| Microsoft  
+Metric | Alphabet | Meta | Amazon | Microsoft  
 ---|---|---|---|---  
-Market Cap| $4.6T| $1.8T| $2.7T| $3.9T  
-Ad Revenue (2025)| $267B| $172B| $64B| $22B  
-Cloud Revenue| $42B| —| $128B| $112B  
-Op Margin| 31.2%| 38%| 25%| 44%  
+Market Cap | $4.6T | $1.8T | $2.7T | $3.9T  
+Ad Revenue (2025) | $267B | $172B | $64B | $22B  
+Cloud Revenue | $42B | — | $128B | $112B  
+Op Margin | 31.2% | 38% | 25% | 44%  
   
 ## 6\. Valuation & Health
 

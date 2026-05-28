@@ -10,8 +10,6 @@ url: https://aidev.fit/en/ai-analyst/amd-2026-en.html
 
 Deep Research AMD
 
-# AMD Comprehensive Investment Analysis (2026)
-
 Date:
 
 Ticker: AMD (AMD)
@@ -152,16 +150,16 @@ __Data Insight: Wall Street Targets
 
 ## 5\. Competitive Comparison: A Four-Way Battle
 
-Metric| AMD| NVIDIA| Intel| Arm / Ampere  
+Metric | AMD | NVIDIA | Intel | Arm / Ampere  
 ---|---|---|---|---  
-Market Cap| $320B| $5.8T| $185B| $150B (Arm)  
-AI Accelerator Share| ~12%| ~82%| <1%| —  
-Data Center Rev (TTM)| ~$16B| ~$141B| ~$14B| ~$3B (Ampere)  
-Gross Margin| ~53%| ~75%| ~45%| ~65% (Ampere)  
-Software Ecosystem| ROCm (Open Source)| CUDA (Proprietary)| oneAPI| —  
-CPU Architecture| x86 (Zen 5)| Arm (Grace)| x86 (P-core/E-core)| Arm (Neoverse)  
-FPGA / Adaptive| Xilinx (Versal)| —| Altera (Agilex)| —  
-AI Revenue Target (CY2026)| $10B+| $180B+| $3-5B| —  
+Market Cap | $320B | $5.8T | $185B | $150B (Arm)  
+AI Accelerator Share | ~12% | ~82% | <1% | —  
+Data Center Rev (TTM) | ~$16B | ~$141B | ~$14B | ~$3B (Ampere)  
+Gross Margin | ~53% | ~75% | ~45% | ~65% (Ampere)  
+Software Ecosystem | ROCm (Open Source) | CUDA (Proprietary) | oneAPI | —  
+CPU Architecture | x86 (Zen 5) | Arm (Grace) | x86 (P-core/E-core) | Arm (Neoverse)  
+FPGA / Adaptive | Xilinx (Versal) | — | Altera (Agilex) | —  
+AI Revenue Target (CY2026) | $10B+ | $180B+ | $3-5B | —  
   
 __Data Insight: Server CPU Market Share
 

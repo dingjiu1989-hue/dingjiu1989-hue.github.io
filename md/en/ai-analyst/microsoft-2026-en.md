@@ -10,8 +10,6 @@ url: https://aidev.fit/en/ai-analyst/microsoft-2026-en.html
 
 Microsoft MSFT · NASDAQ Report Date: May 27, 2026
 
-# Microsoft Corporation — Comprehensive Investment Analysis
-
 Fiscal Year 2025 Full-Year Review & FY2026 Outlook
 
 **Microsoft Corporation** (NASDAQ: MSFT) closed its **fiscal year 2025 (ended June 2025)** as the undisputed leader in enterprise cloud computing and generative artificial intelligence. With a market capitalization of approximately **$3.9 trillion** , the company has delivered annual revenue of roughly **$253.8 billion** and net income of approximately **$103.5 billion** , representing a net margin north of 40%. The stock trades at roughly **35 times trailing earnings** , reflecting investor expectations for sustained double-digit growth driven by Azure, AI services, and the expanding Copilot ecosystem. 
@@ -147,14 +145,14 @@ Microsoft’s stock has appreciated significantly, rising from approximately **$
 
 Wall Street remains overwhelmingly bullish on Microsoft. The consensus analyst rating is **Buy** , with median price targets ranging from **$530 to $650** over the next 12 months. The bull case envisions AI accelerating revenue growth to 15%+ annually, while the bear case focuses on antitrust risk and the possibility that AI monetization takes longer than expected. 
 
-Valuation Metric| Microsoft| Peer Avg.  
+Valuation Metric | Microsoft | Peer Avg.  
 ---|---|---  
-P/E (TTM)| 35.0x| 32.0x  
-EV / EBITDA| 24.0x| 21.5x  
-Price / Sales| 12.5x| 10.0x  
-Free Cash Flow Yield| 2.2%| 2.5%  
-Dividend Yield| 0.8%| 0.6%  
-Revenue Growth (YoY)| ~16%| ~12%  
+P/E (TTM) | 35.0x | 32.0x  
+EV / EBITDA | 24.0x | 21.5x  
+Price / Sales | 12.5x | 10.0x  
+Free Cash Flow Yield | 2.2% | 2.5%  
+Dividend Yield | 0.8% | 0.6%  
+Revenue Growth (YoY) | ~16% | ~12%  
   
 **Bull Case ($650):** Azure AI workloads scale faster than expected, Copilot attachment rates reach 70%+ of the M365 installed base, and GitHub Copilot becomes a $5B+ ARR business within three years. Revenue growth accelerates to 18%+ with margin expansion driving EPS to $18+. 
 
@@ -177,14 +175,14 @@ While Microsoft’s long-term trajectory appears robust, several material risks 
 
 ⚠️ Risk Assessment Summary
 
-Risk Factor| Severity| Probability| Mitigation  
+Risk Factor | Severity | Probability | Mitigation  
 ---|---|---|---  
-Antitrust / Regulation| High| Medium| Legal team, compliance investments  
-AI Competition| Medium| High| Multi-model strategy, first-mover advantage  
-Capex ROI| High| Medium| Strong demand signals, long-term customer contracts  
-Macro Slowdown| Medium| Low| High recurring revenue, essential infrastructure  
-OpenAI Dependency| Medium| Low| Inflection/Mistral partnerships, in-house research  
-Gaming Integration| Low| Medium| Cost restructuring, mobile expansion via King  
+Antitrust / Regulation | High | Medium | Legal team, compliance investments  
+AI Competition | Medium | High | Multi-model strategy, first-mover advantage  
+Capex ROI | High | Medium | Strong demand signals, long-term customer contracts  
+Macro Slowdown | Medium | Low | High recurring revenue, essential infrastructure  
+OpenAI Dependency | Medium | Low | Inflection/Mistral partnerships, in-house research  
+Gaming Integration | Low | Medium | Cost restructuring, mobile expansion via King  
   
 ## Conclusion & Investment Outlook
 

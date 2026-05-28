@@ -10,8 +10,6 @@ url: https://aidev.fit/en/ai-analyst/asml-2026-en.html
 
 ASML __May 27, 2026 __28-Page Deep Dive
 
-# ASML Holding N.V. (ASML)
-
 Comprehensive Investment Analysis — 2026 Outlook
 
 Global Lithography Monopoly · The Crown Jewel of Semiconductor Manufacturing
@@ -42,12 +40,12 @@ ASML's business model rests on two pillars: **New System Sales** — including E
 
 __ASML Key Product Lines
 
-Product Line| Technology Generation| Unit Price| Primary Application  
+Product Line | Technology Generation | Unit Price | Primary Application  
 ---|---|---|---  
-NXE:3600D / 3800E| EUV (0.33 NA)| ~$180M| 7nm/5nm/3nm volume production  
-EXE:5000 / 5200| High-NA EUV (0.55 NA)| ~$380M+| 2nm and beyond advanced nodes  
-TWINSCAN NXT:2100i| Immersion DUV (ArF)| ~$60M–$80M| Mature nodes / China customers  
-TWINSCAN / XT Series| Dry DUV (KrF / ArF)| ~$30M–$50M| Legacy nodes / sensors / power devices  
+NXE:3600D / 3800E | EUV (0.33 NA) | ~$180M | 7nm/5nm/3nm volume production  
+EXE:5000 / 5200 | High-NA EUV (0.55 NA) | ~$380M+ | 2nm and beyond advanced nodes  
+TWINSCAN NXT:2100i | Immersion DUV (ArF) | ~$60M–$80M | Mature nodes / China customers  
+TWINSCAN / XT Series | Dry DUV (KrF / ArF) | ~$30M–$50M | Legacy nodes / sensors / power devices  
   
 ## 2\. Financial Analysis: High-Quality Earnings with Structural Growth
 
@@ -145,15 +143,15 @@ As of Q1 2026, major institutional holders include Vanguard (~7.5%), BlackRock (
 
 __Global Semiconductor Equipment Competitive Comparison
 
-Dimension| ASML| Applied Materials| Lam Research| KLA| Tokyo Electron  
+Dimension | ASML | Applied Materials | Lam Research | KLA | Tokyo Electron  
 ---|---|---|---|---|---  
-Core Domain| Lithography (EUV/DUV)| Deposition/Etch/Ion Implant| Etch/Thin Film Deposition| Inspection/Metrology| Etch/Coating/Deposition  
-2025 Revenue| ~$32B| ~$28B| ~$18B| ~$11B| ~$16B  
-Market Share| Litho >90%| Deposition ~25%| Etch ~30%| Metrology ~55%| Etch/Coating ~20%  
-Competitive Moat| EUV absolute monopoly| Breadth of product line| Depth of etch process| Inspection algorithms + data| Japan customer relationships  
-Gross Margin| ~51–52%| ~47%| ~46%| ~60%| ~43%  
-R&D; Intensity| ~14%| ~11%| ~12%| ~13%| ~10%  
-Customer Concentration| Very high (top 3 >80%)| Diversified| Diversified| Diversified| Diversified  
+Core Domain | Lithography (EUV/DUV) | Deposition/Etch/Ion Implant | Etch/Thin Film Deposition | Inspection/Metrology | Etch/Coating/Deposition  
+2025 Revenue | ~$32B | ~$28B | ~$18B | ~$11B | ~$16B  
+Market Share | Litho >90% | Deposition ~25% | Etch ~30% | Metrology ~55% | Etch/Coating ~20%  
+Competitive Moat | EUV absolute monopoly | Breadth of product line | Depth of etch process | Inspection algorithms + data | Japan customer relationships  
+Gross Margin | ~51–52% | ~47% | ~46% | ~60% | ~43%  
+R&D; Intensity | ~14% | ~11% | ~12% | ~13% | ~10%  
+Customer Concentration | Very high (top 3 >80%) | Diversified | Diversified | Diversified | Diversified  
   
 ### 5.2 ASML's Unique Advantage
 
@@ -171,13 +169,13 @@ Alternative technologies to EUV lithography remain extremely limited. Canon is d
 
 __Semiconductor Equipment Peer Valuation
 
-Company| Market Cap ($B)| P/E (TTM)| EV/EBITDA| Gross Margin| Rev Growth  
+Company | Market Cap ($B) | P/E (TTM) | EV/EBITDA | Gross Margin | Rev Growth  
 ---|---|---|---|---|---  
-ASML| $380| 38.0x| 28.0x| 51.5%| 8.0%  
-Applied Materials| $180| 22.0x| 16.0x| 47%| 5%  
-Lam Research| $120| 22.0x| 16.5x| 46%| 4%  
-KLA| $100| 27.0x| 20.0x| 60%| 7%  
-Tokyo Electron| $100| 22.0x| 15.0x| 43%| 6%  
+ASML | $380 | 38.0x | 28.0x | 51.5% | 8.0%  
+Applied Materials | $180 | 22.0x | 16.0x | 47% | 5%  
+Lam Research | $120 | 22.0x | 16.5x | 46% | 4%  
+KLA | $100 | 27.0x | 20.0x | 60% | 7%  
+Tokyo Electron | $100 | 22.0x | 15.0x | 43% | 6%  
   
 ### 6.2 Valuation Premium Analysis
 
@@ -221,12 +219,12 @@ Our bullish thesis on ASML rests on three structural trends: **(1) Increasing Li
 
 __Investment Rating
 
-Item| Rating / Data  
+Item | Rating / Data  
 ---|---  
-Investment Rating| **Overweight**  
-12-Month Price Target| **$1,100–$1,200** (corresponds to 2026E P/E of ~36–40x)  
-Catalysts| High-NA volume deliveries • TSMC A16 node pull-in • China DUV pre-restriction buying • Accelerated buybacks  
-Downside Risks| Full export control escalation • Semiconductor downcycle • Customer CapEx reduction  
+Investment Rating | **Overweight**  
+12-Month Price Target | **$1,100–$1,200** (corresponds to 2026E P/E of ~36–40x)  
+Catalysts | High-NA volume deliveries • TSMC A16 node pull-in • China DUV pre-restriction buying • Accelerated buybacks  
+Downside Risks | Full export control escalation • Semiconductor downcycle • Customer CapEx reduction  
   
 ### 8.3 Scenario Analysis
 

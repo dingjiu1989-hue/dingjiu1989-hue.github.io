@@ -10,8 +10,6 @@ url: https://aidev.fit/en/ai-analyst/ccb-2026-en.html
 
 Deep Research CCB
 
-# China Construction Bank — Comprehensive Investment Analysis
-
 Date:
 
 Stock: CCB (601939.SH / 0939.HK)
@@ -157,18 +155,18 @@ Key focus areas: (1) NIM bottoming expectations; (2) real estate NPL inflection 
 
 __Big 4 State-Owned Banks — Key Metrics
 
-Metric| CCB| ICBC| ABC| BOC  
+Metric | CCB | ICBC | ABC | BOC  
 ---|---|---|---|---  
-Ticker| 601939| 601398| 601288| 601988  
-Total Assets (T RMB)| ~47.1| ~48.6| ~44.2| ~35.5  
-Revenue (B RMB)| ~7,500| ~8,200| ~7,200| ~6,300  
-Net Profit (B RMB)| ~3,350| ~3,650| ~2,700| ~2,400  
-NIM| ~1.60%| ~1.55%| ~1.50%| ~1.65%  
-NPL Ratio| ~1.35%| ~1.35%| ~1.30%| ~1.25%  
-Provision Coverage| ~240%| ~215%| ~300%| ~200%  
-ROE| ~10.9%| ~10.5%| ~10.2%| ~10.0%  
-PB| ~0.35| ~0.45| ~0.40| ~0.55  
-Div Yield (A-shares)| ~8.5%| ~7.0%| ~7.5%| ~6.5%  
+Ticker | 601939 | 601398 | 601288 | 601988  
+Total Assets (T RMB) | ~47.1 | ~48.6 | ~44.2 | ~35.5  
+Revenue (B RMB) | ~7,500 | ~8,200 | ~7,200 | ~6,300  
+Net Profit (B RMB) | ~3,350 | ~3,650 | ~2,700 | ~2,400  
+NIM | ~1.60% | ~1.55% | ~1.50% | ~1.65%  
+NPL Ratio | ~1.35% | ~1.35% | ~1.30% | ~1.25%  
+Provision Coverage | ~240% | ~215% | ~300% | ~200%  
+ROE | ~10.9% | ~10.5% | ~10.2% | ~10.0%  
+PB | ~0.35 | ~0.45 | ~0.40 | ~0.55  
+Div Yield (A-shares) | ~8.5% | ~7.0% | ~7.5% | ~6.5%  
   
 Data source: Annual reports + MCP. Approximate values for illustration.
 
@@ -184,12 +182,12 @@ CCB trades at PE ~5.6x and PB ~0.35x, near the low end of A-share bank valuation
 
 __Valuation Snapshot
 
-Metric| Current| Sector Avg| Hist. Percentile| Assessment  
+Metric | Current | Sector Avg | Hist. Percentile | Assessment  
 ---|---|---|---|---  
-PE (TTM)| ~5.6x| ~6.0x| ~30%| Low  
-PB| ~0.35x| ~0.50x| ~15%| Undervalued  
-Div Yield| ~8.5%| ~6.5%| ~85%| High  
-PEG| ~1.8x| ~2.0x| ~40%| Fair  
+PE (TTM) | ~5.6x | ~6.0x | ~30% | Low  
+PB | ~0.35x | ~0.50x | ~15% | Undervalued  
+Div Yield | ~8.5% | ~6.5% | ~85% | High  
+PEG | ~1.8x | ~2.0x | ~40% | Fair  
   
 ### 6.2 Financial Health Assessment
 
@@ -252,13 +250,13 @@ Neutral
 
 __Investment Thesis Matrix
 
-Dimension| Bullish Factors| Bearish Factors  
+Dimension | Bullish Factors | Bearish Factors  
 ---|---|---  
-Valuation| PB 0.35x near all-time low; 8.5% yield compelling| PB discount reflects persistent asset quality concerns  
-Earnings| Large absolute profit; good credit cost control| NIM declining; revenue growth stagnant  
-Asset Quality| NPL 1.35% best-in-class among Chinese banks| Large mortgage exposure; special-mention loans elevated  
-Capital| Adequate ratios; strong internal capital generation| Falling ROE reduces value creation  
-Dividend| 8.5% yield; stable payout history| Earnings deceleration may cap future payout growth  
+Valuation | PB 0.35x near all-time low; 8.5% yield compelling | PB discount reflects persistent asset quality concerns  
+Earnings | Large absolute profit; good credit cost control | NIM declining; revenue growth stagnant  
+Asset Quality | NPL 1.35% best-in-class among Chinese banks | Large mortgage exposure; special-mention loans elevated  
+Capital | Adequate ratios; strong internal capital generation | Falling ROE reduces value creation  
+Dividend | 8.5% yield; stable payout history | Earnings deceleration may cap future payout growth  
   
 ### 8.4 Recommended Positioning
 

@@ -10,9 +10,7 @@ url: https://aidev.fit/en/ai-analyst/broadcom-2026-en.html
 
 Broadcom
 
-# Broadcom (AVGO) Deep Research Report
-
-Report Date: May 2026  |  Analyst: AI Research Team
+Report Date: May 2026 | Analyst: AI Research Team
 
 ## 1\. Company Overview
 
@@ -38,13 +36,13 @@ Broadcom generated approximately $58 billion in total revenue for FY2025 (ended 
 
 ### 2.2 Revenue Breakdown
 
-Segment| FY2025 Revenue ($B)| YoY Change| % of Total  
+Segment | FY2025 Revenue ($B) | YoY Change | % of Total  
 ---|---|---|---  
-Semiconductor Solutions| ~35.0| +22%| 60%  
-  of which: AI-related| ~22.0| +64%| 38%  
-  of which: Non-AI| ~13.0| -8%| 22%  
-Infrastructure Software| ~23.0| +65%| 40%  
-**Total**| **~58.0**| **+32%**| **100%**  
+Semiconductor Solutions | ~35.0 | +22% | 60%  
+of which: AI-related | ~22.0 | +64% | 38%  
+of which: Non-AI | ~13.0 | -8% | 22%  
+Infrastructure Software | ~23.0 | +65% | 40%  
+**Total** | **~58.0** | **+32%** | **100%**  
   
 ### 2.3 Profitability
 
@@ -124,12 +122,12 @@ Broadcom entered cybersecurity through the Symantec enterprise security acquisit
 
 ### 5.4 Competitive Landscape Summary
 
-Domain| Broadcom| Key Competitor| Broadcom Advantage / Risk  
+Domain | Broadcom | Key Competitor | Broadcom Advantage / Risk  
 ---|---|---|---  
-Networking Chips| ~70% share| NVIDIA (Mellanox)| Open ecosystem, but Spectrum-X growing fast  
-Custom ASICs| Market leader| Marvell, Alchip| Deep customer ties, but competition intensifying  
-Enterprise Security| Moderate| Palo Alto, CrowdStrike| Non-core, limited investment  
-Virtualization| VMware leader| Nutanix, Microsoft| Price hikes causing customer friction  
+Networking Chips | ~70% share | NVIDIA (Mellanox) | Open ecosystem, but Spectrum-X growing fast  
+Custom ASICs | Market leader | Marvell, Alchip | Deep customer ties, but competition intensifying  
+Enterprise Security | Moderate | Palo Alto, CrowdStrike | Non-core, limited investment  
+Virtualization | VMware leader | Nutanix, Microsoft | Price hikes causing customer friction  
   
 ## 6\. Valuation Analysis
 

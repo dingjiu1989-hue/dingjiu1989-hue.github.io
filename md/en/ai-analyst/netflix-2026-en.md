@@ -10,8 +10,6 @@ url: https://aidev.fit/en/ai-analyst/netflix-2026-en.html
 
 Deep Research Netflix
 
-# Netflix Comprehensive Investment Analysis (2026)
-
 Date:
 
 Ticker: Netflix (NFLX)
@@ -174,20 +172,20 @@ __Data Insight: Wall Street Targets
 
 ## 5\. Competitive Comparison
 
-Metric| Netflix| Disney+| Max (WBD)| Prime Video| YouTube  
+Metric | Netflix | Disney+ | Max (WBD) | Prime Video | YouTube  
 ---|---|---|---|---|---  
-Global Paid Subs| ~330M| ~170M| ~110M| ~200M+*| ~100M+**  
-Content Spend (2025)| $17B| $15B| $12B| $10B+| $5B+  
-Ad-Tier| Yes (70M+ MAU)| Yes| Yes| Yes| YouTube Premium  
-Global Reach| 190+ countries| 160+ countries| ~65 countries| ~240 countries| ~100 countries  
-Operating Margin| 28.6%| ~10%| Loss-making| N/A***| N/A***  
-Original IP Strength| Very strong| Strong (Marvel/Star Wars)| Moderate (DC/HBO)| Moderate| UGC-driven  
-Live Sports| NFL, WWE Raw| ESPN+ (JV)| Bleacher Report| NFL Thursday| Limited  
-Gaming| 100+ titles| Limited| None| Prime Gaming| YouTube Gaming  
+Global Paid Subs | ~330M | ~170M | ~110M | ~200M+* | ~100M+**  
+Content Spend (2025) | $17B | $15B | $12B | $10B+ | $5B+  
+Ad-Tier | Yes (70M+ MAU) | Yes | Yes | Yes | YouTube Premium  
+Global Reach | 190+ countries | 160+ countries | ~65 countries | ~240 countries | ~100 countries  
+Operating Margin | 28.6% | ~10% | Loss-making | N/A*** | N/A***  
+Original IP Strength | Very strong | Strong (Marvel/Star Wars) | Moderate (DC/HBO) | Moderate | UGC-driven  
+Live Sports | NFL, WWE Raw | ESPN+ (JV) | Bleacher Report | NFL Thursday | Limited  
+Gaming | 100+ titles | Limited | None | Prime Gaming | YouTube Gaming  
   
-*Prime Video subscribers are bundled with Amazon Prime, not independently paid.  
-**YouTube TV and Premium paid subscribers.  
-***Parent companies do not separately disclose streaming segment profitability.
+_Prime Video subscribers are bundled with Amazon Prime, not independently paid.  
+__YouTube TV and Premium paid subscribers.  
+_**Parent companies do not separately disclose streaming segment profitability.
 
 Netflix leads all streaming competitors in subscriber scale, operating margin, and global coverage. Disney+ has deeper IP depth (Marvel, Star Wars, Pixar) but carries higher content costs with significantly lower margins. Max maintains stickiness among core HBO fans but is expanding globally at a slower pace. Prime Video benefits from Amazon Prime bundling but exhibits lower engagement density and content spend per user. YouTube operates in a different segment with user-generated content, creating an impenetrable moat in its own right.
 

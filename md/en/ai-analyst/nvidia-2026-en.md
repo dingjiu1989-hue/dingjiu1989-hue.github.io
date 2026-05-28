@@ -10,8 +10,6 @@ url: https://aidev.fit/en/ai-analyst/nvidia-2026-en.html
 
 Deep Research NVIDIA
 
-# NVIDIA Comprehensive Investment Analysis
-
 Date:
 
 Ticker: NVIDIA (NVDA)
@@ -157,13 +155,13 @@ __Data Insight: Wall Street Targets
 
 ## 5\. Competitive Comparison
 
-Metric| NVIDIA| AMD| Intel| Broadcom  
+Metric | NVIDIA | AMD | Intel | Broadcom  
 ---|---|---|---|---  
-Market Cap| $5.8T| $320B| $185B| $1.2T  
-AI Accelerator Share| ~82%| ~12%| <1%| ~5% (custom)  
-DC Revenue (TTM)| $141B| $12B| $14B| $35B  
-Gross Margin| 75.7%| 53%| 45%| 65%  
-Software Ecosystem| CUDA| ROCm| oneAPI| None  
+Market Cap | $5.8T | $320B | $185B | $1.2T  
+AI Accelerator Share | ~82% | ~12% | <1% | ~5% (custom)  
+DC Revenue (TTM) | $141B | $12B | $14B | $35B  
+Gross Margin | 75.7% | 53% | 45% | 65%  
+Software Ecosystem | CUDA | ROCm | oneAPI | None  
   
 ## 6\. Valuation & Financial Health
 
