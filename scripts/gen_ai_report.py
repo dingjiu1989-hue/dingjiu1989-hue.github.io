@@ -896,8 +896,12 @@ def parse_markdown(text):
             out.append(f'<h3>{inline_md(escape(trimmed[4:]))}</h3>')
             continue
 
+        # Table separator row |---|---| — skip silently
+        if re.match(r'^\|[\s\-:|]+\|$', trimmed):
+            continue
+
         # Table row |...|
-        if trimmed.startswith('|') and trimmed.endswith('|') and not re.match(r'^\|[\s\-:]+\|$', trimmed):
+        if trimmed.startswith('|') and trimmed.endswith('|'):
             close_lists()
             cells = [inline_md(escape(c.strip())) for c in trimmed.split('|') if c.strip()]
             next_is_header = (i + 1 < len(lines)) and bool(re.match(r'^\|[\s\-:|]+\|$', lines[i + 1].strip()))
