@@ -7,7 +7,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="alternate icon" href="/favicon.ico">
     <meta property="og:title" content="AI分析师 — 智能公司搜索">
-    <meta property="og:description" content="搜索全球科技公司，快速获取 AI 驱动的深度投资分析报告。覆盖 NVIDIA、Apple、台积电、宁德时代等 19 家头部公司。">
+    <meta property="og:description" content="搜索全球科技公司，快速获取 AI 驱动的深度投资分析报告。覆盖 NVIDIA、Apple、台积电、宁德时代等 24 家头部公司。">
     <meta property="og:url" content="https://aidev.fit/ai-analyst/analysis.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="AI自习室">
@@ -18,7 +18,7 @@
     <meta name="twitter:description" content="搜索全球科技公司，快速获取 AI 驱动的深度投资分析报告。">
     <meta name="twitter:image" content="https://aidev.fit/images/logo.png">
     <title>AI分析师 — 智能公司搜索</title>
-    <meta name="description" content="搜索全球科技公司，快速获取 AI 驱动的深度投资分析报告。覆盖 NVIDIA、Apple、台积电、宁德时代等 19 家头部公司。">
+    <meta name="description" content="搜索全球科技公司，快速获取 AI 驱动的深度投资分析报告。覆盖 NVIDIA、Apple、台积电、宁德时代等 24 家头部公司。">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="canonical" href="https://aidev.fit/ai-analyst/analysis.html">
     <style>
@@ -557,7 +557,7 @@
     function renderGrid(list) {
         var grid = document.getElementById('companyGrid');
         if (list.length === 0) {
-            grid.innerHTML = '<div class="no-results" id="noResults"><strong>未找到匹配公司</strong><br>目前覆盖 19 家头部科技公司。<br><br><button class="live-analysis-btn" id="requestReportBtn" onclick="requestReport()">📝 请求 Claude 生成报告</button><br><span id="requestStatus" style="font-size:.85rem;color:#888;margin-top:8px;display:inline-block;">提交后将通知 AI 助手生成完整 8 段式深度分析报告</span></div>';
+            grid.innerHTML = '<div class="no-results" id="noResults"><strong>未找到匹配公司</strong><br>目前覆盖 24 家头部科技公司（在线分析可生成未收录公司的报告）。<br><br><button class="live-analysis-btn" id="requestReportBtn" onclick="requestReport()">📝 请求 AI 生成完整分析报告</button><br><span id="requestStatus" style="font-size:.85rem;color:#888;margin-top:8px;display:inline-block;">提交后将通知 AI 助手生成完整 8 段式深度分析报告</span></div>';
             return;
         }
         grid.innerHTML = list.map(renderCard).join('');
@@ -844,7 +844,7 @@ function requestReport() {
                 ratingColor: 'blue-600',
                 summary: 'AI 自动生成的深度分析报告',
                 reportDate: new Date().toISOString().split('T')[0],
-                reportUrl: data.slug + '.html',
+                reportUrl: WORKER_URL + '/report/' + data.slug,
             };
             var exists = false;
             for (var ei = 0; ei < allCompanies.length; ei++) {
@@ -855,7 +855,14 @@ function requestReport() {
                 saveCustomCompanies();
                 document.getElementById('gridTitle').textContent = '全部公司';
                 renderGrid(allCompanies);
+                // Scroll to the newly added card
+                setTimeout(function() {
+                    var cards = document.querySelectorAll('.company-card');
+                    var lastCard = cards[cards.length - 1];
+                    if (lastCard) lastCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
             }
+            area.innerHTML = '';
             btn.textContent = '✅ 已生成';
             btn.disabled = false;
         } else {
