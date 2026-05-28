@@ -1267,8 +1267,12 @@ def generate_one(name, code, sector):
 
     # Debug: print MCP income data structure
     if income_rows:
-        print(f'  Income rows: {len(income_rows)}, keys: {list(income_rows[0].keys())[:15]}')
-        print(f'  Sample: yr={income_rows[0].get(\"endDate\",\"N/A\")}, rev={income_rows[0].get(\"revenue\",\"N/A\")}, opr={income_rows[0].get(\"operatingRevenue\",\"N/A\")}')
+        keys = list(income_rows[0].keys())[:15]
+        yr_val = income_rows[0].get('endDate', 'N/A')
+        rev_val = income_rows[0].get('revenue', 'N/A')
+        opr_val = income_rows[0].get('operatingRevenue', 'N/A')
+        print(f'  Income rows: {len(income_rows)}, keys: {keys}')
+        print(f'  Sample: yr={yr_val}, rev={rev_val}, opr={opr_val}')
 
     # 4. Chart data (multi-year)
     years = []
