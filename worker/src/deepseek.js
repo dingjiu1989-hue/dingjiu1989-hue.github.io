@@ -38,6 +38,7 @@ function systemPrompt() {
 
 ## JSON结构
 {
+  "subtitle": "一句话副标题，10-20字，类似「AI算力霸主的芯片帝国」「高股息银行股的估值修复之路」，提炼公司核心投资逻辑",
   "executive_summary": "三段核心摘要（每段含核心**数字**），每段2-3句，用\\n\\n分隔",
   "sections": [
     { "id": "s1", "title": "一、公司概况", "content": "使用 Markdown 格式的200-500字分析" },

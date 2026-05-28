@@ -55,7 +55,8 @@ def main():
     slug = data["slug"]
     company_name = data["company"]
     stock_code = data["code"]
-    title = f"{company_name}全面分析报告：AI 深度研究"
+    subtitle = data.get("subtitle", "").strip() or "AI 深度研究"
+    title = f"{company_name}全面分析报告：{subtitle}"
     filename = f"{slug}.html"
     filepath = os.path.join(REPORTS_DIR, filename)
 

@@ -160,6 +160,7 @@ export default {
         latestPrice, high52, low52, pe: basicInfo?.peRatio || basicInfo?.pe,
         pb: basicInfo?.pbRatio || basicInfo?.pb,
         slug,
+        subtitle: report?.subtitle || '',
         report: {
           executiveSummary: report?.executive_summary || '',
           sections: (report?.sections || []).map(s => ({ id: s.id, title: s.title, content: s.content })),
@@ -178,6 +179,7 @@ export default {
         company: stockName,
         code,
         slug,
+        subtitle: report?.subtitle || '',
         url: `/ai-analyst/${slug}.html`,
         html: fullHTML,
       });
