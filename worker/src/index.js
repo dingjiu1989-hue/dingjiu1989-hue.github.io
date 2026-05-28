@@ -119,7 +119,15 @@ export default {
       const years = incomeRows.map(r => (r.endDate || r.reportDate || '').slice(0, 4)).reverse();
       const revData = incomeRows.map(r => parseFloat(r.revenue || r.operatingRevenue || 0)).reverse();
       const profitData = incomeRows.map(r => parseFloat(r.netProfit || r.netIncome || 0)).reverse();
-      const marginData = incomeRows.map(r => parseFloat(r.grossProfitMargin || 0) || null).reverse();
+      const marginData = incomeRows.map(r => {
+        if (r.grossProfitMargin != null) return parseFloat(r.grossProfitMargin);
+        const rev = parseFloat(r.revenue || r.operatingRevenue || 0);
+        const gp = parseFloat(r.grossProfit);
+        if (rev > 0 && gp > 0) return (gp / rev * 100);
+        const np = parseFloat(r.netProfit || r.netIncome);
+        if (rev > 0 && np > 0) return (np / rev * 100);
+        return null;
+      }).reverse();
 
       // Step 6: Build prompt & call DeepSeek
       const prompt = buildPrompt({

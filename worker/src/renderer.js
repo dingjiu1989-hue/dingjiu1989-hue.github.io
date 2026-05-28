@@ -17,6 +17,7 @@ export function renderReportHTML(data) {
   const revData = chartData.revenue || [];
   const profitData = chartData.netIncome || [];
   const marginData = chartData.grossMargin || [];
+const hasMarginData = marginData.some(v => v != null && !isNaN(v));
 
   // -- Indicator grid data --
   const d3Price = price != null ? parseFloat(price).toFixed(2) : null;
@@ -207,7 +208,7 @@ ${s.content ? parseMarkdown(s.content) : '<p>数据不足，暂无法生成该�
       </script>
       ` : ''}
 
-      ${chartData.marginData && chartData.marginData.length >= 3 ? `
+      ${hasMarginData && years.length >= 3 ? `
       <div class="chart-card">
         <div class="chart-header"><i class="fas fa-percentage" style="color:#059669"></i> 毛利率趋势</div>
         <div class="chart-body"><div class="chart-container"><canvas id="chartMargin"></canvas></div></div>
