@@ -58,7 +58,7 @@ jobs:
           python3 scripts/gen_ai_report.py --company "${{ inputs.company_name }}" --code "${{ inputs.code }}"
 
       - name: Generate batch of 5 reports
-        if: inputs.company_name == ''
+        if: inputs.company_name == '' && inputs.fill_cards != true
         run: python3 scripts/gen_ai_report.py
 
       - name: Backfill search cards (all existing reports)
