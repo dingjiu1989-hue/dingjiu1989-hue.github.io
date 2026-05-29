@@ -6,12 +6,12 @@ on:
     - cron: '0 2 * * *'
   workflow_dispatch:
     inputs:
-      single:
-        description: 'Generate for a single company (name)'
+      company_name:
+        description: 'Company name (e.g. 寒武纪)'
         required: false
         type: string
       code:
-        description: 'Stock code (with --single)'
+        description: 'Stock code (e.g. 688256)'
         required: false
         type: string
       reset:
@@ -48,12 +48,12 @@ jobs:
         run: python3 scripts/gen_ai_report.py --reset
 
       - name: Generate single report
-        if: inputs.single != ''
+        if: inputs.company_name != ''
         run: |
-          python3 scripts/gen_ai_report.py --company "${{ inputs.single }}" --code "${{ inputs.code }}"
+          python3 scripts/gen_ai_report.py --company "${{ inputs.company_name }}" --code "${{ inputs.code }}"
 
       - name: Generate batch of 5 reports
-        if: inputs.single == ''
+        if: inputs.company_name == ''
         run: python3 scripts/gen_ai_report.py
 
       - name: Check for changes

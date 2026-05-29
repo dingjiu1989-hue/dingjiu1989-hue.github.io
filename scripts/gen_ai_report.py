@@ -1741,6 +1741,18 @@ def main():
     if args.company:
         name = args.company.strip()
         code = args.code.strip() if args.code else ''
+
+        # Defensive: if --company looks like "true"/"false" (workflow API mistake) and --code is set,
+        # look up the real company name from the queue
+        if code and name.lower() in ('true', 'false'):
+            q = json.loads(QUEUE_FILE.read_text())
+            match = [e for e in q if e.get('code') == code]
+            if match:
+                print(f'  --company was "{name}", looking up real name from queue: {match[0]["name"]} ({code})')
+                name = match[0]['name']
+            else:
+                print(f'  Warning: --company="{name}" looks wrong, but no match in queue for code={code}')
+
         if not code:
             print(f'Searching for {name}...')
             sr = search_stock(name)
