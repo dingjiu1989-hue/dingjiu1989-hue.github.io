@@ -35,6 +35,31 @@ MCP_TOKEN = os.environ.get('MCP_TOKEN', '')
 DEEPSEEK_KEY = os.environ.get('DEEPSEEK_KEY', '')
 BATCH_SIZE = 5
 
+# English name mapping for A-share companies (code → English name)
+EN_NAME_MAP = {
+    '002156': 'Tongfu Microelectronics',
+    '002185': 'Huatian Technology',
+    '002049': 'Unigroup Guoxin',
+    '002371': 'NAURA',
+    '300223': 'Ingenic',
+    '300661': 'SG Micro',
+    '300782': 'Maxscend',
+    '600584': 'JCET',
+    '603501': 'Will Semiconductor',
+    '603986': 'GigaDevice',
+    '688008': 'Montage Technology',
+    '688012': 'AMEC',
+    '688041': 'Hygon',
+    '688256': 'Cambricon',
+    '688981': 'SMIC',
+    '601288': 'Agricultural Bank of China',
+    '601398': 'ICBC',
+    '601988': 'Bank of China',
+    '600036': 'China Merchants Bank',
+    '600900': 'Yangtze Power',
+    '601939': 'China Construction Bank',
+}
+
 
 # ═══════════════════════════════ MCP Client ═══════════════════════════════
 
@@ -416,6 +441,14 @@ def render_report_cn(data):
 
     has_margin = any(v is not None for v in (margin_data or []))
 
+    # Clamp extreme margin values for chart display (values outside [-100, 100] break Y-axis scale)
+    clamped_margin = []
+    for v in (margin_data or []):
+        if v is not None:
+            clamped_margin.append(max(min(v, 100), -100))
+        else:
+            clamped_margin.append(None)
+
     # YoY growth data (rev_data is oldest→latest, compute latest→oldest)
     yoy_labels = years[1:] if len(years) > 1 else []
     yoy_data = []
@@ -456,7 +489,7 @@ new Chart(document.getElementById('chartIncome'),{type:'bar',data:{labels:YEARS,
     margin_chart = ''
     if has_margin and len(years) >= 1:
         _my = json.dumps(years)
-        _md = json.dumps(margin_data)
+        _md = json.dumps(clamped_margin)
         margin_chart = '''\
 <div class="widget-box">
   <div class="widget-header"><i class="fas fa-percentage" style="color:#059669"></i> 毛利率趋势</div>
@@ -686,7 +719,7 @@ new Chart(document.getElementById('chartYoY'),{type:'bar',data:{labels:YOY_LABEL
         <h1 class="report-title">{co}全面分析报告：{escape(subtitle)}</h1>
         <div class="report-meta">
           <span><strong>日期</strong> / <script>document.write(new Date().toLocaleDateString('zh-CN'))</script></span>
-          <span><strong>行业</strong> / {escape(industry or '金融')}</span>
+          <span><strong>行业</strong> / {escape(industry or '——')}</span>
           <span><strong>来源</strong> / AI 生成</span>
         </div>
       </header>
@@ -724,6 +757,8 @@ def render_report_en(data):
     co = escape(str(data.get('company', '') or ''))
     code = escape(str(data.get('code', '') or ''))
     slug = data.get('slug', 'report')
+    slug_cn = slug.replace('-en', '') if slug.endswith('-en') else slug
+    name_en = escape(str(data.get('name_en', '') or co))
     industry = escape(str(data.get('industry_en', data.get('industry', '') or '')))
     price = data.get('latestPrice')
     pe = data.get('pe')
@@ -742,6 +777,14 @@ def render_report_en(data):
     prices = chart_data.get('prices', [])
 
     has_margin = any(v is not None for v in (margin_data or []))
+
+    # Clamp extreme margin values for chart display
+    clamped_margin = []
+    for v in (margin_data or []):
+        if v is not None:
+            clamped_margin.append(max(min(v, 100), -100))
+        else:
+            clamped_margin.append(None)
 
     # YoY growth data
     yoy_labels = years[1:] if len(years) > 1 else []
@@ -783,7 +826,7 @@ new Chart(document.getElementById('chartIncome'),{type:'bar',data:{labels:YEARS,
     margin_chart = ''
     if has_margin and len(years) >= 1:
         _my = json.dumps(years)
-        _md = json.dumps(margin_data)
+        _md = json.dumps(clamped_margin)
         margin_chart = '''\
 <div class="widget-box">
   <div class="widget-header"><i class="fas fa-percentage" style="color:#059669"></i> Gross Margin Trend</div>
@@ -873,9 +916,9 @@ new Chart(document.getElementById('chartYoY'),{type:'bar',data:{labels:YOY_LABEL
   <title>{co} Comprehensive Investment Analysis (2026) — AI Study Room</title>
   <meta name="description" content="{meta_desc}">
   <meta name="robots" content="index,follow">
-  <link rel="canonical" href="https://aidev.fit/en/ai-analyst/{slug}-en.html">
-  <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai-analyst/{slug}-en.html">
-  <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/ai-analyst/{slug}.html">
+  <link rel="canonical" href="https://aidev.fit/en/ai-analyst/{slug}.html">
+  <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai-analyst/{slug}.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/ai-analyst/{slug_cn}.html">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
@@ -956,13 +999,13 @@ new Chart(document.getElementById('chartYoY'),{type:'bar',data:{labels:YOY_LABEL
       <header>
         <div class="badge-row">
           <span class="badge" style="background:#0f172a;color:#fff">Deep Research</span>
-          <span class="badge" style="background:#1e3a5f;color:#fff">{co}</span>
+          <span class="badge" style="background:#1e3a5f;color:#fff">{name_en}</span>
           <span class="badge" style="background:#e8edf5;color:#475569">{code}</span>
         </div>
-        <h1 class="report-title">{co} Comprehensive Investment Analysis (2026)</h1>
+        <h1 class="report-title">{name_en} Comprehensive Investment Analysis (2026)</h1>
         <div class="report-meta">
           <span><strong>Date</strong> / <script>document.write(new Date().toLocaleDateString('en-US'))</script></span>
-          <span><strong>Sector</strong> / {escape(industry or 'Finance')}</span>
+          <span><strong>Sector</strong> / {escape(industry or '——')}</span>
           <span><strong>Source</strong> / AI Generated</span>
         </div>
       </header>
@@ -1402,6 +1445,74 @@ def update_index_html_en(slug, title):
     print('  EN index.html updated')
 
 
+# ═══════════════════════════════ Analysis Card Update ═══════════════════════════════
+
+ANALYSIS_HTML = BASE / 'ai-analyst' / 'analysis.html'
+
+def fmt_market_cap(val):
+    """Format market cap value for search card display."""
+    if val is None:
+        return '—'
+    try:
+        n = float(val)
+    except (ValueError, TypeError):
+        return str(val)
+    if n >= 1e12:
+        return f'¥{n/1e12:.1f}T'
+    if n >= 1e8:
+        return f'¥{n/1e8:.0f}亿'
+    return f'¥{n:.0f}'
+
+def fmt_revenue(val):
+    """Format revenue for search card display."""
+    if val is None:
+        return '—'
+    try:
+        n = float(val)
+    except (ValueError, TypeError):
+        return str(val)
+    if n >= 1e12:
+        return f'¥{n/1e12:.1f}T'
+    if n >= 1e8:
+        return f'¥{n/1e8:.1f}B'
+    return f'¥{n:.0f}'
+
+def update_analysis_card(slug, data):
+    """Update COMPANIES_DATA entry in analysis.html with real financial data."""
+    if not ANALYSIS_HTML.exists():
+        return
+    html = ANALYSIS_HTML.read_text(encoding='utf-8')
+    match = re.search(r'var COMPANIES_DATA = ({.*?});\s*\n', html, re.DOTALL)
+    if not match:
+        return
+    try:
+        cd = json.loads(match.group(1))
+    except json.JSONDecodeError:
+        return
+    for company in cd['companies']:
+        if company['slug'] == slug:
+            if data.get('marketCap'):
+                company['marketCap'] = data['marketCap']
+            if data.get('revenue'):
+                company['revenue'] = data['revenue']
+            if data.get('netIncome'):
+                company['netIncome'] = data['netIncome']
+            if data.get('revenueGrowth'):
+                company['revenueGrowth'] = data['revenueGrowth']
+            if data.get('pe'):
+                company['pe'] = data['pe']
+            if data.get('grossMargin'):
+                company['grossMargin'] = data['grossMargin']
+            if data.get('rating'):
+                company['rating'] = data['rating']
+            if data.get('ratingEn'):
+                company['ratingEn'] = data['ratingEn']
+            break
+    new_json = json.dumps(cd, ensure_ascii=False, separators=(',', ':'))
+    new_html = html[:match.start(1)] + new_json + html[match.end(1):]
+    ANALYSIS_HTML.write_text(new_html, encoding='utf-8')
+
+
 # ═══════════════════════════════ Company Generation ═══════════════════════════════
 
 def generate_one(name, code, sector):
@@ -1553,9 +1664,29 @@ def generate_one(name, code, sector):
         f.write(cn_html)
     print(f'  Saved CN: ai-analyst/{slug}.html ({len(cn_html)} bytes)')
 
+    # Update analysis.html search card with real financial data
+    mc = basic.get('totalMarketCap')
+    pe_val = basic.get('peRatio') or basic.get('pe')
+    latest_rev = rev_data[-1] if rev_data else None
+    latest_profit = profit_data[-1] if profit_data else None
+    latest_margin = margin_data[-1] if margin_data else None
+    growth = None
+    if len(rev_data) >= 2 and rev_data[-2] and rev_data[-2] > 0:
+        growth = f'+{round((rev_data[-1] - rev_data[-2]) / rev_data[-2] * 100, 1)}%'
+    update_analysis_card(slug, {
+        'marketCap': fmt_market_cap(mc),
+        'revenue': fmt_revenue(latest_rev),
+        'netIncome': fmt_revenue(latest_profit),
+        'revenueGrowth': growth,
+        'pe': f'~{float(pe_val):.1f}x' if pe_val else None,
+        'grossMargin': f'{latest_margin:.1f}%' if latest_margin is not None else None,
+    })
+
     # 7. Save EN HTML
+    name_en = EN_NAME_MAP.get(code, name)
     en_data = cn_data.copy()
     en_data['slug'] = f'{slug}-en'
+    en_data['name_en'] = name_en
     en_data['subtitle'] = subtitle_en
     en_data['executive_summary'] = exec_summary_en
     en_data['sections'] = sections_en
@@ -1570,7 +1701,7 @@ def generate_one(name, code, sector):
 
     # 8. Register in articles.json
     cn_title = f'{name}全面分析报告：{subtitle}'
-    en_title = f'{name} Comprehensive Investment Analysis (2026)'
+    en_title = f'{name_en} Comprehensive Investment Analysis (2026)'
 
     register_article_cn(name, code, slug, cn_title, meta_desc_cn)
     register_article_en(name, code, slug, en_title, meta_desc_en)
