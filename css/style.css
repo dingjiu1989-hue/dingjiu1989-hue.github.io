@@ -395,6 +395,13 @@ a:hover { text-decoration: underline; }
   margin-bottom: 1.25rem;
   font-size: 0.9rem;
 }
+/* Wrap tables in a scrollable container for mobile */
+.article-body table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
 .article-body th, .article-body td {
   border: 1px solid var(--c-border);
   padding: 0.6rem 0.85rem;
@@ -985,6 +992,15 @@ a:hover { text-decoration: underline; }
     border-top: 1px solid #484f58;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   }
+  .nav-toggle:checked ~ .nav-links a {
+    padding: 0.6rem 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .nav-toggle:checked ~ .nav-links .nav-link-highlight {
+    color: #58a6ff;
+  }
   .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
   }
@@ -1015,6 +1031,8 @@ a:hover { text-decoration: underline; }
   .board-header { flex-wrap: wrap; }
   .board-header .board-desc { display: none; }
   .article-meta { font-size: 0.78rem; gap: 0.3rem; }
+  .nav-actions { gap: 0.4rem; }
+  .nav-actions .lang-switch, .nav-actions a { padding: 0.4rem 0.2rem; }
 }
 
 /* Small phones */
@@ -1024,6 +1042,7 @@ a:hover { text-decoration: underline; }
   .article-body h2 { font-size: 1.1rem; }
   .discussion-cta { padding: 1rem; }
   .discussion-cta a { width: 100%; }
+  .article-body a { padding: 0.2rem 0; }
 }
 
 /* === Cookie Consent Banner === */

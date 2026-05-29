@@ -135,7 +135,11 @@ def parse_tags(tags_val):
     return clean
 
 
-def make_article_body(art, board_id, en_data):
+def get_tags(art, board_id):
+    """Get dev.to tags for an article, with board-specific overrides."""
+    if board_id == "ai-analyst":
+        return ["ai", "investing", "finance", "analytics"]
+    return parse_tags(art.get("tags", ""))[:4]
     """Build dev.to article body from markdown content."""
     md_path = ROOT / "md" / "en" / board_id / f'{art["slug"]}.md'
     if not md_path.exists():
@@ -155,7 +159,7 @@ def make_article_body(art, board_id, en_data):
 title: "{art['title']}"
 published: true
 description: "{art.get('description', '')[:200]}"
-tags: {', '.join(parse_tags(art.get('tags', ''))[:4])}
+tags: {', '.join(get_tags(art, board_id))}
 canonical_url: "{original_url}"
 ---
 
@@ -194,7 +198,7 @@ def main():
             all_articles.append((board["id"], art))
 
     # Sort by board priority (Compare = highest CPC, then Tools, then others)
-    board_priority = {"compare": 0, "tools": 1, "ai": 2, "tech": 3, "sidehustle": 4}
+    board_priority = {"compare": 0, "tools": 1, "ai": 2, "tech": 3, "sidehustle": 4, "ai-analyst": 5, "architecture": 6, "database": 7, "security": 8, "daily": 9}
     all_articles.sort(key=lambda x: (board_priority.get(x[0], 99), x[1]["date"]), reverse=False)
 
     # Get already-published slugs
@@ -231,7 +235,7 @@ def main():
                 "description": art.get("description", "")[:200],
                 "body_markdown": body,
                 "published": True,
-                "tags": parse_tags(art.get("tags", ""))[:4],
+                "tags": get_tags(art, board_id),
                 "canonical_url": f"{BASE}/en/{board_id}/{art['slug']}.html",
             }
         }
