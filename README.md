@@ -2,7 +2,7 @@
 
 > Curated tools & tutorials for developers
 
-**860 bilingual technical articles** — English & Chinese — covering AI, web development, DevOps, tools, and side hustles.
+**902 bilingual technical articles** — English & Chinese — covering AI, web development, DevOps, tools, and side hustles.
 
 🌐 **Website:** [https://dingjiu1989-hue.github.io](https://dingjiu1989-hue.github.io/en/)
 🤖 **AI-friendly index:** [`/en/llms.txt`](https://dingjiu1989-hue.github.io/en/llms.txt)
@@ -11,15 +11,16 @@
 
 ## 📊 Stats
 
-- **Total articles:** 860
-- **Categories:** 9
+- **Total articles:** 902
+- **Categories:** 10
 - **AI crawler optimized:** Yes (llms.txt, structured data, sitemap)
 
 ## 📚 Content by Category
 
 | Category | Articles | Link |
 |----------|----------|------|
-| 📰 AI Daily Digest | 6 | [Browse](https://dingjiu1989-hue.github.io/en/daily/) |
+| 🔬 AI Analyst | 38 | [Browse](https://dingjiu1989-hue.github.io/en/ai-analyst/) |
+| 📰 AI Daily Digest | 10 | [Browse](https://dingjiu1989-hue.github.io/en/daily/) |
 | 💻 Tech Tutorials | 130 | [Browse](https://dingjiu1989-hue.github.io/en/tech/) |
 | 💰 Side Hustle | 100 | [Browse](https://dingjiu1989-hue.github.io/en/sidehustle/) |
 | 🛠️ Tool Recommendations | 115 | [Browse](https://dingjiu1989-hue.github.io/en/tools/) |
