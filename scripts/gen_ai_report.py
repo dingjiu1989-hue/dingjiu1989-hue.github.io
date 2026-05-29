@@ -1267,12 +1267,14 @@ def generate_one(name, code, sector):
 
     # Debug: print MCP income data structure
     if income_rows:
-        keys = list(income_rows[0].keys())[:15]
+        keys = list(income_rows[0].keys())[:30]
         yr_val = income_rows[0].get('endDate', 'N/A')
-        rev_val = income_rows[0].get('revenue', 'N/A')
-        opr_val = income_rows[0].get('operatingRevenue', 'N/A')
+        rev_val = income_rows[0].get('revenue', income_rows[0].get('totalOperatingRevenue', 'N/A'))
+        np_val = income_rows[0].get('netProfit', income_rows[0].get('netIncome', 'N/A'))
+        rd_val = income_rows[0].get('reportPeriodEnd', 'N/A')
+        gp_val = income_rows[0].get('grossProfitMargin', 'N/A')
         print(f'  Income rows: {len(income_rows)}, keys: {keys}')
-        print(f'  Sample: yr={yr_val}, rev={rev_val}, opr={opr_val}')
+        print(f'  Sample: yr={yr_val}, rd={rd_val}, rev={rev_val}, np={np_val}, gp={gp_val}')
 
     # 4. Chart data (multi-year)
     years = []
@@ -1281,11 +1283,11 @@ def generate_one(name, code, sector):
     margin_data = []
 
     for r in reversed(income_rows):
-        yr = (r.get('endDate') or r.get('reportDate', ''))[:4]
+        yr = (r.get('endDate') or r.get('reportDate') or r.get('reportPeriodEnd', ''))[:4]
         if yr and (not years or yr != years[-1]):
             years.append(yr)
-            rev = float(r.get('revenue') or r.get('operatingRevenue', 0) or 0)
-            profit = float(r.get('netProfit') or r.get('netIncome', 0) or 0)
+            rev = float(r.get('totalOperatingRevenue') or r.get('revenue') or r.get('operatingRevenue', 0) or 0)
+            profit = float(r.get('netProfit') or r.get('netIncome') or 0)
             rev_data.append(rev)
             profit_data.append(profit)
 
