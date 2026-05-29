@@ -406,6 +406,7 @@ def render_report_cn(data):
     subtitle = data.get('subtitle', '') or 'AI 深度研究'
     exec_summary = data.get('executive_summary', '')
     sections = data.get('sections', [])
+    meta_desc = data.get('meta_description', '') or f'深度分析{co}（{code}）：AI 深度研究报告，覆盖财务、技术面、竞品、估值与风险分析。'
     chart_data = data.get('chart_data', {})
     years = chart_data.get('years', [])
     rev_data = chart_data.get('revenue', [])
@@ -542,7 +543,7 @@ new Chart(document.getElementById('chartYoY'),{type:'bar',data:{labels:YOY_LABEL
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>{co}全面分析报告：{escape(subtitle)} — AI自习室</title>
-  <meta name="description" content="深度分析{co}（{code}）：{industry}。AI 实时生成，覆盖财务、技术面、估值与风险分析。">
+  <meta name="description" content="{meta_desc}">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://aidev.fit/ai-analyst/{slug}.html">
   <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai-analyst/{slug}-en.html">
@@ -732,6 +733,7 @@ def render_report_en(data):
     subtitle = data.get('subtitle_en', data.get('subtitle', '')) or 'AI Deep Research'
     exec_summary = data.get('executive_summary_en', data.get('executive_summary', ''))
     sections = data.get('sections_en', data.get('sections', []))
+    meta_desc = data.get('meta_description_en', '') or f'In-depth analysis of {co} ({code}): AI-driven comprehensive investment research covering financials, technicals, competitive analysis, valuation, and risks.'
     chart_data = data.get('chart_data', {})
     years = chart_data.get('years', [])
     rev_data = chart_data.get('revenue', [])
@@ -869,7 +871,7 @@ new Chart(document.getElementById('chartYoY'),{type:'bar',data:{labels:YOY_LABEL
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>{co} Comprehensive Investment Analysis (2026) — AI Study Room</title>
-  <meta name="description" content="In-depth analysis of {co} ({code}): {industry}. AI-generated comprehensive investment research covering financials, technicals, valuation and risks.">
+  <meta name="description" content="{meta_desc}">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://aidev.fit/en/ai-analyst/{slug}-en.html">
   <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai-analyst/{slug}-en.html">
@@ -1246,7 +1248,7 @@ def save_progress(progress):
         json.dump(progress, f, indent=2, ensure_ascii=False)
 
 
-def register_article_cn(company_name, stock_code, slug, title):
+def register_article_cn(company_name, stock_code, slug, title, description=''):
     """Register CN article in articles.json."""
     with open(ARTICLES_CN) as f:
         articles = json.load(f)
@@ -1258,11 +1260,12 @@ def register_article_cn(company_name, stock_code, slug, title):
                 print(f'  Already registered in CN, skipping')
                 return True
             next_id = max(p['id'] for p in posts) + 1
+            desc = description or f'深度分析{company_name}（{stock_code}）：AI 深度研究报告，覆盖财务、技术面、竞品、估值与风险分析。'
             posts.append({
                 'id': next_id,
                 'slug': slug,
                 'title': title,
-                'description': f'深度分析{company_name}（{stock_code}）：AI 深度研究报告，覆盖财务、技术面、竞品、估值与风险分析。',
+                'description': desc[:200],
                 'date': TODAY,
                 'lastActive': TODAY,
                 'tags': [company_name, '投资分析', '深度研究'],
@@ -1277,7 +1280,7 @@ def register_article_cn(company_name, stock_code, slug, title):
     return True
 
 
-def register_article_en(company_name, stock_code, slug, title):
+def register_article_en(company_name, stock_code, slug, title, description=''):
     """Register EN article in en/articles.json."""
     with open(ARTICLES_EN) as f:
         articles = json.load(f)
@@ -1289,11 +1292,12 @@ def register_article_en(company_name, stock_code, slug, title):
             if any(p['slug'] == en_slug for p in posts):
                 print(f'  Already registered in EN, skipping')
                 return True
+            desc = description or f'In-depth analysis of {company_name} ({stock_code}): AI-driven comprehensive research covering financials, technicals, competitive analysis, valuation, and risks.'
             posts.append({
                 'id': 0,
                 'slug': en_slug,
                 'title': title,
-                'description': f'In-depth analysis of {company_name} ({stock_code}): AI-driven comprehensive research covering financials, technicals, competitive analysis, valuation, and risks.',
+                'description': desc[:200],
                 'date': TODAY,
                 'lastActive': TODAY,
                 'tags': ['AI Analyst', 'Investment Analysis', 'Deep Research'],
@@ -1508,9 +1512,27 @@ def generate_one(name, code, sector):
 
     # 6. Save CN HTML
     slug = make_slug(name, code)
+
+    # Compute meaningful meta description from exec summary
+    meta_desc_cn = ''
+    meta_desc_en = ''
+    if exec_summary:
+        clean = re.sub(r'<[^>]+>', '', exec_summary).strip()
+        clean = re.sub(r'\s+', ' ', clean)
+        meta_desc_cn = clean[:147] + '...' if len(clean) > 150 else clean
+    if not meta_desc_cn:
+        meta_desc_cn = f'深度分析{name}（{code}）：AI 深度研究报告，覆盖财务、技术面、竞品、估值与风险分析。'
+    if exec_summary_en:
+        clean = re.sub(r'<[^>]+>', '', exec_summary_en).strip()
+        clean = re.sub(r'\s+', ' ', clean)
+        meta_desc_en = clean[:147] + '...' if len(clean) > 150 else clean
+    if not meta_desc_en:
+        meta_desc_en = f'In-depth analysis of {name} ({code}): AI-driven comprehensive research covering financials, technicals, competitive analysis, valuation, and risks.'
+
     cn_data = {
         'company': name, 'code': code,
         'industry': basic.get('industry', ''),
+        'meta_description': meta_desc_cn,
         'latestPrice': latest_price, 'high52': high52, 'low52': low52,
         'pe': basic.get('peRatio') or basic.get('pe'),
         'pb': basic.get('pbRatio') or basic.get('pb'),
@@ -1537,6 +1559,7 @@ def generate_one(name, code, sector):
     en_data['subtitle'] = subtitle_en
     en_data['executive_summary'] = exec_summary_en
     en_data['sections'] = sections_en
+    en_data['meta_description_en'] = meta_desc_en
 
     en_html = render_report_en(en_data)
     en_file = REPORTS_EN_DIR / f'{slug}-en.html'
@@ -1549,8 +1572,8 @@ def generate_one(name, code, sector):
     cn_title = f'{name}全面分析报告：{subtitle}'
     en_title = f'{name} Comprehensive Investment Analysis (2026)'
 
-    register_article_cn(name, code, slug, cn_title)
-    register_article_en(name, code, slug, en_title)
+    register_article_cn(name, code, slug, cn_title, meta_desc_cn)
+    register_article_en(name, code, slug, en_title, meta_desc_en)
 
     # 9. Update index.html
     update_index_html_cn(slug, cn_title)
