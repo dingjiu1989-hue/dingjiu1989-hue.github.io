@@ -436,7 +436,7 @@ def render_report_cn(data):
 
     # Income chart
     income_chart = ''
-    if len(years) >= 3:
+    if len(years) >= 1:
         _iy = json.dumps(years)
         _ir = json.dumps(round_to_billion(rev_data))
         _ip = json.dumps(round_to_billion(profit_data))
@@ -454,7 +454,7 @@ new Chart(document.getElementById('chartIncome'),{type:'bar',data:{labels:YEARS,
 
     # Margin chart
     margin_chart = ''
-    if has_margin and len(years) >= 3:
+    if has_margin and len(years) >= 1:
         _my = json.dumps(years)
         _md = json.dumps(margin_data)
         margin_chart = '''\
@@ -764,7 +764,7 @@ def render_report_en(data):
 
 
     income_chart = ''
-    if len(years) >= 3:
+    if len(years) >= 1:
         _iy = json.dumps(years)
         _ir = json.dumps(round_to_billion(rev_data))
         _ip = json.dumps(round_to_billion(profit_data))
@@ -781,7 +781,7 @@ new Chart(document.getElementById('chartIncome'),{type:'bar',data:{labels:YEARS,
         income_chart = income_chart.replace('YEARS', _iy).replace('REVENUE', _ir).replace('PROFIT', _ip)
 
     margin_chart = ''
-    if has_margin and len(years) >= 3:
+    if has_margin and len(years) >= 1:
         _my = json.dumps(years)
         _md = json.dumps(margin_data)
         margin_chart = '''\
@@ -1719,6 +1719,13 @@ def main():
         print(f'     EN: {r["en_file"]}')
     print(f'\nCommit and push to deploy.')
     print(f'Queue remaining: {len(queue) - len(progress["generated"])}')
+
+    # Update analysis.html search page cards
+    try:
+        import subprocess
+        subprocess.run([sys.executable, str(BASE / 'scripts' / 'add_search_cards.py')], cwd=BASE, check=False)
+    except Exception:
+        pass
 
 
 if __name__ == '__main__':
