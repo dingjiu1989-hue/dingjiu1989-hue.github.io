@@ -1265,17 +1265,6 @@ def generate_one(name, code, sector):
     low52 = min(p['close'] for p in prices) if prices else None
     latest_price = prices[-1]['close'] if prices else None
 
-    # Debug: print MCP income data structure
-    if income_rows:
-        keys = list(income_rows[0].keys())[:30]
-        yr_val = income_rows[0].get('endDate', 'N/A')
-        rev_val = income_rows[0].get('revenue', income_rows[0].get('totalOperatingRevenue', 'N/A'))
-        np_val = income_rows[0].get('netProfit', income_rows[0].get('netIncome', 'N/A'))
-        rd_val = income_rows[0].get('reportPeriodEnd', 'N/A')
-        gp_val = income_rows[0].get('grossProfitMargin', 'N/A')
-        print(f'  Income rows: {len(income_rows)}, keys: {keys}')
-        print(f'  Sample: yr={yr_val}, rd={rd_val}, rev={rev_val}, np={np_val}, gp={gp_val}')
-
     # 4. Chart data (multi-year)
     years = []
     rev_data = []
@@ -1300,7 +1289,12 @@ def generate_one(name, code, sector):
                 if gp_rev > 0 and gp_amt > 0:
                     margin_data.append(round(gp_amt / gp_rev * 100, 2))
                 else:
-                    margin_data.append(None)
+                    # Compute from revenue - costOfRevenue
+                    cost = r.get('costOfRevenue')
+                    if cost and gp_rev > 0:
+                        margin_data.append(round((gp_rev - float(cost)) / gp_rev * 100, 2))
+                    else:
+                        margin_data.append(None)
 
     # Only take unique years
     seen_years = set()
