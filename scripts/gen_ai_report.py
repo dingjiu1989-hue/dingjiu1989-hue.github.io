@@ -768,7 +768,7 @@ def render_report_en(data):
     subtitle = data.get('subtitle_en', data.get('subtitle', '')) or 'AI Deep Research'
     exec_summary = data.get('executive_summary_en', data.get('executive_summary', ''))
     sections = data.get('sections_en', data.get('sections', []))
-    meta_desc = data.get('meta_description_en', '') or f'In-depth analysis of {co} ({code}): AI-driven comprehensive investment research covering financials, technicals, competitive analysis, valuation, and risks.'
+    meta_desc = data.get('meta_description_en', '') or f'In-depth analysis of {name_en} ({code}): AI-driven comprehensive investment research covering financials, technicals, competitive analysis, valuation, and risks.'
     chart_data = data.get('chart_data', {})
     years = chart_data.get('years', [])
     rev_data = chart_data.get('revenue', [])
@@ -913,7 +913,7 @@ new Chart(document.getElementById('chartYoY'),{type:'bar',data:{labels:YOY_LABEL
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>{co} Comprehensive Investment Analysis (2026) — AI Study Room</title>
+  <title>{name_en} Comprehensive Investment Analysis (2026) — AI Study Room</title>
   <meta name="description" content="{meta_desc}">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://aidev.fit/en/ai-analyst/{slug}.html">
