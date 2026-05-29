@@ -138,6 +138,8 @@ export default {
         pb: basicInfo?.pbRatio || basicInfo?.pb,
         years, revData, profitData, marginData,
         incomeRows,
+        bsRows,
+        cfRows,
         issues: validationIssues,
       });
 
@@ -214,25 +216,97 @@ function makeSlug(name, code) {
 }
 
 function buildPrompt(d) {
-  // Build richer prompt with multi-year data
+  // Build richer prompt with multi-year data + balance sheet + cash flow
   const _rows = d.incomeRows || [];
   const _years = d.years || [];
   const _rev = d.revData || [];
   const _profit = d.profitData || [];
   const _margin = d.marginData || [];
+  const _bsRows = d.bsRows || [];
+  const _cfRows = d.cfRows || [];
   const _latest = _rows[0] || {};
-  let _tbl = '';
-  if (_years.length) {
-    _tbl = '\n## 历年财务数据\n\n| 年份 | 营收(万元) | 净利润(万元) | 毛利率 |\n|------|-----------|-------------|-------|\n';
-    for (let _i = 0; _i < _years.length; _i++) {
-      _tbl += '| ' + _years[_i] + ' | ' + (_rev[_i] != null ? Number(_rev[_i]).toLocaleString() : '—') + ' | ' + (_profit[_i] != null ? Number(_profit[_i]).toLocaleString() : '—') + ' | ' + (_margin[_i] != null ? _margin[_i].toFixed(1) + '%' : '—') + ' |\n';
+  const _latestBS = _bsRows[0] || {};
+  const _latestCF = _cfRows[0] || {};
+
+  // Build year→data lookup for enhanced table (net margin, EPS per year)
+  const _yrMap = {};
+  for (const _r of _rows) {
+    const _yr = (_r.endDate || _r.reportDate || '').slice(0, 4);
+    if (_yr && !_yrMap[_yr]) {
+      const _rev_ = parseFloat(_r.revenue || _r.operatingRevenue || 0);
+      const _np = parseFloat(_r.netProfit || _r.netIncome || 0);
+      _yrMap[_yr] = {
+        netMargin: _rev_ > 0 ? (_np / _rev_ * 100) : null,
+        eps: parseFloat(_r.eps || _r.basicEps || _r.dilutedEps) || null,
+      };
     }
   }
+
+  // Enhanced income table with net margin and EPS
+  let _tbl = '';
+  if (_years.length) {
+    _tbl = '\n## 历年财务数据\n\n| 年份 | 营收(万元) | 净利润(万元) | 毛利率 | 净利率 | EPS |\n|------|-----------|-------------|-------|-------|-----|\n';
+    for (let _i = 0; _i < _years.length; _i++) {
+      const _yrEntry = _yrMap[_years[_i]] || {};
+      const _nm = _yrEntry.netMargin != null ? _yrEntry.netMargin.toFixed(1) + '%' : '—';
+      const _eps = _yrEntry.eps != null ? _yrEntry.eps.toFixed(3) : '—';
+      _tbl += '| ' + _years[_i] + ' | ' + (_rev[_i] != null ? Number(_rev[_i]).toLocaleString() : '—') + ' | ' + (_profit[_i] != null ? Number(_profit[_i]).toLocaleString() : '—') + ' | ' + (_margin[_i] != null ? _margin[_i].toFixed(1) + '%' : '—') + ' | ' + _nm + ' | ' + _eps + ' |\n';
+    }
+  }
+
+  // YoY growth
   let _gr = '';
   if (_rev.length >= 2 && _rev[0] > 0 && _rev[1] > 0) {
     _gr = '营收YoY：' + ((_rev[0] - _rev[1]) / _rev[1] * 100).toFixed(1) + '%';
     if (_profit[0] > 0 && _profit[1] > 0) _gr += '，净利润YoY：' + ((_profit[0] - _profit[1]) / _profit[1] * 100).toFixed(1) + '%';
   }
+
+  // Balance sheet
+  const _ta = parseFloat(_latestBS.totalAssets || 0);
+  const _tl = parseFloat(_latestBS.totalLiabilities || 0);
+  const _eq = parseFloat(_latestBS.totalShareholdersEquity || _latestBS.totalEquity || 0);
+  const _ca = parseFloat(_latestBS.currentAssets || 0);
+  const _cl = parseFloat(_latestBS.currentLiabilities || 0);
+  let _bs = '';
+  if (_ta > 0) {
+    const _dr = _tl > 0 ? (_tl / _ta * 100).toFixed(1) : '—';
+    const _cr = _cl > 0 && _ca > 0 ? (_ca / _cl).toFixed(2) : '—';
+    _bs = '\n\n## 资产负债状况\n';
+    _bs += '总资产：' + formatNum(_ta) + '\n';
+    _bs += '总负债：' + formatNum(_tl) + '\n';
+    _bs += '股东权益：' + formatNum(_eq || (_ta - _tl)) + '\n';
+    _bs += '资产负债率：' + _dr + '%\n';
+    if (_cr !== '—') _bs += '流动比率：' + _cr + '\n';
+  }
+
+  // Cash flow
+  const _cfo = parseFloat(_latestCF.operatingCashFlow || _latestCF.netOperatingCashFlow || 0);
+  const _cfi = parseFloat(_latestCF.investingCashFlow || _latestCF.netInvestingCashFlow || 0);
+  const _cff = parseFloat(_latestCF.financingCashFlow || _latestCF.netFinancingCashFlow || 0);
+  let _cf = '';
+  if (_cfo || _cfi || _cff) {
+    _cf = '\n\n## 现金流状况\n';
+    _cf += '经营活动现金流净额：' + formatNum(_cfo) + '\n';
+    _cf += '投资活动现金流净额：' + formatNum(_cfi) + '\n';
+    _cf += '筹资活动现金流净额：' + formatNum(_cff) + '\n';
+  }
+
+  // DuPont analysis (financial ratios)
+  const _np = parseFloat(_latest.netProfit || _latest.netIncome || 0);
+  let _ratios = '';
+  if (_ta > 0 && _np > 0) {
+    const _roe = _eq > 0 ? (_np / _eq * 100).toFixed(1) : '—';
+    const _roa = (_np / _ta * 100).toFixed(1);
+    const _at = (_rev[0] || 0) > 0 && _ta > 0 ? ((_rev[0] || 0) / _ta).toFixed(2) : '—';
+    const _em = _eq > 0 ? (_ta / _eq).toFixed(2) : '—';
+    _ratios = '\n\n## 杜邦分析（财务比率）\n';
+    _ratios += 'ROE（净资产收益率）：' + _roe + '%\n';
+    _ratios += 'ROA（总资产收益率）：' + _roa + '%\n';
+    _ratios += '资产周转率：' + _at + '\n';
+    if (_em !== '—') _ratios += '权益乘数：' + _em + '\n';
+  }
+
+  // Text trends (keep for backward compatibility)
   const _rStr = _rev.map(function(v){ return v != null ? formatNum(v) : '—'; }).join(' → ');
   const _pStr = _profit.map(function(v){ return v != null ? formatNum(v) : '—'; }).join(' → ');
   const _mStr = _margin.map(function(v){ return v != null ? v.toFixed(1) + '%' : '—'; }).join(' → ');
@@ -252,12 +326,15 @@ function buildPrompt(d) {
 净利率：${_latest.netProfitMargin != null ? _latest.netProfitMargin + '%' : '—'}
 每股收益：${_latest.eps || _latest.basicEps || '—'}
 ${_gr ? '营收增长：' + _gr : ''}
+${_ratios}
 
 ## 历年财务趋势
 营收逐年：${_rStr}
 净利润逐年：${_pStr}
 毛利率逐年：${_mStr}
 ${_tbl}
+${_bs}
+${_cf}
 
 ## 市场数据
 最新价：${d.price != null ? d.price.toFixed(2) + '元' : '—'}

@@ -138,6 +138,11 @@ DEEPSEEK_SYSTEM_PROMPT = textwrap.dedent("""\
 每章必须用 ### 做内容分层，至少2个，建议3-4个。
 例如财务分析章：### 2.1 营收趋势\\n### 2.2 盈利能力\\n### 2.3 资产质量
 技术分析章：### 3.1 价格走势\\n### 3.2 技术指标\\n### 3.3 支撑位与阻力位
+### 引用块（Callout）
+1. 关键结论用 > [!NOTE] 开头：> [!NOTE] 这是重要的关键结论
+2. 风险提示用 > [!WARNING] 开头：> [!WARNING] 这是需要注意的风险点
+3. 严重风险用 > [!DANGER] 开头：> [!DANGER] 这是必须警惕的严重风险
+4. 操作建议用 > [!TIP] 开头：> [!TIP] 这是具体的操作建议
 
 ### 加粗
 所有关键数字用 **数字+单位** 包裹，如**营收1788亿元**、**净利润610亿元**、**毛利率34%**
@@ -236,7 +241,7 @@ def parse_deepseek_json(text):
 # ═══════════════════════════════ Build Prompt ═══════════════════════════════
 
 def build_prompt(data):
-    """Build the prompt with multi-year financial data."""
+    """Build the prompt with multi-year financial data + balance sheet + cash flow."""
     lines = []
     lines.append(f'请分析「{data["name"]}」（{data["code"]}）并生成深度研究报告。')
     lines.append('')
@@ -248,44 +253,119 @@ def build_prompt(data):
     lines.append('')
 
     _latest = data.get('income_rows', [{}])[0] if data.get('income_rows') else {}
+    _bs_rows = data.get('bs_rows', [])
+    _cf_rows = data.get('cf_rows', [])
+    _latest_bs = _bs_rows[0] if _bs_rows else {}
+    _latest_cf = _cf_rows[0] if _cf_rows else {}
+
+    def _float_or(v, default=0):
+        try:
+            return float(v)
+        except (TypeError, ValueError):
+            return default
+
+    _ta = _float_or(_latest_bs.get('totalAssets'))
+    _tl = _float_or(_latest_bs.get('totalLiabilities'))
+    _eq = _float_or(_latest_bs.get('totalShareholdersEquity') or _latest_bs.get('totalEquity') or 0)
+    _np = _float_or(_latest.get('netProfit') or _latest.get('netIncome'))
+    _rev_latest = _float_or(_latest.get('revenue') or _latest.get('operatingRevenue'))
+
+    # Net profit margin (compute if not available from MCP)
+    _npm = _latest.get('netProfitMargin')
+    if _npm is None and _rev_latest > 0 and _np > 0:
+        _npm = _np / _rev_latest * 100
+
     lines.append('## 最新财务数据（最新报告期）')
     lines.append(f'营收：{fmt_num(_latest.get("revenue") or _latest.get("operatingRevenue"))}')
     lines.append(f'净利润：{fmt_num(_latest.get("netProfit") or _latest.get("netIncome"))}')
     lines.append(f'毛利率：{_latest.get("grossProfitMargin", "—")}%' if _latest.get('grossProfitMargin') else '毛利率：—')
+    lines.append(f'净利率：{_npm:.1f}%' if _npm is not None else '净利率：—')
     lines.append(f'每股收益：{_latest.get("eps") or _latest.get("basicEps") or "—"}')
     lines.append('')
+
+    # DuPont analysis (financial ratios)
+    if _ta > 0 and _np > 0:
+        _roe = f'{_np / _eq * 100:.1f}%' if _eq > 0 else '—'
+        _roa = f'{_np / _ta * 100:.1f}%'
+        _rev_at = _rev_latest or 0
+        _at = f'{_rev_at / _ta:.2f}' if _ta > 0 and _rev_at > 0 else '—'
+        _em = f'{_ta / _eq:.2f}' if _eq > 0 else '—'
+        lines.append('## 杜邦分析（财务比率）')
+        lines.append(f'ROE（净资产收益率）：{_roe}')
+        lines.append(f'ROA（总资产收益率）：{_roa}')
+        lines.append(f'资产周转率：{_at}')
+        if _em != '—':
+            lines.append(f'权益乘数：{_em}')
+        lines.append('')
 
     years = data.get('years', [])
     rev_data = data.get('rev_data', [])
     profit_data = data.get('profit_data', [])
     margin_data = data.get('margin_data', [])
+    income_rows = data.get('income_rows', [])
+
+    # Build year lookup for net margin and EPS
+    yr_map = {}
+    for r in income_rows:
+        yr = (r.get('endDate') or r.get('reportDate') or r.get('reportPeriodEnd', ''))[:4]
+        if yr and yr not in yr_map:
+            rev_r = _float_or(r.get('revenue') or r.get('operatingRevenue'))
+            np_r = _float_or(r.get('netProfit') or r.get('netIncome'))
+            yr_map[yr] = {
+                'net_margin': (np_r / rev_r * 100) if rev_r > 0 else None,
+                'eps': _float_or(r.get('eps') or r.get('basicEps'), None) or None,
+            }
 
     if years:
-        lines.append('## 历年财务趋势')
-        rev_str = ' → '.join(fmt_num(v) if v is not None else '—' for v in rev_data)
-        profit_str = ' → '.join(fmt_num(v) if v is not None else '—' for v in profit_data)
-        margin_str = ' → '.join(f'{v:.1f}%' if v is not None else '—' for v in margin_data)
-        lines.append(f'营收逐年：{rev_str}')
-        lines.append(f'净利润逐年：{profit_str}')
-        lines.append(f'毛利率逐年：{margin_str}')
-
-        lines.append('')
-        lines.append('| 年份 | 营收(万元) | 净利润(万元) | 毛利率 |')
-        lines.append('|------|-----------|-------------|-------|')
+        lines.append('## 历年财务数据')
+        lines.append('| 年份 | 营收(万元) | 净利润(万元) | 毛利率 | 净利率 | EPS |')
+        lines.append('|------|-----------|-------------|-------|-------|-----|')
         for i in range(len(years)):
             r = fmt_num(rev_data[i]) if i < len(rev_data) and rev_data[i] is not None else '—'
             p = fmt_num(profit_data[i]) if i < len(profit_data) and profit_data[i] is not None else '—'
             m = f'{margin_data[i]:.1f}%' if i < len(margin_data) and margin_data[i] is not None else '—'
-            lines.append(f'| {years[i]} | {r} | {p} | {m} |')
+            yr_entry = yr_map.get(years[i], {})
+            nm = f'{yr_entry["net_margin"]:.1f}%' if yr_entry.get('net_margin') is not None else '—'
+            eps_val = f'{yr_entry["eps"]:.3f}' if yr_entry.get('eps') is not None else '—'
+            lines.append(f'| {years[i]} | {r} | {p} | {m} | {nm} | {eps_val} |')
+        lines.append('')
 
+    # YoY growth
     if len(rev_data) >= 2 and rev_data[-1] and rev_data[-2] and rev_data[-2] > 0:
         rev_yoy = (rev_data[-1] - rev_data[-2]) / rev_data[-2] * 100
-        lines.append(f'\n最新营收同比增速：{rev_yoy:.1f}%')
+        lines.append(f'最新营收同比增速：{rev_yoy:.1f}%')
         if len(profit_data) >= 2 and profit_data[-1] and profit_data[-2] and profit_data[-2] > 0:
             profit_yoy = (profit_data[-1] - profit_data[-2]) / profit_data[-2] * 100
             lines.append(f'最新净利润同比增速：{profit_yoy:.1f}%')
+        lines.append('')
 
-    lines.append('')
+    # Balance sheet section
+    if _ta > 0:
+        _dr = f'{_tl / _ta * 100:.1f}%' if _tl > 0 else '—'
+        _ca = _float_or(_latest_bs.get('currentAssets'))
+        _cl = _float_or(_latest_bs.get('currentLiabilities'))
+        _cr = f'{_ca / _cl:.2f}' if _cl > 0 and _ca > 0 else '—'
+        _eq_v = _eq if _eq > 0 else (_ta - _tl)
+        lines.append('## 资产负债状况')
+        lines.append(f'总资产：{fmt_num(_ta)}')
+        lines.append(f'总负债：{fmt_num(_tl)}')
+        lines.append(f'股东权益：{fmt_num(_eq_v)}')
+        lines.append(f'资产负债率：{_dr}')
+        if _cr != '—':
+            lines.append(f'流动比率：{_cr}')
+        lines.append('')
+
+    # Cash flow section
+    _cfo = _float_or(_latest_cf.get('operatingCashFlow') or _latest_cf.get('netOperatingCashFlow'))
+    _cfi = _float_or(_latest_cf.get('investingCashFlow') or _latest_cf.get('netInvestingCashFlow'))
+    _cff = _float_or(_latest_cf.get('financingCashFlow') or _latest_cf.get('netFinancingCashFlow'))
+    if _cfo or _cfi or _cff:
+        lines.append('## 现金流状况')
+        lines.append(f'经营活动现金流净额：{fmt_num(_cfo)}')
+        lines.append(f'投资活动现金流净额：{fmt_num(_cfi)}')
+        lines.append(f'筹资活动现金流净额：{fmt_num(_cff)}')
+        lines.append('')
+
     lines.append('## 市场数据')
     price = data.get('price')
     high52 = data.get('high52')
@@ -352,41 +432,6 @@ def render_report_cn(data):
 
     # Section navigation
     num_labels = ['一', '二', '三', '四', '五', '六', '七', '八']
-    section_nav = ''
-    mobile_options = ''
-    section_html = ''
-
-    for i, s in enumerate(sections):
-        s_title = s.get('title', '').lstrip('一二三四五六七八、 ')
-        s_content = s.get('content', '')
-
-        nav_icon = '<i class="fas fa-circle fa-fw" style="width:16px;color:#2563eb;font-size:.5rem;vertical-align:middle"></i>'
-        section_nav += f'<li><a href="#s{i+1}">{nav_icon} {escape(s.get("title", ""))}</a></li>\n'
-        mobile_options += f'<option value="s{i+1}">{escape(s.get("title", ""))}</option>\n'
-
-        extra = ''
-        if i == 2:  # Technical analysis — add indicator grid + price chart
-            extra = indicator_grid_html(price, pe, pb, pct)
-            extra += price_chart_html(prices)
-
-        sec_content = parse_markdown(s_content) if s_content else '<p>数据不足，暂无法生成该章节详细分析。</p>'
-        section_html += f'''
-<h2 id="s{i+1}"><span class="section-num">{num_labels[i] if i < len(num_labels) else ""}</span>{escape(s_title)}</h2>
-{extra}
-{sec_content}'''
-
-    # Stat grid (top-level)
-    stat_cards = ''
-    if price is not None:
-        stat_cards += f'<div class="stat-card"><div class="stat-label">最新价</div><div class="stat-value">¥{price:.2f}</div></div>\n'
-    if pe is not None:
-        stat_cards += f'<div class="stat-card"><div class="stat-label">PE</div><div class="stat-value">{pe:.1f}x</div></div>\n'
-    if pb is not None:
-        stat_cards += f'<div class="stat-card"><div class="stat-label">PB</div><div class="stat-value">{pb:.2f}x</div></div>\n'
-    if high52 is not None:
-        stat_cards += f'<div class="stat-card"><div class="stat-label">52周最高</div><div class="stat-value">¥{high52:.2f}</div></div>\n'
-    if low52 is not None:
-        stat_cards += f'<div class="stat-card"><div class="stat-label">52周最低</div><div class="stat-value">¥{low52:.2f}</div></div>\n'
 
     # Income chart
     income_chart = ''
@@ -395,9 +440,9 @@ def render_report_cn(data):
         _ir = json.dumps(round_to_billion(rev_data))
         _ip = json.dumps(round_to_billion(profit_data))
         income_chart = '''\
-<div class="chart-card">
-  <div class="chart-header"><i class="fas fa-chart-bar" style="color:#2563eb"></i> 营收与净利润趋势</div>
-  <div class="chart-body"><div class="chart-container"><canvas id="chartIncome"></canvas></div><p class="chart-caption">数据来源：MCP 股票数据服务</p></div>
+<div class="widget-box">
+  <div class="widget-header"><i class="fas fa-chart-bar" style="color:#2563eb"></i> 营收与净利润趋势</div>
+  <div class="widget-body"><div class="chart-container"><canvas id="chartIncome"></canvas></div><p class="chart-caption">数据来源：MCP 股票数据服务</p></div>
 </div>
 <script>
 (function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
@@ -412,9 +457,9 @@ new Chart(document.getElementById('chartIncome'),{type:'bar',data:{labels:YEARS,
         _my = json.dumps(years)
         _md = json.dumps(margin_data)
         margin_chart = '''\
-<div class="chart-card">
-  <div class="chart-header"><i class="fas fa-percentage" style="color:#059669"></i> 毛利率趋势</div>
-  <div class="chart-body"><div class="chart-container"><canvas id="chartMargin"></canvas></div></div>
+<div class="widget-box">
+  <div class="widget-header"><i class="fas fa-percentage" style="color:#059669"></i> 毛利率趋势</div>
+  <div class="widget-body"><div class="chart-container"><canvas id="chartMargin"></canvas></div></div>
 </div>
 <script>
 (function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
@@ -429,9 +474,9 @@ new Chart(document.getElementById('chartMargin'),{type:'line',data:{labels:YEARS
         _yoy_labels = json.dumps(yoy_labels)
         _yoy_data = json.dumps(yoy_data)
         yoy_chart = '''\
-<div class="chart-card">
-  <div class="chart-header"><i class="fas fa-arrow-trend-up" style="color:#059669"></i> 营收同比增长率</div>
-  <div class="chart-body"><div class="chart-container"><canvas id="chartYoY"></canvas></div>
+<div class="widget-box">
+  <div class="widget-header"><i class="fas fa-arrow-trend-up" style="color:#059669"></i> 营收同比增长率</div>
+  <div class="widget-body"><div class="chart-container"><canvas id="chartYoY"></canvas></div>
   <p class="chart-caption" style="margin-top:8px;font-size:.7rem;color:#94a3b8">
     <span style="display:inline-block;width:10px;height:10px;background:rgba(16,185,129,.75);border-radius:2px;margin-right:4px;vertical-align:middle"></span> 正增长
     <span style="display:inline-block;width:10px;height:10px;background:rgba(239,68,68,.75);border-radius:2px;margin-right:4px;margin-left:12px;vertical-align:middle"></span> 负增长
@@ -444,9 +489,52 @@ new Chart(document.getElementById('chartYoY'),{type:'bar',data:{labels:YOY_LABEL
 })();
 </script>'''.replace('YOY_LABELS', _yoy_labels).replace('YOY_DATA', _yoy_data)
 
+
     exec_html = ''
     if exec_summary:
-        exec_html = f'<div class="exec-box"><div class="label"><i class="fas fa-bolt" style="margin-right:4px"></i> 核心摘要</div>{parse_markdown(exec_summary)}</div>'
+        exec_html = f'<div class="exec-dark"><h3><i class="fas fa-bolt" style="color:#fbbf24"></i> 核心摘要</h3><div class="grid">{parse_markdown(exec_summary)}</div></div>'
+
+
+    section_nav = ''
+    mobile_options = ''
+    section_html = ''
+
+    for i, s in enumerate(sections):
+        s_title = s.get('title', '').lstrip('一二三四五六七八、 ')
+        s_content = s.get('content', '')
+
+        nav_icon = '<i class="fas fa-circle fa-fw" style="width:16px;color:#2563eb;font-size:.5rem;vertical-align:middle"></i>'
+        section_nav += f'<li><a href="#s{i+1}">{nav_icon} {escape(s.get("title", ""))}</a></li>\n'
+        mobile_options += f'<option value="s{i+1}">{escape(s.get("title", ""))}</option>\n'
+
+        extra = ''
+        after = ''
+        if i == 1:  # Financial analysis — insert charts
+            after = income_chart + margin_chart + yoy_chart
+        if i == 2:  # Technical analysis — add indicator grid + price chart
+            extra = indicator_grid_html(price, pe, pb, pct)
+            extra += price_chart_html(prices)
+
+        sec_content = parse_markdown(s_content) if s_content else '<p>数据不足，暂无法生成该章节详细分析。</p>'
+        section_html += f'''
+<h2 id="s{i+1}"><span class="section-num">{num_labels[i] if i < len(num_labels) else ""}</span>{escape(s_title)}</h2>
+{extra}
+{sec_content}
+{after}'''
+
+
+    # Stat grid (top-level)
+    stat_cards = ''
+    if price is not None:
+        stat_cards += f'<div class="stat-card"><div class="stat-label">最新价</div><div class="stat-value">¥{price:.2f}</div></div>\n'
+    if pe is not None:
+        stat_cards += f'<div class="stat-card"><div class="stat-label">PE</div><div class="stat-value">{pe:.1f}x</div></div>\n'
+    if pb is not None:
+        stat_cards += f'<div class="stat-card"><div class="stat-label">PB</div><div class="stat-value">{pb:.2f}x</div></div>\n'
+    if high52 is not None:
+        stat_cards += f'<div class="stat-card"><div class="stat-label">52周最高</div><div class="stat-value">¥{high52:.2f}</div></div>\n'
+    if low52 is not None:
+        stat_cards += f'<div class="stat-card"><div class="stat-label">52周最低</div><div class="stat-value">¥{low52:.2f}</div></div>\n'
 
     return f'''<!DOCTYPE html>
 <html lang="zh-CN">
@@ -500,6 +588,36 @@ new Chart(document.getElementById('chartYoY'),{type:'bar',data:{labels:YOY_LABEL
   .chart-body .chart-container{{position:relative;height:280px;width:100%}}
   .chart-caption{{font-size:.75rem;color:#94a3b8;text-align:center;margin-top:12px}}
   .exec-box{{background:#f0f7ff;border:1px solid #dbeafe;border-radius:12px;padding:24px;margin-bottom:28px}}
+  .exec-dark{{background:#1e293b;color:#fff;border-radius:12px;padding:32px;margin-bottom:28px;position:relative;overflow:hidden}}
+  .exec-dark h3{{color:#fff!important;border-left-color:#60a5fa!important;font-size:1.2rem!important}}
+  .exec-dark .grid{{display:grid;grid-template-columns:1fr;gap:24px}}
+  @media(min-width:768px){{.exec-dark .grid{{grid-template-columns:1fr 1fr 1fr}}}}
+  .exec-dark .grid-item .label{{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:8px;font-weight:700}}
+  .exec-dark .grid-item .text{{font-size:.9rem;color:#e2e8f0;line-height:1.7}}
+  .callout-note,.callout-warning,.callout-danger,.callout-tip{{border-radius:8px;padding:16px 20px;margin:20px 0;font-size:.9rem;border-left:4px solid;display:flex;align-items:flex-start;gap:10px}}
+  .callout-note{{background:#f8faff;border-left-color:#2563eb;color:#1e293b}}
+  .callout-note i{{color:#2563eb;margin-top:3px}}
+  .callout-warning{{background:#fffbeb;border-left-color:#f59e0b;color:#92400e}}
+  .callout-warning i{{color:#f59e0b;margin-top:3px}}
+  .callout-danger{{background:#fef2f2;border-left-color:#ef4444;color:#991b1b}}
+  .callout-danger i{{color:#ef4444;margin-top:3px}}
+  .callout-tip{{background:#f0fdf4;border-left-color:#10b981;color:#065f46}}
+  .callout-tip i{{color:#10b981;margin-top:3px}}
+  .exec-dark{{background:#1e293b;color:#fff;border-radius:12px;padding:32px;margin-bottom:28px;position:relative;overflow:hidden}}
+  .exec-dark h3{{color:#fff!important;border-left-color:#60a5fa!important;font-size:1.2rem!important}}
+  .exec-dark .grid{{display:grid;grid-template-columns:1fr;gap:24px}}
+  @media(min-width:768px){{.exec-dark .grid{{grid-template-columns:1fr 1fr 1fr}}}}
+  .exec-dark .grid-item .label{{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:8px;font-weight:700}}
+  .exec-dark .grid-item .text{{font-size:.9rem;color:#e2e8f0;line-height:1.7}}
+  .callout-note,.callout-warning,.callout-danger,.callout-tip{{border-radius:8px;padding:16px 20px;margin:20px 0;font-size:.9rem;border-left:4px solid;display:flex;align-items:flex-start;gap:10px}}
+  .callout-note{{background:#f8faff;border-left-color:#2563eb;color:#1e293b}}
+  .callout-note i{{color:#2563eb;margin-top:3px}}
+  .callout-warning{{background:#fffbeb;border-left-color:#f59e0b;color:#92400e}}
+  .callout-warning i{{color:#f59e0b;margin-top:3px}}
+  .callout-danger{{background:#fef2f2;border-left-color:#ef4444;color:#991b1b}}
+  .callout-danger i{{color:#ef4444;margin-top:3px}}
+  .callout-tip{{background:#f0fdf4;border-left-color:#10b981;color:#065f46}}
+  .callout-tip i{{color:#10b981;margin-top:3px}}
   .exec-box .label{{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-bottom:12px}}
   .exec-box p{{font-size:.9rem!important;color:#1e40af!important;margin-bottom:.8em!important;line-height:1.7}}
   .disclaimer-box{{margin-top:3rem;padding:1.5rem;background:#f9fafb;border-radius:10px;border:1px solid #e5e7eb;font-size:.8rem;color:#6b7280;line-height:1.6}}
@@ -507,6 +625,26 @@ new Chart(document.getElementById('chartYoY'),{type:'bar',data:{labels:YOY_LABEL
   .btt-btn{{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border-radius:50%;background:#2563eb;color:#fff;border:none;font-size:1.1rem;cursor:pointer;box-shadow:0 4px 12px rgba(37,99,235,.35);opacity:0;visibility:hidden;transition:all .2s;z-index:50;display:flex;align-items:center;justify-content:center}}
   .btt-btn.show{{opacity:1;visibility:visible}}
   @media(max-width:768px){{h1.report-title{{font-size:1.5rem!important}}h2{{font-size:1.2rem!important}}h3{{font-size:1.05rem!important}}p{{font-size:.9rem!important}}.article-card{{padding:20px 16px}}}}
+  .indicator-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin:20px 0}}
+  .indicator-item{{background:#f9fafb;padding:14px 12px;border-radius:8px;border:1px solid #f3f4f6;text-align:center}}
+  .indicator-item .indicator-label{{font-size:.72rem;color:#64748b;margin-bottom:4px}}
+  .indicator-item .indicator-value{{font-size:1.1rem;font-weight:700;color:#1e293b}}
+  .widget-box{{border:1px solid #e2e8f0;border-radius:12px;margin:24px 0;overflow:hidden;background:#fafcff;box-shadow:0 1px 3px rgba(0,0,0,.06)}}
+  .widget-header{{padding:14px 20px;border-bottom:1px solid #e2e8f0;font-size:.8rem;font-weight:600;color:#64748b;display:flex;align-items:center;gap:8px;background:#f8faff}}
+  .widget-body{{padding:24px}}
+  .references{{font-size:.85rem;color:#4b5563;line-height:1.6}}
+  .references li{{margin-bottom:.3em!important;word-break:break-all}}
+  .references a{{color:#0969da}}
+  .indicator-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin:20px 0}}
+  .indicator-item{{background:#f9fafb;padding:14px 12px;border-radius:8px;border:1px solid #f3f4f6;text-align:center}}
+  .indicator-item .indicator-label{{font-size:.72rem;color:#64748b;margin-bottom:4px}}
+  .indicator-item .indicator-value{{font-size:1.1rem;font-weight:700;color:#1e293b}}
+  .widget-box{{border:1px solid #e2e8f0;border-radius:12px;margin:24px 0;overflow:hidden;background:#fafcff;box-shadow:0 1px 3px rgba(0,0,0,.06)}}
+  .widget-header{{padding:14px 20px;border-bottom:1px solid #e2e8f0;font-size:.8rem;font-weight:600;color:#64748b;display:flex;align-items:center;gap:8px;background:#f8faff}}
+  .widget-body{{padding:24px}}
+  .references{{font-size:.85rem;color:#4b5563;line-height:1.6}}
+  .references li{{margin-bottom:.3em!important;word-break:break-all}}
+  .references a{{color:#0969da}}
   .indicator-signal{{display:inline-block;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:99px;margin-top:4px}}
   .signal-buy{{background:#d1fae5;color:#065f46}}
   .signal-sell{{background:#fee2e2;color:#991b1b}}
@@ -560,9 +698,6 @@ new Chart(document.getElementById('chartYoY'),{type:'bar',data:{labels:YOY_LABEL
 
       {section_html}
 
-      {income_chart}
-      {margin_chart}
-      {yoy_chart}
 
       <div class="disclaimer-box">
         <p><strong>免责声明：</strong>本报告由AI自动生成，仅供参考和学习交流，不构成任何形式的投资建议。报告中的数据和分析基于公开信息和模型估算，可能存在偏差。股市有风险，投资需谨慎。作者和平台不对因使用本报告而产生的任何损失承担责任。</p>
@@ -625,6 +760,67 @@ def render_report_en(data):
          'Market Sentiment', 'Competitive Comparison', 'Valuation & Financial Health', 'Key Risks', 'Conclusion & Recommendations'),
     ][0]
 
+
+    income_chart = ''
+    if len(years) >= 3:
+        _iy = json.dumps(years)
+        _ir = json.dumps(round_to_billion(rev_data))
+        _ip = json.dumps(round_to_billion(profit_data))
+        income_chart = '''\
+<div class="widget-box">
+  <div class="widget-header"><i class="fas fa-chart-bar" style="color:#2563eb"></i> Revenue & Net Income Trend</div>
+  <div class="widget-body"><div class="chart-container"><canvas id="chartIncome"></canvas></div><p class="chart-caption">Source: MCP Stock Data</p></div>
+</div>
+<script>
+(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+new Chart(document.getElementById('chartIncome'),{type:'bar',data:{labels:YEARS,datasets:[{label:'Revenue (CNY B)',data:REVENUE,backgroundColor:'rgba(37,99,235,.75)',borderRadius:6,barPercentage:.6},{label:'Net Income (CNY B)',data:PROFIT,backgroundColor:'rgba(16,185,129,.75)',borderRadius:6,barPercentage:.6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,padding:16}}},scales:{y:{beginAtZero:false,grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false}}}}});
+})();
+</script>'''
+        income_chart = income_chart.replace('YEARS', _iy).replace('REVENUE', _ir).replace('PROFIT', _ip)
+
+    margin_chart = ''
+    if has_margin and len(years) >= 3:
+        _my = json.dumps(years)
+        _md = json.dumps(margin_data)
+        margin_chart = '''\
+<div class="widget-box">
+  <div class="widget-header"><i class="fas fa-percentage" style="color:#059669"></i> Gross Margin Trend</div>
+  <div class="widget-body"><div class="chart-container"><canvas id="chartMargin"></canvas></div></div>
+</div>
+<script>
+(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+new Chart(document.getElementById('chartMargin'),{type:'line',data:{labels:YEARS,datasets:[{label:'Gross Margin (%)',data:MARGIN,borderColor:'#059669',backgroundColor:'rgba(5,150,105,.1)',fill:true,tension:.3,pointRadius:4,pointBackgroundColor:'#059669'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:false,grid:{color:'rgba(0,0,0,.04)'},ticks:{callback:function(v){return v+'%'}}}},x:{grid:{display:false}}}}});
+})();
+</script>'''
+        margin_chart = margin_chart.replace('YEARS', _my).replace('MARGIN', _md)
+
+    # YoY growth chart
+    yoy_chart = ''
+    if has_yoy:
+        _yoy_labels = json.dumps(yoy_labels)
+        _yoy_data = json.dumps(yoy_data)
+        yoy_chart = '''\
+<div class="widget-box">
+  <div class="widget-header"><i class="fas fa-arrow-trend-up" style="color:#059669"></i> Revenue YoY Growth</div>
+  <div class="widget-body"><div class="chart-container"><canvas id="chartYoY"></canvas></div>
+  <p class="chart-caption" style="margin-top:8px;font-size:.7rem;color:#94a3b8">
+    <span style="display:inline-block;width:10px;height:10px;background:rgba(16,185,129,.75);border-radius:2px;margin-right:4px;vertical-align:middle"></span> Positive
+    <span style="display:inline-block;width:10px;height:10px;background:rgba(239,68,68,.75);border-radius:2px;margin-right:4px;margin-left:12px;vertical-align:middle"></span> Negative
+  </p>
+  </div>
+</div>
+<script>
+(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+new Chart(document.getElementById('chartYoY'),{type:'bar',data:{labels:YOY_LABELS,datasets:[{label:'YoY %',data:YOY_DATA,backgroundColor:function(c){var v=c.raw;return v>=0?'rgba(16,185,129,.75)':'rgba(239,68,68,.75)'},borderRadius:6,barPercentage:.6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'rgba(0,0,0,.04)'},ticks:{callback:function(v){return v+'%'}}}},x:{grid:{display:false}}}}});
+})();
+</script>'''.replace('YOY_LABELS', _yoy_labels).replace('YOY_DATA', _yoy_data)
+
+
+    exec_html = ''
+    if exec_summary:
+        exec_html = f'<div class="exec-dark"><h3><i class="fas fa-bolt" style="color:#fbbf24"></i> Executive Summary</h3><div class="grid">{parse_markdown(exec_summary)}</div></div>'
+
+
     section_nav = ''
     mobile_options = ''
     section_html = ''
@@ -640,6 +836,9 @@ def render_report_en(data):
         mobile_options += f'<option value="s{i+1}">{escape(s_title)}</option>\n'
 
         extra = ''
+        after = ''
+        if i == 1:  # Financial analysis — insert charts
+            after = income_chart + margin_chart + yoy_chart
         if i == 2:
             extra = indicator_grid_html_en(price, pe, pb, pct)
             extra += price_chart_html(prices)
@@ -648,7 +847,9 @@ def render_report_en(data):
         section_html += f'''
 <h2 id="s{i+1}"><span class="section-num">{i+1}</span>{escape(s_title)}</h2>
 {extra}
-{sec_content}'''
+{sec_content}
+{after}'''
+
 
     stat_cards = ''
     if price is not None:
@@ -661,64 +862,6 @@ def render_report_en(data):
         stat_cards += f'<div class="stat-card"><div class="stat-label">52W High</div><div class="stat-value">¥{high52:.2f}</div></div>\n'
     if low52 is not None:
         stat_cards += f'<div class="stat-card"><div class="stat-label">52W Low</div><div class="stat-value">¥{low52:.2f}</div></div>\n'
-
-    income_chart = ''
-    if len(years) >= 3:
-        _iy = json.dumps(years)
-        _ir = json.dumps(round_to_billion(rev_data))
-        _ip = json.dumps(round_to_billion(profit_data))
-        income_chart = '''\
-<div class="chart-card">
-  <div class="chart-header"><i class="fas fa-chart-bar" style="color:#2563eb"></i> Revenue & Net Income Trend</div>
-  <div class="chart-body"><div class="chart-container"><canvas id="chartIncome"></canvas></div><p class="chart-caption">Source: MCP Stock Data</p></div>
-</div>
-<script>
-(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
-new Chart(document.getElementById('chartIncome'),{type:'bar',data:{labels:YEARS,datasets:[{label:'Revenue (CNY B)',data:REVENUE,backgroundColor:'rgba(37,99,235,.75)',borderRadius:6,barPercentage:.6},{label:'Net Income (CNY B)',data:PROFIT,backgroundColor:'rgba(16,185,129,.75)',borderRadius:6,barPercentage:.6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,padding:16}}},scales:{y:{beginAtZero:false,grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false}}}}});
-})();
-</script>'''
-        income_chart = income_chart.replace('YEARS', _iy).replace('REVENUE', _ir).replace('PROFIT', _ip)
-
-    margin_chart = ''
-    if has_margin and len(years) >= 3:
-        _my = json.dumps(years)
-        _md = json.dumps(margin_data)
-        margin_chart = '''\
-<div class="chart-card">
-  <div class="chart-header"><i class="fas fa-percentage" style="color:#059669"></i> Gross Margin Trend</div>
-  <div class="chart-body"><div class="chart-container"><canvas id="chartMargin"></canvas></div></div>
-</div>
-<script>
-(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
-new Chart(document.getElementById('chartMargin'),{type:'line',data:{labels:YEARS,datasets:[{label:'Gross Margin (%)',data:MARGIN,borderColor:'#059669',backgroundColor:'rgba(5,150,105,.1)',fill:true,tension:.3,pointRadius:4,pointBackgroundColor:'#059669'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:false,grid:{color:'rgba(0,0,0,.04)'},ticks:{callback:function(v){return v+'%'}}}},x:{grid:{display:false}}}}});
-})();
-</script>'''
-        margin_chart = margin_chart.replace('YEARS', _my).replace('MARGIN', _md)
-
-    # YoY growth chart
-    yoy_chart = ''
-    if has_yoy:
-        _yoy_labels = json.dumps(yoy_labels)
-        _yoy_data = json.dumps(yoy_data)
-        yoy_chart = '''\
-<div class="chart-card">
-  <div class="chart-header"><i class="fas fa-arrow-trend-up" style="color:#059669"></i> Revenue YoY Growth</div>
-  <div class="chart-body"><div class="chart-container"><canvas id="chartYoY"></canvas></div>
-  <p class="chart-caption" style="margin-top:8px;font-size:.7rem;color:#94a3b8">
-    <span style="display:inline-block;width:10px;height:10px;background:rgba(16,185,129,.75);border-radius:2px;margin-right:4px;vertical-align:middle"></span> Positive
-    <span style="display:inline-block;width:10px;height:10px;background:rgba(239,68,68,.75);border-radius:2px;margin-right:4px;margin-left:12px;vertical-align:middle"></span> Negative
-  </p>
-  </div>
-</div>
-<script>
-(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
-new Chart(document.getElementById('chartYoY'),{type:'bar',data:{labels:YOY_LABELS,datasets:[{label:'YoY %',data:YOY_DATA,backgroundColor:function(c){var v=c.raw;return v>=0?'rgba(16,185,129,.75)':'rgba(239,68,68,.75)'},borderRadius:6,barPercentage:.6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'rgba(0,0,0,.04)'},ticks:{callback:function(v){return v+'%'}}}},x:{grid:{display:false}}}}});
-})();
-</script>'''.replace('YOY_LABELS', _yoy_labels).replace('YOY_DATA', _yoy_data)
-
-    exec_html = ''
-    if exec_summary:
-        exec_html = f'<div class="exec-box"><div class="label"><i class="fas fa-bolt" style="margin-right:4px"></i> Executive Summary</div>{parse_markdown(exec_summary)}</div>'
 
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -830,9 +973,6 @@ new Chart(document.getElementById('chartYoY'),{type:'bar',data:{labels:YOY_LABEL
 
       {section_html}
 
-      {income_chart}
-      {margin_chart}
-      {yoy_chart}
 
       <div class="disclaimer-box">
         <p><strong>Disclaimer:</strong> This report is AI-generated for informational purposes only and does not constitute investment advice. Analyses are based on public data and model estimates, which may contain errors. Investing involves risk.</p>
@@ -868,14 +1008,14 @@ def indicator_grid_html(price, pe, pb, pct):
     pos2_label = '关注回调' if d3pct > 80 else ('关注反弹' if d3pct < 30 else '区间震荡')
     pos2_signal = 'signal-sell' if d3pct > 80 else ('signal-buy' if d3pct < 30 else 'signal-neutral')
 
-    return f'''<div class="chart-card">
-  <div class="chart-header"><i class="fas fa-gauge-high" style="color:#2563eb"></i> 核心指标</div>
-  <div class="chart-body">
-    <div class="stat-grid">
-      <div class="stat-card"><div class="stat-label">PE</div><div class="stat-value">{d3pe}</div><span class="indicator-signal signal-neutral">{pe_signal}</span></div>
-      <div class="stat-card"><div class="stat-label">PB</div><div class="stat-value">{d3pb}</div><span class="indicator-signal signal-neutral">{pb_signal}</span></div>
-      <div class="stat-card"><div class="stat-label">52周位置</div><div class="stat-value">{d3pos}</div><span class="indicator-signal {pos_signal}">{pos_label}</span></div>
-      <div class="stat-card"><div class="stat-label">当前价</div><div class="stat-value">¥{d3price}</div><span class="indicator-signal {pos2_signal}">{pos2_label}</span></div>
+    return f'''<div class="widget-box">
+  <div class="widget-header"><i class="fas fa-gauge-high" style="color:#2563eb"></i> 核心指标</div>
+  <div class="widget-body">
+    <div class="indicator-grid">
+      <div class="indicator-item"><div class="indicator-label">PE</div><div class="indicator-value">{d3pe}</div><span class="indicator-signal signal-neutral">{pe_signal}</span></div>
+      <div class="indicator-item"><div class="indicator-label">PB</div><div class="indicator-value">{d3pb}</div><span class="indicator-signal signal-neutral">{pb_signal}</span></div>
+      <div class="indicator-item"><div class="indicator-label">52周位置</div><div class="indicator-value">{d3pos}</div><span class="indicator-signal {pos_signal}">{pos_label}</span></div>
+      <div class="indicator-item"><div class="indicator-label">当前价</div><div class="indicator-value">¥{d3price}</div><span class="indicator-signal {pos2_signal}">{pos2_label}</span></div>
     </div>
   </div>
 </div>'''
@@ -896,14 +1036,14 @@ def indicator_grid_html_en(price, pe, pb, pct):
     pos2_label = 'Caution' if d3pct > 80 else ('Oversold' if d3pct < 30 else 'Range')
     pos2_signal = 'signal-sell' if d3pct > 80 else ('signal-buy' if d3pct < 30 else 'signal-neutral')
 
-    return f'''<div class="chart-card">
-  <div class="chart-header"><i class="fas fa-gauge-high" style="color:#2563eb"></i> Key Indicators</div>
-  <div class="chart-body">
-    <div class="stat-grid">
-      <div class="stat-card"><div class="stat-label">P/E</div><div class="stat-value">{d3pe}</div><span class="indicator-signal signal-neutral">{pe_signal}</span></div>
-      <div class="stat-card"><div class="stat-label">P/B</div><div class="stat-value">{d3pb}</div><span class="indicator-signal signal-neutral">{pb_signal}</span></div>
-      <div class="stat-card"><div class="stat-label">52W Pos.</div><div class="stat-value">{d3pos}</div><span class="indicator-signal {pos_signal}">{pos_label}</span></div>
-      <div class="stat-card"><div class="stat-label">Price</div><div class="stat-value">¥{d3price}</div><span class="indicator-signal {pos2_signal}">{pos2_label}</span></div>
+    return f'''<div class="widget-box">
+  <div class="widget-header"><i class="fas fa-gauge-high" style="color:#2563eb"></i> Key Indicators</div>
+  <div class="widget-body">
+    <div class="indicator-grid">
+      <div class="indicator-item"><div class="indicator-label">P/E</div><div class="indicator-value">{d3pe}</div><span class="indicator-signal signal-neutral">{pe_signal}</span></div>
+      <div class="indicator-item"><div class="indicator-label">P/B</div><div class="indicator-value">{d3pb}</div><span class="indicator-signal signal-neutral">{pb_signal}</span></div>
+      <div class="indicator-item"><div class="indicator-label">52W Pos.</div><div class="indicator-value">{d3pos}</div><span class="indicator-signal {pos_signal}">{pos_label}</span></div>
+      <div class="indicator-item"><div class="indicator-label">Price</div><div class="indicator-value">¥{d3price}</div><span class="indicator-signal {pos2_signal}">{pos2_label}</span></div>
     </div>
   </div>
 </div>'''
@@ -915,9 +1055,9 @@ def price_chart_html(prices):
         return ''
     dates = json.dumps([p.get('date', '') for p in prices])
     closes = json.dumps([p.get('close', 0) for p in prices])
-    return '''<div class="chart-card">
-  <div class="chart-header"><i class="fas fa-chart-line" style="color:#2563eb"></i> Price Trend</div>
-  <div class="chart-body"><div class="chart-container"><canvas id="chartPrice"></canvas></div></div>
+    return '''<div class="widget-box">
+  <div class="widget-header"><i class="fas fa-chart-line" style="color:#2563eb"></i> Price Trend</div>
+  <div class="widget-body"><div class="chart-container"><canvas id="chartPrice"></canvas></div></div>
 </div>
 <script>
 (function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
@@ -965,6 +1105,32 @@ def parse_markdown(text):
             out.append(f'<h3>{inline_md(escape(trimmed[4:]))}</h3>')
             continue
 
+        # Blockquote (> callout)
+        if trimmed.startswith('> '):
+            close_lists()
+            _bq_text = re.sub(r'^>\s*', '', trimmed)
+            _bq_type = 'callout-note'
+            _bq_icon = 'fa-circle-info'
+            if _bq_text.startswith('[!NOTE]') or _bq_text.startswith('[!note]'):
+                _bq_type = 'callout-note'
+                _bq_icon = 'fa-circle-info'
+                _bq_text = re.sub(r'^\[!NOTE\]\s*|^\[!note\]\s*', '', _bq_text)
+            elif _bq_text.startswith('[!WARNING]') or _bq_text.startswith('[!warning]'):
+                _bq_type = 'callout-warning'
+                _bq_icon = 'fa-triangle-exclamation'
+                _bq_text = re.sub(r'^\[!WARNING\]\s*|^\[!note\]\s*', '', _bq_text)
+            elif _bq_text.startswith('[!DANGER]') or _bq_text.startswith('[!danger]'):
+                _bq_type = 'callout-danger'
+                _bq_icon = 'fa-shield-halved'
+                _bq_text = re.sub(r'^\[!DANGER\]\s*|^\[!danger\]\s*', '', _bq_text)
+            elif _bq_text.startswith('[!TIP]') or _bq_text.startswith('[!tip]'):
+                _bq_type = 'callout-tip'
+                _bq_icon = 'fa-lightbulb'
+                _bq_text = re.sub(r'^\[!TIP\]\s*|^\[!tip\]\s*', '', _bq_text)
+            if _bq_text:
+                out.append(f'<div class="{_bq_type}"><i class="fas {_bq_icon}"></i> {inline_md(escape(_bq_text))}</div>')
+            continue
+
         # Table separator row |---|---| — skip silently
         if re.match(r'^\|[\s\-:|]+\|$', trimmed):
             continue
@@ -998,7 +1164,8 @@ def parse_markdown(text):
             if not in_ul:
                 out.append('<ul>')
                 in_ul = True
-            out.append(f'<li>{inline_md(escape(re.sub(r"^[-*]\s+", "", trimmed)))}</li>')
+            _ul_text = re.sub(r'^[-*]\s+', '', trimmed)
+            out.append(f'<li>{inline_md(escape(_ul_text))}</li>')
             continue
 
         # Ordered list
@@ -1012,7 +1179,8 @@ def parse_markdown(text):
             if not in_ol:
                 out.append('<ol>')
                 in_ol = True
-            out.append(f'<li>{inline_md(escape(re.sub(r"^\d+[.)]\s+", "", trimmed)))}</li>')
+            _ol_text = re.sub(r'^\d+[.)]\s+', '', trimmed)
+            out.append(f'<li>{inline_md(escape(_ol_text))}</li>')
             continue
 
         # Paragraph
@@ -1319,6 +1487,8 @@ def generate_one(name, code, sector):
         'years': years, 'rev_data': rev_data, 'profit_data': profit_data,
         'margin_data': margin_data,
         'income_rows': income_rows,
+        'bs_rows': bs_rows,
+        'cf_rows': cf_rows,
     })
 
     print('  Calling Qwen...', end=' ', flush=True)

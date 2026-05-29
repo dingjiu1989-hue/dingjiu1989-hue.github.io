@@ -13520,8 +13520,8 @@ def make_article_html(art, board_id, board_name, all_posts):
     word_est = max(300, body_text_len // 5)
     read_time = max(1, word_est // 200)
 
-    # Thin content guard: noindex articles under 2K chars plain text to protect site quality
-    robots_meta = 'noindex, follow' if body_text_len < 2000 else 'index, follow'
+    # Thin content guard: noindex articles under 1K chars plain text to protect site quality
+    robots_meta = 'noindex, follow' if body_text_len < 1000 else 'index, follow'
     same_board = [p for p in all_posts if p['board_id'] == board_id and p['slug'] != slug]
 
     # Prev/next intra-board navigation for crawl depth
