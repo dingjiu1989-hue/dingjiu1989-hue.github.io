@@ -1491,26 +1491,96 @@ def update_analysis_card(slug, data):
         return
     for company in cd['companies']:
         if company['slug'] == slug:
-            if data.get('marketCap'):
-                company['marketCap'] = data['marketCap']
-            if data.get('revenue'):
-                company['revenue'] = data['revenue']
-            if data.get('netIncome'):
-                company['netIncome'] = data['netIncome']
-            if data.get('revenueGrowth'):
-                company['revenueGrowth'] = data['revenueGrowth']
-            if data.get('pe'):
-                company['pe'] = data['pe']
-            if data.get('grossMargin'):
-                company['grossMargin'] = data['grossMargin']
-            if data.get('rating'):
-                company['rating'] = data['rating']
-            if data.get('ratingEn'):
-                company['ratingEn'] = data['ratingEn']
+            for key in ('marketCap', 'revenue', 'netIncome', 'revenueGrowth', 'pe', 'grossMargin', 'rating', 'ratingEn'):
+                val = data.get(key)
+                if val is not None and val != '—':
+                    company[key] = val
             break
     new_json = json.dumps(cd, ensure_ascii=False, separators=(',', ':'))
     new_html = html[:match.start(1)] + new_json + html[match.end(1):]
     ANALYSIS_HTML.write_text(new_html, encoding='utf-8')
+
+
+def backfill_cards():
+    """Backfill COMPANIES_DATA cards for all already-generated reports using MCP data."""
+    queue = load_queue()
+    progress = load_progress()
+    generated = set(progress.get('generated', []))
+
+    if not MCP_URL or not MCP_TOKEN:
+        print('Error: MCP_URL and MCP_TOKEN required for card backfill')
+        sys.exit(1)
+
+    updated = 0
+    skip = 0
+    for item in queue:
+        code = item['code']
+        name = item['name']
+
+        relevant = [s for s in generated if s.startswith(code)]
+        if not relevant:
+            skip += 1
+            continue
+
+        slug = relevant[0]
+        print(f'  Fetching data for {name} ({code})...', end=' ', flush=True)
+
+        try:
+            basic_rows = mcp_extract_rows(get_basic_info(code))
+            basic = basic_rows[0] if basic_rows else {}
+            income = get_income(code)
+            income_rows = mcp_extract_rows(income)
+
+            if not income_rows:
+                print('no income data, skipping')
+                continue
+
+            latest = income_rows[0]
+            rev = float(latest.get('totalOperatingRevenue') or latest.get('revenue') or latest.get('operatingRevenue', 0) or 0)
+            profit = float(latest.get('netProfit') or latest.get('netIncome') or 0)
+
+            years_rev = []
+            for r in reversed(income_rows):
+                yr = (r.get('endDate') or r.get('reportDate') or r.get('reportPeriodEnd', ''))[:4]
+                if yr and (not years_rev or yr != years_rev[-1][0]):
+                    rv = float(r.get('totalOperatingRevenue') or r.get('revenue') or r.get('operatingRevenue', 0) or 0)
+                    years_rev.append((yr, rv))
+
+            growth = None
+            if len(years_rev) >= 2:
+                prev = years_rev[-2][1]
+                if prev > 0:
+                    growth = f'+{round((years_rev[-1][1] - prev) / prev * 100, 1)}%'
+
+            gp = latest.get('grossProfitMargin')
+            margin = None
+            if gp is not None:
+                margin = f'{float(gp):.1f}%'
+            else:
+                gp_amt = float(latest.get('grossProfit', 0) or 0)
+                if rev > 0 and gp_amt > 0:
+                    margin = f'{round(gp_amt / rev * 100, 1)}%'
+
+            mc = basic.get('totalMarketCap')
+            pe_val = basic.get('peRatio') or basic.get('pe')
+
+            card_data = {
+                'marketCap': fmt_market_cap(mc),
+                'revenue': fmt_revenue(rev),
+                'netIncome': fmt_revenue(profit),
+                'revenueGrowth': growth,
+                'pe': f'~{float(pe_val):.1f}x' if pe_val else None,
+                'grossMargin': margin,
+            }
+            print(f'rev={fmt_revenue(rev)} profit={fmt_revenue(profit)} mc={fmt_market_cap(mc)} pe={pe_val}')
+            update_analysis_card(slug, card_data)
+            updated += 1
+
+        except Exception as e:
+            print(f'Error: {e}')
+            continue
+
+    print(f'\nDone: {updated} cards updated ({skip} skipped)')
 
 
 # ═══════════════════════════════ Company Generation ═══════════════════════════════
@@ -1727,7 +1797,13 @@ def main():
     parser.add_argument('--reset', action='store_true', help='Reset progress (re-generate all)')
     parser.add_argument('--company', type=str, help='Generate report for a single company by name')
     parser.add_argument('--code', type=str, help='Stock code (used with --company)')
+    parser.add_argument('--fill-cards', action='store_true', help='Backfill COMPANIES_DATA cards for existing reports')
     args = parser.parse_args()
+
+    # --fill-cards: only needs MCP credentials, no DeepSeek key
+    if args.fill_cards:
+        backfill_cards()
+        return
 
     if not MCP_URL or not MCP_TOKEN or not DEEPSEEK_KEY:
         print('Error: Set MCP_URL, MCP_TOKEN, and DEEPSEEK_KEY environment variables')

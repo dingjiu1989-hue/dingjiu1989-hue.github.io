@@ -19,6 +19,11 @@ on:
         required: false
         type: boolean
         default: false
+      fill_cards:
+        description: 'Backfill search cards for existing reports'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   generate:
@@ -55,6 +60,10 @@ jobs:
       - name: Generate batch of 5 reports
         if: inputs.company_name == ''
         run: python3 scripts/gen_ai_report.py
+
+      - name: Backfill search cards (all existing reports)
+        if: inputs.fill_cards == true
+        run: python3 scripts/gen_ai_report.py --fill-cards
 
       - name: Check for changes
         id: changes
