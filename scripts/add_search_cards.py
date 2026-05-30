@@ -85,10 +85,13 @@ def make_entry(post, board_posts):
     sector = '科技'
     if '投资分析' in tags:
         sector = '金融'
-    if name_cn in ('中芯国际', '海光信息', '韦尔股份', '中微公司', '紫光国微',
-                    '长电科技', '澜起科技', '卓胜微', '圣邦股份', '北京君正',
-                    '华天科技', '通富微电', '兆易创新', '寒武纪', '北方华创',
-                    'NAURA'):
+    # Check by slug code for semiconductor companies
+    SEMICONDUCTOR_CODES = {
+        '688981', '688041', '002371', '603501', '688012', '688256', '603986',
+        '002049', '600584', '688008', '300782', '300661', '300223', '002185',
+        '002156', '600460', '688396', '688099', '688385', '688052',
+    }
+    if code in SEMICONDUCTOR_CODES:
         sector = '半导体'
 
     return {
