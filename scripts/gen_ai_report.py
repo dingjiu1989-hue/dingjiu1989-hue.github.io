@@ -472,12 +472,10 @@ def render_report_cn(data):
     # Section navigation
     num_labels = ['一', '二', '三', '四', '五', '六', '七', '八']
 
+    has_rev_profit = any(v is not None for v in rev_data) and any(v is not None for v in profit_data)
     # Income chart
     income_chart = ''
-    if len(years) >= 1:
-        _iy = json.dumps(years)
-        _ir = json.dumps(round_to_billion(rev_data))
-        _ip = json.dumps(round_to_billion(profit_data))
+    if len(years) >= 1 and has_rev_profit:
         income_chart = '''\
 <div class="widget-box">
   <div class="widget-header"><i class="fas fa-chart-bar" style="color:#2563eb"></i> 营收与净利润趋势</div>
@@ -737,6 +735,16 @@ new Chart(document.getElementById('chartYoY'),{type:'bar',data:{labels:YOY_LABEL
 
       {section_html}
 
+      <div class="widget-box">
+        <div class="widget-header"><i class="fas fa-book-open" style="color:#2563eb"></i> 数据来源与参考</div>
+        <div class="widget-body">
+          <ul class="references">
+            <li>MCP 股票数据服务 — 财务数据、行情数据、机构持仓</li>
+            <li>公司年度报告及季报（2021–2026）</li>
+            <li>行业研究报告及券商覆盖研报</li>
+          </ul>
+        </div>
+      </div>
 
       <div class="disclaimer-box">
         <p><strong>免责声明：</strong>本报告由AI自动生成，仅供参考和学习交流，不构成任何形式的投资建议。报告中的数据和分析基于公开信息和模型估算，可能存在偏差。股市有风险，投资需谨慎。作者和平台不对因使用本报告而产生的任何损失承担责任。</p>
@@ -812,7 +820,7 @@ def render_report_en(data):
 
 
     income_chart = ''
-    if len(years) >= 1:
+    if len(years) >= 1 and has_rev_profit:
         _iy = json.dumps(years)
         _ir = json.dumps(round_to_billion(rev_data))
         _ip = json.dumps(round_to_billion(profit_data))
@@ -1024,6 +1032,17 @@ new Chart(document.getElementById('chartYoY'),{type:'bar',data:{labels:YOY_LABEL
       {section_html}
 
 
+      <div class="widget-box">
+        <div class="widget-header"><i class="fas fa-book-open" style="color:#2563eb"></i> Data Sources & References</div>
+        <div class="widget-body">
+          <ul class="references">
+            <li>MCP Stock Data Service — Financials, pricing, institutional holdings</li>
+            <li>Company annual & quarterly reports (2021–2026)</li>
+            <li>Industry research & analyst coverage reports</li>
+          </ul>
+        </div>
+      </div>
+
       <div class="disclaimer-box">
         <p><strong>Disclaimer:</strong> This report is AI-generated for informational purposes only and does not constitute investment advice. Analyses are based on public data and model estimates, which may contain errors. Investing involves risk.</p>
       </div>
@@ -1124,6 +1143,8 @@ def parse_markdown(text):
     """Parse basic markdown → HTML (ported from renderer.js)."""
     if not text:
         return ''
+    # DeepSeek sometimes returns literal \n (backslash-n) instead of actual newlines
+    text = text.replace('\\n', '\n')
     lines = text.split('\n')
     out = []
     in_ul = False
@@ -1704,12 +1725,14 @@ def generate_one(name, code, sector):
     meta_desc_en = ''
     if exec_summary:
         clean = re.sub(r'<[^>]+>', '', exec_summary).strip()
+        clean = re.sub(r'\*\*', '', clean)
         clean = re.sub(r'\s+', ' ', clean)
         meta_desc_cn = clean[:147] + '...' if len(clean) > 150 else clean
     if not meta_desc_cn:
         meta_desc_cn = f'深度分析{name}（{code}）：AI 深度研究报告，覆盖财务、技术面、竞品、估值与风险分析。'
     if exec_summary_en:
         clean = re.sub(r'<[^>]+>', '', exec_summary_en).strip()
+        clean = re.sub(r'\*\*', '', clean)
         clean = re.sub(r'\s+', ' ', clean)
         meta_desc_en = clean[:147] + '...' if len(clean) > 150 else clean
     if not meta_desc_en:
