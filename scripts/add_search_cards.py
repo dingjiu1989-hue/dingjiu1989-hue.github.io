@@ -7,90 +7,36 @@ COMPANIES_DATA entries, then injects them into analysis.html.
 import json, re
 from pathlib import Path
 
+from card_data import (
+    HAND_WRITTEN_SLUGS, NAME_MAP, SEMICONDUCTOR_CODES,
+    slug_to_ticker, get_sector_color,
+)
+
 BASE = Path(__file__).resolve().parent.parent
 ANALYSIS_HTML = BASE / 'ai-analyst' / 'analysis.html'
 ARTICLES_CN = BASE / 'articles.json'
 ARTICLES_EN = BASE / 'en' / 'articles.json'
 
-# Hand-written reports that are already in COMPANIES_DATA (skip these)
-HAND_WRITTEN_SLUGS = {
-    'nvidia-2026', 'google-2026', 'microsoft-2026', 'amazon-2026',
-    'meta-2026', 'tsmc-2026', 'broadcom-2026', 'tencent-2026',
-    'apple-2026', 'baba-2026', 'xiaomi-group-2026', 'huahong-semiconductor-2026',
-    'oracle-2026', 'netflix-2026', 'asml-2026', 'amd-2026', 'catl-2026',
-    'ccb-2026', 'micron-2026',
-    '600036-2026', '600900-2026', '601988-2026', '601398-2026', '601288-2026',
-}
-
-# Sector color mapping
-SECTOR_COLORS = {
-    '半导体': 'red-600',
-    '金融': 'blue-600',
-    '新能源': 'green-600',
-    '公用事业': 'yellow-500',
-    'AI': 'purple-600',
-    '科技': 'blue-600',
-    '通信': 'indigo-600',
-    '消费电子': 'orange-500',
-}
-
-def slug_to_ticker(slug):
-    """Extract ticker from slug like '002156-2026' → '002156.SZ'"""
-    code = slug.split('-')[0]
-    if code.isdigit():
-        if code.startswith('6') or code.startswith('688'):
-            return f'{code}.SH'
-        elif code.startswith('0') or code.startswith('3'):
-            return f'{code}.SZ'
-    return code
-
-def get_sector_color(sector):
-    return SECTOR_COLORS.get(sector, 'blue-600')
 
 def make_entry(post, board_posts):
     """Generate a simplified COMPANIES_DATA entry from articles.json post data."""
     slug = post['slug']
     code = slug.split('-')[0]
-    title = post.get('title', '')
     description = post.get('description', '')[:120]
 
-    # Determine company name and Chinese name from title
-    name = title
-    name_cn = title
+    # Determine company name
+    if slug in NAME_MAP:
+        name, name_cn = NAME_MAP[slug]
+    else:
+        title = post.get('title', '')
+        name = title
+        name_cn = title
 
-    # Map some known names
-    name_map = {
-        '688981-2026': ('SMIC', '中芯国际'),
-        '688041-2026': ('Hygon', '海光信息'),
-        '002371-2026': ('NAURA', '北方华创'),
-        '603501-2026': ('Will Semiconductor', '韦尔股份'),
-        '688012-2026': ('AMEC', '中微公司'),
-        '688256-2026': ('Cambricon', '寒武纪'),
-        '603986-2026': ('GigaDevice', '兆易创新'),
-        '002049-2026': ('Unigroup Guoxin', '紫光国微'),
-        '600584-2026': ('JCET', '长电科技'),
-        '688008-2026': ('Montage Technology', '澜起科技'),
-        '300782-2026': ('Maxscend', '卓胜微'),
-        '300661-2026': ('SG Micro', '圣邦股份'),
-        '300223-2026': ('Ingenic', '北京君正'),
-        '002185-2026': ('Huatian Technology', '华天科技'),
-        '002156-2026': ('Tongfu Microelectronics', '通富微电'),
-    }
-
-    if slug in name_map:
-        name, name_cn = name_map[slug]
-
-    # Determine sector from first tag or description
+    # Determine sector
     tags = post.get('tags', [])
     sector = '科技'
     if '投资分析' in tags:
         sector = '金融'
-    # Check by slug code for semiconductor companies
-    SEMICONDUCTOR_CODES = {
-        '688981', '688041', '002371', '603501', '688012', '688256', '603986',
-        '002049', '600584', '688008', '300782', '300661', '300223', '002185',
-        '002156', '600460', '688396', '688099', '688385', '688052',
-    }
     if code in SEMICONDUCTOR_CODES:
         sector = '半导体'
 
@@ -118,6 +64,7 @@ def make_entry(post, board_posts):
         'reportDate': post.get('date', '2026-05-29'),
         'reportUrl': f'{slug}.html',
     }
+
 
 def main():
     articles = json.loads(ARTICLES_CN.read_text(encoding='utf-8'))
@@ -171,6 +118,7 @@ def main():
     )
     ANALYSIS_HTML.write_text(new_html2, encoding='utf-8')
     print('Updated company count in meta description.')
+
 
 if __name__ == '__main__':
     main()

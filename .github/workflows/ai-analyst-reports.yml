@@ -65,6 +65,27 @@ jobs:
         if: inputs.fill_cards == true
         run: python3 scripts/gen_ai_report.py --fill-cards
 
+      - name: QA audit generated reports
+        if: always()
+        run: |
+          python3 -c "
+          import os, sys
+          sys.path.insert(0, '.')
+          from scripts.gen_ai_report import qa_report
+
+          total = 0
+          for f in sorted(os.listdir('ai-analyst')):
+              if not f.endswith('-2026.html'):
+                  continue
+              slug = f.replace('.html', '')
+              cn = open(f'ai-analyst/{f}').read()
+              en_path = f'en/ai-analyst/{slug}-en.html'
+              en = open(en_path).read() if os.path.exists(en_path) else ''
+              w = qa_report(cn, en, slug)
+              total += len(w)
+          print(f'## QA total: {total} warning(s)')
+          "
+
       - name: Check for changes
         id: changes
         run: |

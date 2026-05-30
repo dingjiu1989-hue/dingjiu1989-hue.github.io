@@ -1289,6 +1289,74 @@ def round_to_billion(arr):
     return [round(v / 1e8, 2) if v is not None else None for v in arr]
 
 
+# ═══════════════════════════════ LLM Output Sanitizer ═══════════════════════════════
+
+def sanitize_llm_output(text, context='html'):
+    """Clean LLM-generated text based on where it will be used.
+
+    Contexts:
+      html     — convert literal \\n to actual newlines (for parse_markdown)
+      meta     — strip **, collapse whitespace (for meta description)
+      card     — strip **, truncate to 120 chars (for search card summary)
+    """
+    if not text:
+        return text
+    text = text.replace('\\n', '\n')
+    if context == 'meta':
+        text = re.sub(r'\*\*(.+?)\*\*', r'\1', text)
+        text = re.sub(r'\s+', ' ', text)
+    elif context == 'card':
+        text = re.sub(r'\*\*(.+?)\*\*', r'\1', text)
+        text = re.sub(r'\s+', ' ', text)
+        text = text.strip()[:120]
+    return text.strip()
+
+
+# ═══════════════════════════════ Report QA ═══════════════════════════════
+
+def qa_report(cn_html, en_html, slug):
+    """Check generated report for common quality issues. Returns list of warnings."""
+    warnings = []
+
+    # Meta description should not have markdown artifacts
+    m = re.search(r'<meta name="description" content="([^"]+)"', cn_html)
+    if m and '**' in m.group(1):
+        warnings.append('CN meta has ** artifacts')
+
+    # HTML body should not have literal \n (double backslash-n)
+    body_start = cn_html.find('<body')
+    body_end = cn_html.find('</body>')
+    if body_start >= 0 and body_end > body_start:
+        body = cn_html[body_start:body_end]
+        if '\\n' in body:
+            warnings.append('CN body has literal \\n')
+
+    # Should have references section
+    if '数据来源与参考' not in cn_html and 'Data Sources & References' not in cn_html:
+        warnings.append('CN missing references section')
+    if 'Data Sources & References' not in en_html and '数据来源与参考' not in en_html:
+        warnings.append('EN missing references section')
+
+    # Charts should have data arrays
+    for cid in re.findall(r'<canvas id="(\w+)"', cn_html):
+        # Find the Chart.new call for this canvas — check if data has non-trivial values
+        script_match = re.search(
+            rf'getElementById\(\"{cid}\"\).*?data:\s*\{{.*?labels:\s*\[(?P<labels>.*?)\].*?data:\s*\[(?P<data>.*?)\]',
+            cn_html, re.DOTALL
+        )
+        if script_match:
+            data_str = script_match.group('data')
+            values = [v.strip() for v in data_str.split(',') if v.strip()]
+            # If all values are 0 or null (and there are values), warn
+            non_empty = [v for v in values if v not in ('null', 'None', '', '0')]
+            if values and not non_empty:
+                warnings.append(f'Chart {cid} has all null/zero data')
+
+    if warnings:
+        print(f'  ⚠ QA [{slug}]: {"; ".join(warnings)}')
+    return warnings
+
+
 def make_slug(name, code):
     """Generate URL slug."""
     return f'{code}-{datetime.now(timezone.utc).strftime("%Y")}'
@@ -1724,17 +1792,17 @@ def generate_one(name, code, sector):
     meta_desc_cn = ''
     meta_desc_en = ''
     if exec_summary:
-        clean = re.sub(r'<[^>]+>', '', exec_summary).strip()
-        clean = re.sub(r'\*\*', '', clean)
-        clean = re.sub(r'\s+', ' ', clean)
-        meta_desc_cn = clean[:147] + '...' if len(clean) > 150 else clean
+        clean = re.sub(r'<[^>]+>', '', exec_summary)
+        meta_desc_cn = sanitize_llm_output(clean, 'meta')[:147]
+        if len(meta_desc_cn) >= 147:
+            meta_desc_cn += '...'
     if not meta_desc_cn:
         meta_desc_cn = f'深度分析{name}（{code}）：AI 深度研究报告，覆盖财务、技术面、竞品、估值与风险分析。'
     if exec_summary_en:
-        clean = re.sub(r'<[^>]+>', '', exec_summary_en).strip()
-        clean = re.sub(r'\*\*', '', clean)
-        clean = re.sub(r'\s+', ' ', clean)
-        meta_desc_en = clean[:147] + '...' if len(clean) > 150 else clean
+        clean = re.sub(r'<[^>]+>', '', exec_summary_en)
+        meta_desc_en = sanitize_llm_output(clean, 'meta')[:147]
+        if len(meta_desc_en) >= 147:
+            meta_desc_en += '...'
     if not meta_desc_en:
         meta_desc_en = f'In-depth analysis of {name} ({code}): AI-driven comprehensive research covering financials, technicals, competitive analysis, valuation, and risks.'
 
@@ -1807,6 +1875,9 @@ def generate_one(name, code, sector):
     # 9. Update index.html
     update_index_html_cn(slug, cn_title)
     update_index_html_en(slug, en_title)
+
+    # 10. QA check
+    qa_report(cn_html, en_html, slug)
 
     return {
         'name': name, 'code': code, 'slug': slug,
