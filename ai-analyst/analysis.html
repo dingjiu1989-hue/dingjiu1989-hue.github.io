@@ -557,7 +557,7 @@
     function renderGrid(list) {
         var grid = document.getElementById('companyGrid');
         if (list.length === 0) {
-            grid.innerHTML = '<div class="no-results" id="noResults"><strong>未找到匹配公司</strong><br>目前覆盖 24 家头部科技公司（在线分析可生成未收录公司的报告）。<br><br><button class="live-analysis-btn" id="requestReportBtn" onclick="requestReport()">📝 请求 AI 生成完整分析报告</button><br><span id="requestStatus" style="font-size:.85rem;color:#888;margin-top:8px;display:inline-block;">提交后将通知 AI 助手生成完整 8 段式深度分析报告</span></div>';
+            grid.innerHTML = '<div class="no-results" id="noResults"><strong>未找到匹配公司</strong><br>目前覆盖 49 家头部科技公司（在线分析可生成未收录公司的报告）。<br><br><button class="live-analysis-btn" id="requestReportBtn" onclick="requestReport()">📝 请求 AI 生成完整分析报告</button><br><span id="requestStatus" style="font-size:.85rem;color:#888;margin-top:8px;display:inline-block;">提交后将通知 AI 助手生成完整 8 段式深度分析报告</span></div>';
             return;
         }
         grid.innerHTML = list.map(renderCard).join('');
