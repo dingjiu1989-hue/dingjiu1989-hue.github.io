@@ -80,9 +80,6 @@
         "foundingDate": "2025"
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/ai/ai-database-query.html"},
-      "sameAs": [
-    "https://dev.to/_6638a39c349d7e9c85ee20/natural-language-to-sql-with-llms-2m2k"
-      ],
       "articleBody": "Build systems that convert natural language questions into SQL queries using LLMs, with schema context, query validation, and safety guards."
     }
     </script>
@@ -185,11 +182,9 @@
 <p>def build_schema_context(tables):</p>
 <p>context_parts = []</p>
 <p>for table in tables:</p>
-<p>ddl = f"CREATE TABLE {table.name} (
-"</p>
+<p>ddl = f"CREATE TABLE {table.name} ( "</p>
 <p>for col in table.columns:</p>
-<p>ddl += f" {col.name} {col.type} -- {col.description}
-"</p>
+<p>ddl += f" {col.name} {col.type} -- {col.description} "</p>
 <p>ddl += ");"</p>
 <p>context_parts.append(ddl)</p>
 <h2>Add sample rows for context on data patterns</h2>
@@ -248,13 +243,8 @@
 <p>Examples:</p>
 <p>"""</p>
 <p>for ex in examples:</p>
-<p>prompt += f"
-Q: {ex['question']}
-SQL: {ex['query']}
-"</p>
-<p>prompt += f"
-Q: {question}
-SQL:"</p>
+<p>prompt += f" Q: {ex['question']} SQL: {ex['query']} "</p>
+<p>prompt += f" Q: {question} SQL:"</p>
 <p>return prompt</p>
 <h2>Query Validation</h2>
 <p>Before executing generated SQL, validate it:</p>
@@ -296,9 +286,7 @@ SQL:"</p>
 <p>feedback = f"Execution error: {str(e)}"</p>
 <p>else:</p>
 <p>feedback = f"Validation errors: {', '.join(errors)}"</p>
-<p>question = f"Original question: {question}
-Previous attempt failed: {feedback}
-Please fix the SQL query."</p>
+<p>question = f"Original question: {question} Previous attempt failed: {feedback} Please fix the SQL query."</p>
 <h2>Schema Linking</h2>
 <p>For large schemas with many tables, first identify relevant tables before generating SQL:</p>
 <p>def identify_relevant_tables(question, all_tables, table_descriptions):</p>

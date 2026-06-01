@@ -79,9 +79,6 @@
         "foundingDate": "2025"
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tools/ai-cli-tools-guide.html"},
-      "sameAs": [
-    "https://dev.to/_6638a39c349d7e9c85ee20/building-ai-powered-cli-tools-a-complete-guide-for-developers-1a0l"
-      ],
       "articleBody": "How to build command-line tools that leverage LLMs \u2014 from simple wrappers to intelligent agents that automate workflows, with Python and Node.js examples."
     }
     </script>
@@ -310,14 +307,12 @@
 <p>import signal</p>
 <p>import sys</p>
 <p>def handle_interrupt(sig, frame):</p>
-<p>click.echo("
-[Interrupted]", err=True)</p>
+<p>click.echo(" [Interrupted]", err=True)</p>
 <p>sys.exit(130)</p>
 <p>signal.signal(signal.SIGINT, handle_interrupt)</p>
 <p>In Node.js with Commander:</p>
 <p>process.on('SIGINT', () =&gt; {</p>
-<p>console.error('
-[Interrupted]');</p>
+<p>console.error(' [Interrupted]');</p>
 <p>process.exit(130);</p>
 <p>});</p>
 <p>Rich formatting (Markdown, syntax highlighting) makes streaming output readable. But be careful with Rich's <code>Live</code> — it re-renders the entire output on each frame, which can be slow for long streams. For long outputs, raw <code>click.echo</code> or <code>process.stdout.write</code> is more performant.</p>
@@ -467,8 +462,7 @@
 <p>click.echo("No changes to review.", err=True)</p>
 <p>raise click.Abort()</p>
 <h2>Count lines and warn</h2>
-<p>lines = result.stdout.count("
-")</p>
+<p>lines = result.stdout.count(" ")</p>
 <p>if lines &gt; 2000:</p>
 <p>click.echo(f"Diff is {lines} lines, will review first 2000.", err=True)</p>
 <p>system = """You are a senior code reviewer. Review the git diff below.</p>
@@ -476,8 +470,7 @@
 <p>For each issue, include: file, line, severity (critical/warning/nit), and suggestion.</p>
 <p>Output in the format requested."""</p>
 <p>prompt = f"Review this git diff:</p>
-<p><code>diff
-{result.stdout[:50000]}</code>"</p>
+<p><code>diff {result.stdout[:50000]}</code>"</p>
 <p>if output == "json":</p>
 <p>response = client.messages.create(</p>
 <p>model=model,</p>
@@ -550,8 +543,7 @@
 <p>) as stream:</p>
 <p>for text in stream.text_stream:</p>
 <p>click.echo(text, nl=False)</p>
-<p>click.echo("
-")</p>
+<p>click.echo(" ")</p>
 <p>Extended versions of this tool:</p>
 <ul>
 <li>

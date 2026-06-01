@@ -80,9 +80,6 @@
         "foundingDate": "2025"
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/ai/multi-agent-systems.html"},
-      "sameAs": [
-    "https://dev.to/_6638a39c349d7e9c85ee20/multi-agent-systems-coordination-communication-consensus-4g8"
-      ],
       "articleBody": "Design multi-agent systems with LLM-powered agents: coordination patterns, inter-agent communication protocols, consensus mechanisms, and conflict resolution st"
     }
     </script>
@@ -252,25 +249,21 @@
 <p>positions = {a.spec.name: await a.process(problem) for a in self.agents}</p>
 <p>for round_num in range(self.rounds):</p>
 <h2>Share positions</h2>
-<p>summary = "
-".join(f"{name}: {pos}" for name, pos in positions.items())</p>
+<p>summary = " ".join(f"{name}: {pos}" for name, pos in positions.items())</p>
 <h2>Each agent critiques and refines</h2>
 <p>new_positions = {}</p>
 <p>for agent in self.agents:</p>
 <p>critique = await agent.process(</p>
-<p>f"Round {round_num + 1}. Review these positions and refine your own:
-{summary}",</p>
+<p>f"Round {round_num + 1}. Review these positions and refine your own: {summary}",</p>
 <p>context=f"Your previous position: {positions[agent.spec.name]}"</p>
 <p>)</p>
 <p>new_positions[agent.spec.name] = critique</p>
 <p>positions = new_positions</p>
 <h2>Final consensus</h2>
 <p>consensus_agent = self.agents[0]</p>
-<p>summary = "
-".join(f"{name}: {pos}" for name, pos in positions.items())</p>
+<p>summary = " ".join(f"{name}: {pos}" for name, pos in positions.items())</p>
 <p>consensus = await consensus_agent.process(</p>
-<p>f"Based on all perspectives, produce a final consensus answer:
-{summary}"</p>
+<p>f"Based on all perspectives, produce a final consensus answer: {summary}"</p>
 <p>)</p>
 <p>return consensus</p>
 <h2>Manager-Worker Pattern</h2>
@@ -293,11 +286,9 @@
 <h2>Collect results</h2>
 <p>results = await asyncio.gather(*worker_futures)</p>
 <h2>Manager synthesizes final output</h2>
-<p>results_text = "
-".join(f"{st['id']}: {r}" for st, r in zip(sub_tasks, results))</p>
+<p>results_text = " ".join(f"{st['id']}: {r}" for st, r in zip(sub_tasks, results))</p>
 <p>final = await self.manager.process(</p>
-<p>f"Synthesize these results into a coherent output:
-{results_text}",</p>
+<p>f"Synthesize these results into a coherent output: {results_text}",</p>
 <p>context=f"Original task: {task}"</p>
 <p>)</p>
 <p>return final</p>

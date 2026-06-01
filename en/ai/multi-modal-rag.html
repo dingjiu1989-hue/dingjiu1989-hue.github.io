@@ -80,9 +80,6 @@
         "foundingDate": "2025"
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/ai/multi-modal-rag.html"},
-      "sameAs": [
-    "https://dev.to/_6638a39c349d7e9c85ee20/multi-modal-rag-images-tables-documents-chunking-and-retrieval-52i4"
-      ],
       "articleBody": "Build multi-modal RAG systems that handle images, tables, and documents. Learn chunking strategies, embedding approaches, and retrieval fusion for different dat"
     }
     </script>
@@ -174,8 +171,7 @@
 <p>for row in rows:</p>
 <p>row_desc = ", ".join(f"{headers[i]}: {cell}" for i, cell in enumerate(row))</p>
 <p>text_parts.append(row_desc)</p>
-<p>return "
-".join(text_parts)</p>
+<p>return " ".join(text_parts)</p>
 <h2>Strategy 2: Multi-Vector Retriever</h2>
 <p>Store both text representations and visual embeddings:</p>
 <p>from langchain.retrievers.multi_vector import MultiVectorRetriever</p>

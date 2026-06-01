@@ -80,9 +80,6 @@
         "foundingDate": "2025"
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/ai/agent-memory-systems.html"},
-      "sameAs": [
-    "https://dev.to/_6638a39c349d7e9c85ee20/agent-memory-systems-short-term-long-term-episodic-semantic-memory-3pd2"
-      ],
       "articleBody": "Design memory systems for AI agents inspired by cognitive architecture: short-term working memory, long-term storage, episodic experiences, and semantic knowled"
     }
     </script>
@@ -305,22 +302,17 @@
 <p>def build_prompt_context(self, query: str) -&gt; str:</p>
 <p>context_parts = []</p>
 <h2>Recent conversation</h2>
-<p>context_parts.append("=== Recent Context ===
-")</p>
+<p>context_parts.append("=== Recent Context === ")</p>
 <p>context_parts.extend(self.short_term.get_context())</p>
 <h2>Relevant long-term memories</h2>
 <p>memories = self.long_term.recall(query, k=3)</p>
 <p>if memories:</p>
-<p>context_parts.append("
-=== Related Memories ===
-")</p>
+<p>context_parts.append(" === Related Memories === ")</p>
 <p>context_parts.extend([m["content"] for m in memories])</p>
 <h2>Similar past episodes</h2>
 <p>episodes = self.episodic.retrieve_similar_episodes(query, k=2)</p>
 <p>if episodes:</p>
-<p>context_parts.append("
-=== Similar Past Experiences ===
-")</p>
+<p>context_parts.append(" === Similar Past Experiences === ")</p>
 <p>for ep in episodes:</p>
 <p>context_parts.append(f"Task: {ep.task}, Outcome: {ep.outcome}")</p>
 <h2>Relevant semantic facts</h2>
@@ -328,12 +320,9 @@
 <p>for entity in entities:</p>
 <p>facts = self.semantic.query_fact(entity)</p>
 <p>if facts:</p>
-<p>context_parts.append(f"
-=== Facts about {entity} ===
-")</p>
+<p>context_parts.append(f" === Facts about {entity} === ")</p>
 <p>context_parts.extend(facts)</p>
-<p>return "
-".join(context_parts)</p>
+<p>return " ".join(context_parts)</p>
 <h2>Conclusion</h2>
 <p>Agent memory systems mirror human cognitive architecture. Short-term memory maintains immediate conversation context with token-aware eviction. Long-term memory persistently stores important information with vector-based retrieval. Episodic memory records specific experiences for future reference. Semantic memory extracts and stores general knowledge from experiences. An integrated memory system combines all four types, giving agents both the immediate context and the accumulated wisdom needed for complex, long-running tasks.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></li><li><a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></li><li><a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a></li></ul></div>
         <div class="ad-container">

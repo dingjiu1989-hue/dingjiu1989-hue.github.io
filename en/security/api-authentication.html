@@ -258,11 +258,7 @@
 <p>timestamp = str(int(time.time()))</p>
 <p>nonce = secrets.token_hex(8)</p>
 <h2>Build message to sign</h2>
-<p>message = f"{method}
-{path}
-{timestamp}
-{nonce}
-".encode() + body</p>
+<p>message = f"{method} {path} {timestamp} {nonce} ".encode() + body</p>
 <p>signature = hmac.new(</p>
 <p>self.api_secret,</p>
 <p>message,</p>
@@ -293,11 +289,7 @@
 <p>secret = self.secrets.get(api_key)</p>
 <p>if not secret:</p>
 <p>return False</p>
-<p>message = f"{method}
-{path}
-{timestamp}
-{nonce}
-".encode() + body</p>
+<p>message = f"{method} {path} {timestamp} {nonce} ".encode() + body</p>
 <p>expected = hmac.new(secret.encode(), message, hashlib.sha256).hexdigest()</p>
 <p>return hmac.compare_digest(expected, signature)</p>
 <p>Choosing the Right Method </p>

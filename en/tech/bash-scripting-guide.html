@@ -80,9 +80,6 @@
         "foundingDate": "2025"
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/bash-scripting-guide.html"},
-      "sameAs": [
-    "https://dev.to/_6638a39c349d7e9c85ee20/bash-scripting-best-practices-27ke"
-      ],
       "articleBody": "Essential patterns for writing reliable, maintainable shell scripts in production environments."
     }
     </script>
@@ -153,8 +150,7 @@
 <p>Every production Bash script should begin with strict mode settings that catch errors early:</p>
 <h2>!/usr/bin/env bash</h2>
 <p>set -euo pipefail</p>
-<p>IFS=$'
-\t'</p>
+<p>IFS=$' \t'</p>
 <ul>
 <li>
 <p><code>set -e</code> causes the script to exit immediately when a command fails.</p>
@@ -222,15 +218,13 @@
 <p>This prevents accidental overwrites and documents intent.</p>
 <h2>Prefer <code>printf</code> Over <code>echo</code></h2>
 <p>The <code>echo</code> command behaves differently across shells and platforms. Use <code>printf</code> for portable, predictable output:</p>
-<p>printf "Processing file: %s
-" "$filename"</p>
+<p>printf "Processing file: %s " "$filename"</p>
 <h2>Logging with Timestamps</h2>
 <p>Implement a simple logging function for better observability:</p>
 <p>log() {</p>
 <p>local level="$1"</p>
 <p>shift</p>
-<p>printf "[%s] [%s] %s
-" "$(date '+%Y-%m-%d %H:%M:%S')" "$level" "$*" &gt;&amp;2</p>
+<p>printf "[%s] [%s] %s " "$(date '+%Y-%m-%d %H:%M:%S')" "$level" "$*" &gt;&amp;2</p>
 <p>}</p>
 <p>info() { log "INFO" "$@"; }</p>
 <p>error() { log "ERROR" "$@"; }</p>

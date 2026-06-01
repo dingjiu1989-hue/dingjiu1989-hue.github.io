@@ -130,7 +130,7 @@ Dataset quality matters more than quantity. A well-curated 1,000-example dataset
 
 "input": "Team discussed Q1 results. Revenue grew 15%. Engineering shipped 3 features. Marketing launched new campaign.",
 
-"output": "- Q1 revenue grew 15% \- Engineering shipped 3 new features \- Marketing launched a new campaign"
+"output": "- Q1 revenue grew 15% - Engineering shipped 3 new features - Marketing launched a new campaign"
 
 }
 

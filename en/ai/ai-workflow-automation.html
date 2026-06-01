@@ -81,9 +81,6 @@
         "foundingDate": "2025"
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/ai/ai-workflow-automation.html"},
-      "sameAs": [
-    "https://dev.to/_6638a39c349d7e9c85ee20/ai-workflow-automation-langchain-temporal-event-driven-agents-5594"
-      ],
       "articleBody": "Build robust AI workflow automation with LangChain for LLM orchestration, Temporal for durable execution, and event-driven patterns for resilient agent pipeline"
     }
     </script>
@@ -150,21 +147,17 @@
 <h2>Define individual chain steps</h2>
 <p>extract_prompt = PromptTemplate(</p>
 <p>input_variables=["text"],</p>
-<p>template="Extract key requirements from this text:
-{text}",</p>
+<p>template="Extract key requirements from this text: {text}",</p>
 <p>)</p>
 <p>extract_chain = LLMChain(llm=llm, prompt=extract_prompt, output_key="requirements")</p>
 <p>analyze_prompt = PromptTemplate(</p>
 <p>input_variables=["requirements"],</p>
-<p>template="Analyze these requirements and identify potential issues:
-{requirements}",</p>
+<p>template="Analyze these requirements and identify potential issues: {requirements}",</p>
 <p>)</p>
 <p>analyze_chain = LLMChain(llm=llm, prompt=analyze_prompt, output_key="analysis")</p>
 <p>generate_prompt = PromptTemplate(</p>
 <p>input_variables=["requirements", "analysis"],</p>
-<p>template="Based on requirements and analysis, generate a solution:
-Requirements: {requirements}
-Analysis: {analysis}",</p>
+<p>template="Based on requirements and analysis, generate a solution: Requirements: {requirements} Analysis: {analysis}",</p>
 <p>)</p>
 <p>generate_chain = LLMChain(llm=llm, prompt=generate_prompt, output_key="solution")</p>
 <h2>Compose into a sequential workflow</h2>
@@ -187,8 +180,7 @@ Analysis: {analysis}",</p>
 <p>return await vector_search(query)</p>
 <p>@activity.defn</p>
 <p>async def generate_answer(context: list[str], question: str) -&gt; str:</p>
-<p>return await call_llm(f"Context: {context}
-Question: {question}")</p>
+<p>return await call_llm(f"Context: {context} Question: {question}")</p>
 <p>@activity.defn</p>
 <p>async def review_output(answer: str) -&gt; str:</p>
 <p>"""Human-in-the-loop review with timeout."""</p>
@@ -285,8 +277,7 @@ Question: {question}")</p>
 <p>async def handle_query(self, event: Event):</p>
 <p>query = event.data["query"]</p>
 <p>docs = vector_search(query)</p>
-<p>answer = call_llm(f"Context: {docs}
-Query: {query}")</p>
+<p>answer = call_llm(f"Context: {docs} Query: {query}")</p>
 <p>await self.bus.emit(Event(</p>
 <p>type=EventType.WORKFLOW_COMPLETE,</p>
 <p>data={"query": query, "answer": answer},</p>

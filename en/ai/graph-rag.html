@@ -80,9 +80,6 @@
         "foundingDate": "2025"
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/ai/graph-rag.html"},
-      "sameAs": [
-    "https://dev.to/_6638a39c349d7e9c85ee20/graph-rag-knowledge-graphs-entity-extraction-relationship-traversal-1g10"
-      ],
       "articleBody": "Implement Graph RAG using knowledge graphs: extract entities and relationships from documents, traverse graph connections, and combine graph retrieval with vect"
     }
     </script>
@@ -239,8 +236,7 @@
 <p>Return ONLY the entity names, one per line.</p>
 <p>Query: {query}</p>
 <p>""")</p>
-<p>return [line.strip() for line in response.strip().split("
-") if line.strip()]</p>
+<p>return [line.strip() for line in response.strip().split(" ") if line.strip()]</p>
 <h2>Microsoft's GraphRAG Pattern</h2>
 <p>Microsoft's GraphRAG uses a global-to-local search approach:</p>
 <p>def graphrag_search(query: str, graph: KnowledgeGraph, vector_store, llm) -&gt; str:</p>
