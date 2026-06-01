@@ -27,8 +27,6 @@ Layer| Where| Example| Never Commit?
   3. **Validate at startup, not at runtime.** Use Zod to validate all env vars when the app starts. If a required var is missing, crash immediately — don't fail mysteriously 3 hours later.
   4. **Use different values per environment.** Development, staging, and production should have separate database URLs, API keys, and feature flags.
 
-
-
 ## Validation Pattern (Prevent Runtime Surprises)
     
     

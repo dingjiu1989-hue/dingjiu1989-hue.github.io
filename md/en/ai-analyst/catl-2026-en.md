@@ -42,8 +42,6 @@ CATL's operations span three major segments:
   * **Energy Storage Systems** (~18% of revenue): Serving generation-side, grid-side, and behind-the-meter storage markets — the company's second growth engine.
   * **Battery Materials & Recycling** (~10% of revenue): Through its subsidiary Brunp Recycling, covering lithium, nickel, cobalt resource recovery and cathode material production.
 
-
-
 __
 
 #### Key Insight
@@ -57,8 +55,6 @@ CATL has evolved from a pure battery supplier into a closed-loop ecosystem: "mat
   3. **Customer Lock-in** : Through joint ventures, long-term supply agreements, and technology licensing, CATL creates high switching costs for automaker clients.
   4. **Resource Control** : Lithium, cobalt, and nickel resource positions in Indonesia, DRC, Argentina, etc., with rising self-sufficiency rates for key materials.
 
-
-
 __Data Insight: Global Power Battery Market Share (2025)
 
 ## 2\. Financial Analysis
@@ -70,8 +66,6 @@ __Data Insight: Global Power Battery Market Share (2025)
   * **EPS (FY2025)** : ¥16.14/share
   * **EPS (Q1 2026)** : ¥4.58/share (annualized ~¥18.3)
 
-
-
 __Data Insight: Revenue & Net Profit Trend
 
 ### 2.2 Profitability
@@ -80,8 +74,6 @@ __Data Insight: Revenue & Net Profit Trend
   * **Net Margin** : 17.0%, strong for a manufacturing enterprise
   * **ROE** : ~20% (diluted), efficient capital returns
   * **R &D; Spend**: >¥21B, ~5% of revenue
-
-
 
 __Data Insight: Gross & Net Margin Trend
 
@@ -92,8 +84,6 @@ __Data Insight: Gross & Net Margin Trend
   * **Equity** : ¥394.2B
   * **Cash Reserves** : ~¥260B, ample liquidity
   * **Capex** : ~¥42.3B in FY2025 (MCP data), primarily overseas capacity
-
-
 
 __Data Insight: Balance Sheet Structure (Q1 2026)
 
@@ -106,8 +96,6 @@ __Data Insight: Balance Sheet Structure (Q1 2026)
   * **52-Week High** : ¥468.75
   * **52-Week Low** : ¥233.51
   * **Avg Turnover** : 0.72%, relatively stable shareholding
-
-
 
 Data source: Alibaba Cloud MCP Stock Data Service, adjusted daily quotes (242 trading days, May 2025–May 2026). CATL shares climbed from ~¥250 to ¥400+ over the past 12 months. September saw a 31% monthly surge driven by global EV policy catalysts and lithium price stabilization. The stock hit its 52-week high of ¥468.75 in April 2026 before pulling back with the broader market.
 
@@ -159,8 +147,6 @@ Per Alibaba Cloud MCP Stock Data: As of March 31, 2026 (Q1 filing), institutions
   * **Goldman Sachs** : Buy, target ¥500. Long-term global electrification trend benefits the leader.
   * **Consensus Target** : ¥478, implying ~19% upside from current price.
 
-
-
 __Data Insight: Analyst Price Targets
 
 ## 5\. Competitive Comparison
@@ -188,8 +174,6 @@ CATL's core advantages vs. competitors: ① Largest scale and steepest cost curv
   * **Free Cash Flow (CFO-Capex)** : ~¥90.9B, exceptional cash conversion
   * **Year-End Cash** : ~¥300B (cash & equivalents), sufficient for 3+ years of capex
 
-
-
 Overall, CATL is trading at historically low valuation multiples. Buying the global battery leader at 23x P/E with ~20% earnings growth implies a PEG below 1x, offering some margin of safety. However, the valuation compression reflects market concerns about growth deceleration — if net profit growth slows to 10-15% in the next two years, current valuation may not represent a "floor price."
 
 ## 7\. Key Risks
@@ -199,8 +183,6 @@ Overall, CATL is trading at historically low valuation multiples. Buying the glo
   * **Overseas Expansion Headwinds** : The US market is effectively closed due to the Inflation Reduction Act (IRA). The Hungarian factory faces EU anti-subsidy investigations. US tariff policies keep escalating.
   * **Technology Disruption** : If solid-state batteries achieve mass production breakthroughs, the competitive landscape could be fundamentally reshaped. While CATL is also researching solid-state, new technology routes risk devaluing existing capacity investments.
   * **Lithium Price Volatility** : While falling lithium prices benefited gross margins in the short term, extreme low prices may impact upstream resource investment returns and affect the whole supply chain strategy.
-
-
 
 __
 
@@ -239,7 +221,5 @@ Global electrification long-term thesis intact. Energy storage could become a se
   7. [Morgan Stanley — Auto & Battery Research (May 2026)](<https://www.morganstanley.com/>)
   8. [Yahoo Finance — 300750.SZ](<https://finance.yahoo.com/quote/300750.SZ/>)
   9. Alibaba Cloud MCP Stock Data Service — Financials, Adjusted Quotes, Institutional Holdings (queried May 2026)
-
-
 
 **Disclaimer:** This analysis is for informational and educational purposes only and does not constitute investment advice. It is based on publicly available information, historical data, and model analysis as of the report date, which may involve certain lag and limitations. Past performance does not guarantee future results. Investors should make their own independent assessment and consider their personal risk tolerance before making any investment decisions.

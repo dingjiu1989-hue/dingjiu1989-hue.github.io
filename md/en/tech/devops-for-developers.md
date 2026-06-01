@@ -133,6 +133,4 @@ Not every project needs the full DevOps stack:
   * **Growing startup:** GitHub Actions → Railway or Render. Add Sentry for errors.
   * **Scaling product:** GitHub Actions → K8s (or ECS). Terraform for infra. Full monitoring stack.
 
-
-
 **Bottom line:** Learn CI/CD and Docker first — they're universally useful. Add Terraform when your infra has 5+ resources. Add K8s only when you have 10+ containers and need orchestration. The best operations is the one you don't have to think about. See also: [CI/CD tools comparison](</en/tools/best-cicd-tools-2026.html>) and [Docker vs Podman](</en/compare/docker-vs-podman.html>).

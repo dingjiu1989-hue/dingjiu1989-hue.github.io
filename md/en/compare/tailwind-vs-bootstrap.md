@@ -26,9 +26,6 @@ Bootstrap's approach is "start with a button that looks like a button, customize
 
   * JavaScript plugins for interactive components
 
-
-
-
 ### Card Title
 
 Some quick example text.
@@ -46,9 +43,6 @@ Tailwind's approach is "compose your design from primitive utility classes." It 
   * No pre-built components (you build everything from utilities)
 
   * Zero runtime — all styles are generated at build time
-
-
-
 
 ### Card Title
 
@@ -132,9 +126,6 @@ Tailwind's design token system makes it easy to create completely custom designs
 
   * **Tailwind default** : ~15KB CSS (compressed) with purge — often smaller for actual projects since unused utilities are removed
 
-
-
-
 Both are comparable in final bundle size when properly configured. Tailwind's JIT compiler ensures only used classes appear in the output.
 
 ## Ecosystem and Components
@@ -163,9 +154,6 @@ Both are comparable in final bundle size when properly configured. Tailwind's JI
 
   * The site/app doesn't need a unique visual identity
 
-
-
-
 **Choose Tailwind when:**
 
   * You need a custom, branded design
@@ -177,9 +165,6 @@ Both are comparable in final bundle size when properly configured. Tailwind's JI
   * Your team prefers composing from utilities
 
   * You want the smallest possible CSS bundle
-
-
-
 
 ## Real-World Usage
 

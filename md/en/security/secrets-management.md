@@ -178,9 +178,6 @@ Secrets should have a limited lifetime. Implement automatic rotation:
 
   * **SSH keys** : Rotate on employee departure or annually.
 
-
-
-
 ## Example: Zero-downtime DB password rotation
 
 ## Phase 1: Update app to accept both old and new passwords
@@ -202,9 +199,6 @@ Secrets should be scoped to what a particular service or developer needs:
   * Service accounts have the minimum permissions required for their function.
 
   * Audit every secret access with timestamp and requester identity.
-
-
-
 
 Summary 
 

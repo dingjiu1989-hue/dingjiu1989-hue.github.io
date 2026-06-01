@@ -75,6 +75,4 @@ PC with RTX 3060 (12GB)| 7B-13B models in VRAM.
   * You need web search or real-time data.
   * You're on a low-RAM machine and can afford API costs.
 
-
-
 **Bottom line:** Ollama + DeepSeek Coder V2 gives you excellent local coding on any M-series Mac. For maximum quality, use API models (Claude/GPT-4o). For privacy, off-grid, or cost reasons, local models are now genuinely useful for daily development. See also: [Best LLMs for Coding comparison](</en/ai/best-llms-for-coding-2026.html>) and [AI-Assisted Programming Guide](</en/ai/ai-coding.html>).

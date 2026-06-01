@@ -26,9 +26,6 @@ To build a ubiquitous language:
 
   * Keep a glossary of terms and their definitions.
 
-
-
-
 Bounded Contexts 
 
 A bounded context is a boundary within which a particular domain model applies. Different contexts may use the same term to mean different things. 
@@ -41,9 +38,6 @@ In an e-commerce system:
 
   * The **Inventory** context has a `Product` with stock levels and warehouse locations.
 
-
-
-
 Each bounded context has its own domain model, its own database, and potentially its own team. The boundaries are explicit, and communication between contexts happens through well-defined integration points. 
 
 Identifying bounded contexts is one of the hardest parts of DDD. Look for:
@@ -53,9 +47,6 @@ Identifying bounded contexts is one of the hardest parts of DDD. Look for:
   * Different lifecycle or persistence requirements.
 
   * Different ubiquitous language terms.
-
-
-
 
 Entities and Value Objects 
 
@@ -98,9 +89,6 @@ Consider an `Order` aggregate:
   * Contained entities: `OrderLineItem`, `ShippingAddress`
 
   * Contained value objects: `Money`, `OrderStatus`
-
-
-
 
 External objects can only reference the aggregate root. All operations on the aggregate go through the root, which enforces invariants: 
 
@@ -167,9 +155,6 @@ Beyond tactical patterns, DDD includes strategic design tools:
   * **Generic Subdomains** : Using off-the-shelf solutions for non-core functionality (authentication, payments).
 
   * **Supporting Subdomains** : Building custom but straightforward solutions for areas that support the core domain.
-
-
-
 
 Getting Started with DDD 
 

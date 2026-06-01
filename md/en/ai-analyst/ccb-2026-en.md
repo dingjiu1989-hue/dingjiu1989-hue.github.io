@@ -44,16 +44,12 @@ Founded in 1954 to serve national infrastructure investment, CCB listed on the H
   * **Retail Banking** (~40% of revenue): Residential mortgages (~17% market share), credit cards, consumer loans, wealth management. Serving 700M+ retail customers through 14,000+ branches.
   * **Treasury Operations** (~15% of revenue): Bond investments, interbank lending, derivatives. Holds substantial government bond portfolios.
 
-
-
 ### 1.3 Competitive Moats
 
   * **Scale Advantage** : Over RMB 47 trillion in total assets and RMB 30 trillion in deposits provide the cheapest funding base in Chinese banking.
   * **Brand & Trust**: State-owned status provides an implicit government guarantee, underpinning customer confidence.
   * **Distribution Network** : 14,000+ branches nationwide, complemented by 400M+ mobile banking users.
   * **Regulatory Advantage** : G-SIB designation ensures lower funding costs and stronger crisis resilience.
-
-
 
 ### 1.4 Fintech Transformation
 
@@ -196,8 +192,6 @@ PEG | ~1.8x | ~2.0x | ~40% | Fair
   * **Asset Quality** : NPL ratio 1.35% is best-in-class; overdue 90+ / NPL ratio ~80% confirms strict NPL recognition.
   * **Provisions** : Coverage ~240%, provision-to-loan ratio ~3.2% — strong loss-absorption capacity.
 
-
-
 Overall financial health is Tier 1 among Chinese banks. However, the declining ROE trajectory (from 13%+ in 2019 to ~10.9% currently) signals that profitability is still bottoming. The key question is when NIM will stabilize.
 
 ## 7\. Key Risks
@@ -233,8 +227,6 @@ Tilt Bullish
   * **Catalysts** : Further property easing, fiscal stimulus, deposit rate cuts fueling NIM bottoming expectations.
   * **Target** : Near-term ~¥11.0-11.5 (7-12% upside), implying 2026E PB of 0.38-0.40x.
 
-
-
 ### 8.2 Long-Term View (6-18 Months)
 
 Neutral
@@ -243,8 +235,6 @@ Neutral
   * **Transformation Crucible** : Fintech, wealth management, green finance, and inclusive banking are long-term growth drivers, but cannot yet offset NIM pressure.
   * **Dividend Sustainability** : Payout ratio ~30% with substantial retained earnings supports dividend continuity, though declining profitability constrains upside.
   * **Risk Premium** : Successful resolution of local debt and property risks could compress the equity risk premium, lifting PB from 0.35x toward 0.5x+.
-
-
 
 ### 8.3 Investment Thesis Matrix
 
@@ -265,8 +255,6 @@ Dividend | 8.5% yield; stable payout history | Earnings deceleration may cap fut
   * **H-Share Opportunity** : H-shares (0939.HK) trade at ~15% discount to A-shares, yielding ~10% — attractive for FX-tolerant investors.
   * **Take-Profit** : Consider partial profit-taking if PB recovers above 0.5x (implied price ~¥14-15) or dividend yield falls below 5%.
 
-
-
 ### 8.5 Key Watch Items
 
 Monitor: (1) LPR trajectory; (2) Deposit rate adjustment pace; (3) NPL formation rate; (4) Property sales and price stabilization signals; (5) Provision coverage trend. Marginal improvement in any of these could catalyze a valuation re-rating.
@@ -278,7 +266,5 @@ Monitor: (1) LPR trajectory; (2) Deposit rate adjustment pace; (3) NPL formation
   * Wind Financial Terminal
   * PBOC Statistics
   * Data as of: May 27, 2026
-
-
 
 Risk Warning: The above content is compiled based on public information, historical data, and model analysis results, intended only for informational reference and does not constitute any investment advice. There may be certain lag and limitations; past performance does not indicate future results. Individual risk tolerance should be considered when making judgments.

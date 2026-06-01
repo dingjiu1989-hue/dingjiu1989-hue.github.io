@@ -100,9 +100,6 @@ Essential tmux key bindings:
 
   * `Ctrl+B [` — Enter scroll/copy mode.
 
-
-
-
 tmux configuration in `~/.tmux.conf` customizes key bindings, status bar, colors, and mouse support. Plugins via tpm (tmux plugin manager) add features like persistent sessions, save/restore, and CPU monitoring.
 
 ## zoxide: Smarter Directory Navigation
@@ -136,9 +133,6 @@ Essential operations:
   * `d` to view diff of selected file.
 
   * `:` for custom commands.
-
-
-
 
 lazygit significantly reduces Git command memorization while providing visual feedback for complex operations like interactive rebase, conflict resolution, and cherry-picking.
 

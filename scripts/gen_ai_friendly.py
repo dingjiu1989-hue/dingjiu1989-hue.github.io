@@ -102,7 +102,10 @@ def gen_markdown_copies():
         if not body:
             return None
         body = re.sub(r'<p class="see-also"[^>]*>.*?</p>', '', body, flags=re.DOTALL)
-        return local_h.handle(body).strip()
+        body = local_h.handle(body).strip()
+        body = body.replace('\\n', '\n')
+        body = re.sub(r'\n{3,}', '\n\n', body)
+        return body
 
     MD_DIR.mkdir(exist_ok=True)
     (MD_DIR / "en").mkdir(exist_ok=True)
@@ -427,7 +430,10 @@ def gen_llms_full():
         if not body:
             return None
         body = re.sub(r'<p class="see-also"[^>]*>.*?</p>', '', body, flags=re.DOTALL)
-        return local_h.handle(body).strip()
+        body = local_h.handle(body).strip()
+        body = body.replace('\\n', '\n')
+        body = re.sub(r'\n{3,}', '\n\n', body)
+        return body
 
     en_data = json.loads(EN_ARTICLES.read_text(encoding="utf-8"))
 

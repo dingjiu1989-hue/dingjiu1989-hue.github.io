@@ -52,9 +52,6 @@ Use fine-tuning when:
 
   * You want lower latency (no retrieval step) and consistent response times
 
-
-
-
 Fine-tuning costs include training ($25-$100 per run for GPT-4o-mini) and hosting. The benefit is zero retrieval overhead at inference time.
 
 ## When to Use RAG
@@ -94,9 +91,6 @@ Use RAG when:
   * Different users need access to different subsets of data
 
   * You need to add or remove information without retraining
-
-
-
 
 RAG costs are dominated by vector storage and retrieval latency (100-500ms per search).
 
@@ -152,7 +146,10 @@ messages=[
 
 "role": "user",
 
-"content": f"Context:\n{format_docs(docs)}\n\nQuestion: {question}"
+"content": f"Context:
+{format_docs(docs)}
+
+Question: {question}"
 
 }
 
@@ -203,8 +200,6 @@ model.fit(train_objectives=[(train_dataloader, train_loss)], epochs=3)
 Follow this decision tree:
 
   * Does your data change frequently? Yes -> RAG. No -> consider fine-tuning.
-
-
 
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Do you need to cite sources? Yes -> RAG. No -> consider fine-tuning.
 

@@ -31,8 +31,6 @@ API Keys| Medium (if stored properly)| N/A (machine-to-machine)| Low| Server-to-
   * Implement CSRF protection for cookie-based sessions (double-submit cookie pattern or Synchronizer Token)
   * Set reasonable session duration: 15 minutes idle timeout, 8 hours absolute max
 
-
-
 ## JWT: When and How to Use Safely
 
 **Best for:** APIs consumed by multiple client types (web, mobile, third-party). **Critical rules:** Never store sensitive data in JWT payload (it is base64-encoded, not encrypted). Always set short expiration (15-60 min) and use refresh tokens for renewal. Maintain a server-side token denylist for revoked tokens.
@@ -59,8 +57,6 @@ API Keys| Medium (if stored properly)| N/A (machine-to-machine)| Low| Server-to-
   * Refresh token rotation is mandatory (one-time-use refresh tokens)
   * The Resource Owner Password Credentials grant is removed (never send username/password to an authorization server)
   * Bearer tokens must not be passed in URL query strings
-
-
 
 ## Password Storage: Non-Negotiable Rules
 

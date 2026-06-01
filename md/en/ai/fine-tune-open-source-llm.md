@@ -29,8 +29,6 @@ RLHF / DPO| $100-1,000 (one-time)| Very High| Aligning model to human preference
   * **Bad use case:** "Answer questions about our internal docs" — use RAG, not fine-tuning, for factual retrieval
   * **Bad use case:** "Generate product descriptions from our catalog" — use RAG + templates, since your catalog changes
 
-
-
 ## Data Preparation: The Most Important Step
 
 Format| Example| Use Case  
@@ -46,8 +44,6 @@ Preference Pairs| `{"chosen":[...],"rejected":[...]}`| DPO/RLHF training
   * **Diversity > quantity:** 200 diverse, high-quality examples outperform 2,000 similar ones
   * **Validate manually:** Spot-check every example — one bad example poisons the output more than ten good ones fix it
   * **Include edge cases:** Empty inputs, very long inputs, multi-turn conversations
-
-
 
 ## Fine-Tuning Platforms Compared
 

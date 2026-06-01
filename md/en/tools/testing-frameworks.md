@@ -330,7 +330,4 @@ assert response.status_code == expected
 
   * **Python testing** : pytest with pytest-asyncio for async code.
 
-
-
-
 The ideal testing stack in 2026: Vitest for unit tests, Playwright for E2E tests, pytest for Python services.

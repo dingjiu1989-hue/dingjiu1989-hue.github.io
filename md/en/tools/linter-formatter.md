@@ -302,7 +302,4 @@ ruff check src/ --watch # Watch mode
 
   * **Pre-commit hooks** : All tools support staged-file-only checks with `--staged` flag.
 
-
-
-
 The industry is clearly moving toward Rust-based all-in-one tools. Biome and Ruff represent the future of code quality tooling: fast, unified, and simple to configure.

@@ -36,9 +36,6 @@ System Events
 
   * Rate limit triggers
 
-
-
-
 Log Structure 
 
 Use a consistent, structured format for all logs. JSON is the standard for security logs: 
@@ -235,7 +232,8 @@ self.previous_hash = signature
 
 with open('/var/log/secure/audit.log', 'a') as f:
 
-f.write(json.dumps(event) + '\n')
+f.write(json.dumps(event) + '
+')
 
 def verify_chain(self):
 

@@ -88,9 +88,6 @@ When to Choose SQL
 
   * **Standardized access** : Multiple applications need to query the same data.
 
-
-
-
 NoSQL Strengths 
 
 Flexible Schema 
@@ -200,9 +197,6 @@ When to Choose NoSQL
   * **Global scale** : Need multi-region replication and automatic sharding.
 
   * **Real-time feeds** : Social media, activity streams.
-
-
-
 
 Decision Matrix 
 

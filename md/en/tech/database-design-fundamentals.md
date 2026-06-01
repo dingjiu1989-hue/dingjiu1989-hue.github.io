@@ -71,8 +71,6 @@ Unique| Enforce uniqueness| UNIQUE(email)
   * **Don't over-index.** Each index slows down INSERT/UPDATE/DELETE.
   * **Use EXPLAIN ANALYZE.** Verify the index is actually being used.
 
-
-
 ## 3\. Relationship Types
     
     

@@ -26,9 +26,6 @@ Relational databases organize data into tables with predefined schemas, linked b
 
   * Mature ecosystem and tooling.
 
-
-
-
 **Weaknesses** : 
 
   * Schema changes require migrations.
@@ -36,9 +33,6 @@ Relational databases organize data into tables with predefined schemas, linked b
   * Horizontal scaling is complex (sharding).
 
   * Rigid for highly varied, sparse data.
-
-
-
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Typical relational model
 
@@ -88,9 +82,6 @@ Document databases store semi-structured data in JSON-like documents. Schemas ar
 
   * Developer productivity for rapidly evolving models.
 
-
-
-
 **Weaknesses** : 
 
   * Limited join capabilities (`$lookup` is less performant than SQL JOINs).
@@ -98,9 +89,6 @@ Document databases store semi-structured data in JSON-like documents. Schemas ar
   * Multi-document transactions are newer and slower than ACID RDBMS.
 
   * No enforced schema means application-level validation is essential.
-
-
-
 
 // MongoDB document model
 
@@ -136,9 +124,6 @@ Key-value stores are the simplest database type. They store values accessed by a
 
   * Ideal for caching and session storage.
 
-
-
-
 **Weaknesses** : 
 
   * No query capabilities beyond key lookups (in pure KV stores).
@@ -146,9 +131,6 @@ Key-value stores are the simplest database type. They store values accessed by a
   * Limited to simple data structures (without secondary indexes).
 
   * Application must manage data relationships.
-
-
-
 
 SET user:42 '{"email": "alice@example.com", "name": "Alice"}'
 
@@ -172,9 +154,6 @@ Graph databases model data as nodes and edges, optimized for traversing relation
 
   * Pattern matching queries for complex relationships.
 
-
-
-
 **Weaknesses** : 
 
   * Less efficient for non-graph workloads (simple aggregations).
@@ -182,9 +161,6 @@ Graph databases model data as nodes and edges, optimized for traversing relation
   * Smaller ecosystem and fewer hosting options.
 
   * Requires learning specialized query languages (Cypher, SPARQL).
-
-
-
 
 // Neo4j Cypher query
 
@@ -210,9 +186,6 @@ Time-series databases optimize for append-heavy, time-ordered data with automati
 
   * Compression ratios of 90%+.
 
-
-
-
 **Weaknesses** : 
 
   * Less suitable for transactional workloads.
@@ -220,9 +193,6 @@ Time-series databases optimize for append-heavy, time-ordered data with automati
   * Joins and complex relationships are not a focus.
 
   * Query language varies widely (Flux vs SQL vs custom).
-
-
-
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- TimescaleDB (SQL-based time-series)
 
@@ -256,9 +226,6 @@ Vector databases store and search high-dimensional vectors (embeddings) using si
 
   * CRUD operations on vector embeddings.
 
-
-
-
 **Weaknesses** : 
 
   * Orthogonal use case to traditional databases (complement, not replace).
@@ -266,9 +233,6 @@ Vector databases store and search high-dimensional vectors (embeddings) using si
   * Index build times can be significant for large datasets.
 
   * Requires vector embeddings from ML models.
-
-
-
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- pgvector (PostgreSQL extension)
 

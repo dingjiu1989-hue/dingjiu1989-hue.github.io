@@ -24,9 +24,6 @@ Tables exceeding hundreds of gigabytes benefit from partitioning for several rea
 
   * **Archival** : Older partitions can be detached and moved to cheaper storage without affecting access to recent data.
 
-
-
-
 Partitioning Methods 
 
 PostgreSQL supports three built-in partitioning methods: range, list, and hash. 
@@ -202,8 +199,5 @@ Common Pitfalls
   * **Row triggers on the parent table** can have unexpected behavior; apply triggers to partitions instead.
 
   * **Too many partitions** degrade planner performance and increase memory usage. Aim for 50-500 partitions for most workloads.
-
-
-
 
 Partitioning is a powerful technique when applied deliberately. Measure your workload patterns, choose the right method, and automate partition lifecycle management to keep your database performing predictably as it grows.

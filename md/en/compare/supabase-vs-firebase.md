@@ -48,9 +48,6 @@ content: "..."
 
   * Flexible schema — no migrations needed
 
-
-
-
 **Weaknesses:**
 
   * Complex queries (no JOIN, limited filtering, no aggregation)
@@ -60,9 +57,6 @@ content: "..."
   * Data denormalization required for relational data
 
   * No migration tools — schema changes are manual
-
-
-
 
 // Firestore query
 
@@ -94,9 +88,6 @@ Supabase uses full PostgreSQL with all its capabilities:
 
   * ACID compliance and transactional integrity
 
-
-
-
 **Weaknesses:**
 
   * Manual schema migrations required
@@ -106,9 +97,6 @@ Supabase uses full PostgreSQL with all its capabilities:
   * Scaling requires planning (connection pooling, read replicas)
 
   * Limited offline support compared to Firestore
-
-
-
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Supabase SQL query
 
@@ -166,9 +154,6 @@ USING (auth.uid() = user_id);
 
   * **Supabase** : Real-time uses a separate Realtime Server that listens to PostgreSQL replication. You subscribe to specific channels and tables. It's more configurable but requires explicit setup.
 
-
-
-
 ## Pricing Comparison
 
 | Aspect | Firebase | Supabase |
@@ -205,9 +190,6 @@ Firebase's Spark plan is generous for prototyping, but costs can scale unpredict
 
   * You want the fastest path to a working prototype
 
-
-
-
 **Choose Supabase when:**
 
   * Your data has complex relationships requiring SQL
@@ -221,9 +203,6 @@ Firebase's Spark plan is generous for prototyping, but costs can scale unpredict
   * You need vector embeddings for AI features (pgvector)
 
   * You prefer database-level security with Row Level Security
-
-
-
 
 ## Conclusion
 

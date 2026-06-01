@@ -26,9 +26,6 @@ A typical classification scheme includes four tiers:
 
   * **Restricted** : Highly sensitive data with legal or regulatory requirements. PII, PHI, payment card data, credentials.
 
-
-
-
 ## Automated Classification
 
 Manual classification does not scale. Modern DLP solutions use automated methods:
@@ -38,9 +35,6 @@ Manual classification does not scale. Modern DLP solutions use automated methods
   * **Context analysis** : Examine metadata including file location, creator, and access patterns.
 
   * **User behavior** : Flag unusual access patterns, like a developer downloading the entire customer database.
-
-
-
 
 ## Example: Automated data classification regex patterns
 
@@ -130,9 +124,6 @@ Endpoint DLP protects data on laptops, desktops, and mobile devices. It monitors
 
   * **Cloud sync** : Monitor files uploaded to personal cloud storage.
 
-
-
-
 ## Endpoint DLP policy example (pseudocode)
 
 DLP_POLICIES = [
@@ -189,9 +180,6 @@ Network DLP inspects traffic at network chokepoints to detect data exfiltration.
 
   * **File transfer** : Monitor FTP, SFTP, and SCP transfers.
 
-
-
-
 ## TLS Inspection
 
 Network DLP requires decrypting TLS traffic to inspect the content. The DLP appliance acts as a man-in-the-middle, terminating TLS connections, inspecting traffic, and re-encrypting to forward.
@@ -211,9 +199,6 @@ Cloud DLP protects data in SaaS applications (Google Workspace, Microsoft 365, S
   * **Microsoft Purview** : DLP for Microsoft 365 covering Exchange, SharePoint, OneDrive, Teams, and endpoints. Includes policy tips that warn users in real time.
 
   * **AWS Macie** : Machine learning-powered DLP for S3. Automatically discovers and classifies sensitive data in S3 buckets.
-
-
-
 
 ## GCP DLP inspection example
 
@@ -277,9 +262,6 @@ f"Location: {finding.location.byte_range}")
 
   * **Scanning costs** : DLP scanning of large cloud data stores can be expensive.
 
-
-
-
 ## DLP Policy Design
 
 Effective DLP policies balance security with productivity.
@@ -293,9 +275,6 @@ Effective DLP policies balance security with productivity.
   * **Warn** : Alert the user but allow the action. Use for medium-confidence violations.
 
   * **Notify** : Log and notify security without interrupting the user. Use for low-confidence or policy compliance monitoring.
-
-
-
 
 ## Policy Tuning
 

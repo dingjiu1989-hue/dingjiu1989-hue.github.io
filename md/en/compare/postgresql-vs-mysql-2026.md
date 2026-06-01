@@ -40,9 +40,6 @@ PostgreSQL excels at complex queries involving multiple joins, window functions,
 
   * EXTENSION ecosystem (PostGIS, pgvector, TimescaleDB)
 
-
-
-
 **MySQL Strengths:**
 
   * Simpler replication: GTID-based and group replication
@@ -54,9 +51,6 @@ PostgreSQL excels at complex queries involving multiple joins, window functions,
   * MySQL Shell for advanced management
 
   * InnoDB Cluster for high availability
-
-
-
 
 ## Ecosystem and Hosting
 

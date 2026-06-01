@@ -200,9 +200,6 @@ Be prepared to discuss:
 
   * Conflict between security and business needs
 
-
-
-
 Resources for Preparation 
 
 Study these areas in depth: OWASP Top 10, cloud security (AWS/GCP/Azure), network protocols, cryptography fundamentals, and compliance frameworks. Practice with hands-on labs and capture-the-flag challenges. Be ready to whiteboard system designs and discuss real-world threat scenarios.

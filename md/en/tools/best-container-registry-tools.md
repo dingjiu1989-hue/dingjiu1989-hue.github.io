@@ -76,6 +76,4 @@ JFrog Artifactory| Enterprise universal| None| Yes| 30+ formats
   * **Large org with diverse artifact types:** JFrog Artifactory — universal, but you'll pay for it.
   * **Just starting out:** Docker Hub free tier + GHCR for private images. You can always migrate later.
 
-
-
 Most teams end up using two registries: one cloud-native (ECR/GAR) for production and GHCR or Docker Hub for development and public images.

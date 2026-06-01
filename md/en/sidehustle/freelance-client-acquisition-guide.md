@@ -60,8 +60,6 @@ Send within 24 hours. Structure: Problem summary (prove you understood), propose
   * Client can't articulate the problem clearly — you'll build the wrong thing.
   * Multiple stakeholders with conflicting requirements — design by committee kills projects.
 
-
-
 ## After the First Client
 
 Over-deliver slightly (meet deadlines, communicate proactively, document your work). Ask for a testimonial while the project is still fresh. Ask if they know anyone else who needs similar work. Raise your rate by 20% for the next client. Repeat. After 3-5 clients, you'll have a referral pipeline and won't need to pitch cold anymore. That's when freelancing stops feeling like a hustle and starts feeling like a business.

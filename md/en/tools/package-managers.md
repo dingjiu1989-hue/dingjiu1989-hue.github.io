@@ -200,7 +200,4 @@ bun install --workspaces
 
   * **New project** : Consider bun if you want a single tool for runtime, package management, and bundling.
 
-
-
-
 The trend is clear: pnpm for production projects, bun for performance-critical or new projects, Yarn Berry for teams committed to the PnP workflow, and npm when simplicity and zero-additional-tools is the priority.

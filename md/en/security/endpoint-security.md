@@ -34,9 +34,6 @@ Limitations of signature-based AV:
 
   * No cross-host correlation
 
-
-
-
 Endpoint Detection and Response (EDR) 
 
 EDR platforms continuously monitor endpoint activity, recording system calls, process creation, network connections, file system changes, and registry modifications. They provide visibility into attacker behavior across the kill chain. 

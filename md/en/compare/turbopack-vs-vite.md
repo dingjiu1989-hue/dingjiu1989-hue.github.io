@@ -22,9 +22,6 @@ Vite uses a two-tier architecture:
 
   * **Production** : Rollup handles the final build for maximum compatibility and tree-shaking
 
-
-
-
 // vite.config.js
 
 import { defineConfig } from "vite";
@@ -65,9 +62,6 @@ vendor: ["react", "react-dom"],
 
   * Instant HMR through native ESM
 
-
-
-
 **Weaknesses:**
 
   * Two different bundlers for dev and production (potential inconsistencies)
@@ -75,9 +69,6 @@ vendor: ["react", "react-dom"],
   * esbuild's extensibility is limited compared to Rollup
 
   * Large monorepos can experience slowdowns
-
-
-
 
 ## Turbopack: Rust-Based
 
@@ -88,9 +79,6 @@ Turbopack is built in Rust for maximum performance:
   * **Function-level caching** : Individual module functions are cached, not entire files
 
   * **Parallel processing** : Leverages all CPU cores efficiently
-
-
-
 
 // next.config.js
 
@@ -122,9 +110,6 @@ rules: {
 
   * Function-level caching for extreme performance
 
-
-
-
 **Weaknesses:**
 
   * Currently limited to Next.js ecosystem
@@ -134,9 +119,6 @@ rules: {
   * Newer and less battle-tested
 
   * Documentation is still maturing
-
-
-
 
 ## Performance Benchmarks
 
@@ -172,9 +154,6 @@ Turbopack is faster in cold start scenarios due to Rust's compilation speed. HMR
 
   * vite-plugin-svg-icons
 
-
-
-
 **Turbopack** has a growing but limited plugin system. In 2026, Turbopack supports webpack loaders for compatibility, but the native plugin API is still evolving. Most plugins in the Next.js ecosystem work through webpack compatibility rather than native Turbopack plugins.
 
 ## Framework Support
@@ -190,9 +169,6 @@ Turbopack is faster in cold start scenarios due to Rust's compilation speed. HMR
   * Solid (SolidStart uses Vite)
 
   * Lit, Preact, Qwik, vanilla JS
-
-
-
 
 **Turbopack** is primarily a Next.js tool. While it technically works with any Node.js application, its optimizations and features are designed for Next.js. Third-party framework integration is not a priority.
 
@@ -238,9 +214,6 @@ Both tools offer excellent development experiences:
 
   * You want framework-agnostic tooling
 
-
-
-
 **Choose Turbopack when:**
 
   * You're using Next.js (it's the default recommendation)
@@ -250,9 +223,6 @@ Both tools offer excellent development experiences:
   * You want tight integration with Next.js features (RSC, App Router)
 
   * You're building on Vercel's infrastructure
-
-
-
 
 ## Conclusion
 

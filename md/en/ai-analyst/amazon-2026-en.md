@@ -158,8 +158,6 @@ AI / LLM | OpenAI (Microsoft), Google | Bedrock multi-model, custom silicon, Sag
   * **Project Kuiper:** Once operational (satellite broadband), Kuiper could generate $10–20B in annual revenue by 2030, serving unconnected and under-connected populations globally.
   * **Automation & robotics:** Investment in warehouse robotics (Proteus, Sparrow, Cardinal) and autonomous delivery (Zoox) could structurally reduce the cost-to-serve over the next decade.
 
-
-
 ### 5.2 Downside Risks
 
   * **Regulatory overhang:** The U.S. FTC lawsuit (filed 2023) and evolving digital regulation in the EU (Digital Markets Act) pose structural risks to Amazon’s marketplace practices, advertising business, and data usage. A forced separation or conduct remedy could impair profitability.
@@ -167,8 +165,6 @@ AI / LLM | OpenAI (Microsoft), Google | Bedrock multi-model, custom silicon, Sag
   * **Competitive pressure in cloud:** Microsoft Azure’s deep enterprise relationships and OpenAI partnership, combined with Google Cloud’s AI-native strategy, could erode AWS’s market share lead over time.
   * **Retail margin ceiling:** Despite improvements, retail remains a structurally low-margin business vulnerable to input cost inflation, fuel prices, and wage pressure. Rising competition from Temu and Shein in softline categories adds price pressure.
   * **Currency & macro headwinds:** A significant portion of revenue is international, and a strong U.S. dollar or global recession could materially impact top-line growth and profitability.
-
-
 
 📈 Stock Price Performance (Indexed, 2021–2026)
 

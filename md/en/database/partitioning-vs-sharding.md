@@ -82,9 +82,6 @@ When to Use
 
   * Sharding: Write throughput exceeds single server, dataset too large for one server
 
-
-
-
 Conclusion 
 
 Start with partitioning before considering sharding. Partitioning solves many problems with less complexity. Only shard when a single database is insufficient, and use tools like Vitess or Citus to manage the complexity.

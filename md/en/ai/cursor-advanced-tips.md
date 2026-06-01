@@ -51,8 +51,6 @@ Cursor Agent (Cmd+Shift+I) can read your codebase, run terminal commands, and ed
   * Upgrading dependencies and fixing breaking changes
   * Setting up CI/CD or configuration files
 
-
-
 ## 4\. Keyboard Shortcuts That Save Hours
 
 Shortcut| Action| When to Use  
@@ -83,8 +81,6 @@ Technique| How| Why
   * **Write the test first:** "Write a failing test for X, then implement it." The best guardrail.
   * **Tab autocomplete is for flow, Composer is for features.** Don't use Composer for single lines; don't use Tab for architecture.
 
-
-
 ## Quick Wins Checklist
 
   1. Set up `.cursorrules` with your tech stack and conventions.
@@ -93,7 +89,5 @@ Technique| How| Why
   4. After every AI-generated change, ask: "Check this for edge cases."
   5. Write custom instructions specific to your codebase.
   6. Use Agent mode for tasks touching 5+ files.
-
-
 
 **Bottom line:** The difference between casual and power Cursor users is context. Power users give rich, specific context with @Files, @Docs, and detailed instructions. Casual users type one-liners and wonder why the output is generic. See also: [Cursor vs Copilot vs Claude Code](</en/compare/cursor-vs-copilot-vs-claude-code.html>) and [AI-Assisted Programming Guide](</en/ai/ai-coding.html>).

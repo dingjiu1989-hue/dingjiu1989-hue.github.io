@@ -266,9 +266,6 @@ brew install --cask lens
 
   * Multi-cluster management
 
-
-
-
 ## Kustomize
 
 Native Kubernetes configuration customization (built into kubectl v1.14+):

@@ -386,7 +386,4 @@ npx artillery report report.json
 
   * **CI/CD integration** : k6 with Grafana dashboards for production load testing.
 
-
-
-
 All four tools support CI integration. k6 has the strongest Grafana ecosystem. Locust excels for teams already using Python data tools. Gatling produces the most detailed HTML reports. Artillery is the fastest to set up for simple tests.

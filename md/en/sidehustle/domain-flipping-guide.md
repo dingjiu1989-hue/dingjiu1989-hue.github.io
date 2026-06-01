@@ -27,8 +27,6 @@ Geo Domains| $10-$50| $500-$20,000| Medium| City + service combinations (e.g., A
   3. **SEO analysis:** Use Ahrefs/Semrush APIs to programmatically check backlink profiles and organic traffic of expired domains.
   4. **Marketplace arbitrage:** Script price comparisons across GoDaddy Auctions, Namecheap, Sedo, and Afternic to find pricing gaps.
 
-
-
 ## What Makes a Domain Valuable
 
 Factor| High Value| Low Value  

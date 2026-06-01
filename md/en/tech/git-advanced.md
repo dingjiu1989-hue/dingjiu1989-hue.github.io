@@ -31,8 +31,6 @@ The most powerful Git feature most developers never learn. Interactive rebase le
   * **Before opening a PR:** Reorder commits so they tell a logical story
   * **Never:** On shared branches or commits that have been pushed. Rewriting public history causes chaos.
 
-
-
 ## Cherry-Pick: Apply a Specific Commit Anywhere
 
 When you need one specific commit from another branch without merging everything:

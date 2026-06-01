@@ -38,9 +38,6 @@ SAST analyzes source code without executing it. It identifies vulnerabilities li
 
   * **Checkmarx / Fortify** : Commercial SAST tools with extensive rule sets.
 
-
-
-
 ## Pipeline Integration
 
 ## GitHub Actions: SAST with Semgrep
@@ -93,9 +90,6 @@ fi
 
   * Create custom rules for your application's specific security patterns.
 
-
-
-
 ## Dependency Scanning
 
 Modern applications use dozens of open-source libraries. Each library introduces transitive dependencies with potential vulnerabilities.
@@ -121,9 +115,6 @@ grype sbom:./sbom.json
   * **Snyk** : Commercial vulnerability scanner with fix advice and license compliance.
 
   * **OWASP Dependency-Check** : Open-source scanner that identifies CVEs in dependencies.
-
-
-
 
 ## Dependabot configuration
 
@@ -157,9 +148,6 @@ labels:
 
   * Monitor for license compliance alongside vulnerability scanning.
 
-
-
-
 ## Dynamic Application Security Testing (DAST)
 
 DAST tests the running application from the outside, simulating real-world attack patterns. It discovers vulnerabilities that SAST misses, such as authentication bypass, session management flaws, and business logic errors.
@@ -171,9 +159,6 @@ DAST tests the running application from the outside, simulating real-world attac
   * **Burp Suite** : Commercial web security testing platform with advanced scanning.
 
   * **Arachni** : Open-source web application security scanner framework.
-
-
-
 
 ## Pipeline Integration
 
@@ -226,9 +211,6 @@ fi
   * Use baseline scans for smoke testing and full scans for release candidates.
 
   * Integrate with Jira or ticketing for automatic issue creation.
-
-
-
 
 ## Container Scanning
 
@@ -302,9 +284,6 @@ sarif_file: trivy-results.sarif
 
   * Enable granular runtime security with seccomp, AppArmor, or SELinux policies.
 
-
-
-
 ## Policy-as-Code
 
 Policy-as-code defines security and compliance rules as executable code. Policies are versioned, reviewed, and enforced automatically in the pipeline.
@@ -365,9 +344,6 @@ conftest test main.tf \
 
   * IAM roles must have resource-level constraints.
 
-
-
-
 ## Building a DevSecOps Culture
 
 Tools alone do not make DevSecOps successful. The human elements matter more.
@@ -379,9 +355,6 @@ Tools alone do not make DevSecOps successful. The human elements matter more.
   * **Friction reduction** : Optimize scan times. A 30-minute SAST scan encourages skipping. A 2-minute scan integrates naturally into the workflow.
 
   * **Blameless culture** : When security scans find issues, the process worked correctly. Celebrate catching issues early rather than blaming developers.
-
-
-
 
 ## Conclusion
 

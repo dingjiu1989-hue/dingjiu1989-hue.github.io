@@ -20,9 +20,6 @@ The most common waste is over-provisioned resources. Use cloud provider tools to
 
   * **Azure Advisor** : Provides cost recommendations across all services.
 
-
-
-
 Target utilization rules of thumb:
 
 | Resource | Target Utilization |
@@ -85,9 +82,6 @@ Storage costs accumulate silently. Audit your storage regularly:
 
   * **Object storage tiers** : 
 
-
-
-
 | Tier | Cost/GB/Month | Use Case |
 
 |------|--------------|----------|
@@ -142,9 +136,6 @@ Data transfer out of cloud providers is expensive. Minimize egress:
 
   * **NAT Gateway costs** : Use NAT instances instead of NAT Gateway for high-volume traffic (cost savings of 70-80%).
 
-
-
-
 ## Autoscaling
 
 Scale resources to match demand:
@@ -180,9 +171,6 @@ Databases are often the most expensive service:
   * **Connection pooling** : Use PgBouncer or RDS Proxy to handle thousands of connections without provisioning for peak.
 
   * **Delete old data** : Archive historical data to object storage.
-
-
-
 
 ## Reserved Capacity with Spot
 

@@ -70,9 +70,6 @@ A good postmortem includes:
 
   * Action items with owners and deadlines.
 
-
-
-
 Blameless culture requires organizational commitment. Executives must model it by accepting systemic explanations. Teams must feel safe admitting mistakes without retribution.
 
 Action items should be prioritized based on risk reduction. Not every finding requires immediate fixes. Track action items and verify completion in subsequent postmortems to close the loop.

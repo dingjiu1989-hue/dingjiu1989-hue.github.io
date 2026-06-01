@@ -44,7 +44,9 @@ async for chunk in stream:
 
 if chunk.type == "content_block_delta":
 
-yield f"data: {chunk.delta.text}\n\n"
+yield f"data: {chunk.delta.text}
+
+"
 
 @app.post("/chat")
 
@@ -128,7 +130,9 @@ def safe_structured_generate(prompt: str, schema: type[BaseModel], max_retries=3
 
 for attempt in range(max_retries):
 
-raw = call_llm(prompt + "\n\nRespond in valid JSON matching this schema: " + str(schema.model_json_schema()))
+raw = call_llm(prompt + "
+
+Respond in valid JSON matching this schema: " + str(schema.model_json_schema()))
 
 try:
 
@@ -142,7 +146,9 @@ if attempt == max_retries - 1:
 
 raise
 
-prompt += f"\n\nPrevious attempt failed: {e}. Please fix the JSON."
+prompt += f"
+
+Previous attempt failed: {e}. Please fix the JSON."
 
 return None
 

@@ -202,7 +202,8 @@ crcSalt =
 
 SHOULD_LINEMERGE = true
 
-LINE_BREAKER = ([\r\n]+)
+LINE_BREAKER = ([\r
+]+)
 
 TRUNCATE = 20000
 
@@ -395,8 +396,5 @@ Loki offers the lowest storage cost by far due to its S3-based object storage an
   * **Grafana Loki** : Best for cost-conscious teams already using Grafana, who can tolerate grep-style log searching.
 
   * **Splunk** : Best for enterprises requiring compliance auditing, RBAC, and have budget for premium support.
-
-
-
 
 For most engineering teams, Loki paired with Grafana offers the best balance of cost and capability. Move to ELK when you need indexed structured search on arbitrary fields. Reserve Splunk for regulated environments where audit trails and access controls justify the expense.

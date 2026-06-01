@@ -292,7 +292,4 @@ vite build # Uses Rollup for optimal production output
 
   * **Production builds** : Vite + Rollup for optimal tree-shaking and code-splitting. Combine with esbuild for minification.
 
-
-
-
 Many teams use a combination: esbuild for dependencies, Vite for development, and esbuild or swc for CI compilation without type checking, with a separate `tsc --noEmit` step for type safety.

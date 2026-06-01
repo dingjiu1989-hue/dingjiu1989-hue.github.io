@@ -38,8 +38,6 @@ Meta Platforms is the world's largest social networking company. Under CEO Mark 
   * **Reality Labs (RL)** (1.5% revenue): Quest 4 VR, Orion AR glasses, Ray-Ban Meta smart glasses. Long-term bet on next-gen computing.
   * **Open-Source AI** : LLaMA 4 (405B/70B/8B), 500M+ cumulative downloads, #1 model family on HuggingFace.
 
-
-
 __
 
 #### Key Insight
@@ -59,8 +57,6 @@ __Data Insight: Global Tech Market Cap
   3. **Open-Source AI Community Advantage** : LLaMA 4's open-source strategy attracts global developers, creating ecosystem lock-in.
   4. **Capex Barrier** : $50B+ annual AI infrastructure investment is a significant barrier for competitors.
 
-
-
 ## 2\. Financial Analysis
 
   * **2025 Revenue** : $172.4B (+22% YoY)
@@ -72,8 +68,6 @@ __Data Insight: Global Tech Market Cap
   * **FCF** : $62B, Capex $52B (+85% YoY)
   * **Buybacks** : $45B in 2025, dividend $0.50/qtr
 
-
-
 __Data Insight: Revenue & Operating Margin
 
 ## 3\. Technical Analysis
@@ -81,8 +75,6 @@ __Data Insight: Revenue & Operating Margin
   * **52-Week Range** : $450 - $620
   * **Current** : ~$580
   * **YTD** : +18%
-
-
 
 __Data Insight: META 52-Week
 
@@ -125,8 +117,6 @@ Moderate
   * **Bernstein** : Neutral, $550 target. Reality Labs losses weighing on ROIC.
   * **Consensus** : $625, ~8% upside.
 
-
-
 ## 5\. Competitive Comparison
 
 Metric | Meta | Google | TikTok | Snapchat  
@@ -142,8 +132,6 @@ AI Model | LLaMA 4 (open) | Gemini (closed) | Doubao (closed) | None
   * **Cash** : $78B, Net cash $55B
   * **Buybacks** : $45B in 2025, shareholder yield 2.5%
 
-
-
 ## 7\. Key Risks
 
   * **TikTok Competition** : Despite US policy uncertainty, TikTok maintains 1.5B DAU, competing for young user attention.
@@ -151,8 +139,6 @@ AI Model | LLaMA 4 (open) | Gemini (closed) | Doubao (closed) | None
   * **Regulatory Risk** : EU DMA targeting personalized ads, FTC youth data protection rules could weaken AI ad efficiency.
   * **AI ROI Uncertainty** : ~70% of $52B Capex goes to AI infrastructure; LLaMA monetization path remains unclear.
   * **Founder Control Risk** : Zuckerberg holds majority voting rights — strategic direction is entirely his decision.
-
-
 
 __
 
@@ -180,7 +166,5 @@ LLaMA + social empire creates a unique AI data flywheel. Orion AR glasses could 
   4. [Morgan Stanley — Meta Research](<https://www.morganstanley.com/>)
   5. [HuggingFace — LLaMA Models](<https://huggingface.co/meta-llama>)
   6. [Yahoo Finance — META](<https://finance.yahoo.com/quote/META/>)
-
-
 
 **Disclaimer:** This analysis is for informational and educational purposes only and does not constitute investment advice. It is based on publicly available information, historical data, and model analysis as of the report date, which may involve certain lag and limitations. Past performance does not guarantee future results. Investors should make their own independent assessment and consider their personal risk tolerance before making any investment decisions.

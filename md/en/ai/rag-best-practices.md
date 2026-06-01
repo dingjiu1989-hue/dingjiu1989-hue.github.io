@@ -38,8 +38,6 @@ Jina embeddings v3| 1,024| 62.4| Free (up to 1M tokens/day)| Long context (8K to
   * **Re-ranking:** Retrieve 20-50 chunks, then use a cross-encoder (Cohere Rerank, BGE-Reranker) to score relevance and keep the top 3-5. Adds ~100ms latency but dramatically improves precision.
   * **Query transformation:** Rewrite user queries before retrieval — decompose complex questions into sub-questions, or generate hypothetical answers to use as search queries.
 
-
-
 ## RAG Architecture Pattern
     
     

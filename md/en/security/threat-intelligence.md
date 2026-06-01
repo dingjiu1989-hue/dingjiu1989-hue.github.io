@@ -16,8 +16,6 @@ Threat intelligence follows a structured lifecycle:
 
   * **Requirements** : What do you need to know? For example, which threat actors target your industry, what TTPs they use, and what indicators to watch for.
 
-
-
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Collection** : Gather data from open sources, commercial feeds, internal telemetry, and human intelligence.
 
 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Processing** : Convert raw data into a usable format. Normalize timestamps, de-duplicate indicators, enrich with context.
@@ -45,9 +43,6 @@ OSINT is intelligence derived from publicly available sources. It is free, acces
   * **GitHub** : Search for leaked credentials, API keys, or configuration files in public repositories.
 
   * **Telegram channels / Discord servers** : Some threat actor groups communicate openly about tactics and targets.
-
-
-
 
 ## OSINT example: Find exposed S3 buckets
 
@@ -81,9 +76,6 @@ Threat feeds provide structured data about known malicious indicators. Feeds ran
 
   * **Behavioral feeds** : Descriptions of attacker behaviors and TTPs rather than static indicators.
 
-
-
-
 ## Popular Feeds
 
   * **AlienVault OTX** : Community-driven threat feed with thousands of pulses. Free API access.
@@ -93,9 +85,6 @@ Threat feeds provide structured data about known malicious indicators. Feeds ran
   * **CrowdStrike Falcon Intelligence** : Commercial feed with actor profiles and contextual enrichment.
 
   * **Abuse.ch** : Free feeds for malware URLs (URLhaus), C2 servers (Feodo Tracker), and ransomware domains.
-
-
-
 
 ## Python: Consuming AlienVault OTX feed
 
@@ -153,9 +142,6 @@ The framework organizes attacks into tactics (the "why") and techniques (the "ho
 
   * **Exfiltration** : T1041 Exfiltration Over C2 Channel, T1567 Exfiltration Over Web Service
 
-
-
-
 ## Using ATT&CK; for Threat Intelligence
 
 Map observed indicators and behaviors to ATT&CK; techniques to understand attacker objectives and capabilities.
@@ -194,17 +180,11 @@ IoC sharing enables organizations to benefit from each other's detection experie
 
   * **Behavioral indicators** : Describe patterns (network traffic patterns, registry changes).
 
-
-
-
 ## Sharing Platforms
 
   * **MISP** : Self-hosted platform for IoC management and sharing. Supports automatic correlation and feed generation.
 
   * **STIX/TAXII** : Standardized exchange protocols.
-
-
-
 
 ## STIX and TAXII
 
@@ -225,9 +205,6 @@ STIX 2.1 defines domain objects including:
   * **Report** : Collections of threat intelligence.
 
   * **Malware** : Malicious software.
-
-
-
 
 // STIX 2.1 Indicator object
 
@@ -262,9 +239,6 @@ TAXII defines two service types:
   * **Collection** : A managed feed of STIX objects that consumers can pull.
 
   * **Channel** : A publish-subscribe mechanism for real-time intelligence sharing.
-
-
-
 
 ## Fetch indicators from a TAXII collection
 
@@ -317,9 +291,6 @@ Not all intelligence is equally relevant. Prioritize based on:
   * **Actionability** : Can you do something about it? Can you block, detect, or mitigate?
 
   * **Timeliness** : Is the intelligence current, or is it historical noise?
-
-
-
 
 ## Conclusion
 

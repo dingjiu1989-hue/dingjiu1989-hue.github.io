@@ -26,9 +26,6 @@ Before comparing frameworks, it's important to define what we mean by "agent." A
 
   * **Self-reflection** : Evaluate outcomes and adjust plans
 
-
-
-
 ## Framework Comparison
 
 ## LangGraph
@@ -44,9 +41,6 @@ LangGraph, part of the LangChain ecosystem, models agent workflows as directed g
   * Human-in-the-loop support for approval workflows
 
   * Streaming of intermediate results
-
-
-
 
 **Example — simple agent with tool use:**
 
@@ -99,9 +93,6 @@ CrewAI focuses on multi-agent collaboration, where specialized agents work toget
   * Sequential and hierarchical task execution
 
   * Built-in tool library and custom tool support
-
-
-
 
 **Example — research team:**
 
@@ -165,9 +156,6 @@ AutoGen, developed by Microsoft Research, enables multi-agent conversations with
 
   * Strong support for human participation
 
-
-
-
 **Best for:** Research and complex multi-agent scenarios requiring conversation-based problem solving.
 
 ## OpenAI Assistants API
@@ -183,9 +171,6 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
   * Thread management for conversation state
 
   * Vector store integration for RAG
-
-
-
 
 **Best for:** Rapid prototyping and applications already in the OpenAI ecosystem.
 
@@ -219,9 +204,6 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
 
   * **Assistants API** : Choose for rapid prototyping and managed infrastructure
 
-
-
-
 ## Emerging Patterns
 
 The agent framework landscape is evolving rapidly. Key trends to watch:
@@ -233,9 +215,6 @@ The agent framework landscape is evolving rapidly. Key trends to watch:
   * **Safety guardrails** : Automated checks for agent actions before execution
 
   * **Tool marketplaces** : Shared catalogs of agent-compatible tools and APIs
-
-
-
 
 ## Conclusion
 

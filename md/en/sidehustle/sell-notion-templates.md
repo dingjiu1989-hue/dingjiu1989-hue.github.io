@@ -40,8 +40,6 @@ Education| Study planner, course builder, research database| $8-25| Medium
   * **Mobile-friendly views:** 40% of Notion usage is mobile. Test every database view on phone layout
   * **Modular design:** Let users remove sections they do not need without breaking linked databases
 
-
-
 ## Where to Sell
 
 Platform| Fee| Best For| Traffic Source  

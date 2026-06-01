@@ -18,8 +18,6 @@ A slow PostgreSQL query is the most common performance bottleneck in web applica
   4. **Fix:** Apply the specific optimization, measure the improvement
   5. **Prevent:** Add an index, adjust work_mem, or rewrite the query permanently
 
-
-
 ## Reading EXPLAIN ANALYZE Output
 
 Node Type| What It Means| Good or Bad?| Action  

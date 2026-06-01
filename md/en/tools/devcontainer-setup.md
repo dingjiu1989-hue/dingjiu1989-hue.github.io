@@ -136,9 +136,6 @@ Codespaces supports:
 
   * VS Code and browser-based editors.
 
-
-
-
 {
 
 "image": "mcr.microsoft.com/devcontainers/universal:2",
@@ -182,9 +179,6 @@ Keep devcontainer.json in the repository root for broadest tool compatibility. P
   * `postCreateCommand`: Runs after container creation completes.
 
   * `postStartCommand`: Runs each time container starts.
-
-
-
 
 Minimize image size by using specific base images rather than the universal image unless diverse tooling is needed. Test dev container configuration in CI to catch configuration drift.
 

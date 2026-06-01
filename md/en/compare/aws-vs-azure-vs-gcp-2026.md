@@ -20,9 +20,6 @@ Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP) domi
 
   * **GCP** : ~11% market share. Leading in AI/ML and data analytics. Preferred by data-intensive and AI-native companies.
 
-
-
-
 ## Compute Services
 
 | Service | AWS | Azure | GCP |
@@ -75,9 +72,6 @@ AWS pioneered the pay-as-you-go model with Reserved Instances for discounts. Azu
 
   * **GCP** : Cleanest console and CLI experience. gcloud CLI is widely praised. Best integration with open-source tools. Cloud Shell is a full terminal in the browser.
 
-
-
-
 ## Multi-Cloud and Lock-In
 
 AWS creates the most vendor lock-in through proprietary services (DynamoDB, Lambda's event sources, Kinesis). GCP and Azure also have proprietary services but tend to use more open standards (Kubernetes, PostgreSQL, Prometheus).
@@ -91,9 +85,6 @@ AWS creates the most vendor lock-in through proprietary services (DynamoDB, Lamb
   * **Azure** : 160+ Availability Zones across 60+ regions
 
   * **GCP** : 121 zones across 40 regions
-
-
-
 
 AWS has the best coverage in underserved regions (South America, Africa, Middle East). Azure has the strongest presence in government and regulated industries. GCP's regions are concentrated in major markets.
 
@@ -109,9 +100,6 @@ AWS has the best coverage in underserved regions (South America, Africa, Middle 
 
   * Your team already has AWS experience
 
-
-
-
 **Choose Azure when:**
 
   * Your organization uses Microsoft products (Office 365, Active Directory, .NET)
@@ -122,9 +110,6 @@ AWS has the best coverage in underserved regions (South America, Africa, Middle 
 
   * You want Azure OpenAI integration with enterprise security
 
-
-
-
 **Choose GCP when:**
 
   * AI/ML is central to your application
@@ -134,9 +119,6 @@ AWS has the best coverage in underserved regions (South America, Africa, Middle 
   * You value developer experience and clean APIs
 
   * You need the best data analytics platform (BigQuery)
-
-
-
 
 ## Conclusion
 

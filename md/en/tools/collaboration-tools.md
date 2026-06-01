@@ -384,9 +384,6 @@ value: canceled
 
   * **Linear** : Documents linked to projects with rich formatting and issue references.
 
-
-
-
 ## Integration Ecosystem
 
 Slack's 2,400+ app directory is unmatched for enterprise toolchain integration. Discord's bot ecosystem is developer-centric but less business-oriented. Linear's integrations focus on developer tools (GitHub, GitLab, Sentry, Figma) and are purpose-built rather than generic.
@@ -432,8 +429,5 @@ Post-Deploy Monitoring (Datadog alert in Slack)
   * **Discord** : Best for community-driven open-source projects or small teams who prioritize voice communication.
 
   * **Linear** : Best for any team that wants fast, focused issue tracking regardless of chat tool choice.
-
-
-
 
 The most effective setups combine all three: Slack for day-to-day chat and alerts, Linear for work management, and Discord for community engagement or voice communication.

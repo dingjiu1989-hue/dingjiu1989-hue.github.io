@@ -40,8 +40,6 @@ For $20/month, you get significantly more: real GPT-4o with web browsing, file u
   * You create images for presentations or social media regularly
   * You use ChatGPT as a coding assistant daily
 
-
-
 ## Pro: Only for Power Users
 
 $200/month is a serious commitment. The main draws are **unlimited access** (no message caps, no throttling) and **o1 Pro mode** — which runs a deeper reasoning process for complex math, science, and coding problems. Unless you're running ChatGPT all day as a core part of your professional workflow, it's hard to justify.
@@ -51,8 +49,6 @@ $200/month is a serious commitment. The main draws are **unlimited access** (no 
   * You're a researcher who needs the deepest reasoning on complex problems
   * You use ChatGPT as your primary coding tool for 6+ hours a day
   * You run a business where ChatGPT usage directly generates revenue
-
-
 
 ## My Recommendation
 

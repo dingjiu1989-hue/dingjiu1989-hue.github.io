@@ -34,9 +34,6 @@ B-tree indexes are balanced trees with fan-out on the order of hundreds. Height 
 
   * Insert/Update/Delete: O(log n)
 
-
-
-
 Hash 
 
 Hash indexes support only equality comparisons (`=`). They are typically smaller than B-tree for the same data: 
@@ -65,9 +62,6 @@ CREATE INDEX idx_daterange ON bookings USING GIST (booking_period);
 
   * `inet`: `>>`, `<<`, etc.
 
-
-
-
 **When to use** :
 
   * Geospatial data (PostGIS points, polygons)
@@ -77,9 +71,6 @@ CREATE INDEX idx_daterange ON bookings USING GIST (booking_period);
   * Full-text search with `tsvector` (though GIN is often better)
 
   * Custom data types with GiST operator classes
-
-
-
 
 **Performance** : Variable insertion/query performance depending on the operator class. Typically O(log n) for search. 
 
@@ -101,9 +92,6 @@ CREATE INDEX idx_products_attrs ON products USING GIN (attributes jsonb_path_ops
 
   * Full-text search: `@@`
 
-
-
-
 **When to use** :
 
   * Full-text search (tsvector)
@@ -113,9 +101,6 @@ CREATE INDEX idx_products_attrs ON products USING GIN (attributes jsonb_path_ops
   * Array columns (tags, categories)
 
   * Any column where you need to find rows containing specific elements
-
-
-
 
 **Performance** : GIN indexes are larger than B-tree (typically 2-3x the data size) and slower to build. Reads are fast; writes are slower due to pending list management. Use `gin_pending_list_limit` to tune write performance. 
 
@@ -136,9 +121,6 @@ CREATE INDEX idx_text_prefix ON texts USING SPGIST (text);
   * Geographic data with non-uniform distribution
 
   * KD-tree semantics for multi-dimensional data
-
-
-
 
 SP-GiST is most effective when the data distribution allows efficient space partitioning. It is faster than GiST for certain point queries but less general. 
 
@@ -163,9 +145,6 @@ WITH (pages_per_range = 64);
   * Data warehousing and analytics workloads
 
   * Append-only tables (logs, events, time-series)
-
-
-
 
 **Storage comparison** : 
 

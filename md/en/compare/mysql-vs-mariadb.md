@@ -50,9 +50,6 @@ Key fork motivations:
 
   * **Storage engine philosophy** : MariaDB encourages engine diversity; MySQL centralizes around InnoDB
 
-
-
-
 ## Storage Engine Differences
 
 ## InnoDB (Both) vs Aria (MariaDB)
@@ -380,8 +377,5 @@ xtrabackup --backup --target-dir=/backup/mysql
   * **Choose MariaDB** if you want fully open-source (no Oracle licensing), need thread pool performance (free), require temporal tables or dynamic columns, prefer a community-governed project, or want storage engine diversity (Aria, ColumnStore, Spider).
 
   * **Stay on current** if you already run either in production without migration pain; the differences are rarely worth a migration for existing deployments.
-
-
-
 
 For new projects starting in 2026, MariaDB offers the better value proposition for most use cases due to its open governance and free enterprise features, while MySQL remains the safer choice for organizations that already have Oracle relationships or need its specific enterprise integrations.

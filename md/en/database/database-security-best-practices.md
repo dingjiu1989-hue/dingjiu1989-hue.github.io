@@ -106,9 +106,6 @@ Key Management for Encryption at Rest
 
   * Implement key access auditing to detect unauthorized use.
 
-
-
-
 Encryption in Transit 
 
 Encryption in transit protects data as it travels between the database and clients. 
@@ -156,9 +153,6 @@ ssl_key = /etc/ssl/private/server-key.pem
   * Rotate certificates before expiry.
 
   * Use client certificates for mutual TLS authentication.
-
-
-
 
 Row-Level Security (RLS) 
 
@@ -235,9 +229,6 @@ What to Log
   * Data export operations.
 
   * Schema changes.
-
-
-
 
 PostgreSQL Audit with pgaudit 
 
@@ -405,9 +396,6 @@ Application Users vs Admin Users
 
   * Application users should never have DDL permissions.
 
-
-
-
 Secret Rotation 
 
 Database credentials need regular rotation. Compromised credentials that are never rotated become permanent backdoors. 
@@ -454,9 +442,6 @@ db_pass = creds['data']['password'] # random password
 
   * Encryption keys: Annually.
 
-
-
-
 Security Hardening Checklist 
 
   * [ ] Encryption at rest enabled for all databases.
@@ -482,9 +467,6 @@ Security Hardening Checklist
   * [ ] Unused extensions and features removed.
 
   * [ ] Connection limits set per user to prevent resource exhaustion.
-
-
-
 
 Conclusion 
 

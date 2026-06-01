@@ -24,9 +24,6 @@ Time-series workloads differ from traditional OLTP:
 
   * **Retention** : Data older than a threshold is dropped automatically.
 
-
-
-
 Hypertables 
 
 TimescaleDB's central abstraction is the hypertable, which automatically partitions data by time: 
@@ -242,8 +239,5 @@ TimescaleDB is the right choice when you need:
   * Existing PostgreSQL tooling (PgBouncer, pgBadger, ORMs).
 
   * A single database for both transactional and time-series workloads.
-
-
-
 
 The combination of hypertables, continuous aggregates, and compression makes PostgreSQL with TimescaleDB a compelling default choice for time-series data that coexists with relational data.

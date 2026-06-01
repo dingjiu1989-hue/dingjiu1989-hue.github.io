@@ -33,8 +33,6 @@ Setup takes 30 minutes. Key steps:
   * Add a sponsor badge to your README and website
   * Thank sponsors publicly in release notes
 
-
-
 ## Open Core: The Most Lucrative Model
 
 The open core model — where the core product is free and open source, but advanced features require a paid license — has funded some of the biggest developer tools companies. The key is picking features that individual developers do not need but companies will pay for: SSO, audit logs, advanced permissions, SLA guarantees.

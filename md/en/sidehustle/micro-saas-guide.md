@@ -22,9 +22,6 @@ Several trends make micro-SaaS particularly attractive right now:
 
   * **Distribution channels** (Product Hunt, Hacker News, niche communities) give small products visibility without a marketing budget.
 
-
-
-
 A micro-SaaS earning $5,000-$15,000/month in recurring revenue provides excellent side income or a comfortable full-time living, especially when run from anywhere in the world.
 
 ## Finding the Right Idea
@@ -47,9 +44,6 @@ The best micro-SaaS ideas come from specific, painful problems in niche markets:
 
   * Would people pay $19-49/month for the solution?
 
-
-
-
 ## Tech Stack Choices
 
 In 2026, the optimal micro-SaaS stack balances speed, cost, and maintainability:
@@ -65,9 +59,6 @@ In 2026, the optimal micro-SaaS stack balances speed, cost, and maintainability:
   * **Email** : Resend or Loops for transactional emails and simple marketing automation.
 
   * **Hosting** : Vercel or Railway for simple, cost-effective deployment with generous free tiers.
-
-
-
 
 This stack lets you build and launch in weeks, not months. The total running cost for the first 100-200 customers is typically under $50/month.
 
@@ -93,9 +84,6 @@ Micro-SaaS pricing follows different rules than enterprise SaaS:
 
   * **Free trial** of 7-14 days with no credit card required.
 
-
-
-
 ## Distribution Without a Budget
 
 You do not need a marketing budget to launch a micro-SaaS:
@@ -109,9 +97,6 @@ You do not need a marketing budget to launch a micro-SaaS:
   * **Product Hunt launch.** A well-executed Product Hunt launch can generate 500-1000 signups in a day.
 
   * **Cold outreach.** Personalized emails to 50 potential customers, offering a free trial. This is uncomfortable but remarkably effective.
-
-
-
 
 ## Economics and Sustainability
 
@@ -127,9 +112,6 @@ Run the numbers before you start:
 
   * **Customers needed per month just to stay flat** : 9-14 new customers.
 
-
-
-
 These numbers are achievable but not easy. Expect at least 6-12 months before reaching meaningful revenue.
 
 ## Avoiding Burnout
@@ -143,9 +125,6 @@ Micro-SaaS is a marathon. Protect yourself:
   * Outsource what you dislike. A $500/month VA handling support emails is worth it.
 
   * Keep the scope tight. Saying no to feature requests is a superpower.
-
-
-
 
 ## Summary
 

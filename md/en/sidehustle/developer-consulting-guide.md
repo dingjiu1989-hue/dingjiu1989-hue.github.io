@@ -45,6 +45,4 @@ The formula: **Target annual salary / 1,000 = hourly rate.** If you want $150K/y
   3. **Speak at meetups/conferences:** Even local meetups establish credibility. Recorded talks are evergreen marketing
   4. **Offer a diagnostic engagement:** A fixed-price $2,000-5,000 "technical assessment" gives the client a taste of your value with low commitment on both sides
 
-
-
 **Bottom line:** Consulting is the highest hourly rate you can earn as a developer — but it requires sales skills, a clear specialty, and comfort with variable income. Start part-time while employed, build 2-3 retainer clients at $2,000+/month each, then transition to full-time when you have 6+ months of runway. See also: [Freelance Pricing Guide](</en/sidehustle/freelance-pricing-guide.html>) and [Developer Side Hustles 2026](</en/sidehustle/developer-side-hustles-2026.html>).

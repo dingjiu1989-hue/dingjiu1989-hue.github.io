@@ -136,9 +136,6 @@ Benefits
 
   * **Query optimization** : Changes are isolated to the repository.
 
-
-
-
 Unit of Work Pattern 
 
 Unit of Work tracks changes to objects during a business transaction and writes them as a single unit: 
@@ -490,8 +487,5 @@ Choosing the Right Pattern
   * Use **Query Objects** when queries have many optional parameters (reports, search APIs).
 
   * Use **Table Inheritance** based on how your domain model maps to data.
-
-
-
 
 These patterns are not prescriptive rules but tools. Use them when they simplify your code; do not force them into a simple application that would be better served by direct SQL or a lightweight ORM.

@@ -251,6 +251,4 @@ TSMC is the "foundation company" of global AI infrastructure. As AI chip demand 
   9. Yahoo Finance / SEC EDGAR — TSM ADR Historical Prices & Financial Statements
   10. SEMI / IC Insights — Global Semiconductor Foundry Market Data, 2025–2026
 
-
-
 **Disclaimer:** This report is for informational and educational purposes only and does not constitute investment advice. Data and opinions herein are based on publicly available information and may contain inaccuracies. Investing involves risk, including loss of principal.

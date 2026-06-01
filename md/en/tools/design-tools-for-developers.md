@@ -18,8 +18,6 @@ You don't need a design degree to build polished, professional-looking products.
   * Grab free UI kits from the Figma Community: search "iOS UI kit" or "dashboard template"
   * Export assets at 1x/2x/3x for web and mobile
 
-
-
 ## Color: Never Guess Hex Codes Again
 
 Tool| Use For  
@@ -54,8 +52,6 @@ Resource| Description
   * [Fontpair](<https://fontpair.co>) — curated font pairings. When you can't decide what goes with what.
   * [Type Scale](<https://typescale.com>) — visual type scale calculator. Set body size → get the perfect h1-h6 scale.
 
-
-
 ## Stock Photos That Don't Look Like Stock Photos
 
 See our [Best Free Stock Photo Sites](</en/sidehustle/free-images.html>) guide for the full list. Quick picks: Unsplash for natural photos, Pexels for videos too, and Kaboompics for styled flat lays.
@@ -67,7 +63,5 @@ See our [Best Free Stock Photo Sites](</en/sidehustle/free-images.html>) guide f
   3. **Lucide or Phosphor** — icons
   4. **unDraw or Storyset** — illustrations
   5. **Google Fonts (Inter + JetBrains Mono)** — typography
-
-
 
 You can build a SaaS landing page, portfolio site, or product UI with just these five tools. No design background needed.

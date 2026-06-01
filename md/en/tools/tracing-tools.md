@@ -348,7 +348,4 @@ trace.set_tracer_provider(provider)
 
   * **Data pipeline** : OpenTelemetry Collector as the central hub for receiving and routing all telemetry.
 
-
-
-
 The OpenTelemetry Collector should be the first component in any tracing infrastructure. It receives traces from instrumented services, applies sampling and enrichment, and forwards to the backend of your choice (Jaeger, Tempo, or both). This decouples instrumentation from storage decisions.

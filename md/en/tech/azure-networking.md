@@ -64,9 +64,6 @@ Key features include:
 
   * Outbound rules for SNAT configuration.
 
-
-
-
 Azure Application Gateway operates at Layer 7, providing HTTP/HTTPS load balancing with TLS termination, URL-based routing, cookie-based session affinity, and a built-in Web Application Firewall.
 
 az network application-gateway create \

@@ -22,9 +22,6 @@ The days of "open source means free" are evolving. Companies and individuals inc
 
   * **Managed hosting** (the project is free, hosting it is paid).
 
-
-
-
 ## GitHub Sponsors
 
 GitHub Sponsors allows individuals and companies to sponsor developers and projects directly.
@@ -43,9 +40,6 @@ GitHub Sponsors allows individuals and companies to sponsor developers and proje
 
   * $100/month: Direct access via private Slack/Discord channel.
 
-
-
-
 **What works:**
 
   * Projects with large user bases (thousands of GitHub stars).
@@ -55,9 +49,6 @@ GitHub Sponsors allows individuals and companies to sponsor developers and proje
   * Actively maintained projects with regular releases.
 
   * Projects with clear roadmaps and community engagement.
-
-
-
 
 **Realistic expectations:** Most projects earn $200-2,000/month from GitHub Sponsors. Top projects (Vue, VueUse, n8n) earn $10,000-50,000+/month.
 
@@ -75,9 +66,6 @@ The open core model: the core product is open source and free. Premium features,
 
   * **Mattermost:** Open source Slack alternative, paid enterprise version.
 
-
-
-
 **Implementation:** Keep the core functional and valuable without paid features. Paid features should be genuinely useful to companies but not essential for individual developers. Use license keys or feature flags to gate paid functionality.
 
 **Pricing:** $10-100/month for individual developers. $100-1,000/month for teams.
@@ -93,9 +81,6 @@ Offer the open source project as a managed service. Users who do not want to sel
   * **Ghost:** Open source publishing platform, paid Ghost(Pro) hosting.
 
   * **Plausible:** Open source analytics, paid cloud version.
-
-
-
 
 **Why it works:** Companies prefer SaaS for reliability and reduced operational overhead. They are willing to pay $10-100/month to avoid managing infrastructure.
 
@@ -113,9 +98,6 @@ Companies using your open source project will need help:
 
   * **Enterprise:** Dedicated support engineer, SLA guarantees. Custom pricing.
 
-
-
-
 **Consulting services:**
 
   * Custom feature development ($100-250/hour).
@@ -125,9 +107,6 @@ Companies using your open source project will need help:
   * Performance tuning and optimization.
 
   * Training and workshops for teams.
-
-
-
 
 A developer maintaining a popular open source project can easily generate $5,000-20,000/month in consulting and support revenue.
 
@@ -139,9 +118,6 @@ License the project under two different licenses:
 
   * **Commercial license** : Companies can use the software in proprietary products without open-sourcing their code.
 
-
-
-
 **Successful examples:**
 
   * **MySQL:** GPL for open source, commercial license for proprietary use.
@@ -149,9 +125,6 @@ License the project under two different licenses:
   * **React Native elements:** MIT license for open source, commercial license for companies over a certain revenue.
 
   * **FFmpeg:** LGPL/GPL for open source, commercial licensing available.
-
-
-
 
 **Implementation:** Use a copyleft license (AGPL) as the default. Companies that want to embed your software in proprietary products need a commercial license. Price the commercial license at $1,000-10,000/year depending on company size.
 

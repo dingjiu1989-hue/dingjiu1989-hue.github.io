@@ -41,8 +41,6 @@ Self-Hosted (Lemon Squeezy)| 5% + $0.50| Your own| Maximum profit, but you drive
   5. **Documentation:** Storybook or equivalent. Component API docs with copy-paste examples. Good docs reduce support load by 80%.
   6. **Regular updates:** Publish a changelog. Buyers check "last updated" dates before purchasing.
 
-
-
 ## Revenue Example: Tailwind Component Library
 
 Month| Sales| Price| Revenue| Traffic Source  

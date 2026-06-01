@@ -36,9 +36,6 @@ Each HTTP method has a specific semantic meaning. Use them correctly:
 
   * `DELETE` — Remove a resource. Idempotent.
 
-
-
-
 A common mistake is using POST for everything. Proper method usage makes your API self-documenting and allows HTTP clients to make intelligent caching and retry decisions. 
 
 Use Proper HTTP Status Codes 
@@ -52,9 +49,6 @@ Your API should return meaningful status codes. Group them logically:
   * **4xx Client Error** : `400 Bad Request` for malformed input, `401 Unauthorized` when authentication is missing, `403 Forbidden` when the user lacks permission, `404 Not Found`, `409 Conflict` for duplicate resources, `422 Unprocessable Entity` for validation errors.
 
   * **5xx Server Error** : `500 Internal Server Error`, `502 Bad Gateway`, `503 Service Unavailable`.
-
-
-
 
 Returning `200 OK` for everything forces API consumers to inspect the response body to determine success or failure. This defeats the purpose of HTTP status codes. 
 

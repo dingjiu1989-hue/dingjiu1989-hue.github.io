@@ -84,9 +84,6 @@ println(" Referenced by: " + ref.getFromAddress());
 
   * Processor support: x86, x64, ARM, AARCH64, MIPS, PowerPC, RISC-V, 6502, 8051, and 50+ more
 
-
-
-
 ## Ghidra Python script
 
 from ghidra.program.model.symbol import SourceType
@@ -322,8 +319,5 @@ print(f" Used at: {use.address}")
   * **Power users** : radare2 for the deepest control and command-line workflows.
 
   * **Malware analysis** : Ghidra with its decompiler and extensive processor support.
-
-
-
 
 All four tools are capable of serious reverse engineering work. Ghidra offers the best free decompiler and the broadest platform support. Binary Ninja has the cleanest API for scripting. radare2 is unbeatable for command-line automation.

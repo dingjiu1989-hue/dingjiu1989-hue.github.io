@@ -44,7 +44,9 @@ relationships: list[Relationship]
 
 def extract_graph(documents: list[str]) -> ExtractionResult:
 
-combined_text = "\n\n".join(documents)
+combined_text = "
+
+".join(documents)
 
 response = call_llm_with_structured_output(f"""
 
@@ -210,7 +212,8 @@ Query: {query}
 
 """)
 
-return [line.strip() for line in response.strip().split("\n") if line.strip()]
+return [line.strip() for line in response.strip().split("
+") if line.strip()]
 
 ## Microsoft's GraphRAG Pattern
 
@@ -273,9 +276,6 @@ Graph RAG excels over vector-only RAG when:
   * You need to answer "how are these related?" questions frequently
 
   * Entities appear across many documents and you need to aggregate information about them
-
-
-
 
 ## Conclusion
 

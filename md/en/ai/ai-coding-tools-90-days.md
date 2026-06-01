@@ -24,8 +24,6 @@ Each task was scored on three axes:
   * **Efficiency** (1-5): How much time did it save vs doing it manually?
   * **Context handling** (1-5): How well did it understand the broader codebase?
 
-
-
 Tasks were drawn from real work: production bug fixes, feature development, test writing, and code review across a TypeScript/React/Node.js stack and Python data pipeline.
 
 ## The Models
@@ -40,8 +38,6 @@ Claude won on refactoring, code review, and any task requiring deep understandin
   * Code review with specific, actionable feedback
   * Understanding subtle bugs in complex logic
   * Writing comprehensive test suites
-
-
 
 **Example — refactoring a monolithic React component:**
 
@@ -60,8 +56,6 @@ GPT-4o is the tool I reach for when I need to write boilerplate, generate 5 func
   * API integrations and boilerplate
   * Generating multiple approaches to compare
 
-
-
 **Example — ETL pipeline in Python:**
 
 I needed to extract data from a PostgreSQL database, transform it with business logic, and load it into a reporting system. GPT-4o wrote a working pipeline with error handling, retry logic, and progress logging in about 8 minutes. Claude would have taken longer but produced a more architecturally clean version.
@@ -79,8 +73,6 @@ Gemini's 1M token context window is a genuine advantage for large codebase under
   * Identifying dead code and architectural debt
   * Cross-module refactoring planning
 
-
-
 **Weakness:** Code generation quality lags behind Claude and GPT-4o. Often produces correct-but-verbose solutions. The latency is higher.
 
 ### DeepSeek V4 — Best Free Option (Avg: 3.8/5)
@@ -93,8 +85,6 @@ DeepSeek V4 is shockingly good for a free model. It matches GPT-4o on many routi
   * Code explanation and debugging
   * Writing unit tests
   * Generating code in niche languages
-
-
 
 **Weakness:** Struggles with very large contexts (>50K tokens). Variable naming can be inconsistent. Multi-step reasoning is less reliable.
 
@@ -109,8 +99,6 @@ Cursor's agent mode is a fundamentally different experience from chat-based AI. 
   * Applying code review suggestions
   * Refactoring with confidence (it sees the full project)
 
-
-
 **Weakness:** The agent can make unexpected changes if you're not careful. Always review the diff before accepting. Costs $20/month on top of any model API costs.
 
 ### GitHub Copilot — Best Inline Completions (Avg: 4.0/5)
@@ -123,8 +111,6 @@ Copilot is not trying to be Claude or Cursor. It's optimized for one thing: pred
   * Writing repetitive code (getters, constructors, boilerplate tests)
   * Learning your coding style from context
   * Low-friction: zero context switching
-
-
 
 **Weakness:** Cannot handle multi-file changes. Inline completions are narrow. For anything beyond simple code generation, you'll reach for a chat-based model.
 
@@ -157,8 +143,6 @@ My current setup: **Copilot Free** for inline completions, **Claude Pro** for co
   2. **Context is everything.** A model with full project context (Cursor agent, Gemini 1M) catches issues that chat-only models miss.
   3. **Free models are good enough for 60% of daily tasks.** Save the paid models for the 40% that need real reasoning.
   4. **Your coding workflow matters more than model choice.** The IDE integration (Cursor agent) was a bigger productivity boost than switching between Claude and GPT-4o.
-
-
 
 ## Further Reading
 

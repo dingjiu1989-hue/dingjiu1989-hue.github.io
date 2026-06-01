@@ -44,9 +44,6 @@ Key patterns include:
 
   * Offset modifier: `rate(http_requests_total[5m] offset 1w)` compares current traffic with last week's.
 
-
-
-
 Understanding PromQL vector matching — one-to-one, many-to-one, and group modifiers — is essential for writing correct queries involving multiple metrics.
 
 ## Recording Rules

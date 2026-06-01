@@ -18,9 +18,6 @@ A container runtime manages the lifecycle of containers -- pulling images, creat
 
   * **High-level runtimes** : Docker, containerd, Podman -- provide a user-facing API and image management.
 
-
-
-
 Most developers interact with high-level runtimes. The low-level runtime handles the actual container execution.
 
 ## Docker
@@ -39,9 +36,6 @@ Docker is the original developer-friendly container platform. It bundles build t
 
   * Widest platform support (Linux, macOS, Windows).
 
-
-
-
 **Cons:**
 
   * Daemon-based architecture with root privileges by default.
@@ -49,9 +43,6 @@ Docker is the original developer-friendly container platform. It bundles build t
   * Running without root requires `rootless` mode setup.
 
   * Slower startup than containerd alone.
-
-
-
 
 **Best for** : Development environments, CI/CD pipelines, and teams that need the largest ecosystem.
 
@@ -79,9 +70,6 @@ Podman is a daemonless container engine developed by Red Hat. It is designed as 
 
   * Built-in systemd integration for running containers as services.
 
-
-
-
 **Cons:**
 
   * Smaller ecosystem and community compared to Docker.
@@ -89,9 +77,6 @@ Podman is a daemonless container engine developed by Red Hat. It is designed as 
   * Some advanced Docker features not yet implemented.
 
   * Docker Compose support requires `podman-compose` (third-party).
-
-
-
 
 **Best for** : Security-conscious teams, production environments, and users who want rootless containers.
 
@@ -121,9 +106,6 @@ containerd is the industry-standard container runtime, used internally by Docker
 
   * Stable and battle-tested (core of Docker Engine).
 
-
-
-
 **Cons:**
 
   * No developer-friendly CLI -- mostly used through higher-level tools.
@@ -131,9 +113,6 @@ containerd is the industry-standard container runtime, used internally by Docker
   * Cannot build images natively (requires buildkit).
 
   * No Docker Compose equivalent.
-
-
-
 
 **Best for** : Kubernetes nodes, embedded systems, and users who need a minimal runtime.
 
@@ -161,17 +140,11 @@ CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Inte
 
   * Kubelet integration without extra daemons.
 
-
-
-
 **Cons:**
 
   * Not designed for standalone use.
 
   * Smaller ecosystem than containerd.
-
-
-
 
 **Best for** : Kubernetes clusters where security and compliance are priorities.
 

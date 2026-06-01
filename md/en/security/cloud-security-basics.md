@@ -64,9 +64,6 @@ Best practices for IAM:
 
   * Require multi-factor authentication for the root account and all privileged users.
 
-
-
-
 ## GCP IAM
 
 GCP IAM uses roles that are collections of permissions. Primitive roles (Owner, Editor, Viewer) are broad. Predefined roles are service-specific and more granular.
@@ -128,9 +125,6 @@ Encryption key management differs across providers:
   * **GCP Cloud KMS** : Similar capabilities with Cloud HSM option for FIPS 140-2 Level 3 validation.
 
   * **Azure Key Vault** : Stores keys, secrets, and certificates. Integrates with Azure Disk Encryption, SQL Server TDE, and App Service.
-
-
-
 
 Never store secrets in code, configuration files, or environment variables exposed through debugging endpoints. Use a proper secrets manager with automatic rotation.
 

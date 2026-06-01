@@ -28,9 +28,6 @@ PlanetScale is built on MySQL-compatible Vitess, the same technology that powers
 
   * VNode-based sharding for large datasets
 
-
-
-
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PlanetScale: standard MySQL syntax
 
 CREATE TABLE users (
@@ -66,9 +63,6 @@ Neon is built on PostgreSQL with a custom storage engine that separates compute 
   * Instant branching using copy-on-write
 
   * Autoscaling from 0.25 to 16 vCPU
-
-
-
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Neon: full PostgreSQL with all features
 
@@ -128,9 +122,6 @@ neonctl branches create --parent myapp --name add-billing-feature
 
   * Deploy requests show schema diff, handle migrations, and auto-resolve conflicts
 
-
-
-
 **Neon branches:**
 
   * Branches use copy-on-write at the page level — nearly instant and storage-efficient
@@ -138,9 +129,6 @@ neonctl branches create --parent myapp --name add-billing-feature
   * Logical replication between branches is supported
 
   * Time-travel: connect to any point in time within the retention window (like `git checkout` for databases)
-
-
-
 
 ## Serverless Capabilities
 
@@ -190,9 +178,6 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
 
   * Connection pooling via PlanetScale Boost
 
-
-
-
 **Neon** offers:
 
   * Web console with SQL editor
@@ -204,9 +189,6 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   * Vercel, Netlify, and Cloudflare integration
 
   * Drizzle Studio integration
-
-
-
 
 ## Ecosystem Compatibility
 
@@ -222,9 +204,6 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
 
   * Raw `mysql2` driver
 
-
-
-
 **Neon** works with PostgreSQL-compatible ORMs:
 
   * Prisma (PostgreSQL adapter)
@@ -239,9 +218,6 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
 
   * Supabase SDK
 
-
-
-
 ## When to Choose What
 
 **Choose PlanetScale when:**
@@ -254,9 +230,6 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
 
   * Your application uses MySQL-compatible tools
 
-
-
-
 **Choose Neon when:**
 
   * You want full PostgreSQL compatibility (foreign keys, extensions)
@@ -268,9 +241,6 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   * You value time-travel queries and instant branching
 
   * You're deploying on Vercel or Edge Functions
-
-
-
 
 ## Conclusion
 

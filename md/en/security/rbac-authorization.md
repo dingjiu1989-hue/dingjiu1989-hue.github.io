@@ -410,9 +410,6 @@ Common Pitfalls
 
   * **User in multiple roles** : Decide whether permissions are additive (union) or restrictive (intersection).
 
-
-
-
 Summary 
 
 RBAC simplifies authorization by grouping permissions into roles and assigning roles to users. Start with flat RBAC and add hierarchy as needed. Always check permissions rather than role names, cache resolved permissions for performance, and layer on ABAC policies for fine-grained access control. Log all authorization decisions for auditability.

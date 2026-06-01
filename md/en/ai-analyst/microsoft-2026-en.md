@@ -92,8 +92,6 @@ The quarterly revenue trajectory shows a clear inflection point beginning in Q3 
   * **Gaming** : ~40% growth including Activision, ~8% organic
   * **LinkedIn** : ~12% growth, steady advertising and talent solution demand
 
-
-
 ## 4\. Profitability & Margin Analysis
 
 Microsoft’s operating margin has steadily expanded from 42% in FY2022 to an estimated **47% in FY2025** , driven by operating leverage in cloud infrastructure, higher-margin AI service attach rates, and disciplined cost management. Net income of **$103.5 billion** translates to a net margin of approximately 40.8%, among the highest for any company of comparable scale. 
@@ -104,8 +102,6 @@ Key margin dynamics:
   * **Operating expenses** grew at a slower pace than revenue, reflecting the operating leverage inherent in software and platform businesses
   * **Capital expenditures** have increased substantially to support AI data center buildout, reaching ~$60B annualized; however, these investments are expected to generate strong returns as AI workloads migrate to production
   * **Share buybacks** reduced the diluted share count by ~2% annually, providing a modest earnings per share tailwind
-
-
 
 ## 5\. AI Strategy & Capital Allocation
 
@@ -136,8 +132,6 @@ Microsoft’s stock has appreciated significantly, rising from approximately **$
   * **RSI (14)** : ~55, neutral territory suggesting neither overbought nor oversold
   * **50-day MA** : ~$485, currently trading above indicating short-term bullish momentum
   * **200-day MA** : ~$450, well above this level confirming a long-term uptrend
-
-
 
 ## 7\. Valuation & Price Targets
 
@@ -170,8 +164,6 @@ While Microsoft’s long-term trajectory appears robust, several material risks 
   * **Enterprise Spending Cycle** : A macro downturn could slow enterprise cloud adoption and extend sales cycles, particularly for new AI products that remain unproven in terms of ROI for many CIOs.
   * **OpenAI Dependency & Governance**: Microsoft’s close tie to OpenAI creates concentration risk. Governance instability at OpenAI (as seen in late 2023) could disrupt product roadmaps and the partnership structure.
   * **Gaming Integration Risk** : The Activision Blizzard acquisition has not yet delivered the margin accretion initially projected, and the gaming industry faces structural headwinds from rising development costs and subscription fatigue.
-
-
 
 ⚠️ Risk Assessment Summary
 

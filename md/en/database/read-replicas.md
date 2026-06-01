@@ -158,9 +158,6 @@ Replication lag is the time between a commit on the primary and its visibility o
 
   * Long-running queries on the replica competing for I/O.
 
-
-
-
 Monitoring Lag 
 
 PostgreSQL offers precise lag metrics: 
@@ -262,8 +259,5 @@ Best Practices
   * **Use`hot_standby_feedback`** in PostgreSQL to prevent query cancellations on replicas due to vacuum conflicts.
 
   * **Consider cascading replication** for multi-region setups: primary in us-east-1 streams to a regional replica in us-west-2, which then feeds application replicas in the same region.
-
-
-
 
 Read replicas are a proven, low-risk approach to scaling reads. Combined with proper monitoring and automated failover, they form the foundation of a highly available database architecture.

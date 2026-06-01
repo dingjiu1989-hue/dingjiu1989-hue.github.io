@@ -178,9 +178,6 @@ Best Practices
 
   * **Monitor long-running transactions** via `pg_stat_activity`:
 
-
-
-
 SELECT pid, NOW() - xact_start AS duration, state, query
 
 FROM pg_stat_activity

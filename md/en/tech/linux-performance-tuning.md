@@ -20,9 +20,6 @@ Brendan Gregg's USE (Utilization, Saturation, Errors) method provides a systemat
 
   * **Errors** : How many error events are there?
 
-
-
-
 Apply this to CPU, memory, storage, and network resources to quickly identify the bottleneck.
 
 ## CPU Performance Tuning

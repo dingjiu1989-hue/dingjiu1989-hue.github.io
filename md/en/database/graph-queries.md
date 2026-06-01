@@ -218,8 +218,6 @@ Recursive CTEs execute sequentially (each iteration is one plan node). Optimizat
 
   * **Limit depth early** : Add a depth guard in the `WHERE` clause.
 
-
-
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Use cycle detection** : The `ARRAY[...]` path check can be expensive for deep graphs. Use PostgreSQL 14+'s `CYCLE` clause: 
 
 WITH RECURSIVE org_chart AS (
@@ -264,9 +262,6 @@ Recursive CTEs are the right tool when:
 
   * Graph traversal is a small fraction of overall query volume.
 
-
-
-
 Consider a dedicated graph database when: 
 
   * You need unbounded, many-to-many graph traversal at scale.
@@ -276,8 +271,5 @@ Consider a dedicated graph database when:
   * Path queries traverse millions of nodes and edges.
 
   * You need property graph features (labels on both nodes and edges) as a primary data model.
-
-
-
 
 Recursive CTEs prove that SQL can handle graph queries. For bounded-depth hierarchies, they perform well and keep your architecture simple. When your graph queries become the dominant workload, it is time to evaluate a dedicated graph database.

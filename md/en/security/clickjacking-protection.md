@@ -142,9 +142,6 @@ Framebusting limitations:
 
   * Attackers can use `onbeforeunload` to prevent navigation
 
-
-
-
 Testing for Clickjacking Vulnerabilities 
 
 ## Test with curl

@@ -51,6 +51,4 @@ Book| Author| Why Read It
   * **Read one book at a time.** "I'm reading 5 books" means you're finishing zero. Pick one, finish it, move on.
   * **Apply immediately.** The best time to read a design book is when you're designing something. The second best time is right before.
 
-
-
 **Bottom line:** Start with The Pragmatic Programmer and A Philosophy of Software Design — both are short, practical, and change how you code immediately. Read DDIA when you're ready for distributed systems. See also: [Developer YouTube Channels](</en/tools/best-dev-youtube-channels.html>) and [Developer Podcasts](</en/tools/best-dev-podcasts.html>).

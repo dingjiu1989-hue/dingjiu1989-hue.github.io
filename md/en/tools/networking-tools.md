@@ -262,7 +262,4 @@ tshark -r capture.pcap -Y "dns" -w dns-only.pcap
 
   * **Protocol issues** : `tshark -Y` display filters to inspect application-layer behavior.
 
-
-
-
 Mastering these five tools covers 95% of network troubleshooting scenarios. Start with mtr for path issues, dig for DNS, nmap for connectivity, iperf for performance, and Wireshark for deep protocol analysis.

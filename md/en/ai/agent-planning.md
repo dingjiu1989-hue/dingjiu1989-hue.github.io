@@ -252,7 +252,8 @@ return best_path or "No solution found."
 
 def _generate_thoughts(self, problem: str, current_state: list[str]) -> list[list[str]]:
 
-context = "\n".join(current_state) if current_state else "No reasoning yet."
+context = "
+".join(current_state) if current_state else "No reasoning yet."
 
 response = self.llm(f"""
 
@@ -272,7 +273,8 @@ return [current_state + [t] for t in parse_thoughts(response)]
 
 def _evaluate_thought(self, problem: str, state: list[str]) -> float:
 
-context = "\n".join(state)
+context = "
+".join(state)
 
 score = self.llm(f"""
 

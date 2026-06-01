@@ -20,9 +20,6 @@ Choose an operating system that supports the tools you need:
 
   * **Windows with WSL2** : Windows Subsystem for Linux 2 provides a Linux kernel inside Windows. Run Linux tools natively while using Windows applications.
 
-
-
-
 For most developers, macOS or WSL2 on Windows provides the best balance of tooling and usability.
 
 ## Shell Configuration

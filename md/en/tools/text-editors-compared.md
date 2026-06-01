@@ -28,9 +28,6 @@ Microsoft's VS Code is the most widely used editor in 2026, with over 70% market
 
   * Settings Sync across devices.
 
-
-
-
 **Weaknesses:**
 
   * Can be resource-heavy (memory usage often exceeds 500MB).
@@ -40,9 +37,6 @@ Microsoft's VS Code is the most widely used editor in 2026, with over 70% market
   * Telemetry concerns (though most can be disabled).
 
   * Extension quality varies significantly.
-
-
-
 
 {
 
@@ -82,9 +76,6 @@ NeoVim is a modern fork of Vim with a vibrant plugin ecosystem and Lua-based con
 
   * Active plugin community.
 
-
-
-
 **Weaknesses:**
 
   * Steep learning curve (modal editing is initially slower).
@@ -94,9 +85,6 @@ NeoVim is a modern fork of Vim with a vibrant plugin ecosystem and Lua-based con
   * Plugins can conflict or break on updates.
 
   * No built-in debugger UI.
-
-
-
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- init.lua (modern NeoVim configuration)
 
@@ -174,9 +162,6 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
 
   * Low memory footprint.
 
-
-
-
 **Weaknesses:**
 
   * Newer, smaller ecosystem and community.
@@ -186,9 +171,6 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
   * Only available on macOS and Linux (alpha).
 
   * Fewer themes and customization options.
-
-
-
 
 // Zed settings.json
 
@@ -244,9 +226,6 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
 
   * Static analysis catches errors before runtime.
 
-
-
-
 **Weaknesses:**
 
   * Heavy resource usage (often uses 2GB+ RAM).
@@ -256,9 +235,6 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   * Paid licenses ($249/year for all tools).
 
   * Different IDE per language.
-
-
-
 
 **Best for** : Enterprise Java/Kotlin development, teams that want the best refactoring and debugging tools.
 
@@ -303,9 +279,6 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   * **Full-stack web** : VS Code or JetBrains WebStorm.
 
   * **Rust developers** : Zed has excellent Rust support; NeoVim + rust-analyzer also works well.
-
-
-
 
 ## Summary
 

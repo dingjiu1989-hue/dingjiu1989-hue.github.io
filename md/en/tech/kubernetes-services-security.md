@@ -20,9 +20,6 @@ Kubernetes deprecated PodSecurityPolicies in favor of Pod Security Admission (PS
 
   * **Restricted** : Strong pod hardening.
 
-
-
-
 Apply PSA via namespace labels:
 
 apiVersion: v1

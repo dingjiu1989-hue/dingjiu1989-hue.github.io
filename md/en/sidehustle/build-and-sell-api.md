@@ -63,8 +63,6 @@ Tier| Price| Requests/Month| Who It's For
   4. **Create SDKs** for popular languages (at minimum: Node.js, Python).
   5. **List on API marketplaces:** RapidAPI, API Layer, GitHub Marketplace.
 
-
-
 **Real examples:** ScreenshotAPI ($30K+/mo, screenshot generation), Bannerbear ($25K+/mo, image generation API), Geocodio ($15K+/mo, geocoding). All built by solo developers or tiny teams.
 
 **Bottom line:** Find a repetitive developer task, wrap it in an API, charge per request. Start with a free tier. Build great docs. The market for developer-focused APIs keeps growing because every company needs more automation. See also: [SaaS Bootstrapping](</en/sidehustle/saas-bootstrapping-guide.html>) and [Micro-SaaS Ideas](</en/sidehustle/micro-saas-ideas-2026.html>).

@@ -26,9 +26,6 @@ A good Git client should:
 
   * Perform well with large repositories.
 
-
-
-
 ## GitKraken
 
 GitKraken is the most polished commercial Git client. Its distinctive interface uses a colorful branch graph and highly visual commit history.
@@ -45,9 +42,6 @@ GitKraken is the most polished commercial Git client. Its distinctive interface 
 
   * In-app code review capabilities.
 
-
-
-
 **Cons:**
 
   * Requires a subscription ($59/year for Pro).
@@ -55,9 +49,6 @@ GitKraken is the most polished commercial Git client. Its distinctive interface 
   * Can be slow with very large repositories.
 
   * Not open source.
-
-
-
 
 Best for: Developers who want a polished, visual Git experience and are willing to pay.
 
@@ -75,9 +66,6 @@ Atlassian's Sourcetree is a free Git client for Windows and macOS. It offers str
 
   * Search through commit messages and file changes.
 
-
-
-
 **Cons:**
 
   * UI feels dated compared to GitKraken.
@@ -85,9 +73,6 @@ Atlassian's Sourcetree is a free Git client for Windows and macOS. It offers str
   * Can be slow with monorepos.
 
   * Limited built-in merge conflict resolution.
-
-
-
 
 Best for: Teams using Git Flow who want a free, capable client.
 
@@ -105,9 +90,6 @@ GitHub Desktop is the simplest Git client, designed for seamless GitHub integrat
 
   * Supports CLI integration (open in terminal).
 
-
-
-
 **Cons:**
 
   * No advanced features (rebase, cherry-pick, stash management).
@@ -115,9 +97,6 @@ GitHub Desktop is the simplest Git client, designed for seamless GitHub integrat
   * Only works with GitHub (no GitLab/Bitbucket support).
 
   * Limited to basic Git operations.
-
-
-
 
 Best for: Developers who primarily use GitHub and want a simple, focused tool.
 
@@ -135,9 +114,6 @@ VS Code's built-in Git support has become remarkably capable. The Source Control
 
   * Source Control Provider API for platform integration.
 
-
-
-
 **Cons:**
 
   * Not a standalone Git client.
@@ -145,9 +121,6 @@ VS Code's built-in Git support has become remarkably capable. The Source Control
   * Advanced operations require command palette or extensions.
 
   * Can be slow in very large repos.
-
-
-
 
 Best for: Developers already using VS Code who want an integrated Git experience.
 
@@ -218,9 +191,6 @@ It combines the speed of the terminal with the convenience of a GUI.
   * **Git Flow teams** : Sourcetree has the best Git Flow support.
 
   * **Linux users** : GitKraken or GitAhead (Sourcetree and GitHub Desktop lack full Linux support).
-
-
-
 
 ## Summary
 

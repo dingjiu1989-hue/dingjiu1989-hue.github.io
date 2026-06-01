@@ -108,9 +108,11 @@ client.add('lock:payment:123', 'locked', expire=30) # Only if not exists
 
 client.replace('user:1000:profile', updated_profile) # Only if exists
 
-client.append('log:buffer', 'new entry\n') # Append to existing value
+client.append('log:buffer', 'new entry
+') # Append to existing value
 
-client.prepend('log:buffer', 'header\n') # Prepend
+client.prepend('log:buffer', 'header
+') # Prepend
 
 ## Increment/Decrement
 
@@ -331,8 +333,5 @@ result = client.get("key")
   * **Use Redis** when you need data structures beyond key-value, persistence, replication, or any advanced caching patterns like rate limiting, session stores, or leaderboards.
 
   * **Use both** when you want a two-tier caching strategy: Memcached for hot cache (regenerable) and Redis for persistent cache (session, counter) and non-cache workloads.
-
-
-
 
 For most modern applications, Redis is the better default due to its versatility. Reserve Memcached for specific high-throughput caching scenarios where Redis's overhead and feature set are unnecessary.

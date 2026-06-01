@@ -24,9 +24,6 @@ AI coding assistants have become indispensable:
 
   * **Continue.dev** : Open-source AI assistant that works with local and cloud models.
 
-
-
-
 {
 
 "github.copilot.enable": {
@@ -53,9 +50,6 @@ AI coding assistants have become indispensable:
 
   * **AWS CodeWhisperer** : Free, good for AWS-related development.
 
-
-
-
 ## Language Support
 
 Extended beyond basic syntax highlighting:
@@ -69,9 +63,6 @@ Extended beyond basic syntax highlighting:
   * **Biome** : Linter and formatter for JavaScript/TypeScript (replaces ESLint + Prettier).
 
   * **Rust Analyzer** : Rust language server with inlay hints, type information, and refactoring.
-
-
-
 
 {
 
@@ -97,9 +88,6 @@ Version control becomes seamless with these plugins:
 
   * **Conventional Commits** : Standardized commit message format support.
 
-
-
-
 ## Testing Tools
 
 Run and debug tests without leaving your editor:
@@ -111,9 +99,6 @@ Run and debug tests without leaving your editor:
   * **Jest Runner** : Run individual Jest tests with a single click.
 
   * **Coverage Gutters** : Display test coverage highlights in the editor gutter.
-
-
-
 
 ## Productivity
 
@@ -130,9 +115,6 @@ These plugins save time on daily tasks:
   * **Bookmarks** : Navigate between marked lines with keyboard shortcuts.
 
   * **Project Manager** : Switch between projects with saved window states.
-
-
-
 
 {
 
@@ -157,9 +139,6 @@ A pleasant visual environment reduces eye strain:
   * **Peacock** : Colorize editor windows for easy project identification.
 
   * **Indent Rainbow** : Color-code indentation levels for easier reading.
-
-
-
 
 ## Recommended Setup
 

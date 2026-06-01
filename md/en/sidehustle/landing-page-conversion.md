@@ -22,9 +22,6 @@ Developers have advantages in conversion optimization:
 
   * You can implement changes quickly without waiting for a team.
 
-
-
-
 ## The Conversion Formula
 
 Every landing page follows the same fundamental formula:
@@ -44,9 +41,6 @@ If visitors cannot understand what you offer within 5 seconds, they leave. Clari
   * Who is this for?
 
   * What will I get?
-
-
-
 
 Good: "Build REST APIs 10x faster with AutoAPI"
 
@@ -68,9 +62,6 @@ Bad: "Next-generation API platform"
 
   * Zero distractions (no navigation menu, no multiple offers).
 
-
-
-
 ## Call-to-Action Optimization
 
 The CTA button is where conversions happen. Every element points to this button.
@@ -83,9 +74,6 @@ The CTA button is where conversions happen. Every element points to this button.
 
   * Action-oriented: "Deploy Now" or "Generate My Dashboard"
 
-
-
-
 **Button design:**
 
   * High contrast color (red, green, or orange depending on brand colors).
@@ -96,17 +84,11 @@ The CTA button is where conversions happen. Every element points to this button.
 
   * Above the fold (visible without scrolling) plus repeated below.
 
-
-
-
 **Primary vs. secondary CTAs:**
 
   * One primary CTA per page.
 
   * Secondary CTAs ("Learn more" or "View pricing") should be visually distinct and less prominent.
-
-
-
 
 ## Social Proof
 
@@ -152,9 +134,6 @@ Anxiety is fear of making a bad decision:
 
   * Benefit: "Launch your backend in minutes instead of weeks"
 
-
-
-
 **Scannable structure:**
 
   * Short paragraphs (2-3 sentences max).
@@ -164,9 +143,6 @@ Anxiety is fear of making a bad decision:
   * Bold key phrases.
 
   * Section headers that tell a story.
-
-
-
 
 **Specificity beats superlatives.** "10x faster" is less convincing than "Our users reduced API development from 3 days to 4 hours." Specific numbers are credible.
 
@@ -184,9 +160,6 @@ Do not guess what converts. Test:
 
   * Simple server-side testing (build your own).
 
-
-
-
 **What to test:**
 
   * Headline variations (this is the highest-impact test).
@@ -200,9 +173,6 @@ Do not guess what converts. Test:
   * Pricing presentation.
 
   * Form length.
-
-
-
 
 **Test one thing at a time.** A test that changes headline, CTA, and image together tells you nothing about what caused the change.
 

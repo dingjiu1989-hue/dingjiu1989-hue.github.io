@@ -34,9 +34,6 @@ The interactive rebase editor presents a list of commits with actions:
 
   * `drop` — Remove the commit entirely.
 
-
-
-
 Best practices include squashing fixup commits, splitting large commits into logical units, and rewriting messages for clarity. Interactive rebase should only be used on branches not shared with other developers — rewriting public history causes painful merge conflicts for collaborators.
 
 Conflict resolution during rebase requires solving conflicts per commit, not per merge. Each commit in the rebase sequence is applied and paused on conflict. The `git rerere` (reuse recorded resolution) feature automatically applies previously resolved conflict resolutions.
@@ -93,9 +90,6 @@ Use cases include:
 
   * Maintaining separate directories for development and production builds.
 
-
-
-
 Worktrees share the same repository objects but maintain separate working directories and indexes. Each worktree has its own HEAD, branch, and staging area.
 
 git worktree list
@@ -140,9 +134,6 @@ Client-side hooks include:
 
   * `post-commit`: Notify CI system, update issue tracker.
 
-
-
-
 Server-side hooks include:
 
   * `pre-receive`: Enforce commit policies, block force pushes.
@@ -150,9 +141,6 @@ Server-side hooks include:
   * `update`: Per-branch policy enforcement.
 
   * `post-receive`: Deploy to production, send notifications.
-
-
-
 
 The pre-commit framework manages hooks declaratively:
 

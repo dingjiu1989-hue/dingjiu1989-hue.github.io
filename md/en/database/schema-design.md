@@ -162,9 +162,6 @@ Tables
 
   * **Avoid reserved words** : Never name a table `user`, `order`, or `group` without quoting
 
-
-
-
 Columns 
 
   * **Primary keys** : `id` (singular, generic)
@@ -174,9 +171,6 @@ Columns
   * **Timestamps** : `created_at`, `updated_at`, `deleted_at`
 
   * **Boolean flags** : `is_active`, `has_billing`, `email_verified`
-
-
-
 
 Indexes 
 
@@ -315,8 +309,5 @@ Practical Schema Checklist
   * [ ] Indexes match query patterns (verified with EXPLAIN)
 
   * [ ] Appropriate normalization level (3NF typically, denormalize knowingly)
-
-
-
 
 Schema design is a long-term investment. A well-designed schema reduces bugs, makes queries faster, and makes the codebase easier for new developers to understand. Invest the time upfront; the payoff compounds over years of maintenance.

@@ -40,8 +40,6 @@ Platform| Cost| Best For
   4. **Add a CTA to every article you write:** "Enjoyed this? I write a weekly newsletter about [topic]. Join 2,500 developers here."
   5. **Engage in communities:** Answer questions on Reddit, Discord, Stack Overflow. Signature links add up.
 
-
-
 ## Step 3: Monetize
 
 Method| When| Revenue per 1,000 subs  
@@ -75,7 +73,5 @@ General "web development" newsletters compete with everyone. Narrower wins:
   * "TypeScript Tips" — too narrow? "Modern TypeScript" — just right.
   * "React Weekly" — too broad. "Next.js & React Server Components" — differentiated.
   * "DevOps" — saturated. "Platform Engineering for Startups" — niche and valuable.
-
-
 
 **Bottom line:** Pick a focused developer niche. Write consistently for 6 months before worrying about revenue. Cross-promote with other newsletters. Sponsorships kick in at ~1,000 engaged subscribers. Four sponsors per issue at 10K subs = comfortable full-time income. See also: [Technical Writing Income](</en/sidehustle/technical-writing-income.html>) and [Selling Digital Products](</en/sidehustle/sell-digital-products.html>).

@@ -57,6 +57,4 @@ Tool| What It Is| Why Use It
   5. Database: **DBeaver** or **TablePlus**
   6. Editor: already covered — see [Code Editor Showdown](</en/compare/code-editors-comparison-2026.html>)
 
-
-
 All tools above are free for individual developers. Bookmark this page and come back next time you set up a new machine.

@@ -24,9 +24,6 @@ Traditional diagram tools (draw.io, LucidChart) produce binary files that are di
 
   * Work in any editor with syntax highlighting.
 
-
-
-
 ## Mermaid
 
 Mermaid is the most popular diagram-as-code tool, supported natively by GitHub, GitLab, and Notion. It renders diagrams from JavaScript-like syntax.
@@ -68,9 +65,6 @@ E --> F[Cache]
   * Gantt chart, Pie chart, Git graph
 
   * User Journey, C4 diagram (decomposition)
-
-
-
 
 sequenceDiagram
 
@@ -137,9 +131,6 @@ GW --> User: 200 OK
   * Archimate, Gantt, Mind Map, Work Breakdown
 
   * Network diagram, JSON/YAML visualization
-
-
-
 
 **Pros** : Most comprehensive diagram type support, mature and stable, powerful layout engine.
 
@@ -284,9 +275,6 @@ class: mermaid
   * **For whiteboarding** : Excalidraw (best visual output for brainstorming).
 
   * **For polished output** : D2 (best auto-layout, modern tool).
-
-
-
 
 ## Summary
 

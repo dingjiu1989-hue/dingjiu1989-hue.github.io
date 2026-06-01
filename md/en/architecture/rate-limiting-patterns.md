@@ -22,9 +22,6 @@ Rate limiting prevents a single client from consuming an unfair share of resourc
 
   * Prevent cascading failures in distributed systems.
 
-
-
-
 Token Bucket Algorithm 
 
 The token bucket is one of the most popular rate limiting algorithms. A bucket holds a fixed number of tokens. Tokens are added at a steady rate. Each request consumes one token. If the bucket is empty, the request is denied. 
@@ -138,9 +135,6 @@ Choosing the Right Algorithm
   * **Sliding window counter** is a good compromise between accuracy and efficiency.
 
   * **Leaky bucket** works when you need a constant processing rate.
-
-
-
 
 Summary 
 

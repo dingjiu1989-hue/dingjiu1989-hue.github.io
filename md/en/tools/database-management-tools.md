@@ -32,9 +32,6 @@ DBeaver's feature set includes:
 
   * Version 6+ (Lite, Enterprise) adds NoSQL database support.
 
-
-
-
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- DBeaver's smart auto-completion suggests columns, tables, and functions
 
 SELECT u.name, COUNT(o.id) AS order_count
@@ -68,9 +65,6 @@ Key features include:
   * Session management with saved connections and groups.
 
   * Database structure editing (add/remove columns, indexes, foreign keys).
-
-
-
 
 TablePlus' text-editing mode for large text fields and JSON viewer for JSON columns are standout features. The built-in code generator produces migration scripts automatically.
 
@@ -113,9 +107,6 @@ PostgreSQL-specific features include:
   * PGBouncer connection pooling integration.
 
   * Query plan visualization with cost analysis.
-
-
-
 
 pgAdmin 4's web-based architecture allows running as a shared service accessible from any browser. This is ideal for team database administration. The trade-off is a heavier resource footprint compared to desktop-only tools.
 

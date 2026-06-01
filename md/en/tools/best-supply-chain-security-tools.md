@@ -78,8 +78,6 @@ Sigstore/Cosign| Artifact signing| Keyless OIDC| Yes| Free
   3. Switch to Chainguard base images for your Docker builds. This single change eliminates 80%+ of CVEs from your images.
   4. Sign your releases with Cosign. It takes 5 minutes to set up in GitHub Actions and proves your artifacts haven't been tampered with.
 
-
-
 **When you have budget:** Add Snyk for reachability analysis and license compliance. Add Chainguard Enterprise for policy enforcement and centralized visibility.
 
 **When you're enterprise scale:** Anchor Enterprise for policy-as-code across 100+ teams. Chainguard for SLSA Level 3 provenance across your entire container fleet.

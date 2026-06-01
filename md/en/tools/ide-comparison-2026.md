@@ -166,7 +166,4 @@ RULES = """
 
   * **AI-first workflow** : Cursor excels when you integrate AI into every edit and refactoring step.
 
-
-
-
 Consider using multiple editors for different tasks. Many developers use VS Code for quick edits and JetBrains for deep work on large codebases. Zed and Cursor are increasingly replacing VS Code as daily drivers for performance and AI features respectively.

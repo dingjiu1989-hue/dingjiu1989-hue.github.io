@@ -18,8 +18,6 @@ The code editor market in 2026 has consolidated around three heavyweights: Micro
   * **Best for:** Full-stack web dev, TypeScript/JavaScript, polyglot developers, remote work
   * **Weakness:** Java/C# support isn't as deep as JetBrains. AI features require extensions (Copilot).
 
-
-
 ## JetBrains IDEs (IntelliJ IDEA / WebStorm / PyCharm)
 
 **The Specialist.** Each JetBrains IDE is tailored to a specific language ecosystem, and it shows. Refactoring tools that actually understand your code. A debugger that just works. Database tools built in. The trade-off: heavier, more expensive, and slower to start.
@@ -28,8 +26,6 @@ The code editor market in 2026 has consolidated around three heavyweights: Micro
   * **Best for:** Java/Kotlin, C#, PHP, large enterprise codebases, complex refactoring
   * **Weakness:** Heavier resource usage. AI features (JetBrains AI) are decent but not as strong as Cursor or Copilot.
 
-
-
 ## Cursor
 
 **The AI-Native Editor.** A VS Code fork rebuilt from the ground up around AI interaction. Instead of asking AI for code and pasting it in, you describe what you want and Cursor writes it in your codebase — understanding your existing files, types, and patterns. The "Tab to accept" model for multi-line edits is so natural it feels like telepathy.
@@ -37,8 +33,6 @@ The code editor market in 2026 has consolidated around three heavyweights: Micro
   * **Price:** Free (limited) / $20/mo (Pro)
   * **Best for:** Greenfield projects, rapid prototyping, solo developers, AI-first workflows
   * **Weakness:** Lacks some VS Code extensions. Not ideal for large enterprise projects. AI-generated code still needs careful review.
-
-
 
 ## Head-to-Head Comparison
 

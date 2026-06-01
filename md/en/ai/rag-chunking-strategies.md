@@ -48,7 +48,10 @@ chunk_size=512,
 
 chunk_overlap=64,
 
-separators=["\n\n", "\n", ".", " ", ""],
+separators=["
+
+", "
+", ".", " ", ""],
 
 keep_separator=True,
 
@@ -56,7 +59,9 @@ keep_separator=True,
 
 chunks = splitter.split_text(long_document)
 
-The algorithm tries each separator in order. It first attempts to split on paragraph boundaries (`\n\n`). If a paragraph exceeds the chunk size, it splits on line breaks, then sentences, then spaces. This preserves as much natural structure as possible.
+The algorithm tries each separator in order. It first attempts to split on paragraph boundaries (`
+
+`). If a paragraph exceeds the chunk size, it splits on line breaks, then sentences, then spaces. This preserves as much natural structure as possible.
 
 ## Semantic Chunking
 
@@ -116,7 +121,8 @@ chunks = []
 
 current_section = {"heading": "Introduction", "content": []}
 
-for line in markdown_text.split("\n"):
+for line in markdown_text.split("
+"):
 
 heading_match = re.match(r"^(#{1,3})\s+(.+)$", line)
 

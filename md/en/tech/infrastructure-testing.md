@@ -374,7 +374,4 @@ t.Skip("Skipping integration test in short mode")
 
   * **Test data isolation** : use separate AWS accounts or dedicated test projects.
 
-
-
-
 A comprehensive infrastructure testing strategy combines static analysis for fast feedback, unit tests for module validation, integration tests for real resource behavior, and policy-as-code for compliance. The upfront investment pays dividends when a test catches a misconfiguration before it reaches production.

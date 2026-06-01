@@ -222,9 +222,6 @@ Favor procedures when:
 
   * Network round trips must be minimized.
 
-
-
-
 Favor application code when: 
 
   * The logic involves complex control flow across external services.
@@ -234,8 +231,5 @@ Favor application code when:
   * Testing frameworks are more mature in the application language.
 
   * The database CPU is already a bottleneck.
-
-
-
 
 A balanced architecture puts data-integrity rules in the database and complex orchestration in the application layer, using each environment for what it does best.

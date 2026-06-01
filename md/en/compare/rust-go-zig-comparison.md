@@ -236,9 +236,6 @@ Key ecosystem pieces:
 
   * **WASM** : `wasm-pack`, `wasm-bindgen`
 
-
-
-
 By 2026, Rust has crossed the chasm from "promising" to "enterprise." Major adopters include AWS (Firecracker, Lambda runtime), Google (Fuchsia, Android), Microsoft (Windows kernel components), Meta (Diem, source control tools), and Linux (kernel modules via `rust-for-linux`).
 
 ## Go: The Pragmatic Default
@@ -257,9 +254,6 @@ Key ecosystem pieces:
 
   * **Deployment** : Single binary, native `GOOS`/`GOARCH` cross-compilation, minimal container images
 
-
-
-
 Go lacks in niche areas — embedded systems, WASM, GPU compute, game development — but dominates container infrastructure (Docker, Kubernetes, Prometheus, Terraform are all written in Go).
 
 ## Zig: Growing Fast but Still Young
@@ -277,9 +271,6 @@ Key ecosystem pieces:
   * **Game dev** : Integration with `raylib` and `SDL` bindings
 
   * **Cross-compilation** : Best-in-class. Zig ships its own C toolchain and can target any arch/OS from a single download, no SDK needed.
-
-
-
 
 Zig's biggest strength — and weakness — is the small standard library. You get HTTP, compression, JSON, and crypto out of the box, but the API surfaces are thin. There is no `serde`, no `tokio`, no `rayon`. The Zig community prefers explicitness and simplicity over abstraction, which means fewer libraries exist and those that do are less general.
 
@@ -316,9 +307,6 @@ Rust's learning curve is legendary and earned. Newcomers spend weeks, sometimes 
   * **Traits and generics** : Trait objects vs generics, blanket impls, associated types, GATs
 
   * **Build times** : Clean builds can take minutes even for modest projects
-
-
-
 
 By 2026, improvements like `#[derive]` for more traits, better borrow checker diagnostics, and the stabilization of `impl Trait` in return positions have reduced the pain. But Rust remains the language you invest in, not the one you pick up in a weekend.
 
@@ -522,9 +510,6 @@ The differences are telling:
 
   * **Zig** is the most explicit. Allocators are passed through the call chain. JSON encoding uses `std.json.stringifyAlloc`. Nothing is hidden — and the code is correspondingly longer.
 
-
-
-
 ## Job Market and Adoption Trends in 2026
 
 ## Rust
@@ -537,9 +522,6 @@ Rust's job market has grown 4x since 2022. It is no longer a niche language — 
 
   * **Notable shift** : Kubernetes replacements and container tooling are increasingly written in Rust (or Go). The Linux kernel's Rust support has created demand for Rust kernel module developers
 
-
-
-
 ## Go
 
 Go remains the dominant language for cloud-native development. It is the most-requested language for backend platform roles.
@@ -550,16 +532,11 @@ Go remains the dominant language for cloud-native development. It is the most-re
 
   * **Slowdown** : Growth has plateaued in the West but is expanding rapidly in Asia-Pacific markets, where Go's simplicity makes it popular as a first systems language
 
-
-
-
 ## Zig
 
 Zig's job market is nascent but growing. Most Zig roles in 2026 fall into three categories:
 
   * **C/C++ replacement** : Companies migrating legacy C/C++ codebases to a modern language
-
-
 
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Game development** : Zig's compile-time features and explicit control appeal to game engine teams
 
@@ -627,9 +604,6 @@ Game engine / graphics programming → Zig or Rust
 
   * Your problem domain is CRUD APIs and simple web services
 
-
-
-
 ## Do not pick Go when:
 
   * You need maximum per-request throughput
@@ -640,9 +614,6 @@ Game engine / graphics programming → Zig or Rust
 
   * You work in real-time or latency-sensitive domains
 
-
-
-
 ## Do not pick Zig when:
 
   * You need a mature library ecosystem
@@ -652,9 +623,6 @@ Game engine / graphics programming → Zig or Rust
   * You ship production software that needs GC-managed memory safety
 
   * You need to hire from a standard talent pool
-
-
-
 
 ## Conclusion
 

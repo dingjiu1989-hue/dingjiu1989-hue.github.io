@@ -60,9 +60,6 @@ Docker's built-in security features include:
 
   * iptables rules managed by Docker for traffic filtering
 
-
-
-
 For production deployments, combining Docker user-defined networks with external firewalls and service meshes provides defense in depth. Each container should be connected only to networks it requires, following the principle of least privilege.
 
 ## Troubleshooting Common Issues

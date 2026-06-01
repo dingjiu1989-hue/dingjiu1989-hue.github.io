@@ -66,9 +66,6 @@ self.cache.delete(f"user:{user_id}")
 
   * Cache failures are not fatal (system falls back to database).
 
-
-
-
 **Disadvantages** :
 
   * Cache miss penalty includes both cache check and database read.
@@ -76,9 +73,6 @@ self.cache.delete(f"user:{user_id}")
   * Stale data until TTL expires (if items are not invalidated on update).
 
   * Thundering herd problem on cache miss for popular items.
-
-
-
 
 Write-Through 
 
@@ -114,9 +108,6 @@ self.cache.set(f"user:{user_id}", user, ttl=3600)
 
   * Read path is simple (always from cache or cache-miss-then-database).
 
-
-
-
 **Disadvantages** :
 
   * Writes are slower (must update both database and cache).
@@ -124,9 +115,6 @@ self.cache.set(f"user:{user_id}", user, ttl=3600)
   * Writes more data to cache than may ever be read (cache pollution).
 
   * Cache and database updates are not atomic (risk of inconsistency).
-
-
-
 
 Write-Behind (Write-Back) 
 
@@ -208,9 +196,6 @@ self.write_queue.put_nowait({
 
   * Reduces database write load.
 
-
-
-
 **Disadvantages** :
 
   * Risk of data loss if cache fails before flush completes.
@@ -218,9 +203,6 @@ self.write_queue.put_nowait({
   * Complex to implement correctly.
 
   * Inconsistency window between cache update and database update.
-
-
-
 
 Refresh-Ahead 
 

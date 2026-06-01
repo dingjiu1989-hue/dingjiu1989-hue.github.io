@@ -123,6 +123,4 @@ CI runs unrelated changes on every commit| Turborepo caches tasks. Only changed 
   * **Remote caching:** Turborepo can cache builds remotely (Vercel). CI builds reuse cache from previous CI runs.
   * **Don't go monorepo for <3 packages.** The overhead isn't worth it for tiny projects. Start with a single repo, extract when you have sharing pain.
 
-
-
 **Bottom line:** Monorepos shine when you have 3+ apps/packages that share code. pnpm workspaces + Turborepo is the best stack in 2026. The shared config package alone saves hours of boilerplate setup per new project. See also: [Package Manager Comparison](</en/compare/pnpm-vs-npm-vs-yarn.html>) and [Build Tools Comparison](</en/compare/vite-vs-webpack-vs-turbopack.html>).

@@ -44,8 +44,6 @@ Thumbnails| Canva (free)| Figma (free) or Photoshop
   * **Authority videos (40%):** "Build a Full-Stack App with Next.js 15" — deep content, builds trust, long watch time
   * **Community videos (20%):** Q&As;, career stories, "day in the life" — builds connection, increases engagement
 
-
-
 ## Monetization: Beyond AdSense
 
 Revenue Stream| How It Works| Earning Potential (1K-50K subs)  

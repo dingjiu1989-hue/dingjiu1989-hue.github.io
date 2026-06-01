@@ -142,6 +142,4 @@ Save as `hello.py` and run with `python3 hello.py`. That's it — you're a progr
   * **Real Python** — excellent tutorials from beginner to advanced
   * **Build something** — a CLI tool, a simple web scraper, a TODO app. Anything.
 
-
-
 The secret to learning Python: start building things immediately. Don't get stuck in tutorial hell.

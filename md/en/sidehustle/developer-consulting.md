@@ -24,9 +24,6 @@ Consulting is not for everyone. Before starting, assess your fit:
 
   * You have 5+ years of experience in a specific technical area.
 
-
-
-
 **You are a poor fit if:**
 
   * You prefer deep focus on a single product or codebase.
@@ -34,9 +31,6 @@ Consulting is not for everyone. Before starting, assess your fit:
   * Uncertainty about next month's income causes significant stress.
 
   * You dislike sales, networking, and self-promotion.
-
-
-
 
 ## Finding Your Niche
 
@@ -55,9 +49,6 @@ The most successful consultants specialize. A specialist commanding $250/hour ea
   * **Platform engineering** : Building internal developer platforms and CI/CD pipelines.
 
   * **Legacy modernization** : Extracting monoliths into microservices.
-
-
-
 
 Choose a niche where you have existing depth and where companies are actively spending money.
 
@@ -93,16 +84,11 @@ There are several pricing models for developer consulting:
 
   * 12+ years: $200-350/hour
 
-
-
-
 ## Creating Proposals and Contracts
 
 A good consulting proposal includes:
 
   * **Problem statement** (shows you understand their situation).
-
-
 
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Proposed approach** (high level -- not a detailed spec).
 
@@ -137,9 +123,6 @@ Transition from side hustle to full-time consulting when:
   * Your consulting income matches or exceeds your salary for 3+ consecutive months.
 
   * You have a pipeline of potential clients beyond your current engagements.
-
-
-
 
 ## Summary
 

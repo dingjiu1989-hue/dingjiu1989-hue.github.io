@@ -236,9 +236,6 @@ Cache Behavior
 
   * **Persistence** is asynchronous by default but configurable.
 
-
-
-
 Memory Quotas 
 
 ## Set bucket memory quota (important tuning parameter)
@@ -260,9 +257,6 @@ Eviction policies:
   * `valueOnly`: Evict document value, keep metadata (faster re-fetch on access).
 
   * `fullEviction`: Evict entire document (more memory savings but slower on cache miss).
-
-
-
 
 Durability Settings 
 

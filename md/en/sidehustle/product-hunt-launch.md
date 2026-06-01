@@ -22,9 +22,6 @@ Product Hunt is more than a launch platform -- it is a community of early adopte
 
   * **Press and investor attention.** Journalists and VCs monitor Product Hunt daily.
 
-
-
-
 ## Pre-Launch Preparation (4-6 Weeks Before)
 
 **Build your Product Hunt profile.** Complete your maker profile with a professional photo, bio, and links. Follow other makers and engage with their products. Being active before your launch day is crucial.
@@ -38,9 +35,6 @@ Product Hunt is more than a launch platform -- it is a community of early adopte
   * Senior tech journalists.
 
   * Founders of popular products who you have relationships with.
-
-
-
 
 If you cannot find a hunter, you can self-hunt. It is less effective but perfectly acceptable.
 
@@ -58,9 +52,6 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
 
   * **First comment** (written by the maker, tells the story behind the product).
 
-
-
-
 **Build your launch list.** Product Hunt ranking depends on upvotes in the first few hours. Compile a list of people who will upvote on launch day:
 
   * Your email subscribers (your most reliable supporters).
@@ -73,9 +64,6 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
 
   * Developer community members.
 
-
-
-
 **Pre-launch teaser.** Send a "coming soon" email to your list 1-2 weeks before launch. Create a Twitter/X thread announcing your upcoming launch. Build anticipation.
 
 ## Launch Day Execution
@@ -87,9 +75,6 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   * **Have your "strike team" ready at 12:01 AM PT** to upvote immediately. Early momentum is critical.
 
   * **Notify your launch list with a specific time.** "Please upvote at 12:01 AM PT."
-
-
-
 
 **The first hour is everything.** Product Hunt's algorithm heavily weights early upvote velocity. If you get 100 upvotes in the first hour, you will likely stay near the top. If you get 10, you will get buried.
 
@@ -104,9 +89,6 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   * What makes it different.
 
   * A call to action (try it, give feedback).
-
-
-
 
 **Coordinate with your hunter.** If you have a hunter, ensure they are ready to submit at the right time and engage with comments.
 
@@ -124,9 +106,6 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
 
   * DM your followers asking for support.
 
-
-
-
 **Community posts:**
 
   * Reddit: Post in relevant subreddits (r/webdev, r/SideProject, r/SaaS). Follow each subreddit's self-promotion rules.
@@ -136,9 +115,6 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   * LinkedIn: Post about your launch journey.
 
   * Dev.to: Write a post about building and launching your product.
-
-
-
 
 **Slack and Discord communities.** Share your launch in relevant communities where you are an active member, not a drive-by spammer.
 
@@ -153,9 +129,6 @@ Based on analysis of hundreds of launches:
   * **Conversion rate:** 5-15% of Product Hunt visitors sign up for your product.
 
   * **Retention:** 10-30% of those signups become active users.
-
-
-
 
 ## Post-Launch Activities
 

@@ -43,8 +43,6 @@ Tesla has evolved from a pure EV manufacturer into an "AI-centric" comprehensive
   * **Services & Other**: Vehicle maintenance, Supercharger network services, software subscriptions (e.g., FSD), and auto insurance
   * **AI & Robotics**: Represented by the FSD autonomous driving system and Optimus humanoid robot, these are the primary drivers of future growth
 
-
-
 Notably, Tesla is accelerating its strategic pivot, planning to discontinue Model S/X by the end of 2026 and redirect resources toward high-growth areas such as Cybertruck, Optimus robots, and the Robotaxi autonomous ride-hailing service. Musk stated during the Q1 2026 earnings call: "Tesla is likely to become the first company to build a humanoid AGI."
 
 __
@@ -73,8 +71,6 @@ Tesla's core competitive moat is reflected in the following areas:
   * **Software-Defined Vehicle** : Continuous vehicle performance and feature optimization via OTA updates, enhancing user stickiness
   * **Economies of Scale** : Shanghai Gigafactory capacity continues to ramp up, with December 2025 monthly deliveries exceeding 97,100 units
 
-
-
 In terms of industry position, Tesla ranked second in global EV sales in 2025 with a 14% market share, but has lost its global BEV sales crown to BYD (BEV sales of 2.2567 million units). Model Y and Model 3 remain the world's two best-selling EVs, with cumulative global Model Y sales surpassing 4 million units.
 
 In the Chinese market, Tesla's share is facing increasing pressure. In 2025, Tesla's total deliveries in China were 625,698 units, down 4.78% YoY. During the same period, Xiaomi SU7 deliveries surpassed Model 3 for the first time, exceeding it by nearly 30%. However, Tesla's Shanghai factory deliveries maintained strong growth, with Q1 2026 Shanghai factory deliveries reaching 213,000 units, up 23.5% YoY, accounting for 60% of Tesla's global deliveries.
@@ -93,15 +89,11 @@ By business segment:
   * Energy revenue: $12.771 billion, up 26.6% YoY
   * Services & Other revenue: $12.53 billion, up 19% YoY
 
-
-
 In Q1 2026, Tesla's revenue reached $22.387 billion, up 16% YoY, the highest growth rate in nearly three years:
 
   * Automotive revenue: $16.234 billion, up 16% YoY
   * Energy revenue: $2.408 billion, down 12% YoY
   * Services & Other revenue: $3.745 billion, up 42% YoY
-
-
 
 __Data Insight: Revenue Growth by Segment (Q1 2026)
 
@@ -113,8 +105,6 @@ Tesla's full-year 2025 net income was $3.794 billion, down 46% YoY, primarily im
   * Regulatory credit revenue decreased from $2.17 billion in 2024 to $1.45 billion in 2025
   * Digital asset (e.g., Bitcoin) impairments of $69 million and $222 million in Q4 2025 and Q1 2026, respectively
   * Significant increase in R&D; expenses, with Q1 2026 R&D; reaching $1.946 billion, up 37% YoY
-
-
 
 In Q1 2026, Tesla's net income was $477 million, up 17% YoY but down significantly QoQ. Notably, Tesla achieved $1.444 billion in free cash flow in Q1 2026, up 117% YoY, far exceeding market expectations of a $1.43 billion loss.
 
@@ -132,16 +122,12 @@ Tesla's balance sheet structure is relatively healthy. As of December 31, 2025:
   * Debt-to-asset ratio: approximately 19%
   * Current ratio: 2.02
 
-
-
 Cash flow metrics:
 
   * FY2025 operating cash flow: $14.7 billion
   * FY2025 free cash flow: $6.2 billion
   * Q1 2026 operating cash flow: $3.94 billion, up 83% YoY
   * Q1 2026 free cash flow: $1.444 billion, up 117% YoY
-
-
 
 However, Tesla management warned that 2026 capital expenditures will surge to over $25 billion (compared to only $9 billion in 2025), primarily allocated to AI computing infrastructure, new production lines (e.g., Cybercab, Optimus), and battery material production. This investment plan could lead to negative free cash flow in the remaining quarters of 2026 and potentially require additional financing in 2027.
 
@@ -164,8 +150,6 @@ Tesla's key technical indicators present mixed signals:
   * **Moving Averages** : Price above the 20-day MA ($409.26) and 50-day MA ($388.33), but below the 200-day MA ($410.03)
   * **Volatility** : ATR (Average True Range) at 18.202, indicating elevated near-term volatility
   * **Support & Resistance**: Key support at $420 (Shanghai factory export growth and Optimus mass production expectations); key resistance at $450-$465 (Cybertruck recall risk and overvaluation concerns)
-
-
 
 __Technical Analysis
 
@@ -206,16 +190,12 @@ __Recent Event Drivers
   * __Shanghai factory export efficiency gains from "release upon declaration" policy
   * __FSD (Supervised) available in China, unlocking the largest single market
 
-
-
 #### __Negative
 
   * __Cybertruck recalled in the US (173 units) due to brake disc cracking
   * __CapEx plan exceeding $25B raises cash flow concerns
   * __US "Big and Beautiful Bill" threatens to eliminate EV tax credits
   * __China EV penetration rate exceeds 60%, intensifying competition
-
-
 
 ## 4\. Market Sentiment: Ratings, Public Opinion & News Impact
 
@@ -227,8 +207,6 @@ Wall Street analysts show significant divergence on Tesla:
   * **Hold Rating** : Morgan Stanley raised its Tesla price target by 11% to $415; Goldman Sachs maintains "Hold" with target slightly adjusted to $375 (March data)
   * **Sell Rating** : Wells Fargo analysts cut their target price by 66.55% to $125, citing massive investment needs and potential negative future cash flow
   * **Institutional Holdings** : Institutional ownership at 44.88%, up 0.51% QoQ, but attitudes are markedly divided. For instance, Mairs and Power increased holdings while Fifth Third Bank and Avantis US Equity Fund reduced positions
-
-
 
 __Data Insight: Analyst Target Price Divergence
 
@@ -245,16 +223,12 @@ __Sentiment Analysis
   * __FSD (Supervised) approved in China — a key milestone for AI strategy
   * __Owner brand loyalty improved from 90% to 92%
 
-
-
 #### __Negative Sentiment
 
   * __Cybertruck recall raises market concerns about product quality
   * __Model S/X discontinuation causing dissatisfaction among premium owners
   * __Musk's frequent involvement in political issues distracting from business focus
   * __High CapEx plan raising concerns about near-term profitability and cash flow
-
-
 
 ### 4.3 News Impact
 
@@ -264,8 +238,6 @@ Key news events recently affecting Tesla's stock price:
   * **May 13** : Tesla officially discontinued Model S/X; market interpreted this as a positive signal of strategic focus; stock rose 1.9%
   * **April 23** : Tesla released Q1 2026 earnings, with revenue and net income beating expectations; stock rose 4% in after-hours trading but subsequently declined due to sharply increased CapEx guidance
   * **February 14** : Tesla's US website showed the one-time FSD purchase option ended on Feb 14, transitioning to monthly subscription only from Feb 15, signaling the strategic shift from hardware sales to software subscriptions
-
-
 
 ## 5\. Competitive Comparison: Market Share & Financial Metrics
 
@@ -326,8 +298,6 @@ Tesla's current valuation metrics are at historically elevated levels:
   * **P/S Ratio** : Tesla's P/S ratio is 13.36x, far exceeding other automakers
   * **P/B Ratio** : Tesla's P/B ratio is 18.85x, also at the high end of the industry
 
-
-
 __Data Insight: P/E Ratio (TTM) Comparison
 
 Analyzing Tesla's valuation by business segment, the high valuation primarily stems from the option value of future businesses:
@@ -338,8 +308,6 @@ Analyzing Tesla's valuation by business segment, the high valuation primarily st
   * **Robotaxi** : ~$850 billion, based on 25x P/S
   * **Optimus Robot** : ~$500 billion, based on 40x P/S
 
-
-
 __Data Insight: Option Value by Business Segment
 
 ### 6.2 DCF Valuation Analysis
@@ -349,8 +317,6 @@ DCF-based valuation analysis for Tesla reveals significant divergence in intrins
   * **Conservative Scenario** (WACC 12%, terminal growth 2.5%): Intrinsic value ~$538 billion, well below current market cap
   * **Base Scenario** (WACC 11.2%, terminal growth 2.5%): Intrinsic value ~$1.34 trillion, close to current market cap
   * **Bull Scenario** (WACC 10.7%, terminal growth 3.0%): Intrinsic value ~$1.8 trillion, mainly dependent on rapid commercialization of second-curve businesses such as Robotaxi and Optimus
-
-
 
 __Data Insight: DCF Valuation Scenarios
 
@@ -371,8 +337,6 @@ Tesla's financial health exhibits short-term robustness but long-term pressure:
   * **Earnings Quality** : Approximately 40% of 2025 net income depended on regulatory credit sales and digital asset gains; core automotive business profit was only $2.28 billion
   * **Inventory Management** : Q1 2026 inventory days rose to 27, up 8 days YoY; delivery-production gap reached 50,000 units, indicating worsening inventory buildup
   * **Working Capital** : Tesla's working capital of $31.125 billion is significantly positive, indicating current assets well above current liabilities and strong short-term liquidity
-
-
 
 __Financial Health Snapshot
 
@@ -411,8 +375,6 @@ The competitive risks Tesla faces are primarily reflected in the following areas
   * **Slowing Product Iteration** : Model 3/Y have been on the market for years without fundamental exterior or interior redesigns, relying only on minor tweaks to maintain freshness, leading to declining consumer appeal
   * **Inventory Buildup Risk** : Q1 2026 Tesla produced 408,386 units but delivered only 358,023, resulting in an inventory buildup exceeding 50,000 units — a record high
 
-
-
 ### 7.2 Policy Risk
 
 Policy risk represents the largest systemic risk for Tesla:
@@ -421,8 +383,6 @@ Policy risk represents the largest systemic risk for Tesla:
   * **Tax Credit Policy** : The "Big and Beautiful Bill" threatens to eliminate EV tax credits; if implemented before the end of September, Tesla's North American sales could plummet by 40%
   * **EU Carbon Tariffs** : EU countervailing duties on Chinese-made BEVs combined with the 10% base tariff could result in a maximum composite rate of 45.3%. Tesla must accept a "Minimum Import Price" (MIP) commitment, potentially weakening price competitiveness
   * **FSD Regulatory Constraints** : NHTSA is introducing stricter regulatory requirements for autonomous driving systems, limiting Tesla's ability to market FSD as a near-complete solution, potentially impacting commercialization progress
-
-
 
 __
 
@@ -438,8 +398,6 @@ Geopolitical risks affect Tesla primarily through supply chain and market access
   * **Technology Restriction Risk** : China restricts LFP technology exports; Tesla's Texas factory Malaysian chip yield rate is only 65%; Nevada factory environmental litigation adds $120 million in costs
   * **European Market Access** : EU implements carbon tariffs and countervailing duties; Tesla must raise Shanghai factory prices to meet MIP requirements, potentially weakening European market competitiveness
   * **Musk Political Risk** : Musk's frequent involvement in political issues may invite regulatory scrutiny and distract from business focus
-
-
 
 ## 8\. Conclusion: Short-Term & Long-Term Investment Recommendations
 
@@ -460,16 +418,12 @@ Geopolitical risks affect Tesla primarily through supply chain and market access
      * Technical indicators present mixed signals: MACD bullish momentum weakening, RSI in neutral territory
      * Short-term moving averages provide support, but long-term moving averages diverge in direction
 
-
-
 **Based on the above analysis, short-term investment recommendations are as follows:**
 
   1. **Cautious Observation** : Tesla's current valuation is at historically elevated levels, with a P/E (TTM) of 838.56x, significantly above the industry average. Investors are advised to remain cautious when the stock approaches resistance levels ($450-$465) and wait for pullback opportunities.
   2. **Monitor FSD Progress in China** : On May 21, Tesla announced FSD (Supervised) availability in China, but it is currently limited to a staged rollout; full deployment still awaits regulatory approval. FSD progress in China will be a key near-term catalyst for the stock.
   3. **Watch for Policy Risk** : The US "Big and Beautiful Bill" could eliminate EV tax credits. If implemented before the end of September, North American sales could plummet by 40%. Investors are advised to closely monitor related legislative developments as near-term risk indicators.
   4. **Monitor Inventory Management** : Q1 2026 inventory days rose to 27, up 8 days YoY, with worsening inventory buildup risk. If inventory is not effectively absorbed in subsequent quarters, it may trigger a stock price correction.
-
-
 
 ### 8.2 Long-Term Outlook (6-12 Months)
 
@@ -489,16 +443,12 @@ Geopolitical risks affect Tesla primarily through supply chain and market access
      * The market's high valuation of Tesla is primarily based on the option value of its second-curve businesses
      * DCF valuation shows significant divergence in Tesla's intrinsic value, ranging from $538 billion (conservative) to $1.8 trillion (bull case)
 
-
-
 **Based on the above analysis, long-term investment recommendations are as follows:**
 
   1. **Phased Position Building** : Tesla's long-term investment value is high, but so are the risks. Investors are advised to adopt a phased position-building strategy, buying in tranches when the stock pulls back to the $400-$420 range to reduce single-point entry risk.
   2. **Focus on Second-Curve Businesses** : Long-term investors should closely monitor the commercialization progress of Tesla's second-curve businesses, including FSD user growth, Robotaxi, and Optimus mass production timelines. Progress in these areas will be decisive for Tesla's long-term valuation.
   3. **Watch Financial Risk** : Tesla's 2026 CapEx plan exceeds $25 billion, potentially leading to sustained negative free cash flow. Investors are advised to closely monitor cash flow metrics in quarterly earnings reports as important risk indicators.
   4. **Diversify Investments** : Given the policy, geopolitical, and competitive risks Tesla faces, investors are advised not to concentrate excessive capital in a single stock and should diversify to spread risk.
-
-
 
 ## Appendix: Key Data Quick Reference
 

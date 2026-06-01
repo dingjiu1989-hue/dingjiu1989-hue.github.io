@@ -100,9 +100,6 @@ StatefulSets provide:
 
   * Stable storage with PersistentVolumeClaim templates.
 
-
-
-
 PersistentVolumes and Storage Classes 
 
 Database storage requires careful configuration of PersistentVolumes: 
@@ -365,9 +362,6 @@ When to Containerize
 
   * Your team has Kubernetes expertise.
 
-
-
-
 **Do not containerize when** : 
 
   * You lack operational Kubernetes expertise.
@@ -377,8 +371,5 @@ When to Containerize
   * You need the simplicity of managed services (RDS, Cloud SQL).
 
   * Your team prefers a dedicated DBA toolset.
-
-
-
 
 Databases in containers are production-viable with the right operator, storage class, and backup strategy. For most teams, a managed database service is simpler and more cost-effective. Containerization makes sense when you need portability, GitOps-driven management, and full control over the database configuration.

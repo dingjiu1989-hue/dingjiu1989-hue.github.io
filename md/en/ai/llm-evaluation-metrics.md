@@ -26,9 +26,6 @@ For classification tasks — sentiment analysis, intent detection, topic classif
 
   * **Confusion Matrix** : Shows which classes are commonly confused
 
-
-
-
 Example calculation for an intent classification task:
 
 True Positives: 850 | False Positives: 50
@@ -53,9 +50,6 @@ ROUGE measures the overlap between generated text and reference text, primarily 
 
   * **ROUGE-Skip-Bigram** : Bigrams that can have gaps
 
-
-
-
 ROUGE correlates reasonably with human judgment for extractive summarization but performs poorly for abstractive summaries where wording differs.
 
 ## BLEU (Bilingual Evaluation Understudy)
@@ -67,9 +61,6 @@ BLEU measures precision of n-gram overlap, primarily for translation:
   * Higher-gram matches are weighted more heavily
 
   * Includes a brevity penalty to prevent short outputs
-
-
-
 
 BLEU has known limitations: it favors literal translations over fluent ones and correlates poorly with human judgment for creative text.
 
@@ -96,9 +87,6 @@ Standardized benchmarks enable model-to-model comparison:
   * **TruthfulQA** : Measuring truthfulness and hallucination
 
   * **BIG-Bench** : 204 diverse tasks
-
-
-
 
 When reporting benchmark scores, always include the exact evaluation setup (few-shot count, prompt template, decoding parameters) since these significantly affect results.
 
@@ -140,9 +128,6 @@ Despite automation advances, human evaluation remains the gold standard:
 
   * **Error annotation** : Raters categorize specific failure modes
 
-
-
-
 A good annotation rubric defines each score level with concrete examples. For a 5-point helpfulness scale, each point should have anchor examples.
 
 ## Evaluation in Production
@@ -156,9 +141,6 @@ Production evaluation goes beyond benchmarks:
   * **Outcome metrics** : Task completion rate, time-to-resolution, user satisfaction surveys
 
   * **Monitoring dashboards** : Track response length, latency, refusal rates, and toxicity scores over time
-
-
-
 
 ## Conclusion
 

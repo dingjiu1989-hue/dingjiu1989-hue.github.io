@@ -38,9 +38,6 @@ An SLO sets a target value for an SLI over a defined period. Common targets are 
 
   * 99.999% allows 5.26 minutes per year.
 
-
-
-
 SLO targets should not be aspirational. A target that has never been met provides no useful signal. Start with a target slightly below current performance and tighten it over time as reliability improves.
 
 Not all services need the same SLO. Critical user journeys (authentication, checkout, data access) should have higher SLOs than secondary features. Multi-tier SLOs — target (internal goal) and minimum (customer commitment) — provide a buffer between aspirational goals and contractual obligations.
@@ -62,9 +59,6 @@ A burn rate of 1 means the budget will be fully consumed by the end of the perio
   * Fast-burn alerts (burn rate >= 14 over 1 hour): Catches severe outages immediately. Pages the on-call engineer.
 
   * Slow-burn alerts (burn rate >= 2 over 6 hours): Detects gradual degradation. Pages or creates a ticket for next-day investigation.
-
-
-
 
 This approach ensures critical incidents are paged immediately while gradual issues are investigated before they exhaust the budget.
 

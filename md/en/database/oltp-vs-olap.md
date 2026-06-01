@@ -34,9 +34,6 @@ User checks balance: SELECT balance FROM accounts WHERE account_id = 1234;
 
   * **ACID** : Transactions must be atomic and isolated.
 
-
-
-
 OLAP Characteristics 
 
 OLAP systems process complex queries over large datasets to support decision-making. 
@@ -83,9 +80,6 @@ ORDER BY revenue DESC;
 
   * **ACID** : Relaxed requirements. Snapshot isolation is often sufficient.
 
-
-
-
 Row vs Column Store 
 
 Row Store (OLTP) 
@@ -104,9 +98,6 @@ Row 2: [102, 73, 1234, 49.99, 2, '2026-01-15']
 
   * Slow for: `SELECT SUM(amount) FROM orders` (reads all rows but needs only one column).
 
-
-
-
 Column Store (OLAP) 
 
 Column-oriented databases store each column contiguously. 
@@ -124,9 +115,6 @@ amount: [29.99, 49.99, 99.99, 5.99, ...]
   * Slow for: `SELECT * FROM orders WHERE order_id = 101` (reads all column files to reconstruct the row).
 
   * Slow for: Single-row inserts (must write to multiple column files).
-
-
-
 
 Indexing Strategies 
 
@@ -214,9 +202,6 @@ COMMIT;
 
   * Total time: under 50ms.
 
-
-
-
 OLAP Query Pattern 
 
 SELECT
@@ -248,9 +233,6 @@ ORDER BY revenue DESC;
   * Aggregates and groups data.
 
   * Total time: seconds to minutes.
-
-
-
 
 Hybrid Approaches 
 
@@ -332,9 +314,6 @@ HTAP Platforms
 
   * **SAP HANA** : In-memory row and columnar stores. Used in enterprise environments for mixed workloads.
 
-
-
-
 When HTAP Works 
 
 HTAP works when:
@@ -345,9 +324,6 @@ HTAP works when:
 
   * The cost of maintaining two systems is prohibitive.
 
-
-
-
 HTAP struggles when:
 
   * Analytics queries are complex and scan terabytes of historical data.
@@ -355,9 +331,6 @@ HTAP struggles when:
   * Transaction volume is very high (the row store becomes a bottleneck for the columnar sync).
 
   * Write-optimized and read-optimized storage are fundamentally at odds.
-
-
-
 
 Choosing Your Approach 
 
@@ -369,9 +342,6 @@ OLTP-Only
 
   * Add read replicas for read scaling.
 
-
-
-
 OLAP-Only
 
   * Use a columnar database (ClickHouse, Redshift, BigQuery).
@@ -379,9 +349,6 @@ OLAP-Only
   * Design star schema for data modeling.
 
   * Partition tables by date for efficient pruning.
-
-
-
 
 Mixed Workloads with Modest Analytics
 
@@ -391,9 +358,6 @@ Mixed Workloads with Modest Analytics
 
   * Materialized views for common aggregations.
 
-
-
-
 Mixed Workloads with Heavy Analytics
 
   * Use the dual database approach (OLTP + OLAP).
@@ -401,9 +365,6 @@ Mixed Workloads with Heavy Analytics
   * Replicate via CDC (Debezium, Striim, Fivetran).
 
   * Accept the operational complexity of maintaining two systems.
-
-
-
 
 Conclusion 
 

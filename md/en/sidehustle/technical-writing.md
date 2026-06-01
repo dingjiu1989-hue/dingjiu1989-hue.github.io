@@ -24,9 +24,6 @@ The demand for technical content is massive and growing:
 
   * AI training data requires high-quality technical explanations.
 
-
-
-
 ## Types of Technical Writing Work
 
 **Tutorials and how-to guides.** Step-by-step guides showing how to accomplish specific tasks. Paid per article or per word. Typical rates: $200-500 per article (1,500-2,500 words).
@@ -49,9 +46,6 @@ The demand for technical content is massive and growing:
 
   * **Contently and Skyword** : Content marketing platforms with established rates.
 
-
-
-
 **Direct pitching to companies:**
 
   * Identify developer tool companies with active blogs (e.g., DigitalOcean, Twilio, Auth0, Netlify).
@@ -61,9 +55,6 @@ The demand for technical content is massive and growing:
   * Send a pitch with 3-5 article ideas, a writing sample, and your rate.
 
   * Many companies have standing budgets for contributed content.
-
-
-
 
 **Developer publications:**
 
@@ -75,9 +66,6 @@ The demand for technical content is massive and growing:
 
   * Dev.to (lower rates but excellent portfolio building).
 
-
-
-
 **Internal documentation contracts:**
 
   * Companies are often desperate for technical writers to document internal systems.
@@ -86,16 +74,11 @@ The demand for technical content is massive and growing:
 
   * Offer to document their codebase, API, or internal tools.
 
-
-
-
 ## Building a Portfolio
 
 Your first few pieces establish credibility. If you have no published work:
 
   * **Write for free initially.** Contribute to open source documentation. Write a tutorial for FreeCodeCamp. The exposure is worth more than the payment at the beginning.
-
-
 
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Publish on your own blog.** A well-written blog post demonstrates capability. Use it as a writing sample when pitching.
 
@@ -115,9 +98,6 @@ Rates depend on experience, specialization, and the client:
 
   * Editing and review: $30-50 per hour.
 
-
-
-
 **Experienced rates** (portfolio of 10+ published pieces):
 
   * Blog posts: $400-800 per article.
@@ -126,17 +106,11 @@ Rates depend on experience, specialization, and the client:
 
   * Whitepapers: $2,000-5,000 per project.
 
-
-
-
 **Premium rates** (recognized expert in a niche):
 
   * Blog posts: $800-2,000 per article.
 
   * Documentation: $125-200 per hour.
-
-
-
 
 Negotiate based on value, not time. If your article generates $10,000 in traffic-driven conversions for the client, $1,000 is a bargain.
 
@@ -163,9 +137,6 @@ To grow beyond side-hustle income:
   * **Offer packages.** "I will write 4 blog posts per month for $2,000" is more valuable to a client than one-off pieces.
 
   * **Start a newsletter.** A technical writing newsletter can generate consulting leads and direct client offers.
-
-
-
 
 ## Summary
 

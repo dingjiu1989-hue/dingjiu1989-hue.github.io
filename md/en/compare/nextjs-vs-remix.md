@@ -28,9 +28,6 @@ Next.js, developed by Vercel, is the most popular React framework and has evolve
 
   * Multiple rendering modes: Static (SSG), Server-side (SSR), Incremental Static Regeneration (ISR), and Streaming
 
-
-
-
 **Data loading in Next.js:**
 
 // App Router: data fetching in Server Components
@@ -65,9 +62,6 @@ return (
 
   * Largest community and most learning resources
 
-
-
-
 **Weaknesses:**
 
   * Framework is coupled to Vercel for some features (ISR, image optimization)
@@ -77,9 +71,6 @@ return (
   * Routing flexibility constraints compared to Remix
 
   * Global `layout.tsx` caching can be confusing
-
-
-
 
 ## Remix
 
@@ -96,9 +87,6 @@ Remix (now maintained by Shopify) focuses on web fundamentals — using the plat
   * Form handling with native HTML forms
 
   * Streaming via deferred data
-
-
-
 
 **Data loading in Remix:**
 
@@ -162,9 +150,6 @@ Loading analytics...
 
   * Error boundaries at every route level
 
-
-
-
 **Weaknesses:**
 
   * Smaller ecosystem than Next.js
@@ -174,9 +159,6 @@ Loading analytics...
   * Less tooling and community content
 
   * Image optimization requires manual configuration
-
-
-
 
 ## Astro
 
@@ -193,9 +175,6 @@ Astro takes a content-first approach — it's a "multi-page application" framewo
   * Content collections for Markdown/MDX
 
   * Static-first with server endpoints for dynamic data
-
-
-
 
 **Data loading in Astro:**
 
@@ -235,9 +214,6 @@ const pageTitle = "Our Products";
 
   * Best choice for content-heavy sites
 
-
-
-
 **Weaknesses:**
 
   * Not ideal for highly dynamic, app-like experiences
@@ -247,9 +223,6 @@ const pageTitle = "Our Products";
   * View transitions and SPA-like navigation are less mature
 
   * Interactive islands add complexity compared to SSR-only approaches
-
-
-
 
 ## Comparison Table
 
@@ -283,9 +256,6 @@ const pageTitle = "Our Products";
 
   * You need advanced image optimization and ISR
 
-
-
-
 **Choose Remix when:**
 
   * You want a web-standards-first approach
@@ -296,9 +266,6 @@ const pageTitle = "Our Products";
 
   * You need nested layouts with parallel data loading
 
-
-
-
 **Choose Astro when:**
 
   * You're building a content-focused site (blog, docs, marketing)
@@ -308,9 +275,6 @@ const pageTitle = "Our Products";
   * You're using multiple UI frameworks in one project
 
   * You need excellent Markdown/MDX authoring experience
-
-
-
 
 ## Conclusion
 

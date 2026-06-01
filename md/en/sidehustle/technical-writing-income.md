@@ -29,16 +29,12 @@ Channel| Rate Range| How It Works
   4. **Dev.to:** Build a following. Companies will reach out to you.
   5. **Agency approach:** Offer "blog content as a service" to 3-5 dev tool companies. $2K-5K/mo retainer.
 
-
-
 ## How to Build a Portfolio That Gets Hired
 
   * **Write 5 high-quality articles on your own blog first.** These are your samples.
   * **Pick a niche:** "TypeScript" and "frontend" is too broad. "Next.js performance optimization" or "Postgres query optimization" is specific and valuable.
   * **Show results:** "This article got 50K views and was featured in Next.js weekly" proves value better than "I write about TypeScript."
   * **Format matters:** Code blocks, tables, clear headings, practical examples. A well-formatted article IS your portfolio.
-
-
 
 ## Writing That Attracts Clients
 

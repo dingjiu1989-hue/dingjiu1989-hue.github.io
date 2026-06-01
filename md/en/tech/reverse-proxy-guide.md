@@ -22,9 +22,6 @@ A reverse proxy sits in front of your application servers, handling incoming req
 
   * **Multiple services** : Route different paths to different backends from one domain.
 
-
-
-
 ## Nginx Reverse Proxy
 
 Nginx is the industry standard for reverse proxying. It is mature, highly performant, and extremely configurable.

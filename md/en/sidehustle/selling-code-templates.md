@@ -45,8 +45,6 @@ The value proposition is simple: "I built all the boring parts so you can focus 
   * **Documentation that's actually good** — setup in <5 minutes, video walkthrough, architecture decisions explained
   * **Regular updates** — dependencies updated monthly, new features added quarterly
 
-
-
 ### 3\. Where to Sell
 
 Platform| Fee| Best For  
@@ -64,7 +62,5 @@ Platform| Fee| Best For
   4. **Reddit & Dev.to:** Share the tutorial (not the product). Value first, sales second.
   5. **Affiliate program:** 30% commission. Let others sell for you. Gumroad/Lemon Squeezy handle this.
   6. **Email list:** Collect emails with a free mini-template. Sell the full version to your list.
-
-
 
 **Bottom line:** Templates are the best digital product for developers — you build them with skills you already have. The key is solving real boilerplate pain. Charge more than you think ($99-299 not $19-49). Update regularly to justify the price. See also: [Selling Digital Products](</en/sidehustle/sell-digital-products.html>) and [Micro-SaaS Ideas](</en/sidehustle/micro-saas-ideas-2026.html>).

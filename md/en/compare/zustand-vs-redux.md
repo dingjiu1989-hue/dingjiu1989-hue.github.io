@@ -76,9 +76,6 @@ dispatch(increment())}>+1
 
   * Well-documented for complex async flows
 
-
-
-
 **Weaknesses:**
 
   * Conceptual overhead (actions, reducers, dispatch, selectors)
@@ -88,9 +85,6 @@ dispatch(increment())}>+1
   * Selectors need memoization for performance
 
   * Centralized store can become a bottleneck in very large apps
-
-
-
 
 ## Zustand
 
@@ -152,9 +146,6 @@ return (
 
   * Works outside React (vanilla JS stores)
 
-
-
-
 **Weaknesses:**
 
   * Fewer middleware options than Redux
@@ -164,9 +155,6 @@ return (
   * DevTools require additional setup
 
   * No built-in data fetching or caching (unlike RTK Query or TanStack Query)
-
-
-
 
 ## Jotai
 
@@ -226,9 +214,6 @@ setCount((c) => c + 1)}>+1
 
   * No global store or Provider needed
 
-
-
-
 **Weaknesses:**
 
   * Less mature ecosystem than Redux
@@ -238,9 +223,6 @@ setCount((c) => c + 1)}>+1
   * Debugging can be harder with many small atoms
 
   * SSR requires additional configuration
-
-
-
 
 ## Comparison Table
 
@@ -282,9 +264,6 @@ setCount((c) => c + 1)}>+1
 
   * You need time-travel debugging and rich middleware
 
-
-
-
 **Choose Zustand when:**
 
   * You want minimal boilerplate and fast setup
@@ -297,9 +276,6 @@ setCount((c) => c + 1)}>+1
 
   * You need to access state outside React components
 
-
-
-
 **Choose Jotai when:**
 
   * You want React-idiomatic state (atoms = useState + useContext)
@@ -311,9 +287,6 @@ setCount((c) => c + 1)}>+1
   * You're building an app with many small, independent state pieces
 
   * You want composeable state without a global store
-
-
-
 
 ## Conclusion
 

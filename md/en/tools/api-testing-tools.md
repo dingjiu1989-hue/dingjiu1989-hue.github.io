@@ -30,9 +30,6 @@ Postman remains the most widely used API testing platform. It provides a compreh
 
   * GraphQL and gRPC support.
 
-
-
-
 **Cons:**
 
   * Desktop app can be resource-heavy.
@@ -42,9 +39,6 @@ Postman remains the most widely used API testing platform. It provides a compreh
   * Cloud dependency for team features.
 
   * Complex for simple ad-hoc requests.
-
-
-
 
 **Best for** : Teams needing a comprehensive API lifecycle tool with collaboration.
 
@@ -84,9 +78,6 @@ Insomnia is a lightweight, focused API client with a clean interface. It was acq
 
   * Performance testing via Inso CLI (pro feature).
 
-
-
-
 **Cons:**
 
   * Fewer integrations than Postman.
@@ -94,9 +85,6 @@ Insomnia is a lightweight, focused API client with a clean interface. It was acq
   * Collaboration features limited (paid).
 
   * Smaller community and fewer resources.
-
-
-
 
 **Best for** : Developers who want a fast, focused API client without the bloat.
 
@@ -118,9 +106,6 @@ Bruno is a newer, open-source API client that stores collections as plain text f
 
   * Very fast and lightweight.
 
-
-
-
 **Cons:**
 
   * Newer with fewer community resources.
@@ -130,9 +115,6 @@ Bruno is a newer, open-source API client that stores collections as plain text f
   * Fewer integrations than Postman.
 
   * GraphQL support less mature.
-
-
-
 
 **Best for** : Teams that want open-source, Git-native API development.
 
@@ -172,9 +154,6 @@ HTTPie is a command-line HTTP client designed for humans. It provides a more int
 
   * Python-based with pip install.
 
-
-
-
 **Cons:**
 
   * No GUI (terminal only).
@@ -182,9 +161,6 @@ HTTPie is a command-line HTTP client designed for humans. It provides a more int
   * No collection management.
 
   * Not suitable for complex test suites.
-
-
-
 
 **Best for** : Quick ad-hoc API testing from the terminal.
 
@@ -212,9 +188,6 @@ VS Code's REST Client extension lets you send HTTP requests directly from your e
 
   * Code snippets generation.
 
-
-
-
 **Cons:**
 
   * No visual collection management.
@@ -222,9 +195,6 @@ VS Code's REST Client extension lets you send HTTP requests directly from your e
   * No built-in test assertions.
 
   * Limited scripting capabilities.
-
-
-
 
 **Best for** : Developers who want to keep API testing inside their editor.
 
@@ -325,9 +295,6 @@ expect(res.body.email).toBe('user@example.com');
   * **For quick debugging** : HTTPie or curl.
 
   * **For GraphQL-heavy projects** : Insomnia has the best GraphQL experience.
-
-
-
 
 ## Summary
 

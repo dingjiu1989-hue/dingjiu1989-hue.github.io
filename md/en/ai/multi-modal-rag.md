@@ -82,7 +82,8 @@ row_desc = ", ".join(f"{headers[i]}: {cell}" for i, cell in enumerate(row))
 
 text_parts.append(row_desc)
 
-return "\n".join(text_parts)
+return "
+".join(text_parts)
 
 ## Strategy 2: Multi-Vector Retriever
 

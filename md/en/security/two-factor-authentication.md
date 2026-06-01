@@ -236,9 +236,6 @@ User Experience Best Practices
 
   * Show which 2FA methods are registered in the security settings page.
 
-
-
-
 Summary 
 
 Implement TOTP as the primary 2FA method, supplement with backup codes for recovery, and offer WebAuthn/passkeys as an upgrade path for security-conscious users. Always rate limit 2FA endpoints, hash backup codes before storage, and provide clear recovery workflows. SMS-based 2FA is better than no 2FA but should be deprecated in favor of app-based or hardware-based authenticators.

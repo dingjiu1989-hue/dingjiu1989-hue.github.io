@@ -108,9 +108,6 @@ Key INCLUDE columns are those that:
 
   * Significantly reduce the number of heap fetches.
 
-
-
-
 Partial Indexes 
 
 Partial indexes cover only a subset of rows, making them smaller and faster to maintain: 

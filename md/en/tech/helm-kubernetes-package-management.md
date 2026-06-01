@@ -406,7 +406,4 @@ Follow semantic versioning strictly. Breaking template changes require a major v
 
   * **Resource policy annotations** : use `helm.sh/resource-policy: keep` sparingly and document its use.
 
-
-
-
 Helm remains the most widely adopted packaging tool in the Kubernetes ecosystem, and mastering its advanced features is essential for operating production-grade workloads at scale.

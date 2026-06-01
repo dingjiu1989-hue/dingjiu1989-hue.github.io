@@ -37,8 +37,6 @@ Specialist (niche expertise)| $150-$300/hr| $600-$1,500/mo| Rust, ML engineering
   4. **Free intro sessions:** Offer a free 15-minute intro call. Converts 30-50% of prospects into paying students.
   5. **Ask for testimonials:** After 5+ sessions, ask for LinkedIn recommendations or video testimonials. Social proof is the #1 conversion factor.
 
-
-
 ## Independent vs Platform: The Trade-Off
 
 Factor| Platform (Codementor, Wyzant)| Independent (Your Own)  

@@ -56,9 +56,6 @@ Runbooks are step-by-step guides for handling common incidents. Every documented
 
   * Contact information: Subject matter experts for this component.
 
-
-
-
 Runbooks should be version-controlled alongside application code in a `runbooks/` directory at the repository root. They should be tested periodically during game days or chaos engineering exercises.
 
 ## Alert Fatigue Prevention
@@ -74,9 +71,6 @@ The key metric is the alert-to-incident conversion rate. If fewer than 10% of al
   * Is the alert accurate? Does it correlate with actual customer impact?
 
   * Is the alert specific? Does it identify the relevant service and symptom?
-
-
-
 
 Tiered alerting routes different severity levels through different notification channels. Critical alerts page via phone call. Warning alerts send push notifications. Informational alerts go to Slack or email — during business hours only.
 
@@ -95,9 +89,6 @@ Key features to evaluate include:
   * Reporting on response times, incident counts, and overrides.
 
   * Vacation and swap management.
-
-
-
 
 ## On-Call Culture and Quality of Life
 

@@ -402,7 +402,4 @@ iac_dir: 'terraform'
 
   * **CI pipeline** : Run all scanners in CI with appropriate severity thresholds. Fail on CRITICAL issues.
 
-
-
-
 The most robust approach runs all four scanners at different points: Trivy on every container build and IaC change, Checkov on Terraform PRs, Terrascan as a compliance check, and kube-bench as a scheduled cluster audit.

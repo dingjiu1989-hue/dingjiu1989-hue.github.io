@@ -22,9 +22,6 @@ Unlike social media, where algorithms control reach, email delivers directly to 
 
   * **Longevity.** A good email list retains value for years. Social media followers fade without constant content.
 
-
-
-
 ## Building Your First Subscribers
 
 Before worrying about content, you need subscribers. The most effective growth strategies for developer email lists:
@@ -36,9 +33,6 @@ Before worrying about content, you need subscribers. The most effective growth s
   * "Download the 50-page guide to REST API Design"
 
   * "Get the Figma template for SaaS landing pages"
-
-
-
 
 Place signup forms at the end of your blog posts, on your landing page, and in your GitHub README.
 
@@ -64,9 +58,6 @@ Developer newsletters succeed by providing consistent value:
 
   * One question to engage subscribers (reply to this email).
 
-
-
-
 **Educational format:**
 
   * Deep dive into a specific technical topic.
@@ -77,9 +68,6 @@ Developer newsletters succeed by providing consistent value:
 
   * When and when not to use the approach.
 
-
-
-
 **Personal story format:**
 
   * Something you built or learned.
@@ -89,9 +77,6 @@ Developer newsletters succeed by providing consistent value:
   * What you would do differently.
 
   * Lessons applicable to the reader's work.
-
-
-
 
 The most successful developer newsletters mix all three formats. Consistency matters more than frequency. Weekly newsletters outperform sporadic ones.
 
@@ -108,9 +93,6 @@ Choose your platform based on list size and features:
   * **beehiiv:** Strong growth tools including referral programs and recommendations. Good for scaling.
 
   * **Mailchimp:** Widely used but increasingly expensive. Less developer-friendly than alternatives.
-
-
-
 
 ## Growing Your Newsletter
 
@@ -136,9 +118,6 @@ After your initial burst of subscribers, growth requires ongoing effort:
 
   * 50,000+ subscribers: $3,000-10,000+ per mention.
 
-
-
-
 **Affiliate links.** Recommend tools you use and include affiliate links. Developer tools (hosting, SaaS products, API services) often have generous affiliate programs.
 
 **Paid subscriptions.** Offer premium content (deeper dives, exclusive tutorials, code libraries) behind a paywall. Substack and ConvertKit support paid subscriptions natively.
@@ -160,9 +139,6 @@ A newsletter that lands in spam does not exist. Maximize deliverability:
   * Avoid spam trigger words ("free," "guaranteed," "act now") in subject lines.
 
   * Use double opt-in (confirms the subscriber genuinely wants your emails).
-
-
-
 
 ## Common Mistakes
 

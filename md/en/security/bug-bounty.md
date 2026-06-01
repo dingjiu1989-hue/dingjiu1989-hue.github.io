@@ -200,9 +200,6 @@ HackerOne
 
   * Build reputation through quality reports, not volume
 
-
-
-
 Bugcrowd
 
   * Complete priority rating correctly (P1-P5 based on CVSS)
@@ -210,9 +207,6 @@ Bugcrowd
   * Use the built-in POC video recording for complex vulnerabilities
 
   * Engage in VRT (Vulnerability Rating Taxonomy) disputes professionally
-
-
-
 
 Conclusion 
 

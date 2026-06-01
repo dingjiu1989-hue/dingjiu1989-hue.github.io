@@ -356,7 +356,4 @@ Grafana self-hosted is the most cost-effective at scale because you only pay for
 
   * **New Relic** : Cloud-first but offers a data-ingestion API that allows hybrid collection patterns.
 
-
-
-
 For startups and small teams, Grafana self-hosted provides the best balance of capability and cost. As teams grow to 20+ engineers, Datadog's out-of-the-box integrations reduce operational overhead. New Relic is compelling for organizations already in the Oracle/AWS ecosystem that value NRQL's analytical power.

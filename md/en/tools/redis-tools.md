@@ -98,9 +98,6 @@ Redis's official GUI tool for visualization and analysis:
 
   * Redis Stream management and TRIM operations
 
-
-
-
 ## Start RedisInsight
 
 ## Download from https://redis.com/redis-enterprise/redis-insight/
@@ -205,9 +202,6 @@ docker run -d -p 8081:8081 rediscommander/redis-commander:latest
 
   * Connection to multiple Redis instances
 
-
-
-
 ## Redis Monitoring with redis-stat
 
 ## Install via gem
@@ -301,8 +295,5 @@ fi
   * **Production monitoring** : redis-stat for real-time dashboards, RedisInsight for deep memory analysis.
 
   * **Performance debugging** : Slow log analysis in Redis CLI or RedisInsight, big keys analysis.
-
-
-
 
 The most effective setup combines the Redis CLI for scripting and automation with RedisInsight for data visualization and memory optimization. Use Redis Commander for lightweight web-based access when a desktop GUI is not available.

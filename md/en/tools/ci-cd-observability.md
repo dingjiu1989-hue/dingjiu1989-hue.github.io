@@ -32,9 +32,6 @@ Key build metrics include:
 
   * Success rate and failure distribution by stage.
 
-
-
-
 ## GitLab CI with metrics collection
 
 build:
@@ -148,9 +145,6 @@ Dedicated tools include:
   * Datadog CI Visibility: Comprehensive pipeline observability with APM integration.
 
   * Grafana with Loki: Custom pipeline dashboards using log-based metrics.
-
-
-
 
 ## Conclusion
 

@@ -55,8 +55,6 @@ Focus lets you scope searches to specific sources:
   * **YouTube** — search video transcripts
   * **Reddit** — search Reddit discussions
 
-
-
 ### Pages
 
 Turn any Perplexity thread into a shareable, well-formatted web page with one click. Great for sharing research findings with your team or publishing a quick report.

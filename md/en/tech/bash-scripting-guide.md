@@ -18,7 +18,8 @@ Every production Bash script should begin with strict mode settings that catch e
 
 set -euo pipefail
 
-IFS=$'\n\t'
+IFS=$'
+\t'
 
   * `set -e` causes the script to exit immediately when a command fails.
 
@@ -27,9 +28,6 @@ IFS=$'\n\t'
   * `set -o pipefail` makes pipeline failures propagate.
 
   * Setting `IFS` to newline and tab prevents word-splitting issues with filenames containing spaces.
-
-
-
 
 A more advanced option is `set -o errexit` combined with custom error handling:
 
@@ -137,7 +135,8 @@ This prevents accidental overwrites and documents intent.
 
 The `echo` command behaves differently across shells and platforms. Use `printf` for portable, predictable output:
 
-printf "Processing file: %s\n" "$filename"
+printf "Processing file: %s
+" "$filename"
 
 ## Logging with Timestamps
 
@@ -149,7 +148,8 @@ local level="$1"
 
 shift
 
-printf "[%s] [%s] %s\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$level" "$*" >&2
+printf "[%s] [%s] %s
+" "$(date '+%Y-%m-%d %H:%M:%S')" "$level" "$*" >&2
 
 }
 

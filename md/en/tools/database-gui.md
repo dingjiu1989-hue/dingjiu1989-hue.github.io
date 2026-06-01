@@ -208,7 +208,4 @@ A lightweight, open-source SQL editor and database manager:
 
   * **Daily querying** : TablePlus for fast, developer-friendly query execution.
 
-
-
-
 Many developers use a combination: TablePlus for daily PostgreSQL/MySQL work, DBeaver for database administration tasks, and DataGrip when already working in an IntelliJ project.

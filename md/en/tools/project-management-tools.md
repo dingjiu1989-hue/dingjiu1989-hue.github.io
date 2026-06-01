@@ -26,9 +26,6 @@ A developer-friendly project management tool should:
 
   * Allow developer workflow customization.
 
-
-
-
 ## Linear
 
 Linear has become the preferred project management tool for modern software teams. It focuses on speed and developer experience.
@@ -48,9 +45,6 @@ Linear has become the preferred project management tool for modern software team
   * Roadmap view for long-term planning.
 
   * API and GraphQL-based webhooks.
-
-
-
 
 // Linear GraphQL API
 
@@ -104,9 +98,6 @@ Jira is the most widely used project management tool in enterprise software deve
 
   * Marketplace with thousands of add-ons.
 
-
-
-
 // Jira Query Language examples
 
 project = "BACKEND" AND status != Done ORDER BY priority DESC
@@ -136,9 +127,6 @@ GitHub Projects integrates project management directly into the GitHub workflow.
   * Roadmap view (beta).
 
   * Free for public repositories.
-
-
-
 
 ## GitHub Project automation workflow
 
@@ -188,9 +176,6 @@ Notion is a flexible workspace that combines notes, databases, and project manag
 
   * Collaboration with comments and mentions.
 
-
-
-
 **Pros** : All-in-one (wiki + project management), flexible data model, beautiful UI.
 
 **Cons** : Can be slow with large databases, not developer-specific, limited Git integration.
@@ -213,9 +198,6 @@ Taiga is an open-source project management platform with a focus on agile method
 
   * Self-hosted option available.
 
-
-
-
 **Pros** : Open source, self-hostable, good agile support.
 
 **Cons** : Smaller community, less polished than paid options.
@@ -237,9 +219,6 @@ ClickUp is a feature-rich project management tool that aims to replace multiple 
   * Automations without coding.
 
   * Integrations with GitHub, GitLab, Slack.
-
-
-
 
 **Pros** : Most feature-rich, all-in-one platform, good free tier.
 
@@ -306,9 +285,6 @@ curl -X POST https://api.linear.app/graphql \
   * **Budget-conscious** : GitHub Projects (free with GitHub) or Taiga (free, self-hosted).
 
   * **Feature-maximalists** : ClickUp (most features, best free tier).
-
-
-
 
 ## Summary
 

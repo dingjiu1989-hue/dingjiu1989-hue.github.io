@@ -45,16 +45,12 @@ Founded in 1978 and headquartered in Boise, Idaho, Micron has grown into the wor
   * **Storage (SBU)** (~25% of revenue): SSDs (NAND-based), eMMC. 232-layer NAND in production, data center SSD share expanding.
   * **Embedded (EBU)** (~10% of revenue): Automotive, industrial IoT, consumer. ADAS and smart cockpit driving high growth in automotive memory.
 
-
-
 ### 1.3 Competitive Moats
 
   * **HBM Technology Lead** : First to mass-produce HBM3E with NVIDIA qualification. HBM revenue on track from ~$5B (FY2024) to $15B+ (FY2026).
   * **Advanced Process Nodes** : DRAM on 1γ (1-gamma) node, NAND at 232+ layers for competitive cost structure and power efficiency.
   * **Manufacturing Network** : 12 facilities across the US, Japan, Singapore, and Taiwan. CHIPS Act support ($6.1B in proposed grants) for new Boise and New York fabs.
   * **Geostrategic Value** : Sole US DRAM manufacturer benefits from policy tailwinds around technology supply chain security.
-
-
 
 ### 1.4 The AI Opportunity
 
@@ -182,8 +178,6 @@ PEG (3yr growth) | ~0.5x | ~0.8x | ~0.7x | Undervalued
   * **Liquidity** : Current ratio ~2.5x, quick ratio ~1.8x — ample short-term liquidity.
   * **Inventory** : Days of inventory declined from ~200 (FY2023 peak) to ~150 — normalization largely complete.
 
-
-
 ## 7\. Key Risks
 
 ### 7.1 Memory Cycle Risk
@@ -217,8 +211,6 @@ Tilt Bullish
   * **Catalysts** : FY2025 Q3 earnings beat potential; HBM4 development milestones; CHIPS Act grant finalization; new customer qualifications (e.g., AMD MI350).
   * **Target** : Near-term ~$160-170 (10-15% upside), implying FY2025E PE ~18-20x.
 
-
-
 ### 8.2 Long-Term View (6-18 Months)
 
 Cautiously Positive
@@ -227,8 +219,6 @@ Cautiously Positive
   * **Cyclical Peak Concern** : Long-term investors should assess whether 2026-2027 marks the cycle peak. Memory capacity expansion plans may overshoot demand, triggering price competition.
   * **Geographic Diversification** : Facilities across US, Japan, Singapore, Taiwan and CHIPS Act support provide manufacturing resilience. Long-term reshoring trend benefits Micron.
   * **Structural Margin Improvement** : HBM and DDR5 product mix shift supports structural improvement to 40%+ gross margins and 15%+ net margins.
-
-
 
 ### 8.3 Investment Thesis Matrix
 
@@ -249,8 +239,6 @@ Valuation | Forward PE ~18x; PEG ~0.5x attractive | Peak-cycle PE could compress
   * **Phased Entry** : Current ~$150 — accumulate on dips to $130-140 (200-DMA zone). Partial profit-taking at $160-170.
   * **Diversification** : Limit single-stock exposure to <10% of portfolio. Consider SMH ETF for broader semiconductor diversification.
 
-
-
 ### 8.5 Key Watch Items
 
 Monitor: (1) DRAM/NAND contract pricing; (2) HBM shipment volume and customer qualification progress; (3) NVIDIA and AMD AI chip shipment guidance; (4) Micron's quarterly gross and operating margin trajectory; (5) Inventory days and CAPEX plan changes.
@@ -261,7 +249,5 @@ Monitor: (1) DRAM/NAND contract pricing; (2) HBM shipment volume and customer qu
   * IC Insights, TrendForce, Gartner
   * Public Market Data
   * Data as of: May 27, 2026
-
-
 
 Risk Warning: The above content is compiled based on public information, historical data, and model analysis results, intended only for informational reference and does not constitute any investment advice. There may be certain lag and limitations; past performance does not indicate future results. Individual risk tolerance should be considered when making judgments.

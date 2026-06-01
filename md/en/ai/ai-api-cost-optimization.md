@@ -26,9 +26,6 @@ Most LLM APIs charge per token — typically at different rates for input and ou
 
   * **DeepSeek-V3** : $0.27/M input tokens, $1.10/M output tokens
 
-
-
-
 Output tokens are typically 3-6x more expensive than input tokens. This asymmetry has major implications for optimization strategy.
 
 ## Strategy 1: Model Selection
@@ -42,9 +39,6 @@ Output tokens are typically 3-6x more expensive than input tokens. This asymmetr
   * Complex reasoning: Opus, GPT-4o, or DeepSeek-R1
 
   * Code generation: Claude Sonnet or GPT-4o
-
-
-
 
 A router model can direct simple queries to cheap models and complex ones to expensive models:
 
@@ -77,9 +71,6 @@ This pattern alone can reduce costs by 60-80% while maintaining overall quality.
   * **Context compression** : Summarize long documents before passing them to the model. A 10-page document compressed to one paragraph saves 95% of input tokens.
 
   * **Dynamic prompt assembly** : Only include instructions relevant to the current task. Don't include all possible capabilities in every request.
-
-
-
 
 ## Strategy 3: Caching
 
@@ -139,9 +130,6 @@ For semantic caching (similar but not identical queries), use embedding similari
 
   * **Rate limit optimization** : Fill your rate limit efficiently rather than making many small requests
 
-
-
-
 ## Strategy 5: Smart Output Management
 
 **Limit output tokens aggressively.** Each output token is 3-6x the cost of an input token:
@@ -153,9 +141,6 @@ For semantic caching (similar but not identical queries), use embedding similari
   * Request specific formats that minimize tokens ("answer yes/no, no explanation")
 
   * Generate shorter drafts and iterate rather than requesting comprehensive outputs
-
-
-
 
 ## Strategy 6: Hybrid Architecture
 
@@ -169,9 +154,6 @@ Don't use LLMs for everything. A hybrid architecture combines cheap deterministi
 
   * **Fallback chain** : Try cheaper methods first, escalate to more expensive models only when needed
 
-
-
-
 ## Monitoring and Budgeting
 
 Implement cost tracking from day one:
@@ -183,9 +165,6 @@ Implement cost tracking from day one:
   * Track cost per unit of business value (cost per generated article, cost per support ticket resolved)
 
   * A/B test optimization strategies with cost as a key metric alongside quality
-
-
-
 
 ## Conclusion
 

@@ -39,6 +39,4 @@ Writing complex integration tests| Poor (20-40% useful)| AI lacks deep understan
   3. **Generate boilerplate unit tests:** Use GitHub Copilot or Diffblue to generate tests for untested code — the 80% that is simple (data classes, validation, CRUD) can be AI-generated, freeing you to write the 20% that matters (business logic, edge cases).
   4. **Set up flaky test detection:** Integrate a tool that tracks flakiness (Testim, BuildPulse, or your CI platform's analytics). Flaky tests erode trust in the test suite; AI can help identify and fix them.
 
-
-
 **Bottom line:** The biggest AI win in testing is selector self-healing and visual regression — these eliminate the two most time-consuming maintenance tasks in E2E testing. Use GitHub Copilot for generating boilerplate unit tests (saves 20-30% of test writing time). Do not expect AI to replace test design — understanding what to test and how to structure tests still requires human judgment. See also: [Playwright vs Cypress vs Selenium](</en/compare/playwright-vs-cypress-vs-selenium.html>) and [Testing Strategies for Web Apps](</en/tech/testing-strategies-web-apps.html>).

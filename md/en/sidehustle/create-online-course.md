@@ -32,8 +32,6 @@ The IDEAL framework for topic selection:
   * **A — Angle:** Your course has a unique spin — "React for Backend Developers" vs generic "Learn React"
   * **L — Longevity:** The technology has staying power (React, Python, AWS — not a framework released last month)
 
-
-
 ## Course Pricing Strategy
 
 Course Type| Length| Price Range| Example  

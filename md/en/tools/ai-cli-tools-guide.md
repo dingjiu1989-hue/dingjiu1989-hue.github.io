@@ -24,9 +24,6 @@ A traditional CLI tool maps flags to function calls. An AI CLI tool does somethi
 
   * **It streams reasoning.** Users see the model think, which builds trust and lets them cancel early.
 
-
-
-
 The architecture looks like this:
 
 User Input (args, stdin, interactive) → CLI Framework (Click/Commander)
@@ -289,8 +286,6 @@ Streaming is table stakes. Users won't wait 10 seconds for a full response. Here
 
   * **Open a streaming connection** to the LLM API.
 
-
-
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Write each token** to stdout as it arrives — no buffering.
 
 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Handle backpressure.** If the terminal is slow, don't drop tokens; let the OS buffer.
@@ -305,7 +300,8 @@ import sys
 
 def handle_interrupt(sig, frame):
 
-click.echo("\n[Interrupted]", err=True)
+click.echo("
+[Interrupted]", err=True)
 
 sys.exit(130)
 
@@ -315,7 +311,8 @@ In Node.js with Commander:
 
 process.on('SIGINT', () => {
 
-console.error('\n[Interrupted]');
+console.error('
+[Interrupted]');
 
 process.exit(130);
 
@@ -461,7 +458,11 @@ if os.path.isfile(f):
 
 with open(f) as fh:
 
-contents.append(f"### {f}\n\n`\n{fh.read()}\n`")
+contents.append(f"### {f}
+
+`
+{fh.read()}
+`")
 
 elif os.path.isdir(f) and recursive:
 
@@ -475,15 +476,23 @@ try:
 
 with open(path) as fh:
 
-contents.append(f"### {path}\n\n`\n{fh.read()}\n`")
+contents.append(f"### {path}
+
+`
+{fh.read()}
+`")
 
 except Exception:
 
 pass
 
-context = "\n\n".join(contents[:20]) # limit context size
+context = "
 
-prompt = f"The user wants to understand these files:\n\n{context}"
+".join(contents[:20]) # limit context size
+
+prompt = f"The user wants to understand these files:
+
+{context}"
 
 with client.messages.stream(
 
@@ -510,9 +519,6 @@ The key challenge is **context window management**. You can't dump every file in
   * **Smart filtering.** Skip binary files, node_modules, .git, and other non-text directories automatically.
 
   * **Chunking.** For large files, send only relevant sections (first 50 lines, function signatures, recent git changes).
-
-
-
 
 ## CLI Framework Comparison
 
@@ -590,7 +596,8 @@ raise click.Abort()
 
 ## Count lines and warn
 
-lines = result.stdout.count("\n")
+lines = result.stdout.count("
+")
 
 if lines > 2000:
 
@@ -604,7 +611,11 @@ For each issue, include: file, line, severity (critical/warning/nit), and sugges
 
 Output in the format requested."""
 
-prompt = f"Review this git diff:\n\n`diff\n{result.stdout[:50000]}\n`"
+prompt = f"Review this git diff:
+
+`diff
+{result.stdout[:50000]}
+`"
 
 if output == "json":
 
@@ -616,7 +627,9 @@ max_tokens=4096,
 
 system=system,
 
-messages=[{"role": "user", "content": prompt + "\n\nRespond in JSON format."}],
+messages=[{"role": "user", "content": prompt + "
+
+Respond in JSON format."}],
 
 )
 
@@ -651,9 +664,6 @@ The code review tool is a good example of the **file-aware + git-aware** pattern
   * **Output format selection** — text/markdown for human reading, JSON for CI pipeline consumption.
 
   * **Streaming** for interactive use, full response for JSON mode.
-
-
-
 
 ## Real Example: AI Git Commit Message Generator
 
@@ -731,7 +741,8 @@ for text in stream.text_stream:
 
 click.echo(text, nl=False)
 
-click.echo("\n")
+click.echo("
+")
 
 Extended versions of this tool:
 
@@ -742,9 +753,6 @@ Extended versions of this tool:
   * **Template support** — read `.gitmessage` templates.
 
   * **AI commit body generation** — expand the body with detailed reasoning.
-
-
-
 
 ## Error Handling for LLM Calls in CLI
 
@@ -936,9 +944,6 @@ AI CLI tools need API keys. Best practices:
 
   * **Never hardcode keys** — not even for testing. Use environment variables in CI too.
 
-
-
-
 import os
 
 from dotenv import load_dotenv
@@ -958,8 +963,6 @@ raise click.Abort()
 When designing a new AI CLI tool, run through these questions:
 
   * **Input:** Arguments, flags, stdin, or interactive? What's the primary interface?
-
-
 
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Context:** What files, commands, or environment state does the model need to see?
 
@@ -990,9 +993,6 @@ The tools described here are the foundation. The next generation of AI CLI tools
   * **Cache aggressively** — prompt caching cuts latency 2-3x and cost in half.
 
   * **Use local models** — `llama.cpp` and `mlx` make local LLMs viable for many CLI tasks.
-
-
-
 
 The pattern is always the same: CLI framework handles input, LLM SDK handles generation, your orchestration code connects them. Get the streaming right, handle errors gracefully, and you have a tool that feels like magic in the terminal.
 

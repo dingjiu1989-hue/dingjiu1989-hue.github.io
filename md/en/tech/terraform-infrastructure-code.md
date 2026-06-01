@@ -316,9 +316,6 @@ assert.NotEmpty(t, output)
 
   * **Missing`prevent_destroy`**: Protect critical resources:
 
-
-
-
 resource "aws_db_instance" "production" {
 
 lifecycle {
@@ -330,8 +327,6 @@ prevent_destroy = true
 }
 
   * **Large state files** : Split infrastructure into manageable chunks by service layer (networking, compute, data).
-
-
 
 ## Sentinel and Policy as Code
 

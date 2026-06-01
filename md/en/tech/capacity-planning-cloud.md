@@ -32,9 +32,6 @@ Key considerations include:
 
   * Cooldown periods: Prevent rapid scaling oscillations.
 
-
-
-
 ## Reserved Instances
 
 Reserved Instances (RIs) provide significant discounts (30-60%) in exchange for commitment to a specific instance configuration. They are the primary tool for reducing compute costs for baseline capacity.
@@ -61,9 +58,6 @@ Best use cases for spot instances include:
 
   * Kubernetes node pools with cluster autoscaler support.
 
-
-
-
 Strategies for managing spot interruptions include:
 
   * Use diverse instance types and sizes across multiple availability zones.
@@ -75,9 +69,6 @@ Strategies for managing spot interruptions include:
   * Maintain minimum on-demand capacity for critical workloads.
 
   * Set maximum spot price based on willingness to pay.
-
-
-
 
 Spot Instance Advisor provides pricing history and interruption rate data for informed instance selection.
 

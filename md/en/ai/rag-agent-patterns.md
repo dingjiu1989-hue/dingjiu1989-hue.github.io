@@ -38,7 +38,9 @@ chunks = vector_search(search_query, k=5)
 
 ## Step 3: Generate answer from retrieved chunks
 
-context = "\n\n".join(chunks)
+context = "
+
+".join(chunks)
 
 answer = call_llm(f"""
 
@@ -92,7 +94,9 @@ if avg_relevance >= 7:
 
 ## High confidence: generate answer
 
-context = "\n\n".join(chunks[:3])
+context = "
+
+".join(chunks[:3])
 
 return generate_answer(question, context)
 

@@ -256,7 +256,4 @@ perf script | stackcollapse-perf.pl | flamegraph.pl > after.svg
 
   * **Comparison** : Use differential flamegraphs to verify optimization impact.
 
-
-
-
 Profiling is an iterative process: identify hotspots, form a hypothesis, make a change, and re-profile to verify improvement. Flamegraphs make this loop faster by providing immediate visual feedback on where time is spent.

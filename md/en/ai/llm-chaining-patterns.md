@@ -24,9 +24,6 @@ A single LLM call has limitations:
 
   * **Debugging difficulty** : When output is wrong, isolating which instruction caused the problem is hard
 
-
-
-
 Chaining addresses these by decomposing complex tasks into focused steps, each with a clear objective and validation criteria.
 
 ## Core Patterns
@@ -81,7 +78,9 @@ intermediate.append(result)
 
 ## Reduce: combine all intermediate results
 
-combined = "\n---\n".join(intermediate)
+combined = "
+---
+".join(intermediate)
 
 final = call_llm(reduce_prompt, combined)
 

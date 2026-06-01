@@ -62,9 +62,6 @@ In the closed state, the circuit breaker allows requests to pass through to the 
 
   * When the failure threshold is exceeded, the breaker opens.
 
-
-
-
 Open State 
 
 In the open state, the circuit breaker immediately rejects requests without calling the remote service. This prevents overwhelming a failing service and allows it time to recover. 
@@ -75,9 +72,6 @@ In the open state, the circuit breaker immediately rejects requests without call
 
   * The open duration should be long enough for the service to recover but short enough to minimize downtime.
 
-
-
-
 Half-Open State 
 
 In the half-open state, the circuit breaker allows a limited number of trial requests. If these requests succeed, the breaker closes. If they fail, the breaker reopens. 
@@ -87,9 +81,6 @@ In the half-open state, the circuit breaker allows a limited number of trial req
   * Success threshold reached: transition to closed.
 
   * Any failure: transition back to open.
-
-
-
 
 Implementation with Resilience4j 
 
@@ -373,9 +364,6 @@ Key Metrics to Monitor
 
   * **Buffered calls** : Number of buffered calls in the current sliding window.
 
-
-
-
 ## Prometheus metric format (from Resilience4j exporter)
 
 resilience4j_circuitbreaker_state{name="paymentService",state="closed"} 1
@@ -435,9 +423,6 @@ Fallback Strategies
   * **Degraded functionality** : Return partial results (e.g., show product page without recommendations).
 
   * **Queue for retry** : Store the request and retry later.
-
-
-
 
 @CircuitBreaker(name = "recommendationService", fallbackMethod = "recommendationFallback")
 
@@ -502,9 +487,6 @@ Common Pitfalls
   * **All-or-nothing thinking** : Not all dependencies need circuit breakers. Use them for external APIs, databases, and critical services.
 
   * **Ignoring half-open** : The half-open state is critical for recovery. Do not skip it.
-
-
-
 
 Conclusion 
 

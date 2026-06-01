@@ -59,8 +59,6 @@ The quality of few-shot examples matters more than quantity. 3 perfect examples 
   * **Show your formatting in examples:** If you want code blocks with language tags, your examples must include them
   * **Progressive complexity:** Order examples from simple to complex — LLMs pay more attention to the last example
 
-
-
 ## Chain-of-Thought for Code Generation
 
 For complex coding tasks, explicitly ask the model to plan before writing:

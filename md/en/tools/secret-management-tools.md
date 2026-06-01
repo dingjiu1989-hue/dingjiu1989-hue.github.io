@@ -368,7 +368,4 @@ AWS Secrets Manager and Doppler benefit from the cloud provider's redundancy nat
 
   * **Doppler** : Best for developer-focused teams wanting a simple, cross-platform secret management solution with minimal operational overhead.
 
-
-
-
 Start with a tool that matches your current scale. Vault's complexity is only justified when you need its dynamic secret capabilities or operate across multiple cloud providers.

@@ -28,9 +28,6 @@ Documents arrive in various formats:
 
   * **HTML/emails** : Web content and email attachments
 
-
-
-
 Each format requires different preprocessing:
 
 def preprocess_document(file_path):
@@ -104,9 +101,6 @@ return {
   * **Google Document AI** : Strong general-purpose OCR with entity extraction
 
   * **Tesseract + Post-processing** : Free, but requires cleanup for quality results
-
-
-
 
 ## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Document Classification
 
@@ -276,9 +270,6 @@ Key components:
 
   * **Human review interface** : Dashboard for manual review of exceptions
 
-
-
-
 ## Handling Edge Cases
 
   * **Poor quality scans** : Apply image enhancement (deskew, denoise, contrast adjustment)
@@ -291,9 +282,6 @@ Key components:
 
   * **Very long documents** : Chunk and process section by section, then merge results
 
-
-
-
 ## Measuring Accuracy
 
 Track these metrics per document type:
@@ -305,9 +293,6 @@ Track these metrics per document type:
   * **Rejection rate** : Documents sent to human review
 
   * **Time savings** : Manual processing time vs AI processing time
-
-
-
 
 ## Conclusion
 

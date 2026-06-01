@@ -108,9 +108,6 @@ Pricing psychology tips:
 
   * **Usage-based caps** : set fair usage limits that encourage upgrades
 
-
-
-
 ## Stripe Billing Integration
 
 // Stripe subscription management

@@ -24,9 +24,6 @@ Upwork is the largest general freelancing platform, with a massive volume of dev
 
   * Built-in time tracking for hourly contracts.
 
-
-
-
 **Cons:**
 
   * High competition from global developers.
@@ -34,9 +31,6 @@ Upwork is the largest general freelancing platform, with a massive volume of dev
   * Tiered service fees (20% on first $500, then decreasing -- expensive initially).
 
   * Controversial connects system (you buy credits to submit proposals).
-
-
-
 
 **Best for:** Developers starting their freelancing career who want access to the largest client base.
 
@@ -49,9 +43,6 @@ Upwork is the largest general freelancing platform, with a massive volume of dev
   * Apply only to projects where you meet 100% of the required skills.
 
   * Write personalized proposals referencing specific details from the job posting.
-
-
-
 
 ## Toptal
 
@@ -67,9 +58,6 @@ Toptal bills itself as "the world's top talent" and positions itself as a premiu
 
   * No fee bidding -- you set your rate.
 
-
-
-
 **Cons:**
 
   * Extremely selective acceptance rate (~3%).
@@ -77,9 +65,6 @@ Toptal bills itself as "the world's top talent" and positions itself as a premiu
   * Multi-stage screening process (takes 1-3 weeks).
 
   * Limited project volume compared to Upwork.
-
-
-
 
 **Best for:** Experienced developers (5+ years) seeking premium clients at premium rates.
 
@@ -90,9 +75,6 @@ Toptal bills itself as "the world's top talent" and positions itself as a premiu
   * Highlight specialization in your profile. Generalists struggle on Toptal.
 
   * Be patient during the matching process. The right client may take weeks to appear.
-
-
-
 
 ## Gun.io
 
@@ -108,9 +90,6 @@ Gun.io focuses specifically on software developers and technical talent.
 
   * Strong focus on US-based and EU-based clients.
 
-
-
-
 **Cons:**
 
   * Smaller project pool than Upwork.
@@ -118,9 +97,6 @@ Gun.io focuses specifically on software developers and technical talent.
   * Vetting process requires time investment.
 
   * May not have projects in all technology stacks.
-
-
-
 
 **Best for:** Full-stack and backend developers seeking consistent, well-paying contract work.
 
@@ -136,9 +112,6 @@ Freelancer is the second-largest platform but has a different character than Upw
 
   * Lower fees than Upwork in some cases.
 
-
-
-
 **Cons:**
 
   * Significant competition from low-cost regions.
@@ -146,9 +119,6 @@ Freelancer is the second-largest platform but has a different character than Upw
   * Quality of projects varies widely.
 
   * Platform interface feels dated.
-
-
-
 
 **Best for:** Developers comfortable competing on price and volume.
 
@@ -166,9 +136,6 @@ Fiverr has evolved significantly from its $5 gig origins. Fiverr Pro is their pr
 
   * Good for developers offering specific, well-defined services.
 
-
-
-
 **Cons:**
 
   * Pro approval is selective.
@@ -176,9 +143,6 @@ Fiverr has evolved significantly from its $5 gig origins. Fiverr Pro is their pr
   * Gig-based model is not ideal for large, undefined projects.
 
   * Client quality on standard Fiverr is mixed.
-
-
-
 
 **Best for:** Developers who want to offer specific packages (build a landing page, fix a bug, create an API integration).
 
@@ -196,9 +160,6 @@ Contra is a newer platform with a unique commission-free model.
 
   * Strong for design and frontend work.
 
-
-
-
 **Cons:**
 
   * Smaller client pool (still growing).
@@ -206,9 +167,6 @@ Contra is a newer platform with a unique commission-free model.
   * Fewer features for complex project management.
 
   * Limited dispute resolution infrastructure.
-
-
-
 
 **Best for:** Developers who want to keep 100% of their earnings and are building a portfolio.
 
@@ -221,9 +179,6 @@ Beyond major platforms:
   * **Agency subcontracting.** Digital agencies frequently need overflow developers. Build relationships with 2-3 agencies in your area or niche. Rates are good, and work is consistent.
 
   * **Direct referrals.** The best clients come from referrals. After each successful project, ask for referrals. Build a pipeline that reduces platform dependency.
-
-
-
 
 ## Platform Comparison
 
@@ -256,9 +211,6 @@ Platforms are a starting point, not a destination. Over time, reduce dependency:
   * Set up a referral program (e.g., one month free for referrals).
 
   * Specialize so deeply that clients seek you out by name.
-
-
-
 
 The goal is to eventually handle client acquisition independently, keeping 100% of your rate rather than paying platform fees.
 

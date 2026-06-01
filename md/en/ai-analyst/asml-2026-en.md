@@ -255,6 +255,4 @@ Downside Risks | Full export control escalation • Semiconductor downcycle • 
   11. Visible Alpha Consensus Data, May 2026
   12. SEMI — Worldwide Semiconductor Equipment Market Statistics, 2025
 
-
-
 **Disclaimer:** This report is for informational and educational purposes only and does not constitute investment advice. Data and opinions herein are based on publicly available information and may contain inaccuracies. Investing involves risk, including loss of principal.

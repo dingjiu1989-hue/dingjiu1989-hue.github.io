@@ -66,6 +66,4 @@ Descending Index| Index sorted DESC (not default ASC)| ORDER BY col DESC is the 
   4. **Create with purpose:** Partial index for subsets, covering index (INCLUDE) for Index-Only Scans, composite for multi-column filters
   5. **Verify with EXPLAIN:** Did the plan change from Seq Scan → Index Scan / Index Only Scan? Run ANALYZE first.
 
-
-
 **Bottom line:** B-Tree indexes solve 90% of indexing needs — they handle =, range, sorting, and prefix matching. GIN is essential for JSONB and full-text search workloads. The most common indexing mistakes: (1) indexing columns that are never queried, (2) missing composite indexes for multi-column WHERE clauses, and (3) not using covering indexes (INCLUDE) to enable Index-Only Scans. Run the unused index query above quarterly — dropping unused indexes speeds up every INSERT/UPDATE. See also: [PostgreSQL Query Optimization](</en/tech/postgresql-query-optimization.html>) and [Database Design Fundamentals](</en/tech/database-design-fundamentals.html>).

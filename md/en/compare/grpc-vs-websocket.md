@@ -600,7 +600,4 @@ Both protocols are fast enough for most use cases. gRPC's advantages compound at
 
   * **Use both** when your architecture needs gRPC for internal service communication and WebSocket for browser clients, with a gateway translating between them.
 
-
-
-
 For modern applications, gRPC is the better choice for service-to-service communication, while WebSocket remains the practical standard for browser-based real-time features.

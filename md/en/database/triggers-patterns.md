@@ -60,9 +60,6 @@ Trigger timing options:
 
   * `INSTEAD OF`: Replaces the operation entirely. Only valid on views.
 
-
-
-
 Common Use Cases 
 
 Audit Logging 
@@ -175,9 +172,6 @@ Triggers add overhead that is easy to underestimate:
 
   * **Lock duration** : Triggers extend the time a row or page lock is held, increasing contention in high-concurrency workloads.
 
-
-
-
 The `pg_stat_user_functions` view helps identify trigger overhead: 
 
 SELECT total_time / calls AS avg_time_per_call,
@@ -198,8 +192,6 @@ Triggers execute transparently. Developers new to a codebase often discover trig
 
   * **Naming conventions** : Prefix trigger functions with `trg_` and trigger names with the table name.
 
-
-
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Document dependencies** : Maintain a trigger dependency map. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Session-level disable** (requires superuser or explicit privilege): 
 
 SET session_replication_role = replica;
@@ -218,9 +210,6 @@ When triggers become too expensive or complex, Change Data Capture offers a stre
 
   * **pgoutput + pg_recvlogical** : Custom CDC implementations.
 
-
-
-
 CDC avoids trigger overhead, does not slow the original transaction, and supports real-time streaming to external systems. 
 
 Best Practices 
@@ -234,8 +223,5 @@ Best Practices
   * Add comments explaining _why_ the trigger exists, not just what it does.
 
   * Test trigger behavior with rollback test cases.
-
-
-
 
 Triggers are a legitimate tool for data integrity, but they should be your last resort, not your first instinct. When a `CHECK` constraint, `UNIQUE` index, or `FOREIGN KEY` can enforce the rule, use that instead.

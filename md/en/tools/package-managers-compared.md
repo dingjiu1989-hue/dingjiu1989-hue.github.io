@@ -282,9 +282,6 @@ Go's approach is minimal but effective. The module graph is stored in `go.sum` f
 
   * **Multi-language projects** : Use pnpm for Node parts, uv for Python, and Cargo for Rust.
 
-
-
-
 ## Summary
 
 The package manager landscape is converging on speed and determinism. Rust-based tools (uv, pnpm's native core) represent the next generation, offering 10-100x performance improvements. Choose the fastest tool for your primary ecosystem but maintain compatibility for your team and CI. Deterministic lock files and verified checksums are non-negotiable for production builds.

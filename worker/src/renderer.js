@@ -245,6 +245,8 @@ window.addEventListener('scroll',function(){document.getElementById('bttBtn').cl
  */
 function parseMarkdown(text) {
   if (!text) return '';
+  // Normalize literal \n (double backslash-n) to actual newlines — same fix as gen_ai_report.py
+  text = text.replace(/\\n/g, '\n');
   const lines = text.split('\n');
   const out = [];
   let inUl = false, inOl = false, inTable = false;

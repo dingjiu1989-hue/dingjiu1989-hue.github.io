@@ -111,6 +111,4 @@ CSP is your last line of defense. It tells the browser what sources of scripts, 
   * **Rate limiting:** Protect login and API endpoints from brute force.
   * **Logging:** Log auth events. Never log passwords or tokens.
 
-
-
 **Bottom line:** Use parameterized queries, auto-escaping frameworks, SameSite cookies, CSP headers, and explicit CORS allowlists. Security is layers — implement them all, and a single failure won't compromise you. See also: [REST API Best Practices](</en/tech/rest-api-best-practices.html>) and [API Design Patterns](</en/tech/api-design-patterns.html>).

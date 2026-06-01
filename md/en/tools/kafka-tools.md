@@ -74,9 +74,6 @@ depends_on:
 
   * Node and broker monitoring
 
-
-
-
 ## AKHQ advanced configuration
 
 akhq:
@@ -149,9 +146,6 @@ SERVER_PORT: 8080
 
   * Dark and light themes
 
-
-
-
 ## Multi-cluster configuration
 
 KAFKA_CLUSTERS_0_NAME: staging
@@ -208,9 +202,6 @@ SCHEMA_REGISTRY_URLS: "http://schema-registry:8081"
 
   * Role-based access control
 
-
-
-
 ## Data masking configuration
 
 server:
@@ -258,9 +249,6 @@ A desktop GUI application for Kafka (Windows/macOS/Linux):
   * SSL/SASL authentication support
 
   * Time-based message search
-
-
-
 
 ## CLI Tools
 
@@ -321,8 +309,5 @@ kafka-consumer-perf-test.sh --broker-list localhost:9092 --topic test --messages
   * **Desktop preference** : Offset Explorer for a native desktop experience.
 
   * **Scripting** : Kafka CLI tools for automation and CI/CD tasks.
-
-
-
 
 For development and staging environments, Kafka UI or Kowl provide excellent web-based management with minimal setup. For production, AKHQ offers the most comprehensive feature set, while Redpanda Console provides the best message debugging experience.

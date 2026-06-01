@@ -400,7 +400,4 @@ memory: 256Mi
 
   * **JMeter** : Best for organizations requiring broad protocol support, GUI-based test creation, or integration with legacy performance testing workflows.
 
-
-
-
 For most modern web applications, k6 provides the best developer experience and CI integration. Choose Locust when your test scenarios require complex Python logic. Reserve JMeter for situations requiring its broad protocol support or when non-developers need to create and modify test plans.

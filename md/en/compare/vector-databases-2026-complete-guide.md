@@ -400,9 +400,6 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
 
   * Budget is not the primary concern
 
-
-
-
 ## ✅ Use Chroma if:
 
   * You're prototyping or building a demo
@@ -412,9 +409,6 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   * You're building for edge/browser deployment
 
   * You're in a Jupyter notebook exploring data
-
-
-
 
 ## ✅ Use Weaviate if:
 
@@ -426,9 +420,6 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
 
   * You need multi-tenancy built in
 
-
-
-
 ## ✅ Use Qdrant if:
 
   * Performance is your top priority
@@ -438,9 +429,6 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   * You want to minimize infrastructure cost
 
   * You're building real-time recommendation systems
-
-
-
 
 ## ✅ Use Milvus if:
 
@@ -452,9 +440,6 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
 
   * You need to scale to billions of vectors
 
-
-
-
 ## ✅ Use pgvector if:
 
   * You already use PostgreSQL
@@ -465,16 +450,11 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
 
   * Your dataset is under 1M vectors
 
-
-
-
 ## Production Checklist
 
 When moving to production with any vector database:
 
   * **Monitor recall** — run regular quality checks. A 90% recall means 10% of relevant results are missing.
-
-
 
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Test at scale** — benchmark with your actual data size, not a sample. Index build time scales O(n log n).
 
@@ -528,7 +508,8 @@ limit=5,
 
 )
 
-context = "\n".join(r.payload["text"] for r in results)
+context = "
+".join(r.payload["text"] for r in results)
 
 ## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate answer with context
 
@@ -538,7 +519,8 @@ model="claude-sonnet-4-6",
 
 messages=[
 
-{"role": "system", "content": f"Answer using this context:\n{context}"},
+{"role": "system", "content": f"Answer using this context:
+{context}"},
 
 {"role": "user", "content": question},
 

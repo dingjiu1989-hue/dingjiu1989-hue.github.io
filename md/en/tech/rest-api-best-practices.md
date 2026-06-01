@@ -100,8 +100,6 @@ Always return errors in a consistent structure:
   * **Use API keys or OAuth2.** Never roll your own auth protocol.
   * **Keep secrets out of responses.** Password hashes, internal IDs, stack traces, server versions.
 
-
-
 ## 8\. API Documentation
 
 Use OpenAPI 3.1 (Swagger). It's the industry standard and generates interactive docs automatically. Tools like Stoplight, Redoc, and Swagger UI render beautiful docs from a single spec file. If your API doesn't have an OpenAPI spec, it's not ready for production.

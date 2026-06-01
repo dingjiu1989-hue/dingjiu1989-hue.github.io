@@ -42,7 +42,9 @@ self.message_history = [{"role": "system", "content": spec.system_prompt}]
 
 async def process(self, task: str, context: str = "") -> str:
 
-messages = self.message_history + [{"role": "user", "content": f"{context}\n\nTask: {task}"}]
+messages = self.message_history + [{"role": "user", "content": f"{context}
+
+Task: {task}"}]
 
 response = self.llm(messages, tools=self.spec.tools)
 
@@ -236,7 +238,8 @@ for round_num in range(self.rounds):
 
 ## Share positions
 
-summary = "\n".join(f"{name}: {pos}" for name, pos in positions.items())
+summary = "
+".join(f"{name}: {pos}" for name, pos in positions.items())
 
 ## Each agent critiques and refines
 
@@ -246,7 +249,8 @@ for agent in self.agents:
 
 critique = await agent.process(
 
-f"Round {round_num + 1}. Review these positions and refine your own:\n{summary}",
+f"Round {round_num + 1}. Review these positions and refine your own:
+{summary}",
 
 context=f"Your previous position: {positions[agent.spec.name]}"
 
@@ -260,11 +264,13 @@ positions = new_positions
 
 consensus_agent = self.agents[0]
 
-summary = "\n".join(f"{name}: {pos}" for name, pos in positions.items())
+summary = "
+".join(f"{name}: {pos}" for name, pos in positions.items())
 
 consensus = await consensus_agent.process(
 
-f"Based on all perspectives, produce a final consensus answer:\n{summary}"
+f"Based on all perspectives, produce a final consensus answer:
+{summary}"
 
 )
 
@@ -310,11 +316,13 @@ results = await asyncio.gather(*worker_futures)
 
 ## Manager synthesizes final output
 
-results_text = "\n".join(f"{st['id']}: {r}" for st, r in zip(sub_tasks, results))
+results_text = "
+".join(f"{st['id']}: {r}" for st, r in zip(sub_tasks, results))
 
 final = await self.manager.process(
 
-f"Synthesize these results into a coherent output:\n{results_text}",
+f"Synthesize these results into a coherent output:
+{results_text}",
 
 context=f"Original task: {task}"
 

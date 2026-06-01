@@ -48,8 +48,6 @@ Analytics| None| Basic (conversation count, satisfaction)| Full analytics (resol
   3. **Hybrid retrieval (keyword + vector):** Users ask precise questions ("What is the refund policy for international orders?") that vector search alone may miss. BM25 keyword matching catches exact terms.
   4. **Conversation context matters:** "What about for Europe?" → must expand to "What is the refund policy for international orders in Europe?" using conversation history.
 
-
-
 ## Function Calling for Chatbots: What to Enable
 
 Function| Example User Query| Security Consideration  

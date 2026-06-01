@@ -45,8 +45,6 @@ AI can explain trade-offs between approaches, but it shouldn't make the final ca
   * **Pasting entire files into chat.** This is slow and error-prone. Use tools that read your codebase directly (Claude Code, Cursor).
   * **Over-relying on AI as a beginner.** If you're learning, write the code yourself first. Use AI to explain concepts and review your work, not to do the work for you.
 
-
-
 ## Building a Productive Workflow
 
   1. **Plan in plain English.** Describe what you want to build before writing code.

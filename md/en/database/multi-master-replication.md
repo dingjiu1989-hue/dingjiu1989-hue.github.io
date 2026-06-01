@@ -22,9 +22,6 @@ The primary reasons to consider multi-master replication are:
 
   * **Read scalability with local writes** : Each node can serve both reads and writes with low latency.
 
-
-
-
 Conflict Resolution Strategies 
 
 When two nodes concurrently modify the same row, a conflict occurs. Resolution strategies vary by system: 
@@ -101,9 +98,6 @@ More sophisticated CRDTs include:
 
   * **OR-Set** (observed-remove set): Supports both add and remove without losing concurrent adds.
 
-
-
-
 Galera Cluster (MySQL / MariaDB) 
 
 Galera Cluster implements synchronous multi-master replication for MySQL. All nodes coordinate before committing: 
@@ -134,9 +128,6 @@ Galera Key Properties
 
   * **No replication lag** : All nodes are consistent at commit time.
 
-
-
-
 Galera Limitations 
 
   * Cluster size penalty: 2-3 nodes is optimal. More nodes increase certification overhead.
@@ -146,9 +137,6 @@ Galera Limitations
   * Network latency between nodes directly impacts write latency (the "slowest node" problem).
 
   * `REPEATABLE READ` is the default; `SERIALIZABLE` causes high conflict rates.
-
-
-
 
 PostgreSQL BDR (Bi-Directional Replication) 
 
@@ -190,9 +178,6 @@ BDR supports multiple conflict resolution modes:
 
   * `apply_local`
 
-
-
-
 CAP Theorem Implications 
 
 Multi-master systems live in the CAP trade-off space: 
@@ -203,9 +188,6 @@ Multi-master systems live in the CAP trade-off space:
 
   * **BDR with custom handlers** : Tunable. Configure per-table conflict strategies.
 
-
-
-
 When to Avoid Multi-Master 
 
 Multi-master replication is not the default for good reasons: 
@@ -215,9 +197,6 @@ Multi-master replication is not the default for good reasons:
   * **Apps with hot rows** : If 90% of writes target 10 rows (e.g., a counter), conflicts are guaranteed.
 
   * **Teams without operational maturity** : Multi-master requires monitoring replication lag, conflict rates, and node health.
-
-
-
 
 Monitoring Conflicts 
 

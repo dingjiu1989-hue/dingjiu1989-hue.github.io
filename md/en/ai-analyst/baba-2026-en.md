@@ -46,8 +46,6 @@ Alibaba has evolved from a single e-commerce platform into a comprehensive techn
   * **Digital Media & Entertainment**: Youku, Alibaba Pictures
   * **Innovation & Others**: DAMO Academy, T-Head (PingTouGe) chips, DingTalk
 
-
-
 In 2026, Alibaba's strategic focus has decisively shifted to "AI-driven" growth. CEO Eddie Wu stated during the FY2026 earnings call that the company's "full-stack AI investments have progressed from incubation to commercialization at scale." The company targets over $100 billion in combined AI + Cloud external revenue over the next five years. Over 100,000 proprietary Zhenwu PPU chips have been deployed, and the Qwen 3.6-Plus model ranked #1 globally on OpenRouter by daily usage (1.4 trillion tokens/day in April).
 
 __
@@ -72,8 +70,6 @@ Alibaba's competitive advantages span multiple dimensions:
   4. **Global Logistics Network** : Cainiao's smart logistics hubs worldwide underpin a differentiated cross-border e-commerce advantage.
   5. **Diversified Revenue Structure** : Seven business segments spread single-market risk; cloud and AI provide a genuine second growth curve.
 
-
-
 __Data Insight: China AI Cloud Market Share
 
 ### 1.4 Industry Position
@@ -84,8 +80,6 @@ Alibaba holds key positions across multiple sectors:
   * **Cloud Computing** : #1 in China IaaS+PaaS (35.8%), with absolute leadership in the AI cloud sub-segment.
   * **Large Language Models** : Qwen family ranks #1 globally on OpenRouter by daily usage; among the top 3 most active open-source model ecosystems worldwide.
   * **Logistics** : Cainiao reaches 200+ countries, one of China's largest smart logistics platforms.
-
-
 
 ## 2\. Financial Analysis
 
@@ -100,8 +94,6 @@ FY2026 (ended March 31, 2026) saw Alibaba's annual revenue surpass ¥1 trillion 
   * **Cainiao Logistics** : ¥99.6B (+14% YoY)
   * **Local Services** : ¥78.5B (+12% YoY)
 
-
-
 __Data Insight: Revenue Trend (FY2022–FY2026)
 
 __Data Insight: Segment Revenue Breakdown (FY2026)
@@ -115,8 +107,6 @@ FY2026 profitability faced severe pressure:
   * **Non-GAAP Net Income** : ¥108.8B, down approximately 30% YoY.
   * **Cloud Intelligence Group EBITA** : ¥6.7B (+26% YoY), the only core segment with growing profits.
 
-
-
 The significant margin compression is the result of deliberate front-loaded strategic investment. Management has clearly communicated that the current phase prioritizes AI infrastructure buildout and market share expansion, with profit recovery expected over a 2-3 year horizon.
 
 __Data Insight: Adjusted EBITA Trend
@@ -128,8 +118,6 @@ __Data Insight: Adjusted EBITA Trend
   * **Capital Expenditure** : ~¥68B in FY2026 (+85% YoY), primarily for AI infrastructure (data centers, GPU clusters).
   * **Share Repurchases** : ~$15B in FY2026, signaling management's conviction that the stock is undervalued.
 
-
-
 ## 3\. Technical Analysis
 
 ### 3.1 Price Trend
@@ -140,8 +128,6 @@ Alibaba ADR (BABA) performance over the past year:
   * **Current Price** : ~$132 (May 26, 2026)
   * **YTD Performance** : +18%, benefiting from AI theme momentum and China tech sector re-rating
   * **HK Shares** : ~HK$102 (9988.HK), A/H premium approximately 3%
-
-
 
 __Data Insight: BABA Stock Price (52-Week)
 
@@ -193,8 +179,6 @@ Wall Street sentiment on Alibaba is predominantly positive but with widening dis
   * **Citi** : Neutral, target $160. Cautious on macro consumption environment and competitive landscape.
   * **Consensus Target** : $189, implying approximately 43% upside from current levels.
 
-
-
 __Data Insight: Wall Street Price Targets
 
 ### 4.2 Key Market Themes
@@ -203,8 +187,6 @@ __Data Insight: Wall Street Price Targets
   * **Buyback Momentum** : The $15B FY2026 repurchase program is a key support for the stock; FY2027 buyback scale is closely watched.
   * **Spin-Off Catalysts** : IPO progress for Cainiao, Freshippo, and other units represents important catalysts, though timelines remain uncertain.
   * **Macro Environment** : China consumption recovery trajectory and US-China relations are critical external variables.
-
-
 
 ## 5\. Competitive Comparison
 
@@ -235,8 +217,6 @@ Compared to global tech peers, Alibaba's current valuation multiples are notably
   * **Alibaba (BABA)** : P/E 20x, P/S 2.1x, SOTP analysis suggests cloud and AI businesses are nearly "free."
   * **PDD Holdings (PDD)** : P/E 18x, P/S 3.5x, Temu globalization narrative supports valuation.
 
-
-
 Alibaba trades at the lowest P/E and P/S multiples among comparable companies, implying significant re-rating potential if the AI cloud transformation succeeds.
 
 ## 6\. Valuation & Financial Health
@@ -253,8 +233,6 @@ Applying a sum-of-the-parts (SOTP) framework to Alibaba:
   * **Net Cash** : ~¥0.5T.
   * **SOTP Aggregate** : ~¥4.0T (~$550B), implying ~80% upside from the current $304B market cap.
 
-
-
 __
 
 #### Key Valuation Conclusion
@@ -268,8 +246,6 @@ SOTP valuation of ~$550B implies ~80% upside versus the current $304B market cap
   * **Strong Shareholder Returns** : $15B in FY2026 buybacks plus inaugural annual dividend, total shareholder yield of approximately 6%.
   * **Clear Profit Recovery Path** : Management has outlined a 2-3 year AI investment cycle after which capex intensity normalizes.
 
-
-
 ## 7\. Key Risk Factors
 
 ### 7.1 Competitive Risks
@@ -278,23 +254,17 @@ SOTP valuation of ~$550B implies ~80% upside versus the current $304B market cap
   * **AI Competition Intensifying** : Baidu (ERNIE), ByteDance (Doubao), and Huawei (Pangu) are aggressively investing in LLMs; the competitive landscape is far from settled.
   * **Cloud Price War** : Telecom-carrier clouds (China Mobile Cloud, China Telecom e-Surfing Cloud) are capturing government and enterprise customers with aggressive pricing, compressing cloud margins.
 
-
-
 ### 7.2 Regulatory Risks
 
   * **Antitrust Oversight** : While the post-2021 rectification is largely complete, the evolving regulatory framework remains an overhang.
   * **Data Security Regulations** : Cross-border data flow restrictions may constrain international commerce and cloud overseas expansion.
   * **AI Regulation** : China's LLM filing regime and content review requirements could moderate Qwen's commercialization pace.
 
-
-
 ### 7.3 Geopolitical & Macro Risks
 
   * **US-China Tech Decoupling** : Escalating US chip export controls to China could limit Alibaba Cloud's access to high-end GPUs. The in-house Zhenwu PPU is a strategic hedge, but the performance gap will take time to close.
   * **ADR Delisting Tail Risk** : Although the 2022 audit dispute has been resolved, the long-tail risk of US-China financial decoupling persists. Hong Kong secondary listing provides mitigation.
   * **China Macro Headwinds** : Sluggish consumer confidence recovery and the property-sector downturn continue to weigh on the e-commerce core business.
-
-
 
 __
 
@@ -313,8 +283,6 @@ Near-term, Alibaba's share price is likely to be driven by:
   3. **AI Catalysts** : New Qwen releases, OpenRouter ranking shifts, and enterprise customer wins could trigger episodic rallies.
   4. **Macro Policy** : China consumption stimulus measures and the internet regulatory tone are important variables.
 
-
-
 **Recommendation** : Current valuation is near historic lows; P/E of 20x plus a 6% shareholder yield offers a reasonable margin of safety. Accumulate on dips near the $120-125 support zone. Target price: $155-165.
 
 ### 8.2 Long-Term Recommendation (6–18 Months)
@@ -325,8 +293,6 @@ Long-term investors should view Alibaba as an "AI + Cloud" growth stock rather t
   2. **SOTP Value Unlocking Path** : Cainiao IPO, Freshippo spin-off, and cloud business independent financing will catalyze sum-of-the-parts value realization.
   3. **Attractive Risk-Reward** : SOTP valuation of $550B vs. $304B current market cap — even after applying a 30% conglomerate discount, fair value has significant upside.
   4. **Key Downside Risks** : Escalating chip export controls, AI investment returns falling short, prolonged macro weakness.
-
-
 
 **Recommendation** : Long-term investors can build a position at current levels, treating Alibaba as a dual-theme play on "AI infrastructure + China consumption recovery." Stop-loss at $98 (52-week low). 12-18 month target: $180-200, corresponding to 25-28x P/E.
 

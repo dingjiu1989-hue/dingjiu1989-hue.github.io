@@ -310,7 +310,4 @@ ltrace -c ./myapp # Which library calls are most frequent?
 
   * **Library comprehension** : ltrace shows which library functions are called and how often.
 
-
-
-
 Start with strace for quick diagnostics. Use lldb/gdb for step-through debugging. Deploy rr for your hardest bugs — the reverse execution capability makes "oops, I missed that" a thing of the past.

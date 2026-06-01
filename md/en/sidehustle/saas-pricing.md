@@ -56,9 +56,6 @@ Enterprise: Custom - Everything + SSO, SLA
 
   * Ensure each tier has a clear value story, not just "more of everything."
 
-
-
-
 ## Usage-Based Pricing
 
 Customers pay for what they consume:
@@ -97,9 +94,6 @@ Most successful SaaS companies use hybrid pricing:
 
   * **Add-ons** (flat): Optional premium features.
 
-
-
-
 Example: SendGrid charges a base monthly fee for email credits, then overages for additional emails, and add-ons for dedicated IP addresses and analytics.
 
 ## Choosing Your Model
@@ -125,9 +119,6 @@ Do not set your pricing once and forget it. Run continuous experiments:
   * **Measure conversion rates** at each price point.
 
   * **Track churn by pricing tier**. High churn in a tier suggests a value gap.
-
-
-
 
 Tools like ProfitWell and Baremetrics help track pricing metrics.
 

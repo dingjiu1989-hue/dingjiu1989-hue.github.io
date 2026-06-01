@@ -132,14 +132,9 @@ ollama run my-coding-assistant
 
   * **Multi-model support** : Load multiple models and switch between them
 
-
-
-
 ## Setup
 
   * Download from [lmstudio.ai](<https://lmstudio.ai>)
-
-
 
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Open the app and browse the model catalog
 
@@ -187,9 +182,6 @@ Quantization reduces model size at the cost of some accuracy:
 
   * **Q2_K** : Minimal RAM, noticeable quality loss
 
-
-
-
 Rule of thumb: each quantization step roughly doubles model size but improves quality marginally. Q4_K_M is the sweet spot.
 
 ## GPU Acceleration
@@ -214,9 +206,6 @@ Larger context windows consume more memory. A 128K context with Q4_K_M requires 
 
   * 70B model: ~48 GB total
 
-
-
-
 ## Use Cases for Local LLMs
 
   * **Privacy-sensitive data** : Medical records, legal documents, personal information
@@ -228,9 +217,6 @@ Larger context windows consume more memory. A 128K context with Q4_K_M requires 
   * **Experimentation** : Rapid testing of different models without API costs
 
   * **Latency-critical applications** : No network calls for inference
-
-
-
 
 ## Conclusion
 

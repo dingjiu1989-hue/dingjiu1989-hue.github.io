@@ -96,6 +96,4 @@ Stripe's webhook system is the implementation to study — signatures, retries, 
   * Bulk operations for batch create/update/delete when users operate on many items.
   * Webhooks with signatures + retries + dashboard for any event-driven integration.
 
-
-
 **Bottom line:** These five patterns separate a prototype API from a production API. Implement them before you need them — retrofitting idempotency is much harder than building it in from day one. See also: [REST API Best Practices](</en/tech/rest-api-best-practices.html>) and [API architecture comparison](</en/compare/trpc-vs-graphql-vs-rest.html>).

@@ -40,9 +40,6 @@ SQLite shines for transactional patterns: `INSERT INTO users VALUES (...)` compl
 
   * JSON support with json1 extension
 
-
-
-
 **DuckDB Strengths:**
 
   * Columnar storage with compression (up to 10x space savings)
@@ -56,9 +53,6 @@ SQLite shines for transactional patterns: `INSERT INTO users VALUES (...)` compl
   * Full SQL:2011 support including CTEs and window functions
 
   * Seamless Python/R integration via PyArrow
-
-
-
 
 ## Use Case Scenarios
 

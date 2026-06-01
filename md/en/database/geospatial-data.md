@@ -36,9 +36,6 @@ The most important design decision in PostGIS is choosing between the `geometry`
 
   * Operations that require planar spatial functions.
 
-
-
-
 CREATE TABLE buildings (
 
 id BIGSERIAL PRIMARY KEY,
@@ -62,9 +59,6 @@ INSERT INTO buildings (name, location) VALUES
   * Accurate distance calculations in degrees.
 
   * Queries like "find all points within 10 km."
-
-
-
 
 CREATE TABLE pois (
 

@@ -24,9 +24,6 @@ A developer note-taking tool should support:
 
   * Extensibility (APIs, plugins, or custom scripts).
 
-
-
-
 ## Obsidian
 
 Obsidian is the leading personal knowledge management tool for developers. It treats each note as a plain Markdown file on your local filesystem.
@@ -44,9 +41,6 @@ Obsidian is the leading personal knowledge management tool for developers. It tr
   * Git plugin for version control of your notes.
 
   * Graph view for visualizing note connections.
-
-
-
 
 ## API Design Notes
 
@@ -94,9 +88,6 @@ Logseq is an open-source knowledge management tool using an outliner paradigm. N
 
   * Git-based sync.
 
-
-
-
 **Use for** : Daily standup notes, meeting minutes, research notes.
 
 ## Notion
@@ -114,9 +105,6 @@ Notion is the most versatile workspace tool, combining notes, databases, wikis, 
   * Sprint planning templates.
 
   * Documentation wikis with sidebar navigation.
-
-
-
 
 **Use for** : Team wikis, sprint planning, product documentation.
 
@@ -137,9 +125,6 @@ Dendron is a VS Code extension that provides hierarchical note-taking. It treats
   * First-class Git integration.
 
   * Completely local and open source.
-
-
-
 
 ## Dendron hierarchy
 
@@ -168,9 +153,6 @@ Boost Note is an open-source Markdown editor designed for developers, with a foc
   * Markdown with code highlighting.
 
   * Dark theme.
-
-
-
 
 ## Comparison Table
 
@@ -253,9 +235,6 @@ Some developers integrate notes with their codebase. Jupyter Notebooks combine c
   * **Research and journaling** : Logseq for block-level citations.
 
   * **Quick snippets** : Boost Note for organized code snippets.
-
-
-
 
 ## Summary
 

@@ -39,8 +39,6 @@ Alphabet Inc. (Google's parent) is the world's largest digital advertising compa
   * **Google Cloud** (11%): GCP + Workspace + Gemini API, #1 in AI inference workloads.
   * **Other Bets** (1%): Waymo (60%+ Robotaxi market share), Verily, DeepMind.
 
-
-
 __
 
 #### Key Insight
@@ -60,8 +58,6 @@ __Data Insight: Global Tech Giants Market Cap
   3. **TPU Custom Silicon** : TPU v7 delivers superior performance-per-dollar for AI inference vs. NVIDIA GPUs.
   4. **Waymo Technology Lead** : Robotaxi operations across Phoenix, SF, and LA; 30M+ paid monthly miles.
 
-
-
 ## 2\. Financial Analysis
 
   * **2025 Revenue** : $383.3B (+14% YoY)
@@ -71,8 +67,6 @@ __Data Insight: Global Tech Giants Market Cap
   * **Gross Margin** : 57.5%, Op Margin 31.2%, Net Margin 28.7%
   * **FCF** : $78B, Capex $62B (+58% YoY)
 
-
-
 __Data Insight: Revenue & Cloud Growth
 
 ## 3\. Technical Analysis
@@ -80,8 +74,6 @@ __Data Insight: Revenue & Cloud Growth
   * **52-Week Range** : $165 - $215
   * **Current** : ~$198
   * **YTD** : +12%
-
-
 
 __Data Insight: GOOGL 52-Week
 
@@ -91,8 +83,6 @@ __Data Insight: GOOGL 52-Week
   * **Goldman Sachs** : Buy, $220 PT — antitrust fears overblown
   * **UBS** : Neutral, $190 PT
   * **Consensus** : $212, ~7% upside
-
-
 
 ## 5\. Competitive Comparison
 
@@ -109,16 +99,12 @@ Op Margin | 31.2% | 38% | 25% | 44%
   * **Cash** : $115B, Net cash $75B
   * **Buybacks** : $72B in 2025
 
-
-
 ## 7\. Key Risks
 
   * **Antitrust Breakup Risk** : DOJ remedy ruling due Q3 2026. Worst case: forced divestiture of Chrome or AdTech.
   * **AI Search Impact** : AI Overviews reduce click-through rates. "Zero-click answers" fundamentally challenge the ad monetization model.
   * **Capex Surge** : Capex doubled from $39B (2024) to $62B (2025). $20B Anthropic investment ROI highly uncertain.
   * **AI Competition** : OpenAI SearchGPT hits 200M daily queries, gradually eroding search share.
-
-
 
 __
 
@@ -145,7 +131,5 @@ Search monopoly + AI Cloud + Waymo provide a three-engine growth story. 28x P/E 
   3. [Goldman Sachs — Alphabet Research](<https://www.goldmansachs.com/>)
   4. [DOJ Antitrust Litigation](<https://www.justice.gov/atr/division-opinions/google-search-antitrust-litigation>)
   5. [Yahoo Finance — GOOGL](<https://finance.yahoo.com/quote/GOOGL/>)
-
-
 
 **Disclaimer:** This analysis is for informational and educational purposes only and does not constitute investment advice. It is based on publicly available information, historical data, and model analysis as of the report date, which may involve certain lag and limitations. Past performance does not guarantee future results. Investors should make their own independent assessment and consider their personal risk tolerance before making any investment decisions.

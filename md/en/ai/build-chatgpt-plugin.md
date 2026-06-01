@@ -31,8 +31,6 @@ The architecture has three components:
   2. **OpenAPI Specification:** A JSON/YAML file describing your API endpoints (what ChatGPT reads to understand your plugin)
   3. **Plugin Manifest:** A JSON file registered with OpenAI describing your plugin and pointing to your API + OpenAPI spec
 
-
-
 ## Step-by-Step Implementation (Python/FastAPI)
     
     

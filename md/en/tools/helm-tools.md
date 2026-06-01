@@ -366,7 +366,4 @@ helm diff release my-app ./chart
 
   * **Review before apply** : Use helm-diff to preview changes without actually applying them.
 
-
-
-
 The most complete Helm workflow combines all these tools: Helmfile for release management, helm-secrets for secure values, helm-docs for documentation, chart-testing for CI validation, and helm-diff for change preview.

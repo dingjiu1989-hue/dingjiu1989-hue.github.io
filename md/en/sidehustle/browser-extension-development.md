@@ -83,6 +83,4 @@ WXT (Framework)| Type-safe extensions, modern DX| TypeScript-first, cross-browse
   6. **Promotional images:** Small tile (440x280), large tile (920x680), marquee (1400x560).
   7. **Review time:** 1-5 business days for initial review, 1-3 days for updates.
 
-
-
 **Bottom line:** Browser extensions are a $2B+ market that most developers ignore. Manifest V3 has raised the technical bar (disqualifying amateurs) while improving security for users. Start with Plasmo or WXT for the best developer experience, target Chrome first (80%+ market share), and submit early — the CWS review process often finds issues you will miss. See also: [Chrome Extension Monetization](</en/sidehustle/chrome-extension-monetization.html>) and [Web Security Basics](</en/tech/web-security-basics.html>).

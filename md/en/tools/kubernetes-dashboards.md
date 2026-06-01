@@ -32,9 +32,6 @@ Key features include:
 
   * Extensions API for custom functionality.
 
-
-
-
 Lens' metrics require metrics-server or Prometheus installed on the cluster. Without metrics, the interface loses its most valuable real-time monitoring capability.
 
 The licensing change requires Lens Desktop IDEs to be associated with a Lens account for clusters of 10+ nodes or commercial use. This drove the community fork to OpenLens.
@@ -80,9 +77,6 @@ K9s provides:
   * Pulse view showing cluster health at a glance.
 
   * Custom resource definitions and aliases.
-
-
-
 
 K9s supports skins (themes) for customization and plugins for extensibility. The `:screendump` command captures terminal output, useful for documentation and incident reports.
 

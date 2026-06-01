@@ -46,9 +46,6 @@ Use cases for simple views:
 
   * **Reusable joins** : Encapsulate multi-table aggregations that are queried frequently.
 
-
-
-
 Materialized Views 
 
 A materialized view physically stores the result set. Queries against it are fast because they read pre-computed data rather than executing the full query. 
@@ -90,9 +87,6 @@ Materialized views shine when:
   * Slightly stale data (minutes or hours) is acceptable.
 
   * The result set is small enough to be stored efficiently.
-
-
-
 
 The trade-off is staleness. Between refreshes, queries see snapshots that may differ from the base tables. Design your refresh schedule around business tolerance for latency. 
 

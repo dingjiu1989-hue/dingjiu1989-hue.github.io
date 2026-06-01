@@ -54,9 +54,6 @@ Key design rules:
 
   * Secondary indexes can be local (same partition key, different sort key) or global (different partition key).
 
-
-
-
 ## DynamoDB query
 
 import boto3
@@ -116,9 +113,6 @@ Key design rules:
   * You model tables around your access patterns (query-first design).
 
   * Denormalization is expected and encouraged.
-
-
-
 
 ## Cassandra query
 
@@ -266,9 +260,6 @@ When to Choose Which
 
   * You prioritize operations simplicity over cost optimization.
 
-
-
-
 **Choose Cassandra when** : 
 
   * You run on-premises or multi-cloud.
@@ -281,9 +272,6 @@ When to Choose Which
 
   * Your queries require complex clustering and ordering within partitions.
 
-
-
-
 **Avoid both when** : 
 
   * You need complex joins, aggregations, or ad-hoc queries.
@@ -291,8 +279,5 @@ When to Choose Which
   * ACID transactions across multiple records are critical.
 
   * Your data model has many-to-many relationships.
-
-
-
 
 DynamoDB and Cassandra are both excellent at what they do: high-throughput, scalable key-value and wide-column workloads. The choice depends on your operational preferences, cloud strategy, and cost sensitivity. For most applications starting out, a relational database with read replicas is the simpler and more flexible choice.

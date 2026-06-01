@@ -83,6 +83,4 @@ Platform| Free Tier| Best For
   * **CI/CD:** GitHub Actions (2K min/mo)
   * **Analytics:** Plausible (self-hosted) or Umami
 
-
-
 **This stack handles 10K-100K+ users before you pay anything.** When you do start paying, it's $5-50/month per service, not $500. See also: [Free Hosting Guide](</en/tools/best-free-hosting-side-projects.html>) and [SaaS Bootstrapping](</en/sidehustle/saas-bootstrapping-guide.html>).

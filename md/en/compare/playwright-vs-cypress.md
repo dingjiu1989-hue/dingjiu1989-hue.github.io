@@ -26,9 +26,6 @@ Cypress runs inside the browser alongside your application:
 
   * **DOM snapshot** : Hovering over each command shows the DOM state at that moment
 
-
-
-
 // Cypress test
 
 describe("Login Flow", () => {
@@ -65,9 +62,6 @@ cy.contains("Welcome back").should("be.visible");
 
   * Network stubbing is built-in and powerful
 
-
-
-
 **Weaknesses:**
 
   * Limited to Chromium-family browsers (Chrome, Edge, Firefox) — no Safari or mobile Safari
@@ -77,9 +71,6 @@ cy.contains("Welcome back").should("be.visible");
   * No native web component support for shadow DOM
 
   * Limited to JavaScript/TypeScript
-
-
-
 
 ## Playwright: Out-of-Process Automation
 
@@ -92,9 +83,6 @@ Playwright controls browsers via the Chrome DevTools Protocol (CDP):
   * **Multi-tab** : Full control over multiple pages, frames, and contexts
 
   * **Browser contexts** : Isolated sessions for parallel testing
-
-
-
 
 // Playwright test (with @playwright/test)
 
@@ -136,9 +124,6 @@ await expect(page.getByText("Welcome back")).toBeVisible();
 
   * Superior parallel execution
 
-
-
-
 **Weaknesses:**
 
   * Less intuitive debugging experience than Cypress
@@ -148,9 +133,6 @@ await expect(page.getByText("Welcome back")).toBeVisible();
   * Steeper setup for CI/CD
 
   * Heavier dependency footprint
-
-
-
 
 ## Selector Options
 
@@ -186,9 +168,6 @@ Playwright's `getByRole()` and `getByLabel()` encourage accessible selectors by 
 
   * Built-in retry logic for flaky tests
 
-
-
-
 // playwright.config.js
 
 export default defineConfig({
@@ -210,9 +189,6 @@ fullyParallel: true,
   * Test analytics and flakiness detection
 
   * Free tier is limited to 3 parallel runs
-
-
-
 
 ## API and Request Testing
 
@@ -284,9 +260,6 @@ expect(response.body.token).to.exist;
 
   * You want native mobile device emulation
 
-
-
-
 **Choose Cypress when:**
 
   * Developer experience and debugging are your top priority
@@ -298,9 +271,6 @@ expect(response.body.token).to.exist;
   * You're OK with the Cypress Cloud subscription for parallelism
 
   * You want the most intuitive API for writing tests
-
-
-
 
 ## Conclusion
 

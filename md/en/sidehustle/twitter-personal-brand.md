@@ -22,9 +22,6 @@ The professional return on investment for developer Twitter is substantial:
 
   * **Learning acceleration.** Following smart people and engaging in technical discussions accelerates your learning.
 
-
-
-
 ## Finding Your Voice and Niche
 
 You do not need to be famous or have a millions followers. A focused, engaged audience of 1,000-5,000 relevant followers is more valuable than a diffuse audience of 50,000.
@@ -36,9 +33,6 @@ You do not need to be famous or have a millions followers. A focused, engaged au
   * "I write about Go performance optimization."
 
   * "I help developers understand cloud infrastructure."
-
-
-
 
 Your bio should clearly communicate your focus:
 
@@ -62,9 +56,6 @@ Formula for a good thread:
 
   * Final tweet: summary + call to action (follow, subscribe, or try your product).
 
-
-
-
 **2\. Build in public.** Share your process of building a side project:
 
   * "Today I shipped feature X."
@@ -74,9 +65,6 @@ Formula for a good thread:
   * "I made a mistake with the database schema. Here is what I learned."
 
   * "Launch week: Day 1 results."
-
-
-
 
 Building in public creates a narrative that people want to follow. It humanizes you and makes your projects relatable.
 
@@ -88,9 +76,6 @@ Building in public creates a narrative that people want to follow. It humanizes 
 
   * "Here is why I stopped using [popular tool] and switched to [alternative]."
 
-
-
-
 Contrarian opinions spark discussion and engagement. The goal is thoughtful disagreement, not trolling.
 
 **4\. Value bombs.** Share actionable insights without expecting anything in return:
@@ -100,9 +85,6 @@ Contrarian opinions spark discussion and engagement. The goal is thoughtful disa
   * "Here is the exact Git workflow our team uses for releases."
 
   * "5 VS Code extensions that saved me 10 hours this week."
-
-
-
 
 These tweets establish credibility and are highly shareable.
 
@@ -130,9 +112,6 @@ Twitter rewards consistency. The algorithm favors accounts that tweet multiple t
 
   * 1-2 threads per week.
 
-
-
-
 **Scheduling tools:**
 
   * Typefully (designed for thread drafting).
@@ -140,9 +119,6 @@ Twitter rewards consistency. The algorithm favors accounts that tweet multiple t
   * Hypefury (optimizes posting times).
 
   * Buffer (simple scheduling).
-
-
-
 
 Write tweets in batches. Dedicate 30 minutes per day to Twitter. Respond to notifications and engage with your timeline.
 
@@ -171,9 +147,6 @@ Beyond follower count, track these metrics:
   * **Newsletter signups from Twitter.** Direct conversion tracking.
 
   * **Inbound DMs.** Quality opportunities generated.
-
-
-
 
 ## Common Mistakes
 

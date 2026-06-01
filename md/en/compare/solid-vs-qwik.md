@@ -50,9 +50,6 @@ setCount(c => c + 1)}>+1
 
   * **No virtual DOM** : Direct DOM manipulation via compilation
 
-
-
-
 // Solid.js: automatic dependency tracking
 
 import { createSignal, createEffect, createMemo } from "solid-js";
@@ -97,9 +94,6 @@ console.log(`Showing ${filteredTodos().length} todos`);
 
   * SolidStart meta-framework for full-stack applications
 
-
-
-
 **Weaknesses:**
 
   * Smaller ecosystem than React
@@ -109,9 +103,6 @@ console.log(`Showing ${filteredTodos().length} todos`);
   * JSX without re-rendering requires mental model shift from React
 
   * Less community content and learning resources
-
-
-
 
 ## Qwik
 
@@ -148,9 +139,6 @@ count.value++)}>+1
   * **`$` suffix**: Identifies lazy-loadable boundaries (events, stores, effects)
 
   * **Prefetching** : Predicts user interactions and preloads handlers
-
-
-
 
 // Qwik: code is split per-event by default
 
@@ -194,9 +182,6 @@ Load Todos
 
   * Qwik City meta-framework with routing and data loading
 
-
-
-
 **Weaknesses:**
 
   * Most complex mental model of any framework
@@ -208,9 +193,6 @@ Load Todos
   * Tooling and developer experience still maturing
 
   * Resumability debugging is harder than traditional approaches
-
-
-
 
 ## Performance Comparison
 
@@ -266,9 +248,6 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
 
   * Your team knows React and wants a familiar but faster alternative
 
-
-
-
 **Choose Qwik when:**
 
   * Initial page load performance is critical
@@ -280,9 +259,6 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
   * You want the most advanced code-splitting available
 
   * You're willing to learn a new mental model for maximum performance
-
-
-
 
 ## Conclusion
 

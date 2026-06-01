@@ -28,9 +28,6 @@ A developer-friendly password manager should offer:
 
   * Cross-platform support (macOS, Linux, Windows).
 
-
-
-
 ## 1Password
 
 1Password is the most popular password manager among developers. It offers a robust CLI and excellent developer experience.
@@ -50,9 +47,6 @@ A developer-friendly password manager should offer:
   * Travel mode (remove vaults when crossing borders).
 
   * Watchtower for compromised password alerts.
-
-
-
 
 ## 1Password CLI examples
 
@@ -103,9 +97,6 @@ Bitwarden is the leading open-source password manager. It offers a self-hosted o
   * Unlimited devices on free plan.
 
   * API for programmatic access.
-
-
-
 
 ## Bitwarden CLI examples
 
@@ -300,9 +291,6 @@ bw get password "Production/Database" --session $BW_SESSION
   * **Maximum Unix compatibility** : pass for minimal, scriptable password management.
 
   * **CI/CD heavy** : 1Password Secrets Automation or Bitwarden Secrets Manager.
-
-
-
 
 ## Summary
 

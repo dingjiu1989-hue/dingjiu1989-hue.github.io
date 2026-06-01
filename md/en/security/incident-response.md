@@ -34,9 +34,6 @@ Preparation is the most important phase. Without preparation, every incident bec
 
   * Evidence collection tools (FTK Imager, Volatility, tcpdump)
 
-
-
-
 **Practice regularly** : Run tabletop exercises every quarter. Simulate a ransomware attack, a data exposure, or a compromised credential. Practice builds muscle memory.
 
 ## Phase 2: Detection and Analysis
@@ -55,9 +52,6 @@ Detection relies on monitoring and alerting. Every alert is a potential incident
 
   * User reports of suspicious activity
 
-
-
-
 **Triage questions** :
 
   * What happened? What systems are affected?
@@ -70,9 +64,6 @@ Detection relies on monitoring and alerting. Every alert is a potential incident
 
   * What severity level applies?
 
-
-
-
 **Severity classification** :
 
   * SEV-1: Critical. Active data exfiltration, ransomware, or service-wide compromise. Immediate response required.
@@ -82,9 +73,6 @@ Detection relies on monitoring and alerting. Every alert is a potential incident
   * SEV-3: Medium. Potential compromise under investigation. Phishing campaign targeting employees.
 
   * SEV-4: Low. Minor policy violations. Automated scans with no evidence of exploitation.
-
-
-
 
 ## Phase 3: Containment, Eradication, and Recovery
 
@@ -99,9 +87,6 @@ Containment stops the attack from spreading. Eradication removes the attacker's 
   * Block attacker IP addresses at the firewall.
 
   * Rotate credentials for affected services.
-
-
-
 
 ## Example: Block an IP at the firewall
 
@@ -125,9 +110,6 @@ aws iam update-access-key \
 
   * Deploy WAF rules to block attack patterns.
 
-
-
-
 **Eradication** :
 
   * Remove malware using EDR tools.
@@ -138,9 +120,6 @@ aws iam update-access-key \
 
   * Reset root passwords and privileged credentials.
 
-
-
-
 **Recovery** :
 
   * Restore systems from clean backups.
@@ -150,9 +129,6 @@ aws iam update-access-key \
   * Gradually reintroduce traffic while monitoring for recurrence.
 
   * Communicate recovery status to stakeholders.
-
-
-
 
 ## Phase 4: Post-Incident Activity
 
@@ -173,9 +149,6 @@ The post-mortem is where the team learns from the incident and improves processe
   * Remediation items with owners and deadlines
 
   * Changes to runbooks, tooling, or architecture
-
-
-
 
 ## Post-Mortem: Service Credential Leak
 
@@ -218,9 +191,6 @@ Proper evidence collection preserves data for legal action and root cause analys
   * Record command output with timestamps using the `script` command.
 
   * Maintain chain of custody documentation for all evidence.
-
-
-
 
 ## Capture memory dump with LiME
 

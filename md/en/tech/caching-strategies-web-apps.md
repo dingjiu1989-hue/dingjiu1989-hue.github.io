@@ -99,8 +99,6 @@ Layer| What to Cache| TTL| Invalidation
   * **Data that must be accurate:** Bank balances, inventory counts during flash sales. Use the database directly or use a cache with write-through.
   * **Before you have a performance problem:** Caching prematurely adds complexity. Wait until you measure a bottleneck.
 
-
-
 ## Cache Invalidation Strategies
 
 Strategy| How| When  

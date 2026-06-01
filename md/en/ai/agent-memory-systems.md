@@ -344,7 +344,8 @@ context_parts = []
 
 ## Recent conversation
 
-context_parts.append("=== Recent Context ===\n")
+context_parts.append("=== Recent Context ===
+")
 
 context_parts.extend(self.short_term.get_context())
 
@@ -354,7 +355,9 @@ memories = self.long_term.recall(query, k=3)
 
 if memories:
 
-context_parts.append("\n=== Related Memories ===\n")
+context_parts.append("
+=== Related Memories ===
+")
 
 context_parts.extend([m["content"] for m in memories])
 
@@ -364,7 +367,9 @@ episodes = self.episodic.retrieve_similar_episodes(query, k=2)
 
 if episodes:
 
-context_parts.append("\n=== Similar Past Experiences ===\n")
+context_parts.append("
+=== Similar Past Experiences ===
+")
 
 for ep in episodes:
 
@@ -380,11 +385,14 @@ facts = self.semantic.query_fact(entity)
 
 if facts:
 
-context_parts.append(f"\n=== Facts about {entity} ===\n")
+context_parts.append(f"
+=== Facts about {entity} ===
+")
 
 context_parts.extend(facts)
 
-return "\n".join(context_parts)
+return "
+".join(context_parts)
 
 ## Conclusion
 

@@ -30,8 +30,6 @@ Customers already pay for similar tools| If nobody pays for a similar solution, 
   * **Indie Hackers and Hacker News.** See what solo founders are building and look for adjacent problems.
   * **Reddit pain points.** Search for "I wish there was a tool that..." or "frustrated with [tool]"
 
-
-
 ## Phase 2: Validate Before You Build (Week 2-3)
 
 The #1 mistake: building for 6 months before showing anyone. Instead:
@@ -40,8 +38,6 @@ The #1 mistake: building for 6 months before showing anyone. Instead:
   2. **Talk to 10 potential customers.** Not friends or family. Actual people in your target market. Ask: "What do you currently use to solve this problem? What would make you switch?"
   3. **Get 50 email signups.** Post your landing page on relevant Reddit communities, Twitter, LinkedIn, and niche forums. If you can't get 50 people to give you their email, you haven't found a painful enough problem.
   4. **Pre-sell if possible.** Offer a 50% lifetime discount for the first 20 customers who pay before launch. Pre-sales validate that people will actually open their wallets.
-
-
 
 ## Phase 3: Build the MVP (Week 3-7)
 
@@ -67,8 +63,6 @@ Ship the smallest thing someone will pay for:
   * A simple onboarding flow (2-3 steps max)
   * Basic error messages and loading states
 
-
-
 Skip: user analytics dashboards, team features, custom domains, white-label, detailed documentation, and anything "nice to have."
 
 ## Phase 4: Launch and Get First Customers (Week 7-8)
@@ -78,8 +72,6 @@ Skip: user analytics dashboards, team features, custom domains, white-label, det
   3. **Write a launch blog post.** "Why I Built X" or "How I Built X in 6 Weeks" — these stories resonate with developers and get shared organically.
   4. **Reach out to your pre-launch email list.** These people already expressed interest. Offer them a launch-week discount.
   5. **Engage in relevant communities.** Not by spamming your link, but by genuinely helping people and mentioning your tool only when it directly solves their stated problem.
-
-
 
 ## Phase 5: Pricing That Works
 

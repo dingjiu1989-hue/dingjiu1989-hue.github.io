@@ -32,9 +32,6 @@ Responsibilities:
 
   * Maintain shift logs
 
-
-
-
 ## Tier 1 triage automation example
 
 def triage_alert(alert):
@@ -81,9 +78,6 @@ Responsibilities:
 
   * Playbook refinement
 
-
-
-
 Tier 3 — Advanced Analysis 
 
 Tier 3 analysts handle the most complex incidents, develop detection rules, perform threat hunting, and conduct post-incident reviews. 
@@ -99,9 +93,6 @@ Responsibilities:
   * Red/purple team collaboration
 
   * Incident review and lessons learned
-
-
-
 
 SIEM Tuning 
 

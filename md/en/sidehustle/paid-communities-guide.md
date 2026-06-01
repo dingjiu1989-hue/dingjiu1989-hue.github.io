@@ -40,6 +40,4 @@ Content Creator| $5-15/mo| Ad-free content, early access, behind-the-scenes, pol
   4. **Hire moderators early:** At 500+ members, you cannot do it alone. Promote active members to moderator roles
   5. **Run cohort-based programs:** 8-week structured programs within the community boost retention and justify higher pricing
 
-
-
 **Bottom line:** A paid community is a marathon, not a sprint. Expect 6-12 months to reach $5K/month. Focus on exceptional member experience and real outcomes — the best marketing is happy members who tell their friends. See also: [Newsletter Monetization](</en/sidehustle/newsletter-monetization-guide.html>) and [Selling Online Courses](</en/sidehustle/create-online-course.html>).

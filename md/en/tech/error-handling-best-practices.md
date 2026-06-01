@@ -136,6 +136,4 @@ Error Type| HTTP Status| Retry?| Show User?| Notify Dev?
   * Add a request ID to every error log. Makes debugging across services possible.
   * Alert on 5xx spike, not every 5xx. A single 500 might be a blip. 50 in a minute is an incident.
 
-
-
 **Bottom line:** Structured errors + global handler + external service retries + proper logging = an error system that helps you fix bugs instead of hiding them. See also: [Testing Strategies](</en/tech/testing-strategies-web-apps.html>) and [CI/CD Tools](</en/tools/best-cicd-tools-2026.html>).

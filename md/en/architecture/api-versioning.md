@@ -34,9 +34,6 @@ The most common and straightforward approach:
 
   * Easy to test different versions.
 
-
-
-
 **Cons:**
 
   * URL pollution -- the version is part of the resource identifier, which some argue violates REST principles.
@@ -44,9 +41,6 @@ The most common and straightforward approach:
   * Difficult to manage granular versioning (versioning one endpoint without versioning others).
 
   * Clients tend to hardcode the version in URLs, making upgrades less frequent.
-
-
-
 
 **Best for:** Public APIs where simplicity and discoverability are priorities. Used by Twitter, Stripe, and GitHub. 
 
@@ -66,9 +60,6 @@ Include the version as a query parameter:
 
   * Easy to implement on the server side.
 
-
-
-
 **Cons:**
 
   * Pollutes query parameters.
@@ -78,9 +69,6 @@ Include the version as a query parameter:
   * Caching becomes more complex since the same URL with different query parameters may produce different responses.
 
   * Not suitable for proxy-level routing.
-
-
-
 
 **Best for:** Internal APIs or APIs where URL cleanliness is a priority over visibility. 
 
@@ -106,9 +94,6 @@ X-API-Version: 1
 
   * Content negotiation is a standard HTTP mechanism.
 
-
-
-
 **Cons:**
 
   * Hidden -- developers cannot see the version just by looking at the URL.
@@ -118,9 +103,6 @@ X-API-Version: 1
   * More complex routing at the proxy level.
 
   * Web browsers and simple HTTP clients may not support custom headers well.
-
-
-
 
 **Best for:** REST purists who want to follow HTTP semantics strictly. Used by GitHub (in the past) and Twilio. 
 
@@ -136,9 +118,6 @@ There is no universally correct choice. Consider your audience:
 
   * For RESTful APIs where HTTP semantics matter, header-based versioning aligns with the principles of content negotiation.
 
-
-
-
 Semantic Versioning for APIs 
 
 Apply semantic versioning principles to your API: 
@@ -148,9 +127,6 @@ Apply semantic versioning principles to your API:
   * **Minor version** (v1.1): Backward-compatible additions (new endpoints, new optional fields).
 
   * **Patch version** (v1.1.1): Bug fixes that do not change the API contract.
-
-
-
 
 In practice, most APIs only expose the major version and use minor/patch versions internally for documentation purposes. 
 
@@ -207,9 +183,6 @@ The best versioning strategy is not needing one. Design your API to be extensibl
   * Return more data than clients need (clients can ignore extra fields).
 
   * Use wire-format tolerant data structures (maps instead of fixed objects).
-
-
-
 
 GraphQL eliminates many versioning concerns by letting clients specify exactly what they need. 
 

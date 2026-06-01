@@ -42,8 +42,6 @@ Site| Focus| Frequency
   * **CodeMentor** — Get paid to do code reviews and mentoring. Lower volume but high hourly rates.
   * **Working Nomads** — Curated remote job newsletter. Subscribe and get filtered jobs in your inbox.
 
-
-
 ## How to Stand Out
 
   1. **Specialize, don't generalize.** "Full-stack developer" is a commodity. "React developer specializing in real-time dashboards" gets hired at 3x the rate.

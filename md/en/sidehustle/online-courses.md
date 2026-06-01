@@ -22,9 +22,6 @@ The market for technical education is massive and growing:
 
   * Video content has higher perceived value than written content.
 
-
-
-
 A course teaching developers a specific, valuable skill at $99-299 per student is a compelling value proposition when it saves them days or weeks of self-study.
 
 ## Choosing Your Course Topic
@@ -40,9 +37,6 @@ The best course topics sit at the intersection of three factors:
   * Job postings requiring the skill.
 
   * Questions on Stack Overflow and Reddit.
-
-
-
 
 **Your expertise.** You need to be genuinely knowledgeable. Students will spot shallow knowledge. You do not need to be the world's top expert, but you should have 2+ years of practical experience.
 
@@ -61,9 +55,6 @@ The best course topics sit at the intersection of three factors:
   * Mobile development with React Native or Flutter.
 
   * DevOps and CI/CD pipeline building.
-
-
-
 
 ## Course Structure and Curriculum
 
@@ -86,9 +77,6 @@ A well-structured course follows a proven format:
   * Individual videos: 5-15 minutes. Videos longer than 20 minutes have significantly lower completion rates.
 
   * Keep each video focused on one concept or step.
-
-
-
 
 ## Production Quality
 
@@ -114,9 +102,6 @@ Good production quality is important but does not need to be expensive:
 
   * Pricing models vary ($29-99/month + transaction fees).
 
-
-
-
 **Marketplace (largest audience):**
 
   * **Udemy:** Massive built-in audience but 63% revenue share (97% if student comes through paid ads). No control over pricing (Udemy runs frequent sales).
@@ -124,9 +109,6 @@ Good production quality is important but does not need to be expensive:
   * **Skillshare:** Subscription model. Paid based on watch time. Good for shorter, skills-focused content.
 
   * **Pluralsight:** Invitation-only for instructors. Higher quality standards but established audience.
-
-
-
 
 **Hybrid approach:** Publish on Udemy for discovery and audience building. Create a premium, extended version on Teachable for higher revenue per student.
 
@@ -141,9 +123,6 @@ Technical course pricing guidelines:
   * **Comprehensive course** (8-15 hours): $199-299.
 
   * **Bundle or certification prep:** $299-499.
-
-
-
 
 Udemy pricing is different. Courses are typically priced at $19.99-49.99 due to platform norms. Udemy's constant sales mean students expect discounts. Do not make Udemy your only distribution channel for premium pricing.
 
@@ -171,9 +150,6 @@ Technical courses require maintenance:
 
   * Archive outdated courses or mark them clearly.
 
-
-
-
 A 10% annual update effort (1-2 days per year for a 10-hour course) keeps content relevant and prevents negative reviews.
 
 ## Revenue Expectations
@@ -184,17 +160,11 @@ A 10% annual update effort (1-2 days per year for a 10-hour course) keeps conten
 
   * Month 4-12: $200-500/month passive.
 
-
-
-
 **Third course (with existing audience):**
 
   * Launch month: $5,000-20,000.
 
   * Ongoing: $1,000-5,000/month passive.
-
-
-
 
 Top technical course creators earn $50,000-500,000+/year with a portfolio of courses.
 

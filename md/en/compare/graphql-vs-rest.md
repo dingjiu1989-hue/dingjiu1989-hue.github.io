@@ -118,9 +118,6 @@ author { name }
 
   * **Relay's cache** : More opinionated, built for Facebook-scale apps
 
-
-
-
 // Apollo Client normalized cache
 
 const cache = new InMemoryCache({
@@ -241,9 +238,6 @@ OpenAPI provides similar contract guarantees but requires more boilerplate to ma
 
   * Connection pooling per endpoint
 
-
-
-
 **GraphQL** faces performance challenges:
 
   * N+1 queries: Resolving nested relations requires solutions like DataLoader
@@ -251,9 +245,6 @@ OpenAPI provides similar contract guarantees but requires more boilerplate to ma
   * Query complexity: A malicious client can request expensive nested queries
 
   * No CDN caching for POST requests (unless using GET-based queries)
-
-
-
 
 // DataLoader prevents N+1 queries in GraphQL
 
@@ -283,9 +274,6 @@ posts: (parent) => userLoader.load(parent.authorId)
 
   * Inline documentation: Field descriptions visible in the query explorer
 
-
-
-
 **REST** tooling is more mature but less interactive:
 
   * Postman/Hoppscotch: Request collections and testing
@@ -293,9 +281,6 @@ posts: (parent) => userLoader.load(parent.authorId)
   * Swagger UI: Interactive API documentation
 
   * curl: Universal, no special tools needed
-
-
-
 
 ## When to Choose What
 
@@ -311,9 +296,6 @@ posts: (parent) => userLoader.load(parent.authorId)
 
   * You value strong typing and auto-generated documentation
 
-
-
-
 **Choose REST when:**
 
   * Your API is primarily consumed by third-party developers
@@ -325,9 +307,6 @@ posts: (parent) => userLoader.load(parent.authorId)
   * You need maximum compatibility with existing tools and proxies
 
   * Your endpoints return fixed responses (no client-specific shaping needed)
-
-
-
 
 ## Conclusion
 

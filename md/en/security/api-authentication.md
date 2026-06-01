@@ -250,7 +250,11 @@ nonce = secrets.token_hex(8)
 
 ## Build message to sign
 
-message = f"{method}\n{path}\n{timestamp}\n{nonce}\n".encode() + body
+message = f"{method}
+{path}
+{timestamp}
+{nonce}
+".encode() + body
 
 signature = hmac.new(
 
@@ -312,7 +316,11 @@ if not secret:
 
 return False
 
-message = f"{method}\n{path}\n{timestamp}\n{nonce}\n".encode() + body
+message = f"{method}
+{path}
+{timestamp}
+{nonce}
+".encode() + body
 
 expected = hmac.new(secret.encode(), message, hashlib.sha256).hexdigest()
 

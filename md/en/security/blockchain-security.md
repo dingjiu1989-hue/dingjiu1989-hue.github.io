@@ -46,9 +46,6 @@ An attacker contract can exploit this by calling `withdraw` repeatedly from its 
 
   * Use OpenZeppelin's ReentrancyGuard modifier.
 
-
-
-
 // SAFE: Checks-Effects-Interactions
 
 contract SafeWithdraw {
@@ -84,9 +81,6 @@ Smart contracts rely on oracles to bring off-chain data (price feeds, randomness
   * Implement time-weighted average prices (TWAP) rather than spot prices.
 
   * Add sanity checks and circuit breakers for price movements beyond normal ranges.
-
-
-
 
 // Using Chainlink price feed with TWAP protection
 
@@ -132,9 +126,6 @@ Transactions in the mempool are visible to all. MEV (Maximal Extractable Value) 
 
   * Use private transaction relayers (Flashbots, MEV Blocker).
 
-
-
-
 ## Integer Overflow and Underflow
 
 While Solidity 0.8+ includes built-in overflow checking via `unchecked` blocks, older versions required SafeMath. Always use SafeMath or Solidity 0.8+ for arithmetic.
@@ -166,9 +157,6 @@ Improper access control allows unauthorized users to call privileged functions. 
   * Follow the principle of least privilege for admin functions.
 
   * Use multi-signature wallets for privileged operations.
-
-
-
 
 // Secure access control with OpenZeppelin
 
@@ -207,9 +195,6 @@ Auditing is the primary defense against smart contract vulnerabilities. A thorou
   * **Mythril** : Security analysis tool that uses symbolic execution to find vulnerabilities.
 
   * **Echidna** : Fuzzing tool that tests contract properties using random inputs.
-
-
-
 
 ## Slither analysis
 
@@ -273,9 +258,6 @@ Automated tools catch common patterns but miss business logic flaws. Manual revi
 
   * **Token handling** : Does the contract handle non-standard ERC-20 tokens (USDT, fee-on-transfer)?
 
-
-
-
 ## Formal Verification
 
 Formal verification mathematically proves that a contract satisfies specified properties. It is the highest assurance level for smart contract security.
@@ -287,9 +269,6 @@ Formal verification mathematically proves that a contract satisfies specified pr
   * **KEVM / K Framework** : Executable formal semantics of the EVM.
 
   * **Halmos** : Symbolic testing tool for Foundry-compatible projects.
-
-
-
 
 // Certora property specification
 
@@ -326,9 +305,6 @@ User wallets are a major attack vector. Protecting wallet infrastructure is crit
   * Use hardware security modules (HSMs) or cloud KMS for server-side keys.
 
   * Implement multi-party computation (MPC) for distributed key management.
-
-
-
 
 ## EIP-712 Structured Data Signing
 

@@ -28,9 +28,6 @@ OpenAI's DALL-E 3 excels at understanding complex prompts and rendering text wit
 
   * Strong safety filters prevent problematic outputs
 
-
-
-
 **Limitations:**
 
   * Less stylistic variety than Midjourney
@@ -38,9 +35,6 @@ OpenAI's DALL-E 3 excels at understanding complex prompts and rendering text wit
   * Cannot generate images of public figures or copyrighted styles
 
   * Lower maximum resolution (1024x1792 or 1792x1024)
-
-
-
 
 **Best for:** General use, marketing materials, images with text
 
@@ -76,9 +70,6 @@ Midjourney produces the most artistically striking images, with a distinctive ae
 
   * Consistent character generation with "cref" parameter
 
-
-
-
 **Limitations:**
 
   * Requires Discord to use (no dedicated API)
@@ -88,9 +79,6 @@ Midjourney produces the most artistically striking images, with a distinctive ae
   * Weaker at rendering text and complex scenes
 
   * Steeper learning curve for parameters
-
-
-
 
 **Best for:** Artistic work, concept art, character design
 
@@ -110,9 +98,6 @@ Stable Diffusion is the open-source option, offering maximum control and customi
 
   * ControlNet for precise spatial control
 
-
-
-
 **Limitations:**
 
   * Requires technical setup for best results
@@ -120,9 +105,6 @@ Stable Diffusion is the open-source option, offering maximum control and customi
   * Vanilla model quality lags behind Midjourney
 
   * Requires GPU for reasonable speed
-
-
-
 
 **Best for:** Custom workflows, fine-tuned models, offline generation
 
@@ -158,9 +140,6 @@ Different styles dramatically change output:
 
   * **Anime** : "anime style, cel-shaded, Studio Ghibli inspired, soft pastel colors"
 
-
-
-
 ## Advanced Techniques
 
 ## ControlNet (Stable Diffusion)
@@ -175,17 +154,11 @@ ControlNet provides spatial control over image generation:
 
   * **Normal maps** : Control surface details
 
-
-
-
 ## Inpainting and Outpainting
 
   * **Inpainting** : Replace specific regions of an image while preserving the rest
 
   * **Outpainting** : Extend an image beyond its original boundaries
-
-
-
 
 ## LoRA Fine-Tuning
 
@@ -216,8 +189,6 @@ image = pipe("a character in a garden, anime style").images[0]
 A production image generation pipeline:
 
   * **Brief analysis** : Extract subject, style, and composition requirements
-
-
 
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Prompt construction** : Build structured prompt with all components
 

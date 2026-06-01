@@ -80,20 +80,19 @@ unit_price DECIMAL(10,2)
 
   * Index hints: `-- indexed on order_date for range queries`
 
-
-
-
 def build_schema_context(tables):
 
 context_parts = []
 
 for table in tables:
 
-ddl = f"CREATE TABLE {table.name} (\n"
+ddl = f"CREATE TABLE {table.name} (
+"
 
 for col in table.columns:
 
-ddl += f" {col.name} {col.type} -- {col.description}\n"
+ddl += f" {col.name} {col.type} -- {col.description}
+"
 
 ddl += ");"
 
@@ -105,7 +104,9 @@ if table.sample_rows:
 
 context_parts.append(f"-- Sample row: {table.sample_rows[0]}")
 
-return "\n\n".join(context_parts)
+return "
+
+".join(context_parts)
 
 ## Few-Shot Examples
 
@@ -209,9 +210,14 @@ Examples:
 
 for ex in examples:
 
-prompt += f"\nQ: {ex['question']}\nSQL: {ex['query']}\n"
+prompt += f"
+Q: {ex['question']}
+SQL: {ex['query']}
+"
 
-prompt += f"\nQ: {question}\nSQL:"
+prompt += f"
+Q: {question}
+SQL:"
 
 return prompt
 
@@ -295,7 +301,9 @@ else:
 
 feedback = f"Validation errors: {', '.join(errors)}"
 
-question = f"Original question: {question}\nPrevious attempt failed: {feedback}\nPlease fix the SQL query."
+question = f"Original question: {question}
+Previous attempt failed: {feedback}
+Please fix the SQL query."
 
 ## Schema Linking
 

@@ -26,9 +26,6 @@ A good Markdown editor should provide:
 
   * Git integration for version control.
 
-
-
-
 ## VS Code (with Extensions)
 
 VS Code is arguably the best Markdown editor with the right extensions. Its built-in Markdown support is already good, and extensions make it exceptional.
@@ -71,9 +68,6 @@ Obsidian has become the most popular Markdown-based knowledge management tool. I
 
   * Vim keybindings support.
 
-
-
-
 ## Note structure in Obsidian
 
 ## Links
@@ -108,9 +102,6 @@ Typora is a minimal Markdown editor with a unique live-preview approach -- it hi
 
   * Themes and custom CSS.
 
-
-
-
 **Pros** : Beautiful, distraction-free interface, best for focus-based writing, excellent export options.
 
 **Cons** : Not open source, no plugin system, limited organization features.
@@ -130,9 +121,6 @@ Notable is a cross-platform Markdown editor with a three-pane layout (folders, f
   * Multi-note editing.
 
   * Code snippet support with highlighting.
-
-
-
 
 **Pros** : Clean organization, encryption support, fast search.
 
@@ -156,9 +144,6 @@ Logseq is an open-source knowledge management tool that uses an outliner format 
 
   * Git-based sync.
 
-
-
-
 **Pros** : Powerful linking and referencing, open source, strong community.
 
 **Cons** : Outliner style takes adjustment, not for traditional document writing.
@@ -178,9 +163,6 @@ iA Writer is a focused writing app that emphasizes typography and minimalism. It
   * Library organization.
 
   * Direct publishing to Medium, WordPress.
-
-
-
 
 **Pros** : Best-in-class typography, cross-platform sync, excellent focus features.
 
@@ -235,9 +217,6 @@ SUMMARY.md
   * **For presentations** : Marp (Markdown to slides).
 
   * **For documentation sites** : VitePress or Docusaurus.
-
-
-
 
 ## Summary
 

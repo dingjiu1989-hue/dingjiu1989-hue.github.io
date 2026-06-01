@@ -36,9 +36,6 @@ Events differ from commands and messages:
 
   * **Message** : Data sent between services, may be a command or an event.
 
-
-
-
 Event Sourcing 
 
 Event sourcing stores the state of an application as a sequence of events. Instead of storing the current state (e.g., "account balance = 100"), event sourcing stores every state change ("AccountOpened", "MoneyDeposited", "MoneyWithdrawn"). 
@@ -129,9 +126,6 @@ Benefits of Event Sourcing
 
   * **Event-driven projections** : Build multiple read models from the same events.
 
-
-
-
 When NOT to Use Event Sourcing 
 
   * Simple CRUD applications where audit trails are not needed.
@@ -141,9 +135,6 @@ When NOT to Use Event Sourcing
   * When the event store becomes a performance bottleneck for write-heavy workloads.
 
   * When domain events are not a natural modeling fit.
-
-
-
 
 Pub/Sub Pattern 
 
@@ -191,9 +182,6 @@ When to Use Pub/Sub
 
   * **Decoupled integration** : Services should not know about each other.
 
-
-
-
 Event Streaming with Kafka 
 
 Apache Kafka is the dominant platform for event streaming at scale. It provides durable, ordered, and partitioned event storage. 
@@ -209,9 +197,6 @@ Kafka Concepts
   * **Consumer** : Reads events from a topic partition.
 
   * **Consumer group** : A set of consumers that cooperate to consume a topic. Each partition is consumed by exactly one consumer in the group.
-
-
-
 
 from kafka import KafkaProducer, KafkaConsumer
 
@@ -353,9 +338,6 @@ Schema Evolution Rules
 
   * **Full compatible** : Both backward and forward compatible.
 
-
-
-
 Rules:
 
   * Do not remove required fields.
@@ -365,9 +347,6 @@ Rules:
   * Do not rename fields.
 
   * Do not change field types.
-
-
-
 
 Idempotent Consumers 
 

@@ -38,6 +38,4 @@ Community as SaaS Funnel| $5K-$200K/mo| Developer tool companies| Supabase Disco
   5. **Celebrate wins publicly:** When a member gets a job, launches a project, or solves a problem — highlight it. Their success is your community's marketing.
   6. **Protect the culture:** One toxic member can destroy a community. Have clear rules, enforce them consistently, and remove bad actors quickly.
 
-
-
 **Bottom line:** A paid developer community is one of the most sustainable side hustles — recurring revenue, high margins, and genuine impact. Start with a free community on Discord or Discourse, build engagement for 6-12 months, then add a paid tier when members start asking "how can I support this?" The key: the community must provide value EVEN TO LURKERS — if you charge from day one, you will never reach critical mass. See also: [Paid Communities Guide](</en/sidehustle/paid-communities-guide.html>) and [Newsletter Monetization Guide](</en/sidehustle/newsletter-monetization-guide.html>).

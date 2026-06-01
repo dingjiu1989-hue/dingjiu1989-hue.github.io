@@ -43,8 +43,6 @@ NVIDIA's model is built on a three-pillar strategy: GPU hardware + CUDA software
   * **Professional Visualization** (2.5%): Quadro/RTX workstation GPUs for industrial design, scientific computing
   * **Automotive & Robotics** (1.5%): DRIVE Orin/Thor autonomous driving, Jetson edge AI
 
-
-
 In 2026, NVIDIA's core narrative has shifted from "selling chips" to "selling AI factories." The Blackwell GB200 NVL72 rack-scale solution integrates 72 GPUs + 36 Grace CPUs into a single exaflop-class compute unit, priced at over $3 million per rack.
 
 __
@@ -66,8 +64,6 @@ __Data Insight: Global Semiconductor Market Cap
   3. **System-Level Solution** : NVLink+NVSwitch+Mellanox networking forms a complete data center interconnect stack, eliminating third-party dependencies.
   4. **Pricing Power** : Data Center GPU gross margins exceed 80% amid supply-constrained demand from Microsoft, Meta, Google, and Amazon.
 
-
-
 __Data Insight: AI Accelerator Market Share
 
 ## 2\. Financial Analysis
@@ -81,8 +77,6 @@ __Data Insight: AI Accelerator Market Share
   * **Automotive** : $1.7B (+25% YoY)
   * **Q1 FY2027** : Revenue $43B (+10% QoQ), Data Center $38.5B
 
-
-
 __Data Insight: Revenue & Data Center Growth
 
 ### 2.2 Profitability
@@ -92,8 +86,6 @@ __Data Insight: Revenue & Data Center Growth
   * **Non-GAAP Diluted EPS** : $2.94 (+130% YoY)
   * **Free Cash Flow** : $60.2B
 
-
-
 __Data Insight: Gross & Net Margin Trend
 
 ## 3\. Technical Analysis
@@ -102,8 +94,6 @@ __Data Insight: Gross & Net Margin Trend
   * **Current Price** : ~$185 (May 2026)
   * **YTD** : +38%, driven by Blackwell ramp and Rubin roadmap acceleration
   * **GTC Effect** : Stock jumped 12% in March after Rubin platform announcement
-
-
 
 __Data Insight: NVDA 52-Week Price
 
@@ -149,8 +139,6 @@ High Vol
   * **Jefferies** : Hold, target $170. Long-term CSP custom chip threat (Google TPU, Amazon Trainium).
   * **Consensus Target** : $195, implying ~5% upside.
 
-
-
 __Data Insight: Wall Street Targets
 
 ## 5\. Competitive Comparison
@@ -172,8 +160,6 @@ Software Ecosystem | CUDA | ROCm | oneAPI | None
   * **Cash** : $68B, zero net debt.
   * **Shareholder Returns** : $32B buybacks + $1B dividends in FY2026.
 
-
-
 ## 7\. Key Risks
 
   * **AI Capex Cycle Inflection** : If hyperscalers (Microsoft, Meta, Google) cut AI budgets, DC revenue could crash from triple-digit growth to single digits.
@@ -181,8 +167,6 @@ Software Ecosystem | CUDA | ROCm | oneAPI | None
   * **Export Controls Escalation** : US chip export restrictions to China keep tightening (B200 now on controlled list).
   * **Competition Closing the Gap** : AMD MI400 due late 2026; performance gap may shrink to 15-20%. Broadcom + ByteDance/OpenAI custom chip partnerships growing.
   * **Valuation at Perfection** : $5.8T market cap has already priced in the most bullish scenario.
-
-
 
 __
 
@@ -220,7 +204,5 @@ AI compute demand is structurally growing, but $5.8T already prices in extreme o
   6. [Counterpoint — AI Chip Tracker (Q1 2026)](<https://www.counterpointresearch.com/>)
   7. [Mercury Research — GPU Market Share](<https://www.mercuryresearch.com/>)
   8. [Yahoo Finance — NVDA](<https://finance.yahoo.com/quote/NVDA/>)
-
-
 
 **Disclaimer:** This analysis is for informational and educational purposes only and does not constitute investment advice. It is based on publicly available information, historical data, and model analysis as of the report date, which may involve certain lag and limitations. Past performance does not guarantee future results. Investors should make their own independent assessment and consider their personal risk tolerance before making any investment decisions.

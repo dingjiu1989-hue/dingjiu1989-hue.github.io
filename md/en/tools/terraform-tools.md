@@ -388,7 +388,4 @@ hooks:
 
   * **Code quality** : Set up pre-commit hooks for terraform fmt, validate, tflint, and docs.
 
-
-
-
 The ideal Terraform workflow combines all these tools: Terragrunt for structure, pre-commit for quality, tfssec for security, Infracost for cost awareness, and Terratest for deployment validation.

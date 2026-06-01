@@ -52,9 +52,6 @@ Nodes are Python functions that receive the state and return updates. Each node 
 
   * `should_continue` — a conditional edge function that routes to `continue` or `end`
 
-
-
-
 ## Conditional Routing
 
 Conditional edges are what make LangGraph powerful. A routing function inspects the state and returns the next node name:
@@ -136,9 +133,6 @@ Each search node runs concurrently. A merge function combines results into a uni
   * For production, use `SQLiteSaver` instead of `MemorySaver` to survive restarts
 
   * Limit graph depth to under 20 nodes for predictable latency
-
-
-
 
 ## Real-World Example
 

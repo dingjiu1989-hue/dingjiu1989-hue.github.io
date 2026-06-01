@@ -44,6 +44,4 @@ Full backend + DB| **Render** (web service + Postgres) or **Railway** (app + DB)
   * **Database backups:** Most free DB tiers don't include automated backups. Set up your own.
   * **Custom domain SSL:** All these platforms support custom domains, but some require a paid plan for team features or analytics.
 
-
-
 **Bottom line:** You can ship a production-quality side project for $0/month in 2026. Cloudflare Pages for static, Vercel for Next.js, Render for APIs, Supabase for backend, and Cloudflare Workers for edge functions. No credit card required for any of the above. See also: [Hosting Comparison](</en/compare/vercel-vs-netlify-vs-cloudflare.html>) and [SaaS Bootstrapping Guide](</en/sidehustle/saas-bootstrapping-guide.html>).

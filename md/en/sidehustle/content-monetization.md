@@ -454,7 +454,9 @@ if (tutorials.includes(code)) {
 
 const link = generateAffiliateLink(tool, code);
 
-return `${code}\n\n`;
+return `${code}
+
+`;
 
 }
 

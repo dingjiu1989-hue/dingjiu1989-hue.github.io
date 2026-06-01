@@ -114,9 +114,6 @@ Several tools can validate your security headers:
 
   * **curl** : Quick manual check:
 
-
-
-
 curl -sI https://example.com | grep -i '^strict-transport|^content-security|^x-content-type|^x-frame|^referrer'
 
 Common Mistakes 
@@ -130,9 +127,6 @@ Common Mistakes
   * **Not preloading HSTS** : The first request is still vulnerable without preloading.
 
   * **Overly permissive CORS headers** : `Access-Control-Allow-Origin: *` combined with credentials exposes your API to any site.
-
-
-
 
 Summary 
 

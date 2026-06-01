@@ -44,9 +44,6 @@ return jsonify(user)
 
   * Excellent for small to medium applications
 
-
-
-
 **Weaknesses:**
 
   * No built-in async support (flask async views were added but are limited compared to FastAPI)
@@ -56,9 +53,6 @@ return jsonify(user)
   * "Batteries not included" means more decisions and potential inconsistencies
 
   * WSGI-only, cannot take full advantage of async Python
-
-
-
 
 ## Django
 
@@ -108,9 +102,6 @@ return Response({"error": "Not found"}, status=404)
 
   * Large community and extensive documentation
 
-
-
-
 **Weaknesses:**
 
   * Heavy and opinionated — hard to deviate from Django's way
@@ -120,9 +111,6 @@ return Response({"error": "Not found"}, status=404)
   * ORM is powerful but can be slow for complex queries
 
   * Async support is relatively new and not as seamless as FastAPI
-
-
-
 
 ## FastAPI
 
@@ -168,9 +156,6 @@ return user
 
   * Modern Python features (type hints, dataclasses, async/await)
 
-
-
-
 **Weaknesses:**
 
   * Younger ecosystem than Django or Flask
@@ -180,9 +165,6 @@ return user
   * Less suitable for traditional server-rendered HTML applications
 
   * ORM choices (SQLAlchemy, Tortoise-ORM) require additional setup
-
-
-
 
 ## Comparison Table
 
@@ -218,9 +200,6 @@ FastAPI's async-native architecture gives it a significant performance advantage
 
   * **Flask** (with Gunicorn): ~2,000-4,000 requests/second
 
-
-
-
 For CPU-bound tasks, the difference narrows since Python's GIL still applies.
 
 ## When to Choose What
@@ -237,9 +216,6 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
 
   * You're prototyping and want the fastest setup
 
-
-
-
 **Choose Django when:**
 
   * You're building a data-driven web application with complex models
@@ -252,9 +228,6 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
 
   * You're building a content management system or e-commerce platform
 
-
-
-
 **Choose FastAPI when:**
 
   * You're building a high-performance API or microservice
@@ -266,9 +239,6 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
   * Your API serves AI/ML models (FastAPI's async model serving is excellent)
 
   * You value type safety and automatic validation
-
-
-
 
 ## Conclusion
 

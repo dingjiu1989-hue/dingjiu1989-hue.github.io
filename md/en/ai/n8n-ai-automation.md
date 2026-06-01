@@ -30,8 +30,6 @@ Monitor an RSS feed, fetch articles, and generate AI summaries posted to Slack:
 
   * RSS Feed Read node — Poll tech blogs every 4 hours
 
-
-
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. HTTP Request node — Fetch each article's full text
 
 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. OpenAI node (Summarize) — Generate 3-bullet summary
@@ -45,8 +43,6 @@ n8n's expression system passes data between nodes: =$json.articleContent pulls t
 Classify, route, and respond to support tickets automatically:
 
   * Webhook node — Receive ticket from Zendesk/Intercom
-
-
 
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. OpenAI node (Classify) — Categorize: bug/feature/question/urgent
 
@@ -65,8 +61,6 @@ The classification prompt: "Classify this ticket into bug/feature/question/urgen
 Create a complete content marketing pipeline:
 
   * Schedule node — Weekly trigger Monday 9 AM
-
-
 
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. AI node — Generate 5 blog topics from your strategy doc
 
@@ -90,8 +84,6 @@ Enrich CRM records with AI-generated insights:
 
   * Database node — Read leads table
 
-
-
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. OpenAI node — For each lead: company description, industry, engagement score (1-10)
 
 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Database node — Update records with enrichment
@@ -103,8 +95,6 @@ n8n's JSON output parser validates AI responses before writing to database. Malf
 Build a RAG research agent:
 
   * Manual node — Trigger with a question
-
-
 
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Vector Store node — Query document embeddings (Pinecone/Qdrant)
 

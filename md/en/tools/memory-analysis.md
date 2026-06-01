@@ -270,7 +270,4 @@ memray flamegraph memray-myapp.*.bin
 
   * **Quick memory error detection** : GCC/Clang address sanitizer during development.
 
-
-
-
 Start with the lowest-overhead tool for your language. For C/C++, use ASan during development and heaptrack for deeper analysis. For Python, memray is the best all-around choice. Reserve Valgrind for hard-to-find memory errors that simpler tools miss.

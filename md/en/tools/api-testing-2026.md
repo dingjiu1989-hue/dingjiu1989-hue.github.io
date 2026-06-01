@@ -314,7 +314,4 @@ return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });
 
   * **Privacy-conscious** : Bruno or Hoppscotch (self-hosted) for local-only data.
 
-
-
-
 The trend is toward local-first, git-integrated tools. Bruno represents this new direction most completely. Postman remains the safest choice for enterprise teams needing the full feature set.

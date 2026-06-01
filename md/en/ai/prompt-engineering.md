@@ -20,8 +20,6 @@ Every effective prompt has some combination of these five elements:
   4. **Format** — How should the output look? "List each vulnerability with: location, severity, and fix."
   5. **Constraints** — What are the boundaries? "Only flag HIGH or CRITICAL severity issues. Ignore style concerns."
 
-
-
 ## Before/After: The Same Request, Different Results
 
 ### Bad Prompt
@@ -84,8 +82,6 @@ Your first prompt rarely produces a perfect result. Use the conversation like a 
   1. Start broad: "Write a Python script that processes CSV files."
   2. Add constraints: "The CSV has headers. Skip empty lines. Handle FileNotFoundError."
   3. Refine output: "Make the error messages user-friendly. Add a progress bar."
-
-
 
 ## Common Mistakes
 

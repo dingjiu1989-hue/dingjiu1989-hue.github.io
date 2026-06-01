@@ -342,7 +342,4 @@ java -jar wiremock-standalone.jar --port 8089 --verbose
 
   * **Integration/E2E tests** : WireMock as a standalone HTTP server for contract testing.
 
-
-
-
 Use MSW + Sinon as your core mocking stack. Add nock or WireMock when testing service-to-service HTTP interactions at the integration level.

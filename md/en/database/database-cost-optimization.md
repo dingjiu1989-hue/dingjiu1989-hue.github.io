@@ -56,9 +56,6 @@ In cloud environments, monitor CloudWatch (AWS), Azure Monitor, or GCP Cloud Mon
 
   * **Storage Used** : Wasted storage costs money; reclaim unused space.
 
-
-
-
 The Sizing Process 
 
 ## Before: 8 vCPU, 32 GB RAM, 1000 GB gp2 ($700/month)
@@ -84,9 +81,6 @@ When to Reserve
   * **Reserve when** : Workload is predictable and runs 24/7. Production databases are ideal.
 
   * **Do not reserve when** : Development/staging instances that run only during business hours. Short-lived project databases.
-
-
-
 
 Using Reserved Instances with Auto-Scaling 
 
@@ -215,9 +209,6 @@ Practical Cost-Saving Checklist
   * [ ] Set storage autoscaling with limits to prevent runaway costs.
 
   * [ ] Monitor and alert on cost anomalies.
-
-
-
 
 Monitoring Cost Efficiency 
 

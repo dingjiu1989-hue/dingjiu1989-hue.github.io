@@ -74,7 +74,8 @@ def store_immutable(self, log_entry):
 
 with open("/var/log/soc2/access.log", "a") as f:
 
-f.write(json.dumps(log_entry) + "\n")
+f.write(json.dumps(log_entry) + "
+")
 
 ## Also send to SIEM
 

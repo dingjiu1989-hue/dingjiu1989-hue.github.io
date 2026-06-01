@@ -184,9 +184,6 @@ Choose PostgreSQL with JSONB when you need:
 
   * Familiar SQL tooling and ORM integration.
 
-
-
-
 Choose MongoDB when you need: 
 
   * Native horizontal sharding out of the box.
@@ -195,17 +192,11 @@ Choose MongoDB when you need:
 
   * A document-first data model without relational baggage.
 
-
-
-
 Best Practices 
 
   * **Always use`jsonb`**, not `json`, unless you have a specific reason.
 
   * **Add CHECK constraints** to validate JSON structure when possible:
-
-
-
 
 ALTER TABLE products ADD CONSTRAINT valid_attributes
 
@@ -216,8 +207,5 @@ CHECK (jsonb_typeof(attributes -> 'price') = 'number');
   * **Benchmark GIN indexes** : The default GIN index covers more operators. The `jsonb_path_ops` variant is faster for containment but less flexible.
 
   * **Avoid JSONB for everything** : If your "attributes" are always queried with equality or range conditions, use regular columns with proper types. JSONB is best for truly variable schemas.
-
-
-
 
 PostgreSQL's JSONB support bridges the gap between relational and document databases. Used wisely, it eliminates the need for a separate document store in many applications.

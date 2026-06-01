@@ -100,9 +100,6 @@ When to Use MongoDB
 
   * Document-oriented data (catalogs, content management)
 
-
-
-
 DynamoDB 
 
 DynamoDB is AWS's managed key-value and document database. It requires careful up-front schema design. 
@@ -183,9 +180,6 @@ When to Use DynamoDB
 
   * AWS-native architectures
 
-
-
-
 Firestore 
 
 Firestore is Google Cloud's NoSQL document database with real-time synchronization. 
@@ -245,9 +239,6 @@ When to Use Firestore
   * Mobile backends (offline support)
 
   * Google Cloud ecosystem
-
-
-
 
 Decision Matrix 
 

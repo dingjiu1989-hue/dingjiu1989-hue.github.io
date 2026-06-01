@@ -130,9 +130,6 @@ Use `pg_dump` for:
 
   * Selective restoration (single table or schema).
 
-
-
-
 Use `pg_basebackup` for: 
 
   * Full-cluster physical backup.
@@ -142,9 +139,6 @@ Use `pg_basebackup` for:
   * Point-in-time recovery capability.
 
   * Faster bulk restore (skip SQL parsing).
-
-
-
 
 pgBackRest 
 
@@ -211,8 +205,5 @@ Most cloud providers offer managed backup services:
   * **Cloud SQL** : Point-in-time recovery with binary log archiving.
 
   * **Aurora** : Continuous backup to S3 with PITR, no performance impact.
-
-
-
 
 The 3-2-1 rule applies to databases: three copies of data, on two different media, with one off-site. Your backup strategy should verify all three conditions regularly.

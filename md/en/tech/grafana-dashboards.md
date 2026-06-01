@@ -42,9 +42,6 @@ Variable types include:
 
   * Data source variables for switching between backends.
 
-
-
-
 Chained (dependent) variables filter subsequent variable options based on previous selections, enabling drill-down navigation from datacenter to cluster to pod.
 
 ## Annotations: Events on Timelines

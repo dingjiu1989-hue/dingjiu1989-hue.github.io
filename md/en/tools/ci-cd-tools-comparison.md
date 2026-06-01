@@ -382,7 +382,4 @@ Based on the 2025-2026 Stack Overflow and JetBrains surveys, GitHub Actions has 
 
   * **Choose Jenkins** if you require air-gapped deployments, custom plugin development, or have existing pipeline investments that make migration costly.
 
-
-
-
 No single CI/CD tool is perfect for every scenario. Evaluate based on your team's platform affinity, compliance requirements, and pipeline complexity rather than feature checklists alone.

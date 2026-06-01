@@ -208,7 +208,4 @@ chezmoi age encrypt ~/.ssh/id_ed25519 > ~/.local/share/chezmoi/encrypted_dot_ssh
 
   * **Team dotfiles** : chezmoi's robust apply/diff workflow supports collaboration safely.
 
-
-
-
 Choose chezmoi if you have more than two machines or need secret management. Choose bare git for simplicity on single-machine setups. Choose Stow if you prefer Unix philosophy and have mostly identical machines.

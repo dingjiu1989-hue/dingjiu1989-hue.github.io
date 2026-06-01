@@ -22,9 +22,6 @@ The terminal emulator is one of the most frequently used tools in a developer's 
 
   * **Platform** : Native macOS, Linux, and Windows support.
 
-
-
-
 ## iTerm2
 
 iTerm2 is the default choice for macOS developers. It has been the gold standard for years with extensive feature coverage.
@@ -46,9 +43,6 @@ iTerm2 is the default choice for macOS developers. It has been the gold standard
   * Image display in terminal (Sixel/IMG cat).
 
   * Built-in password manager.
-
-
-
 
 ## iTerm2 shell integration
 
@@ -88,9 +82,6 @@ Warp is a modern, Rust-based terminal with built-in AI features and a block-base
 
   * Custom themes.
 
-
-
-
 ## Warp AI features
 
 ## Type: "find all node processes and kill them"
@@ -116,9 +107,6 @@ Alacritty is a minimalist, GPU-accelerated terminal emulator focused on performa
   * True color and ligature support.
 
   * YAML/TOML configuration (version 0.13+).
-
-
-
 
 ## alacritty.toml
 
@@ -168,9 +156,6 @@ Kitty is a GPU-accelerated terminal focused on performance and features. It supp
 
   * Fully keyboard-driven.
 
-
-
-
 ## Kitty kittens (built-in tools)
 
 kitty +kitten icat image.png # Display image in terminal
@@ -216,9 +201,6 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
   * Unicode and emoji support.
 
   * Acrylic/transparency effects.
-
-
-
 
 {
 
@@ -325,9 +307,6 @@ Ctrl-b " # Horizontal split
   * **Performance maximizers** : Alacritty + tmux.
 
   * **AI-friendly** : Warp (built-in AI features).
-
-
-
 
 ## Summary
 
