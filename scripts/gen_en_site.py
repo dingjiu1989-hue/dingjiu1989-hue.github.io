@@ -13882,8 +13882,8 @@ def make_homepage(data):
     gtag('config', 'G-XGFYGQE9NS');
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
-    <meta property="og:title" content="AI Study Room — {site['tagline']}">
-    <meta property="og:description" content="Forum-style resource library aggregating tech tutorials, side hustle ideas, tool recommendations, and AI guides.">
+    <meta property="og:title" content="AI Study Room — Developer Tutorials, Tool Comparisons & AI Guides">
+    <meta property="og:description" content="Curated developer resources: tech tutorials, AI guides, tool comparisons, side hustle strategies, and software architecture deep dives — 900+ free articles.">
     <meta property="og:url" content="{BASE}/en/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="AI Study Room">
@@ -13893,11 +13893,11 @@ def make_homepage(data):
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AI Study Room — {site['tagline']}">
-    <meta name="twitter:description" content="Forum-style resource library aggregating tech tutorials, side hustle ideas, tool recommendations, and AI guides.">
+    <meta name="twitter:title" content="AI Study Room — Developer Tutorials, Tool Comparisons & AI Guides">
+    <meta name="twitter:description" content="Curated developer resources: tech tutorials, AI guides, tool comparisons, side hustle strategies, and software architecture deep dives — 900+ free articles.">
     <meta name="twitter:image" content="{BASE}/images/logo.png">
-    <title>AI Study Room — {site['tagline']}</title>
-    <meta name="description" content="Forum-style resource library aggregating tech tutorials, side hustle ideas, tool recommendations, and AI guides.">
+    <title>AI Study Room — Developer Tutorials, Tool Comparisons & AI Guides</title>
+    <meta name="description" content="Curated developer resources: tech tutorials, AI guides, tool comparisons, side hustle strategies, and software architecture deep dives — 900+ free articles.">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="alternate" type="application/rss+xml" title="AI Study Room RSS" href="/en/feed.xml">
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
@@ -13969,6 +13969,12 @@ def make_homepage(data):
         <span class="hero-stat">📂 {total_boards} boards</span>
         <span class="hero-stat">📝 {total_posts} articles</span>
       </div>
+    </div>
+  </section>
+
+  <section class="seo-intro">
+    <div class="container">
+      <p>AI Study Room is a curated library of <strong>{total_posts}+ developer articles</strong> covering <strong>tech tutorials</strong>, <strong>AI development guides</strong>, <strong>tool comparisons</strong>, <strong>side hustle strategies</strong>, and <strong>software architecture</strong>. Every article is researched and written to help developers save time, make better technology decisions, and stay current with the fast-moving software landscape. From <strong>API design</strong> and <strong>database optimization</strong> to <strong>cloud security</strong> and <strong>AI agent development</strong> — find practical, actionable content across <strong>{total_boards} topic areas</strong>.</p>
     </div>
   </section>
 

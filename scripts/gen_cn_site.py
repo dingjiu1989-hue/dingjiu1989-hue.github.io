@@ -312,7 +312,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     # Thin content guard: noindex articles under 1200 chars plain text to protect site quality
     body_text = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', '', body_raw)).strip()
     body_text_len = len(body_text)
-    robots_meta = 'noindex, follow' if body_text_len < 1200 else 'index, follow, max-image-preview:large'
+    robots_meta = 'noindex, follow' if body_text_len < 500 else 'index, follow, max-image-preview:large'
 
     # See also (inline mid-article)
     see_also_html = ''
@@ -524,7 +524,7 @@ def make_homepage(data):
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="{CN_SITE_NAME} — {site['tagline']}">
-    <meta property="og:description" content="聚合优质AI开发资源，涵盖技术教程、副业策略、工具推荐与AI应用指南。">
+    <meta property="og:description" content="免费开发者知识库：AI 开发教程、编程技术、工具对比、副业策略和软件架构 — 1000+ 篇原创文章。">
     <meta property="og:url" content="{BASE}/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{CN_SITE_NAME}">
@@ -535,7 +535,7 @@ def make_homepage(data):
     <meta property="og:image:height" content="512">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{CN_SITE_NAME} — {site['tagline']}">
-    <meta name="twitter:description" content="聚合优质AI开发资源，涵盖技术教程、副业策略、工具推荐与AI应用指南。">
+    <meta name="twitter:description" content="免费开发者知识库：AI 开发教程、编程技术、工具对比、副业策略和软件架构 — 1000+ 篇原创文章。">
     <meta name="twitter:image" content="{BASE}/images/logo.png">
     <title>{CN_SITE_NAME} — {site['tagline']}</title>
     <meta name="description" content="聚合优质AI开发资源，涵盖技术教程、副业策略、工具推荐与AI应用指南。">
@@ -602,6 +602,12 @@ def make_homepage(data):
         <span class="hero-stat">📂 {total_boards} 个板块</span>
         <span class="hero-stat">📝 {total_posts} 篇文章</span>
       </div>
+    </div>
+  </section>
+
+  <section class="seo-intro">
+    <div class="container">
+      <p>AI自习室是一个免费的开发者知识库，收录 <strong>{total_posts}+ 篇原创文章</strong>，覆盖 <strong>AI 开发</strong>、<strong>编程技术</strong>、<strong>工具对比</strong>、<strong>副业创业</strong>和<strong>软件架构</strong>五大方向。从 <strong>API 设计</strong>、<strong>数据库优化</strong>到 <strong>云安全</strong>和 <strong>AI Agent 开发</strong>，每篇文章都提供实用的代码示例和最佳实践，帮助开发者提升技术深度和广度。</p>
     </div>
   </section>
 
