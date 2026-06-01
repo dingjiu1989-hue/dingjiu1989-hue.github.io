@@ -202,8 +202,7 @@ crcSalt =
 
 SHOULD_LINEMERGE = true
 
-LINE_BREAKER = ([\r
-]+)
+LINE_BREAKER = ([\r ]+)
 
 TRUNCATE = 20000
 

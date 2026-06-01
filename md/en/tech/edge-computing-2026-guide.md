@@ -484,8 +484,7 @@ response = { title: content.title, body: content.body };
 
 const translated = await env.AI.run('@cf/meta/m2m100-1.2b', {
 
-text: `Title: ${content.title}
-Body: ${content.body}`,
+text: `Title: ${content.title} Body: ${content.body}`,
 
 source_lang: content.locale,
 
@@ -493,8 +492,7 @@ target_lang: userLocale,
 
 });
 
-const parts = translated.translated_text.split('
-Body: ');
+const parts = translated.translated_text.split(' Body: ');
 
 response = {
 

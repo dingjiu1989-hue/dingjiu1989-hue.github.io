@@ -74,9 +74,7 @@ violations = []
 
 for principle in constitution:
 
-check = call_llm(f"Does this response violate the principle: '{principle}'?
-Response: {response}
-Answer YES or NO.")
+check = call_llm(f"Does this response violate the principle: '{principle}'? Response: {response} Answer YES or NO.")
 
 if check.strip().upper() == "YES":
 
@@ -84,8 +82,7 @@ violations.append(principle)
 
 if violations:
 
-revised = call_llm(f"Revise this response to comply with these principles: {violations}
-Original: {response}")
+revised = call_llm(f"Revise this response to comply with these principles: {violations} Original: {response}")
 
 return revised, violations
 

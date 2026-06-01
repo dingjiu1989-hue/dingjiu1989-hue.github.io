@@ -60,7 +60,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/ai-workflow-automation.png",
       "datePublished": "2026-02-15",
       "dateModified": "2026-04-19",
-      "wordCount": "1370",
+      "wordCount": "1369",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -134,7 +134,7 @@
           <span class="meta-sep">·</span>
           <span>122 views</span>
           <span class="meta-sep">·</span>
-          <span>1370 words</span>
+          <span>1369 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-workflow-automation.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-workflow-automation.png" alt="AI Workflow Automation: LangChain, Temporal, Event-Driven Agents" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (18)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#langchain-workflows">LangChain Workflows</a></li><li><a href="#define-individual-chain-steps">Define individual chain steps</a></li><li><a href="#compose-into-a-sequential-workflow">Compose into a sequential workflow</a></li><li><a href="#temporal-for-durable-execution">Temporal for Durable Execution</a></li><li><a href="#define-activities-individual-steps">Define activities (individual steps)</a></li><li><a href="#define-workflow">Define workflow</a></li><li><a href="#step-1-retrieve-documents">Step 1: Retrieve documents</a></li><li><a href="#step-2-generate-answer">Step 2: Generate answer</a></li><li><a href="#step-3-human-review">Step 3: Human review</a></li><li><a href="#run-the-workflow">Run the workflow</a></li><li><a href="#event-driven-architecture">Event-Driven Architecture</a></li><li><a href="#event-driven-document-processing-pipeline">Event-driven document processing pipeline</a></li><li><a href="#extract-text-chunk-embed">Extract text, chunk, embed</a></li><li><a href="#error-recovery-and-retry">Error Recovery and Retry</a></li><li><a href="#reduce-context-size-and-retry">Reduce context size and retry</a></li><li><a href="#log-and-escalate-to-human">Log and escalate to human</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
@@ -150,17 +150,21 @@
 <h2>Define individual chain steps</h2>
 <p>extract_prompt = PromptTemplate(</p>
 <p>input_variables=["text"],</p>
-<p>template="Extract key requirements from this text:\n{text}",</p>
+<p>template="Extract key requirements from this text:
+{text}",</p>
 <p>)</p>
 <p>extract_chain = LLMChain(llm=llm, prompt=extract_prompt, output_key="requirements")</p>
 <p>analyze_prompt = PromptTemplate(</p>
 <p>input_variables=["requirements"],</p>
-<p>template="Analyze these requirements and identify potential issues:\n{requirements}",</p>
+<p>template="Analyze these requirements and identify potential issues:
+{requirements}",</p>
 <p>)</p>
 <p>analyze_chain = LLMChain(llm=llm, prompt=analyze_prompt, output_key="analysis")</p>
 <p>generate_prompt = PromptTemplate(</p>
 <p>input_variables=["requirements", "analysis"],</p>
-<p>template="Based on requirements and analysis, generate a solution:\nRequirements: {requirements}\nAnalysis: {analysis}",</p>
+<p>template="Based on requirements and analysis, generate a solution:
+Requirements: {requirements}
+Analysis: {analysis}",</p>
 <p>)</p>
 <p>generate_chain = LLMChain(llm=llm, prompt=generate_prompt, output_key="solution")</p>
 <h2>Compose into a sequential workflow</h2>
@@ -183,7 +187,8 @@
 <p>return await vector_search(query)</p>
 <p>@activity.defn</p>
 <p>async def generate_answer(context: list[str], question: str) -&gt; str:</p>
-<p>return await call_llm(f"Context: {context}\nQuestion: {question}")</p>
+<p>return await call_llm(f"Context: {context}
+Question: {question}")</p>
 <p>@activity.defn</p>
 <p>async def review_output(answer: str) -&gt; str:</p>
 <p>"""Human-in-the-loop review with timeout."""</p>
@@ -280,7 +285,8 @@
 <p>async def handle_query(self, event: Event):</p>
 <p>query = event.data["query"]</p>
 <p>docs = vector_search(query)</p>
-<p>answer = call_llm(f"Context: {docs}\nQuery: {query}")</p>
+<p>answer = call_llm(f"Context: {docs}
+Query: {query}")</p>
 <p>await self.bus.emit(Event(</p>
 <p>type=EventType.WORKFLOW_COMPLETE,</p>
 <p>data={"query": query, "answer": answer},</p>

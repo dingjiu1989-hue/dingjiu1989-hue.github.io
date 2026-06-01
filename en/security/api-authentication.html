@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/security/api-authentication.png",
       "datePublished": "2026-03-06",
       "dateModified": "2026-05-14",
-      "wordCount": "1261",
+      "wordCount": "1260",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -133,7 +133,7 @@
           <span class="meta-sep">·</span>
           <span>473 views</span>
           <span class="meta-sep">·</span>
-          <span>1261 words</span>
+          <span>1260 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/api-authentication.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/api-authentication.png" alt="API Authentication Methods" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (13)</summary><ol><li><a href="#client-configuration">Client configuration</a></li><li><a href="#obtain-access-token">Obtain access token</a></li><li><a href="#use-token-for-api-calls">Use token for API calls</a></li><li><a href="#validate-scopes">Validate scopes</a></li><li><a href="#generate-client-certificate">Generate client certificate</a></li><li><a href="#sign-with-internal-ca">Sign with internal CA</a></li><li><a href="#configure-server-for-mtls-nginx">Configure server for mTLS (Nginx)</a></li><li><a href="#extract-client-certificate-info">Extract client certificate info</a></li><li><a href="#flask-app-reading-mtls-client-info">Flask app reading mTLS client info</a></li><li><a href="#authorize-based-on-client-certificate-cn">Authorize based on client certificate CN</a></li><li><a href="#build-message-to-sign">Build message to sign</a></li><li><a href="#replay-protection">Replay protection</a></li><li><a href="#verify-signature">Verify signature</a></li></ol></details>
@@ -258,7 +258,11 @@
 <p>timestamp = str(int(time.time()))</p>
 <p>nonce = secrets.token_hex(8)</p>
 <h2>Build message to sign</h2>
-<p>message = f"{method}\n{path}\n{timestamp}\n{nonce}\n".encode() + body</p>
+<p>message = f"{method}
+{path}
+{timestamp}
+{nonce}
+".encode() + body</p>
 <p>signature = hmac.new(</p>
 <p>self.api_secret,</p>
 <p>message,</p>
@@ -289,7 +293,11 @@
 <p>secret = self.secrets.get(api_key)</p>
 <p>if not secret:</p>
 <p>return False</p>
-<p>message = f"{method}\n{path}\n{timestamp}\n{nonce}\n".encode() + body</p>
+<p>message = f"{method}
+{path}
+{timestamp}
+{nonce}
+".encode() + body</p>
 <p>expected = hmac.new(secret.encode(), message, hashlib.sha256).hexdigest()</p>
 <p>return hmac.compare_digest(expected, signature)</p>
 <p>Choosing the Right Method </p>

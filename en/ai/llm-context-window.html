@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/llm-context-window.png",
       "datePublished": "2025-12-12",
       "dateModified": "2026-05-13",
-      "wordCount": "2140",
+      "wordCount": "2139",
       "keywords": "Artificial Intelligence, Machine Learning",
       "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
       "inLanguage": "en",
@@ -132,7 +132,7 @@
           <span class="meta-sep">·</span>
           <span>102 views</span>
           <span class="meta-sep">·</span>
-          <span>2140 words</span>
+          <span>2139 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/llm-context-window.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/llm-context-window.png" alt="LLM Context Window Management" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (19)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#the-lost-in-the-middle-problem">The "Lost in the Middle" Problem</a></li><li><a href="#context-budgeting">Context Budgeting</a></li><li><a href="#strategies-for-long-conversations">Strategies for Long Conversations</a></li><li><a href="#sliding-window">Sliding Window</a></li><li><a href="#include-a-summary-of-earlier-turns-if-needed">Include a summary of earlier turns if needed</a></li><li><a href="#conversation-summarization">Conversation Summarization</a></li><li><a href="#hierarchical-summarization">Hierarchical Summarization</a></li><li><a href="#rag-context-management">RAG Context Management</a></li><li><a href="#document-ranking-for-context">Document Ranking for Context</a></li><li><a href="#chunk-level-re-ranking">Chunk-Level Re-Ranking</a></li><li><a href="#always-include-the-top-chunk">Always include the top chunk</a></li><li><a href="#fill-from-both-ends-inward">Fill from both ends inward</a></li><li><a href="#reorder-best-chunk-last-second-best-first-rest-in-middle">Reorder: best chunk last, second best first, rest in middle</a></li><li><a href="#long-document-processing">Long Document Processing</a></li><li><a href="#map-reduce-for-very-long-documents">Map-Reduce for Very Long Documents</a></li><li><a href="#iterative-refinement">Iterative Refinement</a></li><li><a href="#monitoring-context-usage">Monitoring Context Usage</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
@@ -246,7 +246,8 @@
 <p>summaries.append(summary)</p>
 <p>final_summary = call_llm(</p>
 <p>"Combine these section summaries into a coherent overview:",</p>
-<p>"\n\n".join(summaries)</p>
+<p>"</p>
+<p>".join(summaries)</p>
 <p>)</p>
 <p>return final_summary</p>
 <h2>Iterative Refinement</h2>

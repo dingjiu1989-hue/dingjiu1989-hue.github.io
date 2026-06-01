@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/agent-memory-systems.png",
       "datePublished": "2026-02-13",
       "dateModified": "2026-04-08",
-      "wordCount": "1515",
+      "wordCount": "1513",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -133,7 +133,7 @@
           <span class="meta-sep">·</span>
           <span>124 views</span>
           <span class="meta-sep">·</span>
-          <span>1515 words</span>
+          <span>1513 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/agent-memory-systems.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/agent-memory-systems.png" alt="Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (14)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#short-term-memory-working-memory">Short-Term Memory (Working Memory)</a></li><li><a href="#evict-oldest-messages-when-over-token-limit">Evict oldest messages when over token limit</a></li><li><a href="#long-term-memory">Long-Term Memory</a></li><li><a href="#group-similar-memories-and-create-consolidated-summaries">Group similar memories and create consolidated summaries</a></li><li><a href="#this-runs-as-a-background-task">This runs as a background task</a></li><li><a href="#episodic-memory">Episodic Memory</a></li><li><a href="#semantic-memory">Semantic Memory</a></li><li><a href="#integrated-agent-memory">Integrated Agent Memory</a></li><li><a href="#recent-conversation">Recent conversation</a></li><li><a href="#relevant-long-term-memories">Relevant long-term memories</a></li><li><a href="#similar-past-episodes">Similar past episodes</a></li><li><a href="#relevant-semantic-facts">Relevant semantic facts</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
@@ -305,17 +305,22 @@
 <p>def build_prompt_context(self, query: str) -&gt; str:</p>
 <p>context_parts = []</p>
 <h2>Recent conversation</h2>
-<p>context_parts.append("=== Recent Context ===\n")</p>
+<p>context_parts.append("=== Recent Context ===
+")</p>
 <p>context_parts.extend(self.short_term.get_context())</p>
 <h2>Relevant long-term memories</h2>
 <p>memories = self.long_term.recall(query, k=3)</p>
 <p>if memories:</p>
-<p>context_parts.append("\n=== Related Memories ===\n")</p>
+<p>context_parts.append("
+=== Related Memories ===
+")</p>
 <p>context_parts.extend([m["content"] for m in memories])</p>
 <h2>Similar past episodes</h2>
 <p>episodes = self.episodic.retrieve_similar_episodes(query, k=2)</p>
 <p>if episodes:</p>
-<p>context_parts.append("\n=== Similar Past Experiences ===\n")</p>
+<p>context_parts.append("
+=== Similar Past Experiences ===
+")</p>
 <p>for ep in episodes:</p>
 <p>context_parts.append(f"Task: {ep.task}, Outcome: {ep.outcome}")</p>
 <h2>Relevant semantic facts</h2>
@@ -323,9 +328,12 @@
 <p>for entity in entities:</p>
 <p>facts = self.semantic.query_fact(entity)</p>
 <p>if facts:</p>
-<p>context_parts.append(f"\n=== Facts about {entity} ===\n")</p>
+<p>context_parts.append(f"
+=== Facts about {entity} ===
+")</p>
 <p>context_parts.extend(facts)</p>
-<p>return "\n".join(context_parts)</p>
+<p>return "
+".join(context_parts)</p>
 <h2>Conclusion</h2>
 <p>Agent memory systems mirror human cognitive architecture. Short-term memory maintains immediate conversation context with token-aware eviction. Long-term memory persistently stores important information with vector-based retrieval. Episodic memory records specific experiences for future reference. Semantic memory extracts and stores general knowledge from experiences. An integrated memory system combines all four types, giving agents both the immediate context and the accumulated wisdom needed for complex, long-running tasks.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></li><li><a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></li><li><a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a></li></ul></div>
         <div class="ad-container">

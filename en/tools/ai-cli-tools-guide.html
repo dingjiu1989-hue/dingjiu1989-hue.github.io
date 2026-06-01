@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/tools/ai-cli-tools-guide.png",
       "datePublished": "2025-12-09",
       "dateModified": "2026-04-15",
-      "wordCount": "5577",
+      "wordCount": "5571",
       "keywords": "CLI, AI, Python, Node.js, LLM, Developer Tools, Automation",
       "about": [{"@type": "Thing", "name": "CLI"}, {"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Python"}, {"@type": "Thing", "name": "Node.js"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -148,7 +148,7 @@
           <span class="meta-sep">·</span>
           <span>186 views</span>
           <span class="meta-sep">·</span>
-          <span>5577 words</span>
+          <span>5571 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tools/ai-cli-tools-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/ai-cli-tools-guide.png" alt="Building AI-Powered CLI Tools: A Complete Guide for Developers" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (25)</summary><ol><li><a href="#why-ai-cli-tools-are-different">Why AI CLI Tools Are Different</a></li><li><a href="#architecture-of-ai-cli-tools">Architecture of AI CLI Tools</a></li><li><a href="#python-click--llm-sdk">Python: Click + LLM SDK</a></li><li><a href="#nodejs-commander--langchain">Node.js: Commander + LangChain</a></li><li><a href="#usrbinenv-node">!/usr/bin/env node</a></li><li><a href="#pattern-streaming-responses-to-stdout">Pattern: Streaming Responses to stdout</a></li><li><a href="#pattern-interactive-multi-step-tools">Pattern: Interactive Multi-Step Tools</a></li><li><a href="#pattern-file-aware-tools">Pattern: File-Aware Tools</a></li><li><a href="#cli-framework-comparison">CLI Framework Comparison</a></li><li><a href="#real-example-ai-code-review-cli">Real Example: AI Code Review CLI</a></li><li><a href="#usrbinenv-python3">!/usr/bin/env python3</a></li><li><a href="#get-git-diff">Get git diff</a></li><li><a href="#count-lines-and-warn">Count lines and warn</a></li><li><a href="#real-example-ai-git-commit-message-generator">Real Example: AI Git Commit Message Generator</a></li><li><a href="#usrbinenv-python3">!/usr/bin/env python3</a></li><li><a href="#error-handling-for-llm-calls-in-cli">Error Handling for LLM Calls in CLI</a></li><li><a href="#">...</a></li><li><a href="#packaging-and-distribution">Packaging and Distribution</a></li><li><a href="#pypi-python">PyPI (Python)</a></li><li><a href="#pyprojecttoml">pyproject.toml</a></li><li><a href="#npm-nodejs">npm (Node.js)</a></li><li><a href="#homebrew-macoslinux">Homebrew (macOS/Linux)</a></li><li><a href="#environment-and-configuration">Environment and Configuration</a></li><li><a href="#putting-it-all-together-architecture-checklist">Putting It All Together: Architecture Checklist</a></li><li><a href="#beyond-simple-wrappers">Beyond Simple Wrappers</a></li></ol></details>
@@ -310,12 +310,14 @@
 <p>import signal</p>
 <p>import sys</p>
 <p>def handle_interrupt(sig, frame):</p>
-<p>click.echo("\n[Interrupted]", err=True)</p>
+<p>click.echo("
+[Interrupted]", err=True)</p>
 <p>sys.exit(130)</p>
 <p>signal.signal(signal.SIGINT, handle_interrupt)</p>
 <p>In Node.js with Commander:</p>
 <p>process.on('SIGINT', () =&gt; {</p>
-<p>console.error('\n[Interrupted]');</p>
+<p>console.error('
+[Interrupted]');</p>
 <p>process.exit(130);</p>
 <p>});</p>
 <p>Rich formatting (Markdown, syntax highlighting) makes streaming output readable. But be careful with Rich's <code>Live</code> — it re-renders the entire output on each frame, which can be slow for long streams. For long outputs, raw <code>click.echo</code> or <code>process.stdout.write</code> is more performant.</p>
@@ -388,18 +390,22 @@
 <p>for f in files:</p>
 <p>if os.path.isfile(f):</p>
 <p>with open(f) as fh:</p>
-<p>contents.append(f"### {f}\n\n<code>\n{fh.read()}\n</code>")</p>
+<p>contents.append(f"### {f}</p>
+<p><code>{fh.read()}</code>")</p>
 <p>elif os.path.isdir(f) and recursive:</p>
 <p>for root, _, filenames in os.walk(f):</p>
 <p>for fn in filenames:</p>
 <p>path = os.path.join(root, fn)</p>
 <p>try:</p>
 <p>with open(path) as fh:</p>
-<p>contents.append(f"### {path}\n\n<code>\n{fh.read()}\n</code>")</p>
+<p>contents.append(f"### {path}</p>
+<p><code>{fh.read()}</code>")</p>
 <p>except Exception:</p>
 <p>pass</p>
-<p>context = "\n\n".join(contents[:20]) # limit context size</p>
-<p>prompt = f"The user wants to understand these files:\n\n{context}"</p>
+<p>context = "</p>
+<p>".join(contents[:20]) # limit context size</p>
+<p>prompt = f"The user wants to understand these files:</p>
+<p>{context}"</p>
 <p>with client.messages.stream(</p>
 <p>model="claude-sonnet-4-20250514",</p>
 <p>max_tokens=4096,</p>
@@ -461,20 +467,24 @@
 <p>click.echo("No changes to review.", err=True)</p>
 <p>raise click.Abort()</p>
 <h2>Count lines and warn</h2>
-<p>lines = result.stdout.count("\n")</p>
+<p>lines = result.stdout.count("
+")</p>
 <p>if lines &gt; 2000:</p>
 <p>click.echo(f"Diff is {lines} lines, will review first 2000.", err=True)</p>
 <p>system = """You are a senior code reviewer. Review the git diff below.</p>
 <p>Focus on: logic errors, security issues, performance problems, style violations.</p>
 <p>For each issue, include: file, line, severity (critical/warning/nit), and suggestion.</p>
 <p>Output in the format requested."""</p>
-<p>prompt = f"Review this git diff:\n\n<code>diff\n{result.stdout[:50000]}\n</code>"</p>
+<p>prompt = f"Review this git diff:</p>
+<p><code>diff
+{result.stdout[:50000]}</code>"</p>
 <p>if output == "json":</p>
 <p>response = client.messages.create(</p>
 <p>model=model,</p>
 <p>max_tokens=4096,</p>
 <p>system=system,</p>
-<p>messages=[{"role": "user", "content": prompt + "\n\nRespond in JSON format."}],</p>
+<p>messages=[{"role": "user", "content": prompt + "</p>
+<p>Respond in JSON format."}],</p>
 <p>)</p>
 <p>print(response.content[0].text)</p>
 <p>else:</p>
@@ -540,7 +550,8 @@
 <p>) as stream:</p>
 <p>for text in stream.text_stream:</p>
 <p>click.echo(text, nl=False)</p>
-<p>click.echo("\n")</p>
+<p>click.echo("
+")</p>
 <p>Extended versions of this tool:</p>
 <ul>
 <li>

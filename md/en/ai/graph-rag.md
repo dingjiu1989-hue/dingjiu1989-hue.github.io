@@ -212,8 +212,7 @@ Query: {query}
 
 """)
 
-return [line.strip() for line in response.strip().split("
-") if line.strip()]
+return [line.strip() for line in response.strip().split(" ") if line.strip()]
 
 ## Microsoft's GraphRAG Pattern
 

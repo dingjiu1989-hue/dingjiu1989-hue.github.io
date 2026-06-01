@@ -146,8 +146,7 @@ messages=[
 
 "role": "user",
 
-"content": f"Context:
-{format_docs(docs)}
+"content": f"Context: {format_docs(docs)}
 
 Question: {question}"
 

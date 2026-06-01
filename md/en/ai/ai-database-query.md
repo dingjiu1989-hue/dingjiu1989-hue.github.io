@@ -86,13 +86,11 @@ context_parts = []
 
 for table in tables:
 
-ddl = f"CREATE TABLE {table.name} (
-"
+ddl = f"CREATE TABLE {table.name} ( "
 
 for col in table.columns:
 
-ddl += f" {col.name} {col.type} -- {col.description}
-"
+ddl += f" {col.name} {col.type} -- {col.description} "
 
 ddl += ");"
 
@@ -210,14 +208,9 @@ Examples:
 
 for ex in examples:
 
-prompt += f"
-Q: {ex['question']}
-SQL: {ex['query']}
-"
+prompt += f" Q: {ex['question']} SQL: {ex['query']} "
 
-prompt += f"
-Q: {question}
-SQL:"
+prompt += f" Q: {question} SQL:"
 
 return prompt
 
@@ -301,9 +294,7 @@ else:
 
 feedback = f"Validation errors: {', '.join(errors)}"
 
-question = f"Original question: {question}
-Previous attempt failed: {feedback}
-Please fix the SQL query."
+question = f"Original question: {question} Previous attempt failed: {feedback} Please fix the SQL query."
 
 ## Schema Linking
 

@@ -38,7 +38,7 @@
     <meta name="twitter:description" content="Explore agent planning frameworks: ReAct for reasoning and acting, Plan-and-Execute for task decomposition, Tree of Thoughts for exploration, and self-reflectio">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/ai/agent-planning.png">
     <meta property="article:published_time" content="2026-02-13">
-    <meta property="article:modified_time" content="2026-05-31">
+    <meta property="article:modified_time" content="2026-04-07">
     <meta property="article:section" content="AI Tutorials">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/agent-planning.webp" type="image/webp" fetchpriority="high">
@@ -58,7 +58,7 @@
       "description": "Explore agent planning frameworks: ReAct for reasoning and acting, Plan-and-Execute for task decomposition, Tree of Thoughts for exploration, and self-reflectio",
       "image": "https://aidev.fit/images/covers/en/ai/agent-planning.png",
       "datePublished": "2026-02-13",
-      "dateModified": "2026-05-31",
+      "dateModified": "2026-04-07",
       "wordCount": "2068",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
@@ -259,7 +259,8 @@
 <p>candidates.extend(next_thoughts)</p>
 <p>return best_path or "No solution found."</p>
 <p>def _generate_thoughts(self, problem: str, current_state: list[str]) -&gt; list[list[str]]:</p>
-<p>context = "\n".join(current_state) if current_state else "No reasoning yet."</p>
+<p>context = "
+".join(current_state) if current_state else "No reasoning yet."</p>
 <p>response = self.llm(f"""</p>
 <p>Problem: {problem}</p>
 <p>Current reasoning: {context}</p>
@@ -269,7 +270,8 @@
 <h2>Parse response into multiple thought continuations</h2>
 <p>return [current_state + [t] for t in parse_thoughts(response)]</p>
 <p>def _evaluate_thought(self, problem: str, state: list[str]) -&gt; float:</p>
-<p>context = "\n".join(state)</p>
+<p>context = "
+".join(state)</p>
 <p>score = self.llm(f"""</p>
 <p>Problem: {problem}</p>
 <p>Reasoning so far: {context}</p>

@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/security/log-management-security.png",
       "datePublished": "2025-12-18",
       "dateModified": "2026-05-13",
-      "wordCount": "1465",
+      "wordCount": "1464",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
@@ -132,7 +132,7 @@
           <span class="meta-sep">·</span>
           <span>203 views</span>
           <span class="meta-sep">·</span>
-          <span>1465 words</span>
+          <span>1464 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/log-management-security.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/log-management-security.png" alt="Security Log Management" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#filebeat-configuration">Filebeat configuration</a></li><li><a href="#example-custom-siem-rule-for-brute-force-detection">Example: Custom SIEM rule for brute force detection</a></li><li><a href="#add-chained-hash-for-tamper-detection">Add chained hash for tamper detection</a></li><li><a href="#create-hmac-signature">Create HMAC signature</a></li><li><a href="#write-to-append-only-log">Write to append-only log</a></li></ol></details>
@@ -262,7 +262,8 @@
 <p>self.previous_hash = signature</p>
 <h2>Write to append-only log</h2>
 <p>with open('/var/log/secure/audit.log', 'a') as f:</p>
-<p>f.write(json.dumps(event) + '\n')</p>
+<p>f.write(json.dumps(event) + '
+')</p>
 <p>def verify_chain(self):</p>
 <p>"""Verify the integrity of the entire log chain."""</p>
 <p>previous_hash = ""</p>

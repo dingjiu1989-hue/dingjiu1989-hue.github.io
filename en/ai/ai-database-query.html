@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/ai-database-query.png",
       "datePublished": "2025-12-11",
       "dateModified": "2026-05-08",
-      "wordCount": "1762",
+      "wordCount": "1760",
       "keywords": "Artificial Intelligence, Machine Learning",
       "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
       "inLanguage": "en",
@@ -132,7 +132,7 @@
           <span class="meta-sep">·</span>
           <span>129 views</span>
           <span class="meta-sep">·</span>
-          <span>1762 words</span>
+          <span>1760 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-database-query.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-database-query.png" alt="Natural Language to SQL with LLMs" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (15)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#how-nl2sql-works">How NL2SQL Works</a></li><li><a href="#schema-context">Schema Context</a></li><li><a href="#add-sample-rows-for-context-on-data-patterns">Add sample rows for context on data patterns</a></li><li><a href="#few-shot-examples">Few-Shot Examples</a></li><li><a href="#sql-generation-prompt">SQL Generation Prompt</a></li><li><a href="#query-validation">Query Validation</a></li><li><a href="#safety-check-no-mutations">Safety check: no mutations</a></li><li><a href="#check-table-references">Check table references</a></li><li><a href="#syntax-validation">Syntax validation</a></li><li><a href="#advanced-techniques">Advanced Techniques</a></li><li><a href="#self-correction-loop">Self-Correction Loop</a></li><li><a href="#schema-linking">Schema Linking</a></li><li><a href="#production-deployment">Production Deployment</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
@@ -185,15 +185,18 @@
 <p>def build_schema_context(tables):</p>
 <p>context_parts = []</p>
 <p>for table in tables:</p>
-<p>ddl = f"CREATE TABLE {table.name} (\n"</p>
+<p>ddl = f"CREATE TABLE {table.name} (
+"</p>
 <p>for col in table.columns:</p>
-<p>ddl += f" {col.name} {col.type} -- {col.description}\n"</p>
+<p>ddl += f" {col.name} {col.type} -- {col.description}
+"</p>
 <p>ddl += ");"</p>
 <p>context_parts.append(ddl)</p>
 <h2>Add sample rows for context on data patterns</h2>
 <p>if table.sample_rows:</p>
 <p>context_parts.append(f"-- Sample row: {table.sample_rows[0]}")</p>
-<p>return "\n\n".join(context_parts)</p>
+<p>return "</p>
+<p>".join(context_parts)</p>
 <h2>Few-Shot Examples</h2>
 <p>For complex schemas, provide question-SQL pairs relevant to the query:</p>
 <p>few_shot_examples = [</p>
@@ -245,8 +248,13 @@
 <p>Examples:</p>
 <p>"""</p>
 <p>for ex in examples:</p>
-<p>prompt += f"\nQ: {ex['question']}\nSQL: {ex['query']}\n"</p>
-<p>prompt += f"\nQ: {question}\nSQL:"</p>
+<p>prompt += f"
+Q: {ex['question']}
+SQL: {ex['query']}
+"</p>
+<p>prompt += f"
+Q: {question}
+SQL:"</p>
 <p>return prompt</p>
 <h2>Query Validation</h2>
 <p>Before executing generated SQL, validate it:</p>
@@ -288,7 +296,9 @@
 <p>feedback = f"Execution error: {str(e)}"</p>
 <p>else:</p>
 <p>feedback = f"Validation errors: {', '.join(errors)}"</p>
-<p>question = f"Original question: {question}\nPrevious attempt failed: {feedback}\nPlease fix the SQL query."</p>
+<p>question = f"Original question: {question}
+Previous attempt failed: {feedback}
+Please fix the SQL query."</p>
 <h2>Schema Linking</h2>
 <p>For large schemas with many tables, first identify relevant tables before generating SQL:</p>
 <p>def identify_relevant_tables(question, all_tables, table_descriptions):</p>

@@ -158,8 +158,7 @@ Original: {query}
 
 """)
 
-return f"{query}
-{expansions}"
+return f"{query} {expansions}"
 
 def hyde_query(query: str) -> str:
 

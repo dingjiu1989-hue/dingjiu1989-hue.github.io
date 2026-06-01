@@ -238,8 +238,7 @@ for round_num in range(self.rounds):
 
 ## Share positions
 
-summary = "
-".join(f"{name}: {pos}" for name, pos in positions.items())
+summary = " ".join(f"{name}: {pos}" for name, pos in positions.items())
 
 ## Each agent critiques and refines
 
@@ -249,8 +248,7 @@ for agent in self.agents:
 
 critique = await agent.process(
 
-f"Round {round_num + 1}. Review these positions and refine your own:
-{summary}",
+f"Round {round_num + 1}. Review these positions and refine your own: {summary}",
 
 context=f"Your previous position: {positions[agent.spec.name]}"
 
@@ -264,13 +262,11 @@ positions = new_positions
 
 consensus_agent = self.agents[0]
 
-summary = "
-".join(f"{name}: {pos}" for name, pos in positions.items())
+summary = " ".join(f"{name}: {pos}" for name, pos in positions.items())
 
 consensus = await consensus_agent.process(
 
-f"Based on all perspectives, produce a final consensus answer:
-{summary}"
+f"Based on all perspectives, produce a final consensus answer: {summary}"
 
 )
 
@@ -316,13 +312,11 @@ results = await asyncio.gather(*worker_futures)
 
 ## Manager synthesizes final output
 
-results_text = "
-".join(f"{st['id']}: {r}" for st, r in zip(sub_tasks, results))
+results_text = " ".join(f"{st['id']}: {r}" for st, r in zip(sub_tasks, results))
 
 final = await self.manager.process(
 
-f"Synthesize these results into a coherent output:
-{results_text}",
+f"Synthesize these results into a coherent output: {results_text}",
 
 context=f"Original task: {task}"
 

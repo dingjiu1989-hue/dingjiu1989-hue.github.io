@@ -50,8 +50,7 @@ chunk_overlap=64,
 
 separators=["
 
-", "
-", ".", " ", ""],
+", " ", ".", " ", ""],
 
 keep_separator=True,
 
@@ -121,8 +120,7 @@ chunks = []
 
 current_section = {"heading": "Introduction", "content": []}
 
-for line in markdown_text.split("
-"):
+for line in markdown_text.split(" "):
 
 heading_match = re.match(r"^(#{1,3})\s+(.+)$", line)
 

@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/llm-api-design.png",
       "datePublished": "2026-02-16",
       "dateModified": "2026-05-16",
-      "wordCount": "1091",
+      "wordCount": "1089",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -133,7 +133,7 @@
           <span class="meta-sep">·</span>
           <span>213 views</span>
           <span class="meta-sep">·</span>
-          <span>1091 words</span>
+          <span>1089 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/llm-api-design.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/llm-api-design.png" alt="LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (6)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#streaming-responses">Streaming Responses</a></li><li><a href="#structured-output">Structured Output</a></li><li><a href="#error-handling">Error Handling</a></li><li><a href="#rate-limiting">Rate Limiting</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
@@ -155,7 +155,8 @@
 <p>) as stream:</p>
 <p>async for chunk in stream:</p>
 <p>if chunk.type == "content_block_delta":</p>
-<p>yield f"data: {chunk.delta.text}\n\n"</p>
+<p>yield f"data: {chunk.delta.text}</p>
+<p>"</p>
 <p>@app.post("/chat")</p>
 <p>async def chat(request: Request):</p>
 <p>body = await request.json()</p>
@@ -197,14 +198,16 @@
 <p>from pydantic import ValidationError</p>
 <p>def safe_structured_generate(prompt: str, schema: type[BaseModel], max_retries=3):</p>
 <p>for attempt in range(max_retries):</p>
-<p>raw = call_llm(prompt + "\n\nRespond in valid JSON matching this schema: " + str(schema.model_json_schema()))</p>
+<p>raw = call_llm(prompt + "</p>
+<p>Respond in valid JSON matching this schema: " + str(schema.model_json_schema()))</p>
 <p>try:</p>
 <p>parsed = json.loads(clean_json(raw))</p>
 <p>return schema.model_validate(parsed)</p>
 <p>except (json.JSONDecodeError, ValidationError) as e:</p>
 <p>if attempt == max_retries - 1:</p>
 <p>raise</p>
-<p>prompt += f"\n\nPrevious attempt failed: {e}. Please fix the JSON."</p>
+<p>prompt += f"</p>
+<p>Previous attempt failed: {e}. Please fix the JSON."</p>
 <p>return None</p>
 <h2>Error Handling</h2>
 <p>LLM APIs fail in distinctive ways. Build a retry strategy around each failure mode:</p>

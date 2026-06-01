@@ -78,8 +78,8 @@ intermediate.append(result)
 
 ## Reduce: combine all intermediate results
 
-combined = "
----
+## combined = "
+
 ".join(intermediate)
 
 final = call_llm(reduce_prompt, combined)

@@ -171,7 +171,9 @@
 <p>The weights are tuned via A/B testing. Most production systems use this blended approach.</p>
 <h2>LLM-Powered Personalization</h2>
 <p>LLMs add a reasoning layer on top of vector search. Instead of returning raw results, the LLM re-ranks and explains recommendations:</p>
-<p>prompt = f'User profile: {user_history}\nCandidate items: {candidates}\nRank these by relevance.'</p>
+<p>prompt = f'User profile: {user_history}
+Candidate items: {candidates}
+Rank these by relevance.'</p>
 <p>response = client.chat.completions.create(model='gpt-4o', ...)</p>
 <p>This generates personalized descriptions for each recommendation, improving click-through rates by 15-30% in A/B tests.</p>
 <h2>Cold Start Solutions</h2>

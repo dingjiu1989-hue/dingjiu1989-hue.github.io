@@ -76,9 +76,7 @@ The weights are tuned via A/B testing. Most production systems use this blended 
 
 LLMs add a reasoning layer on top of vector search. Instead of returning raw results, the LLM re-ranks and explains recommendations:
 
-prompt = f'User profile: {user_history}
-Candidate items: {candidates}
-Rank these by relevance.'
+prompt = f'User profile: {user_history} Candidate items: {candidates} Rank these by relevance.'
 
 response = client.chat.completions.create(model='gpt-4o', ...)
 

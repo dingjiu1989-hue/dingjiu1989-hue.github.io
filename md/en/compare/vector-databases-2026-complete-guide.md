@@ -508,8 +508,7 @@ limit=5,
 
 )
 
-context = "
-".join(r.payload["text"] for r in results)
+context = " ".join(r.payload["text"] for r in results)
 
 ## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate answer with context
 
@@ -519,8 +518,7 @@ model="claude-sonnet-4-6",
 
 messages=[
 
-{"role": "system", "content": f"Answer using this context:
-{context}"},
+{"role": "system", "content": f"Answer using this context: {context}"},
 
 {"role": "user", "content": question},
 

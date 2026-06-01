@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/security/soc2-technical.png",
       "datePublished": "2026-03-19",
       "dateModified": "2026-04-26",
-      "wordCount": "1429",
+      "wordCount": "1428",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -133,7 +133,7 @@
           <span class="meta-sep">·</span>
           <span>209 views</span>
           <span class="meta-sep">·</span>
-          <span>1429 words</span>
+          <span>1428 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/soc2-technical.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/soc2-technical.png" alt="SOC 2 Technical Controls" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (4)</summary><ol><li><a href="#write-to-append-only-log">Write to append-only log</a></li><li><a href="#also-send-to-siem">Also send to SIEM</a></li><li><a href="#change-management-pipelineyaml">change-management-pipeline.yaml</a></li><li><a href="#change-management-api">Change management API</a></li></ol></details>
@@ -170,7 +170,8 @@
 <p>"""Store logs in immutable storage for audit"""</p>
 <h2>Write to append-only log</h2>
 <p>with open("/var/log/soc2/access.log", "a") as f:</p>
-<p>f.write(json.dumps(log_entry) + "\n")</p>
+<p>f.write(json.dumps(log_entry) + "
+")</p>
 <h2>Also send to SIEM</h2>
 <p>self.send_to_siem(log_entry)</p>
 <p>Access Review Automation </p>

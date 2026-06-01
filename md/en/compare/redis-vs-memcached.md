@@ -108,11 +108,9 @@ client.add('lock:payment:123', 'locked', expire=30) # Only if not exists
 
 client.replace('user:1000:profile', updated_profile) # Only if exists
 
-client.append('log:buffer', 'new entry
-') # Append to existing value
+client.append('log:buffer', 'new entry ') # Append to existing value
 
-client.prepend('log:buffer', 'header
-') # Prepend
+client.prepend('log:buffer', 'header ') # Prepend
 
 ## Increment/Decrement
 

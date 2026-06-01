@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/tech/bash-scripting-guide.png",
       "datePublished": "2025-12-01",
       "dateModified": "2026-05-14",
-      "wordCount": "964",
+      "wordCount": "963",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
@@ -144,7 +144,7 @@
           <span class="meta-sep">·</span>
           <span>59 views</span>
           <span class="meta-sep">·</span>
-          <span>964 words</span>
+          <span>963 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/bash-scripting-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/bash-scripting-guide.png" alt="Bash Scripting Best Practices" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (18)</summary><ol><li><a href="#start-with-strict-mode">Start with Strict Mode</a></li><li><a href="#usrbinenv-bash">!/usr/bin/env bash</a></li><li><a href="#use-functions-for-modularity">Use Functions for Modularity</a></li><li><a href="#prefer---over">Prefer [[ ]] Over [ ]</a></li><li><a href="#quote-everything">Quote Everything</a></li><li><a href="#wrong">Wrong</a></li><li><a href="#right">Right</a></li><li><a href="#use-trap-for-cleanup">Use trap for Cleanup</a></li><li><a href="#argument-parsing-with-getopts">Argument Parsing with getopts</a></li><li><a href="#use-readonly-and-declare--r">Use readonly and declare -r</a></li><li><a href="#prefer-printf-over-echo">Prefer printf Over echo</a></li><li><a href="#logging-with-timestamps">Logging with Timestamps</a></li><li><a href="#validating-dependencies">Validating Dependencies</a></li><li><a href="#avoid-eval-and-backtick-substitution">Avoid eval and Backtick Substitution</a></li><li><a href="#use-arrays-for-lists">Use Arrays for Lists</a></li><li><a href="#shellcheck-integration">ShellCheck Integration</a></li><li><a href="#testing-bash-scripts">Testing Bash Scripts</a></li><li><a href="#summary">Summary</a></li></ol></details>
@@ -153,7 +153,8 @@
 <p>Every production Bash script should begin with strict mode settings that catch errors early:</p>
 <h2>!/usr/bin/env bash</h2>
 <p>set -euo pipefail</p>
-<p>IFS=$'\n\t'</p>
+<p>IFS=$'
+\t'</p>
 <ul>
 <li>
 <p><code>set -e</code> causes the script to exit immediately when a command fails.</p>
@@ -221,13 +222,15 @@
 <p>This prevents accidental overwrites and documents intent.</p>
 <h2>Prefer <code>printf</code> Over <code>echo</code></h2>
 <p>The <code>echo</code> command behaves differently across shells and platforms. Use <code>printf</code> for portable, predictable output:</p>
-<p>printf "Processing file: %s\n" "$filename"</p>
+<p>printf "Processing file: %s
+" "$filename"</p>
 <h2>Logging with Timestamps</h2>
 <p>Implement a simple logging function for better observability:</p>
 <p>log() {</p>
 <p>local level="$1"</p>
 <p>shift</p>
-<p>printf "[%s] [%s] %s\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$level" "$*" &gt;&amp;2</p>
+<p>printf "[%s] [%s] %s
+" "$(date '+%Y-%m-%d %H:%M:%S')" "$level" "$*" &gt;&amp;2</p>
 <p>}</p>
 <p>info() { log "INFO" "$@"; }</p>
 <p>error() { log "ERROR" "$@"; }</p>

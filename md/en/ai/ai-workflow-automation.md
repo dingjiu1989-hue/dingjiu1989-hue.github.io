@@ -32,8 +32,7 @@ extract_prompt = PromptTemplate(
 
 input_variables=["text"],
 
-template="Extract key requirements from this text:
-{text}",
+template="Extract key requirements from this text: {text}",
 
 )
 
@@ -43,8 +42,7 @@ analyze_prompt = PromptTemplate(
 
 input_variables=["requirements"],
 
-template="Analyze these requirements and identify potential issues:
-{requirements}",
+template="Analyze these requirements and identify potential issues: {requirements}",
 
 )
 
@@ -54,9 +52,7 @@ generate_prompt = PromptTemplate(
 
 input_variables=["requirements", "analysis"],
 
-template="Based on requirements and analysis, generate a solution:
-Requirements: {requirements}
-Analysis: {analysis}",
+template="Based on requirements and analysis, generate a solution: Requirements: {requirements} Analysis: {analysis}",
 
 )
 
@@ -102,8 +98,7 @@ return await vector_search(query)
 
 async def generate_answer(context: list[str], question: str) -> str:
 
-return await call_llm(f"Context: {context}
-Question: {question}")
+return await call_llm(f"Context: {context} Question: {question}")
 
 @activity.defn
 
@@ -297,8 +292,7 @@ query = event.data["query"]
 
 docs = vector_search(query)
 
-answer = call_llm(f"Context: {docs}
-Query: {query}")
+answer = call_llm(f"Context: {docs} Query: {query}")
 
 await self.bus.emit(Event(
 

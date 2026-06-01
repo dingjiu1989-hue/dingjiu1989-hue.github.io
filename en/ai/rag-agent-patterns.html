@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/rag-agent-patterns.png",
       "datePublished": "2026-02-18",
       "dateModified": "2026-04-04",
-      "wordCount": "1078",
+      "wordCount": "1077",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -133,7 +133,7 @@
           <span class="meta-sep">·</span>
           <span>542 views</span>
           <span class="meta-sep">·</span>
-          <span>1078 words</span>
+          <span>1077 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/rag-agent-patterns.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/rag-agent-patterns.png" alt="RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (21)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#self-query-rag">Self-Query RAG</a></li><li><a href="#step-1-generate-search-query">Step 1: Generate search query</a></li><li><a href="#step-2-retrieve-using-optimized-query">Step 2: Retrieve using optimized query</a></li><li><a href="#step-3-generate-answer-from-retrieved-chunks">Step 3: Generate answer from retrieved chunks</a></li><li><a href="#corrective-rag-crag">Corrective RAG (CRAG)</a></li><li><a href="#retrieve">Retrieve</a></li><li><a href="#score-relevance">Score relevance</a></li><li><a href="#high-confidence-generate-answer">High confidence: generate answer</a></li><li><a href="#medium-confidence-try-query-decomposition">Medium confidence: try query decomposition</a></li><li><a href="#low-confidence-reformulate-query">Low confidence: reformulate query</a></li><li><a href="#adaptive-retrieval">Adaptive Retrieval</a></li><li><a href="#classify-the-question-type">Classify the question type</a></li><li><a href="#simple-direct-retrieval">Simple direct retrieval</a></li><li><a href="#retrieve-documents-for-each-side-of-the-comparison">Retrieve documents for each side of the comparison</a></li><li><a href="#step-by-step-retrieval">Step-by-step retrieval</a></li><li><a href="#retrieve-broadly-then-narrow">Retrieve broadly then narrow</a></li><li><a href="#multi-hop-retrieval">Multi-Hop Retrieval</a></li><li><a href="#check-if-we-need-another-hop">Check if we need another hop</a></li><li><a href="#extract-the-next-search-target">Extract the next search target</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
@@ -152,7 +152,8 @@
 <h2>Step 2: Retrieve using optimized query</h2>
 <p>chunks = vector_search(search_query, k=5)</p>
 <h2>Step 3: Generate answer from retrieved chunks</h2>
-<p>context = "\n\n".join(chunks)</p>
+<p>context = "</p>
+<p>".join(chunks)</p>
 <p>answer = call_llm(f"""</p>
 <p>Answer the question based on the context below.</p>
 <p>If the context does not contain enough information, say so.</p>
@@ -179,7 +180,8 @@
 <p>avg_relevance = sum(relevance_scores) / len(relevance_scores)</p>
 <p>if avg_relevance &gt;= 7:</p>
 <h2>High confidence: generate answer</h2>
-<p>context = "\n\n".join(chunks[:3])</p>
+<p>context = "</p>
+<p>".join(chunks[:3])</p>
 <p>return generate_answer(question, context)</p>
 <p>elif avg_relevance &gt;= 4:</p>
 <h2>Medium confidence: try query decomposition</h2>

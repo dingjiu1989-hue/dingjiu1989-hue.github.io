@@ -300,8 +300,7 @@ import sys
 
 def handle_interrupt(sig, frame):
 
-click.echo("
-[Interrupted]", err=True)
+click.echo(" [Interrupted]", err=True)
 
 sys.exit(130)
 
@@ -311,8 +310,7 @@ In Node.js with Commander:
 
 process.on('SIGINT', () => {
 
-console.error('
-[Interrupted]');
+console.error(' [Interrupted]');
 
 process.exit(130);
 
@@ -460,9 +458,7 @@ with open(f) as fh:
 
 contents.append(f"### {f}
 
-`
-{fh.read()}
-`")
+`{fh.read()}`")
 
 elif os.path.isdir(f) and recursive:
 
@@ -478,9 +474,7 @@ with open(path) as fh:
 
 contents.append(f"### {path}
 
-`
-{fh.read()}
-`")
+`{fh.read()}`")
 
 except Exception:
 
@@ -596,8 +590,7 @@ raise click.Abort()
 
 ## Count lines and warn
 
-lines = result.stdout.count("
-")
+lines = result.stdout.count(" ")
 
 if lines > 2000:
 
@@ -613,9 +606,7 @@ Output in the format requested."""
 
 prompt = f"Review this git diff:
 
-`diff
-{result.stdout[:50000]}
-`"
+`diff {result.stdout[:50000]}`"
 
 if output == "json":
 
@@ -741,8 +732,7 @@ for text in stream.text_stream:
 
 click.echo(text, nl=False)
 
-click.echo("
-")
+click.echo(" ")
 
 Extended versions of this tool:
 

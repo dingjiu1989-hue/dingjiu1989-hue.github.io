@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/graph-rag.png",
       "datePublished": "2026-02-16",
       "dateModified": "2026-04-14",
-      "wordCount": "1183",
+      "wordCount": "1182",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -133,7 +133,7 @@
           <span class="meta-sep">·</span>
           <span>139 views</span>
           <span class="meta-sep">·</span>
-          <span>1183 words</span>
+          <span>1182 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/graph-rag.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/graph-rag.png" alt="Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (17)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#entity-extraction">Entity Extraction</a></li><li><a href="#building-the-knowledge-graph">Building the Knowledge Graph</a></li><li><a href="#create-entities">Create entities</a></li><li><a href="#create-relationships">Create relationships</a></li><li><a href="#graph--vector-hybrid-retrieval">Graph + Vector Hybrid Retrieval</a></li><li><a href="#step-1-identify-starting-entities-from-the-query">Step 1: Identify starting entities from the query</a></li><li><a href="#step-2-vector-search-for-broader-context">Step 2: Vector search for broader context</a></li><li><a href="#step-3-graph-traversal-from-identified-entities">Step 3: Graph traversal from identified entities</a></li><li><a href="#step-4-combine-and-rank-results">Step 4: Combine and rank results</a></li><li><a href="#microsofts-graphrag-pattern">Microsoft's GraphRAG Pattern</a></li><li><a href="#step-1-local-search---find-directly-relevant-entities">Step 1: Local search - find directly relevant entities</a></li><li><a href="#step-2-global-search---find-related-communities">Step 2: Global search - find related communities</a></li><li><a href="#step-3-vector-search-for-text-chunks">Step 3: Vector search for text chunks</a></li><li><a href="#step-4-synthesize-answer">Step 4: Synthesize answer</a></li><li><a href="#when-to-use-graph-rag">When to Use Graph RAG</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
@@ -155,7 +155,8 @@
 <p>entities: list[Entity]</p>
 <p>relationships: list[Relationship]</p>
 <p>def extract_graph(documents: list[str]) -&gt; ExtractionResult:</p>
-<p>combined_text = "\n\n".join(documents)</p>
+<p>combined_text = "</p>
+<p>".join(documents)</p>
 <p>response = call_llm_with_structured_output(f"""</p>
 <p>Extract all entities and their relationships from the text below.</p>
 <p>Entity types to consider: Person, Organization, Technology, Product, Location, Concept, Event</p>
@@ -238,7 +239,8 @@
 <p>Return ONLY the entity names, one per line.</p>
 <p>Query: {query}</p>
 <p>""")</p>
-<p>return [line.strip() for line in response.strip().split("\n") if line.strip()]</p>
+<p>return [line.strip() for line in response.strip().split("
+") if line.strip()]</p>
 <h2>Microsoft's GraphRAG Pattern</h2>
 <p>Microsoft's GraphRAG uses a global-to-local search approach:</p>
 <p>def graphrag_search(query: str, graph: KnowledgeGraph, vector_store, llm) -&gt; str:</p>

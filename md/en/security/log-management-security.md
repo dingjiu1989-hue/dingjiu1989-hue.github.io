@@ -232,8 +232,7 @@ self.previous_hash = signature
 
 with open('/var/log/secure/audit.log', 'a') as f:
 
-f.write(json.dumps(event) + '
-')
+f.write(json.dumps(event) + ' ')
 
 def verify_chain(self):
 

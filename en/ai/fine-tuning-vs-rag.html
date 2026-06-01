@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/fine-tuning-vs-rag.png",
       "datePublished": "2026-02-15",
       "dateModified": "2026-05-09",
-      "wordCount": "1368",
+      "wordCount": "1367",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -144,7 +144,7 @@
           <span class="meta-sep">·</span>
           <span>211 views</span>
           <span class="meta-sep">·</span>
-          <span>1368 words</span>
+          <span>1367 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/fine-tuning-vs-rag.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/fine-tuning-vs-rag.png" alt="Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (17)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#when-to-fine-tune">When to Fine-Tune</a></li><li><a href="#fine-tuning-for-a-custom-tone-and-format">Fine-tuning for a custom tone and format</a></li><li><a href="#when-to-use-rag">When to Use RAG</a></li><li><a href="#retrieve-current-information">Retrieve current information</a></li><li><a href="#generate-with-up-to-date-context">Generate with up-to-date context</a></li><li><a href="#cost-comparison">Cost Comparison</a></li><li><a href="#hybrid-approaches">Hybrid Approaches</a></li><li><a href="#fine-tuned-model-handles-formatting-tone-and-reasoning">Fine-tuned model handles formatting, tone, and reasoning</a></li><li><a href="#rag-provides-factual-context">RAG provides factual context</a></li><li><a href="#step-1-retrieve-relevant-context">Step 1: Retrieve relevant context</a></li><li><a href="#step-2-use-fine-tuned-model-with-rag-context">Step 2: Use fine-tuned model with RAG context</a></li><li><a href="#fine-tuning-the-retriever">Fine-Tuning the Retriever</a></li><li><a href="#create-training-pairs-question-relevantdocument">Create training pairs: (question, relevant_document)</a></li><li><a href="#fine-tune-the-embedding-model">Fine-tune the embedding model</a></li><li><a href="#decision-flowchart">Decision Flowchart</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
@@ -239,7 +239,9 @@
 <p>},</p>
 <p>{</p>
 <p>"role": "user",</p>
-<p>"content": f"Context:\n{format_docs(docs)}\n\nQuestion: {question}"</p>
+<p>"content": f"Context:
+{format_docs(docs)}</p>
+<p>Question: {question}"</p>
 <p>}</p>
 <p>]</p>
 <p>)</p>
