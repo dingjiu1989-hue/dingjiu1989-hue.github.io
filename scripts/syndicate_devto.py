@@ -140,6 +140,8 @@ def get_tags(art, board_id):
     if board_id == "ai-analyst":
         return ["ai", "investing", "finance", "analytics"]
     return parse_tags(art.get("tags", ""))[:4]
+
+def make_article_body(art, board_id, en_data):
     """Build dev.to article body from markdown content."""
     md_path = ROOT / "md" / "en" / board_id / f'{art["slug"]}.md'
     if not md_path.exists():
