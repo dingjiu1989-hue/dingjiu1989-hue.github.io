@@ -100,6 +100,24 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+          {
+        "@type": "Question",
+        "name": "What are the differences between Pinecone and Chroma?",
+        "acceptedAnswer": {"@type": "Answer", "text": "How vector databases work, when to use them, and a head-to-head comparison of Pinecone, Chroma, Weaviate, Qdrant, Milvus, and pgvector with production benchmarks."}
+      },
+      {
+        "@type": "Question",
+        "name": "Which is better, Pinecone or Chroma?",
+        "acceptedAnswer": {"@type": "Answer", "text": "How vector databases work, when to use them, and a head-to-head comparison of Pinecone, Chroma, Weaviate, Qdrant, Milvus, and pgvector with production benchmarks. Compare features, pricing, performance, and ecosystem to choose the right tool."}
+      }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide",
       "applicationCategory": "DeveloperApplication",
@@ -467,14 +485,12 @@
 <p>query_vector=vector,</p>
 <p>limit=5,</p>
 <p>)</p>
-<p>context = "
-".join(r.payload["text"] for r in results)</p>
+<p>context = " ".join(r.payload["text"] for r in results)</p>
 <h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate answer with context</h2>
 <p>response = llm.chat.completions.create(</p>
 <p>model="claude-sonnet-4-6",</p>
 <p>messages=[</p>
-<p>{"role": "system", "content": f"Answer using this context:
-{context}"},</p>
+<p>{"role": "system", "content": f"Answer using this context: {context}"},</p>
 <p>{"role": "user", "content": question},</p>
 <p>]</p>
 <p>)</p>

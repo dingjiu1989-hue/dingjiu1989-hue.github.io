@@ -13170,6 +13170,35 @@ BODIES['ai-coding-tools-90-days'] = '''
 def _js(s):
     return s.replace('\\', '\\\\').replace('"', '\\"')
 
+def _auto_faq_for_compare(title, desc):
+    """Auto-generate FAQPage items for compare articles by parsing 'vs' titles."""
+    items = []
+    # Extract "X vs Y" pattern
+    m = re.match(r'^([A-Za-z0-9+#.\-/ ]+)\s+vs\s+([A-Za-z0-9+#.\-/ ]+)', title)
+    if m:
+        a, b = m.group(1).strip(), m.group(2).strip()
+        # Split multi-way comparisons: "X vs Y vs Z" — only use first two
+        if ' vs ' in b:
+            parts = b.split(' vs ', 1)
+            b = parts[0].strip()
+        # Truncate long names
+        a_short = a.split()[0] if len(a) > 30 else a
+        b_short = b.split()[0] if len(b) > 30 else b
+        cut_desc = desc[:200] + '…' if len(desc) > 200 else desc
+        items.append({'q': f'What are the differences between {a_short} and {b_short}?', 'a': cut_desc})
+        items.append({'q': f'Which is better, {a_short} or {b_short}?', 'a': f'It depends on your use case. {cut_desc} See the full article for a detailed comparison with pros, cons, and recommendations.'})
+        items.append({'q': f'When should I use {a_short} vs {b_short}?', 'a': f'{cut_desc} The right choice depends on your project requirements, team size, and scalability needs.'})
+    elif ' vs ' in title:
+        # "A vs B: subtitle" or similar
+        parts = title.split(' vs ', 1)
+        a = parts[0].strip().split()[-1] if parts[0].strip() else title.split()[0]
+        b = parts[1].strip().split()[0] if parts[1].strip() else ''
+        if a and b:
+            cut_desc = desc[:200] + '…' if len(desc) > 200 else desc
+            items.append({'q': f'What are the differences between {a} and {b}?', 'a': cut_desc})
+            items.append({'q': f'Which is better, {a} or {b}?', 'a': f'{cut_desc} Compare features, pricing, performance, and ecosystem to choose the right tool.'})
+    return items
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [
@@ -13433,9 +13462,11 @@ def make_article_html(art, board_id, board_name, all_posts):
     # Full content is already in HTML body + llms-full.txt + /md/ — no need to inline it twice
     body_json = json.dumps(art['description'])
 
-    # FAQ Schema for articles that have Q&A sections
+    # FAQ Schema for articles that have Q&A sections (explicit or auto-generated for compare board)
     faq_schema = ''
     faq_data = FAQS.get(slug)
+    if not faq_data and board_id == 'compare':
+        faq_data = _auto_faq_for_compare(art['title'], art['description'])
     if faq_data:
         faq_items = ',\n'.join(
             f'''      {{

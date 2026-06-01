@@ -100,6 +100,29 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+          {
+        "@type": "Question",
+        "name": "What are the differences between Redis and Memcached?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Compare Redis and Memcached across data structures, persistence, clustering, memory efficiency, and use cases for caching, sessions, and message queuing."}
+      },
+      {
+        "@type": "Question",
+        "name": "Which is better, Redis or Memcached?",
+        "acceptedAnswer": {"@type": "Answer", "text": "It depends on your use case. Compare Redis and Memcached across data structures, persistence, clustering, memory efficiency, and use cases for caching, sessions, and message queuing. See the full article for a detailed comparison with pros, cons, and recommendations."}
+      },
+      {
+        "@type": "Question",
+        "name": "When should I use Redis vs Memcached?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Compare Redis and Memcached across data structures, persistence, clustering, memory efficiency, and use cases for caching, sessions, and message queuing. The right choice depends on your project requirements, team size, and scalability needs."}
+      }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "Redis vs Memcached: Caching Solution Comparison",
       "applicationCategory": "DeveloperApplication",
@@ -197,10 +220,8 @@
 <h2>Atomic operations</h2>
 <p>client.add('lock:payment:123', 'locked', expire=30) # Only if not exists</p>
 <p>client.replace('user:1000:profile', updated_profile) # Only if exists</p>
-<p>client.append('log:buffer', 'new entry
-') # Append to existing value</p>
-<p>client.prepend('log:buffer', 'header
-') # Prepend</p>
+<p>client.append('log:buffer', 'new entry ') # Append to existing value</p>
+<p>client.prepend('log:buffer', 'header ') # Prepend</p>
 <h2>Increment/Decrement</h2>
 <p>client.set('counter:api:day', '0')</p>
 <p>client.incr('counter:api:day', 1)</p>
