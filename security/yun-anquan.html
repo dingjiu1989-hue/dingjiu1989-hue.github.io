@@ -58,7 +58,7 @@
       "image": "https://aidev.fit/images/covers/en/security/yun-anquan.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1545",
+      "wordCount": "636",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "zh-CN",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/security/yun-anquan.html"},
-      "articleBody": "共享责任模型   云安全遵循共享责任模型：云服务商负责\"云的安全\"（基础设施、物理安全），用户负责\"云中的安全\"（数据、配置、访问控制）。   IAM策略   IAM（身份与访问管理）是云安全的第一道防线。   最小权限原则   每个实体（用户、服务、角色）只授予完成其任务所需的最小权限集。        {         &quot;Version&quot;  :     &quot;2012-10-17&quot;  ,         &quot;Statement&quot;  :     [             {                 &quot;Effect&quot;  :     &quot;Allow&quot;  ,                 &quot;Action&quot;  :     [                     &quot;s3:GetObject&quot;  ,                     &quot;s3:ListBucket&quot;                 ],                 &quot;Resource&quot;  :     [                     &quot;arn:aws:s3:::myapp-assets&quot;  ,                     &quot;arn:aws:s3:::myapp-assets/*&quot;                 ]             }         ]   }         原则：  拒绝所有，按需开放。定期审计未使用的权限。   角色而非用户     使用IAM Role而非长期Access Key   为EC2、Lambda等服务分配角色   使用临时凭证（STS）管理     权限边界   使用权限边界（Permissions Boundary）设置角色能获得的最高权限，防止权限提升。   网络安全组   VPC隔离     将不同环境（开发、测试、生产）放在不同VPC中   使用VPC Peering或Transit Gateway连接VPC   敏感服务部署在私有子网中     安全组规则        # 安全组最佳实践   resource     &quot;aws_security_group&quot;     &quot;web&quot;     {       name            =     &quot;web-sg&quot;       description     =     &quot;Web服务器安全组&quot;       vpc_id          =     aws_vpc.main.id      # 入站规则：只允许80和443       ingress     {         from_port       =     80         to_port         =     80         protocol        =     &quot;tcp&quot;         cidr_blocks     =     [  &quot;0.0.0.0/0&quot;  ]       }        ingress     {         from_port       =     443         to_port         =     443         protocol        =     &quot;tcp&quot;         cidr_blocks     =     [  &quot;0.0.0.0/0&quot;  ]       }      # 出站规则：限制出站流量       egress     {         from_port       =     0         to_port         =     0         protocol        =     &quot;-1&quot;         cidr_blocks     =     [  &quot;0.0.0.0/0&quot;  ]       }   }        NACL配置   网络ACL提供子网级别的状态无关过滤，作为安全组的补充。   加密配置   传输中加密     所有对外服务使用TLS 1.2+   内部服务间通讯使用mTLS   RDS连接启用SSL/TLS     静态加密    存储加密：         # EBS加密  aws   ec2   enable-ebs-encryption-by-default   # S3默认加密  aws   s3api   put-bucket-encryption    \\      --bucket   myapp-data    \\      --server-side-encryption-configuration    &#39;{&quot;Rules&quot;:[{&quot;ApplyServerSideEncryptionByDefault&quot;:{&quot;SSEAlgorithm&quot;:&quot;AES256&quot;}}]}&#39;         密钥管理：  - 使用KMS托管密钥 - 定期轮换密钥 - 区分客户主密钥和加密密钥   密钥轮换   自动轮换IAM访问密钥、数据库密码和加密密钥。使用AWS Secrets Manager或AWS Parameter Store管理敏感配置。   合规监控   配置审计      AWS Config ：持续监控资源配置变化    Security Hub ：安全状态聚合    GuardDuty ：威胁检测     合规扫描        # 使用Prowler进行云安全审计  prowler   aws   --checks   extra-79   --checks   extra-761       事件响应     检测异常活动（GuardDuty发现异常API调用）   自动隔离受影响资源（Lambda自动响应）   取证分析（CloudTrail日志分析）   恢复和加固     日常检查清单     [ ] 是否有多余的开放端口（22、3306等）   [ ] S3存储桶是否公开可访问   [ ] IAM密钥是否定期轮换   [ ] 是否启用了CloudTrail（操作审计）   [ ] 是否有未使用的安全组规则   [ ] 根账号是否启用了MFA     云安全需要持续的监控和优化，没有一劳永逸的解决方案。"
+      "articleBody": "共享责任模型   云安全遵循共享责任模型：云服务商负责\"云的安全\"（基础设施、物理安全），用户负责\"云中的安全\"（数据、配置、访问控制）。   IAM策略   IAM（身份与访问管理）是云安全的第一道防线。   最小权限原则   每个实体（用户、服务、角色）只授予完成其任务所需的最小权限集。    {     &quot;Version&quot;: &quot;2012-10-17&quot;,     &quot;Statement&quot;: [         {             &quot;Effect&quot;: &quot;Allow&quot;,             &quot;Action&quot;: [                 &quot;s3:GetObject&quot;,                 &quot;s3:ListBucket&quot;             ],             &quot;Resource&quot;: [                 &quot;arn:aws:s3:::myapp-assets&quot;,                 &quot;arn:aws:s3:::myapp-assets/*&quot;             ]         }     ] }       原则：  拒绝所有，按需开放。定期审计未使用的权限。   角色而非用户     使用IAM Role而非长期Access Key   为EC2、Lambda等服务分配角色   使用临时凭证（STS）管理     权限边界   使用权限边界（Permissions Boundary）设置角色能获得的最高权限，防止权限提升。   网络安全组   VPC隔离     将不同环境（开发、测试、生产）放在不同VPC中   使用VPC Peering或Transit Gateway连接VPC   敏感服务部署在私有子网中     安全组规则    # 安全组最佳实践 resource &quot;aws_security_group&quot; &quot;web&quot; {   name        = &quot;web-sg&quot;   description = &quot;Web服务器安全组&quot;   vpc_id      = aws_vpc.main.id    # 入站规则：只允许80和443   ingress {     from_port   = 80     to_port     = 80     protocol    = &quot;tcp&quot;     cidr_blocks = [&quot;0.0.0.0/0&quot;]   }    ingress {     from_port   = 443     to_port     = 443     protocol    = &quot;tcp&quot;     cidr_blocks = [&quot;0.0.0.0/0&quot;]   }    # 出站规则：限制出站流量   egress {     from_port   = 0     to_port     = 0     protocol    = &quot;-1&quot;     cidr_blocks = [&quot;0.0.0.0/0&quot;]   } }      NACL配置   网络ACL提供子网级别的状态无关过滤，作为安全组的补充。   加密配置   传输中加密     所有对外服务使用TLS 1.2+   内部服务间通讯使用mTLS   RDS连接启用SSL/TLS     静态加密    存储加密：     # EBS加密 aws ec2 enable-ebs-encryption-by-default  # S3默认加密 aws s3api put-bucket-encryption \\   --bucket myapp-data \\   --server-side-encryption-configuration '{&quot;Rules&quot;:[{&quot;ApplyServerSideEncryptionByDefault&quot;:{&quot;SSEAlgorithm&quot;:&quot;AES256&quot;}}]}'       密钥管理：  - 使用KMS托管密钥 - 定期轮换密钥 - 区分客户主密钥和加密密钥   密钥轮换   自动轮换IAM访问密钥、数据库密码和加密密钥。使用AWS Secrets Manager或AWS Parameter Store管理敏感配置。   合规监控   配置审计      AWS Config ：持续监控资源配置变化    Security Hub ：安全状态聚合    GuardDuty ：威胁检测     合规扫描    # 使用Prowler进行云安全审计 prowler aws --checks extra-79 --checks extra-761      事件响应     检测异常活动（GuardDuty发现异常API调用）   自动隔离受影响资源（Lambda自动响应）   取证分析（CloudTrail日志分析）   恢复和加固     日常检查清单     [ ] 是否有多余的开放端口（22、3306等）   [ ] S3存储桶是否公开可访问   [ ] IAM密钥是否定期轮换   [ ] 是否启用了CloudTrail（操作审计）   [ ] 是否有未使用的安全组规则   [ ] 根账号是否启用了MFA     云安全需要持续的监控和优化，没有一劳永逸的解决方案。"
     }
     </script>
     <script type="application/ld+json">
@@ -119,11 +119,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>7 分钟阅读</span>
+          <span>3 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>1545 字</span>
+          <span>636 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/yun-anquan.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/yun-anquan.png" alt="云安全基础：IAM策略、网络安全组、加密配置最佳实践" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（18）</summary><ol><li><a href="#共享责任模型">共享责任模型</a></li><li><a href="#iam策略">IAM策略</a></li><li><a href="#最小权限原则">最小权限原则</a></li><li><a href="#角色而非用户">角色而非用户</a></li><li><a href="#权限边界">权限边界</a></li><li><a href="#网络安全组">网络安全组</a></li><li><a href="#vpc隔离">VPC隔离</a></li><li><a href="#安全组规则">安全组规则</a></li><li><a href="#nacl配置">NACL配置</a></li><li><a href="#加密配置">加密配置</a></li><li><a href="#传输中加密">传输中加密</a></li><li><a href="#静态加密">静态加密</a></li><li><a href="#密钥轮换">密钥轮换</a></li><li><a href="#合规监控">合规监控</a></li><li><a href="#配置审计">配置审计</a></li><li><a href="#合规扫描">合规扫描</a></li><li><a href="#事件响应">事件响应</a></li><li><a href="#日常检查清单">日常检查清单</a></li></ol></details>
@@ -133,23 +133,23 @@
 <p>IAM（身份与访问管理）是云安全的第一道防线。</p>
 <h3>最小权限原则</h3>
 <p>每个实体（用户、服务、角色）只授予完成其任务所需的最小权限集。</p>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;Statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                </span><span class="s2">&quot;s3:GetObject&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="s2">&quot;s3:ListBucket&quot;</span>
-<span class="w">            </span><span class="p">],</span>
-<span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                </span><span class="s2">&quot;arn:aws:s3:::myapp-assets&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="s2">&quot;arn:aws:s3:::myapp-assets/*&quot;</span>
-<span class="w">            </span><span class="p">]</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">]</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-json">{
+    &quot;Version&quot;: &quot;2012-10-17&quot;,
+    &quot;Statement&quot;: [
+        {
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: [
+                &quot;s3:GetObject&quot;,
+                &quot;s3:ListBucket&quot;
+            ],
+            &quot;Resource&quot;: [
+                &quot;arn:aws:s3:::myapp-assets&quot;,
+                &quot;arn:aws:s3:::myapp-assets/*&quot;
+            ]
+        }
+    ]
+}
+</code></pre>
 
 <p><strong>原则：</strong> 拒绝所有，按需开放。定期审计未使用的权限。</p>
 <h3>角色而非用户</h3>
@@ -168,36 +168,36 @@
 <li>敏感服务部署在私有子网中</li>
 </ul>
 <h3>安全组规则</h3>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 安全组最佳实践</span>
-<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_security_group&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="na">name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;web-sg&quot;</span>
-<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Web服务器安全组&quot;</span>
-<span class="w">  </span><span class="na">vpc_id</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_vpc.main.id</span>
+<pre class="codehilite"><code class="language-terraform"># 安全组最佳实践
+resource &quot;aws_security_group&quot; &quot;web&quot; {
+  name        = &quot;web-sg&quot;
+  description = &quot;Web服务器安全组&quot;
+  vpc_id      = aws_vpc.main.id
 
-<span class="c1">  # 入站规则：只允许80和443</span>
-<span class="w">  </span><span class="nb">ingress</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="na">from_port</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>
-<span class="w">    </span><span class="na">to_port</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>
-<span class="w">    </span><span class="na">protocol</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span>
-<span class="w">    </span><span class="na">cidr_blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;0.0.0.0/0&quot;</span><span class="p">]</span>
-<span class="w">  </span><span class="p">}</span>
+  # 入站规则：只允许80和443
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = &quot;tcp&quot;
+    cidr_blocks = [&quot;0.0.0.0/0&quot;]
+  }
 
-<span class="w">  </span><span class="nb">ingress</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="na">from_port</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">443</span>
-<span class="w">    </span><span class="na">to_port</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="m">443</span>
-<span class="w">    </span><span class="na">protocol</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span>
-<span class="w">    </span><span class="na">cidr_blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;0.0.0.0/0&quot;</span><span class="p">]</span>
-<span class="w">  </span><span class="p">}</span>
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = &quot;tcp&quot;
+    cidr_blocks = [&quot;0.0.0.0/0&quot;]
+  }
 
-<span class="c1">  # 出站规则：限制出站流量</span>
-<span class="w">  </span><span class="nb">egress</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="na">from_port</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
-<span class="w">    </span><span class="na">to_port</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
-<span class="w">    </span><span class="na">protocol</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;-1&quot;</span>
-<span class="w">    </span><span class="na">cidr_blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;0.0.0.0/0&quot;</span><span class="p">]</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+  # 出站规则：限制出站流量
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = &quot;-1&quot;
+    cidr_blocks = [&quot;0.0.0.0/0&quot;]
+  }
+}
+</code></pre>
 
 <h3>NACL配置</h3>
 <p>网络ACL提供子网级别的状态无关过滤，作为安全组的补充。</p>
@@ -210,14 +210,14 @@
 </ul>
 <h3>静态加密</h3>
 <p><strong>存储加密：</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># EBS加密</span>
-aws<span class="w"> </span>ec2<span class="w"> </span>enable-ebs-encryption-by-default
+<pre class="codehilite"><code class="language-bash"># EBS加密
+aws ec2 enable-ebs-encryption-by-default
 
-<span class="c1"># S3默认加密</span>
-aws<span class="w"> </span>s3api<span class="w"> </span>put-bucket-encryption<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--bucket<span class="w"> </span>myapp-data<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--server-side-encryption-configuration<span class="w"> </span><span class="s1">&#39;{&quot;Rules&quot;:[{&quot;ApplyServerSideEncryptionByDefault&quot;:{&quot;SSEAlgorithm&quot;:&quot;AES256&quot;}}]}&#39;</span>
-</code></pre></div>
+# S3默认加密
+aws s3api put-bucket-encryption \
+  --bucket myapp-data \
+  --server-side-encryption-configuration '{&quot;Rules&quot;:[{&quot;ApplyServerSideEncryptionByDefault&quot;:{&quot;SSEAlgorithm&quot;:&quot;AES256&quot;}}]}'
+</code></pre>
 
 <p><strong>密钥管理：</strong>
 - 使用KMS托管密钥
@@ -233,9 +233,9 @@ aws<span class="w"> </span>s3api<span class="w"> </span>put-bucket-encryption<sp
 <li><strong>GuardDuty</strong>：威胁检测</li>
 </ul>
 <h3>合规扫描</h3>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 使用Prowler进行云安全审计</span>
-prowler<span class="w"> </span>aws<span class="w"> </span>--checks<span class="w"> </span>extra-79<span class="w"> </span>--checks<span class="w"> </span>extra-761
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash"># 使用Prowler进行云安全审计
+prowler aws --checks extra-79 --checks extra-761
+</code></pre>
 
 <h3>事件响应</h3>
 <ol>

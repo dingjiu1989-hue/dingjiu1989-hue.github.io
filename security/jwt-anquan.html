@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/security/jwt-anquan.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1257",
+      "wordCount": "631",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "zh-CN",
@@ -75,7 +75,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/security/jwt-anquan.html"},
-      "articleBody": "JWT基础   JSON Web Token（JWT）是目前最流行的令牌格式，由Header、Payload和Signature三部分组成，通过Base64URL编码和签名算法生成。   签名算法选择   HS256 vs RS256    HS256（对称加密）：  - 使用同一个密钥签名和验证 - 速度快，Token较短 - 密钥需要妥善管理，泄露后无法区分签名者和验证者    RS256（非对称加密）：  - 使用私钥签名，公钥验证 - 适合多服务间验证（一个认证服务签发，多个业务服务验证） - 公钥可以公开，私钥只有签发服务持有    推荐：  微服务架构下始终使用RS256。单体应用可以使用HS256，但要确保密钥强度足够。   算法混淆攻击   这是JWT最常见的安全漏洞之一。攻击者修改JWT Header中的 alg 字段为 none ，如果服务端验证不严格，就会接受没有签名的Token。    防御：         # 验证算法白名单   jwt  .  decode  (  token  ,   public_key  ,   algorithms  =  [  &quot;RS256&quot;  ],   options  =  {  &quot;require&quot;  :   [  &quot;exp&quot;  ,   &quot;iat&quot;  ]})        Token过期策略   Access Token    建议过期时间：  - Web应用：15-30分钟 - 移动应用：30-60分钟 - 需要用户确认的敏感操作：5分钟    过期后的处理：  - 前端检测到401错误，自动使用Refresh Token获取新Access Token - 如果Refresh Token也过期，要求用户重新登录   基于风险的动态过期   对于高风险操作（修改密码、支付），使用更短的过期时间。对于低风险操作（浏览内容），使用标准过期时间。   刷新令牌机制   Refresh Token是长期令牌，用于获取新的Access Token。   安全存储      Access Token ：内存变量，不持久化    Refresh Token ：HttpOnly Cookie或安全存储     轮转策略   每次使用Refresh Token获取新的Access Token时，同时返回一个新的Refresh Token，旧的Refresh Token立即失效。        def     refresh_access_token  (  refresh_token  ):       # 验证Refresh Token       payload   =   verify_refresh_token  (  refresh_token  )       user_id   =   payload  [  &quot;sub&quot;  ]        # 检查是否已被使用（轮转检测）       if   is_token_revoked  (  refresh_token  ):           revoke_all_user_tokens  (  user_id  )    # 可能被攻击，清理所有令牌           raise   SecurityException  (  &quot;检测到令牌重用&quot;  )        # 吊销旧Refresh Token       revoke_token  (  refresh_token  )        # 生成新的Access Token和Refresh Token       new_access   =   create_access_token  (  user_id  )       new_refresh   =   create_refresh_token  (  user_id  )        return   new_access  ,   new_refresh        重用检测   如果检测到已使用的Refresh Token被再次提交，说明令牌可能已被盗，应吊销该用户的所有令牌。   其他安全措施   Token召回（撤销）   JWT在签发后无法主动失效（直到过期）。对于需要提前失效的场景：      黑名单 ：将需要失效的Token的JTI标识加入黑名单    版本号 ：在Token中嵌入用户令牌版本号，版本变更时旧Token失效    短过期+自动刷新 ：减少Token被利用的时间窗口     Claims验证        claims   =   jwt  .  decode  (  token  ,   public_key  ,   algorithms  =  [  &quot;RS256&quot;  ])   # 必验证的字段   assert   claims  [  &quot;iss&quot;  ]   ==   &quot;https://auth.example.com&quot;    # 签发者   assert   claims  [  &quot;aud&quot;  ]   ==   &quot;https://api.example.com&quot;      # 接收者   assert   claims  [  &quot;exp&quot;  ]   &gt;   time  .  time  ()                     # 过期时间   assert   claims  [  &quot;nbf&quot;  ]   &lt;   time  .  time  ()                     # 生效时间        避免在Payload中存放敏感信息   JWT的Payload只是Base64URL编码（不是加密），任何人解码后都能读取。不要在Payload中存放密码、信用卡号等敏感信息。   最佳实践总结     使用RS256非对称签名算法   Access Token短过期（15-30分钟）   Refresh Token实施轮转和重用检测   验证所有标准Claims（iss、aud、exp）   不使用 alg: none    不在Payload中存敏感数据   实施令牌黑名单机制     JWT认证的安全关键在于正确地实施每个环节，而不是依赖某个单一机制。"
+      "articleBody": "JWT基础   JSON Web Token（JWT）是目前最流行的令牌格式，由Header、Payload和Signature三部分组成，通过Base64URL编码和签名算法生成。   签名算法选择   HS256 vs RS256    HS256（对称加密）：  - 使用同一个密钥签名和验证 - 速度快，Token较短 - 密钥需要妥善管理，泄露后无法区分签名者和验证者    RS256（非对称加密）：  - 使用私钥签名，公钥验证 - 适合多服务间验证（一个认证服务签发，多个业务服务验证） - 公钥可以公开，私钥只有签发服务持有    推荐：  微服务架构下始终使用RS256。单体应用可以使用HS256，但要确保密钥强度足够。   算法混淆攻击   这是JWT最常见的安全漏洞之一。攻击者修改JWT Header中的 alg 字段为 none ，如果服务端验证不严格，就会接受没有签名的Token。    防御：     # 验证算法白名单 jwt.decode(token, public_key, algorithms=[&quot;RS256&quot;], options={&quot;require&quot;: [&quot;exp&quot;, &quot;iat&quot;]})      Token过期策略   Access Token    建议过期时间：  - Web应用：15-30分钟 - 移动应用：30-60分钟 - 需要用户确认的敏感操作：5分钟    过期后的处理：  - 前端检测到401错误，自动使用Refresh Token获取新Access Token - 如果Refresh Token也过期，要求用户重新登录   基于风险的动态过期   对于高风险操作（修改密码、支付），使用更短的过期时间。对于低风险操作（浏览内容），使用标准过期时间。   刷新令牌机制   Refresh Token是长期令牌，用于获取新的Access Token。   安全存储      Access Token ：内存变量，不持久化    Refresh Token ：HttpOnly Cookie或安全存储     轮转策略   每次使用Refresh Token获取新的Access Token时，同时返回一个新的Refresh Token，旧的Refresh Token立即失效。    def refresh_access_token(refresh_token):     # 验证Refresh Token     payload = verify_refresh_token(refresh_token)     user_id = payload[&quot;sub&quot;]      # 检查是否已被使用（轮转检测）     if is_token_revoked(refresh_token):         revoke_all_user_tokens(user_id)  # 可能被攻击，清理所有令牌         raise SecurityException(&quot;检测到令牌重用&quot;)      # 吊销旧Refresh Token     revoke_token(refresh_token)      # 生成新的Access Token和Refresh Token     new_access = create_access_token(user_id)     new_refresh = create_refresh_token(user_id)      return new_access, new_refresh      重用检测   如果检测到已使用的Refresh Token被再次提交，说明令牌可能已被盗，应吊销该用户的所有令牌。   其他安全措施   Token召回（撤销）   JWT在签发后无法主动失效（直到过期）。对于需要提前失效的场景：      黑名单 ：将需要失效的Token的JTI标识加入黑名单    版本号 ：在Token中嵌入用户令牌版本号，版本变更时旧Token失效    短过期+自动刷新 ：减少Token被利用的时间窗口     Claims验证    claims = jwt.decode(token, public_key, algorithms=[&quot;RS256&quot;]) # 必验证的字段 assert claims[&quot;iss&quot;] == &quot;https://auth.example.com&quot;  # 签发者 assert claims[&quot;aud&quot;] == &quot;https://api.example.com&quot;    # 接收者 assert claims[&quot;exp&quot;] &gt; time.time()                   # 过期时间 assert claims[&quot;nbf&quot;] &lt; time.time()                   # 生效时间      避免在Payload中存放敏感信息   JWT的Payload只是Base64URL编码（不是加密），任何人解码后都能读取。不要在Payload中存放密码、信用卡号等敏感信息。   最佳实践总结     使用RS256非对称签名算法   Access Token短过期（15-30分钟）   Refresh Token实施轮转和重用检测   验证所有标准Claims（iss、aud、exp）   不使用 alg: none    不在Payload中存敏感数据   实施令牌黑名单机制     JWT认证的安全关键在于正确地实施每个环节，而不是依赖某个单一机制。"
     }
     </script>
     <script type="application/ld+json">
@@ -120,11 +120,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>6 分钟阅读</span>
+          <span>3 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>1257 字</span>
+          <span>631 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/jwt-anquan.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/jwt-anquan.png" alt="JWT安全：签名算法选择、过期策略、刷新令牌最佳实践" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（16）</summary><ol><li><a href="#jwt基础">JWT基础</a></li><li><a href="#签名算法选择">签名算法选择</a></li><li><a href="#hs256-vs-rs256">HS256 vs RS256</a></li><li><a href="#算法混淆攻击">算法混淆攻击</a></li><li><a href="#token过期策略">Token过期策略</a></li><li><a href="#access-token">Access Token</a></li><li><a href="#基于风险的动态过期">基于风险的动态过期</a></li><li><a href="#刷新令牌机制">刷新令牌机制</a></li><li><a href="#安全存储">安全存储</a></li><li><a href="#轮转策略">轮转策略</a></li><li><a href="#重用检测">重用检测</a></li><li><a href="#其他安全措施">其他安全措施</a></li><li><a href="#token召回撤销">Token召回（撤销）</a></li><li><a href="#claims验证">Claims验证</a></li><li><a href="#避免在payload中存放敏感信息">避免在Payload中存放敏感信息</a></li><li><a href="#最佳实践总结">最佳实践总结</a></li></ol></details>
@@ -144,9 +144,9 @@
 <h3>算法混淆攻击</h3>
 <p>这是JWT最常见的安全漏洞之一。攻击者修改JWT Header中的<code>alg</code>字段为<code>none</code>，如果服务端验证不严格，就会接受没有签名的Token。</p>
 <p><strong>防御：</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 验证算法白名单</span>
-<span class="n">jwt</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">public_key</span><span class="p">,</span> <span class="n">algorithms</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;RS256&quot;</span><span class="p">],</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;require&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;exp&quot;</span><span class="p">,</span> <span class="s2">&quot;iat&quot;</span><span class="p">]})</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python"># 验证算法白名单
+jwt.decode(token, public_key, algorithms=[&quot;RS256&quot;], options={&quot;require&quot;: [&quot;exp&quot;, &quot;iat&quot;]})
+</code></pre>
 
 <h2>Token过期策略</h2>
 <h3>Access Token</h3>
@@ -168,25 +168,25 @@
 </ul>
 <h3>轮转策略</h3>
 <p>每次使用Refresh Token获取新的Access Token时，同时返回一个新的Refresh Token，旧的Refresh Token立即失效。</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">refresh_access_token</span><span class="p">(</span><span class="n">refresh_token</span><span class="p">):</span>
-    <span class="c1"># 验证Refresh Token</span>
-    <span class="n">payload</span> <span class="o">=</span> <span class="n">verify_refresh_token</span><span class="p">(</span><span class="n">refresh_token</span><span class="p">)</span>
-    <span class="n">user_id</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;sub&quot;</span><span class="p">]</span>
+<pre class="codehilite"><code class="language-python">def refresh_access_token(refresh_token):
+    # 验证Refresh Token
+    payload = verify_refresh_token(refresh_token)
+    user_id = payload[&quot;sub&quot;]
 
-    <span class="c1"># 检查是否已被使用（轮转检测）</span>
-    <span class="k">if</span> <span class="n">is_token_revoked</span><span class="p">(</span><span class="n">refresh_token</span><span class="p">):</span>
-        <span class="n">revoke_all_user_tokens</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>  <span class="c1"># 可能被攻击，清理所有令牌</span>
-        <span class="k">raise</span> <span class="n">SecurityException</span><span class="p">(</span><span class="s2">&quot;检测到令牌重用&quot;</span><span class="p">)</span>
+    # 检查是否已被使用（轮转检测）
+    if is_token_revoked(refresh_token):
+        revoke_all_user_tokens(user_id)  # 可能被攻击，清理所有令牌
+        raise SecurityException(&quot;检测到令牌重用&quot;)
 
-    <span class="c1"># 吊销旧Refresh Token</span>
-    <span class="n">revoke_token</span><span class="p">(</span><span class="n">refresh_token</span><span class="p">)</span>
+    # 吊销旧Refresh Token
+    revoke_token(refresh_token)
 
-    <span class="c1"># 生成新的Access Token和Refresh Token</span>
-    <span class="n">new_access</span> <span class="o">=</span> <span class="n">create_access_token</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
-    <span class="n">new_refresh</span> <span class="o">=</span> <span class="n">create_refresh_token</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    # 生成新的Access Token和Refresh Token
+    new_access = create_access_token(user_id)
+    new_refresh = create_refresh_token(user_id)
 
-    <span class="k">return</span> <span class="n">new_access</span><span class="p">,</span> <span class="n">new_refresh</span>
-</code></pre></div>
+    return new_access, new_refresh
+</code></pre>
 
 <h3>重用检测</h3>
 <p>如果检测到已使用的Refresh Token被再次提交，说明令牌可能已被盗，应吊销该用户的所有令牌。</p>
@@ -199,13 +199,13 @@
 <li><strong>短过期+自动刷新</strong>：减少Token被利用的时间窗口</li>
 </ol>
 <h3>Claims验证</h3>
-<div class="codehilite"><pre><span></span><code><span class="n">claims</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">public_key</span><span class="p">,</span> <span class="n">algorithms</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;RS256&quot;</span><span class="p">])</span>
-<span class="c1"># 必验证的字段</span>
-<span class="k">assert</span> <span class="n">claims</span><span class="p">[</span><span class="s2">&quot;iss&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;https://auth.example.com&quot;</span>  <span class="c1"># 签发者</span>
-<span class="k">assert</span> <span class="n">claims</span><span class="p">[</span><span class="s2">&quot;aud&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;https://api.example.com&quot;</span>    <span class="c1"># 接收者</span>
-<span class="k">assert</span> <span class="n">claims</span><span class="p">[</span><span class="s2">&quot;exp&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>                   <span class="c1"># 过期时间</span>
-<span class="k">assert</span> <span class="n">claims</span><span class="p">[</span><span class="s2">&quot;nbf&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>                   <span class="c1"># 生效时间</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">claims = jwt.decode(token, public_key, algorithms=[&quot;RS256&quot;])
+# 必验证的字段
+assert claims[&quot;iss&quot;] == &quot;https://auth.example.com&quot;  # 签发者
+assert claims[&quot;aud&quot;] == &quot;https://api.example.com&quot;    # 接收者
+assert claims[&quot;exp&quot;] &gt; time.time()                   # 过期时间
+assert claims[&quot;nbf&quot;] &lt; time.time()                   # 生效时间
+</code></pre>
 
 <h3>避免在Payload中存放敏感信息</h3>
 <p>JWT的Payload只是Base64URL编码（不是加密），任何人解码后都能读取。不要在Payload中存放密码、信用卡号等敏感信息。</p>

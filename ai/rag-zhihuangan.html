@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/rag-zhihuangan.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "339",
+      "wordCount": "334",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "zh-CN",
@@ -75,7 +75,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/rag-zhihuangan.html"},
-      "articleBody": "什么是RAG   检索增强生成（Retrieval-Augmented Generation, RAG）是当前大语言模型应用中最主流的架构模式之一。它通过将外部知识库的检索结果与LLM的生成能力相结合，有效解决了纯LLM在知识更新、幻觉控制和领域专业性方面的不足。   RAG的核心流程可以概括为三个步骤：文档分块与向量化、向量检索、生成融合。下面我们将逐一详解这些环节的工程实践。   文档分块策略   文档分块的质量直接决定了RAG系统的检索效果。常见的分块策略包括：      固定长度分块 ：按字符数或token数切分，最简单但容易切断语义完整的段落。    语义分块 ：基于段落、句子边界或主题切换点进行分割，推荐使用 langchain.text_splitter 中的 RecursiveCharacterTextSplitter 。    层次化分块 ：对文档进行粗粒度（章节）和细粒度（段落）两级分块，检索时先粗后细。     实践中建议块大小为512-1024个token，块重叠（chunk overlap）设置为10%-20%，以保证上下文连续性。   向量化与存储   选择Embedding模型是RAG的关键决策。目前主流方案包括：      OpenAI text-embedding-3-small ：1536维，性价比最优。    BGE系列 （BAAI General Embedding）：中文场景表现优异。    E5系列 ：多语言支持好。     向量数据库的选型需考虑数据规模、查询性能和运维成本：      Milvus ：适合大规模生产环境，分布式架构。    Qdrant ：Rust编写，性能优异，部署简单。    Chroma ：轻量级，适合原型开发和小规模应用。     检索优化技巧   提升检索准确度的几个关键技巧：      混合检索 ：将向量相似度搜索与BM25关键词搜索结合，兼顾语义和精确匹配。    重排序（Reranking） ：初检索回Top-K结果后，使用Cross-encoder模型进行重排序，大幅提升相关性。    查询重写 ：将用户问题拆解或改写为更适合检索的形式。    HyDE （假设性文档嵌入）：先生成假设性答案，再用该答案的向量进行检索。     生成融合   将检索到的上下文与用户问题一起送入LLM时，需要注意上下文窗口管理和Prompt设计：       请基于以下上下文回答问题。如果上下文中没有相关信息，请明确说明。 上下文：{context} 问题：{question} 答案：       同时需要实现引用溯源，让用户知道答案来源于哪些文档片段，增加可信度。   完整的RAG系统涉及文档处理流水线、向量存储管理、检索服务、生成服务和评估反馈闭环等多个组件。选择合适的架构方案并持续优化，才能构建出稳定可靠的问答系统。"
+      "articleBody": "什么是RAG   检索增强生成（Retrieval-Augmented Generation, RAG）是当前大语言模型应用中最主流的架构模式之一。它通过将外部知识库的检索结果与LLM的生成能力相结合，有效解决了纯LLM在知识更新、幻觉控制和领域专业性方面的不足。   RAG的核心流程可以概括为三个步骤：文档分块与向量化、向量检索、生成融合。下面我们将逐一详解这些环节的工程实践。   文档分块策略   文档分块的质量直接决定了RAG系统的检索效果。常见的分块策略包括：      固定长度分块 ：按字符数或token数切分，最简单但容易切断语义完整的段落。    语义分块 ：基于段落、句子边界或主题切换点进行分割，推荐使用 langchain.text_splitter 中的 RecursiveCharacterTextSplitter 。    层次化分块 ：对文档进行粗粒度（章节）和细粒度（段落）两级分块，检索时先粗后细。     实践中建议块大小为512-1024个token，块重叠（chunk overlap）设置为10%-20%，以保证上下文连续性。   向量化与存储   选择Embedding模型是RAG的关键决策。目前主流方案包括：      OpenAI text-embedding-3-small ：1536维，性价比最优。    BGE系列 （BAAI General Embedding）：中文场景表现优异。    E5系列 ：多语言支持好。     向量数据库的选型需考虑数据规模、查询性能和运维成本：      Milvus ：适合大规模生产环境，分布式架构。    Qdrant ：Rust编写，性能优异，部署简单。    Chroma ：轻量级，适合原型开发和小规模应用。     检索优化技巧   提升检索准确度的几个关键技巧：      混合检索 ：将向量相似度搜索与BM25关键词搜索结合，兼顾语义和精确匹配。    重排序（Reranking） ：初检索回Top-K结果后，使用Cross-encoder模型进行重排序，大幅提升相关性。    查询重写 ：将用户问题拆解或改写为更适合检索的形式。    HyDE （假设性文档嵌入）：先生成假设性答案，再用该答案的向量进行检索。     生成融合   将检索到的上下文与用户问题一起送入LLM时，需要注意上下文窗口管理和Prompt设计：    请基于以下上下文回答问题。如果上下文中没有相关信息，请明确说明。 上下文：{context} 问题：{question} 答案：      同时需要实现引用溯源，让用户知道答案来源于哪些文档片段，增加可信度。   完整的RAG系统涉及文档处理流水线、向量存储管理、检索服务、生成服务和评估反馈闭环等多个组件。选择合适的架构方案并持续优化，才能构建出稳定可靠的问答系统。"
     }
     </script>
     <script type="application/ld+json">
@@ -124,7 +124,7 @@
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>339 字</span>
+          <span>334 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/rag-zhihuangan.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/rag-zhihuangan.png" alt="RAG实战指南：从文档分块到问答系统的完整实现" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（5）</summary><ol><li><a href="#什么是rag">什么是RAG</a></li><li><a href="#文档分块策略">文档分块策略</a></li><li><a href="#向量化与存储">向量化与存储</a></li><li><a href="#检索优化技巧">检索优化技巧</a></li><li><a href="#生成融合">生成融合</a></li></ol></details>
@@ -162,11 +162,11 @@
 </ol>
 <h2>生成融合</h2>
 <p>将检索到的上下文与用户问题一起送入LLM时，需要注意上下文窗口管理和Prompt设计：</p>
-<div class="codehilite"><pre><span></span><code>请基于以下上下文回答问题。如果上下文中没有相关信息，请明确说明。
+<pre class="codehilite"><code>请基于以下上下文回答问题。如果上下文中没有相关信息，请明确说明。
 上下文：{context}
 问题：{question}
 答案：
-</code></pre></div>
+</code></pre>
 
 <p>同时需要实现引用溯源，让用户知道答案来源于哪些文档片段，增加可信度。</p>
 <p>完整的RAG系统涉及文档处理流水线、向量存储管理、检索服务、生成服务和评估反馈闭环等多个组件。选择合适的架构方案并持续优化，才能构建出稳定可靠的问答系统。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>

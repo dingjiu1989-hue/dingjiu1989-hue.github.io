@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/security/api-anquan.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2079",
+      "wordCount": "753",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "zh-CN",
@@ -75,7 +75,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/security/api-anquan.html"},
-      "articleBody": "API安全威胁   API已成为应用攻击的主要入口。常见的API安全威胁包括：滥用调用、注入攻击、身份伪造和数据泄露。   速率限制   限流策略    基于IP的限流：         # Nginx限流配置   limit_req_zone     $binary_remote_addr     zone=api_limit:10m     rate=10r/s  ;    server     {         location     /api/     {             limit_req     zone=api_limit     burst=20     nodelay  ;         }   }         基于用户的限流：         from     flask_limiter     import   Limiter    limiter   =   Limiter  (  key_func  =  lambda  :   current_user  .  id  )    @app  .  route  (  &quot;/api/endpoint&quot;  )   @limiter  .  limit  (  &quot;100/hour&quot;  )   def     endpoint  ():       return   jsonify  ({  &quot;data&quot;  :   &quot;success&quot;  })         分层限流策略：  - 全局：1000请求/秒 - 每用户：100请求/分钟 - 每IP：50请求/分钟 - 敏感API（登录）：5请求/分钟   限流响应   当请求被限流时，返回429状态码和明确的错误信息：        HTTP  /  1.1   429   Too Many Requests   Retry-After  :   60   Content-Type  :   application/json    {         &quot;error&quot;  :     &quot;rate_limit_exceeded&quot;  ,         &quot;message&quot;  :     &quot;请求过于频繁，请60秒后再试&quot;  ,         &quot;retry_after&quot;  :     60   }        输入验证   验证层次   输入验证应在多个层次实施：    传输层：  - 最大请求体大小限制 - 请求超时设置 - HTTPS强制    应用层：  - 参数类型验证 - 长度限制 - 格式校验        from     pydantic     import   BaseModel  ,   EmailStr  ,   Field    class     CreateUserRequest  (  BaseModel  ):       username  :   str   =   Field  (  ...  ,   min_length  =  3  ,   max_length  =  50  ,   pattern  =  &quot;^[a-zA-Z0-9_]+$&quot;  )       email  :   EmailStr       age  :   int   =   Field  (  ...  ,   ge  =  0  ,   le  =  150  )        常见防御      SQL注入 ：参数化查询    XSS ：输出编码    命令注入 ：禁止使用 exec 、 system 等函数    路径遍历 ：白名单验证路径     内容类型验证   严格验证 Content-Type 头：        @app  .  before_request   def     validate_content_type  ():       if   request  .  method   in   [  &quot;POST&quot;  ,   &quot;PUT&quot;  ,   &quot;PATCH&quot;  ]:           if   request  .  content_type   !=   &quot;application/json&quot;  :               return   {  &quot;error&quot;  :   &quot;不支持的Content-Type&quot;  },   415        认证鉴权   认证方案    OAuth 2.0 + OpenID Connect：         # 获取Token   POST /oauth/token   Content-Type: application/json    {       &quot;grant_type&quot;: &quot;authorization_code&quot;,       &quot;code&quot;: &quot;auth_code_xxx&quot;,       &quot;client_id&quot;: &quot;client_xxx&quot;,       &quot;client_secret&quot;: &quot;secret_xxx&quot;,       &quot;redirect_uri&quot;: &quot;https://app.example.com/callback&quot;   }         API Key方案（适用于服务间调用）：  - 为每个调用方生成唯一API Key - API Key定期轮换 - 在请求头中传递： X-API-Key: your-api-key    鉴权粒度    RBAC（基于角色的访问控制）：        /admin/* → 需要admin角色 /api/users/{id} → 只能访问自己的数据 /api/orders → 商户可查看自己的订单        ABAC（基于属性的访问控制）：  根据用户属性、资源属性和环境条件动态判定权限，比RBAC更灵活。   敏感操作确认   对于删除、批量操作等敏感API，实施二次确认： - 发送验证码到注册邮箱/手机 - 要求重新输入密码 - 需要管理员审批   API网关配置   API网关是实施安全策略的理想位置：        # Kong API Gateway 安全配置   plugins  :       -     name  :     rate-limiting         config  :           minute  :     100           policy  :     local        -     name  :     key-auth         config  :           key_names  :     [  &quot;X-API-Key&quot;  ]        -     name  :     cors         config  :           origins  :     [  &quot;https://app.example.com&quot;  ]           methods  :     [  &quot;GET&quot;  ,     &quot;POST&quot;  ,     &quot;PUT&quot;  ,     &quot;DELETE&quot;  ]        审计日志   记录所有API调用的审计日志： - 请求者和请求来源IP - 请求时间和耗时 - 请求的API和方法 - 响应状态码 - 失败原因   API安全是一个系统工程，需要从传输层到应用层建立多层防御体系。"
+      "articleBody": "API安全威胁   API已成为应用攻击的主要入口。常见的API安全威胁包括：滥用调用、注入攻击、身份伪造和数据泄露。   速率限制   限流策略    基于IP的限流：     # Nginx限流配置 limit_req_zone $binary_remote_addr zone=api_limit:10m rate=10r/s;  server {     location /api/ {         limit_req zone=api_limit burst=20 nodelay;     } }       基于用户的限流：     from flask_limiter import Limiter  limiter = Limiter(key_func=lambda: current_user.id)  @app.route(&quot;/api/endpoint&quot;) @limiter.limit(&quot;100/hour&quot;) def endpoint():     return jsonify({&quot;data&quot;: &quot;success&quot;})       分层限流策略：  - 全局：1000请求/秒 - 每用户：100请求/分钟 - 每IP：50请求/分钟 - 敏感API（登录）：5请求/分钟   限流响应   当请求被限流时，返回429状态码和明确的错误信息：    HTTP/1.1 429 Too Many Requests Retry-After: 60 Content-Type: application/json  {     &quot;error&quot;: &quot;rate_limit_exceeded&quot;,     &quot;message&quot;: &quot;请求过于频繁，请60秒后再试&quot;,     &quot;retry_after&quot;: 60 }      输入验证   验证层次   输入验证应在多个层次实施：    传输层：  - 最大请求体大小限制 - 请求超时设置 - HTTPS强制    应用层：  - 参数类型验证 - 长度限制 - 格式校验    from pydantic import BaseModel, EmailStr, Field  class CreateUserRequest(BaseModel):     username: str = Field(..., min_length=3, max_length=50, pattern=&quot;^[a-zA-Z0-9_]+$&quot;)     email: EmailStr     age: int = Field(..., ge=0, le=150)      常见防御      SQL注入 ：参数化查询    XSS ：输出编码    命令注入 ：禁止使用 exec 、 system 等函数    路径遍历 ：白名单验证路径     内容类型验证   严格验证 Content-Type 头：    @app.before_request def validate_content_type():     if request.method in [&quot;POST&quot;, &quot;PUT&quot;, &quot;PATCH&quot;]:         if request.content_type != &quot;application/json&quot;:             return {&quot;error&quot;: &quot;不支持的Content-Type&quot;}, 415      认证鉴权   认证方案    OAuth 2.0 + OpenID Connect：     # 获取Token POST /oauth/token Content-Type: application/json  {     &quot;grant_type&quot;: &quot;authorization_code&quot;,     &quot;code&quot;: &quot;auth_code_xxx&quot;,     &quot;client_id&quot;: &quot;client_xxx&quot;,     &quot;client_secret&quot;: &quot;secret_xxx&quot;,     &quot;redirect_uri&quot;: &quot;https://app.example.com/callback&quot; }       API Key方案（适用于服务间调用）：  - 为每个调用方生成唯一API Key - API Key定期轮换 - 在请求头中传递： X-API-Key: your-api-key    鉴权粒度    RBAC（基于角色的访问控制）：     /admin/* → 需要admin角色 /api/users/{id} → 只能访问自己的数据 /api/orders → 商户可查看自己的订单       ABAC（基于属性的访问控制）：  根据用户属性、资源属性和环境条件动态判定权限，比RBAC更灵活。   敏感操作确认   对于删除、批量操作等敏感API，实施二次确认： - 发送验证码到注册邮箱/手机 - 要求重新输入密码 - 需要管理员审批   API网关配置   API网关是实施安全策略的理想位置：    # Kong API Gateway 安全配置 plugins:   - name: rate-limiting     config:       minute: 100       policy: local    - name: key-auth     config:       key_names: [&quot;X-API-Key&quot;]    - name: cors     config:       origins: [&quot;https://app.example.com&quot;]       methods: [&quot;GET&quot;, &quot;POST&quot;, &quot;PUT&quot;, &quot;DELETE&quot;]      审计日志   记录所有API调用的审计日志： - 请求者和请求来源IP - 请求时间和耗时 - 请求的API和方法 - 响应状态码 - 失败原因   API安全是一个系统工程，需要从传输层到应用层建立多层防御体系。"
     }
     </script>
     <script type="application/ld+json">
@@ -120,11 +120,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>10 分钟阅读</span>
+          <span>3 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>2079 字</span>
+          <span>753 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/api-anquan.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/api-anquan.png" alt="API安全：速率限制、输入验证、认证鉴权最佳实践" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（14）</summary><ol><li><a href="#api安全威胁">API安全威胁</a></li><li><a href="#速率限制">速率限制</a></li><li><a href="#限流策略">限流策略</a></li><li><a href="#限流响应">限流响应</a></li><li><a href="#输入验证">输入验证</a></li><li><a href="#验证层次">验证层次</a></li><li><a href="#常见防御">常见防御</a></li><li><a href="#内容类型验证">内容类型验证</a></li><li><a href="#认证鉴权">认证鉴权</a></li><li><a href="#认证方案">认证方案</a></li><li><a href="#鉴权粒度">鉴权粒度</a></li><li><a href="#敏感操作确认">敏感操作确认</a></li><li><a href="#api网关配置">API网关配置</a></li><li><a href="#审计日志">审计日志</a></li></ol></details>
@@ -133,26 +133,26 @@
 <h2>速率限制</h2>
 <h3>限流策略</h3>
 <p><strong>基于IP的限流：</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># Nginx限流配置</span>
-<span class="k">limit_req_zone</span><span class="w"> </span><span class="nv">$binary_remote_addr</span><span class="w"> </span><span class="s">zone=api_limit:10m</span><span class="w"> </span><span class="s">rate=10r/s</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-nginx"># Nginx限流配置
+limit_req_zone $binary_remote_addr zone=api_limit:10m rate=10r/s;
 
-<span class="k">server</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/api/</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kn">limit_req</span><span class="w"> </span><span class="s">zone=api_limit</span><span class="w"> </span><span class="s">burst=20</span><span class="w"> </span><span class="s">nodelay</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+server {
+    location /api/ {
+        limit_req zone=api_limit burst=20 nodelay;
+    }
+}
+</code></pre>
 
 <p><strong>基于用户的限流：</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">flask_limiter</span><span class="w"> </span><span class="kn">import</span> <span class="n">Limiter</span>
+<pre class="codehilite"><code class="language-python">from flask_limiter import Limiter
 
-<span class="n">limiter</span> <span class="o">=</span> <span class="n">Limiter</span><span class="p">(</span><span class="n">key_func</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">current_user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+limiter = Limiter(key_func=lambda: current_user.id)
 
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/endpoint&quot;</span><span class="p">)</span>
-<span class="nd">@limiter</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="s2">&quot;100/hour&quot;</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">endpoint</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">})</span>
-</code></pre></div>
+@app.route(&quot;/api/endpoint&quot;)
+@limiter.limit(&quot;100/hour&quot;)
+def endpoint():
+    return jsonify({&quot;data&quot;: &quot;success&quot;})
+</code></pre>
 
 <p><strong>分层限流策略：</strong>
 - 全局：1000请求/秒
@@ -161,16 +161,16 @@
 - 敏感API（登录）：5请求/分钟</p>
 <h3>限流响应</h3>
 <p>当请求被限流时，返回429状态码和明确的错误信息：</p>
-<div class="codehilite"><pre><span></span><code><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">429</span> <span class="ne">Too Many Requests</span>
-<span class="na">Retry-After</span><span class="o">:</span> <span class="l">60</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<pre class="codehilite"><code class="language-http">HTTP/1.1 429 Too Many Requests
+Retry-After: 60
+Content-Type: application/json
 
-<span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rate_limit_exceeded&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;请求过于频繁，请60秒后再试&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;retry_after&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span>
-<span class="p">}</span>
-</code></pre></div>
+{
+    &quot;error&quot;: &quot;rate_limit_exceeded&quot;,
+    &quot;message&quot;: &quot;请求过于频繁，请60秒后再试&quot;,
+    &quot;retry_after&quot;: 60
+}
+</code></pre>
 
 <h2>输入验证</h2>
 <h3>验证层次</h3>
@@ -183,13 +183,13 @@
 - 参数类型验证
 - 长度限制
 - 格式校验</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">EmailStr</span><span class="p">,</span> <span class="n">Field</span>
+<pre class="codehilite"><code class="language-python">from pydantic import BaseModel, EmailStr, Field
 
-<span class="k">class</span><span class="w"> </span><span class="nc">CreateUserRequest</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">min_length</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;^[a-zA-Z0-9_]+$&quot;</span><span class="p">)</span>
-    <span class="n">email</span><span class="p">:</span> <span class="n">EmailStr</span>
-    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
-</code></pre></div>
+class CreateUserRequest(BaseModel):
+    username: str = Field(..., min_length=3, max_length=50, pattern=&quot;^[a-zA-Z0-9_]+$&quot;)
+    email: EmailStr
+    age: int = Field(..., ge=0, le=150)
+</code></pre>
 
 <h3>常见防御</h3>
 <ul>
@@ -200,28 +200,28 @@
 </ul>
 <h3>内容类型验证</h3>
 <p>严格验证<code>Content-Type</code>头：</p>
-<div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">before_request</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">validate_content_type</span><span class="p">():</span>
-    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;PUT&quot;</span><span class="p">,</span> <span class="s2">&quot;PATCH&quot;</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">content_type</span> <span class="o">!=</span> <span class="s2">&quot;application/json&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;不支持的Content-Type&quot;</span><span class="p">},</span> <span class="mi">415</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">@app.before_request
+def validate_content_type():
+    if request.method in [&quot;POST&quot;, &quot;PUT&quot;, &quot;PATCH&quot;]:
+        if request.content_type != &quot;application/json&quot;:
+            return {&quot;error&quot;: &quot;不支持的Content-Type&quot;}, 415
+</code></pre>
 
 <h2>认证鉴权</h2>
 <h3>认证方案</h3>
 <p><strong>OAuth 2.0 + OpenID Connect：</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="err"># 获取Token</span>
-<span class="err">POST /oauth/token</span>
-<span class="err">Content-Type: application/json</span>
+<pre class="codehilite"><code class="language-http"># 获取Token
+POST /oauth/token
+Content-Type: application/json
 
-<span class="err">{</span>
-<span class="err">    &quot;grant_type&quot;: &quot;authorization_code&quot;,</span>
-<span class="err">    &quot;code&quot;: &quot;auth_code_xxx&quot;,</span>
-<span class="err">    &quot;client_id&quot;: &quot;client_xxx&quot;,</span>
-<span class="err">    &quot;client_secret&quot;: &quot;secret_xxx&quot;,</span>
-<span class="err">    &quot;redirect_uri&quot;: &quot;https://app.example.com/callback&quot;</span>
-<span class="err">}</span>
-</code></pre></div>
+{
+    &quot;grant_type&quot;: &quot;authorization_code&quot;,
+    &quot;code&quot;: &quot;auth_code_xxx&quot;,
+    &quot;client_id&quot;: &quot;client_xxx&quot;,
+    &quot;client_secret&quot;: &quot;secret_xxx&quot;,
+    &quot;redirect_uri&quot;: &quot;https://app.example.com/callback&quot;
+}
+</code></pre>
 
 <p><strong>API Key方案（适用于服务间调用）：</strong>
 - 为每个调用方生成唯一API Key
@@ -229,10 +229,10 @@
 - 在请求头中传递：<code>X-API-Key: your-api-key</code></p>
 <h3>鉴权粒度</h3>
 <p><strong>RBAC（基于角色的访问控制）：</strong></p>
-<div class="codehilite"><pre><span></span><code>/admin/* → 需要admin角色
+<pre class="codehilite"><code>/admin/* → 需要admin角色
 /api/users/{id} → 只能访问自己的数据
 /api/orders → 商户可查看自己的订单
-</code></pre></div>
+</code></pre>
 
 <p><strong>ABAC（基于属性的访问控制）：</strong>
 根据用户属性、资源属性和环境条件动态判定权限，比RBAC更灵活。</p>
@@ -243,22 +243,22 @@
 - 需要管理员审批</p>
 <h2>API网关配置</h2>
 <p>API网关是实施安全策略的理想位置：</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># Kong API Gateway 安全配置</span>
-<span class="nt">plugins</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rate-limiting</span>
-<span class="w">    </span><span class="nt">config</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">minute</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
-<span class="w">      </span><span class="nt">policy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+<pre class="codehilite"><code class="language-yaml"># Kong API Gateway 安全配置
+plugins:
+  - name: rate-limiting
+    config:
+      minute: 100
+      policy: local
 
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">key-auth</span>
-<span class="w">    </span><span class="nt">config</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">key_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;X-API-Key&quot;</span><span class="p p-Indicator">]</span>
+  - name: key-auth
+    config:
+      key_names: [&quot;X-API-Key&quot;]
 
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cors</span>
-<span class="w">    </span><span class="nt">config</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">origins</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;https://app.example.com&quot;</span><span class="p p-Indicator">]</span>
-<span class="w">      </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;GET&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;POST&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;PUT&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;DELETE&quot;</span><span class="p p-Indicator">]</span>
-</code></pre></div>
+  - name: cors
+    config:
+      origins: [&quot;https://app.example.com&quot;]
+      methods: [&quot;GET&quot;, &quot;POST&quot;, &quot;PUT&quot;, &quot;DELETE&quot;]
+</code></pre>
 
 <h2>审计日志</h2>
 <p>记录所有API调用的审计日志：

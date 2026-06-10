@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/security/sql-zhu-ru.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1145",
+      "wordCount": "525",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "zh-CN",
@@ -75,7 +75,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/security/sql-zhu-ru.html"},
-      "articleBody": "SQL注入原理   SQL注入是最经典的Web安全漏洞之一，攻击者通过在输入中嵌入恶意SQL语句，操纵后端数据库执行非预期的查询。   参数化查询   参数化查询是防御SQL注入最有效的手段。   Python示例        # 不安全：字符串拼接   cursor  .  execute  (  f  &quot;SELECT * FROM users WHERE name = &#39;  {  name  }  &#39;&quot;  )    # 安全：参数化查询   cursor  .  execute  (  &quot;SELECT * FROM users WHERE name =   %s  &quot;  ,   (  name  ,))        Node.js示例        // 不安全   const     sql     =     `SELECT * FROM users WHERE name = &#39;  ${  name  }  &#39;`  ;    // 安全（使用mysql2）   const     sql     =     &#39;SELECT * FROM users WHERE name = ?&#39;  ;   connection  .  execute  (  sql  ,     [  name  ]);        Java示例        // 安全：PreparedStatement   String     sql     =     &quot;SELECT * FROM users WHERE name = ?&quot;  ;   PreparedStatement     ps     =     connection  .  prepareStatement  (  sql  );   ps  .  setString  (  1  ,     name  );   ResultSet     rs     =     ps  .  executeQuery  ();        原理说明   参数化查询将SQL语句和数据分离，数据库预编译SQL语句的语法结构，后续传入的参数只作为数据处理，不会改变SQL的语义。因此即使用户输入包含SQL关键字，也不会被执行。   ORM安全   现代ORM框架（SQLAlchemy、Prisma、TypeORM、Hibernate）默认使用参数化查询，大大降低了SQL注入风险。   安全使用原则    使用ORM的查询构建器：         # SQLAlchemy 安全示例   user   =   session  .  query  (  User  )  .  filter  (  User  .  name   ==   name  )  .  first  ()         避免原生SQL：  - ORM框架的原生SQL方法（如 session.execute(raw_sql) ）绕过了参数化保护 - 不得已使用原生SQL时，确保使用参数化方式   常见ORM风险      动态查询拼接 ：根据条件动态拼接查询字符串    排序参数 ： ORDER BY 后的字段名不能参数化，需要白名单校验    批量操作 ：批量删除或更新时的条件拼接     WAF配置   Web应用防火墙（WAF）作为第二道防线，可以在请求到达应用之前拦截恶意输入。   WAF规则配置        # Nginx + ModSecurity 规则示例   SecRule     REQUEST_FILENAME     &quot;\\.(php|asp)&quot;     &quot;id:1000&quot;   SecRule     ARGS     &quot;@detectSQLi&quot;     &quot;id:1001,deny,msg:&#39;SQL注入检测&#39;&quot;        云WAF      Cloudflare WAF ：预置SQL注入规则集    AWS WAF ：可与ALB和CloudFront集成    阿里云WAF ：中文场景最佳支持     WAF的局限性     无法防御所有SQL注入变种   可能产生误报（阻断正常请求）   二次编码和分块传输可能绕过WAF     因此，WAF应作为补充防御，而非主要依赖。   其他防御措施   最小权限数据库账户   应用使用的数据库账户应遵循最小权限原则： - 只读操作使用只读账户 - 仅授权必要的表 - 禁止使用 GRANT ALL    输入验证     白名单验证：只接受预期格式的输入   类型检查：数字字段确保是数字类型   长度限制：防止缓冲区溢出攻击     错误信息处理     不要在生产环境中显示数据库错误信息   使用自定义错误页面   记录完整错误到日志便于排查     SQL注入虽然历史悠久，但至今仍是常见的安全漏洞。通过参数化查询、ORM安全和WAF的多层防御，可以有效消除SQL注入风险。"
+      "articleBody": "SQL注入原理   SQL注入是最经典的Web安全漏洞之一，攻击者通过在输入中嵌入恶意SQL语句，操纵后端数据库执行非预期的查询。   参数化查询   参数化查询是防御SQL注入最有效的手段。   Python示例    # 不安全：字符串拼接 cursor.execute(f&quot;SELECT * FROM users WHERE name = '{name}'&quot;)  # 安全：参数化查询 cursor.execute(&quot;SELECT * FROM users WHERE name = %s&quot;, (name,))      Node.js示例    // 不安全 const sql = `SELECT * FROM users WHERE name = '${name}'`;  // 安全（使用mysql2） const sql = 'SELECT * FROM users WHERE name = ?'; connection.execute(sql, [name]);      Java示例    // 安全：PreparedStatement String sql = &quot;SELECT * FROM users WHERE name = ?&quot;; PreparedStatement ps = connection.prepareStatement(sql); ps.setString(1, name); ResultSet rs = ps.executeQuery();      原理说明   参数化查询将SQL语句和数据分离，数据库预编译SQL语句的语法结构，后续传入的参数只作为数据处理，不会改变SQL的语义。因此即使用户输入包含SQL关键字，也不会被执行。   ORM安全   现代ORM框架（SQLAlchemy、Prisma、TypeORM、Hibernate）默认使用参数化查询，大大降低了SQL注入风险。   安全使用原则    使用ORM的查询构建器：     # SQLAlchemy 安全示例 user = session.query(User).filter(User.name == name).first()       避免原生SQL：  - ORM框架的原生SQL方法（如 session.execute(raw_sql) ）绕过了参数化保护 - 不得已使用原生SQL时，确保使用参数化方式   常见ORM风险      动态查询拼接 ：根据条件动态拼接查询字符串    排序参数 ： ORDER BY 后的字段名不能参数化，需要白名单校验    批量操作 ：批量删除或更新时的条件拼接     WAF配置   Web应用防火墙（WAF）作为第二道防线，可以在请求到达应用之前拦截恶意输入。   WAF规则配置    # Nginx + ModSecurity 规则示例 SecRule REQUEST_FILENAME &quot;\\.(php|asp)&quot; &quot;id:1000&quot; SecRule ARGS &quot;@detectSQLi&quot; &quot;id:1001,deny,msg:'SQL注入检测'&quot;      云WAF      Cloudflare WAF ：预置SQL注入规则集    AWS WAF ：可与ALB和CloudFront集成    阿里云WAF ：中文场景最佳支持     WAF的局限性     无法防御所有SQL注入变种   可能产生误报（阻断正常请求）   二次编码和分块传输可能绕过WAF     因此，WAF应作为补充防御，而非主要依赖。   其他防御措施   最小权限数据库账户   应用使用的数据库账户应遵循最小权限原则： - 只读操作使用只读账户 - 仅授权必要的表 - 禁止使用 GRANT ALL    输入验证     白名单验证：只接受预期格式的输入   类型检查：数字字段确保是数字类型   长度限制：防止缓冲区溢出攻击     错误信息处理     不要在生产环境中显示数据库错误信息   使用自定义错误页面   记录完整错误到日志便于排查     SQL注入虽然历史悠久，但至今仍是常见的安全漏洞。通过参数化查询、ORM安全和WAF的多层防御，可以有效消除SQL注入风险。"
     }
     </script>
     <script type="application/ld+json">
@@ -120,11 +120,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>5 分钟阅读</span>
+          <span>2 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>1145 字</span>
+          <span>525 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/sql-zhu-ru.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/sql-zhu-ru.png" alt="SQL注入防御：参数化查询、ORM安全、WAF配置" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（17）</summary><ol><li><a href="#sql注入原理">SQL注入原理</a></li><li><a href="#参数化查询">参数化查询</a></li><li><a href="#python示例">Python示例</a></li><li><a href="#nodejs示例">Node.js示例</a></li><li><a href="#java示例">Java示例</a></li><li><a href="#原理说明">原理说明</a></li><li><a href="#orm安全">ORM安全</a></li><li><a href="#安全使用原则">安全使用原则</a></li><li><a href="#常见orm风险">常见ORM风险</a></li><li><a href="#waf配置">WAF配置</a></li><li><a href="#waf规则配置">WAF规则配置</a></li><li><a href="#云waf">云WAF</a></li><li><a href="#waf的局限性">WAF的局限性</a></li><li><a href="#其他防御措施">其他防御措施</a></li><li><a href="#最小权限数据库账户">最小权限数据库账户</a></li><li><a href="#输入验证">输入验证</a></li><li><a href="#错误信息处理">错误信息处理</a></li></ol></details>
@@ -133,29 +133,29 @@
 <h2>参数化查询</h2>
 <p>参数化查询是防御SQL注入最有效的手段。</p>
 <h3>Python示例</h3>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 不安全：字符串拼接</span>
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SELECT * FROM users WHERE name = &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<pre class="codehilite"><code class="language-python"># 不安全：字符串拼接
+cursor.execute(f&quot;SELECT * FROM users WHERE name = '{name}'&quot;)
 
-<span class="c1"># 安全：参数化查询</span>
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users WHERE name = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,))</span>
-</code></pre></div>
+# 安全：参数化查询
+cursor.execute(&quot;SELECT * FROM users WHERE name = %s&quot;, (name,))
+</code></pre>
 
 <h3>Node.js示例</h3>
-<div class="codehilite"><pre><span></span><code><span class="c1">// 不安全</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`SELECT * FROM users WHERE name = &#39;</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">&#39;`</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-javascript">// 不安全
+const sql = `SELECT * FROM users WHERE name = '${name}'`;
 
-<span class="c1">// 安全（使用mysql2）</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;SELECT * FROM users WHERE name = ?&#39;</span><span class="p">;</span>
-<span class="nx">connection</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">sql</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nx">name</span><span class="p">]);</span>
-</code></pre></div>
+// 安全（使用mysql2）
+const sql = 'SELECT * FROM users WHERE name = ?';
+connection.execute(sql, [name]);
+</code></pre>
 
 <h3>Java示例</h3>
-<div class="codehilite"><pre><span></span><code><span class="c1">// 安全：PreparedStatement</span>
-<span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SELECT * FROM users WHERE name = ?&quot;</span><span class="p">;</span>
-<span class="n">PreparedStatement</span><span class="w"> </span><span class="n">ps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">sql</span><span class="p">);</span>
-<span class="n">ps</span><span class="p">.</span><span class="na">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
-<span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ps</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">();</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-java">// 安全：PreparedStatement
+String sql = &quot;SELECT * FROM users WHERE name = ?&quot;;
+PreparedStatement ps = connection.prepareStatement(sql);
+ps.setString(1, name);
+ResultSet rs = ps.executeQuery();
+</code></pre>
 
 <h3>原理说明</h3>
 <p>参数化查询将SQL语句和数据分离，数据库预编译SQL语句的语法结构，后续传入的参数只作为数据处理，不会改变SQL的语义。因此即使用户输入包含SQL关键字，也不会被执行。</p>
@@ -163,9 +163,9 @@
 <p>现代ORM框架（SQLAlchemy、Prisma、TypeORM、Hibernate）默认使用参数化查询，大大降低了SQL注入风险。</p>
 <h3>安全使用原则</h3>
 <p><strong>使用ORM的查询构建器：</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># SQLAlchemy 安全示例</span>
-<span class="n">user</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python"># SQLAlchemy 安全示例
+user = session.query(User).filter(User.name == name).first()
+</code></pre>
 
 <p><strong>避免原生SQL：</strong>
 - ORM框架的原生SQL方法（如<code>session.execute(raw_sql)</code>）绕过了参数化保护
@@ -179,10 +179,10 @@
 <h2>WAF配置</h2>
 <p>Web应用防火墙（WAF）作为第二道防线，可以在请求到达应用之前拦截恶意输入。</p>
 <h3>WAF规则配置</h3>
-<div class="codehilite"><pre><span></span><code><span class="c1"># Nginx + ModSecurity 规则示例</span>
-<span class="k">SecRule</span><span class="w"> </span><span class="s">REQUEST_FILENAME</span><span class="w"> </span><span class="s">&quot;\.(php|asp)&quot;</span><span class="w"> </span><span class="s">&quot;id:1000&quot;</span>
-<span class="s">SecRule</span><span class="w"> </span><span class="s">ARGS</span><span class="w"> </span><span class="s">&quot;@detectSQLi&quot;</span><span class="w"> </span><span class="s">&quot;id:1001,deny,msg:&#39;SQL注入检测&#39;&quot;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-nginx"># Nginx + ModSecurity 规则示例
+SecRule REQUEST_FILENAME &quot;\.(php|asp)&quot; &quot;id:1000&quot;
+SecRule ARGS &quot;@detectSQLi&quot; &quot;id:1001,deny,msg:'SQL注入检测'&quot;
+</code></pre>
 
 <h3>云WAF</h3>
 <ul>
