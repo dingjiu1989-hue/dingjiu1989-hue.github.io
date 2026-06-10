@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/llm-jiaoyi.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "422",
+      "wordCount": "512",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "zh-CN",
@@ -75,7 +75,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/llm-jiaoyi.html"},
-      "articleBody": "核心决策：微调还是API？   在构建LLM应用时，一个根本性的决策是：应该微调自己的模型，还是直接调用商业API？这个问题没有标准答案，需要根据具体场景综合权衡。   API调用的优势与局限   优势      零运维成本 ：不需要管理GPU集群和部署基础设施    持续更新 ：每次调用都使用最新版本模型    弹性伸缩 ：自动处理流量峰值    低启动成本 ：按量付费，无需前期投入     局限      长期成本高 ：大规模调用时，API费用会快速增长    数据隐私 ：数据发送到第三方服务存在合规风险    依赖风险 ：服务商变更定价策略或服务条款    定制化有限 ：无法深度调整模型行为     微调模型的优势与挑战   优势      数据隐私 ：数据完全留在自己的基础设施中    低单次成本 ：部署后每次调用的边际成本很低    行为定制 ：可以精确调整模型的输出风格和知识范围    低延迟 ：本地部署减少网络传输时间     挑战      高初始投入 ：GPU硬件和基础设施成本    运维复杂 ：需要专业的MLOps团队    更新滞后 ：模型版本更新周期长    容量规划难 ：需要预测流量并提前准备资源     成本对比分析   以一个日调用量100万次的问答系统为例：         维度   GPT-4 API   微调LLaMA-7B           月API费用   ~$50,000   $0       GPU月租   $0   ~$3,000       运维人力   $0   ~$5,000       月总成本   ~$50,000   ~$8,000       初始投入   $0   ~$20,000         当调用量达到一定规模后，微调方案的成本优势明显。   混合策略   最好的选择往往不是非此即彼，而是采用混合策略：   路由架构    用户请求 -&gt; 复杂度评估 -&gt; {简单：小模型/API, 复杂：大模型/微调}      分层方案      简单请求 （~80%）：使用微调的小模型处理，成本最低    中等请求 （~15%）：调用商业API，效果有保障    复杂请求 （~5%）：调用最强API或微调的大模型     渐进式迁移路径      第一阶段 ：全部使用API，快速验证产品市场匹配    第二阶段 ：高频场景微调小模型，替换部分API调用    第三阶段 ：核心场景完全自建，保留API作为弹性补充     决策清单   做最终决策前，回答三个问题： 1. 月调用量是否超过100万次？超过则微调方案通常更经济 2. 数据是否需要留在内部？合规需求通常直接决定必须自建 3. 团队是否有MLOps能力？运维能力不足时优先用API，等团队成熟后再迁移   这种渐进式策略既保证了初期的灵活性，也为长期降本提供了路径。"
+      "articleBody": "核心决策：微调还是API？   在构建LLM应用时，一个根本性的决策是：应该微调自己的模型，还是直接调用商业API？这个问题没有标准答案，需要根据具体场景综合权衡。   API调用的优势与局限   优势      零运维成本 ：不需要管理GPU集群和部署基础设施    持续更新 ：每次调用都使用最新版本模型    弹性伸缩 ：自动处理流量峰值    低启动成本 ：按量付费，无需前期投入     局限      长期成本高 ：大规模调用时，API费用会快速增长    数据隐私 ：数据发送到第三方服务存在合规风险    依赖风险 ：服务商变更定价策略或服务条款    定制化有限 ：无法深度调整模型行为     微调模型的优势与挑战   优势      数据隐私 ：数据完全留在自己的基础设施中    低单次成本 ：部署后每次调用的边际成本很低    行为定制 ：可以精确调整模型的输出风格和知识范围    低延迟 ：本地部署减少网络传输时间     挑战      高初始投入 ：GPU硬件和基础设施成本    运维复杂 ：需要专业的MLOps团队    更新滞后 ：模型版本更新周期长    容量规划难 ：需要预测流量并提前准备资源     成本对比分析   以一个日调用量100万次的问答系统为例：         维度   GPT-4 API   微调LLaMA-7B           月API费用   ~$50,000   $0       GPU月租   $0   ~$3,000       运维人力   $0   ~$5,000       月总成本   ~$50,000   ~$8,000       初始投入   $0   ~$20,000         当调用量达到一定规模后，微调方案的成本优势明显。   混合策略   最好的选择往往不是非此即彼，而是采用混合策略：   路由架构        用户请求     -&gt;     复杂度评估     -&gt;     {  简单：小模型  /  API  ,     复杂：大模型  /  微调  }        分层方案      简单请求 （~80%）：使用微调的小模型处理，成本最低    中等请求 （~15%）：调用商业API，效果有保障    复杂请求 （~5%）：调用最强API或微调的大模型     渐进式迁移路径      第一阶段 ：全部使用API，快速验证产品市场匹配    第二阶段 ：高频场景微调小模型，替换部分API调用    第三阶段 ：核心场景完全自建，保留API作为弹性补充     决策清单   做最终决策前，回答三个问题： 1. 月调用量是否超过100万次？超过则微调方案通常更经济 2. 数据是否需要留在内部？合规需求通常直接决定必须自建 3. 团队是否有MLOps能力？运维能力不足时优先用API，等团队成熟后再迁移   这种渐进式策略既保证了初期的灵活性，也为长期降本提供了路径。"
     }
     </script>
     <script type="application/ld+json">
@@ -124,7 +124,7 @@
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>422 字</span>
+          <span>512 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/llm-jiaoyi.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/llm-jiaoyi.png" alt="LLM交易：微调模型 vs API调用，成本与效果的权衡" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（13）</summary><ol><li><a href="#核心决策微调还是api">核心决策：微调还是API？</a></li><li><a href="#api调用的优势与局限">API调用的优势与局限</a></li><li><a href="#优势">优势</a></li><li><a href="#局限">局限</a></li><li><a href="#微调模型的优势与挑战">微调模型的优势与挑战</a></li><li><a href="#优势">优势</a></li><li><a href="#挑战">挑战</a></li><li><a href="#成本对比分析">成本对比分析</a></li><li><a href="#混合策略">混合策略</a></li><li><a href="#路由架构">路由架构</a></li><li><a href="#分层方案">分层方案</a></li><li><a href="#渐进式迁移路径">渐进式迁移路径</a></li><li><a href="#决策清单">决策清单</a></li></ol></details>
@@ -202,8 +202,8 @@
 <h2>混合策略</h2>
 <p>最好的选择往往不是非此即彼，而是采用混合策略：</p>
 <h3>路由架构</h3>
-<pre class="codehilite"><code>用户请求 -&gt; 复杂度评估 -&gt; {简单：小模型/API, 复杂：大模型/微调}
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="err">用户请求</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="err">复杂度评估</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="err">简单：小模型</span><span class="o">/</span><span class="n">API</span><span class="p">,</span><span class="w"> </span><span class="err">复杂：大模型</span><span class="o">/</span><span class="err">微调</span><span class="p">}</span>
+</code></pre></div>
 
 <h3>分层方案</h3>
 <ol>

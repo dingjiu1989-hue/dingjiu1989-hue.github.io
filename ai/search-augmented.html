@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/search-augmented.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "418",
+      "wordCount": "615",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "zh-CN",
@@ -75,7 +75,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/search-augmented.html"},
-      "articleBody": "为什么需要搜索增强   纯向量检索在处理精确匹配、关键词搜索和结构化查询时存在天然局限。而传统搜索引擎（如Elasticsearch）在精确匹配、布尔查询和聚合分析方面有着成熟的能力。将两者结合，可以取长补短。   混合搜索架构   混合搜索的核心思想是将向量检索和关键词检索的结果进行融合。   架构层次    用户查询 → 查询解析 → {向量检索, 关键词检索} → 结果融合 → 重排序 → LLM生成      实现方案    1. Elasticsearch + 向量插件    Elasticsearch从8.0版本开始原生支持向量检索，无需额外插件。    query = {     &quot;knn&quot;: {         &quot;field&quot;: &quot;embedding&quot;,         &quot;query_vector&quot;: query_vector,         &quot;k&quot;: 10     },     &quot;query&quot;: {         &quot;match&quot;: {             &quot;content&quot;: {                 &quot;query&quot;: query_text,                 &quot;boost&quot;: 0.3             }         }     } }       2. 独立搜索+向量服务    将Elasticsearch和向量数据库独立部署，在应用层进行结果融合。   结果融合策略   加权融合   分别为向量检索和关键词检索的结果分配权重：    Score = α * vector_score + (1-α) * bm25_score      α的取值通常通过实验确定，在0.3-0.7之间调节。对于术语明确的查询，提高BM25权重；对于语义查询，提高向量权重。   级联融合   先进行BM25搜索，然后在搜索结果范围内再进行向量重排序。或者反向操作，先向量搜索再BM25过滤。   RRF融合   倒数排序融合（Reciprocal Rank Fusion）是一种无需调参的融合方法：    Score(d) = Σ 1/(k + rank_i(d))      这种方法对不同类型的搜索结果一视同仁，稳定性好。   查询理解与改写   搜索增强的关键在于理解用户意图并构造正确的查询：      查询分类 ：判断查询是事实型、导航型还是探索型    实体识别 ：提取查询中的实体名称    查询扩展 ：使用同义词和相关词扩展查询    多轮优化 ：根据初步检索结果调整查询     工程实践   Elasticsearch优化     使用ik分词器处理中文搜索   设置合理的分片和副本策略   开启慢查询日志监控性能     缓存策略     高频查询结果缓存   向量预计算避免重复编码   多级缓存（内存+SSD）     性能监控   关键监控指标包括：检索延迟、召回率、精确率、结果多样性。   应用场景      企业知识库搜索 ：结合精确匹配和语义理解    电商商品搜索 ：品牌名精确匹配+描述语义搜索    法律文档检索 ：法条编号精确匹配+内容语义检索     搜索增强生成代表了RAG系统的重要发展方向，通过融合传统搜索技术的成熟能力，可以构建更加健壮和精准的问答系统。"
+      "articleBody": "为什么需要搜索增强   纯向量检索在处理精确匹配、关键词搜索和结构化查询时存在天然局限。而传统搜索引擎（如Elasticsearch）在精确匹配、布尔查询和聚合分析方面有着成熟的能力。将两者结合，可以取长补短。   混合搜索架构   混合搜索的核心思想是将向量检索和关键词检索的结果进行融合。   架构层次       用户查询 → 查询解析 → {向量检索, 关键词检索} → 结果融合 → 重排序 → LLM生成       实现方案    1. Elasticsearch + 向量插件    Elasticsearch从8.0版本开始原生支持向量检索，无需额外插件。        query   =   {       &quot;knn&quot;  :   {           &quot;field&quot;  :   &quot;embedding&quot;  ,           &quot;query_vector&quot;  :   query_vector  ,           &quot;k&quot;  :   10       },       &quot;query&quot;  :   {           &quot;match&quot;  :   {               &quot;content&quot;  :   {                   &quot;query&quot;  :   query_text  ,                   &quot;boost&quot;  :   0.3               }           }       }   }         2. 独立搜索+向量服务    将Elasticsearch和向量数据库独立部署，在应用层进行结果融合。   结果融合策略   加权融合   分别为向量检索和关键词检索的结果分配权重：       Score = α  * vector_score + (1-α) *  bm25_score       α的取值通常通过实验确定，在0.3-0.7之间调节。对于术语明确的查询，提高BM25权重；对于语义查询，提高向量权重。   级联融合   先进行BM25搜索，然后在搜索结果范围内再进行向量重排序。或者反向操作，先向量搜索再BM25过滤。   RRF融合   倒数排序融合（Reciprocal Rank Fusion）是一种无需调参的融合方法：       Score(d) = Σ 1/(k + rank_i(d))       这种方法对不同类型的搜索结果一视同仁，稳定性好。   查询理解与改写   搜索增强的关键在于理解用户意图并构造正确的查询：      查询分类 ：判断查询是事实型、导航型还是探索型    实体识别 ：提取查询中的实体名称    查询扩展 ：使用同义词和相关词扩展查询    多轮优化 ：根据初步检索结果调整查询     工程实践   Elasticsearch优化     使用ik分词器处理中文搜索   设置合理的分片和副本策略   开启慢查询日志监控性能     缓存策略     高频查询结果缓存   向量预计算避免重复编码   多级缓存（内存+SSD）     性能监控   关键监控指标包括：检索延迟、召回率、精确率、结果多样性。   应用场景      企业知识库搜索 ：结合精确匹配和语义理解    电商商品搜索 ：品牌名精确匹配+描述语义搜索    法律文档检索 ：法条编号精确匹配+内容语义检索     搜索增强生成代表了RAG系统的重要发展方向，通过融合传统搜索技术的成熟能力，可以构建更加健壮和精准的问答系统。"
     }
     </script>
     <script type="application/ld+json">
@@ -120,11 +120,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>2 分钟阅读</span>
+          <span>3 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>418 字</span>
+          <span>615 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/search-augmented.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/search-augmented.png" alt="搜索增强生成：结合Elasticsearch与传统搜索的RAG方案" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（14）</summary><ol><li><a href="#为什么需要搜索增强">为什么需要搜索增强</a></li><li><a href="#混合搜索架构">混合搜索架构</a></li><li><a href="#架构层次">架构层次</a></li><li><a href="#实现方案">实现方案</a></li><li><a href="#结果融合策略">结果融合策略</a></li><li><a href="#加权融合">加权融合</a></li><li><a href="#级联融合">级联融合</a></li><li><a href="#rrf融合">RRF融合</a></li><li><a href="#查询理解与改写">查询理解与改写</a></li><li><a href="#工程实践">工程实践</a></li><li><a href="#elasticsearch优化">Elasticsearch优化</a></li><li><a href="#缓存策略">缓存策略</a></li><li><a href="#性能监控">性能监控</a></li><li><a href="#应用场景">应用场景</a></li></ol></details>
@@ -133,44 +133,44 @@
 <h2>混合搜索架构</h2>
 <p>混合搜索的核心思想是将向量检索和关键词检索的结果进行融合。</p>
 <h3>架构层次</h3>
-<pre class="codehilite"><code>用户查询 → 查询解析 → {向量检索, 关键词检索} → 结果融合 → 重排序 → LLM生成
-</code></pre>
+<div class="codehilite"><pre><span></span><code>用户查询 → 查询解析 → {向量检索, 关键词检索} → 结果融合 → 重排序 → LLM生成
+</code></pre></div>
 
 <h3>实现方案</h3>
 <p><strong>1. Elasticsearch + 向量插件</strong></p>
 <p>Elasticsearch从8.0版本开始原生支持向量检索，无需额外插件。</p>
-<pre class="codehilite"><code class="language-python">query = {
-    &quot;knn&quot;: {
-        &quot;field&quot;: &quot;embedding&quot;,
-        &quot;query_vector&quot;: query_vector,
-        &quot;k&quot;: 10
-    },
-    &quot;query&quot;: {
-        &quot;match&quot;: {
-            &quot;content&quot;: {
-                &quot;query&quot;: query_text,
-                &quot;boost&quot;: 0.3
-            }
-        }
-    }
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="n">query</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;knn&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;field&quot;</span><span class="p">:</span> <span class="s2">&quot;embedding&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;query_vector&quot;</span><span class="p">:</span> <span class="n">query_vector</span><span class="p">,</span>
+        <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="mi">10</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;match&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="n">query_text</span><span class="p">,</span>
+                <span class="s2">&quot;boost&quot;</span><span class="p">:</span> <span class="mf">0.3</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p><strong>2. 独立搜索+向量服务</strong></p>
 <p>将Elasticsearch和向量数据库独立部署，在应用层进行结果融合。</p>
 <h2>结果融合策略</h2>
 <h3>加权融合</h3>
 <p>分别为向量检索和关键词检索的结果分配权重：</p>
-<pre class="codehilite"><code>Score = α * vector_score + (1-α) * bm25_score
-</code></pre>
+<div class="codehilite"><pre><span></span><code>Score = α <span class="gs">* vector_score + (1-α) *</span> bm25_score
+</code></pre></div>
 
 <p>α的取值通常通过实验确定，在0.3-0.7之间调节。对于术语明确的查询，提高BM25权重；对于语义查询，提高向量权重。</p>
 <h3>级联融合</h3>
 <p>先进行BM25搜索，然后在搜索结果范围内再进行向量重排序。或者反向操作，先向量搜索再BM25过滤。</p>
 <h3>RRF融合</h3>
 <p>倒数排序融合（Reciprocal Rank Fusion）是一种无需调参的融合方法：</p>
-<pre class="codehilite"><code>Score(d) = Σ 1/(k + rank_i(d))
-</code></pre>
+<div class="codehilite"><pre><span></span><code>Score(d) = Σ 1/(k + rank_i(d))
+</code></pre></div>
 
 <p>这种方法对不同类型的搜索结果一视同仁，稳定性好。</p>
 <h2>查询理解与改写</h2>

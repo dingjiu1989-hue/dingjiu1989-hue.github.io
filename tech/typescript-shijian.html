@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/tech/typescript-shijian.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "646",
+      "wordCount": "3210",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "zh-CN",
@@ -75,7 +75,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/typescript-shijian.html"},
-      "articleBody": "超越基础类型   TypeScript的类型系统远比表面上看起来更强大。掌握高级类型技巧能让代码更加安全和优雅。   类型体操   条件类型   根据条件选择不同的类型：    type IsString&lt;T&gt; = T extends string ? true : false; type Result1 = IsString&lt;&quot;hello&quot;&gt;;  // true type Result2 = IsString&lt;42&gt;;       // false      映射类型   对已有类型的属性进行变换：    type Readonly&lt;T&gt; = {     readonly [P in keyof T]: T[P]; };  type Partial&lt;T&gt; = {     [P in keyof T]?: T[P]; };  type Pick&lt;T, K extends keyof T&gt; = {     [P in K]: T[P]; };      递归类型   处理嵌套结构的类型：    type DeepPartial&lt;T&gt; = {     [P in keyof T]?: T[P] extends object ? DeepPartial&lt;T[P]&gt; : T[P]; };  type DeepReadonly&lt;T&gt; = {     readonly [P in keyof T]: T[P] extends object ? DeepReadonly&lt;T[P]&gt; : T[P]; };      infer关键字   从类型中提取子类型：    type ReturnType&lt;T&gt; = T extends (...args: any[]) =&gt; infer R ? R : never; type ArrayItem&lt;T&gt; = T extends (infer U)[] ? U : never; type PromiseValue&lt;T&gt; = T extends Promise&lt;infer U&gt; ? U : T;      泛型进阶   泛型约束   使用extends约束泛型参数的范围：    interface HasId {     id: number; }  function getById&lt;T extends HasId&gt;(items: T[], id: number): T | undefined {     return items.find(item =&gt; item.id === id); }      泛型工具类型   TypeScript内置了大量有用的工具类型，需要深入理解其使用场景：      Partial&lt;T&gt; ：所有属性变为可选    Required&lt;T&gt; ：所有属性变为必选    Readonly&lt;T&gt; ：所有属性变为只读    Pick&lt;T, K&gt; ：从T中选取部分属性    Omit&lt;T, K&gt; ：从T中排除部分属性    Record&lt;K, V&gt; ：构造一个键值类型    Exclude&lt;T, U&gt; ：从联合类型中排除某些类型     模板字面量类型   TypeScript 4.1+支持的模板字面量类型：    type EventName = `on${Capitalize&lt;string&gt;}`; type CSSProperty = `--${string}`;      装饰器   类装饰器   修改类的行为和结构：    function LogClass&lt;T extends { new (...args: any[]): {} }&gt;(constructor: T) {     return class extends constructor {         createdAt = new Date();     }; }      方法装饰器   拦截方法调用，实现日志、缓存等功能：    function Log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {     const original = descriptor.value;     descriptor.value = function(...args: any[]) {         console.log(`Calling ${propertyKey} with`, args);         return original.apply(this, args);     }; }      实践建议      优先使用interface定义公共API的类型     使用type定义联合类型和工具类型     避免过度抽象 ：复杂的类型体操可能降低代码可读性    善用satisfies操作符 （TypeScript 4.9+）进行类型验证    使用ts-reset等工具库增强类型安全      掌握TypeScript的高级类型系统，能够写出更具表达力和安全性的代码。"
+      "articleBody": "超越基础类型   TypeScript的类型系统远比表面上看起来更强大。掌握高级类型技巧能让代码更加安全和优雅。   类型体操   条件类型   根据条件选择不同的类型：        type     IsString  &lt;  T  &gt;     =     T     extends     string     ?     true     :     false  ;   type     Result1     =     IsString  &lt;  &quot;hello&quot;  &gt;  ;      // true   type     Result2     =     IsString  &lt;  42  &gt;  ;           // false        映射类型   对已有类型的属性进行变换：        type     Readonly  &lt;  T  &gt;     =     {         readonly     [  P     in     keyof     T  ]  :     T  [  P  ];   };    type     Partial  &lt;  T  &gt;     =     {         [  P     in     keyof     T  ]  ?  :     T  [  P  ];   };    type     Pick  &lt;  T  ,     K     extends     keyof     T  &gt;     =     {         [  P     in     K  ]  :     T  [  P  ];   };        递归类型   处理嵌套结构的类型：        type     DeepPartial  &lt;  T  &gt;     =     {         [  P     in     keyof     T  ]  ?  :     T  [  P  ]     extends     object     ?     DeepPartial  &lt;  T  [  P  ]  &gt;     :     T  [  P  ];   };    type     DeepReadonly  &lt;  T  &gt;     =     {         readonly     [  P     in     keyof     T  ]  :     T  [  P  ]     extends     object     ?     DeepReadonly  &lt;  T  [  P  ]  &gt;     :     T  [  P  ];   };        infer关键字   从类型中提取子类型：        type     ReturnType  &lt;  T  &gt;     =     T     extends     (  ...args  :     any  [])     =&gt;     infer     R     ?     R     :     never  ;   type     ArrayItem  &lt;  T  &gt;     =     T     extends     (  infer     U  )[]     ?     U     :     never  ;   type     PromiseValue  &lt;  T  &gt;     =     T     extends     Promise  &lt;  infer     U  &gt;     ?     U     :     T  ;        泛型进阶   泛型约束   使用extends约束泛型参数的范围：        interface     HasId     {         id  :     number  ;   }    function     getById  &lt;  T     extends     HasId  &gt;  (  items  :     T  [],     id  :     number  )  :     T     |     undefined     {         return     items  .  find  (  item     =&gt;     item  .  id     ===     id  );   }        泛型工具类型   TypeScript内置了大量有用的工具类型，需要深入理解其使用场景：      Partial&lt;T&gt; ：所有属性变为可选    Required&lt;T&gt; ：所有属性变为必选    Readonly&lt;T&gt; ：所有属性变为只读    Pick&lt;T, K&gt; ：从T中选取部分属性    Omit&lt;T, K&gt; ：从T中排除部分属性    Record&lt;K, V&gt; ：构造一个键值类型    Exclude&lt;T, U&gt; ：从联合类型中排除某些类型     模板字面量类型   TypeScript 4.1+支持的模板字面量类型：        type     EventName     =     `on  ${  Capitalize  &lt;  string  &gt;  }  `  ;   type     CSSProperty     =     `--  ${  string  }  `  ;        装饰器   类装饰器   修改类的行为和结构：        function     LogClass  &lt;  T     extends     {     new     (  ...args  :     any  [])  :     {}     }  &gt;  (  constructor  :     T  )     {         return     class     extends     constructor     {             createdAt     =     new     Date  ();         };   }        方法装饰器   拦截方法调用，实现日志、缓存等功能：        function     Log  (  target  :     any  ,     propertyKey  :     string  ,     descriptor  :     PropertyDescriptor  )     {         const     original     =     descriptor  .  value  ;         descriptor  .  value     =     function  (  ...args  :     any  [])     {             console  .  log  (  `Calling   ${  propertyKey  }   with`  ,     args  );             return     original  .  apply  (  this  ,     args  );         };   }        实践建议      优先使用interface定义公共API的类型     使用type定义联合类型和工具类型     避免过度抽象 ：复杂的类型体操可能降低代码可读性    善用satisfies操作符 （TypeScript 4.9+）进行类型验证    使用ts-reset等工具库增强类型安全      掌握TypeScript的高级类型系统，能够写出更具表达力和安全性的代码。"
     }
     </script>
     <script type="application/ld+json">
@@ -120,11 +120,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>3 分钟阅读</span>
+          <span>16 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>646 字</span>
+          <span>3210 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/typescript-shijian.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/typescript-shijian.png" alt="TypeScript实践：类型体操、泛型、装饰器高级用法" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（14）</summary><ol><li><a href="#超越基础类型">超越基础类型</a></li><li><a href="#类型体操">类型体操</a></li><li><a href="#条件类型">条件类型</a></li><li><a href="#映射类型">映射类型</a></li><li><a href="#递归类型">递归类型</a></li><li><a href="#infer关键字">infer关键字</a></li><li><a href="#泛型进阶">泛型进阶</a></li><li><a href="#泛型约束">泛型约束</a></li><li><a href="#泛型工具类型">泛型工具类型</a></li><li><a href="#模板字面量类型">模板字面量类型</a></li><li><a href="#装饰器">装饰器</a></li><li><a href="#类装饰器">类装饰器</a></li><li><a href="#方法装饰器">方法装饰器</a></li><li><a href="#实践建议">实践建议</a></li></ol></details>
@@ -133,55 +133,55 @@
 <h2>类型体操</h2>
 <h3>条件类型</h3>
 <p>根据条件选择不同的类型：</p>
-<pre class="codehilite"><code class="language-typescript">type IsString&lt;T&gt; = T extends string ? true : false;
-type Result1 = IsString&lt;&quot;hello&quot;&gt;;  // true
-type Result2 = IsString&lt;42&gt;;       // false
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="nx">IsString</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">true</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">;</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">Result1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IsString</span><span class="o">&lt;</span><span class="s2">&quot;hello&quot;</span><span class="o">&gt;</span><span class="p">;</span><span class="w">  </span><span class="c1">// true</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">Result2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IsString</span><span class="o">&lt;</span><span class="mf">42</span><span class="o">&gt;</span><span class="p">;</span><span class="w">       </span><span class="c1">// false</span>
+</code></pre></div>
 
 <h3>映射类型</h3>
 <p>对已有类型的属性进行变换：</p>
-<pre class="codehilite"><code class="language-typescript">type Readonly&lt;T&gt; = {
-    readonly [P in keyof T]: T[P];
-};
+<div class="codehilite"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="nx">Readonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">readonly</span><span class="w"> </span><span class="p">[</span><span class="nx">P</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">keyof</span><span class="w"> </span><span class="nx">T</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
 
-type Partial&lt;T&gt; = {
-    [P in keyof T]?: T[P];
-};
+<span class="kr">type</span><span class="w"> </span><span class="nx">Partial</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">[</span><span class="nx">P</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">keyof</span><span class="w"> </span><span class="nx">T</span><span class="p">]</span><span class="nx">?</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
 
-type Pick&lt;T, K extends keyof T&gt; = {
-    [P in K]: T[P];
-};
-</code></pre>
+<span class="kr">type</span><span class="w"> </span><span class="nx">Pick</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span><span class="w"> </span><span class="nx">K</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">keyof</span><span class="w"> </span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">[</span><span class="nx">P</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">K</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div>
 
 <h3>递归类型</h3>
 <p>处理嵌套结构的类型：</p>
-<pre class="codehilite"><code class="language-typescript">type DeepPartial&lt;T&gt; = {
-    [P in keyof T]?: T[P] extends object ? DeepPartial&lt;T[P]&gt; : T[P];
-};
+<div class="codehilite"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="nx">DeepPartial</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">[</span><span class="nx">P</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">keyof</span><span class="w"> </span><span class="nx">T</span><span class="p">]</span><span class="nx">?</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">object</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">DeepPartial</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="o">&gt;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
 
-type DeepReadonly&lt;T&gt; = {
-    readonly [P in keyof T]: T[P] extends object ? DeepReadonly&lt;T[P]&gt; : T[P];
-};
-</code></pre>
+<span class="kr">type</span><span class="w"> </span><span class="nx">DeepReadonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">readonly</span><span class="w"> </span><span class="p">[</span><span class="nx">P</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">keyof</span><span class="w"> </span><span class="nx">T</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">object</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">DeepReadonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="o">&gt;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div>
 
 <h3>infer关键字</h3>
 <p>从类型中提取子类型：</p>
-<pre class="codehilite"><code class="language-typescript">type ReturnType&lt;T&gt; = T extends (...args: any[]) =&gt; infer R ? R : never;
-type ArrayItem&lt;T&gt; = T extends (infer U)[] ? U : never;
-type PromiseValue&lt;T&gt; = T extends Promise&lt;infer U&gt; ? U : T;
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="nx">ReturnType</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="p">(</span><span class="nx">...args</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">[])</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">infer</span><span class="w"> </span><span class="nx">R</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">R</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">never</span><span class="p">;</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">ArrayItem</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="p">(</span><span class="nx">infer</span><span class="w"> </span><span class="nx">U</span><span class="p">)[]</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">U</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">never</span><span class="p">;</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">PromiseValue</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">infer</span><span class="w"> </span><span class="nx">U</span><span class="o">&gt;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">U</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">;</span>
+</code></pre></div>
 
 <h2>泛型进阶</h2>
 <h3>泛型约束</h3>
 <p>使用extends约束泛型参数的范围：</p>
-<pre class="codehilite"><code class="language-typescript">interface HasId {
-    id: number;
-}
+<div class="codehilite"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">HasId</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="p">}</span>
 
-function getById&lt;T extends HasId&gt;(items: T[], id: number): T | undefined {
-    return items.find(item =&gt; item.id === id);
-}
-</code></pre>
+<span class="kd">function</span><span class="w"> </span><span class="nx">getById</span><span class="o">&lt;</span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">HasId</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">items</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">[],</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">items</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">item</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">id</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <h3>泛型工具类型</h3>
 <p>TypeScript内置了大量有用的工具类型，需要深入理解其使用场景：</p>
@@ -196,30 +196,30 @@ function getById&lt;T extends HasId&gt;(items: T[], id: number): T | undefined {
 </ul>
 <h3>模板字面量类型</h3>
 <p>TypeScript 4.1+支持的模板字面量类型：</p>
-<pre class="codehilite"><code class="language-typescript">type EventName = `on${Capitalize&lt;string&gt;}`;
-type CSSProperty = `--${string}`;
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="nx">EventName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`on</span><span class="si">${</span><span class="nx">Capitalize</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">CSSProperty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`--</span><span class="si">${</span><span class="kt">string</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+</code></pre></div>
 
 <h2>装饰器</h2>
 <h3>类装饰器</h3>
 <p>修改类的行为和结构：</p>
-<pre class="codehilite"><code class="language-typescript">function LogClass&lt;T extends { new (...args: any[]): {} }&gt;(constructor: T) {
-    return class extends constructor {
-        createdAt = new Date();
-    };
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">LogClass</span><span class="o">&lt;</span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="p">(</span><span class="nx">...args</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">[])</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="p">}</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">constructor</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="kr">constructor</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">createdAt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <h3>方法装饰器</h3>
 <p>拦截方法调用，实现日志、缓存等功能：</p>
-<pre class="codehilite"><code class="language-typescript">function Log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-    const original = descriptor.value;
-    descriptor.value = function(...args: any[]) {
-        console.log(`Calling ${propertyKey} with`, args);
-        return original.apply(this, args);
-    };
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">Log</span><span class="p">(</span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="nx">propertyKey</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">descriptor</span><span class="o">:</span><span class="w"> </span><span class="kt">PropertyDescriptor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">original</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">descriptor</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">descriptor</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">...args</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Calling </span><span class="si">${</span><span class="nx">propertyKey</span><span class="si">}</span><span class="sb"> with`</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">original</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="p">);</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <h2>实践建议</h2>
 <ol>

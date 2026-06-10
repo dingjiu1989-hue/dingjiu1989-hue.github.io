@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="security" data-exclude="api-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="API安全防护指南">
+    <meta property="og:description" content="系统讲解API安全防护策略，涵盖认证授权、输入验证、速率限制、敏感数据保护和API网关配置等关键实践。">
+    <meta property="og:url" content="https://aidev.fit/security/api-security.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/security/api-security.png">
+    <meta property="og:image:alt" content="API安全防护指南">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:section" content="安全防护">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="API安全防护指南">
+    <meta name="twitter:description" content="系统讲解API安全防护策略，涵盖认证授权、输入验证、速率限制、敏感数据保护和API网关配置等关键实践。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/security/api-security.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/api-security.webp" type="image/webp" fetchpriority="high">
+    <title>API安全防护指南 — AI自习室</title>
+    <meta name="description" content="系统讲解API安全防护策略，涵盖认证授权、输入验证、速率限制、敏感数据保护和API网关配置等关键实践。">
+    <meta name="keywords" content="">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/security/api-security.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/api-security.html">
+    <link rel="canonical" href="https://aidev.fit/security/api-security.html"><link rel="next" href="https://aidev.fit/security/data-privacy.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "API安全防护指南",
+      "description": "系统讲解API安全防护策略，涵盖认证授权、输入验证、速率限制、敏感数据保护和API网关配置等关键实践。",
+      "image": "https://aidev.fit/images/covers/en/security/api-security.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "wordCount": "249",
+      "keywords": "",
+      "about": [],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室 编辑部"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/security/api-security.html"},
+      "articleBody": "API认证与授权   正确的认证授权是API安全的第一道防线。 OAuth 2.0 是最主流的授权框架，定义四种授权流程：授权码模式（最安全，适用于有后端的应用）、客户端凭证模式（机器对机通信）、资源所有者密码模式（不推荐）和隐式模式（已废弃，用PKCE替代）。    JWT安全 ：使用RS256非对称签名而非HS256对称签名，避免密钥泄露风险。设置合理的过期时间（Access Token 15分钟，Refresh Token 7天）。在JWT中包含iss（签发者）、aud（受众）和jti（唯一ID）声明，增强安全性。   输入验证与防护   所有API端点必须验证输入数据。使用JSON Schema或类验证器（如Joi、Pydantic）定义严格的输入格式。不仅验证参数类型、长度和格式，还要检查业务规则约束。    注入防护 ：GraphQL API需要配置查询深度限制和查询复杂度分析，防止恶意查询导致拒绝服务。REST API对所有字符串参数进行转义处理。文件上传端点限制文件类型、大小和数量，上传目录设置为不可执行。   速率限制与DDoS防护   API必须实施速率限制保护后端服务。推荐使用令牌桶算法，在API网关层统一实施。策略示例：普通用户每分钟60次请求，认证用户每分钟300次请求，付费用户按合同约定。    响应头 ：在响应中返回限流状态： X-RateLimit-Limit 、 X-RateLimit-Remaining 、 X-RateLimit-Reset 。被限流时返回429状态码和 Retry-After 头。   API网关安全   API网关是安全策略的统一入口。常见网关包括Kong、APISIX、AWS API Gateway和阿里云API网关。在网关层配置IP白名单/黑名单、请求大小限制、SQL注入和XSS攻击检测规则。    日志审计 ：所有API请求记录审计日志，包括来源IP、请求时间、访问路径、用户身份和操作结果。日志存储至少保留180天，定期审查异常访问模式。   敏感数据保护   传输中的敏感数据通过TLS加密。存储中的敏感数据使用字段级加密：AES-256-GCM加密数据库中的个人身份信息，密钥由KMS管理。响应中不要返回敏感字段，使用数据脱敏处理。   API密钥管理方面，前端代码中不要硬编码API密钥。使用短期凭证（如STS临时密钥）替代长期密钥。服务器端API密钥存储在密钥管理服务中，运行环境注入。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "安全防护", "item": "https://aidev.fit/security/"},
+        {"@type": "ListItem", "position": 3, "name": "API安全防护指南"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/security/">安全防护</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags"></div>
+        <h1 class="article-title">API安全防护指南</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室 编辑部</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-11">2026-05-11</time>
+          <span class="meta-sep">·</span>
+          <span>1 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>249 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/security/api-security.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/api-security.png" alt="API安全防护指南" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（5）</summary><ol><li><a href="#api认证与授权">API认证与授权</a></li><li><a href="#输入验证与防护">输入验证与防护</a></li><li><a href="#速率限制与ddos防护">速率限制与DDoS防护</a></li><li><a href="#api网关安全">API网关安全</a></li><li><a href="#敏感数据保护">敏感数据保护</a></li></ol></details>
+        <div class="article-body"><h2>API认证与授权</h2>
+<p>正确的认证授权是API安全的第一道防线。<strong>OAuth 2.0</strong>是最主流的授权框架，定义四种授权流程：授权码模式（最安全，适用于有后端的应用）、客户端凭证模式（机器对机通信）、资源所有者密码模式（不推荐）和隐式模式（已废弃，用PKCE替代）。</p>
+<p><strong>JWT安全</strong>：使用RS256非对称签名而非HS256对称签名，避免密钥泄露风险。设置合理的过期时间（Access Token 15分钟，Refresh Token 7天）。在JWT中包含iss（签发者）、aud（受众）和jti（唯一ID）声明，增强安全性。</p>
+<h2>输入验证与防护</h2>
+<p>所有API端点必须验证输入数据。使用JSON Schema或类验证器（如Joi、Pydantic）定义严格的输入格式。不仅验证参数类型、长度和格式，还要检查业务规则约束。</p>
+<p><strong>注入防护</strong>：GraphQL API需要配置查询深度限制和查询复杂度分析，防止恶意查询导致拒绝服务。REST API对所有字符串参数进行转义处理。文件上传端点限制文件类型、大小和数量，上传目录设置为不可执行。</p>
+<h2>速率限制与DDoS防护</h2>
+<p>API必须实施速率限制保护后端服务。推荐使用令牌桶算法，在API网关层统一实施。策略示例：普通用户每分钟60次请求，认证用户每分钟300次请求，付费用户按合同约定。</p>
+<p><strong>响应头</strong>：在响应中返回限流状态：<code>X-RateLimit-Limit</code>、<code>X-RateLimit-Remaining</code>、<code>X-RateLimit-Reset</code>。被限流时返回429状态码和<code>Retry-After</code>头。</p>
+<h2>API网关安全</h2>
+<p>API网关是安全策略的统一入口。常见网关包括Kong、APISIX、AWS API Gateway和阿里云API网关。在网关层配置IP白名单/黑名单、请求大小限制、SQL注入和XSS攻击检测规则。</p>
+<p><strong>日志审计</strong>：所有API请求记录审计日志，包括来源IP、请求时间、访问路径、用户身份和操作结果。日志存储至少保留180天，定期审查异常访问模式。</p>
+<h2>敏感数据保护</h2>
+<p>传输中的敏感数据通过TLS加密。存储中的敏感数据使用字段级加密：AES-256-GCM加密数据库中的个人身份信息，密钥由KMS管理。响应中不要返回敏感字段，使用数据脱敏处理。</p>
+<p>API密钥管理方面，前端代码中不要硬编码API密钥。使用短期凭证（如STS临时密钥）替代长期密钥。服务器端API密钥存储在密钥管理服务中，运行环境注入。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/security/anquan-ji-chu.html"><span class="related-title">Web安全基础：OWASP Top 10详解与防御实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/api-anquan.html"><span class="related-title">API安全：速率限制、输入验证、认证鉴权最佳实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/docker-anquan.html"><span class="related-title">Docker安全：镜像扫描、运行时安全、权限控制</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/jwt-anquan.html"><span class="related-title">JWT安全：签名算法选择、过期策略、刷新令牌最佳实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/log-anquan.html"><span class="related-title">日志安全审计：集中式日志管理、异常检测、合规要求</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/mi-ma-anquan.html"><span class="related-title">密码安全：哈希算法选择、加盐、密码策略设计</span><span class="related-meta">安全防护 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=API%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E6%8C%87%E5%8D%97&url=https%3A//aidev.fit/security/api-security.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/security/api-security.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=API%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E6%8C%87%E5%8D%97&url=https%3A//aidev.fit/security/api-security.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/security/api-security.html&t=API%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E6%8C%87%E5%8D%97" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=API%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E6%8C%87%E5%8D%97&body=https%3A//aidev.fit/security/api-security.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/security/api-security.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="next" href="/security/data-privacy.html" title="数据隐私保护指南">下一篇 →<br><small>数据隐私保护指南</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/security/anquan-ji-chu.html"><span class="related-title">Web安全基础：OWASP Top 10详解与防御实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/api-anquan.html"><span class="related-title">API安全：速率限制、输入验证、认证鉴权最佳实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/docker-anquan.html"><span class="related-title">Docker安全：镜像扫描、运行时安全、权限控制</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/jwt-anquan.html"><span class="related-title">JWT安全：签名算法选择、过期策略、刷新令牌最佳实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/log-anquan.html"><span class="related-title">日志安全审计：集中式日志管理、异常检测、合规要求</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/mi-ma-anquan.html"><span class="related-title">密码安全：哈希算法选择、加盐、密码策略设计</span><span class="related-meta">安全防护 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <section class="author-bio">
+          <h4>关于作者</h4>
+          <p>AI自习室是由一群技术从业者维护的AI知识分享平台。我们关注AI工具、编程技术和开发者生态，致力于为中文开发者提供高质量的原创技术内容。<a href="/about.html">了解更多 →</a></p>
+        </section>
+        <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#api认证与授权">API认证与授权</a></li><li class="toc-h2"><a href="#输入验证与防护">输入验证与防护</a></li><li class="toc-h2"><a href="#速率限制与ddos防护">速率限制与DDoS防护</a></li><li class="toc-h2"><a href="#api网关安全">API网关安全</a></li><li class="toc-h2"><a href="#敏感数据保护">敏感数据保护</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

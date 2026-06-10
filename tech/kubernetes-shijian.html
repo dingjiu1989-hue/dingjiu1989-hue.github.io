@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/tech/kubernetes-shijian.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "497",
+      "wordCount": "1383",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "zh-CN",
@@ -75,7 +75,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/kubernetes-shijian.html"},
-      "articleBody": "Kubernetes核心组件   Kubernetes是目前最主流的容器编排平台。理解其核心组件是掌握K8s的第一步：Pod是最小部署单元，Service提供网络抽象，Deployment管理副本，Ingress处理外部流量。   Pod管理与调度   Pod是K8s中最基本的计算单元，可以包含一个或多个容器。   Pod设计模式      Sidecar模式 ：主容器+辅助容器（如日志收集、代理）    Init容器 ：在主容器启动前执行初始化任务    Adapters ：将不同应用的输出标准化     资源管理   合理设置资源请求和限制是保证集群稳定的关键：    resources:   requests:     memory: &quot;256Mi&quot;     cpu: &quot;500m&quot;   limits:     memory: &quot;512Mi&quot;     cpu: &quot;1000m&quot;      调度策略      节点选择器 ：将Pod调度到特定标签的节点    节点亲和性 ：更灵活的节点选择规则    Pod亲和性/反亲和性 ：控制Pod之间的分布关系     服务发现   K8s中的服务发现通过Service和DNS实现。   Service类型      ClusterIP ：集群内部访问，默认类型    NodePort ：通过节点IP和端口访问    LoadBalancer ：云平台负载均衡器    ExternalName ：外部服务的DNS别名     Ingress控制器   Ingress负责将外部HTTP/HTTPS流量路由到集群内部服务：    apiVersion: networking.k8s.io/v1 kind: Ingress metadata:   name: myapp-ingress spec:   rules:   - host: myapp.example.com     http:       paths:       - path: /api         pathType: Prefix         backend:           service:             name: api-service             port:               number: 80      自动伸缩   HPA（水平Pod自动伸缩）   基于CPU、内存或自定义指标自动调整Pod数量：    apiVersion: autoscaling/v2 kind: HorizontalPodAutoscaler metadata:   name: myapp-hpa spec:   scaleTargetRef:     apiVersion: apps/v1     kind: Deployment     name: myapp   minReplicas: 2   maxReplicas: 10   metrics:   - type: Resource     resource:       name: cpu       target:         type: Utilization         averageUtilization: 70      生产环境运维   监控与日志      Metrics Server ：基础资源指标收集    Prometheus + Grafana ：全面监控方案    EFK/PLG ：日志收集和分析     安全最佳实践     使用RBAC控制访问权限   启用NetworkPolicy隔离网络   使用PodSecurityAdmission限制Pod权限   定期更新集群版本和节点镜像     故障排查   常用命令： kubectl describe 查看资源详情， kubectl logs 查看Pod日志， kubectl exec 进入容器调试， kubectl top 查看资源使用情况。   掌握这些核心实践，能够帮助团队构建稳定、可扩展的Kubernetes生产集群。"
+      "articleBody": "Kubernetes核心组件   Kubernetes是目前最主流的容器编排平台。理解其核心组件是掌握K8s的第一步：Pod是最小部署单元，Service提供网络抽象，Deployment管理副本，Ingress处理外部流量。   Pod管理与调度   Pod是K8s中最基本的计算单元，可以包含一个或多个容器。   Pod设计模式      Sidecar模式 ：主容器+辅助容器（如日志收集、代理）    Init容器 ：在主容器启动前执行初始化任务    Adapters ：将不同应用的输出标准化     资源管理   合理设置资源请求和限制是保证集群稳定的关键：        resources  :       requests  :         memory  :     &quot;256Mi&quot;         cpu  :     &quot;500m&quot;       limits  :         memory  :     &quot;512Mi&quot;         cpu  :     &quot;1000m&quot;        调度策略      节点选择器 ：将Pod调度到特定标签的节点    节点亲和性 ：更灵活的节点选择规则    Pod亲和性/反亲和性 ：控制Pod之间的分布关系     服务发现   K8s中的服务发现通过Service和DNS实现。   Service类型      ClusterIP ：集群内部访问，默认类型    NodePort ：通过节点IP和端口访问    LoadBalancer ：云平台负载均衡器    ExternalName ：外部服务的DNS别名     Ingress控制器   Ingress负责将外部HTTP/HTTPS流量路由到集群内部服务：        apiVersion  :     networking.k8s.io/v1   kind  :     Ingress   metadata  :       name  :     myapp-ingress   spec  :       rules  :       -     host  :     myapp.example.com         http  :           paths  :           -     path  :     /api             pathType  :     Prefix             backend  :               service  :                 name  :     api-service                 port  :                   number  :     80        自动伸缩   HPA（水平Pod自动伸缩）   基于CPU、内存或自定义指标自动调整Pod数量：        apiVersion  :     autoscaling/v2   kind  :     HorizontalPodAutoscaler   metadata  :       name  :     myapp-hpa   spec  :       scaleTargetRef  :         apiVersion  :     apps/v1         kind  :     Deployment         name  :     myapp       minReplicas  :     2       maxReplicas  :     10       metrics  :       -     type  :     Resource         resource  :           name  :     cpu           target  :             type  :     Utilization             averageUtilization  :     70        生产环境运维   监控与日志      Metrics Server ：基础资源指标收集    Prometheus + Grafana ：全面监控方案    EFK/PLG ：日志收集和分析     安全最佳实践     使用RBAC控制访问权限   启用NetworkPolicy隔离网络   使用PodSecurityAdmission限制Pod权限   定期更新集群版本和节点镜像     故障排查   常用命令： kubectl describe 查看资源详情， kubectl logs 查看Pod日志， kubectl exec 进入容器调试， kubectl top 查看资源使用情况。   掌握这些核心实践，能够帮助团队构建稳定、可扩展的Kubernetes生产集群。"
     }
     </script>
     <script type="application/ld+json">
@@ -120,11 +120,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>2 分钟阅读</span>
+          <span>6 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>497 字</span>
+          <span>1383 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/kubernetes-shijian.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/kubernetes-shijian.png" alt="Kubernetes实战：Pod部署、服务发现、自动伸缩" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（14）</summary><ol><li><a href="#kubernetes核心组件">Kubernetes核心组件</a></li><li><a href="#pod管理与调度">Pod管理与调度</a></li><li><a href="#pod设计模式">Pod设计模式</a></li><li><a href="#资源管理">资源管理</a></li><li><a href="#调度策略">调度策略</a></li><li><a href="#服务发现">服务发现</a></li><li><a href="#service类型">Service类型</a></li><li><a href="#ingress控制器">Ingress控制器</a></li><li><a href="#自动伸缩">自动伸缩</a></li><li><a href="#hpa水平pod自动伸缩">HPA（水平Pod自动伸缩）</a></li><li><a href="#生产环境运维">生产环境运维</a></li><li><a href="#监控与日志">监控与日志</a></li><li><a href="#安全最佳实践">安全最佳实践</a></li><li><a href="#故障排查">故障排查</a></li></ol></details>
@@ -140,14 +140,14 @@
 </ul>
 <h3>资源管理</h3>
 <p>合理设置资源请求和限制是保证集群稳定的关键：</p>
-<pre class="codehilite"><code class="language-yaml">resources:
-  requests:
-    memory: &quot;256Mi&quot;
-    cpu: &quot;500m&quot;
-  limits:
-    memory: &quot;512Mi&quot;
-    cpu: &quot;1000m&quot;
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="nt">resources</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">requests</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;256Mi&quot;</span>
+<span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;500m&quot;</span>
+<span class="w">  </span><span class="nt">limits</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;512Mi&quot;</span>
+<span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1000m&quot;</span>
+</code></pre></div>
 
 <h3>调度策略</h3>
 <ul>
@@ -166,46 +166,46 @@
 </ul>
 <h3>Ingress控制器</h3>
 <p>Ingress负责将外部HTTP/HTTPS流量路由到集群内部服务：</p>
-<pre class="codehilite"><code class="language-yaml">apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: myapp-ingress
-spec:
-  rules:
-  - host: myapp.example.com
-    http:
-      paths:
-      - path: /api
-        pathType: Prefix
-        backend:
-          service:
-            name: api-service
-            port:
-              number: 80
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp-ingress</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp.example.com</span>
+<span class="w">    </span><span class="nt">http</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">paths</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/api</span>
+<span class="w">        </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
+<span class="w">        </span><span class="nt">backend</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">service</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api-service</span>
+<span class="w">            </span><span class="nt">port</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+</code></pre></div>
 
 <h2>自动伸缩</h2>
 <h3>HPA（水平Pod自动伸缩）</h3>
 <p>基于CPU、内存或自定义指标自动调整Pod数量：</p>
-<pre class="codehilite"><code class="language-yaml">apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: myapp-hpa
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: myapp
-  minReplicas: 2
-  maxReplicas: 10
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 70
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">autoscaling/v2</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HorizontalPodAutoscaler</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp-hpa</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">scaleTargetRef</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<span class="w">    </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+<span class="w">  </span><span class="nt">minReplicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="nt">maxReplicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">  </span><span class="nt">metrics</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Resource</span>
+<span class="w">    </span><span class="nt">resource</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cpu</span>
+<span class="w">      </span><span class="nt">target</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Utilization</span>
+<span class="w">        </span><span class="nt">averageUtilization</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">70</span>
+</code></pre></div>
 
 <h2>生产环境运维</h2>
 <h3>监控与日志</h3>

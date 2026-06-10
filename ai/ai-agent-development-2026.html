@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/ai-agent-development-2026.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1385",
+      "wordCount": "2706",
       "keywords": "AI Agent, AI开发, LLM应用, 教程",
       "about": [{"@type": "Thing", "name": "AI Agent"}, {"@type": "Thing", "name": "AI开发"}, {"@type": "Thing", "name": "LLM应用"}, {"@type": "Thing", "name": "教程"}],
       "inLanguage": "zh-CN",
@@ -75,7 +75,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/ai-agent-development-2026.html"},
-      "articleBody": "如果说 2024-2025 年是\"和 AI 聊天\"的时代，2026 年就是\" 让 AI 去干活  \"的时代。AI Agent（智能体）不再是研究论文里的概念——它已经可以帮你订机票、写代码、分析数据、监控竞品，而且这些事你用一个周末就能自己搭出来。 本文不讲虚的，从原理到代码，带你写出第一个能自主执行任务的 AI Agent。 什么是 AI Agent（与普通 LLM 的区别） 普通使用 LLM 的方式：你提问 → AI 回答 → 结束。一回合对话。 AI Agent 的方式：你给目标 → Agent  自己拆任务 → 调用工具 → 观察结果 → 反思调整 → 直到完成  。 核心差异在四个字： 自主决策  。Agent 有四个关键能力：      规划（Planning）  ：把一个复杂目标拆成可执行的步骤    工具使用（Tool Use）  ：能搜索网页、调 API、读文件、写代码    记忆（Memory）  ：记住之前的对话和中间结果    反思（Reflection）  ：检查自己的输出，发现错误后自我修正     Agent 的核心架构 一个典型的 AI Agent 架构长这样：    用户目标: &quot;帮我研究竞品 A 的定价策略&quot;     ↓ [规划模块]: 拆成 3 步：   1. 搜索竞品 A 官网定价页   2. 搜索第三方评测网站的价格信息   3. 汇总对比，写成报告     ↓ [执行循环] (ReAct 模式):   Thought: 我需要先访问竞品 A 的官网   Action: web_search(&quot;竞品A 定价&quot;)   Observation: 搜到了定价页面...   Thought: 价格信息拿到了，现在需要找第三方对比   Action: web_search(&quot;竞品A vs 竞品B 价格对比&quot;)   Observation: ...   Thought: 信息足够，可以写报告了   Final Answer: [Markdown 报告]     ↓ [输出]: 一份结构化的定价分析报告            这个模式叫  ReAct（Reasoning + Acting）  ，是当前 90% Agent 框架的底层逻辑。它的核心思想是：思考（推理）→ 行动（调工具）→ 观察（看结果）→ 再思考，循环直到任务完成。 Agent 开发框架对比 2026 框架   语言   特点   适合谁           LangChain / LangGraph   Python/JS   生态最大，组件最全，但抽象层多   需要复杂工作流的企业应用       CrewAI   Python   多 Agent 协作，角色扮演式开发   想快速上手多 Agent 系统的团队       AutoGen (Microsoft)   Python   对话驱动，Agent 之间自动聊天协作   需要多轮协商的复杂任务       OpenAI Agents SDK   Python   官方出品，API 简洁，原生支持工具调用   深度绑定 OpenAI 的项目       Anthropic Tool Use   Python/JS   Claude 原生工具链，MCP 协议集成   用 Claude API 的开发者       Vercel AI SDK   TypeScript   前端优先，流式响应，边生成边展示   Next.js/React 开发者        推荐路径  ：新手从 OpenAI Agents SDK 或 Anthropic Tool Use 开始（概念最清晰），熟悉后用 LangGraph 构建复杂工作流。 手写第一个 Agent（Python + Claude API） 不用任何框架，30 行代码理解 Agent 的核心机制：                   import anthropic  client = anthropic.Anthropic()  # 定义 Agent 能用的工具 tools = [     {         &quot;name&quot;: &quot;web_search&quot;,         &quot;description&quot;: &quot;搜索互联网获取最新信息&quot;,         &quot;input_schema&quot;: {             &quot;type&quot;: &quot;object&quot;,             &quot;properties&quot;: {                 &quot;query&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;搜索关键词&quot;}             },             &quot;required&quot;: [&quot;query&quot;]         }     },     {         &quot;name&quot;: &quot;calculator&quot;,         &quot;description&quot;: &quot;执行数学计算&quot;,         &quot;input_schema&quot;: {             &quot;type&quot;: &quot;object&quot;,             &quot;properties&quot;: {                 &quot;expression&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;数学表达式&quot;}             },             &quot;required&quot;: [&quot;expression&quot;]         }     } ]  # Agent 主循环 def run_agent(user_goal, max_steps=5):     messages = [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: user_goal}]      for step in range(max_steps):         response = client.messages.create(             model=&quot;claude-sonnet-4-6&quot;,             max_tokens=1024,             system=&quot;你是一个能使用工具的 AI Agent。遇到需要外部信息的任务时，调用工具获取数据，然后基于结果继续推理。如果任务完成了，直接给出最终答案。&quot;,             tools=tools,             messages=messages         )          # 检查是否有工具调用         if response.stop_reason == &quot;tool_use&quot;:             for block in response.content:                 if block.type == &quot;tool_use&quot;:                     result = execute_tool(block.name, block.input)                     messages.append({&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: response.content})                     messages.append({                         &quot;role&quot;: &quot;user&quot;,                         &quot;content&quot;: [{                             &quot;type&quot;: &quot;tool_result&quot;,                             &quot;tool_use_id&quot;: block.id,                             &quot;content&quot;: str(result)                         }]                     })         else:             # 没有工具调用 = Agent 认为任务完成了             return response.content[0].text      return &quot;Agent 达到最大步数限制&quot;  def execute_tool(name, params):     # 实际项目中这里接真实的搜索 API / 计算器     if name == &quot;calculator&quot;:         return eval(params[&quot;expression&quot;])  # 生产环境用安全的 math parser     return f&quot;搜索结果: 关于 '{params['query']}' 的信息...&quot;  # 使用 result = run_agent(&quot;奔驰 E300 和宝马 530 哪个保值率高？按 3 年车龄算差价多少？&quot;) print(result)      这个 30 行的 Agent 已经具备了： 理解目标 → 自主决定用什么工具 → 根据结果调整 → 输出最终答案  的完整能力。实际项目只需要把  execute_tool  接上真实 API。 Agent 开发的 5 个实战场景      竞品监控 Agent  ：每天定时抓取竞品网站 → AI 分析变化 → 飞书/企微推送摘要。技术栈：GitHub Actions + Playwright + Claude API + Webhook    代码审查 Agent  ：监听 GitHub PR → 自动 Review 代码（安全、性能、最佳实践）→ 直接在 PR 下评论。技术栈：GitHub App + Claude Code API    客服知识库 Agent  ：上传产品文档 → Agent 用 RAG 检索 + 自主判断是否需要人工介入。技术栈：LangChain + Pinecone + Slack Bot    数据分析 Agent  ：说\"分析这个 CSV 里销售额下降的原因\" → Agent 自己写 Python 画图分析 → 输出报告。技术栈：OpenAI Code Interpreter + Jupyter    个人助理 Agent  ：连接日历 + 邮箱 + 待办事项 → \"帮我安排下周的会议\" → 自动查空闲时间发邀请。技术栈：Anthropic MCP + Google Calendar API     常见陷阱      无限循环  ：Agent 在\"思考→行动→观察\"中打转，停不下来。解决方案：设 ma"
+      "articleBody": "如果说 2024-2025 年是\"和 AI 聊天\"的时代，2026 年就是\" 让 AI 去干活  \"的时代。AI Agent（智能体）不再是研究论文里的概念——它已经可以帮你订机票、写代码、分析数据、监控竞品，而且这些事你用一个周末就能自己搭出来。 本文不讲虚的，从原理到代码，带你写出第一个能自主执行任务的 AI Agent。 什么是 AI Agent（与普通 LLM 的区别） 普通使用 LLM 的方式：你提问 → AI 回答 → 结束。一回合对话。 AI Agent 的方式：你给目标 → Agent  自己拆任务 → 调用工具 → 观察结果 → 反思调整 → 直到完成  。 核心差异在四个字： 自主决策  。Agent 有四个关键能力：      规划（Planning）  ：把一个复杂目标拆成可执行的步骤    工具使用（Tool Use）  ：能搜索网页、调 API、读文件、写代码    记忆（Memory）  ：记住之前的对话和中间结果    反思（Reflection）  ：检查自己的输出，发现错误后自我修正     Agent 的核心架构 一个典型的 AI Agent 架构长这样：       用户目标: &quot;帮我研究竞品 A 的定价策略&quot;     ↓ [规划模块]: 拆成 3 步：   1. 搜索竞品 A 官网定价页   2. 搜索第三方评测网站的价格信息   3. 汇总对比，写成报告     ↓ [执行循环] (ReAct 模式):   Thought: 我需要先访问竞品 A 的官网   Action: web_search(&quot;竞品A 定价&quot;)   Observation: 搜到了定价页面...   Thought: 价格信息拿到了，现在需要找第三方对比   Action: web_search(&quot;竞品A vs 竞品B 价格对比&quot;)   Observation: ...   Thought: 信息足够，可以写报告了   Final Answer: [Markdown 报告]     ↓ [输出]: 一份结构化的定价分析报告             这个模式叫  ReAct（Reasoning + Acting）  ，是当前 90% Agent 框架的底层逻辑。它的核心思想是：思考（推理）→ 行动（调工具）→ 观察（看结果）→ 再思考，循环直到任务完成。 Agent 开发框架对比 2026 框架   语言   特点   适合谁           LangChain / LangGraph   Python/JS   生态最大，组件最全，但抽象层多   需要复杂工作流的企业应用       CrewAI   Python   多 Agent 协作，角色扮演式开发   想快速上手多 Agent 系统的团队       AutoGen (Microsoft)   Python   对话驱动，Agent 之间自动聊天协作   需要多轮协商的复杂任务       OpenAI Agents SDK   Python   官方出品，API 简洁，原生支持工具调用   深度绑定 OpenAI 的项目       Anthropic Tool Use   Python/JS   Claude 原生工具链，MCP 协议集成   用 Claude API 的开发者       Vercel AI SDK   TypeScript   前端优先，流式响应，边生成边展示   Next.js/React 开发者        推荐路径  ：新手从 OpenAI Agents SDK 或 Anthropic Tool Use 开始（概念最清晰），熟悉后用 LangGraph 构建复杂工作流。 手写第一个 Agent（Python + Claude API） 不用任何框架，30 行代码理解 Agent 的核心机制：                       import     anthropic    client   =   anthropic  .  Anthropic  ()    # 定义 Agent 能用的工具   tools   =   [       {           &quot;name&quot;  :   &quot;web_search&quot;  ,           &quot;description&quot;  :   &quot;搜索互联网获取最新信息&quot;  ,           &quot;input_schema&quot;  :   {               &quot;type&quot;  :   &quot;object&quot;  ,               &quot;properties&quot;  :   {                   &quot;query&quot;  :   {  &quot;type&quot;  :   &quot;string&quot;  ,   &quot;description&quot;  :   &quot;搜索关键词&quot;  }               },               &quot;required&quot;  :   [  &quot;query&quot;  ]           }       },       {           &quot;name&quot;  :   &quot;calculator&quot;  ,           &quot;description&quot;  :   &quot;执行数学计算&quot;  ,           &quot;input_schema&quot;  :   {               &quot;type&quot;  :   &quot;object&quot;  ,               &quot;properties&quot;  :   {                   &quot;expression&quot;  :   {  &quot;type&quot;  :   &quot;string&quot;  ,   &quot;description&quot;  :   &quot;数学表达式&quot;  }               },               &quot;required&quot;  :   [  &quot;expression&quot;  ]           }       }   ]    # Agent 主循环   def     run_agent  (  user_goal  ,   max_steps  =  5  ):       messages   =   [{  &quot;role&quot;  :   &quot;user&quot;  ,   &quot;content&quot;  :   user_goal  }]        for   step   in   range  (  max_steps  ):           response   =   client  .  messages  .  create  (               model  =  &quot;claude-sonnet-4-6&quot;  ,               max_tokens  =  1024  ,               system  =  &quot;你是一个能使用工具的 AI Agent。遇到需要外部信息的任务时，调用工具获取数据，然后基于结果继续推理。如果任务完成了，直接给出最终答案。&quot;  ,               tools  =  tools  ,               messages  =  messages           )            # 检查是否有工具调用           if   response  .  stop_reason   ==   &quot;tool_use&quot;  :               for   block   in   response  .  content  :                   if   block  .  type   ==   &quot;tool_use&quot;  :                       result   =   execute_tool  (  block  .  name  ,   block  .  input  )                       messages  .  append  ({  &quot;role&quot;  :   &quot;assistant&quot;  ,   &quot;content&quot;  :   response  .  content  })                       messages  .  append  ({                           &quot;role&quot;  :   &quot;user&quot;  ,                           &quot;content&quot;  :   [{                               &quot;type&quot;  :   &quot;tool_result&quot;  ,                               &quot;tool_use_id&quot;  :   block  .  id  ,                               &quot;content&quot;  :   str  (  result  )                           }]                       })           else  :               # 没有工具调用 = Agent 认为任务完成了               return   response  .  content  [  0  ]  .  text        return   &quot;Agent 达到最大步数限制&quot;    def     execute_tool  (  name  ,   params  ):       # 实际项目中这里接真实的搜索 API / 计算器       if   name   ==   &quot;calculator&quot;  :           return   eval  (  params  [  &quot;expression&quot;  ])    # 生产环境用安全的 math parser       return   f  &quot;搜索结果: 关于 &#39;  {  params  [  &#39;query&#39;  ]  }  &#39; 的信息...&quot;    # 使用   result   =   run_agent  (  &quot;奔驰 E300 和宝马 530 哪个保值率高？按 3 年车龄算差价多少？&quot;  )   print  (  result  )        这个 30 行的 Agent 已经具备了： 理解目标 → 自主决定用什么工具 → 根据结果调整 → 输出最终答案  的完整能力。实际项目只需要把  execute_tool  接上真实 "
     }
     </script>
     <script type="application/ld+json">
@@ -121,11 +121,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-11">2026-05-11</time>
           <span class="meta-sep">·</span>
-          <span>6 分钟阅读</span>
+          <span>13 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>1385 字</span>
+          <span>2706 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-agent-development-2026.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-agent-development-2026.png" alt="AI Agent 开发入门 2026：从原理到第一个智能体" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -137,7 +137,7 @@
 <li><strong>反思（Reflection）</strong> ：检查自己的输出，发现错误后自我修正</li>
 </ul>
 <p>Agent 的核心架构 一个典型的 AI Agent 架构长这样：</p>
-<pre class="codehilite"><code>用户目标: &quot;帮我研究竞品 A 的定价策略&quot;
+<div class="codehilite"><pre><span></span><code>用户目标: &quot;帮我研究竞品 A 的定价策略&quot;
     ↓
 [规划模块]: 拆成 3 步：
   1. 搜索竞品 A 官网定价页
@@ -155,7 +155,7 @@
   Final Answer: [Markdown 报告]
     ↓
 [输出]: 一份结构化的定价分析报告
-</code></pre>
+</code></pre></div>
 
 <table>
 <thead>
@@ -211,79 +211,79 @@
 </tr>
 </tbody>
 </table>
-<pre class="codehilite"><code>import anthropic
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">anthropic</span>
 
-client = anthropic.Anthropic()
+<span class="n">client</span> <span class="o">=</span> <span class="n">anthropic</span><span class="o">.</span><span class="n">Anthropic</span><span class="p">()</span>
 
-# 定义 Agent 能用的工具
-tools = [
-    {
-        &quot;name&quot;: &quot;web_search&quot;,
-        &quot;description&quot;: &quot;搜索互联网获取最新信息&quot;,
-        &quot;input_schema&quot;: {
-            &quot;type&quot;: &quot;object&quot;,
-            &quot;properties&quot;: {
-                &quot;query&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;搜索关键词&quot;}
-            },
-            &quot;required&quot;: [&quot;query&quot;]
-        }
-    },
-    {
-        &quot;name&quot;: &quot;calculator&quot;,
-        &quot;description&quot;: &quot;执行数学计算&quot;,
-        &quot;input_schema&quot;: {
-            &quot;type&quot;: &quot;object&quot;,
-            &quot;properties&quot;: {
-                &quot;expression&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;数学表达式&quot;}
-            },
-            &quot;required&quot;: [&quot;expression&quot;]
-        }
-    }
-]
+<span class="c1"># 定义 Agent 能用的工具</span>
+<span class="n">tools</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;web_search&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;搜索互联网获取最新信息&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;input_schema&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;搜索关键词&quot;</span><span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;calculator&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;执行数学计算&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;input_schema&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;expression&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;数学表达式&quot;</span><span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;expression&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">]</span>
 
-# Agent 主循环
-def run_agent(user_goal, max_steps=5):
-    messages = [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: user_goal}]
+<span class="c1"># Agent 主循环</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_agent</span><span class="p">(</span><span class="n">user_goal</span><span class="p">,</span> <span class="n">max_steps</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">messages</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">user_goal</span><span class="p">}]</span>
 
-    for step in range(max_steps):
-        response = client.messages.create(
-            model=&quot;claude-sonnet-4-6&quot;,
-            max_tokens=1024,
-            system=&quot;你是一个能使用工具的 AI Agent。遇到需要外部信息的任务时，调用工具获取数据，然后基于结果继续推理。如果任务完成了，直接给出最终答案。&quot;,
-            tools=tools,
-            messages=messages
-        )
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_steps</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">=</span><span class="s2">&quot;claude-sonnet-4-6&quot;</span><span class="p">,</span>
+            <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+            <span class="n">system</span><span class="o">=</span><span class="s2">&quot;你是一个能使用工具的 AI Agent。遇到需要外部信息的任务时，调用工具获取数据，然后基于结果继续推理。如果任务完成了，直接给出最终答案。&quot;</span><span class="p">,</span>
+            <span class="n">tools</span><span class="o">=</span><span class="n">tools</span><span class="p">,</span>
+            <span class="n">messages</span><span class="o">=</span><span class="n">messages</span>
+        <span class="p">)</span>
 
-        # 检查是否有工具调用
-        if response.stop_reason == &quot;tool_use&quot;:
-            for block in response.content:
-                if block.type == &quot;tool_use&quot;:
-                    result = execute_tool(block.name, block.input)
-                    messages.append({&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: response.content})
-                    messages.append({
-                        &quot;role&quot;: &quot;user&quot;,
-                        &quot;content&quot;: [{
-                            &quot;type&quot;: &quot;tool_result&quot;,
-                            &quot;tool_use_id&quot;: block.id,
-                            &quot;content&quot;: str(result)
-                        }]
-                    })
-        else:
-            # 没有工具调用 = Agent 认为任务完成了
-            return response.content[0].text
+        <span class="c1"># 检查是否有工具调用</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">stop_reason</span> <span class="o">==</span> <span class="s2">&quot;tool_use&quot;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">block</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;tool_use&quot;</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">execute_tool</span><span class="p">(</span><span class="n">block</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">block</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
+                    <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">})</span>
+                    <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                        <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[{</span>
+                            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;tool_result&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;tool_use_id&quot;</span><span class="p">:</span> <span class="n">block</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                            <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+                        <span class="p">}]</span>
+                    <span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 没有工具调用 = Agent 认为任务完成了</span>
+            <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
 
-    return &quot;Agent 达到最大步数限制&quot;
+    <span class="k">return</span> <span class="s2">&quot;Agent 达到最大步数限制&quot;</span>
 
-def execute_tool(name, params):
-    # 实际项目中这里接真实的搜索 API / 计算器
-    if name == &quot;calculator&quot;:
-        return eval(params[&quot;expression&quot;])  # 生产环境用安全的 math parser
-    return f&quot;搜索结果: 关于 '{params['query']}' 的信息...&quot;
+<span class="k">def</span><span class="w"> </span><span class="nf">execute_tool</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="c1"># 实际项目中这里接真实的搜索 API / 计算器</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;calculator&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">eval</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;expression&quot;</span><span class="p">])</span>  <span class="c1"># 生产环境用安全的 math parser</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;搜索结果: 关于 &#39;</span><span class="si">{</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39; 的信息...&quot;</span>
 
-# 使用
-result = run_agent(&quot;奔驰 E300 和宝马 530 哪个保值率高？按 3 年车龄算差价多少？&quot;)
-print(result)
-</code></pre>
+<span class="c1"># 使用</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">run_agent</span><span class="p">(</span><span class="s2">&quot;奔驰 E300 和宝马 530 哪个保值率高？按 3 年车龄算差价多少？&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
 
 <p>这个 30 行的 Agent 已经具备了：<strong>理解目标 → 自主决定用什么工具 → 根据结果调整 → 输出最终答案</strong> 的完整能力。实际项目只需要把 <code>execute_tool</code> 接上真实 API。 Agent 开发的 5 个实战场景</p>
 <ul>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="security" data-exclude="sql-zhu-ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="SQL注入防御：参数化查询、ORM安全、WAF配置">
+    <meta property="og:description" content="深入讲解SQL注入攻击的原理和防御措施，涵盖参数化查询的正确使用、ORM框架的安全配置和Web应用防火墙的策略设置。">
+    <meta property="og:url" content="https://aidev.fit/security/sql-zhu-ru.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/security/sql-zhu-ru.png">
+    <meta property="og:image:alt" content="SQL注入防御：参数化查询、ORM安全、WAF配置">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="安全防护">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SQL注入防御：参数化查询、ORM安全、WAF配置">
+    <meta name="twitter:description" content="深入讲解SQL注入攻击的原理和防御措施，涵盖参数化查询的正确使用、ORM框架的安全配置和Web应用防火墙的策略设置。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/security/sql-zhu-ru.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/sql-zhu-ru.webp" type="image/webp" fetchpriority="high">
+    <title>SQL注入防御：参数化查询、ORM安全、WAF配置 — AI自习室</title>
+    <meta name="description" content="深入讲解SQL注入攻击的原理和防御措施，涵盖参数化查询的正确使用、ORM框架的安全配置和Web应用防火墙的策略设置。">
+    <meta name="keywords" content="Security, DevOps, Cloud">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/security/sql-zhu-ru.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/sql-zhu-ru.html">
+    <link rel="canonical" href="https://aidev.fit/security/sql-zhu-ru.html"><link rel="prev" href="https://aidev.fit/security/social-gong-cheng.html">
+<link rel="next" href="https://aidev.fit/security/xss-fang-yu.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "SQL注入防御：参数化查询、ORM安全、WAF配置",
+      "description": "深入讲解SQL注入攻击的原理和防御措施，涵盖参数化查询的正确使用、ORM框架的安全配置和Web应用防火墙的策略设置。",
+      "image": "https://aidev.fit/images/covers/en/security/sql-zhu-ru.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1145",
+      "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室 编辑部"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/security/sql-zhu-ru.html"},
+      "articleBody": "SQL注入原理   SQL注入是最经典的Web安全漏洞之一，攻击者通过在输入中嵌入恶意SQL语句，操纵后端数据库执行非预期的查询。   参数化查询   参数化查询是防御SQL注入最有效的手段。   Python示例        # 不安全：字符串拼接   cursor  .  execute  (  f  &quot;SELECT * FROM users WHERE name = &#39;  {  name  }  &#39;&quot;  )    # 安全：参数化查询   cursor  .  execute  (  &quot;SELECT * FROM users WHERE name =   %s  &quot;  ,   (  name  ,))        Node.js示例        // 不安全   const     sql     =     `SELECT * FROM users WHERE name = &#39;  ${  name  }  &#39;`  ;    // 安全（使用mysql2）   const     sql     =     &#39;SELECT * FROM users WHERE name = ?&#39;  ;   connection  .  execute  (  sql  ,     [  name  ]);        Java示例        // 安全：PreparedStatement   String     sql     =     &quot;SELECT * FROM users WHERE name = ?&quot;  ;   PreparedStatement     ps     =     connection  .  prepareStatement  (  sql  );   ps  .  setString  (  1  ,     name  );   ResultSet     rs     =     ps  .  executeQuery  ();        原理说明   参数化查询将SQL语句和数据分离，数据库预编译SQL语句的语法结构，后续传入的参数只作为数据处理，不会改变SQL的语义。因此即使用户输入包含SQL关键字，也不会被执行。   ORM安全   现代ORM框架（SQLAlchemy、Prisma、TypeORM、Hibernate）默认使用参数化查询，大大降低了SQL注入风险。   安全使用原则    使用ORM的查询构建器：         # SQLAlchemy 安全示例   user   =   session  .  query  (  User  )  .  filter  (  User  .  name   ==   name  )  .  first  ()         避免原生SQL：  - ORM框架的原生SQL方法（如 session.execute(raw_sql) ）绕过了参数化保护 - 不得已使用原生SQL时，确保使用参数化方式   常见ORM风险      动态查询拼接 ：根据条件动态拼接查询字符串    排序参数 ： ORDER BY 后的字段名不能参数化，需要白名单校验    批量操作 ：批量删除或更新时的条件拼接     WAF配置   Web应用防火墙（WAF）作为第二道防线，可以在请求到达应用之前拦截恶意输入。   WAF规则配置        # Nginx + ModSecurity 规则示例   SecRule     REQUEST_FILENAME     &quot;\\.(php|asp)&quot;     &quot;id:1000&quot;   SecRule     ARGS     &quot;@detectSQLi&quot;     &quot;id:1001,deny,msg:&#39;SQL注入检测&#39;&quot;        云WAF      Cloudflare WAF ：预置SQL注入规则集    AWS WAF ：可与ALB和CloudFront集成    阿里云WAF ：中文场景最佳支持     WAF的局限性     无法防御所有SQL注入变种   可能产生误报（阻断正常请求）   二次编码和分块传输可能绕过WAF     因此，WAF应作为补充防御，而非主要依赖。   其他防御措施   最小权限数据库账户   应用使用的数据库账户应遵循最小权限原则： - 只读操作使用只读账户 - 仅授权必要的表 - 禁止使用 GRANT ALL    输入验证     白名单验证：只接受预期格式的输入   类型检查：数字字段确保是数字类型   长度限制：防止缓冲区溢出攻击     错误信息处理     不要在生产环境中显示数据库错误信息   使用自定义错误页面   记录完整错误到日志便于排查     SQL注入虽然历史悠久，但至今仍是常见的安全漏洞。通过参数化查询、ORM安全和WAF的多层防御，可以有效消除SQL注入风险。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "安全防护", "item": "https://aidev.fit/security/"},
+        {"@type": "ListItem", "position": 3, "name": "SQL注入防御：参数化查询、ORM安全、WAF配置"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/security/">安全防护</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">Security</span>
+          <span class="tag-cat">DevOps</span>
+          <span class="tag-cat">Cloud</span></div>
+        <h1 class="article-title">SQL注入防御：参数化查询、ORM安全、WAF配置</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室 编辑部</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>5 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>1145 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/security/sql-zhu-ru.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/sql-zhu-ru.png" alt="SQL注入防御：参数化查询、ORM安全、WAF配置" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（17）</summary><ol><li><a href="#sql注入原理">SQL注入原理</a></li><li><a href="#参数化查询">参数化查询</a></li><li><a href="#python示例">Python示例</a></li><li><a href="#nodejs示例">Node.js示例</a></li><li><a href="#java示例">Java示例</a></li><li><a href="#原理说明">原理说明</a></li><li><a href="#orm安全">ORM安全</a></li><li><a href="#安全使用原则">安全使用原则</a></li><li><a href="#常见orm风险">常见ORM风险</a></li><li><a href="#waf配置">WAF配置</a></li><li><a href="#waf规则配置">WAF规则配置</a></li><li><a href="#云waf">云WAF</a></li><li><a href="#waf的局限性">WAF的局限性</a></li><li><a href="#其他防御措施">其他防御措施</a></li><li><a href="#最小权限数据库账户">最小权限数据库账户</a></li><li><a href="#输入验证">输入验证</a></li><li><a href="#错误信息处理">错误信息处理</a></li></ol></details>
+        <div class="article-body"><h2>SQL注入原理</h2>
+<p>SQL注入是最经典的Web安全漏洞之一，攻击者通过在输入中嵌入恶意SQL语句，操纵后端数据库执行非预期的查询。</p>
+<h2>参数化查询</h2>
+<p>参数化查询是防御SQL注入最有效的手段。</p>
+<h3>Python示例</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 不安全：字符串拼接</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SELECT * FROM users WHERE name = &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+<span class="c1"># 安全：参数化查询</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users WHERE name = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,))</span>
+</code></pre></div>
+
+<h3>Node.js示例</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// 不安全</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`SELECT * FROM users WHERE name = &#39;</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">&#39;`</span><span class="p">;</span>
+
+<span class="c1">// 安全（使用mysql2）</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;SELECT * FROM users WHERE name = ?&#39;</span><span class="p">;</span>
+<span class="nx">connection</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">sql</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nx">name</span><span class="p">]);</span>
+</code></pre></div>
+
+<h3>Java示例</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// 安全：PreparedStatement</span>
+<span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SELECT * FROM users WHERE name = ?&quot;</span><span class="p">;</span>
+<span class="n">PreparedStatement</span><span class="w"> </span><span class="n">ps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">sql</span><span class="p">);</span>
+<span class="n">ps</span><span class="p">.</span><span class="na">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ps</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">();</span>
+</code></pre></div>
+
+<h3>原理说明</h3>
+<p>参数化查询将SQL语句和数据分离，数据库预编译SQL语句的语法结构，后续传入的参数只作为数据处理，不会改变SQL的语义。因此即使用户输入包含SQL关键字，也不会被执行。</p>
+<h2>ORM安全</h2>
+<p>现代ORM框架（SQLAlchemy、Prisma、TypeORM、Hibernate）默认使用参数化查询，大大降低了SQL注入风险。</p>
+<h3>安全使用原则</h3>
+<p><strong>使用ORM的查询构建器：</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># SQLAlchemy 安全示例</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+</code></pre></div>
+
+<p><strong>避免原生SQL：</strong>
+- ORM框架的原生SQL方法（如<code>session.execute(raw_sql)</code>）绕过了参数化保护
+- 不得已使用原生SQL时，确保使用参数化方式</p>
+<h3>常见ORM风险</h3>
+<ol>
+<li><strong>动态查询拼接</strong>：根据条件动态拼接查询字符串</li>
+<li><strong>排序参数</strong>：<code>ORDER BY</code>后的字段名不能参数化，需要白名单校验</li>
+<li><strong>批量操作</strong>：批量删除或更新时的条件拼接</li>
+</ol>
+<h2>WAF配置</h2>
+<p>Web应用防火墙（WAF）作为第二道防线，可以在请求到达应用之前拦截恶意输入。</p>
+<h3>WAF规则配置</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Nginx + ModSecurity 规则示例</span>
+<span class="k">SecRule</span><span class="w"> </span><span class="s">REQUEST_FILENAME</span><span class="w"> </span><span class="s">&quot;\.(php|asp)&quot;</span><span class="w"> </span><span class="s">&quot;id:1000&quot;</span>
+<span class="s">SecRule</span><span class="w"> </span><span class="s">ARGS</span><span class="w"> </span><span class="s">&quot;@detectSQLi&quot;</span><span class="w"> </span><span class="s">&quot;id:1001,deny,msg:&#39;SQL注入检测&#39;&quot;</span>
+</code></pre></div>
+
+<h3>云WAF</h3>
+<ul>
+<li><strong>Cloudflare WAF</strong>：预置SQL注入规则集</li>
+<li><strong>AWS WAF</strong>：可与ALB和CloudFront集成</li>
+<li><strong>阿里云WAF</strong>：中文场景最佳支持</li>
+</ul>
+<h3>WAF的局限性</h3>
+<ul>
+<li>无法防御所有SQL注入变种</li>
+<li>可能产生误报（阻断正常请求）</li>
+<li>二次编码和分块传输可能绕过WAF</li>
+</ul>
+<p>因此，WAF应作为补充防御，而非主要依赖。</p>
+<h2>其他防御措施</h2>
+<h3>最小权限数据库账户</h3>
+<p>应用使用的数据库账户应遵循最小权限原则：
+- 只读操作使用只读账户
+- 仅授权必要的表
+- 禁止使用<code>GRANT ALL</code></p>
+<h3>输入验证</h3>
+<ul>
+<li>白名单验证：只接受预期格式的输入</li>
+<li>类型检查：数字字段确保是数字类型</li>
+<li>长度限制：防止缓冲区溢出攻击</li>
+</ul>
+<h3>错误信息处理</h3>
+<ul>
+<li>不要在生产环境中显示数据库错误信息</li>
+<li>使用自定义错误页面</li>
+<li>记录完整错误到日志便于排查</li>
+</ul>
+<p>SQL注入虽然历史悠久，但至今仍是常见的安全漏洞。通过参数化查询、ORM安全和WAF的多层防御，可以有效消除SQL注入风险。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/security/anquan-ji-chu.html"><span class="related-title">Web安全基础：OWASP Top 10详解与防御实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/api-anquan.html"><span class="related-title">API安全：速率限制、输入验证、认证鉴权最佳实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/docker-anquan.html"><span class="related-title">Docker安全：镜像扫描、运行时安全、权限控制</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/jwt-anquan.html"><span class="related-title">JWT安全：签名算法选择、过期策略、刷新令牌最佳实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/log-anquan.html"><span class="related-title">日志安全审计：集中式日志管理、异常检测、合规要求</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/mi-ma-anquan.html"><span class="related-title">密码安全：哈希算法选择、加盐、密码策略设计</span><span class="related-meta">安全防护 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=SQL%E6%B3%A8%E5%85%A5%E9%98%B2%E5%BE%A1%EF%BC%9A%E5%8F%82%E6%95%B0%E5%8C%96%E6%9F%A5%E8%AF%A2%E3%80%81ORM%E5%AE%89%E5%85%A8%E3%80%81WAF%E9%85%8D%E7%BD%AE&url=https%3A//aidev.fit/security/sql-zhu-ru.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/security/sql-zhu-ru.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=SQL%E6%B3%A8%E5%85%A5%E9%98%B2%E5%BE%A1%EF%BC%9A%E5%8F%82%E6%95%B0%E5%8C%96%E6%9F%A5%E8%AF%A2%E3%80%81ORM%E5%AE%89%E5%85%A8%E3%80%81WAF%E9%85%8D%E7%BD%AE&url=https%3A//aidev.fit/security/sql-zhu-ru.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/security/sql-zhu-ru.html&t=SQL%E6%B3%A8%E5%85%A5%E9%98%B2%E5%BE%A1%EF%BC%9A%E5%8F%82%E6%95%B0%E5%8C%96%E6%9F%A5%E8%AF%A2%E3%80%81ORM%E5%AE%89%E5%85%A8%E3%80%81WAF%E9%85%8D%E7%BD%AE" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=SQL%E6%B3%A8%E5%85%A5%E9%98%B2%E5%BE%A1%EF%BC%9A%E5%8F%82%E6%95%B0%E5%8C%96%E6%9F%A5%E8%AF%A2%E3%80%81ORM%E5%AE%89%E5%85%A8%E3%80%81WAF%E9%85%8D%E7%BD%AE&body=https%3A//aidev.fit/security/sql-zhu-ru.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/security/sql-zhu-ru.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/security/social-gong-cheng.html" title="社会工程学防御：钓鱼邮件识别、安全意识培训">← 上一篇<br><small>社会工程学防御：钓鱼邮件识别、安全意识培训</small></a><a class="next" href="/security/xss-fang-yu.html" title="XSS跨站脚本攻击防御：CSP策略、输出编码、框架安全">下一篇 →<br><small>XSS跨站脚本攻击防御：CSP策略、输出编码、框架安全</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/security/anquan-ji-chu.html"><span class="related-title">Web安全基础：OWASP Top 10详解与防御实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/api-anquan.html"><span class="related-title">API安全：速率限制、输入验证、认证鉴权最佳实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/docker-anquan.html"><span class="related-title">Docker安全：镜像扫描、运行时安全、权限控制</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/jwt-anquan.html"><span class="related-title">JWT安全：签名算法选择、过期策略、刷新令牌最佳实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/log-anquan.html"><span class="related-title">日志安全审计：集中式日志管理、异常检测、合规要求</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/mi-ma-anquan.html"><span class="related-title">密码安全：哈希算法选择、加盐、密码策略设计</span><span class="related-meta">安全防护 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <section class="author-bio">
+          <h4>关于作者</h4>
+          <p>AI自习室是由一群技术从业者维护的AI知识分享平台。我们关注AI工具、编程技术和开发者生态，致力于为中文开发者提供高质量的原创技术内容。<a href="/about.html">了解更多 →</a></p>
+        </section>
+        <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#sql注入原理">SQL注入原理</a></li><li class="toc-h2"><a href="#参数化查询">参数化查询</a></li><li class="toc-h3"><a href="#python示例">Python示例</a></li><li class="toc-h3"><a href="#nodejs示例">Node.js示例</a></li><li class="toc-h3"><a href="#java示例">Java示例</a></li><li class="toc-h3"><a href="#原理说明">原理说明</a></li><li class="toc-h2"><a href="#orm安全">ORM安全</a></li><li class="toc-h3"><a href="#安全使用原则">安全使用原则</a></li><li class="toc-h3"><a href="#常见orm风险">常见ORM风险</a></li><li class="toc-h2"><a href="#waf配置">WAF配置</a></li><li class="toc-h3"><a href="#waf规则配置">WAF规则配置</a></li><li class="toc-h3"><a href="#云waf">云WAF</a></li><li class="toc-h3"><a href="#waf的局限性">WAF的局限性</a></li><li class="toc-h2"><a href="#其他防御措施">其他防御措施</a></li><li class="toc-h3"><a href="#最小权限数据库账户">最小权限数据库账户</a></li><li class="toc-h3"><a href="#输入验证">输入验证</a></li><li class="toc-h3"><a href="#错误信息处理">错误信息处理</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

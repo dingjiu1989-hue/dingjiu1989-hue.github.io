@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/ai-pipeline.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "493",
+      "wordCount": "498",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "zh-CN",
@@ -75,7 +75,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/ai-pipeline.html"},
-      "articleBody": "AI数据流水线的价值   高质量的AI应用依赖于高质量的数据管道。从原始数据到可供LLM使用的向量表示，需要经过抽取、清洗、转换、分块和向量化等多个环节。   数据抽取（Extract）   数据抽取是管道的第一环，需要从各种数据源中获取数据。   常见数据源      数据库 ：MySQL、PostgreSQL、MongoDB    文档系统 ：本地文件、SharePoint、Google Drive    API接口 ：CRM系统、第三方平台    网页内容 ：爬虫抓取、RSS订阅     抽取工具      Apache NiFi ：可视化数据流编排，支持200+数据源    Airbyte ：开源数据集成平台，ELT模式    Fivetran ：托管数据管道服务    自定义爬虫 ：Scrapy框架适合网页数据抽取     数据清洗与转换（Transform）   原始数据通常包含噪声、重复和不一致的内容，需要进行清洗。   清洗步骤      去重 ：基于内容哈希或相似度检测去除重复文档    格式统一 ：将PDF、Word、HTML等统一转换为Markdown    内容过滤 ：移除广告、导航栏等无关内容    PII脱敏 ：识别并脱敏个人身份信息    语言检测 ：过滤非目标语言的内容     文档解析技巧      PyMuPDF（fitz） ：PDF解析的首选    python-docx ：Word文档处理    BeautifulSoup ：HTML内容提取    Unstructured库 ：多种格式的统一解析接口     文档分块（Chunking）   分块策略直接影响检索效果。不同的文档类型需要不同的分块方式。   分块策略对比         策略   适用场景   优点   缺点           固定大小   通用   实现简单   语义断裂       段落分割   结构化文档   语义完整   块大小不均       语义分割   长文本   主题聚焦   计算开销大       递归分割   代码文档   层次保留   参数敏感         推荐的实践经验是结合标题层级检测和语义边界，实现自适应的分块策略。   向量化存储（Load）   清洗分块后的数据需要转为向量并存入向量数据库。   向量化流程    文本块 → Embedding模型 → 向量 → 索引构建 → 向量数据库      增量更新策略      全量重建 ：数据量小时直接重建索引    增量追加 ：新数据追加到现有索引    定期合并 ：定期合并增量数据到主索引     数据版本管理   对训练数据和向量索引进行版本管理，便于回滚和对比：     每次数据更新记录版本号   保留上一版本的快照   A/B测试不同版本的数据效果     流水线编排   生产环境中的数据处理需要自动化和监控：      调度工具 ：Apache Airflow、Prefect、Dagster    监控告警 ：数据质量监控、管道失败告警    日志追踪 ：每条数据的处理链路追踪     最佳实践总结     从简单管道开始，逐步增加复杂度   在管道中加入数据质量检查点   对核心环节进行性能基准测试   保持数据的可追溯性和可重复性   建立数据更新和失效的生命周期管理     完善的AI数据管道是构建可靠RAG系统的基础设施保障。"
+      "articleBody": "AI数据流水线的价值   高质量的AI应用依赖于高质量的数据管道。从原始数据到可供LLM使用的向量表示，需要经过抽取、清洗、转换、分块和向量化等多个环节。   数据抽取（Extract）   数据抽取是管道的第一环，需要从各种数据源中获取数据。   常见数据源      数据库 ：MySQL、PostgreSQL、MongoDB    文档系统 ：本地文件、SharePoint、Google Drive    API接口 ：CRM系统、第三方平台    网页内容 ：爬虫抓取、RSS订阅     抽取工具      Apache NiFi ：可视化数据流编排，支持200+数据源    Airbyte ：开源数据集成平台，ELT模式    Fivetran ：托管数据管道服务    自定义爬虫 ：Scrapy框架适合网页数据抽取     数据清洗与转换（Transform）   原始数据通常包含噪声、重复和不一致的内容，需要进行清洗。   清洗步骤      去重 ：基于内容哈希或相似度检测去除重复文档    格式统一 ：将PDF、Word、HTML等统一转换为Markdown    内容过滤 ：移除广告、导航栏等无关内容    PII脱敏 ：识别并脱敏个人身份信息    语言检测 ：过滤非目标语言的内容     文档解析技巧      PyMuPDF（fitz） ：PDF解析的首选    python-docx ：Word文档处理    BeautifulSoup ：HTML内容提取    Unstructured库 ：多种格式的统一解析接口     文档分块（Chunking）   分块策略直接影响检索效果。不同的文档类型需要不同的分块方式。   分块策略对比         策略   适用场景   优点   缺点           固定大小   通用   实现简单   语义断裂       段落分割   结构化文档   语义完整   块大小不均       语义分割   长文本   主题聚焦   计算开销大       递归分割   代码文档   层次保留   参数敏感         推荐的实践经验是结合标题层级检测和语义边界，实现自适应的分块策略。   向量化存储（Load）   清洗分块后的数据需要转为向量并存入向量数据库。   向量化流程       文本块 → Embedding模型 → 向量 → 索引构建 → 向量数据库       增量更新策略      全量重建 ：数据量小时直接重建索引    增量追加 ：新数据追加到现有索引    定期合并 ：定期合并增量数据到主索引     数据版本管理   对训练数据和向量索引进行版本管理，便于回滚和对比：     每次数据更新记录版本号   保留上一版本的快照   A/B测试不同版本的数据效果     流水线编排   生产环境中的数据处理需要自动化和监控：      调度工具 ：Apache Airflow、Prefect、Dagster    监控告警 ：数据质量监控、管道失败告警    日志追踪 ：每条数据的处理链路追踪     最佳实践总结     从简单管道开始，逐步增加复杂度   在管道中加入数据质量检查点   对核心环节进行性能基准测试   保持数据的可追溯性和可重复性   建立数据更新和失效的生命周期管理     完善的AI数据管道是构建可靠RAG系统的基础设施保障。"
     }
     </script>
     <script type="application/ld+json">
@@ -124,7 +124,7 @@
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>493 字</span>
+          <span>498 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-pipeline.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-pipeline.png" alt="AI数据处理流水线：ETL到向量化的完整实践" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（15）</summary><ol><li><a href="#ai数据流水线的价值">AI数据流水线的价值</a></li><li><a href="#数据抽取extract">数据抽取（Extract）</a></li><li><a href="#常见数据源">常见数据源</a></li><li><a href="#抽取工具">抽取工具</a></li><li><a href="#数据清洗与转换transform">数据清洗与转换（Transform）</a></li><li><a href="#清洗步骤">清洗步骤</a></li><li><a href="#文档解析技巧">文档解析技巧</a></li><li><a href="#文档分块chunking">文档分块（Chunking）</a></li><li><a href="#分块策略对比">分块策略对比</a></li><li><a href="#向量化存储load">向量化存储（Load）</a></li><li><a href="#向量化流程">向量化流程</a></li><li><a href="#增量更新策略">增量更新策略</a></li><li><a href="#数据版本管理">数据版本管理</a></li><li><a href="#流水线编排">流水线编排</a></li><li><a href="#最佳实践总结">最佳实践总结</a></li></ol></details>
@@ -206,8 +206,8 @@
 <h2>向量化存储（Load）</h2>
 <p>清洗分块后的数据需要转为向量并存入向量数据库。</p>
 <h3>向量化流程</h3>
-<pre class="codehilite"><code>文本块 → Embedding模型 → 向量 → 索引构建 → 向量数据库
-</code></pre>
+<div class="codehilite"><pre><span></span><code>文本块 → Embedding模型 → 向量 → 索引构建 → 向量数据库
+</code></pre></div>
 
 <h3>增量更新策略</h3>
 <ul>

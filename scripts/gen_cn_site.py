@@ -18,6 +18,7 @@ CN_BOARD_NAMES = {
     'tools': '工具推荐',
     'ai': 'AI 教程',
     'ai-analyst': 'AI分析师',
+    'security': '安全防护',
 }
 CN_BOARD_DESCS = {
     'daily': '每日精选AI领域十大新闻，中英双语，附原文来源链接。',
@@ -26,6 +27,7 @@ CN_BOARD_DESCS = {
     'tools': '精选开发者工具、效率软件与技术栈推荐。',
     'ai': 'AI工具、提示工程与LLM实用指南。',
     'ai-analyst': 'AI驱动的深度研究报告，涵盖半导体、科技、行业分析与投资洞察。',
+    'security': '网络安全防护、数据隐私保护与安全编码最佳实践指南。',
 }
 CN_BOARD_KEYWORDS = {
     'daily': 'AI新闻, 人工智能, 科技新闻, AI每日资讯',
@@ -34,6 +36,7 @@ CN_BOARD_KEYWORDS = {
     'tools': '开发者工具, 效率工具, 软件推荐, 技术栈',
     'ai': 'AI工具, LLM, 提示工程, 机器学习, 人工智能教程',
     'ai-analyst': 'AI分析, 深度研究, 行业报告, 半导体, 投资分析, 科技研究',
+    'security': '网络安全, 数据隐私, API安全, 密码安全, 安全编码, 渗透测试',
 }
 CN_BOARD_ICONS = {
     'daily': '📰',
@@ -42,6 +45,7 @@ CN_BOARD_ICONS = {
     'tools': '🛠️',
     'ai': '🤖',
     'ai-analyst': '🔬',
+    'security': '🔒',
 }
 # Boards with standalone HTML pages — skip auto-generation to preserve rich content
 STANDALONE_BOARDS = {'ai-analyst'}

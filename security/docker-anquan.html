@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="security" data-exclude="docker-anquan">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="Docker安全：镜像扫描、运行时安全、权限控制">
+    <meta property="og:description" content="系统讲解Docker容器安全的实践方案，涵盖镜像漏洞扫描、运行时安全配置、容器权限限制以及安全审计的完整指南。">
+    <meta property="og:url" content="https://aidev.fit/security/docker-anquan.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/security/docker-anquan.png">
+    <meta property="og:image:alt" content="Docker安全：镜像扫描、运行时安全、权限控制">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="安全防护">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Docker安全：镜像扫描、运行时安全、权限控制">
+    <meta name="twitter:description" content="系统讲解Docker容器安全的实践方案，涵盖镜像漏洞扫描、运行时安全配置、容器权限限制以及安全审计的完整指南。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/security/docker-anquan.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/docker-anquan.webp" type="image/webp" fetchpriority="high">
+    <title>Docker安全：镜像扫描、运行时安全、权限控制 — AI自习室</title>
+    <meta name="description" content="系统讲解Docker容器安全的实践方案，涵盖镜像漏洞扫描、运行时安全配置、容器权限限制以及安全审计的完整指南。">
+    <meta name="keywords" content="Security, DevOps, Cloud">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/security/docker-anquan.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/docker-anquan.html">
+    <link rel="canonical" href="https://aidev.fit/security/docker-anquan.html"><link rel="prev" href="https://aidev.fit/security/api-anquan.html">
+<link rel="next" href="https://aidev.fit/security/jwt-anquan.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Docker安全：镜像扫描、运行时安全、权限控制",
+      "description": "系统讲解Docker容器安全的实践方案，涵盖镜像漏洞扫描、运行时安全配置、容器权限限制以及安全审计的完整指南。",
+      "image": "https://aidev.fit/images/covers/en/security/docker-anquan.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1661",
+      "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室 编辑部"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/security/docker-anquan.html"},
+      "articleBody": "Docker安全威胁   容器化部署带来了新的安全挑战：镜像中的漏洞、容器逃逸风险、不安全的配置和权限过度开放是Docker安全的主要威胁。   镜像安全   选择可信基础镜像     优先使用官方镜像（Docker Official Images）   使用经过验证的发行版（Alpine、Distroless）   避免使用 latest 标签，指定精确版本     镜像扫描   在CI/CD流水线中集成镜像扫描：        # CI/CD 中的镜像扫描   -     name  :     Scan Docker image       run  :     |         trivy image myapp:latest         # 或使用 Docker Scout         docker scout quickview myapp:latest         推荐工具：  -  Trivy ：开源，支持多语言和操作系统漏洞 -  Snyk Container ：商业方案，深度集成 -  Docker Scout ：Docker官方安全工具 -  Grype ：Anchore开源扫描器    扫描策略：  - 每次构建都扫描 - 设阻断标准（如：不允许Critical级别漏洞） - 定期扫描已部署的镜像   镜像最小化        # 多阶段构建   FROM     golang:1.22     AS     builder   WORKDIR     /app   COPY    go.mod   go.sum   ./  RUN    go   mod   download  COPY    .   .  RUN     CGO_ENABLED  =  0    go   build   -o   app   FROM     scratch   COPY    --from = builder   /app/app   /  ENTRYPOINT     [  &quot;/app&quot;  ]        最小的镜像意味着最小的攻击面。   运行时安全   容器运行时配置       docker   run    \\      --read-only    \\                        # 只读文件系统      --cap-drop = ALL    \\                     # 删除所有Linux能力      --cap-add = NET_BIND_SERVICE    \\         # 只添加必要能力      --security-opt = no-new-privileges    \\   # 禁止提权      --security-opt    seccomp  = policy.json    \\   # seccomp策略      myapp       Docker Compose安全配置        services  :       app  :         image  :     myapp         read_only  :     true         cap_drop  :           -     ALL         cap_add  :           -     NET_BIND_SERVICE         security_opt  :           -     no-new-privileges:true         restart  :     unless-stopped        非root用户运行        RUN    addgroup   -S   appgroup    &amp;&amp;    adduser   -S   appuser   -G   appgroup  USER     appuser        权限控制   容器权限最小化    Linux Capabilities管理：  默认情况下，Docker容器拥有部分Linux Capabilities。应删除所有不必要的Capabilities。       需要网络：cap_add NET_BIND_SERVICE, NET_RAW 需要时间：cap_add SYS_TIME 不需要：全部drop       资源限制       docker   run    \\      --memory =  &quot;512m&quot;     \\             # 内存限制      --cpus =  &quot;0.5&quot;     \\                 # CPU限制      --pids-limit =  100     \\             # 进程数限制      --ulimit    nofile  =  1024 :2048     # 文件描述符限制      myapp       Docker Socket安全   千万不要将 /var/run/docker.sock 挂载到容器中——这等于给了容器主机的root权限。如果确实需要管理Docker，使用Docker API的远程访问并配置TLS。   安全审计   Docker Bench Security   运行Docker Bench Security进行安全基线检查：       docker   run   --it   --net   host   --pid   host    \\      -v   /etc:/etc:ro    \\      -v   /var:/var:ro    \\      -v   /var/run/docker.sock:/var/run/docker.sock:ro    \\      docker/docker-bench-security       该工具对照CIS Docker Benchmark检查配置项。   日志审计     启用Docker的审计日志   监控容器异常行为   记录所有镜像拉取和容器启动事件     最佳实践清单     [ ] 使用受信任的基础镜像   [ ] 定期扫描镜像漏洞   [ ] 最小化镜像体积   [ ] 以非root用户运行容器   [ ] 删除不必要的Linux Capabilities   [ ] 设置文件系统为只读   [ ] 限制资源使用   [ ] 不挂载Docker Socket   [ ] 使用Seccomp和AppArmor配置   [ ] 定期运行安全基准检查     容器安全需要在镜像构建、运行配置和运维管理每个环节都加以重视。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "安全防护", "item": "https://aidev.fit/security/"},
+        {"@type": "ListItem", "position": 3, "name": "Docker安全：镜像扫描、运行时安全、权限控制"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/security/">安全防护</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">Security</span>
+          <span class="tag-cat">DevOps</span>
+          <span class="tag-cat">Cloud</span></div>
+        <h1 class="article-title">Docker安全：镜像扫描、运行时安全、权限控制</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室 编辑部</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>8 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>1661 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/security/docker-anquan.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/docker-anquan.png" alt="Docker安全：镜像扫描、运行时安全、权限控制" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（17）</summary><ol><li><a href="#docker安全威胁">Docker安全威胁</a></li><li><a href="#镜像安全">镜像安全</a></li><li><a href="#选择可信基础镜像">选择可信基础镜像</a></li><li><a href="#镜像扫描">镜像扫描</a></li><li><a href="#镜像最小化">镜像最小化</a></li><li><a href="#运行时安全">运行时安全</a></li><li><a href="#容器运行时配置">容器运行时配置</a></li><li><a href="#docker-compose安全配置">Docker Compose安全配置</a></li><li><a href="#非root用户运行">非root用户运行</a></li><li><a href="#权限控制">权限控制</a></li><li><a href="#容器权限最小化">容器权限最小化</a></li><li><a href="#资源限制">资源限制</a></li><li><a href="#docker-socket安全">Docker Socket安全</a></li><li><a href="#安全审计">安全审计</a></li><li><a href="#docker-bench-security">Docker Bench Security</a></li><li><a href="#日志审计">日志审计</a></li><li><a href="#最佳实践清单">最佳实践清单</a></li></ol></details>
+        <div class="article-body"><h2>Docker安全威胁</h2>
+<p>容器化部署带来了新的安全挑战：镜像中的漏洞、容器逃逸风险、不安全的配置和权限过度开放是Docker安全的主要威胁。</p>
+<h2>镜像安全</h2>
+<h3>选择可信基础镜像</h3>
+<ul>
+<li>优先使用官方镜像（Docker Official Images）</li>
+<li>使用经过验证的发行版（Alpine、Distroless）</li>
+<li>避免使用<code>latest</code>标签，指定精确版本</li>
+</ul>
+<h3>镜像扫描</h3>
+<p>在CI/CD流水线中集成镜像扫描：</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># CI/CD 中的镜像扫描</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Scan Docker image</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">    </span><span class="no">trivy image myapp:latest</span>
+<span class="w">    </span><span class="no"># 或使用 Docker Scout</span>
+<span class="w">    </span><span class="no">docker scout quickview myapp:latest</span>
+</code></pre></div>
+
+<p><strong>推荐工具：</strong>
+- <strong>Trivy</strong>：开源，支持多语言和操作系统漏洞
+- <strong>Snyk Container</strong>：商业方案，深度集成
+- <strong>Docker Scout</strong>：Docker官方安全工具
+- <strong>Grype</strong>：Anchore开源扫描器</p>
+<p><strong>扫描策略：</strong>
+- 每次构建都扫描
+- 设阻断标准（如：不允许Critical级别漏洞）
+- 定期扫描已部署的镜像</p>
+<h3>镜像最小化</h3>
+<div class="codehilite"><pre><span></span><code><span class="c"># 多阶段构建</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">golang:1.22</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<span class="k">COPY</span><span class="w"> </span>go.mod<span class="w"> </span>go.sum<span class="w"> </span>./
+<span class="k">RUN</span><span class="w"> </span>go<span class="w"> </span>mod<span class="w"> </span>download
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span><span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>go<span class="w"> </span>build<span class="w"> </span>-o<span class="w"> </span>app
+
+<span class="k">FROM</span><span class="w"> </span><span class="s">scratch</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/app/app<span class="w"> </span>/
+<span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;/app&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<p>最小的镜像意味着最小的攻击面。</p>
+<h2>运行时安全</h2>
+<h3>容器运行时配置</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--read-only<span class="w"> </span><span class="se">\ </span><span class="w">                   </span><span class="c1"># 只读文件系统</span>
+<span class="w">  </span>--cap-drop<span class="o">=</span>ALL<span class="w"> </span><span class="se">\ </span><span class="w">                </span><span class="c1"># 删除所有Linux能力</span>
+<span class="w">  </span>--cap-add<span class="o">=</span>NET_BIND_SERVICE<span class="w"> </span><span class="se">\ </span><span class="w">    </span><span class="c1"># 只添加必要能力</span>
+<span class="w">  </span>--security-opt<span class="o">=</span>no-new-privileges<span class="w"> </span><span class="se">\ </span><span class="c1"># 禁止提权</span>
+<span class="w">  </span>--security-opt<span class="w"> </span><span class="nv">seccomp</span><span class="o">=</span>policy.json<span class="w"> </span><span class="se">\ </span><span class="c1"># seccomp策略</span>
+<span class="w">  </span>myapp
+</code></pre></div>
+
+<h3>Docker Compose安全配置</h3>
+<div class="codehilite"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
+<span class="w">    </span><span class="nt">read_only</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">cap_drop</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ALL</span>
+<span class="w">    </span><span class="nt">cap_add</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NET_BIND_SERVICE</span>
+<span class="w">    </span><span class="nt">security_opt</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">no-new-privileges:true</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+</code></pre></div>
+
+<h3>非root用户运行</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">RUN</span><span class="w"> </span>addgroup<span class="w"> </span>-S<span class="w"> </span>appgroup<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>adduser<span class="w"> </span>-S<span class="w"> </span>appuser<span class="w"> </span>-G<span class="w"> </span>appgroup
+<span class="k">USER</span><span class="w"> </span><span class="s">appuser</span>
+</code></pre></div>
+
+<h2>权限控制</h2>
+<h3>容器权限最小化</h3>
+<p><strong>Linux Capabilities管理：</strong>
+默认情况下，Docker容器拥有部分Linux Capabilities。应删除所有不必要的Capabilities。</p>
+<div class="codehilite"><pre><span></span><code>需要网络：cap_add NET_BIND_SERVICE, NET_RAW
+需要时间：cap_add SYS_TIME
+不需要：全部drop
+</code></pre></div>
+
+<h3>资源限制</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--memory<span class="o">=</span><span class="s2">&quot;512m&quot;</span><span class="w"> </span><span class="se">\ </span><span class="w">        </span><span class="c1"># 内存限制</span>
+<span class="w">  </span>--cpus<span class="o">=</span><span class="s2">&quot;0.5&quot;</span><span class="w"> </span><span class="se">\ </span><span class="w">            </span><span class="c1"># CPU限制</span>
+<span class="w">  </span>--pids-limit<span class="o">=</span><span class="m">100</span><span class="w"> </span><span class="se">\ </span><span class="w">        </span><span class="c1"># 进程数限制</span>
+<span class="w">  </span>--ulimit<span class="w"> </span><span class="nv">nofile</span><span class="o">=</span><span class="m">1024</span>:2048<span class="w">  </span><span class="c1"># 文件描述符限制</span>
+<span class="w">  </span>myapp
+</code></pre></div>
+
+<h3>Docker Socket安全</h3>
+<p>千万不要将<code>/var/run/docker.sock</code>挂载到容器中——这等于给了容器主机的root权限。如果确实需要管理Docker，使用Docker API的远程访问并配置TLS。</p>
+<h2>安全审计</h2>
+<h3>Docker Bench Security</h3>
+<p>运行Docker Bench Security进行安全基线检查：</p>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--it<span class="w"> </span>--net<span class="w"> </span>host<span class="w"> </span>--pid<span class="w"> </span>host<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>/etc:/etc:ro<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>/var:/var:ro<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>/var/run/docker.sock:/var/run/docker.sock:ro<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>docker/docker-bench-security
+</code></pre></div>
+
+<p>该工具对照CIS Docker Benchmark检查配置项。</p>
+<h3>日志审计</h3>
+<ul>
+<li>启用Docker的审计日志</li>
+<li>监控容器异常行为</li>
+<li>记录所有镜像拉取和容器启动事件</li>
+</ul>
+<h2>最佳实践清单</h2>
+<ul>
+<li>[ ] 使用受信任的基础镜像</li>
+<li>[ ] 定期扫描镜像漏洞</li>
+<li>[ ] 最小化镜像体积</li>
+<li>[ ] 以非root用户运行容器</li>
+<li>[ ] 删除不必要的Linux Capabilities</li>
+<li>[ ] 设置文件系统为只读</li>
+<li>[ ] 限制资源使用</li>
+<li>[ ] 不挂载Docker Socket</li>
+<li>[ ] 使用Seccomp和AppArmor配置</li>
+<li>[ ] 定期运行安全基准检查</li>
+</ul>
+<p>容器安全需要在镜像构建、运行配置和运维管理每个环节都加以重视。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/security/anquan-ji-chu.html"><span class="related-title">Web安全基础：OWASP Top 10详解与防御实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/api-anquan.html"><span class="related-title">API安全：速率限制、输入验证、认证鉴权最佳实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/jwt-anquan.html"><span class="related-title">JWT安全：签名算法选择、过期策略、刷新令牌最佳实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/log-anquan.html"><span class="related-title">日志安全审计：集中式日志管理、异常检测、合规要求</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/mi-ma-anquan.html"><span class="related-title">密码安全：哈希算法选择、加盐、密码策略设计</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/social-gong-cheng.html"><span class="related-title">社会工程学防御：钓鱼邮件识别、安全意识培训</span><span class="related-meta">安全防护 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=Docker%E5%AE%89%E5%85%A8%EF%BC%9A%E9%95%9C%E5%83%8F%E6%89%AB%E6%8F%8F%E3%80%81%E8%BF%90%E8%A1%8C%E6%97%B6%E5%AE%89%E5%85%A8%E3%80%81%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6&url=https%3A//aidev.fit/security/docker-anquan.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/security/docker-anquan.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Docker%E5%AE%89%E5%85%A8%EF%BC%9A%E9%95%9C%E5%83%8F%E6%89%AB%E6%8F%8F%E3%80%81%E8%BF%90%E8%A1%8C%E6%97%B6%E5%AE%89%E5%85%A8%E3%80%81%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6&url=https%3A//aidev.fit/security/docker-anquan.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/security/docker-anquan.html&t=Docker%E5%AE%89%E5%85%A8%EF%BC%9A%E9%95%9C%E5%83%8F%E6%89%AB%E6%8F%8F%E3%80%81%E8%BF%90%E8%A1%8C%E6%97%B6%E5%AE%89%E5%85%A8%E3%80%81%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=Docker%E5%AE%89%E5%85%A8%EF%BC%9A%E9%95%9C%E5%83%8F%E6%89%AB%E6%8F%8F%E3%80%81%E8%BF%90%E8%A1%8C%E6%97%B6%E5%AE%89%E5%85%A8%E3%80%81%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6&body=https%3A//aidev.fit/security/docker-anquan.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/security/docker-anquan.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/security/api-anquan.html" title="API安全：速率限制、输入验证、认证鉴权最佳实践">← 上一篇<br><small>API安全：速率限制、输入验证、认证鉴权最佳实践</small></a><a class="next" href="/security/jwt-anquan.html" title="JWT安全：签名算法选择、过期策略、刷新令牌最佳实践">下一篇 →<br><small>JWT安全：签名算法选择、过期策略、刷新令牌最佳实践</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/security/anquan-ji-chu.html"><span class="related-title">Web安全基础：OWASP Top 10详解与防御实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/api-anquan.html"><span class="related-title">API安全：速率限制、输入验证、认证鉴权最佳实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/jwt-anquan.html"><span class="related-title">JWT安全：签名算法选择、过期策略、刷新令牌最佳实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/log-anquan.html"><span class="related-title">日志安全审计：集中式日志管理、异常检测、合规要求</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/mi-ma-anquan.html"><span class="related-title">密码安全：哈希算法选择、加盐、密码策略设计</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/social-gong-cheng.html"><span class="related-title">社会工程学防御：钓鱼邮件识别、安全意识培训</span><span class="related-meta">安全防护 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <section class="author-bio">
+          <h4>关于作者</h4>
+          <p>AI自习室是由一群技术从业者维护的AI知识分享平台。我们关注AI工具、编程技术和开发者生态，致力于为中文开发者提供高质量的原创技术内容。<a href="/about.html">了解更多 →</a></p>
+        </section>
+        <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#docker安全威胁">Docker安全威胁</a></li><li class="toc-h2"><a href="#镜像安全">镜像安全</a></li><li class="toc-h3"><a href="#选择可信基础镜像">选择可信基础镜像</a></li><li class="toc-h3"><a href="#镜像扫描">镜像扫描</a></li><li class="toc-h3"><a href="#镜像最小化">镜像最小化</a></li><li class="toc-h2"><a href="#运行时安全">运行时安全</a></li><li class="toc-h3"><a href="#容器运行时配置">容器运行时配置</a></li><li class="toc-h3"><a href="#docker-compose安全配置">Docker Compose安全配置</a></li><li class="toc-h3"><a href="#非root用户运行">非root用户运行</a></li><li class="toc-h2"><a href="#权限控制">权限控制</a></li><li class="toc-h3"><a href="#容器权限最小化">容器权限最小化</a></li><li class="toc-h3"><a href="#资源限制">资源限制</a></li><li class="toc-h3"><a href="#docker-socket安全">Docker Socket安全</a></li><li class="toc-h2"><a href="#安全审计">安全审计</a></li><li class="toc-h3"><a href="#docker-bench-security">Docker Bench Security</a></li><li class="toc-h3"><a href="#日志审计">日志审计</a></li><li class="toc-h2"><a href="#最佳实践清单">最佳实践清单</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>

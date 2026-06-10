@@ -59,7 +59,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/multi-modal.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "500",
+      "wordCount": "1033",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "zh-CN",
@@ -75,7 +75,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/multi-modal.html"},
-      "articleBody": "多模态AI的崛起   多模态AI是指能够同时处理文本、图像、音频和视频等多种数据类型的人工智能系统。随着GPT-4V、Gemini和Claude 3等模型的发布，多模态AI已从实验室走向生产应用。   图片理解   主流API    OpenAI GPT-4V ：支持图片输入，可进行图片描述、OCR、物体识别和图表分析。    response = client.chat.completions.create(     model=&quot;gpt-4-vision-preview&quot;,     messages=[{         &quot;role&quot;: &quot;user&quot;,         &quot;content&quot;: [             {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;请描述这张图片的内容&quot;},             {&quot;type&quot;: &quot;image_url&quot;, &quot;image_url&quot;: {&quot;url&quot;: image_url}}         ]     }] )       Claude 3 Vision ：对文档和图表分析能力突出，支持PDF直接输入。   应用场景      文档解析 ：扫描件、PDF、表单的文字提取和理解    产品审核 ：自动检测图片中的违规内容    视觉问答 ：基于图片内容的问答系统    图表分析 ：从数据可视化图中提取信息     优化技巧     图片按比例压缩到适当分辨率（如1024x1024）   配合OCR预处理提高文字识别率   使用Frames技术将视频帧批量传给模型     语音识别   主流方案    Whisper API（OpenAI） ：支持多语言语音转文字，准确率高。    response = client.audio.transcriptions.create(     model=&quot;whisper-1&quot;,     file=audio_file,     language=&quot;zh&quot;,     response_format=&quot;verbose_json&quot; )       本地Whisper部署 ：使用faster-whisper或whisper.cpp实现本地语音识别，降低延迟和成本。    Azure Speech ：中文识别效果优秀，支持自定义语言模型。   最佳实践     先进行降噪处理提升识别准确率   大文件使用分段处理，避免超时   结合VAD（语音活动检测）过滤静音段     视频分析   实现方案    帧采样法 ：从视频中抽取关键帧进行分析。    # 使用OpenCV抽取关键帧 cap = cv2.VideoCapture(video_path) frames = [] while True:     ret, frame = cap.read()     if not ret: break     if frame_count % frame_interval == 0:         frames.append(frame)       时间戳定位 ：对视频中的特定时间点进行截图分析。    流式处理 ：使用流式传输对长视频进行实时分析。   应用场景     视频内容审核   监控视频事件检测   视频摘要生成   直播内容实时分析     多模态Pipeline架构   构建生产级多模态系统时，推荐使用Pipeline架构：      输入处理层 ：接收并预处理多模态输入    模态分析层 ：各模态分别处理（图片分析、语音识别、视频处理）    信息融合层 ：整合多模态分析结果    LLM推理层 ：基于融合后的信息进行推理决策    输出层 ：格式化输出结果     多模态AI正在快速发展，开发者应关注模型能力边界，选择最适合业务场景的方案。"
+      "articleBody": "多模态AI的崛起   多模态AI是指能够同时处理文本、图像、音频和视频等多种数据类型的人工智能系统。随着GPT-4V、Gemini和Claude 3等模型的发布，多模态AI已从实验室走向生产应用。   图片理解   主流API    OpenAI GPT-4V ：支持图片输入，可进行图片描述、OCR、物体识别和图表分析。        response   =   client  .  chat  .  completions  .  create  (       model  =  &quot;gpt-4-vision-preview&quot;  ,       messages  =  [{           &quot;role&quot;  :   &quot;user&quot;  ,           &quot;content&quot;  :   [               {  &quot;type&quot;  :   &quot;text&quot;  ,   &quot;text&quot;  :   &quot;请描述这张图片的内容&quot;  },               {  &quot;type&quot;  :   &quot;image_url&quot;  ,   &quot;image_url&quot;  :   {  &quot;url&quot;  :   image_url  }}           ]       }]   )         Claude 3 Vision ：对文档和图表分析能力突出，支持PDF直接输入。   应用场景      文档解析 ：扫描件、PDF、表单的文字提取和理解    产品审核 ：自动检测图片中的违规内容    视觉问答 ：基于图片内容的问答系统    图表分析 ：从数据可视化图中提取信息     优化技巧     图片按比例压缩到适当分辨率（如1024x1024）   配合OCR预处理提高文字识别率   使用Frames技术将视频帧批量传给模型     语音识别   主流方案    Whisper API（OpenAI） ：支持多语言语音转文字，准确率高。        response   =   client  .  audio  .  transcriptions  .  create  (       model  =  &quot;whisper-1&quot;  ,       file  =  audio_file  ,       language  =  &quot;zh&quot;  ,       response_format  =  &quot;verbose_json&quot;   )         本地Whisper部署 ：使用faster-whisper或whisper.cpp实现本地语音识别，降低延迟和成本。    Azure Speech ：中文识别效果优秀，支持自定义语言模型。   最佳实践     先进行降噪处理提升识别准确率   大文件使用分段处理，避免超时   结合VAD（语音活动检测）过滤静音段     视频分析   实现方案    帧采样法 ：从视频中抽取关键帧进行分析。        # 使用OpenCV抽取关键帧   cap   =   cv2  .  VideoCapture  (  video_path  )   frames   =   []   while   True  :       ret  ,   frame   =   cap  .  read  ()       if   not   ret  :   break       if   frame_count   %   frame_interval   ==   0  :           frames  .  append  (  frame  )         时间戳定位 ：对视频中的特定时间点进行截图分析。    流式处理 ：使用流式传输对长视频进行实时分析。   应用场景     视频内容审核   监控视频事件检测   视频摘要生成   直播内容实时分析     多模态Pipeline架构   构建生产级多模态系统时，推荐使用Pipeline架构：      输入处理层 ：接收并预处理多模态输入    模态分析层 ：各模态分别处理（图片分析、语音识别、视频处理）    信息融合层 ：整合多模态分析结果    LLM推理层 ：基于融合后的信息进行推理决策    输出层 ：格式化输出结果     多模态AI正在快速发展，开发者应关注模型能力边界，选择最适合业务场景的方案。"
     }
     </script>
     <script type="application/ld+json">
@@ -120,11 +120,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>2 分钟阅读</span>
+          <span>5 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>500 字</span>
+          <span>1033 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/multi-modal.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/multi-modal.png" alt="多模态AI实践：图片理解、语音识别、视频分析的API使用" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（12）</summary><ol><li><a href="#多模态ai的崛起">多模态AI的崛起</a></li><li><a href="#图片理解">图片理解</a></li><li><a href="#主流api">主流API</a></li><li><a href="#应用场景">应用场景</a></li><li><a href="#优化技巧">优化技巧</a></li><li><a href="#语音识别">语音识别</a></li><li><a href="#主流方案">主流方案</a></li><li><a href="#最佳实践">最佳实践</a></li><li><a href="#视频分析">视频分析</a></li><li><a href="#实现方案">实现方案</a></li><li><a href="#应用场景">应用场景</a></li><li><a href="#多模态pipeline架构">多模态Pipeline架构</a></li></ol></details>
@@ -133,17 +133,17 @@
 <h2>图片理解</h2>
 <h3>主流API</h3>
 <p><strong>OpenAI GPT-4V</strong>：支持图片输入，可进行图片描述、OCR、物体识别和图表分析。</p>
-<pre class="codehilite"><code class="language-python">response = client.chat.completions.create(
-    model=&quot;gpt-4-vision-preview&quot;,
-    messages=[{
-        &quot;role&quot;: &quot;user&quot;,
-        &quot;content&quot;: [
-            {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;请描述这张图片的内容&quot;},
-            {&quot;type&quot;: &quot;image_url&quot;, &quot;image_url&quot;: {&quot;url&quot;: image_url}}
-        ]
-    }]
-)
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4-vision-preview&quot;</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="p">[{</span>
+        <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;请描述这张图片的内容&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image_url&quot;</span><span class="p">,</span> <span class="s2">&quot;image_url&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">image_url</span><span class="p">}}</span>
+        <span class="p">]</span>
+    <span class="p">}]</span>
+<span class="p">)</span>
+</code></pre></div>
 
 <p><strong>Claude 3 Vision</strong>：对文档和图表分析能力突出，支持PDF直接输入。</p>
 <h3>应用场景</h3>
@@ -162,13 +162,13 @@
 <h2>语音识别</h2>
 <h3>主流方案</h3>
 <p><strong>Whisper API（OpenAI）</strong>：支持多语言语音转文字，准确率高。</p>
-<pre class="codehilite"><code class="language-python">response = client.audio.transcriptions.create(
-    model=&quot;whisper-1&quot;,
-    file=audio_file,
-    language=&quot;zh&quot;,
-    response_format=&quot;verbose_json&quot;
-)
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">audio</span><span class="o">.</span><span class="n">transcriptions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;whisper-1&quot;</span><span class="p">,</span>
+    <span class="n">file</span><span class="o">=</span><span class="n">audio_file</span><span class="p">,</span>
+    <span class="n">language</span><span class="o">=</span><span class="s2">&quot;zh&quot;</span><span class="p">,</span>
+    <span class="n">response_format</span><span class="o">=</span><span class="s2">&quot;verbose_json&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
 
 <p><strong>本地Whisper部署</strong>：使用faster-whisper或whisper.cpp实现本地语音识别，降低延迟和成本。</p>
 <p><strong>Azure Speech</strong>：中文识别效果优秀，支持自定义语言模型。</p>
@@ -181,15 +181,15 @@
 <h2>视频分析</h2>
 <h3>实现方案</h3>
 <p><strong>帧采样法</strong>：从视频中抽取关键帧进行分析。</p>
-<pre class="codehilite"><code class="language-python"># 使用OpenCV抽取关键帧
-cap = cv2.VideoCapture(video_path)
-frames = []
-while True:
-    ret, frame = cap.read()
-    if not ret: break
-    if frame_count % frame_interval == 0:
-        frames.append(frame)
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 使用OpenCV抽取关键帧</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="n">video_path</span><span class="p">)</span>
+<span class="n">frames</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">ret</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">cap</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ret</span><span class="p">:</span> <span class="k">break</span>
+    <span class="k">if</span> <span class="n">frame_count</span> <span class="o">%</span> <span class="n">frame_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">frames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+</code></pre></div>
 
 <p><strong>时间戳定位</strong>：对视频中的特定时间点进行截图分析。</p>
 <p><strong>流式处理</strong>：使用流式传输对长视频进行实时分析。</p>

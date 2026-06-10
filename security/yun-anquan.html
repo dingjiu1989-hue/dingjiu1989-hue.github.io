@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-render="related" data-board="security" data-exclude="yun-anquan">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
+    <meta property="og:title" content="云安全基础：IAM策略、网络安全组、加密配置最佳实践">
+    <meta property="og:description" content="系统讲解云计算环境的安全配置最佳实践，涵盖IAM身份与访问管理、VPC网络安全组配置和数据加密策略的核心要点。">
+    <meta property="og:url" content="https://aidev.fit/security/yun-anquan.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="AI自习室">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/security/yun-anquan.png">
+    <meta property="og:image:alt" content="云安全基础：IAM策略、网络安全组、加密配置最佳实践">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:section" content="安全防护">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="云安全基础：IAM策略、网络安全组、加密配置最佳实践">
+    <meta name="twitter:description" content="系统讲解云计算环境的安全配置最佳实践，涵盖IAM身份与访问管理、VPC网络安全组配置和数据加密策略的核心要点。">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/security/yun-anquan.png">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/yun-anquan.webp" type="image/webp" fetchpriority="high">
+    <title>云安全基础：IAM策略、网络安全组、加密配置最佳实践 — AI自习室</title>
+    <meta name="description" content="系统讲解云计算环境的安全配置最佳实践，涵盖IAM身份与访问管理、VPC网络安全组配置和数据加密策略的核心要点。">
+    <meta name="keywords" content="Security, DevOps, Cloud">
+    <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/security/yun-anquan.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/yun-anquan.html">
+    <link rel="canonical" href="https://aidev.fit/security/yun-anquan.html"><link rel="prev" href="https://aidev.fit/security/xss-fang-yu.html">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "云安全基础：IAM策略、网络安全组、加密配置最佳实践",
+      "description": "系统讲解云计算环境的安全配置最佳实践，涵盖IAM身份与访问管理、VPC网络安全组配置和数据加密策略的核心要点。",
+      "image": "https://aidev.fit/images/covers/en/security/yun-anquan.png",
+      "datePublished": "2026-05-12",
+      "dateModified": "2026-05-12",
+      "wordCount": "1545",
+      "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "zh-CN",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {"@type": "Person", "name": "AI自习室 编辑部"},
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI自习室",
+        "url": "https://aidev.fit/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
+      },
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/security/yun-anquan.html"},
+      "articleBody": "共享责任模型   云安全遵循共享责任模型：云服务商负责\"云的安全\"（基础设施、物理安全），用户负责\"云中的安全\"（数据、配置、访问控制）。   IAM策略   IAM（身份与访问管理）是云安全的第一道防线。   最小权限原则   每个实体（用户、服务、角色）只授予完成其任务所需的最小权限集。        {         &quot;Version&quot;  :     &quot;2012-10-17&quot;  ,         &quot;Statement&quot;  :     [             {                 &quot;Effect&quot;  :     &quot;Allow&quot;  ,                 &quot;Action&quot;  :     [                     &quot;s3:GetObject&quot;  ,                     &quot;s3:ListBucket&quot;                 ],                 &quot;Resource&quot;  :     [                     &quot;arn:aws:s3:::myapp-assets&quot;  ,                     &quot;arn:aws:s3:::myapp-assets/*&quot;                 ]             }         ]   }         原则：  拒绝所有，按需开放。定期审计未使用的权限。   角色而非用户     使用IAM Role而非长期Access Key   为EC2、Lambda等服务分配角色   使用临时凭证（STS）管理     权限边界   使用权限边界（Permissions Boundary）设置角色能获得的最高权限，防止权限提升。   网络安全组   VPC隔离     将不同环境（开发、测试、生产）放在不同VPC中   使用VPC Peering或Transit Gateway连接VPC   敏感服务部署在私有子网中     安全组规则        # 安全组最佳实践   resource     &quot;aws_security_group&quot;     &quot;web&quot;     {       name            =     &quot;web-sg&quot;       description     =     &quot;Web服务器安全组&quot;       vpc_id          =     aws_vpc.main.id      # 入站规则：只允许80和443       ingress     {         from_port       =     80         to_port         =     80         protocol        =     &quot;tcp&quot;         cidr_blocks     =     [  &quot;0.0.0.0/0&quot;  ]       }        ingress     {         from_port       =     443         to_port         =     443         protocol        =     &quot;tcp&quot;         cidr_blocks     =     [  &quot;0.0.0.0/0&quot;  ]       }      # 出站规则：限制出站流量       egress     {         from_port       =     0         to_port         =     0         protocol        =     &quot;-1&quot;         cidr_blocks     =     [  &quot;0.0.0.0/0&quot;  ]       }   }        NACL配置   网络ACL提供子网级别的状态无关过滤，作为安全组的补充。   加密配置   传输中加密     所有对外服务使用TLS 1.2+   内部服务间通讯使用mTLS   RDS连接启用SSL/TLS     静态加密    存储加密：         # EBS加密  aws   ec2   enable-ebs-encryption-by-default   # S3默认加密  aws   s3api   put-bucket-encryption    \\      --bucket   myapp-data    \\      --server-side-encryption-configuration    &#39;{&quot;Rules&quot;:[{&quot;ApplyServerSideEncryptionByDefault&quot;:{&quot;SSEAlgorithm&quot;:&quot;AES256&quot;}}]}&#39;         密钥管理：  - 使用KMS托管密钥 - 定期轮换密钥 - 区分客户主密钥和加密密钥   密钥轮换   自动轮换IAM访问密钥、数据库密码和加密密钥。使用AWS Secrets Manager或AWS Parameter Store管理敏感配置。   合规监控   配置审计      AWS Config ：持续监控资源配置变化    Security Hub ：安全状态聚合    GuardDuty ：威胁检测     合规扫描        # 使用Prowler进行云安全审计  prowler   aws   --checks   extra-79   --checks   extra-761       事件响应     检测异常活动（GuardDuty发现异常API调用）   自动隔离受影响资源（Lambda自动响应）   取证分析（CloudTrail日志分析）   恢复和加固     日常检查清单     [ ] 是否有多余的开放端口（22、3306等）   [ ] S3存储桶是否公开可访问   [ ] IAM密钥是否定期轮换   [ ] 是否启用了CloudTrail（操作审计）   [ ] 是否有未使用的安全组规则   [ ] 根账号是否启用了MFA     云安全需要持续的监控和优化，没有一劳永逸的解决方案。"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://aidev.fit/"},
+        {"@type": "ListItem", "position": 2, "name": "安全防护", "item": "https://aidev.fit/security/"},
+        {"@type": "ListItem", "position": 3, "name": "云安全基础：IAM策略、网络安全组、加密配置最佳实践"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI自习室 (中文)" href="/feed.xml">
+</head>
+<body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="breadcrumb container">
+    <a href="/">首页</a> › <a href="/security/">安全防护</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">          <span class="tag-cat">Security</span>
+          <span class="tag-cat">DevOps</span>
+          <span class="tag-cat">Cloud</span></div>
+        <h1 class="article-title">云安全基础：IAM策略、网络安全组、加密配置最佳实践</h1>
+        <div class="article-meta">
+          <span class="author-name">By AI自习室 编辑部</span>
+          <span class="meta-sep">·</span>
+          <time datetime="2026-05-12">2026-05-12</time>
+          <span class="meta-sep">·</span>
+          <span>7 分钟阅读</span>
+          <span class="meta-sep">·</span>
+          <span>0 次浏览</span>
+          <span class="meta-sep">·</span>
+          <span>1545 字</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/security/yun-anquan.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/yun-anquan.png" alt="云安全基础：IAM策略、网络安全组、加密配置最佳实践" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>目录（18）</summary><ol><li><a href="#共享责任模型">共享责任模型</a></li><li><a href="#iam策略">IAM策略</a></li><li><a href="#最小权限原则">最小权限原则</a></li><li><a href="#角色而非用户">角色而非用户</a></li><li><a href="#权限边界">权限边界</a></li><li><a href="#网络安全组">网络安全组</a></li><li><a href="#vpc隔离">VPC隔离</a></li><li><a href="#安全组规则">安全组规则</a></li><li><a href="#nacl配置">NACL配置</a></li><li><a href="#加密配置">加密配置</a></li><li><a href="#传输中加密">传输中加密</a></li><li><a href="#静态加密">静态加密</a></li><li><a href="#密钥轮换">密钥轮换</a></li><li><a href="#合规监控">合规监控</a></li><li><a href="#配置审计">配置审计</a></li><li><a href="#合规扫描">合规扫描</a></li><li><a href="#事件响应">事件响应</a></li><li><a href="#日常检查清单">日常检查清单</a></li></ol></details>
+        <div class="article-body"><h2>共享责任模型</h2>
+<p>云安全遵循共享责任模型：云服务商负责"云的安全"（基础设施、物理安全），用户负责"云中的安全"（数据、配置、访问控制）。</p>
+<h2>IAM策略</h2>
+<p>IAM（身份与访问管理）是云安全的第一道防线。</p>
+<h3>最小权限原则</h3>
+<p>每个实体（用户、服务、角色）只授予完成其任务所需的最小权限集。</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;s3:GetObject&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;s3:ListBucket&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;arn:aws:s3:::myapp-assets&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;arn:aws:s3:::myapp-assets/*&quot;</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>原则：</strong> 拒绝所有，按需开放。定期审计未使用的权限。</p>
+<h3>角色而非用户</h3>
+<ul>
+<li>使用IAM Role而非长期Access Key</li>
+<li>为EC2、Lambda等服务分配角色</li>
+<li>使用临时凭证（STS）管理</li>
+</ul>
+<h3>权限边界</h3>
+<p>使用权限边界（Permissions Boundary）设置角色能获得的最高权限，防止权限提升。</p>
+<h2>网络安全组</h2>
+<h3>VPC隔离</h3>
+<ul>
+<li>将不同环境（开发、测试、生产）放在不同VPC中</li>
+<li>使用VPC Peering或Transit Gateway连接VPC</li>
+<li>敏感服务部署在私有子网中</li>
+</ul>
+<h3>安全组规则</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 安全组最佳实践</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_security_group&quot;</span><span class="w"> </span><span class="nv">&quot;web&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;web-sg&quot;</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Web服务器安全组&quot;</span>
+<span class="w">  </span><span class="na">vpc_id</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_vpc.main.id</span>
+
+<span class="c1">  # 入站规则：只允许80和443</span>
+<span class="w">  </span><span class="nb">ingress</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">from_port</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>
+<span class="w">    </span><span class="na">to_port</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>
+<span class="w">    </span><span class="na">protocol</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span>
+<span class="w">    </span><span class="na">cidr_blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;0.0.0.0/0&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nb">ingress</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">from_port</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">443</span>
+<span class="w">    </span><span class="na">to_port</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="m">443</span>
+<span class="w">    </span><span class="na">protocol</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span>
+<span class="w">    </span><span class="na">cidr_blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;0.0.0.0/0&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="c1">  # 出站规则：限制出站流量</span>
+<span class="w">  </span><span class="nb">egress</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">from_port</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<span class="w">    </span><span class="na">to_port</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<span class="w">    </span><span class="na">protocol</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;-1&quot;</span>
+<span class="w">    </span><span class="na">cidr_blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;0.0.0.0/0&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>NACL配置</h3>
+<p>网络ACL提供子网级别的状态无关过滤，作为安全组的补充。</p>
+<h2>加密配置</h2>
+<h3>传输中加密</h3>
+<ul>
+<li>所有对外服务使用TLS 1.2+</li>
+<li>内部服务间通讯使用mTLS</li>
+<li>RDS连接启用SSL/TLS</li>
+</ul>
+<h3>静态加密</h3>
+<p><strong>存储加密：</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># EBS加密</span>
+aws<span class="w"> </span>ec2<span class="w"> </span>enable-ebs-encryption-by-default
+
+<span class="c1"># S3默认加密</span>
+aws<span class="w"> </span>s3api<span class="w"> </span>put-bucket-encryption<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bucket<span class="w"> </span>myapp-data<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--server-side-encryption-configuration<span class="w"> </span><span class="s1">&#39;{&quot;Rules&quot;:[{&quot;ApplyServerSideEncryptionByDefault&quot;:{&quot;SSEAlgorithm&quot;:&quot;AES256&quot;}}]}&#39;</span>
+</code></pre></div>
+
+<p><strong>密钥管理：</strong>
+- 使用KMS托管密钥
+- 定期轮换密钥
+- 区分客户主密钥和加密密钥</p>
+<h3>密钥轮换</h3>
+<p>自动轮换IAM访问密钥、数据库密码和加密密钥。使用AWS Secrets Manager或AWS Parameter Store管理敏感配置。</p>
+<h2>合规监控</h2>
+<h3>配置审计</h3>
+<ul>
+<li><strong>AWS Config</strong>：持续监控资源配置变化</li>
+<li><strong>Security Hub</strong>：安全状态聚合</li>
+<li><strong>GuardDuty</strong>：威胁检测</li>
+</ul>
+<h3>合规扫描</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 使用Prowler进行云安全审计</span>
+prowler<span class="w"> </span>aws<span class="w"> </span>--checks<span class="w"> </span>extra-79<span class="w"> </span>--checks<span class="w"> </span>extra-761
+</code></pre></div>
+
+<h3>事件响应</h3>
+<ol>
+<li>检测异常活动（GuardDuty发现异常API调用）</li>
+<li>自动隔离受影响资源（Lambda自动响应）</li>
+<li>取证分析（CloudTrail日志分析）</li>
+<li>恢复和加固</li>
+</ol>
+<h2>日常检查清单</h2>
+<ul>
+<li>[ ] 是否有多余的开放端口（22、3306等）</li>
+<li>[ ] S3存储桶是否公开可访问</li>
+<li>[ ] IAM密钥是否定期轮换</li>
+<li>[ ] 是否启用了CloudTrail（操作审计）</li>
+<li>[ ] 是否有未使用的安全组规则</li>
+<li>[ ] 根账号是否启用了MFA</li>
+</ul>
+<p>云安全需要持续的监控和优化，没有一劳永逸的解决方案。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/security/anquan-ji-chu.html"><span class="related-title">Web安全基础：OWASP Top 10详解与防御实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/api-anquan.html"><span class="related-title">API安全：速率限制、输入验证、认证鉴权最佳实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/docker-anquan.html"><span class="related-title">Docker安全：镜像扫描、运行时安全、权限控制</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/jwt-anquan.html"><span class="related-title">JWT安全：签名算法选择、过期策略、刷新令牌最佳实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/log-anquan.html"><span class="related-title">日志安全审计：集中式日志管理、异常检测、合规要求</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/mi-ma-anquan.html"><span class="related-title">密码安全：哈希算法选择、加盐、密码策略设计</span><span class="related-meta">安全防护 · 2026-05-12</span></a></div></section>
+                <div class="ad-container">
+          <div class="ad-label">— 广告 —</div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3258394111169733"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="share-bar">
+          <span>分享</span>
+          <a href="https://twitter.com/intent/tweet?text=%E4%BA%91%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9AIAM%E7%AD%96%E7%95%A5%E3%80%81%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%BB%84%E3%80%81%E5%8A%A0%E5%AF%86%E9%85%8D%E7%BD%AE%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5&url=https%3A//aidev.fit/security/yun-anquan.html" target="_blank" rel="noopener" aria-label="分享到 X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/security/yun-anquan.html" target="_blank" rel="noopener" aria-label="分享到 LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=%E4%BA%91%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9AIAM%E7%AD%96%E7%95%A5%E3%80%81%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%BB%84%E3%80%81%E5%8A%A0%E5%AF%86%E9%85%8D%E7%BD%AE%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5&url=https%3A//aidev.fit/security/yun-anquan.html" target="_blank" rel="noopener" aria-label="分享到 Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https%3A//aidev.fit/security/yun-anquan.html&t=%E4%BA%91%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9AIAM%E7%AD%96%E7%95%A5%E3%80%81%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%BB%84%E3%80%81%E5%8A%A0%E5%AF%86%E9%85%8D%E7%BD%AE%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5" target="_blank" rel="noopener" aria-label="分享到 HN">HN</a>
+          <a href="mailto:?subject=%E4%BA%91%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9AIAM%E7%AD%96%E7%95%A5%E3%80%81%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%BB%84%E3%80%81%E5%8A%A0%E5%AF%86%E9%85%8D%E7%BD%AE%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5&body=https%3A//aidev.fit/security/yun-anquan.html" aria-label="通过邮件分享">邮件</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/security/yun-anquan.html" aria-label="复制链接">复制</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="文章导航"><a class="prev" href="/security/xss-fang-yu.html" title="XSS跨站脚本攻击防御：CSP策略、输出编码、框架安全">← 上一篇<br><small>XSS跨站脚本攻击防御：CSP策略、输出编码、框架安全</small></a></nav>
+        <section class="related">
+          <div class="related-heading">相关文章</div>
+          <div class="related-grid"><a class="related-card" href="/security/anquan-ji-chu.html"><span class="related-title">Web安全基础：OWASP Top 10详解与防御实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/api-anquan.html"><span class="related-title">API安全：速率限制、输入验证、认证鉴权最佳实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/docker-anquan.html"><span class="related-title">Docker安全：镜像扫描、运行时安全、权限控制</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/jwt-anquan.html"><span class="related-title">JWT安全：签名算法选择、过期策略、刷新令牌最佳实践</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/log-anquan.html"><span class="related-title">日志安全审计：集中式日志管理、异常检测、合规要求</span><span class="related-meta">安全防护 · 2026-05-12</span></a>
+<a class="related-card" href="/security/mi-ma-anquan.html"><span class="related-title">密码安全：哈希算法选择、加盐、密码策略设计</span><span class="related-meta">安全防护 · 2026-05-12</span></a></div>
+        </section>
+      </article>
+      <div class="discussion-cta">
+        <p>参与讨论</p>
+        <p>有想法或问题？在下方留言 — 你的见解能帮助其他读者。</p>
+        <a href="#giscus-section">留下评论</a>
+      </div>
+      <section class="author-bio">
+          <h4>关于作者</h4>
+          <p>AI自习室是由一群技术从业者维护的AI知识分享平台。我们关注AI工具、编程技术和开发者生态，致力于为中文开发者提供高质量的原创技术内容。<a href="/about.html">了解更多 →</a></p>
+        </section>
+        <div id="giscus-section" data-giscus-loaded="false"></div>
+    </div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul><li class="toc-h2"><a href="#共享责任模型">共享责任模型</a></li><li class="toc-h2"><a href="#iam策略">IAM策略</a></li><li class="toc-h3"><a href="#最小权限原则">最小权限原则</a></li><li class="toc-h3"><a href="#角色而非用户">角色而非用户</a></li><li class="toc-h3"><a href="#权限边界">权限边界</a></li><li class="toc-h2"><a href="#网络安全组">网络安全组</a></li><li class="toc-h3"><a href="#vpc隔离">VPC隔离</a></li><li class="toc-h3"><a href="#安全组规则">安全组规则</a></li><li class="toc-h3"><a href="#nacl配置">NACL配置</a></li><li class="toc-h2"><a href="#加密配置">加密配置</a></li><li class="toc-h3"><a href="#传输中加密">传输中加密</a></li><li class="toc-h3"><a href="#静态加密">静态加密</a></li><li class="toc-h3"><a href="#密钥轮换">密钥轮换</a></li><li class="toc-h2"><a href="#合规监控">合规监控</a></li><li class="toc-h3"><a href="#配置审计">配置审计</a></li><li class="toc-h3"><a href="#合规扫描">合规扫描</a></li><li class="toc-h3"><a href="#事件响应">事件响应</a></li><li class="toc-h2"><a href="#日常检查清单">日常检查清单</a></li></ul></nav>
+    </aside>
+  </div>
+</main>
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+<script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
+</body>
+</html>
