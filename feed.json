@@ -2326,7 +2326,7 @@
       "content_html": "<h2>初始登录与系统更新</h2>\n<p>拿到新服务器后的第一件事是更新系统。使用<code>apt update &amp;&amp; apt upgrade -y</code>（Debian/Ubuntu）或<code>yum update</code>（CentOS/RHEL）将所有软件包更新到最新版本。安装必要的工具集：curl、wget、vim、git、htop、net-tools等。</p>\n<h2>SSH安全加固</h2>\n<p>SSH是服务器的首要攻击入口，必须进行加固。第一步，修改默认端口22为高位端口（如2222），减少自动化扫描攻击。第二步，禁用root密码登录，使用密钥认证。编辑<code>/etc/ssh/sshd_config</code>设置<code>PasswordAuthentication no</code>和<code>PermitRootLogin prohibit-password</code>。</p>\n<p><strong>密钥管理</strong>：生成ED25519类型密钥对，相比RSA更安全且性能更好。将公钥添加到<code>~/.ssh/authorized_keys</code>，私钥保存在本地并设置600权限。多个团队成员使用时，每个成员添加独立的公钥，便于权限回收。</p>\n<h2>防火墙配置</h2>\n<p>使用iptables或ufw配置防火墙规则。基础策略为默认拒绝入站流量，仅放行必要端口。SSH端口、Web服务（80/443）和运维端口按需开启。</p>\n<p>高级配置包括IP白名单（仅允许公司IP访问SSH）、连接频率限制以及端口敲门（Port Knocking）机制。使用fail2ban工具自动封禁多次登录失败的IP地址。</p>\n<h2>用户与权限管理</h2>\n<p>遵循最小权限原则。创建普通用户用于日常操作，仅在需要时使用sudo提权。配置sudoers文件时指定具体可执行的命令，避免ALL权限溢出。</p>\n<p>示例配置：<code>deploy ALL=(ALL) /usr/bin/systemctl, /usr/bin/journalctl</code>限制部署用户只能管理系统服务和查看日志。</p>\n<h2>系统监控与日志</h2>\n<p>安装系统监控工具：使用netdata或Prometheus Node Exporter采集系统指标，包括CPU使用率、内存占用、磁盘IO和网络流量。配置日志轮转（logrotate）避免日志文件撑满磁盘。</p>\n<p><strong>关键指标</strong>：设置磁盘使用率超过80%自动告警，内存交换分区使用异常时通知运维。使用sysstat工具包采集历史性能数据，便于回溯分析。</p>\n<h2>开发环境搭建</h2>\n<p>根据项目需求安装运行时环境。Node.js推荐使用nvm管理多版本；Python使用pyenv或conda管理虚拟环境；Go直接从官网下载二进制包。使用Docker部署应用时，安装Docker CE并配置非root用户运行权限。</p>\n<h2>自动安全更新</h2>\n<p>配置无人值守安全更新可大幅降低漏洞风险。Debian/Ubuntu下安装<code>unattended-upgrades</code>，设置仅自动应用安全补丁。配合<code>apticron</code>工具在有可用更新时发送邮件通知。生产环境建议设置维护窗口，在低峰时段自动重启受影响的服务。</p>\n<p>所有配置操作建议使用Ansible或Shell脚本实现自动化，确保每次搭建新服务器的流程一致且可重复。将配置脚本纳入版本管理，环境变更应有完整的审计记录。</p>",
       "summary": "新服务器到手后的标准操作流程，包括系统更新、安全加固、SSH配置、防火墙设置以及开发环境搭建等关键步骤。",
       "date_published": "2026-05-11",
-      "date_modified": "2026-05-11",
+      "date_modified": "2026-06-11",
       "tags": [
         "Technology",
         "DevOps",
@@ -2446,7 +2446,7 @@
       "content_html": "<h2>Elements面板深入使用</h2>\n<p>Elements面板不仅可以查看DOM结构，更是CSS调试的核心工具。在Styles区域中可以直接编辑CSS属性并实时预览效果。<strong>Computed标签</strong>展示元素最终计算样式，包括从继承到覆盖的完整样式链，解决样式冲突时尤其有用。</p>\n<p><strong>Break on</strong>功能可以对DOM变化设置断点：子节点变化、属性变化或节点移除时暂停JavaScript执行，快速定位修改DOM的代码。</p>\n<h2>Console高级技巧</h2>\n<p>Console远不止console.log。使用<code>console.table()</code>以表格形式输出数组和对象，比log更直观。<code>console.time()</code>和<code>console.timeEnd()</code>精确测量代码执行耗时。<code>console.group()</code>组织日志层级结构，适合调试复杂逻辑。</p>\n<p><strong>保存表达式</strong>：在Console面板右键点击变量选择\"Store as global variable\"，自动生成temp变量引用，方便后续操作。使用<code>$0</code>引用Elements面板中选中的元素，<code>$_</code>引用上一次表达式的结果。</p>\n<h2>Network网络分析</h2>\n<p>Network面板是性能分析和接口调试的利器。使用<strong>瀑布图</strong>分析请求耗时分布，重点关注TTFB（首字节时间）和Content Download阶段。通过请求头确认缓存命中情况（Status 200 from disk cache）。</p>\n<p><strong>节流模拟</strong>：在网络上方的Throttling下拉菜单中选择慢速3G或自定义限速条件，测试低网络环境下的用户体验。Block Request URL功能可以模拟第三方资源加载失败的情况。</p>\n<h2>Performance性能分析</h2>\n<p>录制性能快照分析页面运行的帧率。主线程火焰图展示每个函数的执行耗时，红色标记表示长任务（超过50毫秒），绿色标记表示渲染和绘制。重点关注Layout和Recalculate Style等布局相关事件。</p>\n<p><strong>Lighthouse面板</strong>集成在DevTools中，可以一键生成性能审计报告。选择\"Navigation\"模式进行标准性能审计，根据评分和建议进行针对性优化。</p>\n<h2>内存与存储调试</h2>\n<p>Memory面板的Heap Snapshot（堆快照）分析JavaScript对象的内存占用。录制三次快照（操作前、操作后、垃圾回收后），通过对比发现内存泄漏。重点关注Detached DOM节点——这些是离开了DOM树但仍被JavaScript引用的元素，是内存泄漏的常见原因。</p>\n<p>Application面板管理Storage：Local Storage、Session Storage、IndexedDB和Cookies的数据查看与编辑。Clear Site Data一键清除当前域名的所有存储数据，用于测试首次访问体验。</p>",
       "summary": "全面讲解Chrome开发者工具的核心功能，涵盖元素检查、网络分析、性能调优和内存调试等实战技巧。",
       "date_published": "2026-05-11",
-      "date_modified": "2026-05-11",
+      "date_modified": "2026-06-11",
       "tags": [
         "Technology",
         "DevTools",
@@ -2476,7 +2476,7 @@
       "content_html": "<h2>终端增强工具</h2>\n<p><strong>iTerm2</strong>是macOS上最强大的终端模拟器。分屏（Cmd+D）和热键窗口（Hotkey Window）大幅提升多任务处理效率。配合Oh My Zsh，使用插件如z（智能目录跳转）、git（Git命令别名）和autosuggestions（命令建议）让终端操作行云流水。</p>\n<p><strong>tmux</strong>适合服务器端的多会话管理。创建多个窗口和面板，在SSH断开后保持会话持续运行。配置个性化状态栏显示系统负载和Git分支信息。</p>\n<h2>窗口管理利器</h2>\n<p><strong>Raycast</strong>是效率启动器的标杆。功能远超Alfred：内置计算器、剪贴板历史、代码片段管理和扩展商店。最重要的功能是Quicklinks——配置常用网址的快捷搜索，如<code>gh pr {query}</code>直接搜索GitHub PR。</p>\n<p><strong>yabai</strong>（macOS平铺窗口管理器）实现键盘驱动的窗口管理。自动将窗口排列为非重叠的平铺布局，彻底告别鼠标拖拽调整窗口。搭配skhd配置快捷键切换焦点、调整窗口大小和移动工作区。</p>\n<h2>笔记与知识管理</h2>\n<p><strong>Obsidian</strong>本地优先的知识管理工具。基于Markdown的文件系统确保数据完全可控。图谱视图可视化笔记之间的关联，双向链接构建知识网络。使用Dataview插件查询和聚合笔记元数据，实现类似数据库的操作。</p>\n<p><strong>Logseq</strong>是面向工作流的笔记工具。大纲式结构适合快速记录想法，内置Todo管理和日记系统。与Obsidian共用同一个Markdown文件夹，在不同工具间自由切换。</p>\n<h2>搜索工具</h2>\n<p><strong>ripgrep (rg)</strong>是代码搜索的终极方案。比grep快一个数量级，自动忽略.gitignore中的文件。配合fzf模糊搜索实现交互式文件查找：<code>vim $(fzf)</code>用模糊搜索选择文件后用Vim打开。</p>\n<p><strong>Everything</strong>（Windows）和<strong>MDFind</strong>（macOS）实现全盘文件的毫秒级搜索。开发者场景中最常用的功能是快速定位配置文件、日志文件和大文件。</p>\n<h2>自动化脚本</h2>\n<p><strong>Hammerspoon</strong>（macOS）用Lua脚本控制系统级行为。常见自动化场景：不同WiFi网络自动切换音量配置、窗口快速移动到指定位置、应用启动时自动执行任务。</p>\n<p><strong>Keyboard Maestro</strong>是Mac平台最强大的宏工具。录制键盘操作序列，一键执行复合操作。推荐配置：一键打开开发环境（启动编辑器+终端+浏览器+数据库客户端）、自动插入时间戳、模板文本快速输入。</p>",
       "summary": "精选提升开发效率的实用工具，涵盖终端增强、窗口管理、笔记系统、搜索工具和自动化脚本等生产力利器。",
       "date_published": "2026-05-11",
-      "date_modified": "2026-05-11",
+      "date_modified": "2026-06-11",
       "tags": [
         "Technology",
         "DevTools",
@@ -2630,7 +2630,7 @@
       "content_html": "<h2>安全编码核心原则</h2>\n<p>安全编码不是独立的活动，而是贯穿开发全程的思维方式。最小权限原则：代码只获取完成任务所需的最小权限，不请求多余的资源或数据访问。纵深防御原则：不在任何单一防御环节上放置所有信任，每一层都独立防御。默认安全原则：默认配置应该是安全的，开发人员需要主动选择才能降低安全级别。</p>\n<h2>输入验证规范</h2>\n<p>所有外部输入都是不可信的。输入验证有两个层面：语法验证（确保数据格式正确）和语义验证（确保数据含义合理）。例如用户年龄字段，语法上必须是正整数，语义上应在0-150范围内。</p>\n<p><strong>白名单优于黑名单</strong>：定义允许的输入模式而非禁止的模式。例如允许的字符集<code>[a-zA-Z0-9_@.-]</code>，拒绝所有不在白名单中的字符。正则表达式验证时注意ReDoS（正则拒绝服务攻击）风险，避免使用嵌套量词。</p>\n<h2>输出编码</h2>\n<p>输出编码是将用户可控数据输出到不同上下文时的安全处理。HTML上下文编码<code>&lt;&gt;&amp;\"'</code>字符；JavaScript上下文对字符串字面量编码；URL上下文对参数值进行Percent编码；SQL上下文使用参数化查询。错误的编码上下文转换是XSS漏洞的常见来源。</p>\n<h2>文件安全操作</h2>\n<p><strong>文件上传</strong>：验证文件MIME类型和魔数（Magic Number），不要仅依赖文件扩展名。将上传文件存储到Web根目录之外的目录。使用随机文件名避免路径遍历和覆盖攻击。使用ClamAV等病毒扫描工具对上传文件进行安全检查。</p>\n<p><strong>文件下载</strong>：对下载请求进行路径规范化处理，防止<code>../</code>路径遍历攻击。使用白名单限制可下载的文件列表，而非直接接受用户输入的文件路径。</p>\n<h2>内存安全与并发</h2>\n<p>使用未初始化的内存可能导致敏感信息泄露。安全敏感操作（如密码处理）后立即清除内存中的敏感数据。Python中敏感字符串使用<code>bytearray</code>而非不可变的<code>str</code>，处理完毕后手动覆写。</p>\n<p>并发编程中注意竞态条件（Race Condition）。检查-使用的非原子操作可能导致TOCTOU（Time-of-Check Time-of-Use）漏洞。使用锁或原子操作保证检查和使用之间的原子性。</p>\n<h2>错误处理与日志</h2>\n<p>不要向用户暴露详细的错误信息。生产环境禁用调试输出，配置自定义错误页面。日志记录身份验证失败、权限检查失败和输入验证失败等安全事件，但不要记录密码、信用卡号等敏感信息。</p>\n<h2>依赖管理</h2>\n<p>定期扫描第三方依赖的安全漏洞。使用<code>npm audit</code>、<code>pip safety</code>或Snyk等工具自动化漏洞检测。锁定依赖版本（lock文件）防止意外的恶意更新。订阅安全公告关注依赖库的漏洞披露。</p>",
       "summary": "面向开发者的安全编码指南，涵盖输入验证、输出编码、安全处理文件上传、防止信息泄露以及常见语言的安全编码规范。",
       "date_published": "2026-05-11",
-      "date_modified": "2026-05-11",
+      "date_modified": "2026-06-11",
       "tags": []
     },
     {
@@ -2641,7 +2641,7 @@
       "content_html": "<h2>跨站脚本攻击（XSS）</h2>\n<p>XSS是最常见的Web安全漏洞，攻击者将恶意脚本注入页面。分为三种类型：反射型XSS（恶意脚本在请求中，服务器直接返回执行）、存储型XSS（恶意脚本存储在服务器，每次访问都执行）和DOM型XSS（纯客户端漏洞，通过DOM操作执行）。</p>\n<p><strong>防御方案</strong>：核心原则是\"不信任任何用户输入\"。对输出进行HTML实体编码，将<code>&lt;</code>转义为<code>&amp;lt;</code>，<code>&gt;</code>转义为<code>&amp;gt;</code>。设置CSP（Content Security Policy）响应头限制脚本来源：<code>Content-Security-Policy: default-src 'self'</code>。React和Vue等现代框架默认对输出编码，但<code>dangerouslySetInnerHTML</code>和<code>v-html</code>需谨慎使用。</p>\n<h2>跨站请求伪造（CSRF）</h2>\n<p>CSRF攻击诱导用户在已登录状态下执行非本意的操作。攻击者构造恶意页面，自动发起跨站请求，因为Cookie会自动携带，服务器误认为是合法操作。</p>\n<p><strong>防御方案</strong>：使用CSRF Token——在表单中嵌入随机Token，服务端验证Token有效性。SameSite Cookie属性设置为Strict或Lax，限制跨站请求携带Cookie。验证请求头中的Origin或Referer字段。</p>\n<h2>SQL注入</h2>\n<p>SQL注入利用未过滤的用户输入构造恶意SQL语句。攻击形式包括基于布尔的盲注、基于时间的盲注和UNION查询注入。即使返回结果不可见，攻击者也能通过布尔或时间延迟逐步提取数据。</p>\n<p><strong>防御方案</strong>：永远使用参数化查询（Prepared Statement），而不是拼接SQL字符串。ORM框架（如Sequelize、Prisma、SQLAlchemy）默认使用参数化查询，但原生查询时仍需警惕。对数据库账户实施最小权限原则，应用层使用只读或特定Schema的访问账户。</p>\n<h2>HTTPS与TLS</h2>\n<p>所有Web应用都应启用HTTPS。使用Let's Encrypt免费获取TLS证书，Certbot自动化续期。配置HSTS头要求浏览器始终使用HTTPS连接：<code>Strict-Transport-Security: max-age=31536000; includeSubDomains</code>。</p>\n<h2>安全响应头</h2>\n<p>除了CSP和HSTS，还应配置：X-Frame-Options防止点击劫持，X-Content-Type-Options防止MIME类型嗅探，Referrer-Policy控制Referer信息泄露。定期使用Security Headers工具检测站点头部配置。</p>",
       "summary": "系统介绍Web安全核心知识，包括XSS、CSRF、SQL注入等常见攻击原理与防御方案，帮助开发者构建安全的Web应用。",
       "date_published": "2026-05-11",
-      "date_modified": "2026-05-11",
+      "date_modified": "2026-06-11",
       "tags": []
     },
     {
