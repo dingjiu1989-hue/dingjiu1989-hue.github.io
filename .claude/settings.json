@@ -1,0 +1,55 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/*.pem)",
+      "Read(**/credentials*)",
+      "Read(**/id_rsa*)",
+      "Read(**/id_ed25519*)",
+      "Read(**/secrets/**)",
+      "Read(oauth-client.json)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/dangerous-actions-blocker.sh",
+            "timeout": 3000
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/site-regenerate-reminder.sh",
+            "async": true,
+            "timeout": 3000
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/check-sensitive-files.sh",
+            "async": true,
+            "timeout": 2000
+          }
+        ]
+      }
+    ]
+  }
+}

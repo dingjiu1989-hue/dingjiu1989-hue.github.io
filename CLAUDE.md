@@ -63,3 +63,16 @@ python3 scripts/indexnow_submit.py
 - AI crawlers explicitly welcomed in `robots.txt` (28 crawler rules)
 - JSON-LD structured data on every article page
 - No framework, no build tool — raw HTML/CSS/JS, no dependencies beyond Python stdlib + Pillow + html2text
+
+## Claude Code Hooks
+
+Project-level hooks in `.claude/hooks/`:
+
+| Hook | Event | Purpose |
+|------|-------|---------|
+| `dangerous-actions-blocker.sh` | PreToolUse (Bash) | Blocks `rm -rf` on project root, force-push to main; warns on `git reset --hard` |
+| `site-regenerate-reminder.sh` | PostToolUse (Edit\|Write) | Reminds to regenerate HTML when `articles.json`, `gen_*.py`, or `md/` files change |
+| `check-sensitive-files.sh` | UserPromptSubmit | Flags prompts mentioning push/deploy + sensitive keywords |
+
+Permission deny list in `.claude/settings.json`:
+- Blocks reading `.env`, `credentials*`, `*.pem`, `**/secrets/**`, `oauth-client.json`
