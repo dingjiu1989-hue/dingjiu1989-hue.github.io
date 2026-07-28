@@ -2420,7 +2420,7 @@
       "content_html": "<p>Domain events capture significant business occurrences within a domain-driven system. When a domain expert says \"when the order is shipped, send an invoice,\" the \"order shipped\" is a domain event. Events are named in the past tense: OrderShipped, PaymentReceived, InvoiceGenerated.</p>\n<h2>Event Definition</h2>\n<p>Each event is an immutable object containing the data relevant to the occurrence. Events include a unique identifier, a timestamp, and the business data. Event names come from the ubiquitous language. The structure should be kept stable—consumers depend on it.</p>\n<h2>Publishing</h2>\n<p>Events are published from the domain layer when an aggregate changes state. The aggregate returns events after command execution. The application layer collects and publishes these events to a message bus or event store.</p>\n<p>Transactional outbox ensures events are published reliably. The outbox stores events in the same database transaction as the state change. A separate process reads the outbox and publishes events to the message broker.</p>",
       "summary": "Implement domain events in DDD: event definitions, publishing patterns, handlers, and testing strategies.",
       "date_published": "2026-05-07",
-      "date_modified": "2026-05-18",
+      "date_modified": "2026-07-28",
       "tags": [
         "Architecture",
         "System Design",
