@@ -212,7 +212,7 @@ result[field] = f"**_-_** -{value[-4:]}"
 
 elif field in ('ssn', 'social_security'):
 
-result[field] = f"***-** -{value[-4:]}"
+result[field] = f"* **-** -{value[-4:]}"
 
 elif 'card' in field.lower():
 
