@@ -170,8 +170,8 @@ Live Sports | NFL, WWE Raw | ESPN+ (JV) | Bleacher Report | NFL Thursday | Limit
 Gaming | 100+ titles | Limited | None | Prime Gaming | YouTube Gaming  
   
 _Prime Video subscribers are bundled with Amazon Prime, not independently paid.  
-__YouTube TV and Premium paid subscribers.  
-_**Parent companies do not separately disclose streaming segment profitability.
+**YouTube TV and Premium paid subscribers.  
+***Parent companies do not separately disclose streaming segment profitability.
 
 Netflix leads all streaming competitors in subscriber scale, operating margin, and global coverage. Disney+ has deeper IP depth (Marvel, Star Wars, Pixar) but carries higher content costs with significantly lower margins. Max maintains stickiness among core HBO fans but is expanding globally at a slower pace. Prime Video benefits from Amazon Prime bundling but exhibits lower engagement density and content spend per user. YouTube operates in a different segment with user-generated content, creating an impenetrable moat in its own right.
 
